@@ -10,30 +10,20 @@ README
 Introduction
 ------------
 
-This project contain helpers used at the ENSAE for teaching puroposes:
-   * a source folder: ``src``
-   * a unit test folder: ``_unittests``, go to this folder and run ``run_unittests.py``
-   * a _doc folder: ``_doc``, it will contains the documentation
-   * a file ``setup.py`` to build and to install the module
-   * a file ``make_help.py`` to build the sphinx documentation
-    
+This project contain helpers used at the `ENSAE <http://www.ensae.fr/>`_ for teaching puroposes.
 The project is hosted `here <http://www.xavierdupre.fr/site2013/index_code.html>`_ 
 and on gitbug: `pyensae <https://github.com/sdpython/pyensae/>`_.
     
 Prerequisites
 -------------
 
-To build the documentation, you need:
-   * `Sphinx <http://sphinx-doc.org/>`_ and its dependencies.
-   * `pyhome3 <http://www.xavierdupre.fr/site2013/index_code.html>`_ and its dependency (`numpy <http://www.numpy.org/>`_)
+None unless you want to contribute (see documentation in that case).
     
+Contributions
+-------------
 
-Source
-------
+Started in 2013/08.
 
-The following folders contain:
-
-* ``_doc``: Sphinx documentation.
-* ``_unittests``: unit tests, you can run them by running the function :func:`check <__init__.check>` (as root on linux)
-* ``src``: the sources
+* First contributor: `Xavier Dupre <http://www.xavierdupre.fr/>`_.
+* Contributors: ENSAE's students.
 
