@@ -50,6 +50,10 @@ Quick overview
 
 * **retrieve data for practical lessons**
     * download data or modules:  :func:`download_data <resources.http_retrieve.download_data>`
+    
+* **SQL**
+    * import a text file into a database:  :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>`
+
 
 See also :ref:`l-usecase`.
 

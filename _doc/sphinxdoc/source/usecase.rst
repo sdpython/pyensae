@@ -21,3 +21,17 @@ Download data for a practical lesson
     
 
 
+
+SQLite
+------
+
+Import a flat file into a SQLite database
++++++++++++++++++++++++++++++++++++++++++
+
+::
+
+    from pyensae import import_flatfile_into_database
+    dbf = "database.db3"
+    file = "textfile.txt"
+    import_flatfile_into_database(dbf, file)
+    

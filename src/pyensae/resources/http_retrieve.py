@@ -80,6 +80,12 @@ def download_data ( name,
         - SQLiteSpy.zip
         
     If the file was already downloaded, the function will not do it again.
+    
+    Example:
+    @code
+    from pyensae import download_data
+    download_data('SQLiteSpy.zip', website = 'xd')
+    @endcode
     """
     if glo == None : glo = globals()
     if loc == None : loc = locals()
