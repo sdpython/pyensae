@@ -13,4 +13,6 @@ xcopy /E /C /I /Y _doc\sphinxdoc\build\html dist\html
 rem we open a browser with on the generated help
 dist\html\index.html
 
+rem %pythonexe% setup.py sdist register upload
+
 

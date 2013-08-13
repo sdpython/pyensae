@@ -17,7 +17,7 @@ Download data for a practical lesson
 ::
 
     from pyensae import download_data
-    download_data('SQLiteSpy.zip', website = 'xd')
+    download_data('voeux.zip', website = 'xd')
     
 
 

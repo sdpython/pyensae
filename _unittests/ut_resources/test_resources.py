@@ -34,15 +34,15 @@ class TestResources (unittest.TestCase):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         fold = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "temp_http")
         if not os.path.exists(fold): os.mkdir(fold)
-        exp = ["SQLiteSpy.exe", "SQLiteSpy.zip"]
+        exp = ["VOEUX01.txt", "voeux.zip"]
         for f in exp :
             g = os.path.join(fold, f)
             if os.path.exists(g): os.remove(g)
-        one = "SQLiteSpy.zip"
+        one = "voeux.zip"
         res = download_data(one, website = "xd", whereTo = fold, fileprint = fLOG)
-        fLOG(res)
-        assert len(res) == 1
-        assert "SQLiteSpy.exe" in res[0]
+        fLOG(len(res),res)
+        assert len(res) == 14
+        assert "VOEUX01.txt" in res[0]
         for f in exp :
             g = os.path.join(fold, f)
             assert os.path.exists(g)

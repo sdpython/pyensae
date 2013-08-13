@@ -11,6 +11,7 @@ except ImportError:
     import pyhome3
     
 from pyhome3 import run_cmd, fLOG, run_cmd_windows
+from pyhome3.srcpyhome.core.pysvn_helper import get_repo_version
 
 project_var_name  = "pyensae"
 template_examples = """
@@ -74,9 +75,14 @@ def generate_help_sphinx () :
     sys.path.append (os.path.abspath(os.path.join("_doc", "sphinxdoc","source")))
     import conf
     
+    version = get_repo_version()
+    if version != None :
+        with open("version.txt", "w") as f : f.write(str(version) + "\n")
+    
     # modifies the version number in conf.py
     svver = conf.release
     shutil.copy("README.rst", "_doc/sphinxdoc/source")
+    shutil.copy("LICENSE.txt", "_doc/sphinxdoc/source")
 
     #changes
     chan = os.path.join (os.path.split (__file__) [0], "_doc", "sphinxdoc", "source", "filechanges.rst")

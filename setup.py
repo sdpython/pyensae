@@ -42,11 +42,16 @@ from distutils.core import setup, Extension
 import distutils.sysconfig as SH
 from setuptools import find_packages
 
+if os.path.exists("version.txt") :
+    with open("version.txt", "r") as f : lines = f.readlines()
+    subversion = int(lines[0].strip("\r\n "))
+else :
+    subversion = 1   
+
 project_var_name    = "pyensae"
 sversion            = "0.1"
 versionPython       = "%s.%s" % (sys.version_info.major, sys.version_info.minor)
 path                = "Lib/site-packages/" + project_var_name
-subversion          = 1   
 readme              = 'README.rst'
 
 
@@ -58,13 +63,11 @@ DESCRIPTION = \
 
 CLASSIFIERS = \
 [
-'Development Status :: ' + sversion,
-'Operating System :: any',
-'Programming Language :: Python',
+'Programming Language :: Python :: 3',
 'Intended Audience :: Developers',
-'Topic :: Teachings',
-'School :: ENSAE',
-'License :: Python Software Foundation License',
+'Topic :: Scientific/Engineering',
+'Topic :: Education',
+'License :: OSI Approved :: BSD License',
 ]
 
 #############################################################
@@ -115,7 +118,7 @@ setup(
     version                 = 'v%s.%d' % (sversion, subversion),
     author                  = 'Xavier Dupré',
     author_email            = 'xavier.dupre AT gmail.com',
-    url                     = "http://http://www.xavierdupre.fr/site2013/index_code.html",
+    url                     = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html",
     download_url            = "https://github.com/sdpython/pyensae/",
     description             = DESCRIPTION,
     long_description        = long_description,

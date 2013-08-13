@@ -72,19 +72,12 @@ def download_data ( name,
     @return                 modules or list of files
     
     By extension, this function also download various zip files and decompresses it. 
-    The following tools are available:
-        - wscite.zip
-        - gnuplot.exe.zip
-        - ImageMagick-6.8.3-9-Q16-x86-windows.zip
-        - _graphviz_draw.zip
-        - SQLiteSpy.zip
-        
     If the file was already downloaded, the function will not do it again.
     
     Example:
     @code
     from pyensae import download_data
-    download_data('SQLiteSpy.zip', website = 'xd')
+    download_data('voeux.zip', website = 'xd')
     @endcode
     """
     if glo == None : glo = globals()
