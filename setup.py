@@ -59,7 +59,7 @@ KEYWORDS = \
 project_var_name + ', first name, last name'
 
 DESCRIPTION = \
-"""This a project template including a setup and the generation of sphinx generation."""
+"""Helpers for teaching purposes."""
 
 CLASSIFIERS = \
 [

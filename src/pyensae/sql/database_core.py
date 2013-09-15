@@ -105,8 +105,8 @@ class DatabaseCore (DatabaseCore2) :
             LOG = blind
         self.LOG = LOG
         
-        if isinstance (LOG, dict) :         raise Exception ("fLOG should be a function, not a dictionary")
-        if isinstance (self.LOG, dict) :    raise Exception ("LOG should be a function, not a dictionary")
+        if isinstance (LOG, dict) :         raise TypeError ("fLOG should be a function, not a dictionary")
+        if isinstance (self.LOG, dict) :    raise TypeError ("LOG should be a function, not a dictionary")
         
         if engine == "SQLite" :
             self._sql_file = sql_file
@@ -320,7 +320,8 @@ class DatabaseCore (DatabaseCore2) :
     def has_table (self, table) :
         """say if the table belongs to the database
         @param      table       table name
-        @return                 boolean"""
+        @return                 boolean
+        """
         return table in self.get_table_list ("." in table)
         
     def has_index (self, index) :
@@ -416,8 +417,10 @@ class DatabaseCore (DatabaseCore2) :
             
     def get_table_list (self, add_attached = False) :
         """
+        return the list of table
+        
         @param      add_attached        if True, add the list of tables included in the attached databases
-        return the table list
+        @return                         the table list
         """
         self._check_connection ()
         if self.isMSSQL () :

@@ -58,7 +58,7 @@ class DatabaseImportExport :
                                             filename, 
                                             header          = False,
                                             post_process    = None,
-                                            encoding        = None) :
+                                            encoding        = "utf8") :
         """export a table into a flat file
         @param      view_sql        SQL request
         @param      filename        filename
@@ -66,7 +66,7 @@ class DatabaseImportExport :
         @param      post_process    if != None, use this function to post-process a text line extracted from the file
         @param      encoding        if != None, use this as a parameter to convert any value into str
         """
-        sepline = GetSepLine ()
+        sepline = "\n"
         
         self._check_connection ()
         
@@ -85,7 +85,7 @@ class DatabaseImportExport :
         cur     = self.execute (sql)
         nbline  = 0
         
-        f = open (filename, "w", encoding="utf-8")
+        f = open (filename, "w", encoding=encoding)
         f.write (header_line)
         
         for line_ in cur :
@@ -93,10 +93,7 @@ class DatabaseImportExport :
             if post_process != None :   line = post_process (line_, memo)
             else :                      line = line_
                 
-            if encoding != None :
-                pr = "\t".join ([self._clean_string (str (x, encoding)) for x in line])
-            else :
-                pr = "\t".join ([self._clean_string (str (x)) for x in line])
+            pr = "\t".join ([self._clean_string (str (x)) for x in line])
                     
             f.write (pr + sepline)
             nbline += 1
@@ -145,15 +142,7 @@ class DatabaseImportExport :
         
         @param      file                file name or a matrix (this matrix can be an iterator)
         @param      table               table name
-        @param      columns             columns definition, dictionary { key:(column_name,python_type) }
-                                            or { key:(column_name,python_type,preprocessing_function) }
-                                            where preprocessing_function is a function whose prototype is for example:
-                                            @code
-                                            def preprocessing_score (s) :
-                                                return s.replace (",",".")
-                                            @endcode
-                                            - if PRIMARYKEY is added, the key is considered as the primary key
-                                            - if AUTOINCREMENT is added, the key will automatically filled (like an id)
+        @param      columns             columns definition (see below)
         @param      format              tsv, the only one accepted for the time being, it can be a function (line, **params)
         @param      header              the file has a header of not, if True, skip the first line
         @param      stop                if -1, insert every line, otherwise stop when the number of inserted lines is stop
@@ -167,6 +156,22 @@ class DatabaseImportExport :
         @param      params              see format        
         @param      skip_exception      skip exception while inserting an element
         @return                         number of inserted elements
+        
+        The columns definition must follow the schema:
+            - dictionary ``{ key:(column_name,python_type) }``
+            - or ``{ key:(column_name,python_type,preprocessing_function) }``
+            
+            
+        ``preprocessing_function`` is a function whose prototype is for example:
+        
+        @code
+        def preprocessing_score (s) :
+            return s.replace (",",".")
+        @endcode
+        
+        And:
+            - if ``PRIMARYKEY`` is added, the key is considered as the primary key
+            - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)        
         
         """
         
@@ -284,15 +289,7 @@ class DatabaseImportExport :
         
         @param      file                file name or matrix
         @param      table               table name
-        @param      columns             columns definition, dictionary { key:(column_name,python_type) }
-                                            or { key:(column_name,python_type,preprocessing_function) }
-                                            where preprocessing_function is a function whose prototype is for example:
-                                            @code
-                                            def preprocessing_score (s) :
-                                                return s.replace (",",".")
-                                            @endcode
-                                            - if PRIMARYKEY is added, the key is considered as the primary key
-                                            - if AUTOINCREMENT is added, the key will automatically filled (like an id)
+        @param      columns             columns definition (see below)
                                         if None: columns are guessed
         @param      format              tsv, the only one accepted for the time being, it can be a function whose parameter are a line and **params
         @param      header              the file has a header of not, if True, skip the first line
@@ -306,6 +303,23 @@ class DatabaseImportExport :
         @param      change_to_text      changes the format from any to TEXT
         @param      display             if True, print more information on stdout
         @param      strict_separator    strict number of columns, it assumes there is no separator in the content of every column
+        
+        The columns definition must follow the schema:
+            - dictionary ``{ key:(column_name,python_type) }``
+            - or ``{ key:(column_name,python_type,preprocessing_function) }``
+            
+            
+        ``preprocessing_function`` is a function whose prototype is for example:
+        
+        @code
+        def preprocessing_score (s) :
+            return s.replace (",",".")
+        @endcode
+        
+        And:
+            - if ``PRIMARYKEY`` is added, the key is considered as the primary key
+            - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)        
+        
         """
         if isinstance (file, list) : self.LOG ("processing file ", file [:min (len (file),10)])
         else :                       self.LOG ("processing file ", file)

@@ -25,7 +25,7 @@ class DatabaseCore2 :
         """check the SQL connection"""
         if "_connection" not in self.__dict__ : 
             message = "use connect method before doing operation on this database"
-            raise HalException (message)
+            raise Exception (message)
             
     def _check_values (self, values) :
         """when values are inserted or updated, this method doubles "'"
@@ -264,7 +264,7 @@ class DatabaseCore2 :
                         elif v[1] is datetime.datetime :
                             if isinstance (val, datetime.datetime) : val = val
                             elif isinstance (val, str) : val = datetime.datetime.parse(val)
-                            else : raise Exception("unable to convert %s into datetime" % str(type(val)))
+                            else : raise TypeError("unable to convert %s into datetime" % str(type(val)))
                         else :                          val = v [1] (val)
                     except ValueError as e :
                         self.LOG("(b)line number ", num_line, "**unable to process a line columns ",c, "#", v [0], " type ", v [1], " value ", repr (line [c]))

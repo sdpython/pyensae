@@ -10,7 +10,7 @@ README
 Introduction
 ------------
 
-This project contain helpers used at the `ENSAE <http://www.ensae.fr/>`_ for teaching puroposes.
+This project contain helpers used at the `ENSAE <http://www.ensae.fr/>`_ for teaching purposes.
 The project is hosted `here <http://www.xavierdupre.fr/site2013/index_code.html>`_ 
 and on gitbug: `pyensae <https://github.com/sdpython/pyensae/>`_.
     

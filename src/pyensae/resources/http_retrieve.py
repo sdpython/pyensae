@@ -87,7 +87,7 @@ def download_data ( name,
         website = "http://www.xavierdupre.fr/enseignement/complements/"
     
     if not os.path.exists (whereTo) :
-        raise Exception("this folder should exists " + whereTo)
+        raise FileExistsError("this folder should exists " + whereTo)
         
     origname = name
     if name in sys.modules :
@@ -121,7 +121,7 @@ def download_data ( name,
                 u = urllib2.urlopen (url, "r")
                 all = u.read ()
                 if "404 Not Found" in all and 'if "404 Not Found" in all :' not in all :
-                    raise Exception ("fichier introuvable: " + name )
+                    raise FileNotFoundError ("fichier introuvable: " + name )
                 u.close ()
                 u = open (outfile, "wb" if ".exe" in file or ".zip" in file else "r")
                 u.write ( all )
@@ -208,7 +208,7 @@ def download_data ( name,
             raise e
             
         if name not in temp.__name__ :
-            raise Exception ("name should be present in __name__ " + name + " ? " + temp.__name__ )
+            raise NameError ("name should be present in __name__ " + name + " ? " + temp.__name__ )
         glo[moduleName] = temp
         sys.modules[moduleName] = temp
         sys.modules[origname] = temp

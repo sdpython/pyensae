@@ -35,3 +35,18 @@ Import a flat file into a SQLite database
     file = "textfile.txt"
     import_flatfile_into_database(dbf, file)
     
+
+Export the results of a SQL query into a flat file
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+::
+
+    from pyensae.sql.database_main import Database
+    dbfile = "filename.db3"
+    filetxt = "fileview.txt"
+    sql = "..."
+    db = Database(dbfile)
+    db.connect()
+    db.export_view_into_flat_file (sql, fileview, header = True)
+    db.close()
+    

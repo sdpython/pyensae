@@ -19,14 +19,14 @@ class ExceptionSQL (Exception) :
         @param      sql             SQL instruction
         @param      log             log the exception
         """
-        HalException.__init__ (self, description, log = False)
+        Exception.__init__ (self, description + "\n" + sql)
         self.ex  = ex
         self.sql = sql
-        if log :
-            self._log ()
+        if False and log :
+            print (description + "\n" + sql)
         
     def __str__ (self) :
-        mes  = HalException.__str__ (self)
+        mes  = Exception.__str__ (self)
         mes += "\n" + str (self.ex)
         mes += "\n" + "\n".join ( repr (self.sql).split ("\\n") )
         if len (mes) > 10000 :

@@ -15,3 +15,4 @@ def check( log = False):
     
 from .resources.http_retrieve import download_data
 from .sql.database_helper import import_flatfile_into_database    
+from .file.file_helper import replace_comma_by_point

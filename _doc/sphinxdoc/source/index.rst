@@ -34,7 +34,7 @@ From the page `Pieces of codes, libraries <http://www.xavierdupre.fr/site2013/in
         sudo su
         python3.3 setup.py install
         
-* Using pip::
+* Using pip (see `pipy/pyensae <https://pypi.python.org/pypi/pyensae/>`_)::
 
     pip install pyensae
 

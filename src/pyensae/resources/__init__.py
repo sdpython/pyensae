@@ -21,6 +21,6 @@ def check_dependency( name ):
             sys.path.append(ab)
             import pyhome3
     else :
-        raise Exception("unexpected library name" + name)
+        raise ImportError("unexpected library name" + name)
     
     
