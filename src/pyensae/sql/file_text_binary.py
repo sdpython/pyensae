@@ -557,11 +557,14 @@ class TextFile :
         
         @param      header          header or not in the first line
         @param      exp             regular expression
-        @param      output          if != None, output is a stream which will receive the unrecognized line:
-                                        @code
-                                        line number \t  line
-                                        @endcode
+        @param      output          if != None, output is a stream which will receive the unrecognized line (see below)
         @return                     nb_accepted, nb rejected
+        
+        Format for the file containing the unrecognized lines:
+        @code
+        line number \t  line
+        @endcode
+        
         """
         if isinstance (exp, str) :
             exp = re.compile (exp, re.U)
@@ -597,20 +600,26 @@ class TextFile :
                         nomore  = False,
                         regex   = { }) :
         """
-        build a regular expression
+        Build a regular expression.
         
         @param          sep             separator
         @param          columns         columns definition
-        @param          exp             regular expression associated to each type, by default, it is:
-                                            @code
-                                            {  int:        "([-]?[1-9][0-9]*?)|(0?)",
-                                                    decimal.Decimal: "([-]?[1-9][0-9]*?L?)|(0?)",
-                                                    float:      "[-]?[0-9]*?([.][0-9]*?)?([eE][-]?[0-9]{0,4})?",
-                                                    str:    ".*"}
-                                            @endcode
+        @param          exp             regular expression associated to each type, (see below for the default value)
         @param          nomore          private argument, no more try, not possible to simplify
         @param          regex           if the default expression for a field is not the expected one, look into regex if there is one
         @return                         regex
+        
+        Default value for ``exp``:
+        
+        @code
+            {   
+                int:             "([-]?[1-9][0-9]*?)|(0?)",
+                decimal.Decimal: "([-]?[1-9][0-9]*?L?)|(0?)",
+                float:           "[-]?[0-9]*?([.][0-9]*?)?([eE][-]?[0-9]{0,4})?",
+                str:             ".*"
+            }
+        @endcode
+        
         """
         mx      = max (columns.keys ())+1
         res     = [ None for i in range (mx) ]

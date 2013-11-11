@@ -15,4 +15,7 @@ dist\html\index.html
 
 rem %pythonexe% setup.py sdist register upload
 
+rem to update the module on pipy
+rem c:\python33\python setup.py sdist register upload
+
 
