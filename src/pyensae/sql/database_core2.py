@@ -126,7 +126,7 @@ class DatabaseCore2 :
         f.close ()
         
         if len (lines) <= 1 : 
-            raise HalException ("file %s is empty" % file)
+            raise Exception ("file %s is empty" % file)
             
         exp     = re.compile ("\\W+")
         columns = { }
@@ -174,7 +174,7 @@ class DatabaseCore2 :
                     for k,v in columns.items() :
                         str_columns += "       " + str (k) + "\t" + str (v) + "\n"
                     mes = "KeyError:" + str (e) + "\n" + str (done) + "\n" + str_columns + "\nnb line " + str (nbline) + " columns: " + str (len(line)) + "\n" + str (line)
-                    raise HalException ("problem\n" + mes)
+                    raise Exception ("problem\n" + mes)
                     
                 try :
                     if columns [i][1] == float : raise ValueError ("")
@@ -201,7 +201,7 @@ class DatabaseCore2 :
         for c,v in columns.items() :
             t = v [1]
             if isinstance (t, tuple) and t [0] == str and t [1] == 0 :
-                raise HalException ("the length is null for column %s - %s" % (c, str (v)))
+                raise Exception ("the length is null for column %s - %s" % (c, str (v)))
                         
         self.LOG ("   guess", columns)
         return columns
@@ -221,7 +221,7 @@ class DatabaseCore2 :
         @return                         a dictionary
         """
         if not isinstance (line, list) and not isinstance (line, tuple):
-            if format != "tsv" : raise HalException ("unable to process format " + format)
+            if format != "tsv" : raise Exception ("unable to process format " + format)
             line = line.strip ("\r\n ").replace ("\n", " ")
             line = DatabaseCore2._split_expr.split (line)
         if filter_case != None :
@@ -327,15 +327,15 @@ class DatabaseCore2 :
         """
         
         path  = os.path.realpath (os.path.split (__file__) [0] )
-        pos   = path.find ("pyhome3")
+        pos   = path.find ("pyensae")
         if pos == -1 :
-            raise HalException ("the installation of module pyhome3 went wrong: %s dot not contain pyhome3" % path)
+            raise Exception ("the installation of module pyensae went wrong: %s dot not contain pyensae" % path)
         path  = path [:pos-1]
         if not os.path.exists (path) :
-            raise HalException ("unable to find path " + path )
+            raise Exception ("unable to find path " + path )
         simp  =      [ "import sys"]
         simp +=      [ "sys.path.append (r'%s')" % path ]
-        simp +=      [ "from pyhome3 import Database"]
+        simp +=      [ "from pyensae import Database"]
         
         code  =      [ "tblname = r'%s'" % self.get_file () ]
         

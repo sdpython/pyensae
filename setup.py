@@ -115,7 +115,7 @@ if "--verbose" in sys.argv :
 
 setup(
     name                    = project_var_name,
-    version                 = 'v%s.%d' % (sversion, subversion),
+    version                 = 'py%s-v%s.%d' % (versionPython, sversion, subversion),
     author                  = 'Xavier Dupré',
     author_email            = 'xavier.dupre AT gmail.com',
     url                     = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html",
@@ -128,7 +128,7 @@ setup(
     package_dir             = package_dir,
     package_data            = package_data,
     #data_files              = data_files,
-    #requires                = [  "numpy (>= 1.7.1)", ],
+    requires                = [  "pyquickhelper", ],
     ext_modules             = EXT_MODULES,
     #include_package_data    = True,
     )

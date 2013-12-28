@@ -12,15 +12,17 @@ import sys, os, unittest
 
 try :
     import src
+    import pyquickhelper
 except ImportError :
+    import os, sys
     path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..")))
     if path not in sys.path : sys.path.append (path)
+    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..", "..", "pyquickhelper", "src")))
+    if path not in sys.path : sys.path.append (path)
     import src
+    import pyquickhelper
 
-from src.pyensae.resources import check_dependency
-check_dependency("pyhome3")
-    
-from pyhome3 import fLOG
+from pyquickhelper import fLOG
 from src.pyensae.sql.database_helper import import_flatfile_into_database
 from src.pyensae.sql.database_main import Database
 
