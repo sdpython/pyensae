@@ -8,6 +8,8 @@
 import os, sys, sqlite3 as SQLite
 
 
+from pyquickhelper.loghelper.flog import run_cmd, fLOG
+
 def get_list_server () :
     """
     @return     a list of the available servers from this machine
@@ -36,7 +38,7 @@ def get_list_instance (server) :
         cmd         = 'sqlcmd -S %s\\SQLEXPRESS -Q "SELECT @@ServerName"' % server
         out,err     = run_cmd (cmd, wait = True, shell = True, log_error = False)
         if len (err) > 0 :
-            raise HalException ("unable to find instances for server %s (%s)" % (server, err))
+            raise Exception ("unable to find instances for server %s (%s)" % (server, err))
             
     li = [ _.strip ("\r\n ") for _ in out.split ("\n") ]
     li = [ _ for _ in li if len (_) > 0 ]
@@ -65,20 +67,20 @@ def create_database (instance, database, exc = True) :
     
     Example:
     @code
-    HalLOG (OutputPrint = True)
-    HalLOG (get_list_database ('PCXAVIER\\SQLEXPRESS'))
+    fLOG (OutputPrint = True)
+    fLOG (get_list_database ('PCXAVIER\\SQLEXPRESS'))
     create_database ('PCXAVIER\\SQLEXPRESS', "essai_database")
     drop_database ('PCXAVIER\\SQLEXPRESS', "essai_database")
     @endcode
     """
     ins = get_list_database (instance)
     if database in ins :
-        if exc : raise HalException ("database %s already exists" % database)
+        if exc : raise Exception ("database %s already exists" % database)
     else :
         cmd         = 'sqlcmd -S %s -Q "CREATE DATABASE %s"' % (instance, database)
         out,err     = run_cmd (cmd, wait = True, shell = True, log_error = False)
         if len (err) > 0 :
-            raise HalException ("error: %s" % err)
+            raise Exception ("error: %s" % err)
     
 def drop_database (instance, database, exc = True) :
     """
@@ -89,12 +91,12 @@ def drop_database (instance, database, exc = True) :
     """
     ins = get_list_database (instance)
     if database not in ins :
-        if exc : raise HalException ("database %s does not exist" % database)
+        if exc : raise Exception ("database %s does not exist" % database)
     else :
         cmd         = 'sqlcmd -S %s -Q "DROP DATABASE %s"' % (instance, database)
         out,err     = run_cmd (cmd, wait = True, shell = True, log_error = False)
         if len (err) > 0 :
-            raise HalException ("error: %s" % err)
+            raise Exception ("error: %s" % err)
     
     
 

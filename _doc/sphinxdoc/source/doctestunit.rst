@@ -25,7 +25,7 @@ This test file must begin by ``test_`` and must look like the following::
     """
 
     import sys, os, unittest
-    from pyhome3 import fLOG  # it requires pyhome3.
+    from pyquickhelper import fLOG  # it requires pyquickhelper.
 
     # to import files from the module
     try :

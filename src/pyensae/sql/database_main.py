@@ -12,8 +12,9 @@ from .database_exception        import ExceptionSQL
 from .database_core2            import DatabaseCore2
 from .database_core             import DatabaseCore
 from .database_import_export    import DatabaseImportExport
+from .database_object           import DatabaseObject
 
-class Database (DatabaseCore, DatabaseImportExport) :
+class Database (DatabaseCore, DatabaseImportExport, DatabaseObject) :
     
     """
     This class allows the user to load table from text files and store them into a 

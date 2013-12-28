@@ -15,6 +15,7 @@ author           = "author"
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.split(__file__)[0])))
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.split(__file__)[0], project_var_name)))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.split(__file__)[0], "..", "..", "..", "..", "pyquickhelper", "src")))
 
 # -- General configuration -----------------------------------------------------
 
