@@ -13,8 +13,9 @@ from .database_core2            import DatabaseCore2
 from .database_core             import DatabaseCore
 from .database_import_export    import DatabaseImportExport
 from .database_object           import DatabaseObject
+from .database_join_group       import DatabaseJoinGroup
 
-class Database (DatabaseCore, DatabaseImportExport, DatabaseObject) :
+class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoinGroup) :
     
     """
     This class allows the user to load table from text files and store them into a 
@@ -48,6 +49,7 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject) :
         @param      attach          dictionary: { nickname: filename }, list of database to attach
         @warning If the folder does not exist, it will be created
         """
+        DatabaseJoinGroup.__init__ (self)
         DatabaseCore.__init__ (self,    sql_file    = dbfile, 
                                         engine      = engine, 
                                         user        = user, 

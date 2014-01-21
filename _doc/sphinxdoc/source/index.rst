@@ -5,13 +5,11 @@ pyensae documentation
    :depth: 3
 
 
-Introduction
-------------
+This project contain helpers used at the `ENSAE <http://www.ensae.fr/>`_ for teaching purposes.
+The project is hosted `here <http://www.xavierdupre.fr/site2013/index_code.html>`_ 
+on github: `github/pyensae <https://github.com/sdpython/pyensae/>`_,
+on pypi: `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_.
 
-This module contains various helpers for teachings at the ENSAE.
-
-See :ref:`l-README`.
-    
 Installation 
 ------------
 
@@ -57,11 +55,6 @@ Quick overview
 
 See also :ref:`l-usecase`.
 
-Changes
--------
-
-* :ref:`l-changes`
-
 Contribution
 ------------
 
@@ -86,7 +79,7 @@ Indices and tables
 +------------------+---------------------+------------------+------------------+------------------------+---------------------+
 | :ref:`l-modules` |  :ref:`l-functions` | :ref:`l-classes` | :ref:`l-methods` | :ref:`l-staticmethods` | :ref:`l-properties` |
 +------------------+---------------------+------------------+------------------+------------------------+---------------------+
-| :ref:`genindex`  |  :ref:`modindex`    | :ref:`search`    | :ref:`l-license` |                        |                     |
+| :ref:`genindex`  |  :ref:`modindex`    | :ref:`search`    | :ref:`l-license` | :ref:`l-changes`       | :ref:`l-README`     |
 +------------------+---------------------+------------------+------------------+------------------------+---------------------+
    
 

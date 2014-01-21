@@ -9,7 +9,8 @@
 
 import re,sys,os,glob, math, decimal
 
-from .file_text_binary   import TextFile
+from pyquickhelper.loghelper.flog import GetPath
+from .file_text_binary import TextFile
 
 class TextFileColumns (TextFile) :
     
@@ -80,7 +81,7 @@ class TextFileColumns (TextFile) :
         @param      mistake                     not more than mistake conversion in numbers are allowed
         @param      strict_separator            strict number of columns, it assumes there is no separator in the content of every column
         """
-        TextFile.__init__ (self, filename, utf8, errors, fLOG)
+        TextFile.__init__ (self, filename, utf8, errors, fLOG = fLOG)
         
         self._force_header      = force_header
         self._force_noheader    = force_noheader
@@ -119,8 +120,8 @@ class TextFileColumns (TextFile) :
                 p = self._regexfix.find (")") + 1
                 s = self._regexfix [p]
                 self._regexfix = s.join (exp)
-                fLOG ("split: ", fi)
-                fLOG ("new regex: ", self._regexfix)
+                self.LOG ("split: ", fi)
+                self.LOG ("new regex: ", self._regexfix)
                 
     def __str__ (self) :
         """return the header
@@ -283,13 +284,14 @@ class TextFileColumns (TextFile) :
         f.close ()
     _store = staticmethod (_store)
                 
-    def sort (self, output, key, maxmemory = 2**28, folder = None) :
+    def sort (self, output, key, maxmemory = 2**28, folder = None, fLOG = print) :
         """sort a text file, even a big one, one or several columns gives the order
         @param      output      output file result
         @param      key         lines sorted depending of these columns
         @param      maxmemory   a file is splitted into smaller files which contains not more than maxmemory lines
         @param      folder      the function needs to create temporary files, this folder will contain them
                                 before they get removed
+        @param      fLOG        logging function
         @return
         
         @warning  We assume this file is not opened.
@@ -335,23 +337,24 @@ class TextFileColumns (TextFile) :
             
         self.close ()
         
-        TextFileColumns.fusion (key, files, output, force_header = self._force_header)
+        TextFileColumns.fusion (key, files, output, force_header = self._force_header, fLOG = self.LOG)
         for m in files :
             self.LOG ("removing ", m)
             os.remove (m)
         
-    def fusion (key, files, output, force_header = False) :
+    def fusion (key, files, output, force_header = False, fLOG = print) :
         """
         does a fusion between several files with the same columns (different order is allowed)
         @param      key             columns to be compared
         @param      files           list of files
         @param      output          output file
         @param      force_header    impose the first line as a header
+        @param      fLOG            logging function
         @warning We assume all files are sorted depending on columns in key
         """
         fh = []
         for f in files :
-            h = TextFileColumns (f, force_header = force_header)
+            h = TextFileColumns (f, force_header = force_header, fLOG = fLOG)
             h.open ()
             fh.append ( [ h, iter (h) ])
             

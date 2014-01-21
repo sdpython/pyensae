@@ -56,10 +56,10 @@ readme              = 'README.rst'
 
 
 KEYWORDS = \
-project_var_name + ', first name, last name'
+project_var_name + ', ENSAE, sqllite, database, teachings'
 
 DESCRIPTION = \
-"""Helpers for teaching purposes."""
+"""Helpers for teaching purposes (includes sqllite helpers)"""
 
 CLASSIFIERS = \
 [

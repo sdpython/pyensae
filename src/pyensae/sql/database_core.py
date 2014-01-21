@@ -100,7 +100,7 @@ class DatabaseCore (DatabaseCore2) :
     
         # the rest
         if LOG == None : 
-            def blind(s) :
+            def blind(*l, **p) :
                 pass
             LOG = blind
         self.LOG = LOG
@@ -578,7 +578,7 @@ class DatabaseCore (DatabaseCore2) :
                                 "PLACE +([,a-zA-Z_0-9()]+?) +" \
                                 "FROM +([a-zA-Z_0-9]+?)( +AS +[_a-z0-9])? +ORDER +BY " \
                                 "+([ a-zA-Z_0-9,]+?)( +WHERE(.*?))?( +LIMIT +([0-9]+)?)?$", re.IGNORECASE)
-            self.LOG ("cross product", req)
+            db.LOG ("cross product", req)
             find  = cross.search (req)
             self.request = request
             self.find    = find
@@ -590,7 +590,7 @@ class DatabaseCore (DatabaseCore2) :
             gr   = self.find.groups ()
             key,value,table,count_as,order,where,_,__,limit = gr
             if limit != None : limit = int (limit)
-            self.LOG ("parameters ", [key,value,table,order,where,limit])
+            db.LOG ("parameters ", [key,value,table,order,where,limit])
             fkey = key.split (",")
             fval = value.split (",")
             if where == None : where = ""
