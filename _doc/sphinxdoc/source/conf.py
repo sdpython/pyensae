@@ -9,7 +9,7 @@ import sys, os, datetime
 
 project_var_name = "pyensae"
 author           = "Xavier Dupré"
-version          = '0.1'
+version          = '0.2'
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -54,7 +54,7 @@ copyright = '2014, ' + author
 # The full version, including alpha/beta/rc tags.
 version_file = os.path.abspath(os.path.join(os.path.split(__file__)[0], "..", "..", "..", "version.txt"))
 try :
-    with open(version_file, "r") as ff : first_line = ff.readlines()[0]
+    with open(version_file, "r") as ff : first_line = ff.readlines()[0].strip(" \n\r")
 except FileNotFoundError :
     first_line = "xxx"
 release = '%s.%s' % (version, first_line)
