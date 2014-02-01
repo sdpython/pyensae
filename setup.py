@@ -17,11 +17,13 @@
 # 
 #  3. All advertising materials mentioning features or use of this
 #     software must display the following acknowledgment:
-#     "This product includes software developed by xavier.dupre@gmail.com."
+#     "This product includes software developed by
+#      Xavier Dupré <xavier.dupre AT gmail.com>"
 # 
 #  4. Redistributions of any form whatsoever must retain the following
 #     acknowledgment:
-#     "This product includes software developed by xavier.dupre@gmail.com."
+#     "This product includes software developed by
+#      Xavier Dupré <xavier.dupre AT gmail.com>."
 # 
 #  THIS SOFTWARE IS PROVIDED BY Xavier Dupré ``AS IS'' AND ANY
 #  EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -128,7 +130,7 @@ setup(
     package_dir             = package_dir,
     package_data            = package_data,
     #data_files              = data_files,
-    requires                = [  "pyquickhelper", ],
+    requires                = [  "pyquickhelper" ],
     ext_modules             = EXT_MODULES,
     #include_package_data    = True,
     )

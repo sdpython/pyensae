@@ -8,7 +8,8 @@
 import sys, os, datetime
 
 project_var_name = "pyensae"
-author           = "author"
+author           = "Xavier Dupré"
+version          = '0.1'
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -31,6 +32,7 @@ extensions = [  'sphinx.ext.autodoc',
                 'sphinx.ext.ifconfig', 
                 'sphinx.ext.viewcode',
                 'sphinxcontrib.fancybox',
+                'sphinxjp.themes.basicstrap',
                 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -47,14 +49,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = project_var_name + ' documentation'
-copyright = '2013, ' + author
+copyright = '2014, ' + author
 
-# The version info for the project you're documenting, acts as replacement for
-# |version| and |release|, also used in various other places throughout the
-# built documents.
-#
-# The short X.Y version.
-version = '0.1'
 # The full version, including alpha/beta/rc tags.
 version_file = os.path.abspath(os.path.join(os.path.split(__file__)[0], "..", "..", "..", "version.txt"))
 try :
@@ -107,7 +103,8 @@ modindex_common_prefix = [
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #html_theme = 'default'
-html_theme = 'sphinxdoc'
+import sphinxjp.themes.basicstrap
+html_theme = 'basicstrap'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -126,12 +123,12 @@ html_title = "%s v%s" % (project_var_name, release)
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = "favicon.png"
+html_logo = "project_ico.png"
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-html_favicon = "favicon.ico"
+html_favicon = "project_ico.ico"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

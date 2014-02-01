@@ -17,4 +17,3 @@ xcopy /E /C /I /Y _doc\sphinxdoc\build\html dist\html
 rem we open a browser with on the generated help
 rem dist\html\index.html
 
-

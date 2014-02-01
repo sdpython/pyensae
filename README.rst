@@ -3,12 +3,16 @@
 README
 ======
 
-.. contents::
-   :depth: 3
+   
+**Links:**
+    * `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_
+    * `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
+    * `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_
+    * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pyensae>`_
 
 
-Introduction
-------------
+Description        
+-----------
 
 This project contain helpers used at the `ENSAE <http://www.ensae.fr/>`_ for teaching purposes.
 The project is hosted `here <http://www.xavierdupre.fr/site2013/index_code.html>`_ 

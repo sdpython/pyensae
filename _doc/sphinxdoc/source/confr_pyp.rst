@@ -1,3 +1,5 @@
+.. _l-confpy:
+
 conf.py
 =======
 

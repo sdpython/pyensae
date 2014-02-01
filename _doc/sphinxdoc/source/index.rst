@@ -1,76 +1,56 @@
 pyensae documentation
 =====================
 
-.. contents::
-   :depth: 3
+   
+   
+**Links:**
+    * `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_
+    * `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
+    * `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_
+    * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pyensae>`_
 
+
+Description        
+-----------
 
 This project contain helpers used at the `ENSAE <http://www.ensae.fr/>`_ for teaching purposes.
-The project is hosted `here <http://www.xavierdupre.fr/site2013/index_code.html>`_ 
-on github: `github/pyensae <https://github.com/sdpython/pyensae/>`_,
-on pypi: `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_.
+It requires `github/pyquickhelper <https://github.com/sdpython/pyquickhelper/>`_.
 
-Installation 
-------------
+The main function is used to download data used for my teachings at the 
+`ENSAE <http://www.xavierdupre.fr/site2013/enseignements/index.html>`_
+from the website `http://www.xavierdupre.fr/`_::
 
-From the page `Pieces of codes, libraries <http://www.xavierdupre.fr/site2013/index_code.html>`_:
-
-* Windows installation: 
-    * run the setup ``pyensae*.win32.exe``
-* Windows installation with source:
-    * download the file ``pyensae*.tar.gz`` and unzip it
-    * type the following commands::
+    download_data("td8_velib.zip", website = "xd")
     
-        set PATH=%PATH%;c:\Python33
-        python.exe setup.py install    
-        
-* Linux installation:
-    * download the file ``pyensae*.tar.gz``
-    * type the following commands::
+The second functionality is the ability to import a text file into a SQLite database::
+
+    import_flatfile_into_database("sqlitedb.db3", "flat_file.txt")
     
-        tar xf pyensae-py3.3.tar.gz
-        sudo su
-        python3.3 setup.py install
-        
-* Using pip (see `pipy/pyensae <https://pypi.python.org/pypi/pyensae/>`_)::
+The last function is about getting stock prives from `Yahoo Finance <http://fr.finance.yahoo.com/>`_ ::
 
-    pip install pyensae
-
-
-You can check the module is working for basic functions by running::
+    stock = StockPrices( "BNP.PA", folder = "temp" )
     
-    import pyensae
-    pyensae.check()
-    
-        
-Quick overview
---------------
+See also :ref:`l-usecase`.    
 
-* **retrieve data for practical lessons**
-    * download data or modules:  :func:`download_data <resources.http_retrieve.download_data>`
-    
-* **SQL**
-    * import a text file into a database:  :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>`
+Functionalities
+---------------
 
+* retrieve data for practical lessons
+* import a text file into a database
+* retrieve stock prices from Yahoo Finance
 
-See also :ref:`l-usecase`.
-
-Contribution
-------------
-
-The library is public and available on `github <https://github.com/sdpython/pyensae/>`_. 
-Please do not commit without running the unit test and add a unit test for every of your contributions.
-See :ref:`l-doctestunit` to see how to run them and to generate the documentation.
 
 About this documentation
 ------------------------
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
+    doctestunit
     generatedoc
+    generatesetup
+    installation
     glossary
-    confr_pyp
 
     
 Indices and tables
