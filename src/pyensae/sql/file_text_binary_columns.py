@@ -112,7 +112,7 @@ class TextFileColumns (TextFile) :
                 reg = re.compile ("[(](.+?)[)]")
                 fi  = reg.findall (self._regexfix)
                 if len (fi) != len (changes) :
-                    raise HalException ("not the same number of fields in regular expression (%d,%d):\n%s\n%s" % (len (fi), len (changes),str (fi), str (changes)))
+                    raise Exception ("not the same number of fields in regular expression (%d,%d):\n%s\n%s" % (len (fi), len (changes),str (fi), str (changes)))
                 exp  = []
                 for a,b in zip (fi, changes) :
                     s = "(?P<%s>%s)" % (b,a)
@@ -133,7 +133,7 @@ class TextFileColumns (TextFile) :
         @return         the columns
         """
         if "_columns" not in self.__dict__ :
-            raise HalException ("there is no available columns")
+            raise Exception ("there is no available columns")
         return self._columns
             
     def open (self) :
@@ -158,7 +158,7 @@ class TextFileColumns (TextFile) :
             try :
                 self._regex     = re.compile (regex)
             except Exception as e :
-                raise HalException ("algorithm problem: (type %s, %s)\nunable to understand a regular expression (file %s)\nexp: %s" % (str (type(e)),str (e), self.filename, regex))
+                raise Exception ("algorithm problem: (type %s, %s)\nunable to understand a regular expression (file %s)\nexp: %s" % (str (type(e)),str (e), self.filename, regex))
             self._name      = { }
             self._nb        = 0
             self._conv      = { }
@@ -191,7 +191,7 @@ class TextFileColumns (TextFile) :
             def groupdict (self) : return self.res
                 
         if "_header" not in self.__dict__ :
-            raise HalException ("file not open %s" % self.filename)
+            raise Exception ("file not open %s" % self.filename)
             
         regex_simple = re.compile (self._regex.pattern.replace (">.*)", ">.*?)"))
         
@@ -229,7 +229,7 @@ class TextFileColumns (TextFile) :
                 nberr += 1
                 if nberr * 10 > nb and nberr > 4 :
                     message = "pattern: %s\n line: %s" % (regex_simple.pattern, line)
-                    raise HalException ("(a) there are probably too many errors %d (%d)\n%s" % (nberr, nb, message))
+                    raise Exception ("(a) there are probably too many errors %d (%d)\n%s" % (nberr, nb, message))
             else :
                 res = r.groupdict ()
                 if self._strip_space :
@@ -252,7 +252,7 @@ class TextFileColumns (TextFile) :
                                 self.LOG ("error type", nbert, "unable to interprete line ", nb, "value", repr (res [k]), " type ", repr (self._conv [k]), " line ", repr (line))
                                 if nbert * 10 > nb and nbert > 4 :
                                     message = "pattern: %s\n line: %s" % (regex_simple.pattern, line)
-                                    raise HalException ("(b) there are probably too many errors %d\n%s" % (nberr, message))
+                                    raise Exception ("(b) there are probably too many errors %d\n%s" % (nberr, message))
                                 giveup = True
                                 break
                 if giveup : continue
@@ -301,13 +301,13 @@ class TextFileColumns (TextFile) :
         if folder == None :
             folder = GetPath ()
         if not os.path.exists (folder) :
-            raise HalException ("unable to find folder %s" % folder)
+            raise Exception ("unable to find folder %s" % folder)
             
         try :
             file = open (output, "w")
             file.close ()
         except Exception as e :
-            raise HalException ("unable to create file %s, reason: %s" % (output, str (e)))
+            raise Exception ("unable to create file %s, reason: %s" % (output, str (e)))
             
         self.LOG ("sorting file ", self.filename)
         root   = self.filename.replace (":", "_").replace ("/", "_").replace ("\\", "_").replace (".", "_")

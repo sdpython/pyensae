@@ -7,8 +7,13 @@
 
 import sys, os, sqlite3 as SQLite
 
+class DBException (Exception):
+    """
+    custome exception
+    """
+    pass
 
-class ExceptionSQL (Exception) :
+class ExceptionSQL (DBException) :
     """
     exception related to SQL instructions and only them
     """

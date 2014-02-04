@@ -9,7 +9,7 @@ import os, sys, math, copy, re, time, random, decimal, sqlite3 as SQLite, dateti
 
 module_odbc = None
 
-from .database_exception    import ExceptionSQL
+from .database_exception    import ExceptionSQL, DBException
 from .database_core2        import DatabaseCore2
 
 class DatabaseCore (DatabaseCore2) :
@@ -88,7 +88,7 @@ class DatabaseCore (DatabaseCore2) :
                 for s in rest :
                     ok   = s.split (",")
                     if len (ok) != 2 :
-                        raise HalException ("unable to find an alias in %s" % s)
+                        raise DBException ("unable to find an alias in %s" % s)
                     nick = ok [0].strip ()
                     file = ",".join ( ok [1:] )
                     attach [nick] = file.strip ()
@@ -117,7 +117,7 @@ class DatabaseCore (DatabaseCore2) :
             try :
                 import _externals.pypyodbc.pypyodbc as pypyodbc
             except ImportError as e :
-                raise HalException ("unable to import module pypyodbc: %s" % str (e))
+                raise DBException ("unable to import module pypyodbc: %s" % str (e))
                 
             if sql_file == ":memory:" : sql_file = "_memory_database_"
             module_odbc = sys.modules ["pypyodbc"]
@@ -125,7 +125,7 @@ class DatabaseCore (DatabaseCore2) :
             self._engine   = engine
                 
         else :
-            raise HalException ("unfound engine %s in %s" % (engine, ", ".join (DatabaseCore._engines)))
+            raise DBException ("unfound engine %s in %s" % (engine, ", ".join (DatabaseCore._engines)))
             
         # write a file able to build a database summary
         if sql_file != ":memory:" :
@@ -241,7 +241,7 @@ class DatabaseCore (DatabaseCore2) :
         @param      odbc_string     use a different odbc string
         """
         if "_connection" in self.__dict__ : 
-            raise HalException ("a previous connection was not closed")
+            raise Exception ("a previous connection was not closed")
         
         if   self._engine == "SQLite" : self._connection = SQLite. connect (self._sql_file)
         elif self._engine == "MySQL" :  self._connection = MySQLdb.connect (self._host, self._user, self._password, self._sql_file)
@@ -267,7 +267,7 @@ class DatabaseCore (DatabaseCore2) :
                 self.LOG("connection string ", st)
                 self._connection = module_odbc.connect (st)
                     
-        else : raise HalException ("This engine does not exists (%s)" % self._engine)
+        else : raise DBException ("This engine does not exists (%s)" % self._engine)
             
         for func in DatabaseCore._special_function_init_() :
             self.add_function (func[0], func[2], func[1])
@@ -352,7 +352,7 @@ class DatabaseCore (DatabaseCore2) :
         for c in cols :
             if c [0] == column :
                 return c [1]
-        raise HalException ("column %s were not found in table %s" % (column, table))
+        raise DBException ("column %s were not found in table %s" % (column, table))
         
     def get_index_list (self, attached = "main") :
         """return the list of indexes
@@ -375,7 +375,7 @@ class DatabaseCore (DatabaseCore2) :
         for a,b,c in select :
             fi = exp.findall (c)
             if len (fi) != 1 :
-                raise HalException ("unable to extract index fields from %s" % c)
+                raise DBException ("unable to extract index fields from %s" % c)
             fi = tuple ([ s.strip () for s in fi [0].split (",") ] )
             res.append ( (a,b,c,fi) )
         select.close ()
@@ -826,11 +826,11 @@ class DatabaseCore (DatabaseCore2) :
         @param      temporary       if True the table is temporary
         """
         if self._engine == "SQLite" and table == "sqlite_sequence" :
-            raise HalException ("unable to create a table named sql_sequence")
+            raise DBException ("unable to create a table named sql_sequence")
         
         tables = self.get_table_list ()
         if table in tables :
-            raise HalException ("table " + table + " is already present, it cannot be added")
+            raise DBException ("table " + table + " is already present, it cannot be added")
             
         if temporary :  sql = "CREATE TEMPORARY TABLE " + table + "("
         else :          sql = "CREATE TABLE " + table + "("
@@ -847,7 +847,7 @@ class DatabaseCore (DatabaseCore2) :
                 elif    v is decimal.Decimal    :   col.append (val [0] + " Decimal")
                 elif    v is datetime.datetime  :   col.append (val [0] + " DATETIME")
                 else :
-                    raise HalException ("unable to add column " + str (c) + " ... " + str (val) + " v= " + str (v))
+                    raise DBException ("unable to add column " + str (c) + " ... " + str (val) + " v= " + str (v))
             else :
                 if isinstance (val [1], tuple) :    v,l = val [1]
                 else :                              v,l = val [1], 2048
@@ -858,16 +858,16 @@ class DatabaseCore (DatabaseCore2) :
                 elif    v is decimal.Decimal    :   col.append (val [0] + " Decimal")
                 elif    v is datetime.datetime  :   col.append (val [0] + " DATETIME")
                 else :
-                    raise HalException ("unable to add column " + str (c) + " ... " + str (val) + " v= " + str (v))
+                    raise DBException ("unable to add column " + str (c) + " ... " + str (val) + " v= " + str (v))
                 
             fval = val [2:]
             for v in fval :
                 if v not in DatabaseCore._field_option :
-                    raise HalException ("an option is unexpected %s should be in %s" % (v, str (DatabaseCore._field_option)))
+                    raise DBException ("an option is unexpected %s should be in %s" % (v, str (DatabaseCore._field_option)))
                 
             if "PRIMARYKEY" in val : 
                 if val [1] != int : 
-                    raise HalException ("unable to create a primary key on something differont from an integer (%s)" % str (val))
+                    raise DBException ("unable to create a primary key on something differont from an integer (%s)" % str (val))
                 col [-1] += " PRIMARY KEY"
                 if "AUTOINCREMENT" in val : 
                     if self.isMSSQL () :    col [-1] += " IDENTITY(0,1)"
@@ -965,7 +965,7 @@ class DatabaseCore (DatabaseCore2) :
                 raise ExceptionSQL ("unable to execute a SQL request (2) (cursor %s) (file %s)" % (str (cursor), self.get_file ()), e, sql)
             
         else :
-            raise HalException ("insert: expected type (list of dict or dict) instead of %s" % (str (type (insert_values))))
+            raise DBException ("insert: expected type (list of dict or dict) instead of %s" % (str (type (insert_values))))
 
     def update (self, table, key, value, values) :
         """update some values  WHERE key=value

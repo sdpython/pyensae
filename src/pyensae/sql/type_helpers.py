@@ -51,7 +51,7 @@ def get_default_value_type (ty, none = True) :
     elif    ty == decimal.Decimal : return decimal.Decimal(0)
     elif    ty == float     : return 0.0
     else :
-        raise HalException ("type expected in " + str (guess_type_value_type ()))
+        raise TypeError ("type expected in " + str (guess_type_value_type ()))
 
 def guess_type_list (l, tolerance = 0.01, none = True) :
     """
@@ -67,7 +67,7 @@ def guess_type_list (l, tolerance = 0.01, none = True) :
     length = 0
         
     if l in [str, float, int, None, decimal.Decimal] :
-        raise HalException ("this case is unexpected %s" % str (l))
+        raise Exception ("this case is unexpected %s" % str (l))
         
     if len (l) == 0 : 
         res = defa

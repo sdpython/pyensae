@@ -9,7 +9,7 @@ import sys, os, sqlite3 as SQLite, collections
 
 
 from .file_text_binary      import TextFile
-from .database_exception    import ExceptionSQL
+from .database_exception    import ExceptionSQL, DBException
 
 
 class DatabaseImportExport :
@@ -185,7 +185,7 @@ class DatabaseImportExport :
                 if "PRIMARYKEY" in v : primarykey = v [0]
 
             if table not in self.get_table_list () :
-                raise HalException ("unable to find table " + table)
+                raise DBException ("unable to find table " + table)
                 
             all         = 0
             num_line    = 0
@@ -224,7 +224,7 @@ class DatabaseImportExport :
             if table not in self.get_table_list () :
                 table_list  = self.get_table_list ()
                 message     = "unable to find table " + table + " in [" + ",".join (table_list) + "]"
-                raise HalException (message)
+                raise DBException (message)
 
             file     = TextFile (file, utf8 = True, errors = 'ignore', fLOG = self.LOG)
             file.open ()
@@ -338,13 +338,13 @@ class DatabaseImportExport :
         self.LOG ("columns ", columns)
             
         if not isinstance (file, list) and not os.path.exists (file) : 
-            raise HalException ("unable to find file " + file)
+            raise DBException ("unable to find file " + file)
             
         if not table_exists :                       cursor = self.create_table (table, columns, temporary = temporary)
-        elif table not in self.get_table_list () :  raise HalException ("unable to find table " + table + " (1)")
+        elif table not in self.get_table_list () :  raise DBException ("unable to find table " + table + " (1)")
         else :                                      cursor = None
 
-        if table not in self.get_table_list () : raise HalException ("unable to find table " + table + " (2)")
+        if table not in self.get_table_list () : raise DBException ("unable to find table " + table + " (2)")
         nb = self._append_table (   file, 
                                     table, 
                                     columns, 

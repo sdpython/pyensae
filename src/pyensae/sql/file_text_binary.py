@@ -117,7 +117,7 @@ class TextFile :
         @return         a str string
         """
         if "_f" not in self.__dict__ :
-            raise HalException ("file %s is not opened." % self.filename)
+            raise Exception ("file %s is not opened." % self.filename)
         filesize    = os.stat (self.filename).st_size
         size        = self._buffer_size
         blin        = self._f.read (size)
@@ -186,7 +186,7 @@ class TextFile :
                 #            message = str (e)
                 #            temp = ("-----------nbline %d in file %s\n" % (self._nbline,self.filename)) + repr (line) + "\n" + message + "\n"
                 #            self.LOG (temp)
-                #            raise HalException (temp)
+                #            raise Exception (temp)
                 r = r.rstrip (endchar)
                 if self._filter == None or self._filter (r) :
                     if self._separated :
@@ -292,7 +292,7 @@ class TextFile :
                 if s1 != s2 :
                     mes = "size problem %d != " % (s1)
                     mes += " + ".join ( [str (x) for x in [oldnb,] + [ len(f [1]) for f in files ] ] )
-                    raise HalException (mes)
+                    raise Exception (mes)
                     
             else :
                 col = self._interpret (line)
@@ -310,7 +310,7 @@ class TextFile :
                     col.extend ( ["" for i in range (0, oldnb - len (col)) ] )
                 if len (col) != oldnb :
                     mes = "line %d: problem len(col) = %d and oldnb = %d\n%s" % (self.get_nb_readlines (), len (col), oldnb, repr (line))
-                    raise HalException (mes)
+                    raise Exception (mes)
                     
                 for file in files :
                     cont        = file [0]
@@ -320,7 +320,7 @@ class TextFile :
                         val = cont [this_key]
                         if len (val) != len (c) :
                             mes = "line %d: problem len(val) = %d and len (c) = %d" % (self.get_nb_readlines (), len (val), len (c))
-                            raise HalException (mes)
+                            raise Exception (mes)
                     else :                  
                         val = [ missing_value for k in c ]
                         miss += len (val)
@@ -329,12 +329,12 @@ class TextFile :
                 if len (col) != len (columns) :
                     mes = "problem 1 with line %d\n" % self.get_nb_readlines ()
                     mes += "len (col) = %d len (columns) = %d" % (len (col), len (columns))
-                    raise HalException (mes)
+                    raise Exception (mes)
                     
                 if len (("\t".join (col)).split ("\t")) != len (col) :
                     mes = "problem 2 with line %d\n" % self.get_nb_readlines ()
                     mes += "len (col) = %d len (columns) = %d" % (len (("\t".join (col)).split ("\t")), len (columns))
-                    raise HalException (mes)
+                    raise Exception (mes)
 
                 if output == None : res.append (col)
                 else : output.write ("\t".join (col) + "\n")
@@ -504,10 +504,10 @@ class TextFile :
             names = lines [0].split (bestsep)
             del lines [0]
             if len (names) != bestcol : 
-                raise HalException ("unable to continue: the header does not contain the same number of columns %s != %s" % (len(names), bestcol))
+                raise Exception ("unable to continue: the header does not contain the same number of columns %s != %s" % (len(names), bestcol))
         elif fields != None :
             if len (fields) != bestcol :
-                raise HalException ("the number of fields (%d) is different of the number of columns found in the file %d" % (len (fields), bestcol))
+                raise Exception ("the number of fields (%d) is different of the number of columns found in the file %d" % (len (fields), bestcol))
             names = fields
         else :
             hhhh,_ = 0,bestcol
@@ -518,7 +518,7 @@ class TextFile :
         
         for k in columns :
             if k >= len (names) :
-                raise HalException ("incoherence in the file being read: %d >= %d: " % (k, len (names)) + repr (names) + "\n" + repr (columns))
+                raise Exception ("incoherence in the file being read: %d >= %d: " % (k, len (names)) + repr (names) + "\n" + repr (columns))
             columns [k] = (changes.get (names [k], names [k]), columns [k][0])
             
         self.LOG ("  TextFile.guess_columns: header ", header, " columns ", columns)
@@ -626,7 +626,7 @@ class TextFile :
         for k,v in columns.items () :
             t = v [1]
             if t not in exp :
-                raise HalException ("unknown type %s" % str (t))
+                raise Exception ("unknown type %s" % str (t))
             if v [0] in regex : res [k] = (v [0], regex [ v [0] ]) 
             else :              res [k] = (v [0], exp [t])
         res = [ "(?P<%s>%s)" % c for c in res ]
@@ -644,9 +644,9 @@ class TextFile :
                     reg = re.compile ("?P<(.*?)>")
                     all = reg.findall (final)
                     s   = ",".join (all)
-                    raise HalException ("this expression does not compile (%s), pattern %s, columns %s" % (str (e), final, s))
+                    raise Exception ("this expression does not compile (%s), pattern %s, columns %s" % (str (e), final, s))
                 else :
-                    raise HalException ("this expression does not compile (%s), pattern %s" % (str (e), final))
+                    raise Exception ("this expression does not compile (%s), pattern %s" % (str (e), final))
                 
         exp = {     int:        "[-]?[0-9]*?", 
                     float:      "[0-9.eE]*?",
