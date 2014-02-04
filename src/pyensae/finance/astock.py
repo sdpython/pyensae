@@ -2,7 +2,7 @@
 @file
 @brief Download stock prices (from Yahoo website) and other prices
 """
-import os, sys, re, urllib.request, urllib.error
+import os, sys, re, urllib.request, urllib.error, datetime
 
 class StockPrices:
     """
@@ -16,10 +16,11 @@ class StockPrices:
     @endcode
     """
     
-    def __init__(self, tick, url="yahoo", folder="cache"): 
+    def __init__(self, tick, url="yahoo", folder="cache",
+                    begin = None, end = None): 
         """
         Loads a stock price from either a url or a folder where the data was cached.
-        If a filename ``<folder>/<tick>/txt`` already exists, it takes it from here.
+        If a filename ``<folder>/<tick>.<day1>.<day2>.txt`` already exists, it takes it from here.
         Otherwise, it downloads it.
         
         If url is yahoo, the data will be download using ``http://finance.yahoo.com/q/cp?s=^FCHI+Components``.
@@ -28,6 +29,12 @@ class StockPrices:
         @param      tick        tick name, ex: ``BNP.PA``
         @param      url         if yahoo, downloads the data from there if it was not done before
         @param      folder      cache folder (created if it does not exists
+        @param      begin       first day (datetime), see below
+        @param      end         last day (datetime), see below
+        
+        If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
+        prices for a date before this one).
+        If end is None, the date will the date of yesterday.
         """
         import pandas
 
@@ -39,11 +46,22 @@ class StockPrices:
             if not os.path.exists(folder) :
                 os.mkdir(folder)
             self.tickname = tick
-                
-            name = os.path.join(folder, tick + ".txt")
+            
+            if begin == None : 
+                begin = datetime.datetime(2000,1,3)
+            if end == None :
+                now = datetime.datetime.now()
+                end = now - datetime.timedelta(1)
+            
+            sbeg = begin.strftime("%Y-%m-%d")
+            send = end.strftime("%Y-%m-%d")
+            name = os.path.join(folder, tick + ".{0}.{1}.txt".format(sbeg, send))
+            
             if not os.path.exists (name) :
                 if url == "yahoo" :
-                    url = "http://ichart.finance.yahoo.com/table.csv?s=%s&d=0&e=1&f=2012&g=d&a=0&b=1&c=2004&ignore=.csv"
+                    url = "http://ichart.finance.yahoo.com/table.csv?s=%s&d={0}&e={1}&f={2}&g=d&a={3}&b={4}&c={5}&ignore=.csv".format(
+                                    end.month-1, end.day, end.year,
+                                    begin.month-1,begin.day, begin.year)
                     url = url % tick
                 else :
                     raise Exception("unable to download data from the following webiste " + url)
@@ -121,8 +139,10 @@ class StockPrices:
     @staticmethod
     def available_dates ( listStockPrices, missing = True, field="Close") :
         """
-        returns the list of available_dates for a list of stock prices,
-        a missing date is a date for which there is at least one stock price and one missing stock price
+        Returns the list of values (Open or High or Low or Close or Volumne) from each stock 
+        for all the available_dates for a list of stock prices.
+        
+        A missing date is a date for which there is at least one stock price and one missing stock price.
         
         if ``missing`` is true a column is added which gives the number of missing stock prices for this dates
         
@@ -189,7 +209,6 @@ class StockPrices:
             return StockPrices( self.tickname, self.dataframe.ix[ ave ,: ] )
         else :
             raise Exception("no trading dates left")
-        
 
     def returns(self):
         """
@@ -241,4 +260,69 @@ class StockPrices:
             return ret, ret_mat
         else :
             return ret_mat
+            
+    @staticmethod
+    def draw(listStockPrices, begin = None, end = None, field="Close", date_format = '%Y') :
+        """
+        Draw a graph showing one or several time series.
+        The example was taken `here <http://matplotlib.org/examples/api/date_demo.html>`_.
         
+        @param      listStockPrices     list of @see cl StockPrice
+        @param      begin               first date (datetime) or None to take the first one
+        @param      end                 last included date (datetime) or None to take the last one
+        @param      field               Open, High, Low, Close
+        @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d``
+        @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
+        
+        
+        Example:
+        @code
+        stocks = [ StockPrices ("BNP.PA", folder = cache),
+                    StockPrices ("CA.PA", folder = cache),
+                    StockPrices ("SAN.PA", folder = cache),
+                    ]
+        fig, ax, plt = StockPrices.draw(stocks)
+        fig.savefig("image.png")
+        fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01")
+        plt.show()  
+        @endcode
+        """
+        data = StockPrices.available_dates(listStockPrices, missing = False, field = field)
+        if begin == None :
+            if end != None :
+                data = data [ data.index <= end ]
+        else :
+            if end != None :
+                data = data [ (data.index >= begin) &  (data.index <= end)]
+            else :
+                data = data [ data.index >= begin ]
+                
+        dates = [ datetime.datetime.strptime(_, '%Y-%m-%d') for _ in data.index ]
+        begin = dates[0]
+        end   = dates[-1]
+        
+        import matplotlib.pyplot as plt
+        import matplotlib.dates as mdates
+        import matplotlib.cbook as cbook
+
+        years    = mdates.YearLocator()   # every year
+        months   = mdates.MonthLocator()  # every month
+        yearsFmt = mdates.DateFormatter(date_format)
+        def price(x): return '%1.2f'%x
+        fig, ax = plt.subplots()
+        
+        curve = [ ]
+        for stock in data.columns :
+            curve.append ( ax.plot(dates, data[stock]) )
+
+        ax.xaxis.set_major_locator(years)
+        ax.xaxis.set_major_formatter(yearsFmt)
+        ax.xaxis.set_minor_locator(months)
+        ax.set_xlim(begin, end)
+        ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
+        ax.format_ydata = price
+        ax.grid(True)
+        fig.autofmt_xdate()
+        ax.legend( tuple(data.columns))
+        return fig, ax, plt
+

@@ -4,7 +4,7 @@
 """
 
 
-import sys, os, unittest
+import sys, os, unittest, datetime
 
 
 try :
@@ -29,9 +29,9 @@ class TestStockHttp (unittest.TestCase):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache")
-        name = os.path.join(cache, "BNP.PA.txt")
+        name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-15.txt")
         if os.path.exists(name) : os.remove(name)
-        stock = StockPrices ("BNP.PA", folder = cache)
+        stock = StockPrices ("BNP.PA", folder = cache, end=datetime.datetime(2014,1,15))
         assert os.path.exists(name)
         df = stock.dataframe
         assert len(df) > 0

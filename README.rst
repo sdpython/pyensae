@@ -34,6 +34,21 @@ The last function is about getting stock prives from `Yahoo Finance <http://fr.f
 
     stock = StockPrices( "BNP.PA", folder = "temp" )
     
+To draw a graph with multiple stock prices::
+
+    stocks = [ StockPrices ("BNP.PA", folder = cache),
+                StockPrices ("CA.PA", folder = cache),
+                StockPrices ("SAN.PA", folder = cache),
+                ]
+    fig, ax, plt = StockPrices.draw(stocks)
+    fig.savefig("image.png")
+    
+    # or 
+    
+    fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01")
+    plt.show()  
+
+    
     
 Contributions
 -------------
