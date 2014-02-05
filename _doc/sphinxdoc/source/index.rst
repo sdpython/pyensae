@@ -54,6 +54,19 @@ Functionalities
 * import a text file into a database
 * retrieve stock prices from Yahoo Finance
 
+Dependencies
+------------
+
+* `numpy <http://www.numpy.org/>`_
+* `pandas <http://pandas.pydata.org/>`_
+* `pyquickhelper <https://pypi.python.org/pypi/pyquickhelper>`_
+
+For the class :class:`StockPrices <finance.astock.StockPrices>`:
+    * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
+    * `six <https://pypi.python.org/pypi/six>`_
+
+On Windows, most of the intersting modules can installed from `here <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
+
 
 About this documentation
 ------------------------
