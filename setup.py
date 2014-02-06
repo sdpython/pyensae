@@ -51,7 +51,7 @@ else :
     subversion = 1   
 
 project_var_name    = "pyensae"
-sversion            = "0.1"
+sversion            = "0.2"
 versionPython       = "%s.%s" % (sys.version_info.major, sys.version_info.minor)
 path                = "Lib/site-packages/" + project_var_name
 readme              = 'README.rst'
@@ -130,7 +130,7 @@ setup(
     package_dir             = package_dir,
     package_data            = package_data,
     #data_files              = data_files,
-    requires                = [  "pyquickhelper" ],
+    install_requires        = [  "pyquickhelper" ],
     ext_modules             = EXT_MODULES,
     #include_package_data    = True,
     )
