@@ -5,11 +5,11 @@
 @brief @see cl Database
 """
 
-import sys, os, sqlite3 as SQLite, collections
+import os, collections
 
 
 from .file_text_binary      import TextFile
-from .database_exception    import ExceptionSQL, DBException
+from .database_exception    import DBException
 
 
 class DatabaseImportExport :
@@ -87,6 +87,7 @@ class DatabaseImportExport :
         
         f = open (filename, "w", encoding=encoding)
         f.write (header_line)
+        memo = { }
         
         for line_ in cur :
             
@@ -205,12 +206,12 @@ class DatabaseImportExport :
                 
                 num_line += 1
                 if dic != None :
-                    s   = self._get_insert_request (    dic, 
-                                                        table, 
-                                                        True, 
-                                                        primarykey, 
-                                                        cursor = cursor, 
-                                                        skip_exception = skip_exception)
+                    self._get_insert_request (  dic, 
+                                                table, 
+                                                True, 
+                                                primarykey, 
+                                                cursor = cursor, 
+                                                skip_exception = skip_exception)
                     nbinsert += 1
                     #self._connection.execute (s)
                     all += 1
@@ -256,7 +257,7 @@ class DatabaseImportExport :
                     else : unique_key [dic [unique]] = 0
                 
                 if dic != None :
-                    s   = self._get_insert_request (dic, table, True, primarykey, cursor = cursor)
+                    self._get_insert_request (dic, table, True, primarykey, cursor = cursor)
                     nbinsert += 1
                     all += 1
                     if all % every == 0: 

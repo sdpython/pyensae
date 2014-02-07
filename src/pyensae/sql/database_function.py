@@ -5,10 +5,10 @@
 @brief      generic class to access a SQL database
 """
 
-import os, sys, sqlite3 as SQLite
+import os
 
 
-from pyquickhelper.loghelper.flog import run_cmd, fLOG
+from pyquickhelper.loghelper.flog import run_cmd
 
 def get_list_server () :
     """

@@ -2,7 +2,7 @@
 @file
 @brief Various functions to get data from a website, a reference website.
 """
-import os, sys, importlib, re, urllib.request 
+import os, sys, importlib, re, urllib.request
 
 def remove_empty_line(file) :
     """
@@ -110,22 +110,12 @@ def download_data ( name,
             if url == None : url = website
             url += file
             fileprint ("    downloading of ", url, " to ", outfile)
-            if sys.version_info.major >= 3 :
-                u = urllib.request.urlopen (url)
-                all = u.read ()
-                u.close ()
-                u = open (outfile, "wb")
-                u.write ( all )
-                u.close()
-            else :
-                u = urllib2.urlopen (url, "r")
-                all = u.read ()
-                if "404 Not Found" in all and 'if "404 Not Found" in all :' not in all :
-                    raise FileNotFoundError ("fichier introuvable: " + name )
-                u.close ()
-                u = open (outfile, "wb" if ".exe" in file or ".zip" in file else "r")
-                u.write ( all )
-                u.close()
+            u = urllib.request.urlopen (url)
+            all = u.read ()
+            u.close ()
+            u = open (outfile, "wb")
+            u.write ( all )
+            u.close()
                 
     if ".zip" in name :
         import zipfile

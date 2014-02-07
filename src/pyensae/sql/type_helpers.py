@@ -3,6 +3,7 @@
 @brief  helpers about python types
 """
 
+import decimal, math
 
 def guess_type_value (x, none = None) :
     """
@@ -14,7 +15,7 @@ def guess_type_value (x, none = None) :
     @warning if an integer starts with a zero, then it is a string
     """
     try :
-        i = int (x)
+        int (x)
         if x [0] == '0' and len (x) > 1 :   return str
         else :                              return int if len (x) < 9 else str
     except :

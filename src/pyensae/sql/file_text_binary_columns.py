@@ -7,7 +7,7 @@
 """
 
 
-import re,sys,os,glob, math, decimal
+import re,os,decimal
 
 from pyquickhelper.loghelper.flog import GetPath
 from .file_text_binary import TextFile
@@ -243,7 +243,7 @@ class TextFileColumns (TextFile) :
                                     ttt =  self._conv [k] (0)
                             else :  ttt =  self._conv [k] (res [k])
                             res [k] = ttt
-                        except ValueError as e :
+                        except ValueError :
                             nbert += 1
                             if self._keep_text_when_bad_type :
                                 if nbert % 1000 == 1 :
@@ -310,7 +310,7 @@ class TextFileColumns (TextFile) :
             raise Exception ("unable to create file %s, reason: %s" % (output, str (e)))
             
         self.LOG ("sorting file ", self.filename)
-        root   = self.filename.replace (":", "_").replace ("/", "_").replace ("\\", "_").replace (".", "_")
+        #root   = self.filename.replace (":", "_").replace ("/", "_").replace ("\\", "_").replace (".", "_")
         files  = [ ]
         memo   = [ ]
         self.open ()

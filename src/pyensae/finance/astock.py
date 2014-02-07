@@ -2,7 +2,7 @@
 @file
 @brief Download stock prices (from Yahoo website) and other prices
 """
-import os, sys, re, urllib.request, urllib.error, datetime
+import os, urllib.request, urllib.error, datetime
 
 class StockPrices:
     """
@@ -193,8 +193,6 @@ class StockPrices:
         @param      trading_dates   dates
         @return                     new series
         """
-        import pandas
-        
         da = self.dataframe["Date"]
         da2 = { v:1 for v in da }
         
@@ -244,7 +242,6 @@ class StockPrices:
         @param      ret                 if True, also add the returns
         @return                         square dataframe or 2 dataframe (returns, correlation)
         """
-        
         listStockPrices = [ v.returns() for v in listStockPrices ]
         mat = StockPrices.available_dates (listStockPrices, False, field)
         import numpy, pandas
@@ -303,7 +300,6 @@ class StockPrices:
         
         import matplotlib.pyplot as plt
         import matplotlib.dates as mdates
-        import matplotlib.cbook as cbook
 
         years    = mdates.YearLocator()   # every year
         months   = mdates.MonthLocator()  # every month

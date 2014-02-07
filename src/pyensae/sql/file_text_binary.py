@@ -6,7 +6,7 @@
 """
 
 
-import re,sys,os,glob, math, time, decimal
+import re,os,math, time, decimal
 
 from .type_helpers import guess_type_value
 
@@ -444,7 +444,7 @@ class TextFile :
         bestsep = best
         
         if force_sep != None and bestsep != force_sep :
-            HalLOG ("  TextFile.guess_columns: changes the separator", repr (force_sep))
+            self.LOG ("  TextFile.guess_columns: changes the separator", repr (force_sep))
             bestsep = force_sep
         
         bestcol = 0

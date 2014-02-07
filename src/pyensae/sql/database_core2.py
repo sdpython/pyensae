@@ -5,7 +5,7 @@
 @brief @see cl Database
 """
 
-import re, copy, sys, os, random, sqlite3 as SQLite, datetime
+import re, copy, os, random, sqlite3 as SQLite, datetime, decimal
 
 
 
@@ -90,7 +90,7 @@ class DatabaseCore2 :
             lines.append ("\n")
             lines.append ("indexes")
             for tu in indexes :
-                if isinstance (tu, tuple) or isintance (tu, list) :
+                if isinstance (tu, tuple) or isinstance (tu, list) :
                         lines.append ("    " + "\t".join ( [ str(x) for x in tu ] ))
                 else :  lines.append ("    " + tu)
                     
@@ -266,7 +266,7 @@ class DatabaseCore2 :
                             elif isinstance (val, str) : val = datetime.datetime.parse(val)
                             else : raise TypeError("unable to convert %s into datetime" % str(type(val)))
                         else :                          val = v [1] (val)
-                    except ValueError as e :
+                    except ValueError : #as e :
                         self.LOG("(b)line number ", num_line, "**unable to process a line columns ",c, "#", v [0], " type ", v [1], " value ", repr (line [c]))
                         return None
                         

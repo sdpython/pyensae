@@ -40,8 +40,7 @@
 
 
 import sys,os
-from distutils.core import setup, Extension
-import distutils.sysconfig as SH
+from distutils.core import setup
 from setuptools import find_packages
 
 if os.path.exists("version.txt") :
@@ -70,6 +69,7 @@ CLASSIFIERS = \
 'Topic :: Scientific/Engineering',
 'Topic :: Education',
 'License :: OSI Approved :: BSD License',
+'Development Status :: 5 - Production/Stable'
 ]
 
 #############################################################

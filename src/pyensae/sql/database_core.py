@@ -5,7 +5,7 @@
 @brief @see cl Database
 """
 
-import os, sys, math, copy, re, time, random, decimal, sqlite3 as SQLite, datetime
+import os, sys, math, re, time, decimal, sqlite3 as SQLite, datetime
 
 module_odbc = None
 
@@ -113,16 +113,7 @@ class DatabaseCore (DatabaseCore2) :
             self._engine   = engine
             
         elif engine == "ODBCMSSQL" :
-            global module_odbc
-            try :
-                import _externals.pypyodbc.pypyodbc as pypyodbc
-            except ImportError as e :
-                raise DBException ("unable to import module pypyodbc: %s" % str (e))
-                
-            if sql_file == ":memory:" : sql_file = "_memory_database_"
-            module_odbc = sys.modules ["pypyodbc"]
-            self._sql_file = sql_file
-            self._engine   = engine
+            raise DBException ("unable to import to connect to a SQL server")
                 
         else :
             raise DBException ("unfound engine %s in %s" % (engine, ", ".join (DatabaseCore._engines)))
@@ -134,8 +125,8 @@ class DatabaseCore (DatabaseCore2) :
                 os.makedirs (folder)
             summary = os.path.join (folder, "temp_quick_look_up.py")
             if not os.path.exists (summary) :
-                cwd = os.path.join (os.path.abspath (os.path.split (__file__) [0]), "..", "..")
-                fi  = os.path.split (sql_file) [1]
+                #cwd = os.path.join (os.path.abspath (os.path.split (__file__) [0]), "..", "..")
+                #fi  = os.path.split (sql_file) [1]
                 
                 if "SCRIPT_LOOKUP" in DatabaseCore.__dict__ :
                     script  = DatabaseCore.SCRIPT_LOOKUP
@@ -182,9 +173,11 @@ class DatabaseCore (DatabaseCore2) :
         """
         return "_connection" in self.__dict__ 
 
+    @staticmethod
     def regex_match (exp, st) : 
         return 0 if re.compile (exp).search (st) == None else 1
-    regex_match = staticmethod(regex_match)
+
+    @staticmethod
     def idaytodate (dayint, year, month, day) :
         try :
             d   = datetime.datetime (year, month, day)
@@ -193,7 +186,8 @@ class DatabaseCore (DatabaseCore2) :
             return str (cur).split () [0]
         except Exception as e :
             return str (e)
-    idaytodate = staticmethod(idaytodate)
+
+    @staticmethod
     def isectoday (sec) :
         if sec < 0 : return "negative time"
         elif sec >= 86400 : return "out of day"
@@ -203,18 +197,21 @@ class DatabaseCore (DatabaseCore2) :
             m = (s % 3600) / 60
             s = s % 60
             return "%02d:%02d:%02d" % (h,m,s)
-    isectoday = staticmethod(isectoday)
+
+    @staticmethod
     def itimestamp (t, year, month, day) :
-        d = idaytodate (int (t / 86400), year, month, day)
-        s = isectoday (int (t - 86400. * int (t / 86400)))
+        d = DatabaseCore.idaytodate (int (t / 86400), year, month, day)
+        s = DatabaseCore.isectoday (int (t - 86400. * int (t / 86400)))
         return d + " " + s
-    itimestamp = staticmethod(itimestamp)
+
+    @staticmethod
     def string_to_date (s) :
         d = int (s [:2])
         m = int (s [3:5])
         y = int (s [6:])
         return datetime.datetime (y,m,d)
-    string_to_date = staticmethod(string_to_date)
+
+    @staticmethod
     def _special_function_init_ () :
         _list_special_function = [
                     ("log",         math.log,           1,  "log(s) --> float",     "log"),
@@ -234,7 +231,6 @@ class DatabaseCore (DatabaseCore2) :
                                                         1,  "isectoday (isec) --> str",     "time if isec is the number of seconds since midnight"),
                 ]
         return _list_special_function
-    _special_function_init_ = staticmethod(_special_function_init_)
         
     def connect (self, odbc_string = None) :
         """open a connection to the database
@@ -244,7 +240,7 @@ class DatabaseCore (DatabaseCore2) :
             raise Exception ("a previous connection was not closed")
         
         if   self._engine == "SQLite" : self._connection = SQLite. connect (self._sql_file)
-        elif self._engine == "MySQL" :  self._connection = MySQLdb.connect (self._host, self._user, self._password, self._sql_file)
+        #elif self._engine == "MySQL" :  self._connection = MySQLdb.connect (self._host, self._user, self._password, self._sql_file)
         elif self._engine == "ODBCMSSQL" :
             
             if odbc_string == None :
@@ -596,11 +592,11 @@ class DatabaseCore (DatabaseCore2) :
             if where == None : where = ""
             
             nkey = len (fkey)
-            nval = len (fval)
+            #nval = len (fval)
             sql  = "SELECT %s,%s FROM %s %s ORDER BY %s" % (key,value,table, where, order)
             cur  = self.db.execute (sql)
             data = { }
-            tot  = nkey + nval
+            #tot  = nkey + nval
             for sample in cur :
                 key = sample [:nkey]
                 val = sample [nkey:]
@@ -612,7 +608,7 @@ class DatabaseCore (DatabaseCore2) :
             keys.sort ()
             
             if nkey == 1 : temp = [ [ str (k[0]) + ';' + s                        for s in fval ] for k in keys ]
-            else :         temp = [ [ ",".join ( [str (_) for _ in k] ) + ';' + s for s in fval ] for k in keys ]
+            else :         temp = [ [ ",".join ( [str (_s) for _s in k] ) + ';' + s for s in fval ] for k in keys ]
             self.description = []
             for t in temp : self.description.extend (t)
             self.description = [ (k,None) for k in self.description ]
@@ -976,7 +972,8 @@ class DatabaseCore (DatabaseCore2) :
         
         @warning The commit is not done and must be done to stored these modifications.
         """
-        insert_values = self._check_values (values)
+#        insert_values = 
+        self._check_values (values)
         self._check_connection ()
         all = []
         for k,v in values.items() :

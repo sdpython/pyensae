@@ -4,12 +4,8 @@
 @brief      generic class to access a SQL database
 """
 
-import os, sys
 
 
-from .file_text_binary          import TextFile
-from .database_exception        import ExceptionSQL
-from .database_core2            import DatabaseCore2
 from .database_core             import DatabaseCore
 from .database_import_export    import DatabaseImportExport
 from .database_object           import DatabaseObject

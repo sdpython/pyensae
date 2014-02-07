@@ -5,8 +5,6 @@
 @brief defines logged exceptions for SQL requests
 """
 
-import sys, os, sqlite3 as SQLite
-
 class DBException (Exception):
     """
     custome exception
