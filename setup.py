@@ -46,7 +46,7 @@ from setuptools import find_packages
 
 if os.path.exists("version.txt") :
     with open("version.txt", "r") as f : lines = f.readlines()
-    subversion = int(lines[0].strip("\r\n "))
+    subversion = lines[0].strip("\r\n ")
 else :
     subversion = 1   
 
@@ -117,7 +117,7 @@ if "--verbose" in sys.argv :
 
 setup(
     name                    = project_var_name,
-    version                 = 'py%s-v%s.%d' % (versionPython, sversion, subversion),
+    version                 = 'py%s-v%s.%s' % (versionPython, sversion, subversion),
     author                  = 'Xavier Dupré',
     author_email            = 'xavier.dupre AT gmail.com',
     url                     = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html",

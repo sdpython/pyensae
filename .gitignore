@@ -199,6 +199,7 @@ parts/
 var/
 sdist/
 develop-eggs/
+__pycache__/
 .installed.cfg
 
 # Installer logs
@@ -213,3 +214,13 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+# py* packages
+temp_*
+out_*
+*/sphinxdoc/source/index_*
+*/sphinxdoc/source/readme.*
+*/sphinxdoc/source/LICENSE.*
+*/sphinxdoc/source/filechanges.*
+version.txt
+*/sphinxdoc/source/pyensae/*
