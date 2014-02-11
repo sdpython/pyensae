@@ -38,7 +38,6 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 #  OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 import sys,os
 from distutils.core import setup
 from setuptools import find_packages
@@ -50,7 +49,7 @@ else :
     subversion = 1   
 
 project_var_name    = "pyensae"
-sversion            = "0.2"
+sversion            = "0.3"
 versionPython       = "%s.%s" % (sys.version_info.major, sys.version_info.minor)
 path                = "Lib/site-packages/" + project_var_name
 readme              = 'README.rst'
