@@ -28,7 +28,9 @@ class DatabaseImportExport :
                                             header          = False, 
                                             columns         = None,
                                             post_process    = None) :
-        """export a table into a flat file
+        """
+        export a table into a flat file
+        
         @param      table           table name
         @param      filename        filename
         @param      header          add a header on the first line
@@ -36,6 +38,19 @@ class DatabaseImportExport :
         @param      post_process    post_process a line:
                                         - input:  list, dictionary (for your own use, same one all the time)
                                         - output: list
+                                        
+        @example(Export the results of a SQL query into a flat file)
+        @code
+        from pyensae.sql.database_main import Database
+        dbfile = "filename.db3"
+        filetxt = "fileview.txt"
+        sql = "..."
+        db = Database(dbfile)
+        db.connect()
+        db.export_view_into_flat_file (sql, fileview, header = True)
+        db.close()
+        @endcode
+        @endexample
         """
         if columns == None :    sql = "SELECT * FROM " + table + ";"
         else :                  sql = "SELECT %s FROM %s ;" % (",".join (columns), table)

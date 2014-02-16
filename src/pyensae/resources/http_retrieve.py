@@ -74,11 +74,12 @@ def download_data ( name,
     By extension, this function also download various zip files and decompresses it. 
     If the file was already downloaded, the function will not do it again.
     
-    Example:
+    @example(Download data for a practical lesson)
     @code
     from pyensae import download_data
     download_data('voeux.zip', website = 'xd')
     @endcode
+    @endexample
     """
     if glo == None : glo = globals()
     if loc == None : loc = locals()

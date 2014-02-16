@@ -35,6 +35,36 @@ class StockPrices:
         If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
         prices for a date before this one).
         If end is None, the date will the date of yesterday.
+        
+    
+        @example(Compute the average returns and correlation matrix)
+        @code
+        import pyensae, pandas
+        from pyensae import StockPrices
+
+        # download the CAC 40 composition from my website
+        pyensae.download_data('cac40_2013_11_11.txt', website = 'xd')
+
+        # download all the prices (if not already done) and store them into files
+        actions = pandas.read_csv("cac40_2013_11_11.txt", sep = "\t")
+
+        # we remove stocks with not enough historical data
+        stocks = { k:StockPrices(tick = k) for k,v in actions.values  if k != "SOLB.PA"}
+        dates = StockPrices.available_dates( stocks.values() )
+        stocks = { k:v for k,v in stocks.items() if len(v.missing(dates)) <= 10 }
+        print ("nb left", len(stocks))
+
+        # we remove dates with missing prices
+        dates = StockPrices.available_dates( stocks.values() )
+        ok    = dates[ dates["missing"] == 0 ]
+        print ("all dates before", len(dates), " after:" , len(ok))
+        for k in stocks : stocks[k] = stocks[k].keep_dates(ok)
+
+        # we compute correlation matrix and returns
+        ret, cor = StockPrices.covariance(stocks.values(), cov = False, ret = True)
+        @endcode
+        @endexample
+    
         """
         import pandas
 

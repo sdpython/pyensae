@@ -28,14 +28,15 @@ def import_flatfile_into_database (
     @param  host        host (server)
     @param  fLOG        logging function (will display information through the command line)
     
-    example:
+    
+    @example(Import a flat file into a SQLite database)
     @code
     from pyensae import import_flatfile_into_database
     dbf = "database.db3"
     file = "textfile.txt"
     import_flatfile_into_database(dbf, file)
     @endcode
-        
+    @endexample
     """
     # connection
     db = Database (filedb, engine = engine, host = host, LOG = fLOG)
