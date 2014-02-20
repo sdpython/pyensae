@@ -1,6 +1,6 @@
 """
 @file
-@brief clean all files .pyd and .so depending on pyhome and compiled by the library.
+@brief clean all files .pyd and .so compiled by the library.
 """
 import os
 for root, dirs, files in os.walk("."):
