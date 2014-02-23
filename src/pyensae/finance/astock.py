@@ -338,19 +338,28 @@ class StockPrices:
         import matplotlib.pyplot as plt
         import matplotlib.dates as mdates
 
-        years    = mdates.YearLocator()   # every year
-        months   = mdates.MonthLocator()  # every month
-        yearsFmt = mdates.DateFormatter(date_format)
         def price(x): return '%1.2f'%x
         fig, ax = plt.subplots(**args)
         
         curve = [ ]
         for stock in data.columns :
             curve.append ( ax.plot(dates, data[stock]) )
-
-        ax.xaxis.set_major_locator(years)
-        ax.xaxis.set_major_formatter(yearsFmt)
-        ax.xaxis.set_minor_locator(months)
+            
+        if len(dates) < 500:
+            months   = mdates.MonthLocator() 
+            days     = mdates.DayLocator()
+            monthFmt = mdates.DateFormatter(date_format)
+            ax.xaxis.set_major_locator(months)
+            ax.xaxis.set_major_formatter(monthFmt)
+            ax.xaxis.set_minor_locator(days)
+        else :
+            years    = mdates.YearLocator() 
+            months   = mdates.MonthLocator()
+            yearsFmt = mdates.DateFormatter(date_format)
+            ax.xaxis.set_major_locator(years)
+            ax.xaxis.set_major_formatter(yearsFmt)
+            ax.xaxis.set_minor_locator(months)
+            
         ax.set_xlim(begin, end)
         ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
         ax.format_ydata = price
