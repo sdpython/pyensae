@@ -36,7 +36,6 @@ class StockPrices:
         prices for a date before this one).
         If end is None, the date will the date of yesterday.
         
-    
         @example(Compute the average returns and correlation matrix)
         @code
         import pyensae, pandas
@@ -289,20 +288,24 @@ class StockPrices:
             return ret_mat
             
     @staticmethod
-    def draw(listStockPrices, begin = None, end = None, field="Close", date_format = '%Y') :
+    def draw(listStockPrices, begin = None, end = None, field="Close", date_format = '%Y',
+                **args) :
         """
         Draw a graph showing one or several time series.
         The example was taken `here <http://matplotlib.org/examples/api/date_demo.html>`_.
         
-        @param      listStockPrices     list of @see cl StockPrice
+        @param      listStockPrices     list of @see cl StockPrice (or one @see cl StockPrice if it is the only one)
         @param      begin               first date (datetime) or None to take the first one
         @param      end                 last included date (datetime) or None to take the last one
         @param      field               Open, High, Low, Close
         @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d``
+        @param      args                others arugments to send to ``plt.subplots``
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
         
+        The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
+        can change the graph size (see the example below).
         
-        Example:
+        @example(graph of a financial series)
         @code
         stocks = [ StockPrices ("BNP.PA", folder = cache),
                     StockPrices ("CA.PA", folder = cache),
@@ -310,10 +313,14 @@ class StockPrices:
                     ]
         fig, ax, plt = StockPrices.draw(stocks)
         fig.savefig("image.png")
-        fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01")
+        fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01", figsize=(16,8))
         plt.show()  
         @endcode
+        @endexample
         """
+        if isinstance(listStockPrices, StockPrices):
+            listStockPrices = [ listStockPrices ]
+        
         data = StockPrices.available_dates(listStockPrices, missing = False, field = field)
         if begin == None :
             if end != None :
@@ -326,7 +333,7 @@ class StockPrices:
                 
         dates = [ datetime.datetime.strptime(_, '%Y-%m-%d') for _ in data.index ]
         begin = dates[0]
-        end   = dates[-1]
+        end   = dates[-1] 
         
         import matplotlib.pyplot as plt
         import matplotlib.dates as mdates
@@ -335,7 +342,7 @@ class StockPrices:
         months   = mdates.MonthLocator()  # every month
         yearsFmt = mdates.DateFormatter(date_format)
         def price(x): return '%1.2f'%x
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(**args)
         
         curve = [ ]
         for stock in data.columns :

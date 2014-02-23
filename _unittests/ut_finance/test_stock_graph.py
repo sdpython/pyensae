@@ -35,7 +35,7 @@ class TestStockGraph (unittest.TestCase):
         import matplotlib
         matplotlib.use("TkAgg",warn=False)
         
-        fig, ax, plt = StockPrices.draw(stocks)
+        fig, ax, plt = StockPrices.draw(stocks, figsize=(16,8))
         img = os.path.abspath(os.path.join(os.path.split(__file__)[0],"temp_image.png"))
         if os.path.exists(img): os .remove(img)
         fig.savefig(img)
