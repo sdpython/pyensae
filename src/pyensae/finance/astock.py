@@ -17,7 +17,7 @@ class StockPrices:
     """
     
     def __init__(self, tick, url="yahoo", folder="cache",
-                    begin = None, end = None): 
+                    begin = None, end = None, sep = ","): 
         """
         Loads a stock price from either a url or a folder where the data was cached.
         If a filename ``<folder>/<tick>.<day1>.<day2>.txt`` already exists, it takes it from here.
@@ -31,6 +31,7 @@ class StockPrices:
         @param      folder      cache folder (created if it does not exists
         @param      begin       first day (datetime), see below
         @param      end         last day (datetime), see below
+        @param      sep         column separator
         
         If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
         prices for a date before this one).
@@ -65,15 +66,26 @@ class StockPrices:
         @endexample
     
         """
-        import pandas
+        import pandas, pandas.parser
 
         if isinstance(url, pandas.DataFrame) :
             self.datadf = url
             self.tickname = tick
+        elif isinstance(tick, str) and os.path.exists(tick):
+            try:
+                self.datadf = pandas.read_csv(tick, sep=sep)
+            except pandas.parser.CParserError as e :
+                with open(tick,"r") as t : content = t.read()
+                if "Firewall Authentication" in content :
+                    raise Exception("pandas cannot parse the file, check your have access to internet") from e
+                else :
+                    raise e
         else :
-
             if not os.path.exists(folder) :
-                os.mkdir(folder)
+                try:
+                    os.mkdir(folder)
+                except PermissionError as e :
+                    raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")")
             self.tickname = tick
             
             if begin == None : 
@@ -104,12 +116,22 @@ class StockPrices:
                 
                 if len(text) < 10 :
                     raise Exception("nothing to download for " + tick)
-                        
-                f = open (name, "wb")
-                f.write(text)
-                f.close ()
+                       
+                try:
+                    f = open (name, "wb")
+                    f.write(text)
+                    f.close ()
+                except PermissionError as e :
+                    raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")")
                 
-            self.datadf = pandas.read_csv(name, sep=",")
+            try:
+                self.datadf = pandas.read_csv(name, sep=sep)
+            except pandas.parser.CParserError as e :
+                with open(tick,"r") as t : content = t.read()
+                if "Firewall Authentication" in content :
+                    raise Exception("pandas cannot parse the file, check your have access to internet") from e
+                else :
+                    raise e
             
         self.datadf = self.datadf.sort("Date")
         self.datadf.reset_index(drop = True, inplace=True)

@@ -72,6 +72,18 @@ class TestStockHttp (unittest.TestCase):
         
         ret, mat = StockPrices.covariance(stocks, cov = False, ret = True)
         assert len(ret) == 3
+        
+    def test_no_wifi(self):
+        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        data = os.path.abspath(os.path.split(__file__)[0])
+        data = os.path.join(data,"data")
+        file = os.path.join(data, "BNP.PA.2000-01-03.2014-02-24.txt")
+        fLOG(os.path.exists(file))
+        fLOG(file)
+        try:
+            stock = StockPrices(file)
+        except Exception as e :
+            assert "pandas cannot parse the file" in str(e)
 
 if __name__ == "__main__"  :
     unittest.main ()    

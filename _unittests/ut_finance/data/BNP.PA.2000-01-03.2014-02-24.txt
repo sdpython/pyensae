@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<style type="text/css" media="screen">
+/*<![CDATA[*/
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed, 
+		figure, figcaption, footer, header, hgroup, 
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure, 
+		footer, header, hgroup, menu, nav, section {
+		display: block;
+		}
+		body {
+		line-height: 1;
+		}
+		ol, ul {
+		list-style: none;
+		}
+		blockquote, q {
+		quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+		content: '';
+		content: none;
+		}
+		table {
+		border-collapse: collapse;
+		border-spacing: 0;
+		}
+
+		html,body {
+		height: 100%;
+		padding: 0;
+		margin: 0;
+		font-size: small;
+		text-align: center;
+		font-family: helvetica,sans-serif;
+		}
+
+		table {
+		width: 100%;
+		height: 100%;
+		font-size: 12px;
+		}
+
+		td {
+		vertical-align: middle;
+		text-align: center;
+		}
+
+		form {
+		display: block;
+		border: 10px solid #eee;
+		box-shadow: 0 0 8px 1px #999;
+		-moz-box-shadow: 0 0 8px 1px #999;
+		-webkit-box-shadow: 0 0 8px 3px #999;
+		width: 500px;
+		color: #797979;
+		font-family: Helvetica, Arial, Geneva, sans-serif;
+		position: relative;
+		margin-right: auto;
+		margin-left: auto;
+		padding: 0;
+		}
+
+		#bandeau {
+		background: #39112c url(/XX/YY/ZZ/CI/MGPGHGPGPFHGFGOGFGDH) no-repeat 225px 6px;
+		height: 155px;
+		width: 498px;
+		text-align: left;
+		padding: 1px;
+		}
+
+		h1 {
+		color: #fff;
+		font: 24px/30px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+		margin-top: 50px;
+		margin-left: 30px;
+		}
+
+		#ft_sm {
+		margin-left: 15px;
+		margin-top: 10px;
+		width: 470px;
+		text-align: left;
+		}
+
+		#ft_sb {
+		margin: 15px;
+		text-align: left;
+		}
+
+		h2 {
+		margin-bottom: 20px;
+		font-weight: bold;
+		}
+
+		p {
+		margin-bottom: 10px;
+		}
+
+		div#auth p {
+		width: 450px;
+		}
+
+		p label#ft_adl {
+		width: 350px;
+		height: 30px;
+		line-height: 30px;
+		font-weight: bold;
+		}
+
+		p label.fl {
+		width: 80px;
+		height: 30px;
+		line-height: 30px;
+		font-weight: bold;
+		}
+
+		input#ft_un,input#ft_pd {
+		width: 336px;
+		height: 30px;
+		color: #424242;
+		font: 16px/28px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+		}
+
+		input#ft_ci {
+		margin-top: 20px;
+		float: right;
+		background-image: -webkit-gradient(linear,left top,left bottom,from(whiteSmoke),to(#F1F1F1));
+		background-image: -webkit-linear-gradient(top,whiteSmoke,#F1F1F1);
+		-webkit-border-radius: 2px;
+		-webkit-user-select: none;
+		background-color: whiteSmoke;
+		background-image: linear-gradient(top,whiteSmoke,#F1F1F1);
+		background-image: -o-linear-gradient(top,whiteSmoke,#F1F1F1);
+		border: 1px solid #d5d5d5;
+		border-radius: 2px;
+		color: #666;
+		cursor: default;
+		font-family: arial,sans-serif;
+		font-size: 11px;
+		font-weight: bold;
+		height: 29px;
+		line-height: 27px;
+		margin: 11px 6px;
+		min-width: 54px;
+		padding: 0 24px;
+		text-align: center;
+		}
+
+		.dci {
+		overflow: auto;
+		border: 1px solid #ccc;
+		font-size: 12px;
+		text-align: justify;
+		line-height: 14px;
+		padding: 10px;
+		margin-bottom: 10px;
+		width: 450px;
+		}
+
+		.fl {
+		display: inline;
+		float: left;
+		margin: 2px;
+		}
+
+		.logo {
+		background: #ccc center 25px url(/XX/YY/ZZ/CI/MGPGHGPGPFGGHHPFBGFHEHIG) no-repeat;
+		padding-top: 80px;
+		}
+
+		.hl {
+		color: #ff6000;
+		font-weight: bold;
+		}
+
+		.clear {
+		clear: both;
+		}
+		/*]]>*/
+		</style><!--[if IE]>
+<style type="text/css" media="screen">
+input#ft_ci { height: 33px }
+</style>
+<![endif]-->
+		<title>
+			Firewall Authentication
+		</title>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td>
+					<form action="/" method="post">
+						<div id="bandeau">
+							<h1>
+								Web Portal<br />
+								Accès Wifi
+							</h1>
+						</div><input type="hidden" name="4Tredir" value="http://ichart.finance.yahoo.com/table.csv?s=BNP.PA&d=1&e=24&f=2014&g=d&a=0&b=3&c=2000&ignore=.csv" /> <input type="hidden" name="magic" value="050a1c976e69eb6d" />
+						<div id="ft_sm">
+							<p class="dci">
+								You are about to access Internet content that is not under the control of the network access provider. The network access provider is therefore not responsible for any of these sites, their content or their privacy policies. The network access provider and its staff do not endorse nor make any representations about these sites, or any information, software or other products or materials found there, or any results that may be obtained from using them. If you decide to access any Internet content, you do this entirely at your own risk and you are responsible for ensuring that any accessed material does not infringe the laws governing, but not exhaustively covering, copyright, trademarks, pornography, or any other material which is slanderous, defamatory or might cause offence in any other way.
+							</p>
+							<p>
+								<input type="checkbox" id="ft_ad" /> <label for="ft_ad" id="ft_adl">I accept the terms and disclaimer agreement</label>
+							</p>
+						</div>
+						<div id="ft_sb">
+							<!-- <h2>
+								Authentication for SSID: N/A
+							</h2> -->
+							<p id="note" class="msg">
+								Please enter your username and password to continue
+							</p>
+							<div id="auth">
+								<p>
+									<label class="fl" for="ft_un">Username:</label> <input name="username" id="ft_un" />
+								</p>
+								<p>
+									<label class="fl" for="ft_pd">Password:</label> <input name="password" id="ft_pd" type="password" />
+								</p>
+								<p>
+									<input type="submit" id="ft_ci" value="Continue" />
+								</p>
+								<p class="clear">
+									&nbsp;
+								</p>
+							</div>
+						</div>
+					</form>
+				</td>
+			</tr>
+		</table><script type="text/javascript">
+//<![CDATA[
+		var def_msg = "Please enter your username and password to continue";var cb = get("ft_ad"); var un = get("ft_un"); var pd = get("ft_pd"); var ci = get("ft_ci"); var note = get("note"); var adl = get("ft_adl");if (cb && un && pd && note && adl) { cb.onclick = cb_click; cb_click.apply(cb, [def_msg]); }function get(x) { return document.getElementById(x); }function tc(elm, cn, tg) { if (!elm) return; if (tg) elm.className += " " + cn; else elm.className = elm.className.replace(cn,''); }function cb_click(msg) { var en = !this.checked; un.disabled = en; pd.disabled = en; ci.disabled = en; tc(adl, "hl", en); tc(note, "hl", !en); if(typeof msg === "string") { note.innerHTML = msg; } else { note.innerHTML = def_msg; } } 
+		//]]>
+		</script>
+	</body>
+</html>
+
