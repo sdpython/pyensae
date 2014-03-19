@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @brief      test log(time=3s)
 """

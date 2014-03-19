@@ -3,17 +3,22 @@
 @brief Download stock prices (from Yahoo website) and other prices
 """
 import os, urllib.request, urllib.error, datetime
+import pandas, numpy
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+
 
 class StockPrices:
     """
     defines a class containing stock prices, provides basic functions,
     the class uses `pandas <http://pandas.pydata.org/>`_ to load the data.
     
-    Example:
+    @example(retrieve stock prices from the Yahoo source)
     @code
     prices = StockPrices(tick = "BNP.PA")
     print (prices.dataframe.head())
     @endcode
+    @endexample
     """
     
     def __init__(self, tick, url="yahoo", folder="cache",
@@ -66,15 +71,13 @@ class StockPrices:
         @endexample
     
         """
-        import pandas, pandas.parser
-
         if isinstance(url, pandas.DataFrame) :
             self.datadf = url
             self.tickname = tick
         elif isinstance(tick, str) and os.path.exists(tick):
             try:
                 self.datadf = pandas.read_csv(tick, sep=sep)
-            except pandas.parser.CParserError as e :
+            except Exception as e :
                 with open(tick,"r") as t : content = t.read()
                 if "Firewall Authentication" in content :
                     raise Exception("pandas cannot parse the file, check your have access to internet") from e
@@ -126,7 +129,7 @@ class StockPrices:
                 
             try:
                 self.datadf = pandas.read_csv(name, sep=sep)
-            except pandas.parser.CParserError as e :
+            except Exception as e :
                 with open(tick,"r") as t : content = t.read()
                 if "Firewall Authentication" in content :
                     raise Exception("pandas cannot parse the file, check your have access to internet") from e
@@ -170,8 +173,6 @@ class StockPrices:
         @param      trading_dates       trading_dates (DataFrame having the column ``Date`` or in the index)
         @return                         missing dates (or None if issues)
         """
-        import pandas
-        
         da = self.dataframe["Date"]
         da2 = { v:1 for v in da }
         
@@ -208,12 +209,11 @@ class StockPrices:
             for row in st.dataframe.values :
                 date = row[0]
                 dates.append ( { "Date":date, "tick": st.tick, field:row[4] } )
-        import pandas
+
         df = pandas.DataFrame(dates)
         piv = df.pivot("Date", "tick", field)
         
         if missing :
-            import numpy
             def count_nan(row) :
                 n = 0
                 for k,v in row.items():
@@ -265,7 +265,6 @@ class StockPrices:
         
         @return     StockPrices
         """
-        import numpy
         df    = self.dataframe
         fd    = self.FirstDate()
         ld    = self.LastDate()
@@ -295,7 +294,7 @@ class StockPrices:
         """
         listStockPrices = [ v.returns() for v in listStockPrices ]
         mat = StockPrices.available_dates (listStockPrices, False, field)
-        import numpy, pandas
+
         npmat = numpy.matrix(mat)
         cov = numpy.cov (npmat.transpose()) if cov else numpy.corrcoef (npmat.transpose())
         names = [ v.tick for v in listStockPrices ]
@@ -310,7 +309,8 @@ class StockPrices:
             return ret_mat
             
     @staticmethod
-    def draw(listStockPrices, begin = None, end = None, field="Close", date_format = '%Y',
+    def draw(listStockPrices, begin = None, end = None, 
+                field="Close", date_format = '%Y',
                 **args) :
         """
         Draw a graph showing one or several time series.
@@ -357,9 +357,6 @@ class StockPrices:
         begin = dates[0]
         end   = dates[-1] 
         
-        import matplotlib.pyplot as plt
-        import matplotlib.dates as mdates
-
         def price(x): return '%1.2f'%x
         fig, ax = plt.subplots(**args)
         

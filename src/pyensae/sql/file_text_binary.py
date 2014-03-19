@@ -19,7 +19,7 @@ class TextFile :
     @var    filename        file name
     @var    utf8            decode in utf8?
     @var    errors          decoding in utf8 can raise some errors, see :class:`str` to understand the meaning of this parameter
-    @var    fLOG            logging function (@see fn HalLOG)
+    @var    LOG             logging function
     @var    _buffer_size    read a text file _buffer_size bytes each time
     @var    _filter         function filter, None or return True or False whether a line should considered or not
     

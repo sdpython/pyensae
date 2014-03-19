@@ -1,5 +1,3 @@
-# coding: utf-8
-
 #  Copyright (C) 2013 ---------------
 #  All rights reserved.
 # 
@@ -70,25 +68,6 @@ CLASSIFIERS = \
 'License :: OSI Approved :: BSD License',
 'Development Status :: 5 - Production/Stable'
 ]
-
-#############################################################
-# begin checking
-#############################################################
-
-def remove_existing_build_setup() :
-    if "bdist_wininst" not in sys.argv :
-        for p in ["dist", "src/dist"] :
-            if os.path.exists (p) :
-                for exe in os.listdir (p) :
-                    if ".exe" in exe or ".zip" in exe or ".gz" in exe :
-                        print ("removing ", exe)
-                        os.remove (os.path.join(p, exe))
-
-remove_existing_build_setup()
-
-#############################################################
-# end checking
-#############################################################
 
 
 if "bdist_wininst" not in sys.argv :
