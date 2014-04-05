@@ -22,7 +22,7 @@ class StockPrices:
     """
     
     def __init__(self, tick, url="yahoo", folder="cache",
-                    begin = None, end = None, sep = ","): 
+                    begin = None, end = None, sep = ",", intern=False): 
         """
         Loads a stock price from either a url or a folder where the data was cached.
         If a filename ``<folder>/<tick>.<day1>.<day2>.txt`` already exists, it takes it from here.
@@ -37,6 +37,7 @@ class StockPrices:
         @param      begin       first day (datetime), see below
         @param      end         last day (datetime), see below
         @param      sep         column separator
+        @param      intern      do not use unless you know what to do (@see op __getitem__)
         
         If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
         prices for a date before this one).
@@ -136,9 +137,25 @@ class StockPrices:
                 else :
                     raise e
             
-        self.datadf = self.datadf.sort("Date")
-        self.datadf.reset_index(drop = True, inplace=True)
-        self.datadf.set_index("Date", drop=False, inplace=True)
+        if not intern:
+            self.datadf = self.datadf.sort("Date")
+            self.datadf.reset_index(drop = True, inplace=True)
+            self.datadf.set_index("Date", drop=False, inplace=True)
+        
+    def __getitem__(self, key):
+        """
+        overloads the ``getitem`` operator to get a StockPrice object
+        
+        @param      key     key
+        @return             StockPrice
+        """
+        return StockPrices(self.tick, self.datadf.__getitem__(key), intern=True)
+        
+    def __len__(self):
+        """
+        @return     number of observations
+        """
+        return len(self.datadf)
         
     @property
     def tick(self):
@@ -203,15 +220,41 @@ class StockPrices:
         @param      field               which field to use to fill the matrix
         @return                         matrix with the available dates for each stock
         """
-        
         dates = []
-        for st in listStockPrices :
-            for row in st.dataframe.values :
-                date = row[0]
-                dates.append ( { "Date":date, "tick": st.tick, field:row[4] } )
+        if isinstance(field,str):
+            for st in listStockPrices :
+                lifi = list(st.dataframe.columns)
+                index = lifi.index(field)
+                for row in st.dataframe.values :
+                    date = row[0]
+                    dates.append ( { "Date":date, "tick": st.tick, field:row[index] } )
+        elif isinstance(field, tuple) or isinstance(field, list):
+            for st in listStockPrices :
+                lifi = list(st.dataframe.columns)
+                indexes = [ lifi.index(f) for f in field ]
+                for row in st.dataframe.values :
+                    date = row[0]
+                    r = { "Date":date, "tick": st.tick, } 
+                    for i,f in zip(indexes,field) : r[f] = row[i]
+                    dates.append(r)
+        else :
+            raise TypeError("field must be a string, a tuple or a list")
 
         df = pandas.DataFrame(dates)
-        piv = df.pivot("Date", "tick", field)
+        if isinstance(field,str):
+            piv = df.pivot("Date", "tick", field)
+        elif isinstance(field, tuple) or isinstance(field, list):
+            pivs = [ df.pivot("Date", "tick", f) for f in field ]
+            for fi,piv in zip(field,pivs):
+                col = [ c + "," + fi for c in piv.columns ]
+                piv.columns = col
+            if len(pivs)==1: piv = pivs[0]
+            else :
+                piv = pivs[0].merge(pivs[1],how="outer", left_index=True, right_index=True)
+                for p in pivs[2:]:
+                    piv = piv.merge(p,how="outer", left_index=True, right_index=True)
+        else :
+            raise TypeError("field must be a string, a tuple or a list")
         
         if missing :
             def count_nan(row) :
@@ -310,7 +353,7 @@ class StockPrices:
             
     @staticmethod
     def draw(listStockPrices, begin = None, end = None, 
-                field="Close", date_format = '%Y',
+                field="Close", date_format = None,
                 **args) :
         """
         Draw a graph showing one or several time series.
@@ -319,8 +362,8 @@ class StockPrices:
         @param      listStockPrices     list of @see cl StockPrice (or one @see cl StockPrice if it is the only one)
         @param      begin               first date (datetime) or None to take the first one
         @param      end                 last included date (datetime) or None to take the last one
-        @param      field               Open, High, Low, Close
-        @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d``
+        @param      field               Open, High, Low, Close, Adj Close, Volumne
+        @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d`` or None if you prefer the function to choose
         @param      args                others arugments to send to ``plt.subplots``
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
         
@@ -362,25 +405,41 @@ class StockPrices:
         
         curve = [ ]
         for stock in data.columns :
-            curve.append ( ax.plot(dates, data[stock]) )
+            curve.append ( ax.plot(dates, data[stock], linestyle='solid') )
             
-        if len(dates) < 500:
+        ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
+        if len(dates) < 30:
+            days     = mdates.DayLocator()
+            ax.xaxis.set_major_locator(days)
+            ax.xaxis.set_minor_locator(days)
+            if date_format != None :
+                fmt = mdates.DateFormatter(date_format)
+                ax.xaxis.set_major_formatter(fmt)
+            else :
+                ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
+        elif len(dates) < 500:
             months   = mdates.MonthLocator() 
             days     = mdates.DayLocator()
-            monthFmt = mdates.DateFormatter(date_format)
             ax.xaxis.set_major_locator(months)
-            ax.xaxis.set_major_formatter(monthFmt)
             ax.xaxis.set_minor_locator(days)
+            ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
+            if date_format != None :
+                fmt = mdates.DateFormatter(date_format)
+                ax.xaxis.set_major_formatter(fmt)
+            else :
+                ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
         else :
             years    = mdates.YearLocator() 
             months   = mdates.MonthLocator()
-            yearsFmt = mdates.DateFormatter(date_format)
             ax.xaxis.set_major_locator(years)
-            ax.xaxis.set_major_formatter(yearsFmt)
             ax.xaxis.set_minor_locator(months)
+            if date_format != None :
+                fmt = mdates.DateFormatter(date_format)
+                ax.xaxis.set_major_formatter(fmt)
+            else :
+                ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
             
         ax.set_xlim(begin, end)
-        ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
         ax.format_ydata = price
         ax.grid(True)
         fig.autofmt_xdate()

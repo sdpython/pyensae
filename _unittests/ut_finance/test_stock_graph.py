@@ -23,7 +23,7 @@ from src.pyensae.finance.astock import StockPrices
 
 class TestStockGraph (unittest.TestCase):
     
-    def test_available_dates(self) :
+    def test_graph(self) :
         """
         This test is failing with Python 3.4 if many pictures are drawn.
         """
@@ -37,9 +37,9 @@ class TestStockGraph (unittest.TestCase):
                     ]
                     
         if True:
-            fig, ax, plt = StockPrices.draw(stocks, figsize=(16,8))
+            fig, ax, plt = StockPrices.draw(stocks, figsize=(16,8), field = ["Adj Close", "Close"])
             img = os.path.abspath(os.path.join(os.path.split(__file__)[0],"temp_image.png"))
-            if os.path.exists(img): os .remove(img)
+            if os.path.exists(img): os.remove(img)
             fig.savefig(img)
             assert os.path.exists(img)
 
@@ -55,7 +55,8 @@ class TestStockGraph (unittest.TestCase):
             img = os.path.abspath(os.path.join(os.path.split(__file__)[0],"temp_image3.png"))
             if os.path.exists(img): os .remove(img)
             fig.savefig(img)
-            assert os.path.exists(img)        
+            assert os.path.exists(img)     
+
 
 if __name__ == "__main__"  :
     unittest.main ()    

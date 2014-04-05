@@ -83,6 +83,18 @@ class TestStockHttp (unittest.TestCase):
             stock = StockPrices(file)
         except Exception as e :
             assert "pandas cannot parse the file" in str(e)
+            
+    def test_index(self):
+        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        cache = os.path.abspath(os.path.split(__file__)[0])
+        cache = os.path.join(cache, "temp_cache")
+        name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-16.txt")
+        stock = StockPrices ("BNP.PA", folder = cache, end=datetime.datetime(2014,1,15))
+        some = stock["2001-01-01":"2002-02-02"]
+        assert isinstance(some,StockPrices)
+        assert len(some)<1000
+        
+                
 
 if __name__ == "__main__"  :
     unittest.main ()    

@@ -71,3 +71,13 @@ Started in 2013/08.
 * First contributor: `Xavier Dupré <http://www.xavierdupre.fr/>`_.
 * Others contributors: ENSAE's students.
 
+Versions
+--------
+
+* **v0.4 - 2014/04/05**
+    * the method :meth:`finance.astock.StockPrices.draw` works now with others fields than ``Close``, it also works with two fields in a list, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
+    * the method :meth:`finance.astock.StockPrices.draw` does better with dates
+    * the class :class:`finance.astock.StockPrices` overlaods operator ``__getitem__``, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
+    
+    
+

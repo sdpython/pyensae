@@ -9,7 +9,7 @@ import sys, os, datetime
 
 project_var_name = "pyensae"
 author           = "Xavier Dupré"
-version          = '0.3' 
+version          = '0.4' 
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
