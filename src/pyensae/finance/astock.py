@@ -22,7 +22,8 @@ class StockPrices:
     """
     
     def __init__(self, tick, url="yahoo", folder="cache",
-                    begin = None, end = None, sep = ",", intern=False): 
+                begin = None, end = None, sep = ",", 
+                intern=False): 
         """
         Loads a stock price from either a url or a folder where the data was cached.
         If a filename ``<folder>/<tick>.<day1>.<day2>.txt`` already exists, it takes it from here.
@@ -37,7 +38,7 @@ class StockPrices:
         @param      begin       first day (datetime), see below
         @param      end         last day (datetime), see below
         @param      sep         column separator
-        @param      intern      do not use unless you know what to do (@see op __getitem__)
+        @param      intern      do not use unless you know what to do (@see me __getitem__)
         
         If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
         prices for a date before this one).
@@ -70,6 +71,8 @@ class StockPrices:
         ret, cor = StockPrices.covariance(stocks.values(), cov = False, ret = True)
         @endcode
         @endexample
+        
+        You should also look at `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_.
     
         """
         if isinstance(url, pandas.DataFrame) :
