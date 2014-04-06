@@ -5,11 +5,30 @@
 # sphinx-quickstart on Fri May 10 18:35:14 2013.
 #
 
-import sys, os, datetime
+import sys, os, datetime, re
+
+def extract_version_from_setup():
+    """
+    extract the version from setup.py assuming it is located in ../../..
+    and the version is specified by the following line: ``sversion = "..."``
+    """
+    setup = os.path.abspath(os.path.split(__file__)[0])
+    setup = os.path.join(setup, "..", "..", "..", "setup.py")
+    if os.path.exists(setup):
+        with open(setup,"r") as f : content = f.read()
+        exp = re.compile("sversion *= *['\\\"]([0-9.]+?)['\\\"]")
+        all = exp.findall(content)
+        if len(all) == 0:
+            raise Exception("unable to locate the version from setup.py")
+        if len(all) != 1 :
+            raise Exception("more than one version was found: " + str(all))
+        return all[0]
+    else:
+        raise FileNotFoundError("unable to find setup.py, tried: " + setup)
 
 project_var_name = "pyensae"
 author           = "Xavier Dupré"
-version          = '0.4' 
+version          = extract_version_from_setup()
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
