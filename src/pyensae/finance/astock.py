@@ -448,4 +448,13 @@ class StockPrices:
         fig.autofmt_xdate()
         ax.legend( tuple(data.columns))
         return fig, ax, plt
+        
+    def to_csv(self, filename, sep = "\t"):
+        """
+        saves the file in text format and drops the index
+        
+        @param      filename        filename
+        @param      sep             separator
+        """
+        self.dataframe.to_csv(filename, sep=sep,index=False)
 
