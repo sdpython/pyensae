@@ -89,11 +89,13 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
                                             in both case, the database is not disconnected
                                             
         @example(import a DataFrame into a SQL table)
+        @code
         values = [  {"name":"A", "age":10, "score":34.5 },
                     {"name":"B", "age":20, "score":-34.5 }, ]
         df  = pandas.DataFrame(values)
         dbf = "something.db3"
         db  = Database.fill_sql_table(df, dbf, "mytable")
+        @endcode
         @endexample
         """
         
