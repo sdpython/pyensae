@@ -74,10 +74,13 @@ Started in 2013/08.
 Versions
 --------
 
+* **v0.5 - 2014/04/20**
+    * **new:** add notebooks to the documentation
+    * **new:** add function :meth:`to_excel <finance.astock.StockPrices.to_excel>` to StockPrices
 * **v0.4 - 2014/04/05**
-    * the method :meth:`finance.astock.StockPrices.draw` works now with others fields than ``Close``, it also works with two fields in a list, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
-    * the method :meth:`finance.astock.StockPrices.draw` does better with dates
-    * the class :class:`finance.astock.StockPrices` overlaods operator ``__getitem__``, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
+    * **change:** the method :meth:`finance.astock.StockPrices.draw` works now with others fields than ``Close``, it also works with two fields in a list, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
+    * **change:** the method :meth:`finance.astock.StockPrices.draw` does better with dates
+    * **new:** the class :class:`finance.astock.StockPrices` overloads operator ``__getitem__``, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
     
     
 

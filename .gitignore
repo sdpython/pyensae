@@ -224,3 +224,4 @@ out_*
 version.txt
 */sphinxdoc/source/pyensae/*
 */sphinxdoc/source/all*.rst
+*/sphinxdoc/source/notebooks/*

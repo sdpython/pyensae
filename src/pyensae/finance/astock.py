@@ -78,6 +78,8 @@ class StockPrices:
         if isinstance(url, pandas.DataFrame) :
             self.datadf = url
             self.tickname = tick
+            if "Date" not in url.columns:
+                raise Exception("the dataframe does not contain any column 'Date': {0}".format(",".join( _ for _ in url.columns)))
         elif isinstance(tick, str) and os.path.exists(tick):
             try:
                 self.datadf = pandas.read_csv(tick, sep=sep)
@@ -169,6 +171,12 @@ class StockPrices:
     
     @property
     def dataframe(self):
+        """
+        returns the dataframe
+        """
+        return self.datadf
+        
+    def df(self):
         """
         returns the dataframe
         """
@@ -354,9 +362,21 @@ class StockPrices:
         else :
             return ret_mat
             
+    def plot(self, begin = None, end = None, 
+                field="Close", date_format = None,
+                existing = None,
+                **args):
+        """
+        @see me draw
+        """
+        return StockPrices.draw(self, begin=begin, end=end,
+                        field=field, date_format=date_format,
+                        existing=existing, **args)
+            
     @staticmethod
     def draw(listStockPrices, begin = None, end = None, 
                 field="Close", date_format = None,
+                existing = None,
                 **args) :
         """
         Draw a graph showing one or several time series.
@@ -368,6 +388,7 @@ class StockPrices:
         @param      field               Open, High, Low, Close, Adj Close, Volumne
         @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d`` or None if you prefer the function to choose
         @param      args                others arugments to send to ``plt.subplots``
+        @param      existing            to add this curve to an existing one (existing (fig, ax))
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
         
         The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
@@ -404,11 +425,22 @@ class StockPrices:
         end   = dates[-1] 
         
         def price(x): return '%1.2f'%x
-        fig, ax = plt.subplots(**args)
+        if existing != None:
+            if not isinstance(existing,list) and not isinstance(existing,tuple):
+                raise Exception("existing must be a list or a tuple")
+            if len(existing) != 2 :
+                raise Exception("existing must contain two elements: fix,ax")
+            fig, ax = existing
+            ex_h, ex_l = ax.get_legend_handles_labels()
+            ex_l = tuple(ex_l)
+            ex_h = tuple(ex_h)
+        else :
+            fig, ax = plt.subplots(**args)
+            ex_h, ex_l = tuple(), tuple()
         
         curve = [ ]
         for stock in data.columns :
-            curve.append ( ax.plot(dates, data[stock], linestyle='solid') )
+            curve.append ( ax.plot(dates, data[stock], linestyle='solid', label=str(stock)) )
             
         ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
         if len(dates) < 30:
@@ -446,15 +478,25 @@ class StockPrices:
         ax.format_ydata = price
         ax.grid(True)
         fig.autofmt_xdate()
-        ax.legend( tuple(data.columns))
+        ax.legend( ex_l + tuple(data.columns))
         return fig, ax, plt
         
-    def to_csv(self, filename, sep = "\t"):
+    def to_csv(self, filename, sep = "\t", index=False, **params):
         """
-        saves the file in text format and drops the index
+        saves the file in text format 
+        see `to_csv <http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_csv.html>`_
         
         @param      filename        filename
         @param      sep             separator
+        @param      index           to keep or drop the index
+        @param      params          others parameters
         """
-        self.dataframe.to_csv(filename, sep=sep,index=False)
+        self.dataframe.to_csv(filename, sep=sep,index=index)
+
+    def to_excel(self,  excel_writer, **params):
+        """
+        saves the file in Excel format,
+        see `to_excel <http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_excel.html>`_
+        """
+        self.dataframe.to_excel(excel_writer,**params)
 
