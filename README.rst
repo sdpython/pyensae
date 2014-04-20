@@ -1,4 +1,5 @@
-﻿.. _l-README:
+﻿
+.. _l-README:
 
 README
 ======
@@ -22,7 +23,7 @@ It requires `github/pyquickhelper <https://github.com/sdpython/puquickhelper/>`_
 
 The main function is used to download data used for my teachings at the 
 `ENSAE <http://www.xavierdupre.fr/site2013/enseignements/index.html>`_
-from the website `http://www.xavierdupre.fr/`_::
+from the website `xavierdupre.fr <http://www.xavierdupre.fr/>`_::
 
     download_data("td8_velib.zip", website = "xd")
     
@@ -38,8 +39,7 @@ To draw a graph with multiple stock prices::
 
     stocks = [ StockPrices ("BNP.PA", folder = cache),
                 StockPrices ("CA.PA", folder = cache),
-                StockPrices ("SAN.PA", folder = cache),
-                ]
+                StockPrices ("SAN.PA", folder = cache), ]
     fig, ax, plt = StockPrices.draw(stocks)
     fig.savefig("image.png")
     
