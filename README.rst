@@ -77,6 +77,8 @@ Versions
 * **v0.5 - 2014/04/20**
     * **new:** add notebooks to the documentation
     * **new:** add function :meth:`to_excel <finance.astock.StockPrices.to_excel>` to StockPrices
+    * **new:** add method :meth:`plot <finance.astock.StockPrices.plot>` which calls method :meth:`plot <finance.astock.StockPrices.draw>` but is not static
+    * **change:** method :meth:`draw <finance.astock.StockPrices.draw>` can now draw another series on a second axis
 * **v0.4 - 2014/04/05**
     * **change:** the method :meth:`finance.astock.StockPrices.draw` works now with others fields than ``Close``, it also works with two fields in a list, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
     * **change:** the method :meth:`finance.astock.StockPrices.draw` does better with dates

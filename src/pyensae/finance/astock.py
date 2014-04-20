@@ -317,7 +317,8 @@ class StockPrices:
         """
         builds the returns series
         
-        @return     StockPrices
+        @param      col     column to use to compute the returns
+        @return             StockPrices
         """
         df    = self.dataframe
         fd    = self.FirstDate()
@@ -328,8 +329,9 @@ class StockPrices:
         
         res   = df.ix[plus , ["Date", "Volume"]]
         
-        for k in ["Open", "High", "Low", "Close"] :
-            m = numpy.array(df.ix[moins,"Close"])
+        for k in df.columns:
+            if k in ["Date", "Volume"] : continue
+            m = numpy.array(df.ix[moins,k])
             p = numpy.array(df.ix[plus,k])
             res[k] = (p - m) / m
             
@@ -364,19 +366,19 @@ class StockPrices:
             
     def plot(self, begin = None, end = None, 
                 field="Close", date_format = None,
-                existing = None,
+                existing = None, axis = 1,
                 **args):
         """
         @see me draw
         """
         return StockPrices.draw(self, begin=begin, end=end,
                         field=field, date_format=date_format,
-                        existing=existing, **args)
+                        existing=existing, axis = axis, **args)
             
     @staticmethod
     def draw(listStockPrices, begin = None, end = None, 
                 field="Close", date_format = None,
-                existing = None,
+                existing = None, axis = 1,
                 **args) :
         """
         Draw a graph showing one or several time series.
@@ -389,6 +391,7 @@ class StockPrices:
         @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d`` or None if you prefer the function to choose
         @param      args                others arugments to send to ``plt.subplots``
         @param      existing            to add this curve to an existing one (existing (fig, ax))
+        @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curbes on the second axis.
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
         
         The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
@@ -404,6 +407,15 @@ class StockPrices:
         fig.savefig("image.png")
         fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01", figsize=(16,8))
         plt.show()  
+        @endcode
+        
+        You can also chain the graphs and add a series on a second graph:
+        @code
+        stock = StockPrices ("BNP.PA", folder = cache)
+        stock2 = StockPrices ("CA.PA", folder = cache)
+        fig, ax, plt = stock.plot(figsize=(16,8))
+        fig, ax, plt = stock2.plot(existing=(fig,ax), axis=2)
+        plt.show()
         @endcode
         @endexample
         """
@@ -425,6 +437,7 @@ class StockPrices:
         end   = dates[-1] 
         
         def price(x): return '%1.2f'%x
+        
         if existing != None:
             if not isinstance(existing,list) and not isinstance(existing,tuple):
                 raise Exception("existing must be a list or a tuple")
@@ -434,51 +447,63 @@ class StockPrices:
             ex_h, ex_l = ax.get_legend_handles_labels()
             ex_l = tuple(ex_l)
             ex_h = tuple(ex_h)
+            if axis == 2 :
+                ax = ax.twinx()
         else :
             fig, ax = plt.subplots(**args)
             ex_h, ex_l = tuple(), tuple()
         
         curve = [ ]
         for stock in data.columns :
-            curve.append ( ax.plot(dates, data[stock], linestyle='solid', label=str(stock)) )
+            if axis == 2 :
+                curve.append ( ax.plot(dates, data[stock], "r", linestyle='solid', label=str(stock)) )
+            else :
+                curve.append ( ax.plot(dates, data[stock], linestyle='solid', label=str(stock)) )
             
-        ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
-        if len(dates) < 30:
-            days     = mdates.DayLocator()
-            ax.xaxis.set_major_locator(days)
-            ax.xaxis.set_minor_locator(days)
-            if date_format != None :
-                fmt = mdates.DateFormatter(date_format)
-                ax.xaxis.set_major_formatter(fmt)
-            else :
-                ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
-        elif len(dates) < 500:
-            months   = mdates.MonthLocator() 
-            days     = mdates.DayLocator()
-            ax.xaxis.set_major_locator(months)
-            ax.xaxis.set_minor_locator(days)
-            ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
-            if date_format != None :
-                fmt = mdates.DateFormatter(date_format)
-                ax.xaxis.set_major_formatter(fmt)
-            else :
+        if existing == None :
+            ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
+            if len(dates) < 30:
+                days     = mdates.DayLocator()
+                ax.xaxis.set_major_locator(days)
+                ax.xaxis.set_minor_locator(days)
+                if date_format != None :
+                    fmt = mdates.DateFormatter(date_format)
+                    ax.xaxis.set_major_formatter(fmt)
+                else :
+                    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
+            elif len(dates) < 500:
+                months   = mdates.MonthLocator() 
+                days     = mdates.DayLocator()
+                ax.xaxis.set_major_locator(months)
+                ax.xaxis.set_minor_locator(days)
                 ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
-        else :
-            years    = mdates.YearLocator() 
-            months   = mdates.MonthLocator()
-            ax.xaxis.set_major_locator(years)
-            ax.xaxis.set_minor_locator(months)
-            if date_format != None :
-                fmt = mdates.DateFormatter(date_format)
-                ax.xaxis.set_major_formatter(fmt)
+                if date_format != None :
+                    fmt = mdates.DateFormatter(date_format)
+                    ax.xaxis.set_major_formatter(fmt)
+                else :
+                    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
             else :
-                ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
-            
+                years    = mdates.YearLocator() 
+                months   = mdates.MonthLocator()
+                ax.xaxis.set_major_locator(years)
+                ax.xaxis.set_minor_locator(months)
+                if date_format != None :
+                    fmt = mdates.DateFormatter(date_format)
+                    ax.xaxis.set_major_formatter(fmt)
+                else :
+                    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+                
         ax.set_xlim(begin, end)
         ax.format_ydata = price
-        ax.grid(True)
         fig.autofmt_xdate()
-        ax.legend( ex_l + tuple(data.columns))
+          
+        if axis == 2 :
+            if isinstance(curve,list):
+                curve = [_[0] for _ in curve ]
+            ax.legend( ex_h + tuple(curve), ex_l + tuple(data.columns))
+        else :
+            ax.grid(True)
+            ax.legend( ex_l + tuple(data.columns))
         return fig, ax, plt
         
     def to_csv(self, filename, sep = "\t", index=False, **params):
