@@ -544,7 +544,8 @@ class DatabaseCore (DatabaseCore2) :
         return res
         
     def get_sql_columns (self, request) :
-        """return the columns name for a SQL request
+        """
+        return the columns name for a SQL request
         @param      request             SQL request
         @return                         list of columns name
         """
@@ -558,7 +559,8 @@ class DatabaseCore (DatabaseCore2) :
     ######################################################################################################################
 
     class _cross_product_iter:
-        """iterator for CROSS
+        """
+        iterator for CROSS
         """
         def __init__ (self,db,request):
             com   = re.compile ("^(.*)(--.*)$")
@@ -639,9 +641,15 @@ class DatabaseCore (DatabaseCore2) :
             return self.find != None
             
         def __iter__ (self) :
+            """
+            iterator
+            """
             return self
             
         def __next__ (self) :
+            """
+            iterator
+            """
             if "matrix" not in self.__dict__ : raise StopIteration
             if self.pos < len (self.matrix) :
                 n = self.pos
@@ -679,14 +687,15 @@ class DatabaseCore (DatabaseCore2) :
         @param      nolog           if True, do not log anything
         @return                     cursor
         
-        example
+        @example(run a select command on a table)
         @code
         t   = Database (file)
         cur = t.execute ("SELECT * FROM table1 ;")
         for f in cur :
-            print f
+            print(f)
         cur.close ()
         @endcode
+        @endexample
         
         There is another case outside SQL syntax to build cross product. Syntax:
         @code

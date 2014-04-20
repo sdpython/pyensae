@@ -382,6 +382,5 @@ class DatabaseImportExport :
                 self.create_index (indexname, table, ind)
         
         return nb
-                
-
+    
     

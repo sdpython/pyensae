@@ -74,6 +74,9 @@ Started in 2013/08.
 Versions
 --------
 
+
+* **v0.6 - 2014/??/??**
+    * **new:** convert a DataFrame into a SQLite3 database and the other way, see :meth:`to_df <sql.database_main.Database.to_df>`
 * **v0.5 - 2014/04/20**
     * **new:** add notebooks to the documentation
     * **new:** add function :meth:`to_excel <finance.astock.StockPrices.to_excel>` to StockPrices

@@ -5,7 +5,7 @@
 @brief @see cl Database
 """
 
-import re, copy, os, random, sqlite3 as SQLite, datetime, decimal
+import re, copy, os, random, sqlite3 as SQLite, datetime, decimal, numpy
 
 
 
@@ -220,7 +220,7 @@ class DatabaseCore2 :
         @param      strict_separator    strict number of columns, it assumes there is no separator in the content of every column
         @return                         a dictionary
         """
-        if not isinstance (line, list) and not isinstance (line, tuple):
+        if not isinstance (line, list) and not isinstance (line, tuple) and not isinstance(line, numpy.ndarray):
             if format != "tsv" : raise Exception ("unable to process format " + format)
             line = line.strip ("\r\n ").replace ("\n", " ")
             line = DatabaseCore2._split_expr.split (line)
