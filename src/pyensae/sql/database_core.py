@@ -5,7 +5,7 @@
 @brief @see cl Database
 """
 
-import os, sys, math, re, time, decimal, sqlite3 as SQLite, datetime
+import os, sys, math, re, time, decimal, sqlite3 as SQLite, datetime, numpy
 
 module_odbc = None
 
@@ -845,23 +845,27 @@ class DatabaseCore (DatabaseCore2) :
                 if isinstance (val [1], tuple) :    v,l = val [1]
                 else :                              v,l = val [1], 2048
                     
-                if l > 8000         :     col.append (val [0] + " TEXT")
-                elif    v is str :        col.append (val [0] + " VARCHAR(%d)" % l)
-                elif    v is int      :   col.append (val [0] + " INTEGER")
-                elif    v is float    :   col.append (val [0] + " FLOAT")
-                elif    v is decimal.Decimal    :   col.append (val [0] + " Decimal")
-                elif    v is datetime.datetime  :   col.append (val [0] + " DATETIME")
+                if l > 8000                     : col.append (val [0] + " TEXT")
+                elif    v is str                : col.append (val [0] + " VARCHAR(%d)" % l)
+                elif    v is int                : col.append (val [0] + " INTEGER")
+                elif    v is float              : col.append (val [0] + " FLOAT")
+                elif    v is numpy.int64        : col.append (val [0] + " INTEGER")
+                elif    v is numpy.float64      : col.append (val [0] + " FLOAT")
+                elif    v is decimal.Decimal    : col.append (val [0] + " Decimal")
+                elif    v is datetime.datetime  : col.append (val [0] + " DATETIME")
                 else :
                     raise DBException ("unable to add column " + str (c) + " ... " + str (val) + " v= " + str (v))
             else :
                 if isinstance (val [1], tuple) :    v,l = val [1]
                 else :                              v,l = val [1], 2048
                     
-                if      v is str      : col.append (val [0] + " TEXT")
-                elif    v is int      : col.append (val [0] + " INTEGER")
-                elif    v is float    : col.append (val [0] + " FLOAT")
-                elif    v is decimal.Decimal    :   col.append (val [0] + " Decimal")
-                elif    v is datetime.datetime  :   col.append (val [0] + " DATETIME")
+                if      v is str                : col.append (val [0] + " TEXT")
+                elif    v is int                : col.append (val [0] + " INTEGER")
+                elif    v is float              : col.append (val [0] + " FLOAT")
+                elif    v is numpy.int64        : col.append (val [0] + " INTEGER")
+                elif    v is numpy.float64      : col.append (val [0] + " FLOAT")
+                elif    v is decimal.Decimal    : col.append (val [0] + " Decimal")
+                elif    v is datetime.datetime  : col.append (val [0] + " DATETIME")
                 else :
                     raise DBException ("unable to add column " + str (c) + " ... " + str (val) + " v= " + str (v))
                 
