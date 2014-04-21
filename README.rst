@@ -60,7 +60,7 @@ For the class :class:`StockPrices <finance.astock.StockPrices>`:
     * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
     * `six <https://pypi.python.org/pypi/six>`_
 
-On Windows, most of the intersting modules can installed from `here <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
+On Windows, most of the interesting modules can installed from `here <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
 
 
 Contributions
