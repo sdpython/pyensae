@@ -292,6 +292,9 @@ autosummary_generate = True
 graphviz_output_format = "svg"
 graphviz_dot = r"C:\Program Files (x86)\Graphviz2.34\bin\dot.exe"
 
+if not os.path.exists(graphviz_dot):
+    raise FileNotFoundError(graphviz_dot)
+                               
 def skip(app, what, name, obj, skip, options):
     if name.startswith("_") and name not in \
             [   "__qualname__", 
