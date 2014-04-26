@@ -18,7 +18,7 @@ It requires `github/pyquickhelper <https://github.com/sdpython/pyquickhelper/>`_
 
 The main function is used to download data used for my teachings at the 
 `ENSAE <http://www.xavierdupre.fr/site2013/enseignements/index.html>`_
-from the website `http://www.xavierdupre.fr/`_::
+from the website `xavierdupre.fr <http://www.xavierdupre.fr/>`_::
 
     download_data("td8_velib.zip", website = "xd")
     
@@ -68,8 +68,19 @@ For the class :class:`StockPrices <finance.astock.StockPrices>`:
 On Windows, most of the intersting modules can installed from `here <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
 
 
-About this documentation
-------------------------
+Indices and tables
+==================
+
++------------------+---------------------+---------------------+------------------+------------------------+---------------------+
+| :ref:`l-modules` |  :ref:`l-functions` | :ref:`l-classes`    | :ref:`l-methods` | :ref:`l-staticmethods` | :ref:`l-properties` |
++------------------+---------------------+---------------------+------------------+------------------------+---------------------+
+| :ref:`genindex`  |  :ref:`modindex`    | :ref:`search`       | :ref:`l-license` | :ref:`l-changes`       | :ref:`l-README`     |
++------------------+---------------------+---------------------+------------------+------------------------+---------------------+
+| :ref:`l-example` |  :ref:`l-FAQ`       | :ref:`l-notebooks`  |                  |                        |                     |
++------------------+---------------------+---------------------+------------------+------------------------+---------------------+
+
+Navigation
+==========
 
 .. toctree::
     :maxdepth: 1
@@ -83,15 +94,9 @@ About this documentation
     all_notebooks
     glossary
     index_module
+    license
+    filechanges
+    README
+    all_indexes
 
     
-Indices and tables
-==================
-
-+------------------+---------------------+---------------------+------------------+------------------------+---------------------+
-| :ref:`l-modules` |  :ref:`l-functions` | :ref:`l-classes`    | :ref:`l-methods` | :ref:`l-staticmethods` | :ref:`l-properties` |
-+------------------+---------------------+---------------------+------------------+------------------------+---------------------+
-| :ref:`genindex`  |  :ref:`modindex`    | :ref:`search`       | :ref:`l-license` | :ref:`l-changes`       | :ref:`l-README`     |
-+------------------+---------------------+---------------------+------------------+------------------------+---------------------+
-| :ref:`l-example` |  :ref:`l-FAQ`       | :ref:`l-notebooks`  |                  |                        |                     |
-+------------------+---------------------+---------------------+------------------+------------------------+---------------------+
