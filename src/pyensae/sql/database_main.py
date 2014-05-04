@@ -112,7 +112,11 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
                 db.append_values ( df.values, tablename, schema)
         else :
             db = filename_or_database
-            db.append_values ( self.values, tablename, schema)
+            if tablename not in db.get_table_list () : 
+                cursor = db.create_table (tablename, schema)
+                db.append_values ( df.values, tablename, schema, cursor = cursor)
+            else :
+                db.append_values ( df.values, tablename, schema)
         
         return db
         
@@ -125,7 +129,7 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
         @param      add_id          an index, maybe to be added
         @return                     self
         """
-        return Database.fill_sql_table(df, self, tablename, idr)
+        return Database.fill_sql_table(df, self, tablename, add_id)
     
     def to_df(self, request):
         """

@@ -46,7 +46,7 @@ class TestStockHttp (unittest.TestCase):
         assert len(av)>0
         
         missing = stocks[-1].missing(av)
-        assert len(missing)>0
+        assert missing == None or len(missing)>0
         
     def test_covariance(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
