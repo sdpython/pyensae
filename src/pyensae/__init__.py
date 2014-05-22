@@ -18,3 +18,4 @@ from .sql.database_helper import import_flatfile_into_database
 from .file.file_helper import replace_comma_by_point
 from .finance.astock import StockPrices
 from .sql.database_main import Database
+from .datasource.data_velib import DataVelibCollect
