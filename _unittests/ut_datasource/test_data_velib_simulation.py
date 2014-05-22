@@ -32,12 +32,13 @@ class TestDataVelibOffline (unittest.TestCase):
         fold = os.path.abspath(os.path.split(__file__)[0])
         data = os.path.join(fold,"data")
         
-        for bike in (1,2,3,5,10) :
-            df = DataVelibCollect.to_df(data)
-            dfp, dfs = DataVelibCollect.simulate(df, bike, 10.0, fLOG = fLOG)
-            
-            dfp.to_csv("out_simul_bike_{0}_path.txt".format(bike), sep="\t", index=False)
-            dfs.to_csv("out_simul_bike_{0}_data.txt".format(bike), sep="\t", index=False)
+        for speed in (10,15):
+            for bike in (1,2,3,5,10) :
+                df = DataVelibCollect.to_df(data)
+                dfp, dfs = DataVelibCollect.simulate(df, bike, speed, fLOG = fLOG)
+                
+                dfp.to_csv("out_simul_bike_nb{0}_sp{1}_path.txt".format(bike,speed), sep="\t", index=False)
+                dfs.to_csv("out_simul_bike_nb{0}_sp{1}_data.txt".format(bike,speed), sep="\t", index=False)
 
 
 if __name__ == "__main__"  :

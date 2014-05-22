@@ -468,7 +468,7 @@ class DataVelibCollect :
                 obs["collect_date"] = time
                 obs["file"] = str(time)
                 rows.append(obs)
-            return row
+            return rows
             
         simulation = [ ]
         paths = [ ]
@@ -488,7 +488,7 @@ class DataVelibCollect :
                     v = (time, pop(v), keys[rnd], "begin" ) 
                     running.append( v )
                     lat,lng,name,number = keys[rnd]
-                    dv = { "lat":lat, "lng":lng, "name":name, "number":number }
+                    dv = { "lat0":lat, "lng0":lng, "name0":name, "number0":number }
                     dv.update ({ "time":v[0], "idvelo": v[1], "beginend":v[-1], "hours":0.0, "dist":0.0 }) 
                     paths.append( dv )
                     
@@ -515,7 +515,9 @@ class DataVelibCollect :
                                 rem.append(i)
                                 
                                 lat,lng,name,number = r[2]
-                                dv = { "lat":lat, "lng":lng, "name":name, "number":number }
+                                dv = { "lat0":lat, "lng0":lng, "name0":name, "number0":number }
+                                lat,lng,name,number = keycity
+                                dv.update ({ "lat1":lat, "lng1":lng, "name1":name, "number1":number })
                                 dv.update ({ "time":time, "idvelo": r[1], "beginend":"end", "hours":h, "dist":dist }) 
                                 paths.append( dv )
                                 break
