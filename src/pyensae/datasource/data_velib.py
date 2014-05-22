@@ -207,7 +207,7 @@ class DataVelibCollect :
         @code
         DataVelibCollect.run_collection (private_key,
                     contract = "Paris",
-                    delayms = 1000,
+                    delayms = 60000,
                     single_file = False,
                     stop_datetime = None, 
                     log_every = 1)        
@@ -217,7 +217,7 @@ class DataVelibCollect :
         """
         if key == None :
             key = DataVelibCollect.velib_get_key()
-        velib = DataVelibCollect(key)
+        velib = DataVelibCollect(key, True)
         velib.collecting_data ( contract, 
                                 delayms, 
                                 folder_file, 
