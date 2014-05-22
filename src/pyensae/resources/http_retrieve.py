@@ -86,6 +86,8 @@ def download_data ( name,
     
     if website == "xd" :
         website = "http://www.xavierdupre.fr/enseignement/complements/"
+    elif website == "xdtd":
+        website = "http://www.xavierdupre.fr/site2013/enseignements/tddata/"
     
     if not os.path.exists (whereTo) :
         raise FileExistsError("this folder should exists " + whereTo)
