@@ -27,7 +27,7 @@ from src.pyensae.datasource.data_velib import DataVelibCollect
 
 class TestDataVelibOffline (unittest.TestCase):
     
-    def _test_data_velib_contract(self) :
+    def test_data_velib_contract(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__", LogFile = "temp_hal_log2.txt")
         fold = os.path.abspath(os.path.split(__file__)[0])
         data = os.path.join(fold,"data")

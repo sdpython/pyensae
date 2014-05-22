@@ -5,7 +5,7 @@
 
 """
 
-import os, os.path, sys, datetime, urllib, json, time, re, pandas, numpy
+import os, os.path, sys, datetime, urllib, json, time, re, pandas, numpy, math, random
 
 class DataVelibCollect :
     """
@@ -380,15 +380,160 @@ class DataVelibCollect :
         return anim
         
     @staticmethod
-    def simulate(df, nbbike, speed, period):
+    def distance_haversine(lat1, lon1, lat2, lon2):
+        """
+        compute the haversine distance
+        
+        see `Haversine distance <http://en.wikipedia.org/wiki/Haversine_formula>`_
+        
+        @eturn      double
+        """
+        radius = 6371
+        dlat = math.radians(lat2-lat1)
+        dlon = math.radians(lon2-lon1)
+        a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(lat1)) \
+        * math.cos(math.radians(lat2)) * math.sin(dlon/2) * math.sin(dlon/2)
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+        d = radius * c
+        return d        
+        
+    @staticmethod
+    def simulate(df, nbbike, speed, 
+                    period = datetime.timedelta(minutes=1), 
+                    iteration = 500,
+                    min_min  = 10,
+                    delta_speed = 2.5,
+                    fLOG = print):
         """
         simulate velibs on a set of stations given by df
         
         @param      nbbike      number of bicyles
         @param      period      period
         @param      speed       average speed (in km/h)
-        @return                 simulated paths, data
+        @param      iteration   number of iterations
+        @param      min_min     minimum duration of a trip
+        @param      delta_speed allowed speed difference
+        @param      fLOG        logging function
+        @return                 simulated paths, data (as DataFrame)
         """
-        pass
+        cities = df [["lat","lng","name","number"]]
+        start  = cities.drop_duplicates()
+        idvelo = 0
+        
+        current = { }
+        for row in start.values :
+            r = []
+            for i in range(0,5):
+                r.append(idvelo)
+                idvelo += 1
+            r.extend ( [-1,-1,-1,-1,-1] )
+            ids = tuple(row)
+            current [  ids ] = r
+            
+        running = [ ]
+        
+        def free(v):
+            nb = [ _ for _ in v if _ == -1 ]
+            return len(nb) > 0
+            
+        def bike(v):
+            nb = [ _ for _ in v if _ == -1 ]
+            return len(nb) < len(v)
+            
+        def pop(v):
+            for i,_ in enumerate(v):
+                if _ != -1 :
+                    r = v[i]
+                    v[i] = -1
+                    fLOG("    pop",v)
+                    return r
+            raise Exception("no free bike")
+        
+        def push(v, idv):
+            for i,_ in enumerate(v):
+                if _ == -1 :
+                    v[i] = idv
+                    fLOG("    push",v)
+                    return None
+            raise Exception("no free spot: " + str(v))
+        
+        def give_status(conf, time):
+            rows = [ ]
+            for k,v in conf.items():
+                lat,lng,name,number=k
+                obs = { "lat":lat, "lng":lng, "name":name, "number":number }
+                nb = [ _ for _ in v if _ == -1 ]
+                obs["available_bike_stands"] = len(nb)
+                obs["available_bikes"] = len(v) - len(nb)
+                obs["collect_date"] = time
+                obs["file"] = str(time)
+                rows.append(obs)
+            return row
+            
+        simulation = [ ]
+        paths = [ ]
+        keys = list(current.keys())
+        iter = 0
+        time = datetime.datetime.now()
+        while iter < iteration :
+            
+            status = give_status(current, time)
+            simulation.extend(status)
+            
+            # a bike
+            if len(running) < nbbike :
+                rnd = random.randint(0,len(keys)-1)
+                v = current[keys[rnd]]
+                if bike(v) :
+                    v = (time, pop(v), keys[rnd], "begin" ) 
+                    running.append( v )
+                    lat,lng,name,number = keys[rnd]
+                    dv = { "lat":lat, "lng":lng, "name":name, "number":number }
+                    dv.update ({ "time":v[0], "idvelo": v[1], "beginend":v[-1], "hours":0.0, "dist":0.0 }) 
+                    paths.append( dv )
+                    
+            # do we put the bike back
+            rem = [ ]
+            for i,r in enumerate(running) :
+                delta = time - r[0]
+                h     = delta.total_seconds() / 3600
+                if h*60 > min_min :
+                    for rowi in cities.values:
+                        row = cities.values[ random.randint(0,len(cities)-1) ]
+                        keycity = tuple(row)
+                        station = current[keycity]
+                        if free(station):
+                            vlat,vlng = r[2][0], r[2][1]
+                            clat,clng = row[0], row[1]
+                            dist = DataVelibCollect.distance_haversine(vlat,vlng,clat,clng)
+                            sp   = dist / h 
+                            dsp = abs(sp - speed)
+                            if (dsp < delta_speed or (sp < speed and h >= 1)) \
+                                and random.randint(0,10) == 0 :
+                                # we put it back
+                                push(station, r[1])
+                                rem.append(i)
+                                
+                                lat,lng,name,number = r[2]
+                                dv = { "lat":lat, "lng":lng, "name":name, "number":number }
+                                dv.update ({ "time":time, "idvelo": r[1], "beginend":"end", "hours":h, "dist":dist }) 
+                                paths.append( dv )
+                                break
+            
+            running = [ r for i,r in enumerate(running) if i not in rem ]
+            
+            fLOG(iter, "time ", time, " - ", len(running), "/", nbbike, " paths ", len(paths) )
+            
+            # end of loop
+            time += period
+            iter += 1
+            
+        return pandas.DataFrame(paths), pandas.DataFrame(simulation)
+            
+        
+            
+        
+                
+        
 
         
