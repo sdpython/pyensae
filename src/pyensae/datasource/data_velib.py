@@ -32,7 +32,7 @@ class DataVelibCollect :
     _url_apic = "https://api.jcdecaux.com/vls/v1/contracts?apiKey=%s"
 
     
-    def __init__ (self, apiKey, fetch_contracts = None) :
+    def __init__ (self, apiKey, fetch_contracts = False) :
         """
         constructor
         
