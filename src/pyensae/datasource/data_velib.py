@@ -5,7 +5,7 @@
 
 """
 
-import os, os.path, sys, datetime, urllib, json, time
+import os, os.path, sys, datetime, urllib, json, time, re, pandas, numpy
 
 class DataVelibCollect :
     """
@@ -100,6 +100,7 @@ class DataVelibCollect :
             
         js = str(js, encoding="utf8")
         js = json.loads(js)
+        now = datetime.datetime.now()
         for o in js :
             o["number"]  = int(o["number"])
             o["banking"] = 1 if o["banking"] == "True" else 0
@@ -108,7 +109,7 @@ class DataVelibCollect :
             o["bike_stands"]            = int(o["bike_stands"])
             o["available_bike_stands"]  = int(o["available_bike_stands"])
             o["available_bikes"]        = int(o["available_bikes"])
-            o["collect_date"]           = datetime.datetime.now()
+            o["collect_date"]           = now
             
             ds = float(o["last_update"])
             dt = datetime.datetime.fromtimestamp(ds/1000)
@@ -237,3 +238,157 @@ class DataVelibCollect :
         para =  { "velib_key": "" }
         para = open_window_params (para, DataVelibCollect.__doc__, "Velib Study")
         return None if "__cancel__" in para else para["velib_key"]            
+
+    @staticmethod
+    def to_df(folder, regex = "velib_data.*[.]txt") :
+        """
+        reads all file in a folder (assuming there were produced by this class) and
+        returns a dataframe with it
+        
+        each file is a status of all stations, a row per station will be added to the file
+        
+        @param  folder      folder where to find the files
+        @param  regex       regular expression which filter the files
+        @return             pandas DataFrame
+        
+        It produces a table with the following columns:
+            - address
+            - available_bike_stands
+            - available_bikes
+            - banking
+            - bike_stands
+            - bonus
+            - collect_date
+            - contract_name
+            - last_update
+            - lat
+            - lng
+            - name
+            - number
+            - status
+            - file
+        """
+        if regex == None : regex = ".*"
+        reg = re.compile(regex)
+        
+        files_ = os.listdir(folder)
+        files  = [ _ for _ in files_ if reg.search(_) ]
+        
+        if len(files) == 0:
+            raise FileNotFoundError("no found files in directory: " + folder + "\nregex: " + regex)
+        
+        rows = [ ]
+        for file_ in files :
+            file = os.path.join(folder,file_)
+            with open(file, "r", encoding="utf8") as f : lines = f.readlines()
+            for i,line in enumerate(lines) :
+                dl = eval(line.strip("\n\r\t "))
+                if not isinstance(dl,list):
+                    raise TypeError("we expect a list for line {0} in file {1}".format(i, file))
+                for d in dl :
+                    d["file"] = file_
+                rows.extend(dl)
+                
+        return pandas.DataFrame(rows)
+        
+    @staticmethod
+    def draw(df, **args):
+        """
+        draw a graph using four columns: lng, lat, available_bike_stands, available_bikes
+            
+        @param      args                others parameters to give method ``plt.subplots``
+        @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
+        """
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots(**args)
+        
+        x = df["lng"]
+        y = df["lat"]
+        areaf = df.apply( lambda r : numpy.pi * (r["available_bike_stands"])**2, axis=1)
+        areab = df.apply( lambda r : numpy.pi * (r["available_bikes"])**2, axis=1)
+        ax.scatter (x,y,areaf, alpha=0.5, label="place", color="r")
+        ax.scatter (x,y,areab, alpha=0.5, label="bike", color="g")
+        ax.grid(True)
+        ax.legend()
+        ax.set_xlabel("longitude")
+        ax.set_ylabel("latitude")
+        
+        return fig, ax, plt
+        
+    @staticmethod
+    def js_animation(df, interval = 20, **args):
+        """
+        This function uses the module `JSAnimation <https://github.com/jakevdp/JSAnimation>`_.
+        To install it, you can run:
+        
+        @code
+        try :
+            from JSAnimation import IPython_display
+        except ImportError:
+            import pymyinstall
+            pymyinstall.ModuleInstall("JSAnimation", "github", "jakevdp").install(temp_folder="c:\\temp")
+            # an error does not mean necessarily the installation failed
+        @endcode
+        
+        @param      interval            see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_
+        @param      args                others parameters to give method ``plt.figure``
+        @return                         animation
+        
+        It does not work very well for the time being.
+        """
+        
+        from JSAnimation import IPython_display
+        import matplotlib.pyplot as plt
+        from matplotlib import animation
+        
+        xlim = min(df["lng"]),max(df["lng"])
+        ylim = min(df["lat"]),max(df["lat"])
+        
+        dates = list(sorted(set(df["file"])))
+        datas = [ ]
+        for d in dates :
+            sub = df [ df["file"] == d ]
+            x    = sub["lng"] 
+            y    = sub["lat"]
+            colp = df.apply( lambda r : numpy.pi * (r["available_bike_stands"])**2, axis=1)
+            colb = df.apply( lambda r : numpy.pi * (r["available_bikes"])**2, axis=1)
+            x = tuple(x)
+            y = tuple(y)
+            colp = tuple(colp)
+            colb = tuple(colb)
+            data = (x,y,colp,colb)
+            datas.append(data)
+
+        fig, ax = plt.subplots(**args)
+        x,y,c,d = datas[0]
+
+        scat1 = ax.scatter(x,y,c, alpha=0.5, color="r", label="place")
+        scat2 = ax.scatter(x,y,d, alpha=0.5, color="g", label="bike")
+        ax.grid(True)
+        ax.legend()
+        ax.set_xlabel("longitude")
+        ax.set_ylabel("latitude")
+
+        def animate(i, datas, scat1, scat2):
+            x,y,c,d = datas[i]
+            scat1.set_array(numpy.array(x + y + c))
+            scat2.set_array(numpy.array(x + y + d))
+            return scat1, scat2
+
+        anim = animation.FuncAnimation(fig, animate, frames=len(datas), 
+                interval=interval, fargs=(datas, scat1, scat2), blit=True)        
+        return anim
+        
+    @staticmethod
+    def simulate(df, nbbike, speed, period):
+        """
+        simulate velibs on a set of stations given by df
+        
+        @param      nbbike      number of bicyles
+        @param      period      period
+        @param      speed       average speed (in km/h)
+        @return                 simulated paths, data
+        """
+        pass
+
+        
