@@ -39,7 +39,7 @@ class TestDataVelibOffline (unittest.TestCase):
                 
                 dfp.to_csv("out_simul_bike_nb{0}_sp{1}_path.txt".format(bike,speed), sep="\t", index=False)
                 dfs.to_csv("out_simul_bike_nb{0}_sp{1}_data.txt".format(bike,speed), sep="\t", index=False)
-
+                if __name__ != "__main__" : return
 
 if __name__ == "__main__"  :
     unittest.main ()    

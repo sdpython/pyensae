@@ -37,7 +37,7 @@ class TestDataVelibOffline (unittest.TestCase):
         assert len(df)>0
         
         stations = df [["name","lat","lng"]]
-        gr = stations.groupby(["name","lat","lng"], as_index=False).count()
+        gr = stations.groupby(["name","lat","lng"], as_index=False).sum()
         #fLOG(gr.head())
         assert len(gr)>=30
         

@@ -371,8 +371,12 @@ class DataVelibCollect :
 
         def animate(i, datas, scat1, scat2):
             x,y,c,d = datas[i]
-            scat1.set_array(numpy.array(x + y + c))
-            scat2.set_array(numpy.array(x + y + d))
+            #scat1.set_array(numpy.array(c))
+            #scat2.set_array(numpy.array(d))
+            #scat1.set_array(numpy.array(x + y))
+            #scat2.set_array(numpy.array(x + y))
+            scat1._sizes = c
+            scat2._sizes = d
             return scat1, scat2
 
         anim = animation.FuncAnimation(fig, animate, frames=len(datas), 

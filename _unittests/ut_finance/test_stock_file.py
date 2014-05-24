@@ -38,6 +38,11 @@ class TestStockFile (unittest.TestCase):
         
         stock2 = StockPrices(file, sep="\t")
         assert stock.dataframe.shape == stock2.dataframe.shape
+        df = stock2.dataframe
+        file = os.path.join(cache, "out_excel.xlsx")
+        if os.path.exists(file):os.remove(file)
+        df.to_excel(file)
+        assert os.path.exists(file)
                 
 
 if __name__ == "__main__"  :
