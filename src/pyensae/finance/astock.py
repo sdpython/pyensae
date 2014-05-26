@@ -324,8 +324,8 @@ class StockPrices:
         fd    = self.FirstDate()
         ld    = self.LastDate()
         
-        moins = df ["Date"] > fd
-        plus  = df ["Date"] < ld
+        plus  = df ["Date"] > fd    # dates from FirstDate+1 to LastDate
+        moins = df ["Date"] < ld    # dates from FirstDate to LastDate-1
         
         res   = df.ix[plus , ["Date", "Volume"]]
         
