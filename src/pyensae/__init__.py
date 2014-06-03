@@ -1,7 +1,15 @@
+#-*- coding: utf-8 -*-
 """
 @file
 @brief Main file
 """
+
+__version__ = "0.6"
+__author__ = "Xavier Dupré"
+__github__ = "https://github.com/sdpython/pyensae"
+__url__ = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html"
+__downloadUrl__ = "http://www.xavierdupre.fr/site2013/index_code.html#pyensae"
+__license__ = "BSD License"
 
 def check( log = False):
     """
