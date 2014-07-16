@@ -96,6 +96,19 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
         dbf = "something.db3"
         db  = Database.fill_sql_table(df, dbf, "mytable")
         @endcode
+        
+        This example could be replaced by:
+        
+        @code
+        values = [  {"name":"A", "age":10, "score":34.5 },
+                    {"name":"B", "age":20, "score":-34.5 }, ]
+        df  = pandas.DataFrame(values)
+        dbf = "something.db3"
+        db  = Database(dbf)
+        db.connect()
+        db.import_dataframe(df, "mytable)
+        db.close()
+        @endcode
         @endexample
         """
         

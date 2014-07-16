@@ -36,6 +36,9 @@ def import_flatfile_into_database (
     file = "textfile.txt"
     import_flatfile_into_database(dbf, file)
     @endcode
+    
+    On Windows, `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_ is a free tool 
+    very useful to run SQL queries against a sqlite3 database.
     @endexample
     """
     # connection
