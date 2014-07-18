@@ -72,7 +72,7 @@ class TestDataVelib (unittest.TestCase):
         assert len(js) > 0
         
         tbl = pandas.DataFrame (js)
-        tbl.save (temp_file)
+        tbl.to_csv (temp_file, sep="\t")
         assert os.path.exists (temp_file)
         fLOG(tbl[:10])
         

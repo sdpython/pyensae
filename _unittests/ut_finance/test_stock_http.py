@@ -40,7 +40,7 @@ class TestStockHttp (unittest.TestCase):
         cache = os.path.join(cache, "temp_cache2")
         stocks = [ StockPrices ("BNP.PA", folder = cache),
                     StockPrices ("CA.PA", folder = cache),
-                    StockPrices ("SAN.PA", folder = cache),
+                    StockPrices ("SAF.PA", folder = cache),
                     ]
         av = StockPrices.available_dates(stocks)
         assert len(av)>0
@@ -54,7 +54,7 @@ class TestStockHttp (unittest.TestCase):
         cache = os.path.join(cache, "temp_cache2")
         stocks = [ StockPrices ("BNP.PA", folder = cache),
                     StockPrices ("CA.PA", folder = cache),
-                    StockPrices ("SAN.PA", folder = cache),
+                    StockPrices ("SAF.PA", folder = cache),
                     ]
                     
         dates = StockPrices.available_dates( stocks )
