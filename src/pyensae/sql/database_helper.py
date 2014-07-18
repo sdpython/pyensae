@@ -14,6 +14,7 @@ def import_flatfile_into_database (
                     columns = None,
                     engine  = 'SQLite', 
                     host    = 'localhost',
+                    add_key = None,
                     fLOG    = print) :
     """
     
@@ -27,6 +28,7 @@ def import_flatfile_into_database (
     @param  engine      engine to use when using a SQL server (SQLite or ODBCMSSQL)
     @param  host        host (server)
     @param  fLOG        logging function (will display information through the command line)
+    @param  add_key     name of a key to add (or None if nothing to add)
     
     
     @example(Import a flat file into a SQLite database)
@@ -53,9 +55,9 @@ def import_flatfile_into_database (
         db.remove_table (table)
         
     if header :
-        db.import_table_from_flat_file (filetext, table, columns = None, header = header)
+        db.import_table_from_flat_file (filetext, table, columns = None, header = header, add_key = add_key)
     else :
-        db.import_table_from_flat_file (filetext, table, columns = columns, header = header)
+        db.import_table_from_flat_file (filetext, table, columns = columns, header = header, add_key = add_key)
     
     db.close ()        
 

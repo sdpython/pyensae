@@ -74,7 +74,9 @@ Started in 2013/08.
 Versions
 --------
 
-
+* **0.7 - 2014/??/??**
+    * **fix:** fix an unexpected zero length column in ``import_flatfile_into_database``
+    * **add:** add parameter ``add_key`` to function ``import_flatfile_into_database`` to add a primary key
 * **v0.6 - 2014/05/22**
     * **new:** convert a DataFrame into a SQLite3 database and the other way, see :meth:`to_df <sql.database_main.Database.to_df>`
     * **new:** add a class to collect data from JCDecaux website, see :class:`DataVelibCollect <datasource.data_velib.DataVelibCollect>`

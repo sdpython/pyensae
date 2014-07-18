@@ -188,7 +188,7 @@ class DatabaseCore2 :
                             columns [i] = (columns [i][0], float)
                             self.LOG ("   switch to float ", columns [i], " value ", line [i])
                     except ValueError :
-                        columns [i]  = (columns [i][0], (str, len (line [i])*2) )
+                        columns [i]  = (columns [i][0], (str, max(1,len (line [i]))*2) )
                         done [i]     = True
                         self.LOG ("   swith to str ", columns [i], " value ", line [i])
 
@@ -196,7 +196,7 @@ class DatabaseCore2 :
         for c in columns :
             v = columns [c]
             if v [1] == str :
-                columns [c] = (v [0], (str, length.get (c, 4)*2))
+                columns [c] = (v [0], (str, max(1,length.get (c, 4))*2))
                         
         for c,v in columns.items() :
             t = v [1]

@@ -45,8 +45,6 @@ To draw a graph with multiple stock prices::
     plt.show()  
     
     
-See also :ref:`l-usecase`.    
-
 Functionalities
 ---------------
 

@@ -298,6 +298,7 @@ class DatabaseImportExport :
                                         filter_case         = None,
                                         change_to_text      = [],
                                         strict_separator    = False,
+                                        add_key             = None,
                                         **params) :
                                         
         """
@@ -319,6 +320,7 @@ class DatabaseImportExport :
         @param      change_to_text      changes the format from any to TEXT
         @param      display             if True, print more information on stdout
         @param      strict_separator    strict number of columns, it assumes there is no separator in the content of every column
+        @param      add_key             name of a key to add (or None if nothing to add)
         
         The columns definition must follow the schema:
             - dictionary ``{ key:(column_name,python_type) }``
@@ -343,6 +345,9 @@ class DatabaseImportExport :
         self._check_connection ()
         if columns == None or isinstance (columns, list) :
             columns = self._guess_columns (file, format, columns, filter_case = filter_case)
+            
+        if add_key != None:
+            columns [len(columns)] = (add_key, int, "PRIMARYKEY", "AUTOINCREMENT")
             
         for i in columns :
             v = columns [i]

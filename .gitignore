@@ -225,3 +225,6 @@ version.txt
 */sphinxdoc/source/pyensae/*
 */sphinxdoc/source/all*.rst
 */sphinxdoc/source/notebooks/*
+_doc/notebooks/SQLite*.*
+_doc/notebooks/velib*.*
+_doc/notebooks/World*.db3
