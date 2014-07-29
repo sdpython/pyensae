@@ -110,12 +110,18 @@ class DatabaseCore2 :
         return res, "\n".join (lines)
             
     def _guess_columns (self, file, format, columns_name = None, filter_case = None) :
-        """guess the columns types from a file (the method assumes there is a header)
+        """
+        
+        Guess the columns types from a file (the method assumes there is a header),
+        The types are chosen in that order: int, float, str.
+        It keeps the most frequent one with if 
+        
         @param      file            file name
         @param      format          format (only tsv)
         @param      columns_name    if None, the first line contains the columns, otherwise it is the columns name
         @param      filter_case     process every case information (used to replace space for example)
-        @return                     columns"""
+        @return                     columns
+        """
         f = TextFile (file, utf8 = True, fLOG = self.LOG)
         f.open ()
         lines  = []
@@ -155,6 +161,8 @@ class DatabaseCore2 :
             
         length = {}
         nbline = 0
+        count_types = { }
+        
         for line_ in lines [1:] :
             if filter_case == None :    line = line_
             else :                      line = [ filter_case (s) for s in line_ ]
@@ -163,34 +171,70 @@ class DatabaseCore2 :
 
             for i in range (0, len (line)) :
                 
+                if i >= len(done) : 
+                    # it is probably a wrong line
+                    continue
+                
                 vl = length.get (i, 0)
                 if len (line [i]) > vl :
                     length [i] = len (line [i])
                 
                 try :
-                    if done [i] : continue
+                    if done [i] : 
+                        
+                        continue
                 except KeyError as e :
                     str_columns = ""
                     for k,v in columns.items() :
                         str_columns += "       " + str (k) + "\t" + str (v) + "\n"
                     mes = "KeyError:" + str (e) + "\n" + str (done) + "\n" + str_columns + "\nnb line " + str (nbline) + " columns: " + str (len(line)) + "\n" + str (line)
-                    raise Exception ("problem\n" + mes)
+                    raise Exception ("problem\n" + mes + "\n\ncount_types:\n  " + "\n  ".join( "{0}:{1}".format(k,v) for k,v in sorted(count_types.items())))
+                    
+                if line[i] is None or len(line[i]) == 0 :
+                    continue
                     
                 try :
-                    if columns [i][1] == float : raise ValueError ("")
-                    x           = int (line [i])
+                    x = int (line [i])
                     if abs (x) >= 2147483647 : raise ValueError ("too big int")
-                    columns [i] = (columns [i][0], int)
+                    
+                    if i not in count_types : count_types[i] = { int:1 }
+                    else : count_types[i][int] = count_types[i].get(int,0)+1
+                    
                 except ValueError :
                     try :
-                        x           = float (line [i])
+                        x = float (line [i])
+                        
+                        if i not in count_types : count_types[i] = { float:1 }
+                        else : count_types[i][float] = count_types[i].get(float,0)+1
+                        
                         if columns [i][1] != float :
                             columns [i] = (columns [i][0], float)
-                            self.LOG ("   switch to float ", columns [i], " value ", line [i])
+                            
                     except ValueError :
                         columns [i]  = (columns [i][0], (str, max(1,len (line [i]))*2) )
-                        done [i]     = True
-                        self.LOG ("   swith to str ", columns [i], " value ", line [i])
+                        
+                        if i not in count_types : count_types[i] = { str:1 }
+                        else : count_types[i][str] = count_types[i].get(str,0)+1
+                        
+        self.LOG ("   guess with ", len(lines), "lines")
+        self.LOG ("   count_types ", count_types)
+        for i in range(0,len(columns)):
+            
+            t  = count_types[i]
+            nb = sum(t.values())
+            
+            th = 0.0 if nb < 50 else (0.01 if nb < 100 else 0.02) # we authorize 2% of wrong types
+
+            n = t.get(int,0)
+            if n * 1.0 / nb >= 1-th : ty = int 
+            else :
+                n += t.get(float,0)
+                if n * 1.0 / nb >= 1-th : ty = float
+                else : ty = str
+            
+            columns [i] = (columns [i][0], ty)
+
+        self.LOG ("   columns ", columns)
 
         # if not done, choose str by default
         for c in columns :
@@ -224,6 +268,7 @@ class DatabaseCore2 :
             if format != "tsv" : raise Exception ("unable to process format " + format)
             line = line.strip ("\r\n ").replace ("\n", " ")
             line = DatabaseCore2._split_expr.split (line)
+            
         if filter_case != None :
             line = [ filter_case (s) for s in line ]
         

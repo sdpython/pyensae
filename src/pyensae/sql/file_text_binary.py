@@ -68,6 +68,7 @@ class TextFile :
         self.LOG ("  TextFile: opening file ", self.filename)
         if self._separated :
             res = self.guess_columns ()
+            self.LOG("   TextFile: guessed: ", res)
             sep = res [2]
             self._separated_value = sep
             
@@ -634,6 +635,7 @@ class TextFile :
         final = "^%s$" % sep.join (res)
         
         try :
+            self.LOG("  compiling",final)
             exp = re.compile (final)
             return final
         except Exception as e :

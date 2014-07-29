@@ -18,7 +18,8 @@ def import_flatfile_into_database (
                     fLOG    = print) :
     """
     
-    function which imports a file into a database.
+    Function which imports a file into a database. 
+    It the table exists, it removes it first. There is no addition.
     
     @param  filedb      something.db3
     @param  filetext    something.txt or .tsv
@@ -29,7 +30,6 @@ def import_flatfile_into_database (
     @param  host        host (server)
     @param  fLOG        logging function (will display information through the command line)
     @param  add_key     name of a key to add (or None if nothing to add)
-    
     
     @example(Import a flat file into a SQLite database)
     @code
@@ -55,9 +55,9 @@ def import_flatfile_into_database (
         db.remove_table (table)
         
     if header :
-        db.import_table_from_flat_file (filetext, table, columns = None, header = header, add_key = add_key)
-    else :
-        db.import_table_from_flat_file (filetext, table, columns = columns, header = header, add_key = add_key)
+        columns = None
+        
+    db.import_table_from_flat_file (filetext, table, columns = None, header = header, add_key = add_key)
     
     db.close ()        
 

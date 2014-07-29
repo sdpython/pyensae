@@ -8,8 +8,9 @@
 import os, collections
 
 
-from .file_text_binary      import TextFile
-from .database_exception    import DBException
+from .file_text_binary          import TextFile
+from .file_text_binary_columns  import TextFileColumns
+from .database_exception        import DBException
 
 
 class DatabaseImportExport :
@@ -177,7 +178,6 @@ class DatabaseImportExport :
             - dictionary ``{ key:(column_name,python_type) }``
             - or ``{ key:(column_name,python_type,preprocessing_function) }``
             
-            
         ``preprocessing_function`` is a function whose prototype is for example:
         
         @code
@@ -241,31 +241,44 @@ class DatabaseImportExport :
                 table_list  = self.get_table_list ()
                 message     = "unable to find table " + table + " in [" + ",".join (table_list) + "]"
                 raise DBException (message)
+                
+            column_has_space = len ( [ v[0] for k,v in columns.items() if ' ' in v[0] ] ) > 0
+            self.LOG("   column_has_space",column_has_space, [ v[0] for k,v in columns.items()] )
 
-            file     = TextFile (file, utf8 = True, errors = 'ignore', fLOG = self.LOG)
+            if strict_separator or column_has_space :
+                file = TextFile (file, utf8 = True, errors = 'ignore', fLOG = self.LOG)
+                skip = False
+            else : 
+                file = TextFileColumns(file, utf8 = True, errors = 'ignore', fLOG = self.LOG, 
+                                        regex = columns)
+                skip = True
+            
             file.open ()
             all      = 0
             num_line = 0
-            tsv      = format == "tsv"
             every    = 100000
+            tsv      = format == "tsv"
                 
             for line in file :
                 if stop != -1 and all >= stop : break
                 num_line += 1
-                if header and num_line == 1 : continue
-                if len (line.strip ("\r\n")) == 0 : continue
-                if tsv :
-                    dic = self._process_text_line ( line, 
-                                                    columns, 
-                                                    format, 
-                                                    lower_case          = lower_case, 
-                                                    num_line            = num_line-1, 
-                                                    fill_missing        = fill_missing,
-                                                    filter_case         = filter_case,
-                                                    strict_separator    = strict_separator)
+                if skip :
+                    dic = line
                 else :
-                    dic = format (line, **params)
-                    if dic == None : continue
+                    if header and num_line == 1 : continue
+                    if len (line.strip ("\r\n")) == 0 : continue
+                    if tsv :
+                        dic = self._process_text_line ( line, 
+                                                        columns, 
+                                                        format, 
+                                                        lower_case          = lower_case, 
+                                                        num_line            = num_line-1, 
+                                                        fill_missing        = fill_missing,
+                                                        filter_case         = filter_case,
+                                                        strict_separator    = strict_separator)
+                    else :
+                        dic = format (line, **params)
+                        if dic == None : continue
                 
                 if unique != None :
                     if dic [unique] in unique_key : continue
@@ -356,7 +369,7 @@ class DatabaseImportExport :
                 else :            v = ( v [0], (str, 1000000) ) + v [2:]
             columns [i] = v
                 
-        self.LOG ("columns ", columns)
+        self.LOG ("   columns ", columns)
             
         if not isinstance (file, list) and not os.path.exists (file) : 
             raise DBException ("unable to find file " + file)

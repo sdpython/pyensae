@@ -122,6 +122,10 @@ class TextFileColumns (TextFile) :
                 self._regexfix = s.join (exp)
                 self.LOG ("split: ", fi)
                 self.LOG ("new regex: ", self._regexfix)
+            else: 
+                self.LOG ("    TextFileColumns (1): regex: ",self._regexfix)
+        else: 
+            self.LOG ("    TextFileColumns (2): regex: ",self._regexfix)
                 
     def __str__ (self) :
         """return the header
@@ -235,7 +239,8 @@ class TextFileColumns (TextFile) :
                 if self._strip_space :
                     for k in res :
                         res [k] = res [k].strip ()
-                giveup      = False
+                giveup = False
+                
                 for k in res :
                     if k in self._conv : 
                         try:
@@ -258,6 +263,7 @@ class TextFileColumns (TextFile) :
                 if giveup : continue
                 if self._filter_dict == None or self._filter_dict (res) :
                     yield res
+                    
             nb += 1
             if self._break_at != -1 and nb > self._break_at : break
                 
