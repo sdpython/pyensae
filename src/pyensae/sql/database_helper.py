@@ -57,7 +57,8 @@ def import_flatfile_into_database (
     if header :
         columns = None
         
-    db.import_table_from_flat_file (filetext, table, columns = None, header = header, add_key = add_key)
+    db.import_table_from_flat_file (filetext, table, columns = None, 
+                                    header = header, add_key = add_key)
     
     db.close ()        
 

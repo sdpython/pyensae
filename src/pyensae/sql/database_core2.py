@@ -120,7 +120,7 @@ class DatabaseCore2 :
         @param      format          format (only tsv)
         @param      columns_name    if None, the first line contains the columns, otherwise it is the columns name
         @param      filter_case     process every case information (used to replace space for example)
-        @return                     columns
+        @return                     columns, changes
         """
         f = TextFile (file, utf8 = True, fLOG = self.LOG)
         f.open ()
@@ -138,16 +138,25 @@ class DatabaseCore2 :
         columns = { }
         done    = { }
         count   = { }
+        changes = { }
+        
         for i in range (0, len (lines [0])) :
             if lines [0][i] in ['\ufeffID', '\ufeffid', '\ufeffqid', '\ufeffQID'] : 
                 lines [0][i] = "qid"
 
-            if columns_name == None :   name = lines [0][i].replace (":", "_")
-            else :                      name = columns_name [i].replace (":", "_")
+            if columns_name == None :   
+                name = lines [0][i].replace (":", "_")
+                origin = lines [0][i]
+            else :
+                name = columns_name [i].replace (":", "_")
+                origin = columns_name [i]
+            
             name = name.replace ("-", "_").replace (" ", "_")
+            
             spl  = exp.split (name)
             if len (spl) > 1 : name = "".join (spl)
-            if name [0] in "0123456789" : name = "_" + name
+            if name [0] in "0123456789" : 
+                name = "_" + name
                 
             if name in count : 
                 count [name] += 1
@@ -158,6 +167,9 @@ class DatabaseCore2 :
             #lines [0][i] = name
             columns  [i] = (name, int)
             done     [i] = False
+            
+            if origin != name :
+                changes [origin] = name
             
         length = {}
         nbline = 0
@@ -248,7 +260,7 @@ class DatabaseCore2 :
                 raise Exception ("the length is null for column %s - %s" % (c, str (v)))
                         
         self.LOG ("   guess", columns)
-        return columns
+        return columns, changes
             
     def _process_text_line (self, line, columns, format, lower_case, num_line, 
                                 fill_missing = 0, filter_case = None,

@@ -152,6 +152,7 @@ class DatabaseImportExport :
                                 filter_case         = None,
                                 strict_separator    = False,
                                 skip_exception      = False,
+                                changes             = { },
                                 **params) :
                                 
         """        
@@ -172,6 +173,7 @@ class DatabaseImportExport :
         @param      strict_separator    strict number of columns, it assumes there is no separator in the content of every column
         @param      params              see format        
         @param      skip_exception      skip exception while inserting an element
+        @param      changes             to rewrite column names
         @return                         number of inserted elements
         
         The columns definition must follow the schema:
@@ -190,7 +192,6 @@ class DatabaseImportExport :
             - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)        
         
         """
-        
         if stop != -1 : self.LOG ("SQL append table stop is ", stop)
         self._check_connection ()
         nbinsert = 0 
@@ -249,8 +250,9 @@ class DatabaseImportExport :
                 file = TextFile (file, utf8 = True, errors = 'ignore', fLOG = self.LOG)
                 skip = False
             else : 
+                self.LOG ("   changes",changes)
                 file = TextFileColumns(file, utf8 = True, errors = 'ignore', fLOG = self.LOG, 
-                                        regex = columns)
+                                        regex = columns, changes = changes)
                 skip = True
             
             file.open ()
@@ -357,7 +359,8 @@ class DatabaseImportExport :
             
         self._check_connection ()
         if columns == None or isinstance (columns, list) :
-            columns = self._guess_columns (file, format, columns, filter_case = filter_case)
+            # here, some spaces might have been replaced by "_", we need to get them back
+            columns, changes = self._guess_columns (file, format, columns, filter_case = filter_case)
             
         if add_key != None:
             columns [len(columns)] = (add_key, int, "PRIMARYKEY", "AUTOINCREMENT")
@@ -389,6 +392,7 @@ class DatabaseImportExport :
                                     fill_missing        = fill_missing,
                                     filter_case         = filter_case,
                                     strict_separator    = strict_separator,
+                                    changes             = changes,
                                     **params)
                                     
         self.LOG (nb, " lines imported")

@@ -516,7 +516,6 @@ class TextFile :
             format = "c%0" + str (hhhh) + "d"
             names  = [ format % i for i in range (bestcol) ]
                 
-        
         for k in columns :
             if k >= len (names) :
                 raise Exception ("incoherence in the file being read: %d >= %d: " % (k, len (names)) + repr (names) + "\n" + repr (columns))

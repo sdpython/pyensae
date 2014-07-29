@@ -75,8 +75,9 @@ Versions
 --------
 
 * **0.7 - 2014/??/??**
-    * **fix:** fix an unexpected zero length column in ``import_flatfile_into_database``
-    * **add:** add parameter ``add_key`` to function ``import_flatfile_into_database`` to add a primary key
+    * **fix:** fix an unexpected zero length column in :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>`
+    * **add:** add parameter ``add_key`` to function :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>` to add a primary key
+    * **fix:** improve behavior of :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>`, it is more robust to not so clean flat files
 * **v0.6 - 2014/05/22**
     * **new:** convert a DataFrame into a SQLite3 database and the other way, see :meth:`to_df <sql.database_main.Database.to_df>`
     * **new:** add a class to collect data from JCDecaux website, see :class:`DataVelibCollect <datasource.data_velib.DataVelibCollect>`
