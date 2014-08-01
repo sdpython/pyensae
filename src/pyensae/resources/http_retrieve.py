@@ -113,9 +113,12 @@ def download_data ( name,
             if url == None : url = website
             url += file
             fileprint ("    downloading of ", url, " to ", outfile)
-            u = urllib.request.urlopen (url)
-            all = u.read ()
-            u.close ()
+            try:
+                u = urllib.request.urlopen (url)
+                all = u.read ()
+                u.close ()
+            except Exception as e :
+                raise Exception("unable to retrieve data from {0}".format(url)) from e
             u = open (outfile, "wb")
             u.write ( all )
             u.close()
