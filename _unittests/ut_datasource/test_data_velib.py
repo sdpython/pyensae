@@ -47,7 +47,7 @@ class TestDataVelib (unittest.TestCase):
     def test_data_velib_json(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__", LogFile = "temp_hal_log2.txt")
         
-        fold = os.path.split(__file__)[0]
+        fold = os.path.abspath(os.path.split(__file__)[0])
         tempfold = os.path.join(fold, "temp_data_i")
         if not os.path.exists(tempfold) : os.mkdir(tempfold)
         
@@ -79,7 +79,7 @@ class TestDataVelib (unittest.TestCase):
     def test_data_velib_json_collect(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__", LogFile = "temp_hal_log2.txt")
         
-        fold = os.path.split(__file__)[0]
+        fold = os.path.abspath(os.path.split(__file__)[0])
         tempfold = os.path.join(fold, "temp_data_i2")
         if not os.path.exists(tempfold) : os.mkdir(tempfold)
         
@@ -115,7 +115,7 @@ class TestDataVelib (unittest.TestCase):
     def test_data_velib_json_collect_func(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__", LogFile = "temp_hal_log2.txt")
         
-        fold = os.path.split(__file__)[0]
+        fold = os.path.abspath(os.path.split(__file__)[0])
         tempfold = os.path.join(fold, "temp_data_func")
         if not os.path.exists(tempfold) : os.mkdir(tempfold)
         
@@ -150,7 +150,7 @@ class TestDataVelib (unittest.TestCase):
     def test_data_velib_json_collect_func_besancon(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__", LogFile = "temp_hal_log2.txt")
         
-        fold = os.path.split(__file__)[0]
+        fold = os.path.abspath(os.path.split(__file__)[0])
         tempfold = os.path.join(fold, "temp_data_func_bes")
         if not os.path.exists(tempfold) : os.mkdir(tempfold)
         
