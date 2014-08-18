@@ -1,5 +1,4 @@
-﻿
-.. _l-README:
+﻿.. _l-README:
 
 README
 ======
