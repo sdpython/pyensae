@@ -13,7 +13,7 @@ pyensae documentation
 Description        
 -----------
 
-This project contain helpers used at the `ENSAE <http://www.ensae.fr/>`_ for teaching purposes.
+This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_ for teaching purposes.
 It requires `github/pyquickhelper <https://github.com/sdpython/pyquickhelper/>`_.
 
 The main function is used to download data used for my teachings at the 
