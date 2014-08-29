@@ -296,7 +296,7 @@ class DataVelibCollect :
         """
         draw a graph using four columns: lng, lat, available_bike_stands, available_bikes
             
-        @param      args                others parameters to give method ``plt.subplots``
+        @param      args                other parameters to give method ``plt.subplots``
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
         """
         import matplotlib.pyplot as plt
@@ -331,7 +331,7 @@ class DataVelibCollect :
         @endcode
         
         @param      interval            see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_
-        @param      args                others parameters to give method ``plt.figure``
+        @param      args                other parameters to give method ``plt.figure``
         @return                         animation
         
         It does not work very well for the time being.

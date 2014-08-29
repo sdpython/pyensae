@@ -86,7 +86,7 @@ Versions
     * **new:** add method :meth:`plot <finance.astock.StockPrices.plot>` which calls method :meth:`plot <finance.astock.StockPrices.draw>` but is not static
     * **change:** method :meth:`draw <finance.astock.StockPrices.draw>` can now draw another series on a second axis
 * **v0.4 - 2014/04/05**
-    * **change:** the method :meth:`finance.astock.StockPrices.draw` works now with others fields than ``Close``, it also works with two fields in a list, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
+    * **change:** the method :meth:`finance.astock.StockPrices.draw` works now with other fields than ``Close``, it also works with two fields in a list, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
     * **change:** the method :meth:`finance.astock.StockPrices.draw` does better with dates
     * **new:** the class :class:`finance.astock.StockPrices` overloads operator ``__getitem__``, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
     

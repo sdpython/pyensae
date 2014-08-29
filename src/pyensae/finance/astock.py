@@ -389,10 +389,10 @@ class StockPrices:
         @param      end                 last included date (datetime) or None to take the last one
         @param      field               Open, High, Low, Close, Adj Close, Volumne
         @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d`` or None if you prefer the function to choose
-        @param      args                others arugments to send to ``plt.subplots``
+        @param      args                other arugments to send to ``plt.subplots``
         @param      existing            to add this curve to an existing one (existing (fig, ax))
         @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curbes on the second axis.
-        @param      args                others parameters to give method ``plt.subplots``
+        @param      args                other parameters to give method ``plt.subplots``
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
         
         The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
@@ -515,7 +515,7 @@ class StockPrices:
         @param      filename        filename
         @param      sep             separator
         @param      index           to keep or drop the index
-        @param      params          others parameters
+        @param      params          other parameters
         """
         self.dataframe.to_csv(filename, sep=sep,index=index)
 

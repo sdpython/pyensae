@@ -25,7 +25,7 @@ class DatabaseObject :
             - a property ``index`` which precises the index to unless it returns None
             - a property ``indexes`` which precises other indexes to create (optional)
         
-        The property ``asrow`` must not include others objects, only their ids.
+        The property ``asrow`` must not include other objects, only their ids.
         If the table does not exists, it creates it.
         
         @param      tablename           name of a table (created if it does not exists)

@@ -397,7 +397,7 @@ class DatabaseJoinGroup :
         return select, fields
             
     ##################################################
-    # the others methods
+    # the other methods
     ##################################################
     
     def _build_where_condition (self, where, add_keyword_where = True) :
