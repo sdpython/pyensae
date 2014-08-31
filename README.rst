@@ -73,6 +73,9 @@ Started in 2013/08.
 Versions
 --------
 
+* **0.8 - 2014/??/??**
+    * **add:** add method :meth:`copy_to <sql.database_main.Database.copy_to>` to copy every table from a database to another one
+    * **fix:** class :class:`Database <sql.database_main.Database>` can now handle in memory database
 * **0.7 - 2014/08/24**
     * **fix:** fix an unexpected zero length column in :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>`
     * **add:** add parameter ``add_key`` to function :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>` to add a primary key

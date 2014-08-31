@@ -53,7 +53,7 @@ class DatabaseCore (DatabaseCore2) :
                         LOG         = None,
                         attach      = None) :
         """constructor
-        @param      sql_file        database file (use :memory:) to avoid creating a file and using only memory
+        @param      sql_file        database file database file (use ``:memory:`` to avoid creating a file and using only memory)
                                     it can also contain several files separated by ;
                                         @code
                                         name_file ; nickname,second_file ; ...
@@ -92,6 +92,9 @@ class DatabaseCore (DatabaseCore2) :
                     nick = ok [0].strip ()
                     file = ",".join ( ok [1:] )
                     attach [nick] = file.strip ()
+            elif sql_file.startswith(":"):
+                if sql_file != ":memory:" :
+                    raise FileNotFoundError("unable to interpret file: " + sql_file)
         
         # some initialization
         self._password = password
@@ -113,13 +116,13 @@ class DatabaseCore (DatabaseCore2) :
             self._engine   = engine
             
         elif engine == "ODBCMSSQL" :
-            raise DBException ("unable to import to connect to a SQL server")
+            raise DBException ("unable to connect to a SQL server")
                 
         else :
             raise DBException ("unfound engine %s in %s" % (engine, ", ".join (DatabaseCore._engines)))
             
         # write a file able to build a database summary
-        if sql_file != ":memory:" :
+        if not self.isMemory():
             folder = os.path.split (sql_file) [0]
             if len (folder) > 0 and not os.path.exists (folder) :
                 os.makedirs (folder)
@@ -149,11 +152,20 @@ class DatabaseCore (DatabaseCore2) :
         self._buffer_insert     = []
         self._buffer_insert_s   = 0
         
+        if self.isMemory():
+            self._connection = SQLite.connect(self._sql_file)
+        
     def isMSSQL (self) :
         """says if the syntax is MS SQL Server
         """
         if self._engine == "ODBCMSSQL" : return True
         return False
+        
+    def isMemory(self):
+        """
+        tells if the Database takes place in memory (``:memory:``)
+        """
+        return self._sql_file == ":memory:"
                 
     ######################################################################################################################
     # connection
@@ -236,47 +248,57 @@ class DatabaseCore (DatabaseCore2) :
         """open a connection to the database
         @param      odbc_string     use a different odbc string
         """
-        if "_connection" in self.__dict__ : 
-            raise Exception ("a previous connection was not closed")
-        
-        if   self._engine == "SQLite" : self._connection = SQLite. connect (self._sql_file)
-        #elif self._engine == "MySQL" :  self._connection = MySQLdb.connect (self._host, self._user, self._password, self._sql_file)
-        elif self._engine == "ODBCMSSQL" :
+        if self.isMemory():
+            if "_connection" not in self.__dict__ :
+                raise DBException("It is a database in memory, the database should already be connected.")
+        else :
+            if "_connection" in self.__dict__ : 
+                raise Exception ("a previous connection was not closed")
             
-            if odbc_string == None :
-                temp = [ "DRIVER={SQL Server Native Client 10.0}",# {SQL Server}",
-                        "SERVER=%s" % self._host,
-                        "DATABASE=%s" % self._sql_file,
-                        "Trusted_Connection=yes",
-                        "MARS_Connection=yes",
-                        #"MultipleActiveResultSets=True",
-                        #"Integrated Security=SSPI",
-                        ]
-                #temp = ["DSN=%s" % self._sql_file ]
-                if self._user != None : temp.append ( "UID=%s" % self._user)
-                if self._password != None : temp.append ( "PASSWORD=%s" % self._password)
-                st = ";".join (temp)
-                self.LOG ("connection string ", st)
-                self._connection = module_odbc.connect (st)
-            else :
-                st = odbc_string
-                self.LOG("connection string ", st)
-                self._connection = module_odbc.connect (st)
-                    
-        else : raise DBException ("This engine does not exists (%s)" % self._engine)
-            
-        for func in DatabaseCore._special_function_init_() :
-            self.add_function (func[0], func[2], func[1])
-            
-        for k,v in self._attach.items () :
-            self.attach_database (v, k)
+            if self._engine == "SQLite" : 
+                self._connection = SQLite.connect(self._sql_file)
+            #elif self._engine == "MySQL" :  self._connection = MySQLdb.connect (self._host, self._user, self._password, self._sql_file)
+            elif self._engine == "ODBCMSSQL" :
+                
+                if odbc_string == None :
+                    temp = [ "DRIVER={SQL Server Native Client 10.0}",# {SQL Server}",
+                            "SERVER=%s" % self._host,
+                            "DATABASE=%s" % self._sql_file,
+                            "Trusted_Connection=yes",
+                            "MARS_Connection=yes",
+                            #"MultipleActiveResultSets=True",
+                            #"Integrated Security=SSPI",
+                            ]
+                    #temp = ["DSN=%s" % self._sql_file ]
+                    if self._user != None : temp.append ( "UID=%s" % self._user)
+                    if self._password != None : temp.append ( "PASSWORD=%s" % self._password)
+                    st = ";".join (temp)
+                    self.LOG ("connection string ", st)
+                    self._connection = module_odbc.connect (st)
+                else :
+                    st = odbc_string
+                    self.LOG("connection string ", st)
+                    self._connection = module_odbc.connect (st)
+                        
+            else : 
+                raise DBException ("This engine does not exists (%s)" % self._engine)
+                
+            for func in DatabaseCore._special_function_init_() :
+                self.add_function (func[0], func[2], func[1])
+                
+            for k,v in self._attach.items () :
+                self.attach_database (v, k)
         
     def close (self) :
         """close the database
         """
-        self._check_connection ()
-        self._connection.close ()
-        del self._connection
+        if self.isMemory():
+            # we should not close, otherwise, we lose the data
+            pass
+        else :
+            self._check_connection ()
+            self._connection.close ()
+            del self._connection
         
     def commit (self) :
         """call this function after any insert request
@@ -724,7 +746,7 @@ class DatabaseCore (DatabaseCore2) :
                 if dat2 - dat > 10 : self.LOG("SQL end")
             except Exception as e :
             #else :
-                raise ExceptionSQL ("unable to execute a SQL request (1)(file %s)" % self.get_file (), e, request)
+                raise ExceptionSQL ("unable to execute a SQL request (1)(file %s)" % self.get_file (), e, request) from e
             return cur
         
     def execute_view (self, request, add_column_name = False, nolog = False) :
@@ -818,7 +840,7 @@ class DatabaseCore (DatabaseCore2) :
         else :      sql = "CREATE INDEX %s%s ON %s (%s);" % (prefix, indexname, table, ",".join (columns))
         self.execute (sql)
         
-    def create_table (self, table, columns, temporary = False) :
+    def create_table (self, table, columns, temporary = False, nolog = False) :
         """creates a table
         @param      table           table name
         @param      columns         columns definition, dictionary { key:(column_name,python_type) }
@@ -829,6 +851,8 @@ class DatabaseCore (DatabaseCore2) :
                                                             0:("name",str), 1:("number", float) }
                                     @endcode
         @param      temporary       if True the table is temporary
+        @param      nolog           @see fn execute
+        @return                     cursor
         """
         if self._engine == "SQLite" and table == "sqlite_sequence" :
             raise DBException ("unable to create a table named sql_sequence")
@@ -884,7 +908,7 @@ class DatabaseCore (DatabaseCore2) :
                 
         sql += ",\n       ".join (col)
         sql += ");"
-        self.execute (sql)
+        return self.execute (sql, nolog = nolog)
 
     ######################################################################################################################
     # deletion
@@ -903,31 +927,48 @@ class DatabaseCore (DatabaseCore2) :
     
     def _insert_sql (self, table, insert_values) :
         """build the sql for an insert request
-        @param      table           table name
-        @param      insert_values       dictionary
+        @param      table               table name
+        @param      insert_values       dictionary or a list
         @return                         string
         """
-        keys   = []
-        values = []
-        for k,v in insert_values.items() :
-            keys.append (k)
-            if v is None : values.append ('')
-            elif isinstance (v, str) : 
-                v = "'" + str (v).replace ("'", "''") + "'"
-                values.append (v)
-            elif isinstance (v, datetime.datetime) : 
-                v = "'" + str (v) + "'"
-                values.append (v)
-            else : values.append (str (v))
-        keys    = ",".join (keys)
-        values  = ",".join (values)
-        sql     = "INSERT INTO %s (%s) VALUES (%s)" % (table, keys, values)
-        return sql
+        if isinstance(insert_values, dict):
+            keys   = []
+            values = []
+            for k,v in insert_values.items() :
+                keys.append (k)
+                if v is None : values.append ('')
+                elif isinstance (v, str) : 
+                    v = "'" + str (v).replace ("'", "''") + "'"
+                    values.append (v)
+                elif isinstance (v, datetime.datetime) : 
+                    v = "'" + str (v) + "'"
+                    values.append (v)
+                else : values.append (str (v))
+            keys    = ",".join (keys)
+            values  = ",".join (values)
+            sql     = "INSERT INTO %s (%s) VALUES (%s)" % (table, keys, values)
+            return sql
+        elif isinstance(insert_values, tuple) or isinstance(insert_values, list):
+            values = []
+            for v in insert_values:
+                if v is None : values.append ('')
+                elif isinstance (v, str) : 
+                    v = "'" + str (v).replace ("'", "''") + "'"
+                    values.append (v)
+                elif isinstance (v, datetime.datetime) : 
+                    v = "'" + str (v) + "'"
+                    values.append (v)
+                else : values.append (str (v))
+            values  = ",".join (values)
+            sql     = "INSERT INTO %s VALUES (%s)" % (table, values)
+            return sql
+        else:
+            raise TypeError("unexpected type: " + str(type(insert_values)))
 
     def insert (self, table, insert_values, cursor = None, nolog = True) :
         """insert into a table
         @param      table           table name
-        @param      insert_values   values to insert
+        @param      insert_values   values to insert (a list of dictionary or a single dictionary)
         @param      cursor          if cursor != None, use it, otherwise creates a new one
         @param      nolog           if True, do not log anything
         @return                     sql request or None if several insertion were sent (result is too long)
@@ -940,9 +981,14 @@ class DatabaseCore (DatabaseCore2) :
                 for d in insert_values :
                     self.insert (table, d, cursor)
             else :
-                ins = { }
-                for k in insert_values [0] : ins [k] = ":" + k
-                sql = self._insert_sql (table, ins)
+                if isinstance(insert_values [0], dict):
+                    ins = { }
+                    for k in insert_values [0] : ins [k] = ":" + k
+                    sql = self._insert_sql (table, ins)
+                else :
+                    q = tuple( '?' for _ in insert_values [0] )
+                    sql = self._insert_sql (table, q).replace("'","")
+                    
                 sql = sql.replace ("'", "")
                 try :
                     if not nolog : self.LOG ("SQLs", sql)
@@ -985,7 +1031,7 @@ class DatabaseCore (DatabaseCore2) :
         
         @warning The commit is not done and must be done to stored these modifications.
         """
-#        insert_values = 
+
         self._check_values (values)
         self._check_connection ()
         all = []

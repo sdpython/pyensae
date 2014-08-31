@@ -31,7 +31,7 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
         """
         constructor
         
-        @param      dbfile          database file (use :memory:) to avoid creating a file and using only memory
+        @param      dbfile          database file (use ``:memory:`` to avoid creating a file and using only memory)
                                     it can also contain several files separated by ;
                                         @code
                                         name_file ; nickname,second_file ; ...
@@ -64,7 +64,12 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
         """
         schema = { i:(l,str) for i,l in enumerate(df.columns) }
         if add_id != None :
-            schema [-1] = (add_id, int, "PRIMARYKEY", "AUTOINCREMENT")
+            if isinstance(add_id, bool):
+                if add_id : 
+                    add_id = "PRIMARYKEY"
+                    schema [-1] = (add_id, int, "PRIMARYKEY", "AUTOINCREMENT")
+            else :
+                schema [-1] = (add_id, int, "PRIMARYKEY", "AUTOINCREMENT")
             
         if len(df) > 0 :
             # we use the first row to determine type
@@ -155,3 +160,32 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
         cols = self.get_sql_columns(request)
         iter = self.execute_view(request, nolog=True)
         return pandas.DataFrame(iter, columns=cols)
+        
+    def copy_to(self, db, subset = None):
+        """
+        copy all tables into db, we assume both database are not connected
+        
+        @param      db      another database (possibly empty)
+        @param      subset  list of tables to copy or None for all
+        """
+        self.connect()
+        db.connect()
+        for tbl in self.get_table_list():
+            if subset is None or tbl in subset :
+                self.LOG("copy_to: create table " + tbl)
+                sch = self.get_table_columns_list(tbl, True)
+                curins = db.create_table(tbl, sch)
+                cursor = self.execute("SELECT * FROM %s" % tbl)
+                buffer = [ ]
+                for row in cursor:
+                    buffer.append(row)
+                    if len(buffer) >= 1000 :
+                        db.insert(tbl, buffer, cursor = curins)
+                        buffer = [ ]
+                if len(buffer) > 0 :
+                    db.insert(tbl, buffer)
+                db.commit()
+                cursor.close()
+        self.close()
+        db.close()
+        
