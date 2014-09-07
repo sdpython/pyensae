@@ -231,8 +231,9 @@ class DatabaseCore2 :
         self.LOG ("   guess with ", len(lines), "lines")
         self.LOG ("   count_types ", count_types)
         for i in range(0,len(columns)):
-            
-            t  = count_types[i]
+
+            # if i is not in count_types, it means the first rows do now contain values for these columns (only null values)
+            t  = count_types.get(i, {str:1} )
             nb = sum(t.values())
             
             th = 0.0 if nb < 50 else (0.01 if nb < 100 else 0.02) # we authorize 2% of wrong types
@@ -357,7 +358,7 @@ class DatabaseCore2 :
         for k,v in dico.items() :
             keys.append (k)
             if k != primarykey and isinstance (v, str) : 
-                v = "'" + str (v) + "'"
+                v = "'" + str (v).replace("'","''") + "'"
                 values.append (v)
             elif isinstance (v, datetime.datetime) :
                 values.append ("'" + str (v) + "'")
