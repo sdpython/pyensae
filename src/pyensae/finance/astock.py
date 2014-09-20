@@ -97,9 +97,9 @@ class StockPrices:
                     raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")")
             self.tickname = tick
             
-            if begin == None : 
+            if begin is None :
                 begin = datetime.datetime(2000,1,3)
-            if end == None :
+            if end is None :
                 now = datetime.datetime.now()
                 end = now - datetime.timedelta(1)
             
@@ -114,7 +114,7 @@ class StockPrices:
                                     begin.month-1,begin.day, begin.year)
                     url = url % tick
                 else :
-                    raise Exception("unable to download data from the following webiste " + url)
+                    raise Exception("unable to download data from the following website" + url)
                 
                 try :
                     u = urllib.request.urlopen (url)
@@ -387,11 +387,11 @@ class StockPrices:
         @param      listStockPrices     list of @see cl StockPrice (or one @see cl StockPrice if it is the only one)
         @param      begin               first date (datetime) or None to take the first one
         @param      end                 last included date (datetime) or None to take the last one
-        @param      field               Open, High, Low, Close, Adj Close, Volumne
+        @param      field               Open, High, Low, Close, Adj Close, Volume
         @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d`` or None if you prefer the function to choose
-        @param      args                other arugments to send to ``plt.subplots``
+        @param      args                other arguments to send to ``plt.subplots``
         @param      existing            to add this curve to an existing one (existing (fig, ax))
-        @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curbes on the second axis.
+        @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curves on the second axis.
         @param      args                other parameters to give method ``plt.subplots``
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
         
@@ -424,11 +424,11 @@ class StockPrices:
             listStockPrices = [ listStockPrices ]
         
         data = StockPrices.available_dates(listStockPrices, missing = False, field = field)
-        if begin == None :
-            if end != None :
+        if begin is None :
+            if end is not None :
                 data = data [ data.index <= end ]
         else :
-            if end != None :
+            if end is not None :
                 data = data [ (data.index >= begin) &  (data.index <= end)]
             else :
                 data = data [ data.index >= begin ]
@@ -461,13 +461,13 @@ class StockPrices:
             else :
                 curve.append ( ax.plot(dates, data[stock], linestyle='solid', label=str(stock)) )
             
-        if existing == None :
+        if existing is None :
             ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
             if len(dates) < 30:
                 days     = mdates.DayLocator()
                 ax.xaxis.set_major_locator(days)
                 ax.xaxis.set_minor_locator(days)
-                if date_format != None :
+                if date_format is not None :
                     fmt = mdates.DateFormatter(date_format)
                     ax.xaxis.set_major_formatter(fmt)
                 else :
@@ -478,7 +478,7 @@ class StockPrices:
                 ax.xaxis.set_major_locator(months)
                 ax.xaxis.set_minor_locator(days)
                 ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
-                if date_format != None :
+                if date_format is not None :
                     fmt = mdates.DateFormatter(date_format)
                     ax.xaxis.set_major_formatter(fmt)
                 else :
@@ -488,7 +488,7 @@ class StockPrices:
                 months   = mdates.MonthLocator()
                 ax.xaxis.set_major_locator(years)
                 ax.xaxis.set_minor_locator(months)
-                if date_format != None :
+                if date_format is not None :
                     fmt = mdates.DateFormatter(date_format)
                     ax.xaxis.set_major_formatter(fmt)
                 else :

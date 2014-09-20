@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 
@@ -63,12 +62,12 @@ class DatabaseCore (DatabaseCore2) :
         @param      host            to connect to a MSSQL database
         @param      password        password if needed
         @param      LOG             LOG function, if None, choose ``print``
-        @param      attach          dictionary: { nickname: filename }, list of database to attach
+        @param      attach          dictionary { nickname: filename }, list of database to attach
         @warning If the folder does not exist, it will be created
         """
         
         # attach cases
-        if attach == None : attach = { }
+        if attach is None : attach = { }
         else :              attach = attach.copy ()
             
         if isinstance (sql_file, str) :
@@ -119,7 +118,7 @@ class DatabaseCore (DatabaseCore2) :
             raise DBException ("unable to connect to a SQL server")
                 
         else :
-            raise DBException ("unfound engine %s in %s" % (engine, ", ".join (DatabaseCore._engines)))
+            raise DBException ("unfounded engine %s in %s" % (engine, ", ".join (DatabaseCore._engines)))
             
         # write a file able to build a database summary
         if not self.isMemory():
@@ -187,7 +186,7 @@ class DatabaseCore (DatabaseCore2) :
 
     @staticmethod
     def regex_match (exp, st) : 
-        return 0 if re.compile (exp).search (st) == None else 1
+        return 0 if re.compile (exp).search (st) is None else 1
 
     @staticmethod
     def idaytodate (dayint, year, month, day) :
@@ -327,7 +326,7 @@ class DatabaseCore (DatabaseCore2) :
                 files.append ("%s,%s" % (alias,file) )
             temp = ";".join (files)
             if self._engine != "SQLite" :
-                if self._host == None :
+                if self._host is None :
                     temp = "%s:::%s" % (self._engine, temp) 
                 else :
                     temp = "%s:::%s###%s" % (self._engine, self._host,temp) 
@@ -471,12 +470,12 @@ class DatabaseCore (DatabaseCore2) :
         @see me get_table_columns_list
         example: (dictionary == False)
         @code
-        [(u'fid', <type 'int'>), (u'fidp', <type 'int'>), (u'field', <type 'str'>)]        
+        [('fid', <type 'int'>), ('fidp', <type 'int'>), ('field', <type 'str'>)]
         @endcode
         
         or (dictionary = True)
         @code
-        {0: (u'fid', <type 'int'>), 1: (u'fidp', <type 'int'>), 2: (u'field', <type 'str'>)}        
+        {0: ('fid', <type 'int'>), 1: ('fidp', <type 'int'>), 2: ('field', <type 'str'>)}
         @endcode
         """
         return self.get_table_columns_list (table, dictionary)
@@ -489,12 +488,12 @@ class DatabaseCore (DatabaseCore2) :
         
         example: (dictionary == False)
         @code
-        [(u'fid', <type 'int'>), (u'fidp', <type 'int'>), (u'field', <type 'str'>)]        
+        [('fid', <type 'int'>), ('fidp', <type 'int'>), ('field', <type 'str'>)]
         @endcode
         
         or (dictionary = True)
         @code
-        {0: (u'fid', <type 'int'>), 1: (u'fidp', <type 'int'>), 2: (u'field', <type 'str'>)}        
+        {0: ('fid', <type 'int'>), 1: ('fidp', <type 'int'>), 2: ('field', <type 'str'>)}
         @endcode
         """
         if "." in table :
@@ -594,9 +593,9 @@ class DatabaseCore (DatabaseCore2) :
                     l = l [ :r.span (1)[1] ]
                 clean.append (l.strip ())
             req = " ".join (clean)
-            cross = re.compile (" *CROSS +([ a-zA-Z_0-9,]+?) +" \
-                                "PLACE +([,a-zA-Z_0-9()]+?) +" \
-                                "FROM +([a-zA-Z_0-9]+?)( +AS +[_a-z0-9])? +ORDER +BY " \
+            cross = re.compile (" *CROSS +([ a-zA-Z_0-9,]+?) +"
+                                "PLACE +([,a-zA-Z_0-9()]+?) +"
+                                "FROM +([a-zA-Z_0-9]+?)( +AS +[_a-z0-9])? +ORDER +BY "
                                 "+([ a-zA-Z_0-9,]+?)( +WHERE(.*?))?( +LIMIT +([0-9]+)?)?$", re.IGNORECASE)
             db.LOG ("cross product", req)
             find  = cross.search (req)
@@ -604,12 +603,12 @@ class DatabaseCore (DatabaseCore2) :
             self.find    = find
             self.db      = db
             
-            if self.find == None :
+            if self.find is None :
                 return
                 
             gr   = self.find.groups ()
             key,value,table,count_as,order,where,_,__,limit = gr
-            if limit != None : limit = int (limit)
+            if limit is not None : limit = int (limit)
             db.LOG ("parameters ", [key,value,table,order,where,limit])
             fkey = key.split (",")
             fval = value.split (",")
@@ -660,7 +659,7 @@ class DatabaseCore (DatabaseCore2) :
             self.pos    = 0
         
         def is_working (self) :
-            return self.find != None
+            return self.find is not None
             
         def __iter__ (self) :
             """
@@ -730,7 +729,7 @@ class DatabaseCore (DatabaseCore2) :
         The request must begin by CROSS
         """
         res = self._analyse (request)
-        if res != None :
+        if res is not None :
             return res
         else :
             # classic ways
@@ -845,7 +844,7 @@ class DatabaseCore (DatabaseCore2) :
         @param      table           table name
         @param      columns         columns definition, dictionary { key:(column_name,python_type) }
                                     if PRIMARYKEY is added, the key is considered as the primary key.
-                                    Exemple:
+                                    Example:
                                     @code
                                     columns = { -1:("key", int, "PRIMARYKEY", "AUTOINCREMENT"), 
                                                             0:("name",str), 1:("number", float) }

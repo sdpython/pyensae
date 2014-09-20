@@ -65,14 +65,14 @@ class TextFileColumns (TextFile) :
         @param      errors                      see str (errors = ...)
         @param      fLOG                        LOG function, @see me LOG
         @param      force_header                defines the first line as columns header whatever is it relevant or not
-        @param      changes                     to change the column name, gives the correspondance, example: { "query":"query___" },
+        @param      changes                     to change the column name, gives the correspondence, example: { "query":"query___" },
                                                 it can be a list if there is no header and you want to name any column
         @param      force_noheader              there is no header at all      
         @param      regex                       specify a different regular expression (only if changes is a list)
                                                 if it is a dictionary, the class will replace the default by the one associated in regex for this field
         @param      filter                      None if there is no filter, otherwise it is a function which takes a dictionary and returns a boolean
                                                 which tells if the line must considered or not
-        @param      fields                      when the header is not here, these fields will name the colums
+        @param      fields                      when the header is not here, these fields will name the columns
         @param      keep_text_when_bad_type     keep the value when the conversion type does not word
         @param      break_at                    if != -1, stop when this limit is reached
         @param      strip_space                 remove space around columns if True
@@ -226,10 +226,10 @@ class TextFileColumns (TextFile) :
             else :
                 r = None
                 
-            if r == None :
+            if r is None :
                 if nberr == 0 :
                     self.LOG (self._regex.pattern)
-                self.LOG ("error regex", nberr, "unable to interprete line ", nb, ": ", repr (line))
+                self.LOG ("error regex", nberr, "unable to interpret line ", nb, ": ", repr (line))
                 nberr += 1
                 if nberr * 10 > nb and nberr > 4 :
                     message = "pattern: %s\n line: %s" % (regex_simple.pattern, line)
@@ -261,14 +261,16 @@ class TextFileColumns (TextFile) :
                                 giveup = True
                                 break
                 if giveup : continue
-                if self._filter_dict == None or self._filter_dict (res) :
+                if self._filter_dict is None or self._filter_dict (res) :
                     yield res
                     
             nb += 1
             if self._break_at != -1 and nb > self._break_at : break
                 
     def _store (output, l) :
-        """store a list of dictionaries into a file (add a header)
+        """
+        store a list of dictionaries into a file (add a header)
+
         @param      output      filename
         @param      l           list of dictionary key:value
         @warning                format is utf-8
@@ -294,7 +296,7 @@ class TextFileColumns (TextFile) :
         """sort a text file, even a big one, one or several columns gives the order
         @param      output      output file result
         @param      key         lines sorted depending of these columns
-        @param      maxmemory   a file is splitted into smaller files which contains not more than maxmemory lines
+        @param      maxmemory   a file is split into smaller files which contains not more than maxmemory lines
         @param      folder      the function needs to create temporary files, this folder will contain them
                                 before they get removed
         @param      fLOG        logging function
@@ -372,11 +374,11 @@ class TextFileColumns (TextFile) :
         kline = []
         for li in fh :
             try :
-                if li [1] == None : d = None
+                if li [1] is None : d = None
                 else :              d = li [1].__next__ ()
             except StopIteration :
                                     d = None
-            if d != None :
+            if d is not None :
                 k = tuple ([ d [k] for k in key ] )
                 kline.append ( [ k, d ] + li )
             
@@ -407,13 +409,13 @@ class TextFileColumns (TextFile) :
             res.write (s + sepline)
             nbline += 1
             
-            # nexting
+            # next
             try :
                 d = line [-1].__next__ ()
             except StopIteration :
                 d = None
                 
-            if d != None :
+            if d is not None :
                 k = tuple ([ d [k] for k in key ] )
                 kline.append ( [ k, d ] + line [2:] )
         

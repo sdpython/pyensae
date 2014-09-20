@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 
@@ -53,10 +52,10 @@ class DatabaseJoinGroup :
             self.prefix         = None
             self._count_as      = 0
             self._avoid_prefix  = avoid_prefix
-            if self.parent_key == None and self.key != None :
+            if self.parent_key is None and self.key != None :
                 raise Exception ("parent_key is missing")
                 
-            if where != None :
+            if where is not None :
                 if not isinstance (where, dict) :
                     raise Exception ("parameter where: only dict or None expected (not %s)" % str (type (where)))
                 for k,v in where.items() :
@@ -116,7 +115,7 @@ class DatabaseJoinGroup :
                 else :          self.prefix = chr (97+nb)
             for i,n in enumerate (self.successor) : 
                 n.check_prefix (i)
-            self.PREFIX = "" if self.prefix == None else self.prefix
+            self.PREFIX = "" if self.prefix is None else self.prefix
             self.PREFIX = self._build_predecessor_prefix () + self.PREFIX
                 
         def _build_predecessor_prefix (self) :
@@ -126,13 +125,14 @@ class DatabaseJoinGroup :
             if self._avoid_prefix : return ""
             r = ""
             n = self.predecessor
-            while n != None :
+            while n is not None :
                 r += n.prefix
                 n = n.predecessor
             return r
             
         def clean (self) :
-            """remove all sql,fields members
+            """
+            remove all sql,fields members
             """
             if "SELECT" in self.__dict__ : 
                 del self.__dict__ ["SELECT"]
@@ -202,7 +202,7 @@ class DatabaseJoinGroup :
             else :
                 raise Exception ("fas should not be empty")
                 
-            if tfrom == None : tfrom = self.table
+            if tfrom is None : tfrom = self.table
                 
             if "\n" in tfrom :  
                 lines.append ("FROM (\n%s) AS temp_tbl%d" % (tfrom, self._count_as) )
@@ -326,7 +326,8 @@ class DatabaseJoinGroup :
             self.FIELDS     = fields
             
     def __init__ (self) :
-        """contructor
+        """
+        constructor
         """
         self._count_as = 0
 
@@ -373,7 +374,7 @@ class DatabaseJoinGroup :
         if not duplicate_column :   raise Exception ("duplicate_column = False: this option is not available")
         if len (order) > 0 :        raise Exception ("order != []: this option is not available")
         if unique :                 raise Exception ("unique = True: this option is not available")
-        if fields != None :         raise Exception ("fields != None: this option is not possible yet %s." % (str (fields)))
+        if fields is not None :     raise Exception ("fields != None: this option is not possible yet %s." % (str (fields)))
         
         root.build_sql (self)
         select = root.SELECT
@@ -413,7 +414,7 @@ class DatabaseJoinGroup :
               (However, this probably won't happen.)
         """
         sql = ""
-        if where != None and len (where) > 0 :
+        if where is not None and len (where) > 0 :
             if add_keyword_where : sql += " WHERE "
             if isinstance (where, str) : 
                 sql += where
@@ -483,7 +484,7 @@ class DatabaseJoinGroup :
         str_sum = ", ".join (sum_column)
         if len (str_sum) > 0 : str_sum = ", " + str_sum
         
-        if values == None :
+        if values is None :
             sql     = "SELECT %s AS %s, COUNT(%s) AS %s_nb%s%s\nFROM %s\nGROUP BY %s" % \
                              (", ".join (columns),  \
                               new_column,           \
@@ -555,7 +556,7 @@ class DatabaseJoinGroup :
             raise Exception ("values has not a type (%s) not in [None, dict, list]" % ( str (type(values)) ) )
     
         if execute :
-            if created_table == None : 
+            if created_table is None :
                 raise Exception ("unable to execute the SQL query: not specified name for the table to create")
             if created_table in self.get_table_list () :
                 raise Exception ("table %s already exists" % created_table)
@@ -597,7 +598,7 @@ class DatabaseJoinGroup :
         @return                         SQL request, list of fields ("source", "new name")
         """
         
-        if field2 == None : 
+        if field2 is None :
             field2 = field1
         
         cols1 = self.get_table_columns_list (table1)
@@ -676,7 +677,7 @@ class DatabaseJoinGroup :
         mx      = max ( [ len (f [0]) for f in fields ] ) + 1                
         rem     = params.get ("as_remove", None)
         
-        if rem == None :  
+        if rem is None :
             fields  = [ (f[0] + " " * (mx - len (f [0])), prefix_all + f [1]) for f in fields ]
         else :
             cfields = fields
@@ -708,10 +709,10 @@ class DatabaseJoinGroup :
                 
             nb += 1
             
-        if where != None and len (where) > 0 :      
+        if where is not None and len (where) > 0 :
             select += "WHERE " + where + "\n"
             
-        if order != None and len (order) > 0 :
+        if order is not None and len (order) > 0 :
             te = []
             for o in order :
                 if isinstance (o, tuple) : 
@@ -725,7 +726,7 @@ class DatabaseJoinGroup :
         #select += ";"
     
         if execute :
-            if created_table == None : 
+            if created_table is None :
                 raise Exception ("unable to execute the SQL query: not specified name for the table to create")
             if created_table in self.get_table_list () :
                 raise Exception ("table %s already exists" % created_table)

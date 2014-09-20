@@ -46,20 +46,20 @@ class DatabaseObject :
             except : pass
             break
             
-        if schema == None :
+        if schema is None :
             # nothing to do, it is empty
             return
         
         if tablename not in self.get_table_list () : 
             fLOG("create table ", tablename)
             cursor = self.create_table (tablename, schema)
-            if index != None :
+            if index is not None :
                 self.create_index( 
                             index + "_" + tablename + "_index", 
                             tablename, 
                             [ index ] , 
                             unique = True) 
-                if indexes != None :
+                if indexes is not None :
                     for ind in indexes :
                         if isinstance (ind, str) :
                             self.create_index( 
@@ -78,7 +78,7 @@ class DatabaseObject :
             
         else :
             if check_existence :
-                if index == None :
+                if index is None :
                     raise ValueError("unable to check existence because index property is not set up")
                     
                 def enumerate_nodup(iterator):
@@ -98,7 +98,7 @@ class DatabaseObject :
         
     def enumerate_objects(self, table, classObject) :
         """
-        iterator on objects assuming each row of a table is a object (classOject type).
+        iterator on objects assuming each row of a table is a object (classObject type).
         The classObject must have the following properties:
             - a staticmethod ``schema_database_read`` which gives the schema
             - the constructor must accept a constructor where parameter have the same name as the column names

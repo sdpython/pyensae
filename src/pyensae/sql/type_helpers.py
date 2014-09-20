@@ -46,7 +46,7 @@ def get_default_value_type (ty, none = True) :
     @param      none        if True and all values are empty, return None
     @return                 a default value for this type
     """
-    if      ty == None and none : return None
+    if      ty is None and none : return None
     elif    ty == str   : return ""
     elif    ty == int       : return 0
     elif    ty == decimal.Decimal : return decimal.Decimal(0)

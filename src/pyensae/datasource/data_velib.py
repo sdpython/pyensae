@@ -5,12 +5,12 @@
 
 """
 
-import os, os.path, sys, datetime, urllib, json, time, re, pandas, numpy, math, random
+import os, os.path, datetime, urllib, json, time, re, pandas, numpy, math, random, urllib.error, urllib.request
 
 class DataVelibCollect :
     """
     This class automates data collecting from Velib website.
-    The service is provided at `JCDecaux developper <https://developer.jcdecaux.com/#/home>`_.
+    The service is provided at `JCDecaux developer <https://developer.jcdecaux.com/#/home>`_.
     
     see `notebook on Velib <http://nbviewer.ipython.org/5520933>`_
     
@@ -43,7 +43,7 @@ class DataVelibCollect :
         self.apiKey = apiKey
         self.contracts = DataVelibCollect._contracts_static if not fetch_contracts else self.get_contracts() 
         
-        # sometimes, lng and lat are null, check if some past retreiving returned non null coordinates
+        # sometimes, lng and lat are null, check if some past retrieving returned non null coordinates
         self.memoGeoStation = { }
 
     def get_contracts(self):
@@ -80,7 +80,7 @@ class DataVelibCollect :
         @return                     json string
         """
         if contract not in self.contracts :
-            raise Exception("unable to find contrat in:\n" + "\n".join(self.contracts.keys()))
+            raise Exception("unable to find contract in:\n" + "\n".join(self.contracts.keys()))
         url = DataVelibCollect._url_api % (contract, self.apiKey)
         
         try :
@@ -216,7 +216,7 @@ class DataVelibCollect :
         
         @endexample
         """
-        if key == None :
+        if key is None :
             key = DataVelibCollect.velib_get_key()
         velib = DataVelibCollect(key, True)
         velib.collecting_data ( contract, 
@@ -226,7 +226,8 @@ class DataVelibCollect :
                                 single_file = single_file,
                                 log_every = log_every,
                                 fLOG = fLOG)
-                
+
+    @staticmethod
     def velib_get_key() :
         """
         open a windows to get a key (from a user) and a contract (city)
@@ -268,7 +269,7 @@ class DataVelibCollect :
             - status
             - file
         """
-        if regex == None : regex = ".*"
+        if regex is None : regex = ".*"
         reg = re.compile(regex)
         
         files_ = os.listdir(folder)
@@ -341,8 +342,8 @@ class DataVelibCollect :
         import matplotlib.pyplot as plt
         from matplotlib import animation
         
-        xlim = min(df["lng"]),max(df["lng"])
-        ylim = min(df["lat"]),max(df["lat"])
+        #xlim = min(df["lng"]),max(df["lng"])
+        #ylim = min(df["lat"]),max(df["lat"])
         
         dates = list(sorted(set(df["file"])))
         datas = [ ]
@@ -390,7 +391,7 @@ class DataVelibCollect :
         
         see `Haversine distance <http://en.wikipedia.org/wiki/Haversine_formula>`_
         
-        @eturn      double
+        @return      double
         """
         radius = 6371
         dlat = math.radians(lat2-lat1)
@@ -411,7 +412,7 @@ class DataVelibCollect :
         """
         simulate velibs on a set of stations given by df
         
-        @param      nbbike      number of bicyles
+        @param      nbbike      number of bicycles
         @param      period      period
         @param      speed       average speed (in km/h)
         @param      iteration   number of iterations

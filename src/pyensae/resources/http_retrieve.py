@@ -81,8 +81,8 @@ def download_data ( name,
     @endcode
     @endexample
     """
-    if glo == None : glo = globals()
-    if loc == None : loc = locals()
+    if glo is None : glo = globals()
+    if loc is None : loc = locals()
     
     if website == "xd" :
         website = "http://www.xavierdupre.fr/enseignement/complements/"
@@ -110,7 +110,7 @@ def download_data ( name,
             all = u.read ()
             u.close()
         else :
-            if url == None : url = website
+            if url is None : url = website
             url += file
             fileprint ("    downloading of ", url, " to ", outfile)
             try:
@@ -172,13 +172,13 @@ def download_data ( name,
                     if r2 :
                         l = ""
                         if fir: 
-                            l = "HalLOG = print"
+                            l = "fLOG = print"
                             fir = False
                     elif r1 :
                         st = r1.groups()[0]
                         l = l.replace(st, "from ")
                         if fir: 
-                            l += "\nHalLOG = print"
+                            l += "\nfLOG = print"
                             fir = False
                     fil.append(l.strip("\n\r"))
                 if not fir:

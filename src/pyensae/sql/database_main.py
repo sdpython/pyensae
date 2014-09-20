@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 @brief      generic class to access a SQL database

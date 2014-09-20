@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 
@@ -7,7 +6,7 @@
 
 class DBException (Exception):
     """
-    custome exception
+    custom exception
     """
     pass
 

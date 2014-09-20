@@ -47,7 +47,7 @@ def import_flatfile_into_database (
     db = Database (filedb, engine = engine, host = host, LOG = fLOG)
     db.connect ()
     
-    if table == None :
+    if table is None :
         table = os.path.splitext(os.path.split(filetext)[-1])[0].replace(".","").replace(",","")
     
     if db.has_table (table) :
@@ -57,7 +57,7 @@ def import_flatfile_into_database (
     if header :
         columns = None
         
-    db.import_table_from_flat_file (filetext, table, columns = None, 
+    db.import_table_from_flat_file (filetext, table, columns = columns,
                                     header = header, add_key = add_key)
     
     db.close ()        

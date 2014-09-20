@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 
@@ -144,7 +143,7 @@ class DatabaseCore2 :
             if lines [0][i] in ['\ufeffID', '\ufeffid', '\ufeffqid', '\ufeffQID'] : 
                 lines [0][i] = "qid"
 
-            if columns_name == None :   
+            if columns_name is None :
                 name = lines [0][i].replace (":", "_")
                 origin = lines [0][i]
             else :
@@ -176,7 +175,7 @@ class DatabaseCore2 :
         count_types = { }
         
         for line_ in lines [1:] :
-            if filter_case == None :    line = line_
+            if filter_case is None :    line = line_
             else :                      line = [ filter_case (s) for s in line_ ]
             nbline += 1
             if line == [] or line == [''] : continue
@@ -282,7 +281,7 @@ class DatabaseCore2 :
             line = line.strip ("\r\n ").replace ("\n", " ")
             line = DatabaseCore2._split_expr.split (line)
             
-        if filter_case != None :
+        if filter_case is not None :
             line = [ filter_case (s) for s in line ]
         
         #try :
@@ -336,7 +335,7 @@ class DatabaseCore2 :
             return res
         #except Exception, e
         else :
-            self.LOG("(c)line number ", num_line, "***unable to process a line columns ",c, line)
+            self.LOG("(c)line number ", num_line, "***unable to process a line columns ", line)
             return None
                     
     def _get_insert_request (   self, dico, 
@@ -399,9 +398,9 @@ class DatabaseCore2 :
         
         more  = []
         if self._engine   != "SQLite" : code.append ("engine = '%s'"    % self._engine)
-        if self._user     != None :     code.append ("user = '%s'"      % self._user)
-        if self._password != None :     code.append ("password = '%s'"  % self._password)
-        if self._host     != None :     code.append ("host = '%s'"      % self._host)
+        if self._user     is not None : code.append ("user = '%s'"      % self._user)
+        if self._password is not None : code.append ("password = '%s'"  % self._password)
+        if self._host     is not None : code.append ("host = '%s'"      % self._host)
         more = ", ".join (more)
         
         code.append ( "%s      = Database (dbfile = tblname%s)" % (varname, more) )

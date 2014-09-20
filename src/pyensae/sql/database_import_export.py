@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 
@@ -327,7 +326,7 @@ class DatabaseImportExport :
         @param      header              the file has a header of not, if True, skip the first line
         @param      lower_case          put every string in lower case before inserting it
         @param      table_exists        if True, do not create the table
-        @param      temporary           adding a tempoary table
+        @param      temporary           adding a temporary table
         @param      fill_missing        fill the missing values
         @param      indexes             add indexes before appending all the available observations
         @param      filter_case         process every case information (used to replace space for example)
@@ -354,8 +353,9 @@ class DatabaseImportExport :
             - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)        
         
         """
-        if isinstance (file, list) : self.LOG ("processing file ", file [:min (len (file),10)])
-        else :                       self.LOG ("processing file ", file)
+        if display:
+            if isinstance (file, list) : self.LOG ("processing file ", file [:min (len (file),10)])
+            else :                       self.LOG ("processing file ", file)
             
         self._check_connection ()
         if columns == None or isinstance (columns, list) :
@@ -372,7 +372,7 @@ class DatabaseImportExport :
                 else :            v = ( v [0], (str, 1000000) ) + v [2:]
             columns [i] = v
                 
-        self.LOG ("   columns ", columns)
+        if display : self.LOG ("   columns ", columns)
             
         if not isinstance (file, list) and not os.path.exists (file) : 
             raise DBException ("unable to find file " + file)

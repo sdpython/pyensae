@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 
@@ -20,7 +19,7 @@ def get_list_server () :
     line        = [ _.strip ("\r\n ") for _ in line ]
     line        = [ _ for _ in line if len(_) > 0 ]
         
-    # we place all server containg the machine name in the first place
+    # we place all server containing the machine name in the first place
     machine = os.environ.get ("COMPUTERNAME", "------")
     line    = [ (-1 if _.startswith (machine) else 0, _) for _ in line ]
     line.sort ()

@@ -189,13 +189,13 @@ class TextFile :
                 #            self.LOG (temp)
                 #            raise Exception (temp)
                 r = r.rstrip (endchar)
-                if self._filter == None or self._filter (r) :
+                if self._filter is None or self._filter (r) :
                     if self._separated :
                         yield r.split (self._separated_value)
                     else :
                         yield r
             else :
-                if self._filter == None or self._filter (line) :
+                if self._filter is None or self._filter (line) :
                     if self._separated :
                         yield line.split (self._separated_value)
                     else :
@@ -257,7 +257,7 @@ class TextFile :
         The functions associates this_column value to file_column and append all the columns from filename with a prefix.
         We also assumes values in file_column are unique.
         """
-        if output != None :
+        if output is not None :
             output = open (output, "w", encoding = "utf-8")
 
         files = []
@@ -372,7 +372,7 @@ class TextFile :
         """guess the columns type
         @param      nb              number of lines to have a look to in order to find all the necessary elements
         @param      force_header    impose a header whether it is detect or not
-        @param      changes         modify some column names, example: { "query":"query___" }
+        @param      changes         modify some column names, example { "query":"query___" }
         @param      force_noheader  there is no header at all
         @param      fields          name of the columns if there is no header (instead of c000, c001...)
         @param      regex           if the default expression for a field is not the expected one, change by looking into regex
@@ -406,7 +406,7 @@ class TextFile :
         
         # guess the separation
         sep = TextFile._sep_available
-        if force_sep != None and force_sep not in force_sep : 
+        if force_sep is not None and force_sep not in force_sep :
             sep += force_sep
         h   = { }
         mx  = 0
@@ -438,7 +438,7 @@ class TextFile :
             for k in m : m [k] = float (m [k]) / g
             s = 0.0
             for k in m : s += m [k] * math.log (m [k])
-            if iner == None or s > iner :
+            if iner is None or s > iner :
                 iner = s
                 best = c
                 
@@ -506,7 +506,7 @@ class TextFile :
             del lines [0]
             if len (names) != bestcol : 
                 raise Exception ("unable to continue: the header does not contain the same number of columns %s != %s" % (len(names), bestcol))
-        elif fields != None :
+        elif fields is not None :
             if len (fields) != bestcol :
                 raise Exception ("the number of fields (%d) is different of the number of columns found in the file %d" % (len (fields), bestcol))
             names = fields
