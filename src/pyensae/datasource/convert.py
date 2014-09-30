@@ -75,8 +75,9 @@ def dBase2sqllite(db, table, encoding="cp437"):
     refs = ', '.join([':' + f for f in table.field_names])
     sql = 'insert into %s values (%s)' % (table.name, refs)
 
-    for rec in table:
+    for i,rec in enumerate(table):
         cursor._connection.execute(sql, list(rec.values())) 
+        #if i % 20000 == 0 : print(i)
     
     if isinstance(db, str):
         cursor.commit()
