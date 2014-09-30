@@ -55,7 +55,7 @@ def dBase2sqllite(db, table, encoding="cp437"):
         
     if isinstance(table, str):
         import dbfread
-        table = dbfread.open(table, load=False, encoding=encoding)
+        table = dbfread.DBF(table, load=False, encoding=encoding)
     
     cursor.execute('drop table if exists %s' % table.name)
 
