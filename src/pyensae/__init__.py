@@ -27,4 +27,4 @@ from .file.file_helper import replace_comma_by_point
 from .finance.astock import StockPrices
 from .sql.database_main import Database
 from .datasource.data_velib import DataVelibCollect
-from .datasource.convert import dBase2df
+from .datasource.convert import dBase2df, dBase2sqllite
