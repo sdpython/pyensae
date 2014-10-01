@@ -1,6 +1,6 @@
 """
 @file
-@brief Various conversion function
+@brief Various conversion functions
 """
 
 import pandas
@@ -21,7 +21,7 @@ def dBase2df(file, encoding="cp437"):
     import dbfread
     table = dbfread.DBF(file, load=False, encoding=encoding)
     res = [ _ for _ in table ]
-    return pandas.DataFrame(table.records)
+    return pandas.DataFrame(res)
 
 def dBase2sqllite(db, table, encoding="cp437", overwrite_table = None, fLOG = noLOG):
     """
@@ -51,7 +51,7 @@ def dBase2sqllite(db, table, encoding="cp437", overwrite_table = None, fLOG = no
     }    
     
     if isinstance(db,str):
-        cursor = Database(db)
+        cursor = Database(db, LOG=fLOG)
         cursor.connect()
     else :
         cursor = db
