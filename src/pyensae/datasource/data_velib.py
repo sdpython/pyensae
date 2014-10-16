@@ -111,8 +111,13 @@ class DataVelibCollect :
             o["available_bikes"]        = int(o["available_bikes"])
             o["collect_date"]           = now
             
-            ds = float(o["last_update"])
-            dt = datetime.datetime.fromtimestamp(ds/1000)
+            try:
+                ds = float(o["last_update"])
+                dt = datetime.datetime.fromtimestamp(ds/1000)
+            except ValueError:
+                dt = datetime.datetime.now()
+            except TypeError:
+                dt = datetime.datetime.now()
             o["last_update"] = dt
             
             try :
