@@ -3,6 +3,7 @@
 @brief Various functions to get data from a website, a reference website.
 """
 import os, sys, importlib, re, urllib.request
+from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
 
 def remove_empty_line(file) :
     """
@@ -55,11 +56,11 @@ def download_data ( name,
                     loc         = None,
                     whereTo     = ".",
                     website     = "xd",
-                    fileprint   = print) :
+                    fLOG        = print) :
     """
     retrieve a module given its name, a text file or a zip file,
     look for it on http://www.xavierdupre.fr/... (website),
-    the file is copied at this file location and uncompressed if it is a zip file
+    the file is copied at this file location and uncompressed if it is a zip file (or a tar.gz file)
     
     @param      name        (str) name of the module
     @param      moduleName  (str|None) like import name as moduleName, None for name
@@ -68,7 +69,7 @@ def download_data ( name,
     @param      loc         (dict|None) if None, it will be replaced ``locals()``
     @param      whereTo     specify a folder where downloaded files will be placed
     @param      website     website to look for
-    @param      fileprint   logging function
+    @param      fLOG        logging function
     @return                 modules or list of files
     
     By extension, this function also download various zip files and decompresses it. 
@@ -78,6 +79,12 @@ def download_data ( name,
     @code
     from pyensae import download_data
     download_data('voeux.zip', website = 'xd')
+    @endcode
+    @endexample
+    
+    @example(Download data from a website)
+    @code
+    download_data("facebook.tar.gz",website="http://snap.stanford.edu/data/")    
     @endcode
     @endexample
     """
@@ -96,7 +103,7 @@ def download_data ( name,
     if name in sys.modules :
         return sys.modules[name]
     elif "." not in name :
-        fileprint ("    unable to find module ", name)
+        fLOG ("    unable to find module ", name)
     
     file    = name if "." in name else "%s.py" % name
     outfile = file if whereTo == "." else os.path.join( whereTo, file)
@@ -105,14 +112,14 @@ def download_data ( name,
         path = "../../../../complements_site_web"
         f2 = os.path.join (path, file)
         if os.path.exists (f2) :
-            fileprint ("adding file", f2)
+            fLOG ("adding file", f2)
             u = open (f2, "r")
             all = u.read ()
             u.close()
         else :
             if url is None : url = website
             url += file
-            fileprint ("    downloading of ", url, " to ", outfile)
+            fLOG ("    downloading of ", url, " to ", outfile)
             try:
                 u = urllib.request.urlopen (url)
                 all = u.read ()
@@ -123,30 +130,14 @@ def download_data ( name,
             u.write ( all )
             u.close()
                 
-    if ".zip" in name :
-        import zipfile
-        file = zipfile.ZipFile (outfile, "r")
-        files = []
-        for info in file.infolist () :
-            if not os.path.exists (info.filename) :
-                data = file.read (info.filename)
-                tos = os.path.join (whereTo, info.filename)
-                if not os.path.exists (tos) :
-                    finalfolder = os.path.split(tos)[0]
-                    if not os.path.exists (finalfolder) :
-                        fileprint ("    creating folder ", finalfolder)
-                        os.makedirs (finalfolder)
-                    if not info.filename.endswith ("/") :
-                        u = open (tos, "wb")
-                        u.write ( data )
-                        u.close()
-                        files.append (tos)
-                        fileprint ("    unzipped ", info.filename, " to ", tos)
-                elif not tos.endswith("/") :
-                    files.append (tos)
-            elif not info.filename.endswith ("/") :
-                files.append (info.filename)
-        return files
+    if name.endswith(".zip"):
+        return decompress_zip(outfile, whereTo, fLOG)
+   
+    elif name.endswith(".tar.gz"):
+        return decompress_targz(outfile, whereTo, fLOG)
+   
+    elif name.endswith(".gz"):
+        return decompress_gz(outfile, whereTo, fLOG)
    
     elif "." not in name :
         path,filename = os.path.split(outfile)
@@ -162,7 +153,7 @@ def download_data ( name,
             if "Parent module '' not loaded" in str(e) :
                 reg1 = re.compile("^(from +[.])[a-zA-Z]")
                 reg2 = re.compile("^from +[.]{2}")
-                fileprint("removing relative import for ", name)
+                fLOG("removing relative import for ", name)
                 with open(outfile, "r") as f : lines = f.readlines()
                 fil = [ ]
                 fir = True
@@ -182,25 +173,25 @@ def download_data ( name,
                             fir = False
                     fil.append(l.strip("\n\r"))
                 if not fir:
-                    fileprint("end removing relative import for ", name)
+                    fLOG("end removing relative import for ", name)
                     with open(outfile, "w") as f : f.write("\n".join(fil))
                     
             try :
                 temp = importlib.import_module (name)
             except Exception as e :
-                fileprint ("issue (3) while importing ", name, " -- ", origname)
-                fileprint ("sys.path ", sys.path)
-                for _ in sys.path : fileprint ("    path ", _)
-                fileprint ("sys.modules.keys()", list(sys.modules.keys()))
-                for _ in sorted(sys.modules) : fileprint ("    modules ", _)
+                fLOG ("issue (3) while importing ", name, " -- ", origname)
+                fLOG ("sys.path ", sys.path)
+                for _ in sys.path : fLOG ("    path ", _)
+                fLOG ("sys.modules.keys()", list(sys.modules.keys()))
+                for _ in sorted(sys.modules) : fLOG ("    modules ", _)
                 raise e
                 
         except Exception as e :
-            fileprint ("issue (2) while importing ", name, " -- ", origname)
-            fileprint ("sys.path ", sys.path)
-            for _ in sys.path : fileprint ("    path ", _)
-            fileprint ("sys.modules.keys()", list(sys.modules.keys()))
-            for _ in sorted(sys.modules) : fileprint ("    modules ", _)
+            fLOG ("issue (2) while importing ", name, " -- ", origname)
+            fLOG ("sys.path ", sys.path)
+            for _ in sys.path : fLOG ("    path ", _)
+            fLOG ("sys.modules.keys()", list(sys.modules.keys()))
+            for _ in sorted(sys.modules) : fLOG ("    modules ", _)
             raise e
             
         if name not in temp.__name__ :

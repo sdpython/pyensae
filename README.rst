@@ -74,24 +74,11 @@ Versions
 --------
 
 * **0.8 - 2014/??/??**
-    * **add:** add method :meth:`copy_to <sql.database_main.Database.copy_to>` to copy every table from a database to another one
-    * **fix:** class :class:`Database <sql.database_main.Database>` can now handle in memory database
+    * **add:** add method :meth:`copy_to <pyensae.sql.database_main.Database.copy_to>` to copy every table from a database to another one
+    * **fix:** class :class:`Database <pyensae.sql.database_main.Database>` can now handle in memory database
+    * **add:** functions to decompress files, see :mod:`decompress_helper <pyensae.decompress_helper>`
+    * **change:** function `download_data <pyensae.resources.http_retrieve.download_data>` now works with files .zip, .gz, .tar.gz
 * **0.7 - 2014/08/24**
-    * **fix:** fix an unexpected zero length column in :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>`
-    * **add:** add parameter ``add_key`` to function :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>` to add a primary key
-    * **fix:** improve behavior of :func:`import_flatfile_into_database <sql.database_helper.import_flatfile_into_database>`, it is more robust to not so clean flat files
-* **v0.6 - 2014/05/22**
-    * **new:** convert a DataFrame into a SQLite3 database and the other way, see :meth:`to_df <sql.database_main.Database.to_df>`
-    * **new:** add a class to collect data from JCDecaux website, see :class:`DataVelibCollect <datasource.data_velib.DataVelibCollect>`
-* **v0.5 - 2014/04/20**
-    * **new:** add notebooks to the documentation
-    * **new:** add function :meth:`to_excel <finance.astock.StockPrices.to_excel>` to StockPrices
-    * **new:** add method :meth:`plot <finance.astock.StockPrices.plot>` which calls method :meth:`plot <finance.astock.StockPrices.draw>` but is not static
-    * **change:** method :meth:`draw <finance.astock.StockPrices.draw>` can now draw another series on a second axis
-* **v0.4 - 2014/04/05**
-    * **change:** the method :meth:`finance.astock.StockPrices.draw` works now with other fields than ``Close``, it also works with two fields in a list, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
-    * **change:** the method :meth:`finance.astock.StockPrices.draw` does better with dates
-    * **new:** the class :class:`finance.astock.StockPrices` overloads operator ``__getitem__``, see `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_
-    
-    
-
+    * **fix:** fix an unexpected zero length column in :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>`
+    * **add:** add parameter ``add_key`` to function :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>` to add a primary key
+    * **fix:** improve behavior of :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>`, it is more robust to not so clean flat files
