@@ -63,7 +63,7 @@ class TextFileColumns (TextFile) :
         @param      filename                    filename
         @param      utf8                        True or False
         @param      errors                      see str (errors = ...)
-        @param      fLOG                        LOG function, @see me LOG
+        @param      fLOG                        LOG function, see `fLOG <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/loghelper/flog.html#pyquickhelper.loghelper.flog.fLOG>`_
         @param      force_header                defines the first line as columns header whatever is it relevant or not
         @param      changes                     to change the column name, gives the correspondence, example: { "query":"query___" },
                                                 it can be a list if there is no header and you want to name any column

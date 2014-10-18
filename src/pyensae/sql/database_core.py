@@ -850,7 +850,7 @@ class DatabaseCore (DatabaseCore2) :
                                                             0:("name",str), 1:("number", float) }
                                     @endcode
         @param      temporary       if True the table is temporary
-        @param      nolog           @see fn execute
+        @param      nolog           @see me execute
         @return                     cursor
         """
         if self._engine == "SQLite" and table == "sqlite_sequence" :

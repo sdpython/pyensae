@@ -38,7 +38,7 @@ class StockPrices:
         @param      begin       first day (datetime), see below
         @param      end         last day (datetime), see below
         @param      sep         column separator
-        @param      intern      do not use unless you know what to do (@see me __getitem__)
+        @param      intern      do not use unless you know what to do (see :meth:`__getitem__ <pyensae.finance.atock.StockPrices.__getitem__>`)
         
         If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
         prices for a date before this one).
@@ -369,7 +369,7 @@ class StockPrices:
                 existing = None, axis = 1,
                 **args):
         """
-        @see me draw
+        see :meth:`draw <pyensae.finance.astock.StockPrices.draw>`
         """
         return StockPrices.draw(self, begin=begin, end=end,
                         field=field, date_format=date_format,
@@ -384,7 +384,7 @@ class StockPrices:
         Draw a graph showing one or several time series.
         The example was taken `here <http://matplotlib.org/examples/api/date_demo.html>`_.
         
-        @param      listStockPrices     list of @see cl StockPrice (or one @see cl StockPrice if it is the only one)
+        @param      listStockPrices     list of @see cl StockPrices (or one @see cl StockPrices if it is the only one)
         @param      begin               first date (datetime) or None to take the first one
         @param      end                 last included date (datetime) or None to take the last one
         @param      field               Open, High, Low, Close, Adj Close, Volume

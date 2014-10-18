@@ -229,7 +229,7 @@ class DatabaseJoinGroup :
             
         def _build_join (self, db, fas, select, n) :
             """
-            @see me build_sql
+            see :meth:`build_sql <pyensae.sql.database_join_group.build_sql>`
             
             @param      db              database
             @param      fas             list [(new_name, table, name)]

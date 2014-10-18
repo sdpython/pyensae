@@ -197,7 +197,7 @@ class DataVelibCollect :
         run the collection of the data for velib, data are stored using Json format.
         The function creates a file every time a new status is downloaded.
         
-        @param      key             (str|None) if None, the function calls function @see fn velib_get_key
+        @param      key             (str|None) if None, the function calls function see @see me velib_get_key
         @param      contract        a city
         @param      delayms         gets a status every delayms milliseconds
         @param      folder_file     prefix used to create one file or several, it depends on single_file) where to place downloaded files)   
@@ -210,6 +210,7 @@ class DataVelibCollect :
         @example(collect Velib data)
         The following example produces a file every minute in json format about the status of all
         Velib stations in Paris. They will be put in a folder call ``velib_data``.
+        
         @code
         DataVelibCollect.run_collection (private_key,
                     contract = "Paris",
