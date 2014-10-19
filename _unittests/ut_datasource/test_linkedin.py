@@ -18,13 +18,6 @@ except ImportError :
     import src
     import pyquickhelper
 
-try :
-    import linkedin
-except ImportError :
-    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..", "..", "python-linkedin")))
-    if path not in sys.path : sys.path.append (path)
-    import linkedin
-
 from pyquickhelper import fLOG
 from src.pyensae.datasource.linkedin_access   import LinkedInAccess
 
@@ -55,7 +48,16 @@ class TestLinkedIn (unittest.TestCase):
     my_url = "http://www.linkedin.com/profile/view?id=2288976"
     my_id  = "9nsW-6OsQF"
     
+    def start(self):
+        try :
+            import linkedin
+        except ImportError :
+            path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..", "..", "python-linkedin")))
+            if path not in sys.path : sys.path.append (path)
+            import linkedin
+    
     def test_linkedin (self) :
+        self.start()
         return
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         linkedin = LinkedInAccess (*TestLinkedIn.accessToken)
@@ -88,6 +90,7 @@ class TestLinkedIn (unittest.TestCase):
             fLOG(p)
         
     def test_linkedin_basic (self) :
+        self.start()
         return
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         linkedin = LinkedInAccess (*TestLinkedIn.accessToken)
@@ -120,6 +123,7 @@ class TestLinkedIn (unittest.TestCase):
             fLOG(p)
             
     def test_linkedin_search_key (self) :
+        self.start()
         return
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
 
@@ -179,6 +183,7 @@ class TestLinkedIn (unittest.TestCase):
             assert len(se) > 0
             
     def test_linkedin_connection (self) :
+        self.start()
         return
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
 
