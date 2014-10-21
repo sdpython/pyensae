@@ -358,9 +358,14 @@ class DatabaseImportExport :
             else :                       self.LOG ("processing file ", file)
             
         self._check_connection ()
-        if columns == None or isinstance (columns, list) :
+        if columns is None :
             # here, some spaces might have been replaced by "_", we need to get them back
             columns, changes = self._guess_columns (file, format, columns, filter_case = filter_case)
+        elif isinstance(columns, list):
+            columns_, changes = self._guess_columns (file, format, columns, filter_case = filter_case)
+            if len(columns_) != len(columns):
+                raise DBException("different number of columns:\ncolumns={0}\nguessed={1}".format(str(columns), str(columns_)))
+            columns=columns_
             
         if add_key != None:
             columns [len(columns)] = (add_key, int, "PRIMARYKEY", "AUTOINCREMENT")

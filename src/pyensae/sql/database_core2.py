@@ -113,7 +113,8 @@ class DatabaseCore2 :
         
         Guess the columns types from a file (the method assumes there is a header),
         The types are chosen in that order: int, float, str.
-        It keeps the most frequent one with if 
+        It keeps the most frequent one with if there is not too many errors.
+        The separator must be tabs.
         
         @param      file            file name
         @param      format          format (only tsv)
@@ -169,7 +170,7 @@ class DatabaseCore2 :
             
             if origin != name :
                 changes [origin] = name
-            
+
         length = {}
         nbline = 0
         count_types = { }
