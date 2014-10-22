@@ -1,4 +1,4 @@
-Date	Open	High	Low	Close	Volume	Adj Close
+Date	Open	High	Low	Close	Volume	Adj_Close
 2012-12-17	5.95	5.96	5.84	5.91	6408300	5.91
 2012-12-14	5.99	6.04	5.92	5.95	5426200	5.95
 2012-12-13	5.95	6.04	5.91	6.00	7867900	6.00

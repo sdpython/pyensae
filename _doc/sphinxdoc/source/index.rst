@@ -62,8 +62,22 @@ Dependencies
 For the class :class:`StockPrices <finance.astock.StockPrices>`:
     * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
     * `six <https://pypi.python.org/pypi/six>`_
+    
+The :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` requires:
+    * `paramiko <http://www.paramiko.org/>`_
+    * `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_
+    * `ecdsa <https://pypi.python.org/pypi/ecdsa>`_
+    
+The function :func:`register_magics <pyensae.remote.magic_remote.register_magics>` defines magic commands
+to send commands to a remote commands through a SSH connection:
+    * ``%remote_open``, ``%remote_close``
+    * ``%remote_cmd``, ``%remote_up``, ``%remote_down``
+    
+The magic command will be automatically enabled if the module is imported from a notebook.
+Otherwise, you need to run::
 
-On Windows, most of the intersting modules can installed from `here <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
+    from pyensae.remote.magic_remote import register_magics 
+    register_magics()
 
 
 Indices and tables

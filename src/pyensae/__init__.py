@@ -30,4 +30,14 @@ from .datasource.data_velib import DataVelibCollect
 from .datasource.convert import dBase2df, dBase2sqllite
 from .file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
 from .remote.remote_connection import ASSHClient
-from .remote.magic_remote import register_magics
+
+try:
+    from IPython import get_ipython
+    from .remote.magic_remote import register_magics
+    ip = get_ipython()    
+    if ip is not None:
+        # the program is not run from a notebook
+        register_magics()
+except ImportError:
+    # IPython is not installed
+    pass

@@ -384,7 +384,7 @@ class TextFile :
                                         - separator
                                         - regex which allow the user to extract information from the file
         
-        The column separator is looked into ; \\t 
+        The column separator is looked into ``, | ; \\t``
         @warning The file must not be opened, it will be several times.
         """ 
         self.LOG ("  TextFile.guess_columns: processing file ", self.filename)

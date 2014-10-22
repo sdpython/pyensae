@@ -352,6 +352,7 @@ class DatabaseImportExport :
             - if ``PRIMARYKEY`` is added, the key is considered as the primary key
             - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)        
         
+        @warning The function does not react well when a column name includes a space.
         """
         if display:
             if isinstance (file, list) : self.LOG ("processing file ", file [:min (len (file),10)])
@@ -360,9 +361,9 @@ class DatabaseImportExport :
         self._check_connection ()
         if columns is None :
             # here, some spaces might have been replaced by "_", we need to get them back
-            columns, changes = self._guess_columns (file, format, columns, filter_case = filter_case)
+            columns, changes = self._guess_columns (file, format, columns, filter_case = filter_case, header = header)
         elif isinstance(columns, list):
-            columns_, changes = self._guess_columns (file, format, columns, filter_case = filter_case)
+            columns_, changes = self._guess_columns (file, format, columns, filter_case = filter_case, header = header)
             if len(columns_) != len(columns):
                 raise DBException("different number of columns:\ncolumns={0}\nguessed={1}".format(str(columns), str(columns_)))
             columns=columns_

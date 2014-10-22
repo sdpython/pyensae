@@ -11,6 +11,11 @@ import re, copy, os, random, sqlite3 as SQLite, datetime, decimal, numpy
 from .file_text_binary      import TextFile
 from .database_exception    import ExceptionSQL
 
+class NoHeaderException(Exception):
+    """
+    just to be meant to be caucht later by a unit test
+    """
+    pass
 
 class DatabaseCore2 :
     
@@ -108,22 +113,31 @@ class DatabaseCore2 :
 
         return res, "\n".join (lines)
             
-    def _guess_columns (self, file, format, columns_name = None, filter_case = None) :
+    def _guess_columns (self, file, format, columns_name = None, filter_case = None, header = True) :
         """
         
         Guess the columns types from a file (the method assumes there is a header),
         The types are chosen in that order: int, float, str.
         It keeps the most frequent one with if there is not too many errors.
-        The separator must be tabs.
+        The separator must be tabs (``\\t``).
         
         @param      file            file name
         @param      format          format (only tsv)
         @param      columns_name    if None, the first line contains the columns, otherwise it is the columns name
         @param      filter_case     process every case information (used to replace space for example)
+        @param      header          by default, the function is expected a header
         @return                     columns, changes
         """
         f = TextFile (file, utf8 = True, fLOG = self.LOG)
         f.open ()
+        
+        if header:
+            _aa,_bb,_cc,_dd = f.guess_columns(fields = columns_name)
+            if _cc != "\t":
+                raise Exception("unexpected separator, it should be \\t instead of: " + _cc)
+        else:
+            raise NoHeaderException("a header is expected for that function")
+        
         lines  = []
         for line in f :
             if len (lines) > 1000 : break

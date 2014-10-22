@@ -59,8 +59,11 @@ For the class :class:`StockPrices <finance.astock.StockPrices>`:
     * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
     * `six <https://pypi.python.org/pypi/six>`_
 
-On Windows, most of the interesting modules can installed from `here <http://www.lfd.uci.edu/~gohlke/pythonlibs/>`_.
-
+The :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` requires:
+    * `paramiko <http://www.paramiko.org/>`_
+    * `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_
+    * `ecdsa <https://pypi.python.org/pypi/ecdsa>`_
+    
 
 Contributions
 -------------
@@ -78,6 +81,9 @@ Versions
     * **fix:** class :class:`Database <pyensae.sql.database_main.Database>` can now handle in memory database
     * **add:** functions to decompress files, see :mod:`decompress_helper <pyensae.decompress_helper>`
     * **change:** function `download_data <pyensae.resources.http_retrieve.download_data>` now works with files .zip, .gz, .tar.gz
+    * **new:** add class :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` to communicate with a remote SSH connection 
+      (it uses `paramiko <http://www.paramiko.org/>`_)
+    * **new:** add maigc command to use :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` in a notebook (``%remote_open``, ...)
 * **0.7 - 2014/08/24**
     * **fix:** fix an unexpected zero length column in :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>`
     * **add:** add parameter ``add_key`` to function :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>` to add a primary key

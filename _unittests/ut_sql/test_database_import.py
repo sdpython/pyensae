@@ -23,6 +23,7 @@ except ImportError :
 from pyquickhelper import fLOG
 from src.pyensae.sql.database_helper import import_flatfile_into_database
 from src.pyensae.sql.database_main import Database
+from src.pyensae.sql.database_core2 import NoHeaderException
 
 
 class TestDatabaseImport (unittest.TestCase):
@@ -33,7 +34,11 @@ class TestDatabaseImport (unittest.TestCase):
         dbf  = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "temp_person.db3")
         if os.path.exists(dbf) : os.remove(dbf)
         columns = "sequence tag timestamp dateformat x y z activity".split()
-        import_flatfile_into_database(dbf, file, fLOG = fLOG, columns=columns, header=False)                
+        try:
+            import_flatfile_into_database(dbf, file, fLOG = fLOG, columns=columns, header=False)                
+        except NoHeaderException:
+            return
+            
         assert os.path.exists(dbf)
         db = Database(dbf, LOG = fLOG)
         db.connect()
