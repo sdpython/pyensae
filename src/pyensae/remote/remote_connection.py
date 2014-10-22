@@ -25,6 +25,12 @@ class ASSHClient():
         self.username = username
         self.password = password
         self.connection = None
+        
+    def __str__(self):
+        """
+        usual
+        """
+        return "ASSHClient"
 
     def connect(self):
         """

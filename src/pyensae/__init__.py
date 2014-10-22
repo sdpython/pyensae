@@ -29,3 +29,5 @@ from .sql.database_main import Database
 from .datasource.data_velib import DataVelibCollect
 from .datasource.convert import dBase2df, dBase2sqllite
 from .file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
+from .remote.remote_connection import ASSHClient
+from .remote.magic_remote import register_magics
