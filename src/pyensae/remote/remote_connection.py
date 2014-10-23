@@ -10,6 +10,8 @@ class ASSHClient():
     `paramiko <http://www.paramiko.org/>`_,
     `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_,
     `ecdsa <https://pypi.python.org/pypi/ecdsa>`_.
+    
+    This class is used in magic command @see me remote_open.
     """
 
     def __init__(self, server, username, password):

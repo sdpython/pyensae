@@ -17,6 +17,8 @@ class MagicRemote(Magics):
     for the time being, all the command do not accept another parameters
     such as a SSH client which means only one connection
     can be opened at the same time.
+    
+    The notebook :ref:`pythonhadooppigrst` shows how these commands can be used.
     """
     
     def get_connection(self):
