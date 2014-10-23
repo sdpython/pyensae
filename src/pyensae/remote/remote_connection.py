@@ -41,13 +41,14 @@ class ASSHClient():
         self.connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         self.connection.connect(self.server, username=self.username, password=self.password)
 
-    def execute_command(self, command):
+    def execute_command(self, command, no_exception = False):
         """
         execute a command line, it raises an error
         if there is an error
         
-        @param      command     command
-        @return                 stdout, stderr
+        @param      command         command
+        @param      no_exception    if True, do not raise any exception
+        @return                     stdout, stderr
         
         Example of commands::
         
@@ -70,7 +71,7 @@ class ASSHClient():
         if isinstance(out, bytes):
             out = out.decode("utf-8")
             
-        if len(err) > 0 :
+        if not no_exception and len(err) > 0 :
             raise Exception("unable to run: {0}\nOUT:\n{1}\nERR:\n{2}".format(command, out, err))
             
         return out,err

@@ -30,6 +30,78 @@ class MagicRemote(Magics):
             raise KeyError("No opened SSH connection.")
             
         return self.shell.user_ns["remote_ssh"]
+        
+    @cell_magic
+    def PIG(self, line, cell = None):
+        """
+        defines command ``%%PIG``
+        """
+        if line in [None, ""] :
+            print("Usage:")
+            print("     %%PIG <filename>")
+            print("")
+            print("The command store the content of the cell as a local file.")
+        else:
+            filename = line.strip()
+            with open(filename, "w", encoding="utf8") as f :
+                f.write(cell.replace("\r",""))
+            
+    @line_magic
+    def jobsubmit(self, line):
+        """
+        defines command ``%jobsubmit``
+        """
+        if line in [None, ""]:
+            print("Usage:")
+            print("  %jobsubmit <jobname.pig> [redirection]")
+            print("")
+            print("If redirection is specified, the standard output and error are redirected to")
+            print("redirection.out, redirection.err and the function does not wait.")
+        else:
+            filename = line.strip()
+            spl = filename.split()
+            filename = spl[0]
+            redirection = None if len(spl) == 1 else spl[1]
+            if not os.path.exists(filename):
+                raise FileNotFoundError(filename)
+                
+            dest = os.path.split(filename)[-1]
+            ssh = self.get_connection()
+            ssh.upload(filename, dest)
+            
+            if redirection is None:
+                cmd = "pig -execute -f " + dest
+            else:
+                cmd = "pig -execute -f {0} 2> {1}.err 1> {1}.out &".format(filename, redirection)
+            
+            out, err = ssh.execute_command(cmd, no_exception = True)
+            if len(err) > 0 and (len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                return HTML("<pre>\n%s\n</pre>" % err)
+            else:
+                return HTML("<pre>\n%s\n</pre>" % out)
+    
+    @line_magic
+    def jobsyntax(self, line):
+        """
+        defines command ``%jobsyntax``
+        """
+        if line in [None, ""]:
+            print("Usage:")
+            print("  %jobsyntax <jobname.pig>")
+            print("")
+        else:
+            filename = line.strip()
+            if not os.path.exists(filename):
+                raise FileNotFoundError(filename)
+                
+            dest = os.path.split(filename)[-1]
+            ssh = self.get_connection()
+            ssh.upload(filename, dest)
+            out, err = ssh.execute_command("pig -check " + dest, no_exception = True)
+            if len(err) > 0 and (len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                return HTML("<pre>\n%s\n</pre>" % err)
+            else:
+                return HTML("<pre>\n%s\n</pre>" % out)
     
     @line_magic
     def remote_open (self, line):
@@ -85,8 +157,11 @@ class MagicRemote(Magics):
         """
         ssh = self.get_connection()
         ssh = self.shell.user_ns["remote_ssh"]
-        out, err = ssh.execute_command(line)
-        return HTML("<pre>{0}</pre>".format(out))
+        out, err = ssh.execute_command(line, no_exception = True)
+        if len(err) > 0 and (len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+            return HTML("<pre>\n%s\n</pre>" % err)
+        else:
+            return HTML("<pre>\n%s\n</pre>" % out)
     
     @line_magic
     def remote_up(self, line):
