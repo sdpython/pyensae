@@ -21,6 +21,17 @@ class MagicRemote(Magics):
     The notebook :ref:`pythonhadooppigrst` shows how these commands can be used.
     """
     
+    def _replace_params(self, cell):
+        """
+        replaces parameter such ``__PASSWORD__`` by variable in the notebook environnement
+        
+        @param  cell    string
+        @return         modified string
+        """
+        if "__PASSWORD__" in cell and self.shell is not None and "password" in self.shell.user_ns:
+            cell = cell.replace("__PASSWORD__", self.shell.user_ns["password"])
+        return cell
+    
     def get_connection(self):
         """
         returns the connection stored in the workspace
@@ -41,6 +52,21 @@ class MagicRemote(Magics):
         if line in [None, ""] :
             print("Usage:")
             print("     %%PIG <filename>")
+            print("")
+            print("The command store the content of the cell as a local file.")
+        else:
+            filename = line.strip()
+            with open(filename, "w", encoding="utf8") as f :
+                f.write(cell.replace("\r",""))
+            
+    @cell_magic
+    def PYTHON(self, line, cell = None):
+        """
+        defines command ``%%PIG``
+        """
+        if line in [None, ""] :
+            print("Usage:")
+            print("     %%PYTHON <filename>")
             print("")
             print("The command store the content of the cell as a local file.")
         else:
@@ -95,6 +121,50 @@ class MagicRemote(Magics):
             out, err = ssh.execute_command(cmd, no_exception = True)
             if len(err) > 0 and (len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
                 return HTML("<pre>\n%s\n</pre>" % err)
+            else:
+                return HTML("<pre>\n%s\n</pre>" % out)
+    
+    @line_magic
+    def py_remote(self, line):
+        """
+        @see me remote_py
+        """
+        return self.remote_py(line)
+    
+    @line_magic
+    def remote_py(self, line):
+        """
+        defines command ``%remote_py``
+        """
+        if line in [None, ""]:
+            print("Usage:")
+            print("  %remote_py <program.py> [args]")
+        else:
+            filename = line.strip()
+            spl = filename.split()
+            
+            filename = spl[0]
+            
+            if filename.startswith("[") and filename.endswith("]"):
+                # the first parameter is the executable to use
+                exe = filename.strip("[]")
+                if len(spl) < 2:
+                    raise Exception("the command expects a filename: %remote_py [interpreter] filename.py")
+                filename = spl[1]
+                args = " ".join(spl[2:])
+            else:
+                exe = "python"
+                args = " ".join(spl[1:])
+            
+            dest = os.path.split(filename)[-1]
+            ssh = self.get_connection()
+            ssh.upload(filename, dest)
+            
+            cmd = exe + " " + dest + " " + args
+            
+            out, err = ssh.execute_command(cmd, no_exception = True)
+            if len(err) > 0 :
+                return HTML("<b>ERR:</b><br /><pre>\n%s\n</pre><b>OUT:</b><br /><pre>\n%s\n</pre>" % (err, out))
             else:
                 return HTML("<pre>\n%s\n</pre>" % out)
     
@@ -177,26 +247,39 @@ class MagicRemote(Magics):
         into the notebook workspace
         """
         self.get_connection().close()
+        return True
         
-    @line_magic
-    def cmd_remote(self, line):
+    @line_cell_magic
+    def cmd_remote(self, line, cell = None):
         """
         @see me remote_cmd
         """
-        return self.remote_cmd(line)
+        return self.remote_cmd(line, cell)
     
-    @line_magic
-    def remote_cmd(self, line):
+    @line_cell_magic
+    def remote_cmd(self, line, cell = None):
         """
         run a command on the remote machine
         
         Example::
         
             %remote_cmd ls
+            
+        Or::
+            
+            %%remote_cmd  <something>
+            anything going to stdin
+            
+        In the second case, if __PASSWORD__ is found, it will be replaced by the password stored in
+        workspace.
         """
         ssh = self.get_connection()
         ssh = self.shell.user_ns["remote_ssh"]
-        out, err = ssh.execute_command(line, no_exception = True)
+        
+        if isinstance(cell, str):
+            cell = self._replace_params(cell)
+        
+        out, err = ssh.execute_command(line, no_exception = True, fill_stdin=cell)
         if len(err) > 0 and (len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
             return HTML("<pre>\n%s\n</pre>" % err)
         else:
@@ -232,6 +315,7 @@ class MagicRemote(Magics):
             if not os.path.exists(localfile) :
                 raise FileNotFoundError(localfile)
             ssh.upload(localfile, remotepath)
+            return remotepath
             
     @line_magic
     def down_remote(self, line):
@@ -263,6 +347,39 @@ class MagicRemote(Magics):
             if os.path.exists(localfile) :
                 raise Exception("file {0} cannot be overwritten".format(localfile))
             ssh.download(remotepath,localfile)
+            return localfile
+        
+    @line_magic
+    def open_remote_shell(self, line):
+        """
+        Defines ``%open_remote_shell``
+        """
+        ssh = self.get_connection()
+        ssh.open_session(out_format="html")
+        return True
+        
+    @line_magic
+    def close_remote_shell(self, line):
+        """
+        Defines ``%close_remote_shell``
+        """
+        ssh = self.get_connection()
+        ssh.close_session()
+        return True
+        
+    @line_cell_magic
+    def shell_remote(self, line, cell=None):
+        """
+        Defines ``%shell_remote`` and ``%%shell_remote``
+        """
+        ssh = self.get_connection()
+        if cell is None:
+            out = ssh.send_recv_session(line)
+        else :
+            out = ssh.send_recv_session(cell)
+            
+        return HTML(out)
+        
 
 def register_magics():
     """

@@ -3,6 +3,8 @@
 @brief A class to help connect with a remote machine and send command line.
 """
 
+import time, socket
+
 class ASSHClient():
     """
     A simple class to access to remote machine through SSH.
@@ -27,6 +29,7 @@ class ASSHClient():
         self.username = username
         self.password = password
         self.connection = None
+        self.session = None
         
     def __str__(self):
         """
@@ -43,22 +46,33 @@ class ASSHClient():
         self.connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         self.connection.connect(self.server, username=self.username, password=self.password)
 
-    def execute_command(self, command, no_exception = False):
+    def execute_command(self, command, no_exception = False, fill_stdin = None):
         """
         execute a command line, it raises an error
         if there is an error
         
         @param      command         command
         @param      no_exception    if True, do not raise any exception
+        @param      fill_stdin      data to send on the stdin input
         @return                     stdout, stderr
         
         Example of commands::
         
-            execute_command("ls")
-            execute_command("hdfs dfs -ls")
+            ssh.execute_command("ls")
+            ssh.execute_command("hdfs dfs -ls")
             
         """
         stdin,stdout,stderr = self.connection.exec_command(command)
+        
+        if fill_stdin is not None:
+            if isinstance(fill_stdin, list):
+                fill_stdin = "\n".join(stdin)
+            if isinstance(fill_stdin, str): 
+                stdin.write(fill_stdin)
+                stdin.flush()
+            else:
+                raise TypeError("fill_stdin must be a string, not: {0}".format(type(fill_stdin)))
+                    
         stdin.close()
         
         err = stderr.read()
@@ -83,6 +97,7 @@ class ASSHClient():
         close the connection
         """
         self.connection.close()
+        self.connection = None
         
     def upload(self, localpath, remotepath):
         """
@@ -103,5 +118,145 @@ class ASSHClient():
         """
         sftp = self.connection.open_sftp()
         sftp.get(remotepath, localpath)
-        sftp.close()        
+        sftp.close()
+
+    _allowed_form = { None:None, "plain":None, "html":None }
+    
+    @staticmethod
+    def _get_out_format(format):
+        """
+        returns a function which converts an ANSI string into a different format
         
+        @param      format      string
+        @return                 function
+        """
+        if format not in ASSHClient._allowed_form:
+            raise KeyError("unexpected format, it should be in " + ",".join(ASSHClient._allowed_form.keys()))
+        func = ASSHClient._allowed_form[format]
+        if func is None:
+            if format is None: func = lambda s : s 
+            elif format == "plain":
+                import ansiconv
+                def convert_plain(s):
+                    return ansiconv.to_plain(s)
+                func = convert_plain
+            elif format == "html":
+                from ansi2html import Ansi2HTMLConverter
+                conv = Ansi2HTMLConverter()
+                def convert_html(s):
+                    return conv.convert(s)
+                func = convert_html
+            ASSHClient._allowed_form[format] = func
+        return func
+        
+    def open_session(self, 
+                        no_exception = False, 
+                        timeout = 1.0, 
+                        add_eol = True, 
+                        prompts = ["~$", ">>>"],
+                        out_format = None):
+        """
+        opens a session with method `invoke_shell <http://docs.paramiko.org/en/latest/api/client.html?highlight=invoke_shell#paramiko.client.SSHClient.invoke_shell>`_
+        
+        @param      no_exception    if True, do not raise any exception in case of error
+        @param      timeout         timeous in s
+        @param      add_eol         if True, the function will add a EOL to the sent command if it does not have one
+        @param      prompts         if function terminates if the output ends by one of those strings.
+        @param      out_format      None, plain, html
+        
+        @example(How to open a remote shell?)
+        @code
+        ssh = ASSHClient(   "<server>", 
+                            "<login>", 
+                            "<password>")
+        ssh.connect()
+        out = ssh.send_recv_session("ls")
+        print( ssh.send_recv_session("python") )
+        print( ssh.send_recv_session("print('3')") )
+        print( ssh.send_recv_session("import sys\nsys.executable") )
+        print( ssh.send_recv_session("sys.exit()") )
+        print( ssh.send_recv_session(None) )
+        ssh.close_session()
+        ssh.close()
+        @endcode
+        @endexample
+        """
+        if self.connection is None:
+            raise Exception("No open connection.")
+        if self.session is not None:
+            raise Exception("A session is already open. Cannot open a second one.")
+        if out_format not in ASSHClient._allowed_form:
+            raise KeyError("unexpected format, it should be in {0}".format(";".join(str(_) for _ in ASSHClient._allowed_form.keys())))
+            
+        self.session = self.connection.invoke_shell(width=300, height=1000)
+        self.session_params = { 
+                    "no_exception":no_exception,
+                    "timeout":timeout,
+                    "add_eol":add_eol,
+                    "prompts":[] if prompts is None else prompts,
+                    "out_format":out_format,
+                    "out_func":ASSHClient._get_out_format(out_format)
+                    }
+                    
+        self.session.settimeout(timeout)
+                    
+        return self.session
+        
+    def close_session(self):
+        """
+        close a session
+        """
+        if self.session is None:
+            raise Exception("No open session. Cannot close anything.")
+        
+        self.session.close()
+        self.session = None
+        
+    def send_recv_session(self, fillin):
+        """
+        Send something through a session, 
+        the function is supposed to return when the execute of the given command is done,
+        but this is quite difficult to detect without knowing what exactly was send.
+        
+        So we add a timeout just to tell the function it has to return even if nothing 
+        tells the command has finished. It fillin is None, the function will just 
+        listen to the output.
+        
+        @param      fillin          sent to stdin
+        @return                     stdout
+        
+        The output contains        
+        `escape codes <http://ascii-table.com/ansi-escape-sequences-vt-100.php>`_.
+        They can be converted to plain text or HTML
+        by using the module `ansiconv <http://pythonhosted.org/ansiconv/>`_
+        and `ansi2html <https://github.com/ralphbean/ansi2html/>`_.
+        This can be specified when opening the session.
+        """
+        prompts = self.session_params["prompts"]
+        timeout = self.session_params["timeout"]
+        add_eol = self.session_params["add_eol"]
+        func    = self.session_params["out_func"]
+        
+        if fillin is not None:
+            self.session.send(fillin.encode("utf-8"))
+            if add_eol and not fillin.endswith('\n'):
+                self.session.send("\n".encode("utf-8"))
+                
+        buff = ''
+        begin = time.perf_counter()
+        while True:
+            try:
+                resp = self.session.recv(9999)
+            except socket.timeout:
+                resp = b""
+            dec = resp.decode("unicode_escape")
+            buff += dec
+            for p in prompts:
+                if buff.endswith(p):
+                    break
+            if time.perf_counter() - begin > timeout:
+                break
+            
+        return func ( buff.replace("\r","") )
+        
+    
