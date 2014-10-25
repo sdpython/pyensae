@@ -179,6 +179,10 @@ class ASSHClient():
         ssh.close_session()
         ssh.close()
         @endcode
+        
+        The notebook :ref:`exampleofsshclientcommunicationrst` illustrates
+        the output of these instructions.
+        
         @endexample
         """
         if self.connection is None:

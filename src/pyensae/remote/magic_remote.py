@@ -18,7 +18,8 @@ class MagicRemote(Magics):
     such as a SSH client which means only one connection
     can be opened at the same time.
     
-    The notebook :ref:`pythonhadooppigrst` shows how these commands can be used.
+    The notebooks :ref:`pythonhadooppigrst` and 
+    :ref:`exampleofsshclientcommunicationrst` show how these commands can be used.
     """
     
     def _replace_params(self, cell):
