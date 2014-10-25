@@ -49,6 +49,13 @@ class MagicRemote(Magics):
                 f.write(cell.replace("\r",""))
             
     @line_magic
+    def pigsubmit(self, line):
+        """
+        @see me jobsubmit
+        """
+        return self.jobsubmit(line)
+        
+    @line_magic
     def jobsubmit(self, line):
         """
         defines command ``%jobsubmit``
@@ -115,6 +122,13 @@ class MagicRemote(Magics):
                 return HTML("<pre>\n%s\n</pre>" % out)
     
     @line_magic
+    def open_remote(self, line):
+        """
+        @see me remote_open
+        """
+        return self.remote_open(line)
+    
+    @line_magic
     def remote_open (self, line):
         """
         open a SSH connection and store the connection
@@ -150,6 +164,13 @@ class MagicRemote(Magics):
             return ssh
             
     @line_magic
+    def close_remote(self, line):
+        """
+        @see me remote_close
+        """
+        return self.remote_close(line)
+    
+    @line_magic
     def remote_close (self, line):
         """
         close a SSH connection and store the connection
@@ -157,6 +178,13 @@ class MagicRemote(Magics):
         """
         self.get_connection().close()
         
+    @line_magic
+    def cmd_remote(self, line):
+        """
+        @see me remote_cmd
+        """
+        return self.remote_cmd(line)
+    
     @line_magic
     def remote_cmd(self, line):
         """
@@ -173,6 +201,13 @@ class MagicRemote(Magics):
             return HTML("<pre>\n%s\n</pre>" % err)
         else:
             return HTML("<pre>\n%s\n</pre>" % out)
+
+    @line_magic
+    def up_remote(self, line):
+        """
+        @see me remote_up
+        """
+        return self.remote_up(line)
     
     @line_magic
     def remote_up(self, line):
@@ -198,6 +233,13 @@ class MagicRemote(Magics):
                 raise FileNotFoundError(localfile)
             ssh.upload(localfile, remotepath)
             
+    @line_magic
+    def down_remote(self, line):
+        """
+        @see me remote_down
+        """
+        return self.remote_down(line)
+        
     @line_magic
     def remote_down(self, line):
         """
