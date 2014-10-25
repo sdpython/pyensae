@@ -55,14 +55,22 @@ class MagicRemote(Magics):
         """
         if line in [None, ""]:
             print("Usage:")
-            print("  %jobsubmit <jobname.pig> [redirection]")
+            print("  %jobsubmit <jobname.pig> [redirection] [-local]")
             print("")
             print("If redirection is specified, the standard output and error are redirected to")
             print("redirection.out, redirection.err and the function does not wait.")
+            print("If -local is added, the job runs locally (option -x local).")
         else:
             filename = line.strip()
             spl = filename.split()
+            if "-local" in spl:
+                local = True
+                spl = [ _ for _ in spl if _ != "-local" ]
+            else:
+                local = False
+            
             filename = spl[0]
+            
             redirection = None if len(spl) == 1 else spl[1]
             if not os.path.exists(filename):
                 raise FileNotFoundError(filename)
@@ -70,11 +78,12 @@ class MagicRemote(Magics):
             dest = os.path.split(filename)[-1]
             ssh = self.get_connection()
             ssh.upload(filename, dest)
+            slocal = " -x local" if local else ""
             
             if redirection is None:
-                cmd = "pig -execute -f " + dest
+                cmd = "pig{0} -execute -f ".format(slocal) + dest
             else:
-                cmd = "pig -execute -f {0} 2> {1}.err 1> {1}.out &".format(filename, redirection)
+                cmd = "pig{2} -execute -f {0} 2> {1}.err 1> {1}.out &".format(filename, redirection, slocal)
             
             out, err = ssh.execute_command(cmd, no_exception = True)
             if len(err) > 0 and (len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
