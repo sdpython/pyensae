@@ -78,6 +78,7 @@ Versions
 
 * **0.9 - 2014/??/??**
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
+    * **add:** option -local to %jobsubmit    
 * **0.8 - 2014/10/24**
     * **add:** add method :meth:`copy_to <pyensae.sql.database_main.Database.copy_to>` to copy every table from a database to another one
     * **fix:** class :class:`Database <pyensae.sql.database_main.Database>` can now handle in memory database
