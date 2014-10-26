@@ -175,7 +175,7 @@ class RFilter ( Parser ):
 
 
 
-    protected int curlies = 0;
+    #protected int curlies = 0;
 
 
     class StreamContext(ParserRuleContext):
@@ -296,7 +296,7 @@ class RFilter ( Parser ):
                 if _alt == 1:
                     self.state = 20
                     localctx._NL = self.match(self.NL)
-                    ((WritableToken)localctx._NL).setChannel(Token.HIDDEN_CHANNEL);
+                    localctx._NL.setChannel(Token.HIDDEN_CHANNEL);
 
                 else:
                     raise NoViableAltException(self)
@@ -396,7 +396,7 @@ class RFilter ( Parser ):
                     self.eat()
 
 
-                curlies++;
+                curlies += 1;
                 self.state = 41
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -422,7 +422,7 @@ class RFilter ( Parser ):
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-                curlies--;
+                curlies -= 1;
                 self.state = 45
                 self.match(self.T__44)
 
@@ -693,27 +693,9 @@ class RFilter ( Parser ):
                 self.state = 138
                 self.match(self.T__19)
 
-                        // ``inside a compound expression, a newline before else is discarded,
-                        // whereas at the outermost level, the newline terminates the if
-                        // construction and a subsequent else causes a syntax error.''
-                        /*
-                        Works here
-                            if (1==0) { print(1) } else { print(2) }
-
-                        and correctly gets error here:
-
-                            if (1==0) { print(1) }
-                            else { print(2) }
-
-                        this works too:
-
-                            if (1==0) {
-                              if (2==0) print(1)
-                              else print(2)
-                            }
-                        */
-                        WritableToken tok = (WritableToken)_input.LT(-2);
-                        if (curlies>0&&tok.getType()==NL) tok.setChannel(Token.HIDDEN_CHANNEL);
+                tok = _input.LT(-2);
+                if curlies>0 and tok.getType()==NL :
+                    tok.setChannel(Token.HIDDEN_CHANNEL);
                         
 
             else:
