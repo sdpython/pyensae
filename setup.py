@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 #  Copyright (C) 2013 ---------------
 #  All rights reserved.
 # 
@@ -81,7 +82,8 @@ else :
 
 packages     = find_packages('src', exclude='src')
 package_dir  = { k: "src/" + k.replace(".","/") for k in packages }
-package_data = { project_var_name + ".subproject": ["*.tohelp"] }
+package_data = { project_var_name + ".subproject": ["*.tohelp"],
+                 project_var_name + ".languages": ["*.g4", "*.tokens"], }
     
 with open(readme) as f : long_description = f.read()
 

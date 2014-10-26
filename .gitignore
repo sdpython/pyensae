@@ -235,3 +235,4 @@ _doc/notebooks/Conf*.txt
 
 _unittests/ut_resources/facebook*
 README
+*.jar
