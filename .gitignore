@@ -225,6 +225,7 @@ version.txt
 */sphinxdoc/source/pyensae/*
 */sphinxdoc/source/all*.rst
 */sphinxdoc/source/notebooks/*
+*/sphinxdoc/source/coverage/*
 
 _doc/notebooks/SQLite*.*
 _doc/notebooks/velib*.*
