@@ -125,10 +125,26 @@ elif "unittests" in sys.argv:
     if not os.path.exists("_unittests"):
         raise FileNotFoundError("you must get the source from GitHub to run the unittests")
         
-    sys.path.append("_unittests")
+    fold  = os.path.abspath(os.path.dirname(__file__))
+    foldu = os.path.join(fold, "_unittests")
+    docu  = os.path.join(fold, "_doc")
+    dest  = os.path.join(fold, "_doc","sphinxdoc","source", "coverage")
+    if not os.path.exists(dest):
+        os.mkdir(dest)
+    
+    sys.path.append(foldu)
+
+    from coverage import coverage
+    cov = coverage(source = ["src/" + project_var_name])
+    cov.exclude ('if __name__ == "__main__"')
+    cov.start()
+    
     from run_unittests import main
     main()
     
+    cov.stop()
+    cov.html_report(directory=dest)
+        
 else :
     
     setup(
