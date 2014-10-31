@@ -10,7 +10,10 @@ import azure.storage
 
 class AzureClient():
     """
-    A simple class to access to communite with Azure.
+    
+    .. index: Azure
+    
+    A simple class to access to communite with `Azure <http://azure.microsoft.com/>`_.
     It requires modules 
     `azure <https://github.com/Azure/azure-sdk-for-python>`_.
     
@@ -18,12 +21,15 @@ class AzureClient():
         * list_containers, create_container, list_blobs, put_blob, put_block_blob_from_bytes
         * put_block_blob_from_text, put_page_blob_from_file, get_blob, get_blob
         
+    .. index: blob
+    
     @example(Azure___Get the list of containers and files from a blob storage?)
     
     The functionalities of a ``BlobService`` are described in
     `blobservice.py <https://github.com/Azure/azure-sdk-for-python/blob/master/azure/storage/blobservice.py>`_.
     
     @code
+    from pyensae.remote.azure_connection import AzureClient
     cl = AzureClient("<blob_storage_service>", 
                      "<primary_key>")
     bs = cl.open_blob_service()
@@ -36,6 +42,7 @@ class AzureClient():
     @example(Azure___Upload, download, to a blob storage)
     The following example uploads and downloads a file on a Blob Storage.
     @code
+    from pyensae.remote.azure_connection import AzureClient
     cl = AzureClient("<blob_storage_service>", 
                      "<primary_key>")
     bs = cl.open_blob_service()

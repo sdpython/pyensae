@@ -88,7 +88,7 @@ Indices and tables
 +------------------+---------------------+---------------------+------------------+------------------------+----------------------------------------------------+
 | :ref:`genindex`  |  :ref:`modindex`    | :ref:`search`       | :ref:`l-license` | :ref:`l-changes`       | :ref:`l-README`                                    |
 +------------------+---------------------+---------------------+------------------+------------------------+----------------------------------------------------+
-| :ref:`l-example` |  :ref:`l-FAQ`       | :ref:`l-notebooks`  |                  |                        | `Unit Test Coverage <coverage/index.html>`_        |
+| :ref:`l-example` |  :ref:`l-FAQ`       | :ref:`l-notebooks`  |                  | :ref:`l-exampleAzure`  | `Unit Test Coverage <coverage/index.html>`_        |
 +------------------+---------------------+---------------------+------------------+------------------------+----------------------------------------------------+
 
 Navigation
@@ -102,6 +102,7 @@ Navigation
     generatesetup
     installation
     all_example
+    all_example_Azure
     all_FAQ
     all_notebooks
     glossary
