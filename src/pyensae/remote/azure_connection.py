@@ -4,9 +4,8 @@
 @brief A class to help connect with a remote machine and send command line.
 """
 
-import time, socket
+import time, socket, datetime
 import azure.storage
-
 
 class AzureClient():
     """
@@ -109,24 +108,25 @@ class AzureClient():
         """
         return azure.storage.BlobService(self.account_name, self.account_key)
         
-    def ls(self, blob_service, container_name = None):
+    def ls(self, blob_service, container_name = None, path = None):
         """
         return the content of a blob storage
         
         @param      blob_service        blob service, returned by @see me open_blob_service
         @param      container_name      None for all, its name otherwise
+        @param      path                path in the container
         @return                         list of dictionaries
         """
         res = [ ]
         if container_name is None:
-            for cn in bs.list_containers():
+            for cn in blob_service.list_containers():
                 self.LOG("exploring ", cn.name)
-                r = self.ls(blob_service, cn.name)
+                r = self.ls(blob_service, cn.name, path = path)
                 res.extend(r)
             return res
         else :
             res = [ ]
-            for b in bs.list_blobs(container_name):
+            for b in blob_service.list_blobs(container_name, prefix = path):
                 obs = { }
                 obs["name"] = b.name
                 obs["url"] = b.url
@@ -208,7 +208,38 @@ class AzureClient():
                     if length < AzureClient._chunk_size:
                         break
                 else:
-                    break        
+                    break  
+
+    def delete_blob(self, blob_service, container_name, blob_name):
+        """
+        delete a blob
         
-if __name__ == "__main__":
-    pass
+        @param      blob_service        returns by @see me open_blob_service
+        @param      container_name      container name
+        @param      blob_name           blob name (remote file name)
+        """
+        return blob_service.delete_blob(container_name, blob_name)
+
+    def url_blob(self, blob_service, container, blob_name):
+        """
+        
+        @param      container       container
+        @param      blob_name       blob_name
+        @return                     url
+        """
+        src = blob_service.make_blob_url(container, blob_name)
+        return src
+     
+    def copy_blob(self, blob_service, container, blob_name, source):
+        """
+        copy a blob
+        
+        @param      blob_service        returns by @see me open_blob_service
+        @param      container_name      container name
+        @param      blob_name           destination
+        @param      source              source
+        """
+        url = self.url_blob(blob_service, container, source)
+        res = blob_service.copy_blob(container, blob_name, url)        
+        return res
+        

@@ -38,10 +38,12 @@ from .remote.remote_connection import ASSHClient
 try:
     from IPython import get_ipython
     from .remote.magic_remote import register_magics
+    from .remote.magic_azure import register_azure_magics
     ip = get_ipython()    
     if ip is not None:
         # the program is not run from a notebook
         register_magics()
+        register_azure_magics()
 except ImportError:
     # IPython is not installed
     pass

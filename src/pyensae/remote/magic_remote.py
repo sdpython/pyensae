@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 """
 @file
-@brief An example of a custom magic for IPython.
+@brief Magic command to communicate with an Hadoop cluster.
 """
 import sys, os
 
@@ -91,6 +91,7 @@ class MagicRemote(Magics):
             print("Usage:")
             print("  %jobsubmit <jobname.pig> [redirection] [-local]")
             print("")
+            print("The file <jobname.pig> is local.")
             print("If redirection is specified, the standard output and error are redirected to")
             print("redirection.out, redirection.err and the function does not wait.")
             print("If -local is added, the job runs locally (option -x local).")
@@ -309,7 +310,7 @@ class MagicRemote(Magics):
             print("Usage:")
             print("   remote_up <localfile> <remotepath>")
             print("")
-            print("no space allow in file names")
+            print("no space allowed in file names")
         else :
             ssh = self.get_connection()
             localfile,remotepath = spl
@@ -341,7 +342,7 @@ class MagicRemote(Magics):
             print("Usage:")
             print("   remote_up <localfile> <remotepath>")
             print("")
-            print("no space allow in file names")
+            print("no space allowed in file names")
         else :
             ssh = self.get_connection()
             remotepath,localfile = spl
