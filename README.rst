@@ -82,6 +82,7 @@ Versions
     * **add:** add magic command and methods to enable a shell from a notebook (a kind of putty) (command ``%open_remove_shell``, ...)
     * **new:** function :func:`parse_code <pyensae.languages.antlr_grammar_use.parse_code>` parses a script in R, PIG, SQLite syntax and checks if there is any mistake, it requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_
     * **new:** new class :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>` to handle some basic needs with Azure
+    * **add:** add magic command and methods to handle Azure from a notebook
 * **0.8 - 2014/10/24**
     * **add:** add method :meth:`copy_to <pyensae.sql.database_main.Database.copy_to>` to copy every table from a database to another one
     * **fix:** class :class:`Database <pyensae.sql.database_main.Database>` can now handle in memory database
