@@ -76,7 +76,7 @@ Started in 2013/08.
 Versions
 --------
 
-* **0.9 - 2014/??/??**
+* **0.9 - 2014/11/03**
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
     * **add:** option -local to %jobsubmit    
     * **add:** add magic command and methods to enable a shell from a notebook (a kind of putty) (command ``%open_remove_shell``, ...)
