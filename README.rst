@@ -76,6 +76,8 @@ Started in 2013/08.
 Versions
 --------
 
+* **0.9.1 - 2014/??/??**
+    * **add:** add magic command ``%tail_stderr`` for azure
 * **0.9 - 2014/11/03**
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
     * **add:** option -local to %jobsubmit    

@@ -12,16 +12,22 @@ class AzureException(Exception):
     """
     exception raised by @see cl AzureClient
     """
-    def __init__(self, message, code, json):
+    def __init__(self, message, ret):
         """
         store more information than a regular exception
         
         @param      message             error message
-        @param      code                error code
-        @param      json                information in json format
+        @param      ret                 results of the requests
         """
         Exception.__init__(self, message)
-        self.ret = (code, json)
+        
+        code = r.status_code
+        try:
+            js = r.json()
+        except Exception as e :
+            js = str(e) + "\n" + str(r)
+        
+        self.ret = (code, js)
     
     def __str__(self):
         """
@@ -240,6 +246,7 @@ class AzureClient():
         @param      container_name      container name
         @param      blob_name           blob name (remote file name)
         @param      file_path           local file path
+        @return                         local file
         
         The code comes from `Utilisation du service de stockage d'objets blob à partir de Python <http://azure.microsoft.com/fr-fr/documentation/articles/storage-python-how-to-use-blob-storage/>`_.
         """
@@ -260,6 +267,7 @@ class AzureClient():
                         break
                 else:
                     break  
+        return file_path
 
     def delete_blob(self, blob_service, container_name, blob_name):
         """
@@ -344,7 +352,7 @@ class AzureClient():
         r = requests.get(  webHCatUrl, 
                             auth=(self.hadoop_user_name, self.hadoop_key))
         if r.status_code != 200:
-            raise AzureException("unable to the status of server: " + webHCatUrl, r.status_code, r.json())
+            raise AzureException("unable to the status of server: " + webHCatUrl, r)
         return r.json()
         
     def get_version(self):
@@ -363,7 +371,7 @@ class AzureClient():
         r = requests.get(  webHCatUrl, 
                             auth=(self.hadoop_user_name, self.hadoop_key))
         if r.status_code != 200:
-            raise AzureException("unable to the version of server: " + webHCatUrl, r.status_code, r.json())
+            raise AzureException("unable to the version of server: " + webHCatUrl, r)
         return r.json()
         
     def pig_submit(self, container_name, blob_pig, status_dir = None):
@@ -449,7 +457,7 @@ class AzureClient():
                             data=params)
                             
         if r.status_code != 200:
-            raise AzureException("unable to submit job: " + blob_pig, r.status_code, r.json())
+            raise AzureException("unable to submit job: " + blob_pig, r)
         return r.json()
         
     def job_queue(self, showall = False):
@@ -477,7 +485,7 @@ class AzureClient():
                             params=params)
                             
         if r.status_code != 200:
-            raise AzureException("unable to get job queue", r.status_code, r.json())
+            raise AzureException("unable to get job queue", r)
         return r.json()
 
     def job_status(self, jobid):
@@ -502,7 +510,7 @@ class AzureClient():
                             auth=(self.hadoop_user_name, self.hadoop_key),
                             params=params)
         if r.status_code != 200:
-            raise AzureException("unable to the version of server: " + webHCatUrl, r.status_code, r.json())
+            raise AzureException("unable to the version of server: " + webHCatUrl, r)
         return r.json()
         
     def job_kill(self, jobid):
@@ -527,6 +535,6 @@ class AzureClient():
                             auth=(self.hadoop_user_name, self.hadoop_key),
                             params=params)
         if r.status_code != 200:
-            raise AzureException("unable to the version of server: " + webHCatUrl, r.status_code, r.json())
+            raise AzureException("unable to the version of server: " + webHCatUrl, r)
         return r.json()
         

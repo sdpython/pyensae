@@ -428,6 +428,43 @@ class MagicAzure(Magics):
             cl.upload(bs, cl.account_name, remote, line)
             r = cl.pig_submit(cl.account_name,remote,status_dir=sd)
             return r
+            
+    @line_magic
+    def tail_stderr(self, line):
+        """
+        defines ``%tail_stderr``
+        """
+        line = line.strip()
+        if len(line) == 0 :
+            nbline = 30
+            cont = True
+        else:
+            try:
+                nbline = int(line)
+                cont = True
+            except:
+                print("Usage:")
+                print("     %tail_stderr [nblines]")
+                cont = False
+            
+        if cont:
+            username = self.shell.user_ns["username"] if "username" in self.shell.user_ns else os.environ.get("USERNAME","nouser")
+            remote   = "scripts/pig/{0}/{1}".format(username, os.path.split(line)[-1])
+            sd       = "scripts/run/{0}".format(username)
+            loc      = "stderr"
+            sd      += "/" + loc
+            loc     += ".txt"
+            
+            if os.path.exists(loc):
+                os.remove(loc)
+            
+            cl, bs = self.get_blob_connection()
+            fi = cl.download(bs, cl.account_name, sd, loc)
+            with open(fi, "r") as f : lines = f.readlines()
+            nb = min(nbline, len(lines))
+            show = "\n".join( _.strip("\n\r") for _ in lines[-nb:])
+            return HTML("<pre>\n%s\n</pre>" % show)
+            
 
 
 def register_azure_magics():
