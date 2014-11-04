@@ -14,6 +14,9 @@ class ASSHClient():
     `ecdsa <https://pypi.python.org/pypi/ecdsa>`_.
     
     This class is used in magic command @see me remote_open.
+    On Windows, the installation of pycrypto can be tricky.
+    See `Pycrypto on Windows <http://www.xavierdupre.fr/blog/2014-10-21_nojs.html>`_.
+    Those modules are part of the `Anaconda <http://docs.continuum.io/anaconda/pkg-docs.html>`_ distribution.
     """
 
     def __init__(self, server, username, password):
