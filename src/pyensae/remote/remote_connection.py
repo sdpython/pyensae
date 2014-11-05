@@ -176,7 +176,7 @@ class ASSHClient():
         out = ssh.send_recv_session("ls")
         print( ssh.send_recv_session("python") )
         print( ssh.send_recv_session("print('3')") )
-        print( ssh.send_recv_session("import sys\nsys.executable") )
+        print( ssh.send_recv_session("import sys\\nsys.executable") )
         print( ssh.send_recv_session("sys.exit()") )
         print( ssh.send_recv_session(None) )
         ssh.close_session()
