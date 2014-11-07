@@ -9,7 +9,7 @@ from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML   
 
-from .sql_interface import InterfaceSQLDatabase
+from .sql_interface import InterfaceSQL
 
 @magics_class
 class MagicSQL(Magics):
@@ -39,7 +39,8 @@ class MagicSQL(Magics):
             print("Usage:")
             print("  %SQL_connect <filename>")
         else:
-            obj = InterfaceSQLDatabase.create(file)
+            obj = InterfaceSQL.create(filename)
+            obj.connect()
             self.shell.user_ns["DB"] = obj
             return obj
         
@@ -112,7 +113,7 @@ class MagicSQL(Magics):
             return df
         
 
-def register_sql_magicss():
+def register_sql_magics():
     """
     register magics function, can be called from a notebook
     """
