@@ -18,7 +18,7 @@ This project contain helpers used at the `ENSAE <http://www.ensae.fr/>`_ for tea
 The project is hosted `here <http://www.xavierdupre.fr/site2013/index_code.html>`_ 
 on github: `github/pyensae <https://github.com/sdpython/pyensae/>`_,
 on pypi: `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_.
-It requires `github/pyquickhelper <https://github.com/sdpython/puquickhelper/>`_.
+It requires `github/pyquickhelper <https://github.com/sdpython/pyquickhelper/>`_.
 
 The main function is used to download data used for my teachings at the 
 `ENSAE <http://www.xavierdupre.fr/site2013/enseignements/index.html>`_
