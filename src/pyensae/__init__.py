@@ -34,16 +34,19 @@ from .datasource.data_velib import DataVelibCollect
 from .datasource.convert import dBase2df, dBase2sqllite
 from .file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
 from .remote.remote_connection import ASSHClient
+from .sql.sql_interface import InterfaceSQL
 
 try:
     from IPython import get_ipython
     from .remote.magic_remote import register_magics
     from .remote.magic_azure import register_azure_magics
+    from .sql.magic_sql import register_sql_magics
     ip = get_ipython()    
     if ip is not None:
         # the program is not run from a notebook
         register_magics()
         register_azure_magics()
+        register_sql_magics()
 except ImportError:
     # IPython is not installed
     pass

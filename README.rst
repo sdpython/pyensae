@@ -77,7 +77,8 @@ Versions
 --------
 
 * **0.9.1 - 2014/??/??**
-    * **add:** add magic command ``%tail_stderr`` for azure
+    * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
+    * **add:** add magic command for SQLite3
 * **0.9 - 2014/11/03**
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
     * **add:** option -local to %jobsubmit    
