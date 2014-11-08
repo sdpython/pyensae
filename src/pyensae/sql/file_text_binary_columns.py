@@ -106,7 +106,7 @@ class TextFileColumns (TextFile) :
             for i,c in enumerate (changes) :
                 self._changes [ forma_ % i ] = c
                 
-            if self._regexfix != None and \
+            if self._regexfix is not None and \
                        not isinstance (self._regexfix, dict) and \
                        "(?P<" not in self._regexfix :
                 reg = re.compile ("[(](.+?)[)]")
@@ -252,9 +252,9 @@ class TextFileColumns (TextFile) :
                             nbert += 1
                             if self._keep_text_when_bad_type :
                                 if nbert % 1000 == 1 :
-                                    self.LOG ("error type", nbert, "unable to interprete line (but keep it) ", nb, "value", repr (res [k]), " type ", repr (self._conv [k]), " line ", repr (line))
+                                    self.LOG ("error type", nbert, "unable to interpret line (but keep it) ", nb, "value", repr (res [k]), " type ", repr (self._conv [k]), " line ", repr (line))
                             else :
-                                self.LOG ("error type", nbert, "unable to interprete line ", nb, "value", repr (res [k]), " type ", repr (self._conv [k]), " line ", repr (line))
+                                self.LOG ("error type", nbert, "unable to interpret line ", nb, "value", repr (res [k]), " type ", repr (self._conv [k]), " line ", repr (line))
                                 if nbert * 10 > nb and nbert > 4 :
                                     message = "pattern: %s\n line: %s" % (regex_simple.pattern, line)
                                     raise Exception ("(b) there are probably too many errors %d\n%s" % (nberr, message))
@@ -306,7 +306,7 @@ class TextFileColumns (TextFile) :
         """
         if isinstance (key, str) :
             key = (key,)
-        if folder == None :
+        if folder is None :
             folder = GetPath ()
         if not os.path.exists (folder) :
             raise Exception ("unable to find folder %s" % folder)
@@ -388,7 +388,7 @@ class TextFileColumns (TextFile) :
             # minimum
             mi = None
             for i,line in enumerate (kline) :
-                if mi == None or line [0] < mi :
+                if mi is None or line [0] < mi :
                     mi  = line [0]
                     pos = i
             

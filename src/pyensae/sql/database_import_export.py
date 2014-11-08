@@ -52,7 +52,7 @@ class DatabaseImportExport :
         @endcode
         @endexample
         """
-        if columns == None :    sql = "SELECT * FROM " + table + ";"
+        if columns is None :    sql = "SELECT * FROM " + table + ";"
         else :                  sql = "SELECT %s FROM %s ;" % (",".join (columns), table)
                 
         self.export_view_into_flat_file (sql, filename, header, post_process)
@@ -106,8 +106,8 @@ class DatabaseImportExport :
         
         for line_ in cur :
             
-            if post_process != None :   line = post_process (line_, memo)
-            else :                      line = line_
+            if post_process is not None :   line = post_process (line_, memo)
+            else :                          line = line_
                 
             pr = "\t".join ([self._clean_string (str (x)) for x in line])
                     
@@ -215,12 +215,12 @@ class DatabaseImportExport :
                                                 filter_case         = filter_case,
                                                 strict_separator    = strict_separator)
                 
-                if unique != None :
+                if unique is not None :
                     if dic [unique] in unique_key : continue
                     else : unique_key [dic [unique]] = 0
                 
                 num_line += 1
-                if dic != None :
+                if dic is not None :
                     self._get_insert_request (  dic, 
                                                 table, 
                                                 True, 
@@ -279,13 +279,13 @@ class DatabaseImportExport :
                                                         strict_separator    = strict_separator)
                     else :
                         dic = format (line, **params)
-                        if dic == None : continue
+                        if dic is None : continue
                 
-                if unique != None :
+                if unique is not None :
                     if dic [unique] in unique_key : continue
                     else : unique_key [dic [unique]] = 0
                 
-                if dic != None :
+                if dic is not None :
                     self._get_insert_request (dic, table, True, primarykey, cursor = cursor)
                     nbinsert += 1
                     all += 1
@@ -293,7 +293,7 @@ class DatabaseImportExport :
                         self.LOG("adding %d lines into table %s" % (all, table))
             file.close ()
             
-        if cursor != None : cursor.close ()
+        if cursor is not None : cursor.close ()
         self.commit ()
         return nbinsert
         

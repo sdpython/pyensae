@@ -284,7 +284,7 @@ class TextFile :
                 for k,v in columns.items () :
                     linecol [v] = k
                     
-                if output == None : res.append (linecol)
+                if output is None : res.append (linecol)
                 else :              output.write ("\t".join (linecol) + "\n")
                     
                 s1 = len (linecol)
@@ -298,7 +298,7 @@ class TextFile :
             else :
                 col = self._interpret (line)
                 
-                if unique != None :
+                if unique is not None :
                     key = columns [unique]
                     val = col [key]
                     if val in uniquekey :
@@ -337,10 +337,10 @@ class TextFile :
                     mes += "len (col) = %d len (columns) = %d" % (len (("\t".join (col)).split ("\t")), len (columns))
                     raise Exception (mes)
 
-                if output == None : res.append (col)
+                if output is None : res.append (col)
                 else : output.write ("\t".join (col) + "\n")
         
-        if output == None : return res
+        if output is None : return res
         else :
             output.close ()
             return miss

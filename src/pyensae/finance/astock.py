@@ -32,13 +32,13 @@ class StockPrices:
         If url is yahoo, the data will be download using ``http://finance.yahoo.com/q/cp?s=^FCHI+Components``.
         The CAC40 composition is described `here <http://fr.wikipedia.org/wiki/CAC_40>`_.
         
-        @param      tick        tick name, ex: ``BNP.PA``
+        @param      tick        tick name, ex ``BNP.PA``
         @param      url         if yahoo, downloads the data from there if it was not done before
         @param      folder      cache folder (created if it does not exists
         @param      begin       first day (datetime), see below
         @param      end         last day (datetime), see below
         @param      sep         column separator
-        @param      intern      do not use unless you know what to do (see :meth:`__getitem__ <pyensae.finance.atock.StockPrices.__getitem__>`)
+        @param      intern      do not use unless you know what to do (see :meth:`__getitem__ <pyensae.finance.astock.StockPrices.__getitem__>`)
         
         If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
         prices for a date before this one).
@@ -94,7 +94,7 @@ class StockPrices:
                 try:
                     os.mkdir(folder)
                 except PermissionError as e :
-                    raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")")
+                    raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")") from e
             self.tickname = tick
             
             if begin is None :
@@ -131,7 +131,7 @@ class StockPrices:
                     f.write(text)
                     f.close ()
                 except PermissionError as e :
-                    raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")")
+                    raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")") from e
                 
             try:
                 self.datadf = pandas.read_csv(name, sep=sep)
@@ -219,7 +219,7 @@ class StockPrices:
     @staticmethod
     def available_dates ( listStockPrices, missing = True, field="Close") :
         """
-        Returns the list of values (Open or High or Low or Close or Volumne) from each stock 
+        Returns the list of values (Open or High or Low or Close or Volume) from each stock
         for all the available_dates for a list of stock prices.
         
         A missing date is a date for which there is at least one stock price and one missing stock price.
@@ -393,7 +393,7 @@ class StockPrices:
         @param      existing            to add this curve to an existing one (existing (fig, ax))
         @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curves on the second axis.
         @param      args                other parameters to give method ``plt.subplots``
-        @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
+        @return                         fig, ax, plt, (fig,ax) comes ``plt.subplot``, ``plt`` is ``matplotlib.pyplot``
         
         The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
         can change the graph size (see the example below).
@@ -439,7 +439,7 @@ class StockPrices:
         
         def price(x): return '%1.2f'%x
         
-        if existing != None:
+        if existing is not None:
             if not isinstance(existing,list) and not isinstance(existing,tuple):
                 raise Exception("existing must be a list or a tuple")
             if len(existing) != 2 :
@@ -517,7 +517,7 @@ class StockPrices:
         @param      index           to keep or drop the index
         @param      params          other parameters
         """
-        self.dataframe.to_csv(filename, sep=sep,index=index)
+        self.dataframe.to_csv(filename, sep=sep,index=index, **params)
 
     def to_excel(self,  excel_writer, **params):
         """

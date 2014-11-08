@@ -22,7 +22,7 @@ class MagicAzure(Magics):
     
     def _replace_params(self, cell):
         """
-        replaces parameter such ``__PASSWORD__`` by variable in the notebook environnement
+        replaces parameter such ``__PASSWORD__`` by variable in the notebook environment
         
         @param  cell    string
         @return         modified string
@@ -335,7 +335,7 @@ class MagicAzure(Magics):
             container,src  = self._interpret_path(src, cl, bs)
             container_,dest = self._interpret_path(dest, cl, bs)
             if container != container_:
-                raise AzureException("containers should be the same: {0} != {1}".format(container, container_))
+                raise AzureException("containers should be the same: {0} != {1}".format(container, container_), None)
             cl.copy_blob(bs, container, dest, src)
             return True
             
@@ -381,7 +381,6 @@ class MagicAzure(Magics):
         """
         defines ``%hd_wasb_prefix``
         """
-        line = line.strip()
         cl, bs = self.get_blob_connection()
         return cl.wasb_to_file(cl.account_name)
 
@@ -442,14 +441,15 @@ class MagicAzure(Magics):
             try:
                 nbline = int(line)
                 cont = True
-            except:
+            except ValueError:
                 print("Usage:")
                 print("     %tail_stderr [nblines]")
                 cont = False
+                nbline = 0
             
         if cont:
             username = self.shell.user_ns["username"] if "username" in self.shell.user_ns else os.environ.get("USERNAME","nouser")
-            remote   = "scripts/pig/{0}/{1}".format(username, os.path.split(line)[-1])
+            #remote   = "scripts/pig/{0}/{1}".format(username, os.path.split(line)[-1])
             sd       = "scripts/run/{0}".format(username)
             loc      = "stderr"
             sd      += "/" + loc
@@ -471,6 +471,7 @@ def register_azure_magics():
     """
     register magics function, can be called from a notebook
     """
+    from IPython import get_ipython
     ip = get_ipython()
     ip.register_magics(MagicAzure)
     

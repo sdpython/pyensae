@@ -18,13 +18,13 @@ def guess_type_value (x, none = None) :
         int (x)
         if x [0] == '0' and len (x) > 1 :   return str
         else :                              return int if len (x) < 9 else str
-    except :
+    except ValueError:
         try :
             x = float (x)
             return float
-        except :
+        except ValueError:
             if none :
-                if x == None : return None
+                if x is None : return None
                 try :
                     if len (x) > 0 : return str
                     else : return None

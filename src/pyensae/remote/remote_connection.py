@@ -156,13 +156,13 @@ class ASSHClient():
                         no_exception = False, 
                         timeout = 1.0, 
                         add_eol = True, 
-                        prompts = ["~$", ">>>"],
+                        prompts = ("~$", ">>>"),
                         out_format = None):
         """
-        opens a session with method `invoke_shell <http://docs.paramiko.org/en/latest/api/client.html?highlight=invoke_shell#paramiko.client.SSHClient.invoke_shell>`_
+        open a session with method `invoke_shell <http://docs.paramiko.org/en/latest/api/client.html?highlight=invoke_shell#paramiko.client.SSHClient.invoke_shell>`_
         
         @param      no_exception    if True, do not raise any exception in case of error
-        @param      timeout         timeous in s
+        @param      timeout         timeout in s
         @param      add_eol         if True, the function will add a EOL to the sent command if it does not have one
         @param      prompts         if function terminates if the output ends by one of those strings.
         @param      out_format      None, plain, html

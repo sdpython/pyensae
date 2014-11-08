@@ -382,7 +382,7 @@ class DatabaseCore2 :
         sql     = "INSERT INTO %s (%s) VALUES (%s);" % (table, keys, values)
         if exe :
             try :
-                if cursor != None : cursor.execute (sql)
+                if cursor is not None : cursor.execute (sql)
                 else : self._connection.execute (sql)
             except SQLite.OperationalError as e :
                 if skip_exception : self.LOG("OperationalError: unable to execute a query", e, sql)

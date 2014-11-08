@@ -121,8 +121,8 @@ class DataVelibCollect :
             o["last_update"] = dt
             
             try :
-                o["lat"] = float(o["position"]["lat"]) if o["position"]["lat"] != None else None
-                o["lng"] = float(o["position"]["lng"]) if o["position"]["lng"] != None else None
+                o["lat"] = float(o["position"]["lat"]) if o["position"]["lat"] is not None else None
+                o["lng"] = float(o["position"]["lng"]) if o["position"]["lng"] is not None else None
             except TypeError as e :
                 raise TypeError ("unable to convert geocode for the following row: %s\n%s" % (str(o), str(e)))
                 
@@ -149,7 +149,7 @@ class DataVelibCollect :
         @param      contract        contract name, @see te _contracts
         @param      delayms         delay between two collections (in ms)
         @param      outfile         write data in this file (json), if single_file is True, outfile is used as a prefix
-        @param      single_file     True: one file, else, many files with timestamp as a suffix
+        @param      single_file     if True, one file, else, many files with timestamp as a suffix
         @param      stop_datetime   if None, never stops, else stops when the date is reached
         @param      log_every       print something every <log_every> times data were collected
         @param      fLOG            logging function
@@ -162,7 +162,7 @@ class DataVelibCollect :
         delays   = delayms / 1000.0
         
         nb = 0
-        while stop_datetime == None or now < stop_datetime :
+        while stop_datetime is None or now < stop_datetime :
             now   = datetime.datetime.now()
             cloc += delay
             js  = self.get_json(contract)

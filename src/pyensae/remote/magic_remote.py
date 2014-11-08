@@ -3,7 +3,7 @@
 @file
 @brief Magic command to communicate with an Hadoop cluster.
 """
-import sys, os
+import os
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
@@ -24,7 +24,7 @@ class MagicRemote(Magics):
     
     def _replace_params(self, cell):
         """
-        replaces parameter such ``__PASSWORD__`` by variable in the notebook environnement
+        replaces parameter such ``__PASSWORD__`` by variable in the notebook environment
         
         @param  cell    string
         @return         modified string
@@ -276,8 +276,7 @@ class MagicRemote(Magics):
         workspace.
         """
         ssh = self.get_connection()
-        ssh = self.shell.user_ns["remote_ssh"]
-        
+
         if isinstance(cell, str):
             cell = self._replace_params(cell)
         
@@ -387,6 +386,7 @@ def register_magics():
     """
     register magics function, can be called from a notebook
     """
+    from IPython import get_ipython
     ip = get_ipython()
     ip.register_magics(MagicRemote)
     

@@ -106,7 +106,7 @@ class MagicSQL(Magics):
                 
         if cont:
             db = self.get_connection()
-            df = df.execute(query)
+            df = db.execute(query)
             
             if addv is not None and self.shell is not None:
                 self.shell.user_ns[addv] = df
@@ -117,6 +117,7 @@ def register_sql_magics():
     """
     register magics function, can be called from a notebook
     """
+    from IPython import get_ipython
     ip = get_ipython()
     ip.register_magics(MagicSQL)
     

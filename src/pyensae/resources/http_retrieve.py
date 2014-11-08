@@ -114,7 +114,7 @@ def download_data ( name,
         if os.path.exists (f2) :
             fLOG ("adding file", f2)
             u = open (f2, "r")
-            all = u.read ()
+            alls = u.read ()
             u.close()
         else :
             if url is None : url = website
@@ -122,12 +122,12 @@ def download_data ( name,
             fLOG ("    downloading of ", url, " to ", outfile)
             try:
                 u = urllib.request.urlopen (url)
-                all = u.read ()
+                alls = u.read ()
                 u.close ()
             except Exception as e :
                 raise Exception("unable to retrieve data from {0}".format(url)) from e
             u = open (outfile, "wb")
-            u.write ( all )
+            u.write ( alls )
             u.close()
                 
     if name.endswith(".zip"):

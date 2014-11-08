@@ -4,7 +4,6 @@
 @brief A class to help connect with a remote machine and send command line.
 """
 
-import time, socket, datetime
 import requests
 import azure.storage
 
@@ -20,14 +19,17 @@ class AzureException(Exception):
         @param      ret                 results of the requests
         """
         Exception.__init__(self, message)
-        
-        code = r.status_code
-        try:
-            js = r.json()
-        except Exception as e :
-            js = str(e) + "\n" + str(r)
-        
-        self.ret = (code, js)
+
+        if ret is not None:
+            code = ret.status_code
+            try:
+                js = ret.json()
+            except Exception as e :
+                js = str(e) + "\n" + str(ret)
+
+            self.ret = (code, js)
+        else:
+            self.ret = (None,None)
     
     def __str__(self):
         """
@@ -42,7 +44,7 @@ class AzureClient():
     
     .. index: Azure
     
-    A simple class to access to communite with `Azure <http://azure.microsoft.com/>`_.
+    A simple class to access and communicate with `Azure <http://azure.microsoft.com/>`_.
     It requires modules:
     
     * `azure <https://github.com/Azure/azure-sdk-for-python>`_
@@ -86,7 +88,7 @@ class AzureClient():
             print(r)
         
     cl.download(bs, "<container>", "myremotefolder/remotename.txt", 
-                                   "another_local_filaname.txt")
+                                   "another_local_filename.txt")
     
     @endcode
     @endexample

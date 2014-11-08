@@ -155,7 +155,7 @@ class LinkedInAccess :
         @param      url             search by url
         @return     json
         """
-        if selectors == None and self.all_permissions :
+        if selectors is None and self.all_permissions :
             selectors = LinkedInAccess.default_selectors_profile
         return self.application.get_profile(selectors = selectors, 
                             member_id = id, member_url = url)
@@ -191,9 +191,9 @@ class LinkedInAccess :
                     facets=[facet codes]&  
                     sort=[connections|recommenders|distance|relevance]        
                     
-        @param      params          dictionary: { field: value } (see above)
+        @param      params          dictionary ``{ field: value }`` (see above)
         @param      selectors       if None, uses the default selectors
-        @param      count           1 to 25, if -1 or > 25, search for all (do multiple seaches and concatenate them
+        @param      count           1 to 25, if -1 or > 25, search for all (do multiple searches and concatenate them
         @param      as_df           return a DataFrame
         @param      start           first result to fetch
         @return                     json format (or DataFrame if as_df is True or None if there is nothing to return)
@@ -215,7 +215,7 @@ class LinkedInAccess :
         
         """
         from linkedin import linkedin
-        if selectors == None and self.all_permissions :
+        if selectors is None and self.all_permissions :
             selectors = LinkedInAccess.default_selectors_search_profile
             
         bound = count if count != -1 and count <= 25 else 25
@@ -257,7 +257,7 @@ class LinkedInAccess :
                     key, first = se.popitem()
                     fetched = first.get("_count",0)
                     total += fetched 
-                    all = first.get("_total",0)
+                    alls = first.get("_total",0)
                 else :
                     raise Exception("expecting a result such as {'people': ...} +\n" + str(se))
                 
@@ -267,7 +267,7 @@ class LinkedInAccess :
                 else :
                     res.append(se)
                     
-                fLOG("LinkedInAccess.search_profile [bound=%d,count=%d,fetched=%d,total=%d,all=%d]"% (bound,count, fetched, total, all))
+                fLOG("LinkedInAccess.search_profile [bound=%d,count=%d,fetched=%d,total=%d,alls=%d]"% (bound,count, fetched, total, alls))
                 if fetched < bound or (count != -1 and len(res) >= count) :
                     break
                 start = total

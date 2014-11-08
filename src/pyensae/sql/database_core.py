@@ -62,7 +62,7 @@ class DatabaseCore (DatabaseCore2) :
         @param      host            to connect to a MSSQL database
         @param      password        password if needed
         @param      LOG             LOG function, if None, choose ``print``
-        @param      attach          dictionary { nickname: filename }, list of database to attach
+        @param      attach          dictionary ``{ nickname: filename }``, list of database to attach
         @warning If the folder does not exist, it will be created
         """
         
@@ -101,7 +101,7 @@ class DatabaseCore (DatabaseCore2) :
         self._host     = host
     
         # the rest
-        if LOG == None : 
+        if LOG is None :
             def blind(*l, **p) :
                 pass
             LOG = blind
@@ -206,7 +206,7 @@ class DatabaseCore (DatabaseCore2) :
             s = int (sec)
             h = s / 3600
             m = (s % 3600) / 60
-            s = s % 60
+            s %= 60
             return "%02d:%02d:%02d" % (h,m,s)
 
     @staticmethod
@@ -259,7 +259,7 @@ class DatabaseCore (DatabaseCore2) :
             #elif self._engine == "MySQL" :  self._connection = MySQLdb.connect (self._host, self._user, self._password, self._sql_file)
             elif self._engine == "ODBCMSSQL" :
                 
-                if odbc_string == None :
+                if odbc_string is None :
                     temp = [ "DRIVER={SQL Server Native Client 10.0}",# {SQL Server}",
                             "SERVER=%s" % self._host,
                             "DATABASE=%s" % self._sql_file,
@@ -269,8 +269,8 @@ class DatabaseCore (DatabaseCore2) :
                             #"Integrated Security=SSPI",
                             ]
                     #temp = ["DSN=%s" % self._sql_file ]
-                    if self._user != None : temp.append ( "UID=%s" % self._user)
-                    if self._password != None : temp.append ( "PASSWORD=%s" % self._password)
+                    if self._user is not None : temp.append ( "UID=%s" % self._user)
+                    if self._password is not None : temp.append ( "PASSWORD=%s" % self._password)
                     st = ";".join (temp)
                     self.LOG ("connection string ", st)
                     self._connection = module_odbc.connect (st)
@@ -384,7 +384,7 @@ class DatabaseCore (DatabaseCore2) :
         else :
             request = """   SELECT name,tbl_name,sql 
                             FROM (SELECT * FROM %s.sqlite_master) AS temptbl
-                            WHERE type='index' ORDER BY name;""" % (attached)
+                            WHERE type='index' ORDER BY name;""" % attached
         select  = self._connection.execute (request)
         
         exp  = re.compile ("[(]([a-zA-Z0-9_,]+)[)]")
@@ -612,7 +612,7 @@ class DatabaseCore (DatabaseCore2) :
             db.LOG ("parameters ", [key,value,table,order,where,limit])
             fkey = key.split (",")
             fval = value.split (",")
-            if where == None : where = ""
+            if where is None : where = ""
             
             nkey = len (fkey)
             #nval = len (fval)
@@ -651,7 +651,7 @@ class DatabaseCore (DatabaseCore2) :
                 if stil > 0 :
                     matrix.append (line)
                     pos += 1
-                    if limit != None and pos >= limit :
+                    if limit is not None and pos >= limit :
                         break
                 else :
                     break
@@ -1033,19 +1033,19 @@ class DatabaseCore (DatabaseCore2) :
 
         self._check_values (values)
         self._check_connection ()
-        all = []
+        alls = []
         for k,v in values.items() :
             if k != key :
                 if isinstance (v, str) or isinstance (v, datetime.datetime) :
-                    all += [ "%s='%s'" % (k,str (v)) ]
+                    alls += [ "%s='%s'" % (k,str (v)) ]
                 else :
-                    all += [ "%s=%s" % (k,str (v)) ]
+                    alls += [ "%s=%s" % (k,str (v)) ]
         if isinstance (value, str) :
-            sql = "UPDATE %s SET %s WHERE %s='%s'" % (table, ",".join (all), key, value.replace ("'", "''"))
+            sql = "UPDATE %s SET %s WHERE %s='%s'" % (table, ",".join (alls), key, value.replace ("'", "''"))
         elif isinstance (value, datetime.datetime) :
-            sql = "UPDATE %s SET %s WHERE %s='%s'" % (table, ",".join (all), key, str(value))
+            sql = "UPDATE %s SET %s WHERE %s='%s'" % (table, ",".join (alls), key, str(value))
         else :
-            sql = "UPDATE %s SET %s WHERE %s=%s" % (table, ",".join (all), key, value)
+            sql = "UPDATE %s SET %s WHERE %s=%s" % (table, ",".join (alls), key, value)
         
         try :
             self._connection.execute (sql)

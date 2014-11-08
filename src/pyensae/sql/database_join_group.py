@@ -474,7 +474,7 @@ class DatabaseJoinGroup :
             if column not in [x [0] for x in cols ] :
                 raise Exception ("%s is not a column of table %s\n- columns:\n%s" % (column, table, "\n".join ([str (x) for x in cols])))
             
-        if sql_add == None or len (sql_add) == 0 :  sql_add = ""
+        if sql_add is None or len (sql_add) == 0 :  sql_add = ""
         else :                                      sql_add = ",\n       " + sql_add
             
         sum_column = []
@@ -486,13 +486,13 @@ class DatabaseJoinGroup :
         
         if values is None :
             sql     = "SELECT %s AS %s, COUNT(%s) AS %s_nb%s%s\nFROM %s\nGROUP BY %s" % \
-                             (", ".join (columns),  \
-                              new_column,           \
-                              "*",                  \
-                              new_column,           \
-                              str_sum,              \
-                              sql_add,              \
-                              table,                \
+                             (", ".join (columns),
+                              new_column,
+                              "*",
+                              new_column,
+                              str_sum,
+                              sql_add,
+                              table,
                               ", ".join (columns))
             select  = sql
             
