@@ -12,7 +12,7 @@ from .type_helpers import guess_type_value
 
 
 class TextFile :
-    
+
     """
     This class opens a text file as if it were a binary file. It can deal with null characters which are missed by open function.
 
@@ -22,7 +22,7 @@ class TextFile :
     @var    LOG             logging function
     @var    _buffer_size    read a text file _buffer_size bytes each time
     @var    _filter         function filter, None or return True or False whether a line should considered or not
-    
+
     Example:
     @code
     f = TextFile (filename)
@@ -35,11 +35,11 @@ class TextFile :
 
     _split_expr     = re.compile ("\\r?\\t", re.U)
     _sep_available  = "\t;,| "
-    
-    def __init__ (self, filename, 
-                        utf8        = True, 
-                        errors      = None, 
-                        fLOG        = print, 
+
+    def __init__ (self, filename,
+                        utf8        = True,
+                        errors      = None,
+                        fLOG        = print,
                         buffer_size = 2**20,
                         filter      = None,
                         separated   = False) :
@@ -61,7 +61,7 @@ class TextFile :
         self._buffer_size   = buffer_size
         self._filter        = filter
         self._separated     = separated
-        
+
     def open (self) :
         """open the file in reading mode
         """
@@ -71,28 +71,28 @@ class TextFile :
             self.LOG("   TextFile: guessed: ", res)
             sep = res [2]
             self._separated_value = sep
-            
+
         self._f         = open (self.filename, "r", encoding="utf8") if self.utf8 else open (self.filename, "r")
         self._nbline    = 0
         self._read      = 0
-        
+
     def close (self) :
         """close the file
         """
         self._f.close ()
         self.LOG ("  TextFile: closing file ", self.filename)
         del self.__dict__ ["_f"]
-        
+
     def get_nb_readlines (self) :
         """returns the number of read lines
         """
         return self._nbline
-        
+
     def get_nb_readbytes (self) :
         """returns the number of read bytes
         """
         return self._nbline
-        
+
     def readlines (self) :
         """extracts all the lines,
         the file must not be opened through method open
@@ -105,7 +105,7 @@ class TextFile :
             res.append (l)
         self.close ()
         return res
-        
+
     def __iter__ (self) :
         """iterator
         @code
@@ -130,22 +130,22 @@ class TextFile :
         if blin.startswith("\ufeff") :
             self.LOG ("  removing the three first character u'\\ufeff'")
             blin = blin [len("\ufeff"):]
-            
+
         endline     = "\n"
         endchar     = "\r"
-        
+
         begin       = 0
         sel         = 0
         tim         = time.clock ()
         while len (blin) > 0 :
-            
+
             pos = blin.find (endline, begin)
             if pos == -1 :
                 pos = blin.find (endchar, begin)
                 if begin == 0 and pos != -1 :
                     self.LOG ("  problem in file ", self.filename)
                     self.LOG ("  the line separator is not \\n but \\r")
-                
+
             while pos == -1 :
                 if begin > 0 :
                     blin     = blin [begin:]
@@ -154,30 +154,30 @@ class TextFile :
                 self._read  += len (temp)
                 blin        += temp
                 pos          = blin.find ("\n")
-                if pos == -1 : 
+                if pos == -1 :
                     pos = blin.find ("\r", begin)
                 if len (temp) == 0 and pos == -1 :
                     pos = len (blin)
-                    
+
             temp  = blin [begin:pos]
             line  = str (temp)
             begin = pos+1
-        
+
             tim2 = time.clock ()
             if tim2 - tim > 60 :
                 tim     = tim2
                 ratio   = float (self._read) / filesize * 100
                 self.LOG ("  processing line ", self._nbline, " read bytes ", self._read, " sel ", sel, " ratio %2.2f" % ratio, "%")
-            
+
             if self.utf8 :
                 r = line
-                #if self.errors != None : 
+                #if self.errors != None :
                 #    try :
                 #        r = line.encode("utf8")
                 #    except UnicodeDecodeError :
                 #        self.LOG ("  Unicode error with line ", self._nbline, repr (line))
                 #        r = line.encode("utf8", errors = self.errors)
-                #else :                      
+                #else :
                 #    try :
                 #        r = line.encode("utf8")
                 #    except UnicodeDecodeError as e :
@@ -200,11 +200,11 @@ class TextFile :
                         yield line.split (self._separated_value)
                     else :
                         yield line
-                
+
             self._nbline += 1
 
     def _load (self, filename, this_column, file_column, prefix, **param) :
-        """ 
+        """
         load...
         """
         f = TextFile (filename, fLOG = self.LOG, **param)
@@ -238,13 +238,13 @@ class TextFile :
         col = TextFile._split_expr.split (line.strip (" \r\n"), fLOG = self.LOG)
         return col
 
-    def join (self,     definition, 
-                        output, 
-                        missing_value   = "", 
+    def join (self,     definition,
+                        output,
+                        missing_value   = "",
                         unique          = None,
                         **param) :
         """join several files together
-        
+
         @param  definition      list of triplets:
                                     filename, this_column, file_column, prefix
         @param  output          if None, return the results as a list, otherwise save it into output
@@ -263,11 +263,11 @@ class TextFile :
         files = []
         for a,b,c,d in definition :
             files.append ( self._load (a,b,c,d, **param)  )
-            
+
         res         = []
         miss        = 0
         uniquekey   = { }
-        
+
         self.open ()
         for line in self :
             if self.get_nb_readlines () == 0 :
@@ -283,10 +283,10 @@ class TextFile :
                 linecol = ["" for c in columns ]
                 for k,v in columns.items () :
                     linecol [v] = k
-                    
+
                 if output is None : res.append (linecol)
                 else :              output.write ("\t".join (linecol) + "\n")
-                    
+
                 s1 = len (linecol)
                 s2 = oldnb
                 for f in files : s2 += len (f [1])
@@ -294,10 +294,10 @@ class TextFile :
                     mes = "size problem %d != " % (s1)
                     mes += " + ".join ( [str (x) for x in [oldnb,] + [ len(f [1]) for f in files ] ] )
                     raise Exception (mes)
-                    
+
             else :
                 col = self._interpret (line)
-                
+
                 if unique is not None :
                     key = columns [unique]
                     val = col [key]
@@ -306,32 +306,32 @@ class TextFile :
                         continue
                     else :
                         uniquekey [val] = 1
-                
+
                 if len (col) != oldnb :
                     col.extend ( ["" for i in range (0, oldnb - len (col)) ] )
                 if len (col) != oldnb :
                     mes = "line %d: problem len(col) = %d and oldnb = %d\n%s" % (self.get_nb_readlines (), len (col), oldnb, repr (line))
                     raise Exception (mes)
-                    
+
                 for file in files :
                     cont        = file [0]
                     c           = file [1]
                     this_key    = col [ columns [ file [2] ] ]
-                    if this_key in cont :   
+                    if this_key in cont :
                         val = cont [this_key]
                         if len (val) != len (c) :
                             mes = "line %d: problem len(val) = %d and len (c) = %d" % (self.get_nb_readlines (), len (val), len (c))
                             raise Exception (mes)
-                    else :                  
+                    else :
                         val = [ missing_value for k in c ]
                         miss += len (val)
                     col.extend (val)
-                
+
                 if len (col) != len (columns) :
                     mes = "problem 1 with line %d\n" % self.get_nb_readlines ()
                     mes += "len (col) = %d len (columns) = %d" % (len (col), len (columns))
                     raise Exception (mes)
-                    
+
                 if len (("\t".join (col)).split ("\t")) != len (col) :
                     mes = "problem 2 with line %d\n" % self.get_nb_readlines ()
                     mes += "len (col) = %d len (columns) = %d" % (len (("\t".join (col)).split ("\t")), len (columns))
@@ -339,31 +339,31 @@ class TextFile :
 
                 if output is None : res.append (col)
                 else : output.write ("\t".join (col) + "\n")
-        
+
         if output is None : return res
         else :
             output.close ()
             return miss
-            
+
     def _count_s (self, car) :
         """returns the number of every character in car
         """
         res = { }
         for i,c in enumerate (car) :
-            if c in res : 
+            if c in res :
                 res [c] += 1
-            else :        
+            else :
                 res [c]  = 1
         return res
-        
+
     def _get_type (self, s) :
         """guess the type of value s
         """
         return guess_type_value (s)
 
-    def guess_columns (self,    nb              = 100, 
-                                force_header    = False, 
-                                changes         = { }, 
+    def guess_columns (self,    nb              = 100,
+                                force_header    = False,
+                                changes         = { },
                                 force_noheader  = False,
                                 fields          = None,
                                 regex           = { },
@@ -383,18 +383,18 @@ class TextFile :
                                         - column definition { position : (name, type) } or { position : (name, (str, max_length*2)) }
                                         - separator
                                         - regex which allow the user to extract information from the file
-        
+
         The column separator is looked into ``, | ; \\t``
         @warning The file must not be opened, it will be several times.
-        """ 
+        """
         self.LOG ("  TextFile.guess_columns: processing file ", self.filename)
-        
+
         endlinechar = "\n "
-        
+
         # n lines
         temp    = TextFile (self.filename, fLOG = self.LOG)
         lines   = []
-        
+
         temp.open ()
         for line in temp :
             line = line.strip (endlinechar)
@@ -403,7 +403,7 @@ class TextFile :
             if len (lines) > nb : break
         self.LOG ("  TextFile.guess_columns: using ", len(lines), " lines")
         temp.close ()
-        
+
         # guess the separation
         sep = TextFile._sep_available
         if force_sep is not None and force_sep not in force_sep :
@@ -419,7 +419,7 @@ class TextFile :
                 if k not in h : h [k]  = 1
                 else :          h [k] += 1
                 mx = max (n, mx)
-                
+
         mx  += 1
         best = None
         iner = None
@@ -427,27 +427,27 @@ class TextFile :
             m = {}
             z = 0
             for k in range (mx) :
-                if (c,k) in h : 
+                if (c,k) in h :
                     m [k] = h [c,k]
                     z    += k * m [k]
-                    
+
             if len (m) == 0 : continue
             g = max (sum ( m.values () ), len (lines))
             if z < max (len (lines) * 9 / 10, 1) : continue
-                
+
             for k in m : m [k] = float (m [k]) / g
             s = 0.0
             for k in m : s += m [k] * math.log (m [k])
             if iner is None or s > iner :
                 iner = s
                 best = c
-                
+
         bestsep = best
-        
+
         if force_sep != None and bestsep != force_sep :
             self.LOG ("  TextFile.guess_columns: changes the separator", repr (force_sep))
             bestsep = force_sep
-        
+
         bestcol = 0
         bestnb  = 0
         for k in range (mx) :
@@ -455,11 +455,11 @@ class TextFile :
                 if bestnb < h [bestsep,k] :
                     bestnb  = h [bestsep,k]
                     bestcol = k+1
-    
+
         self.LOG ("  TextFile.guess_columns: sep ", repr (bestsep), "nb cols", bestcol, " bestnb ", bestnb, " more ", h)
-        
+
         # determine the type of every column
-        
+
         h = { }
         for line in lines :
             cols = line.split (bestsep)
@@ -468,14 +468,14 @@ class TextFile :
                 k = i,ty
                 if k not in h : h [k]  = 1
                 else :          h [k] += 1
-        
+
         columns = { }
         for a in h :
             k,t = a
             if k >= bestcol : continue
             if k not in columns :         columns [k] = (t,h [a])
             elif h [a] > columns [k][1] : columns [k] = (t,h [a])
-                
+
         for pos in columns :
             # int and float corrections
             if columns [pos][0] == int and h.get ( (pos,float), 0) > 0 :
@@ -485,9 +485,9 @@ class TextFile :
             if (columns [pos][0] == int or columns [pos][0] == float or columns[pos][0] == decimal.Decimal) and su > mistake :
                 self.LOG ("  changing column type ", pos, columns [pos], " into ", str, " mistakes ", su, " > ", mistake)
                 columns [pos] = (str, columns [pos][1] + su)
-        
+
         # header or not
-        
+
         mat  = 0
         no   = 0
         cols = lines [0].split (bestsep)
@@ -498,13 +498,13 @@ class TextFile :
                 if t == e : mat += 1
                 else :      no += 1
         header = not force_noheader and (force_header or (no > mat))
-        
+
         # determine the column name
-        
+
         if header :
             names = lines [0].split (bestsep)
             del lines [0]
-            if len (names) != bestcol : 
+            if len (names) != bestcol :
                 raise Exception ("unable to continue: the header does not contain the same number of columns %s != %s" % (len(names), bestcol))
         elif fields is not None :
             if len (fields) != bestcol :
@@ -515,56 +515,56 @@ class TextFile :
             while _ > 0 : hhhh,_ = hhhh,_/10
             format = "c%0" + str (hhhh) + "d"
             names  = [ format % i for i in range (bestcol) ]
-                
+
         for k in columns :
             if k >= len (names) :
                 raise Exception ("incoherence in the file being read: %d >= %d: " % (k, len (names)) + repr (names) + "\n" + repr (columns))
             columns [k] = (changes.get (names [k], names [k]), columns [k][0])
-            
+
         self.LOG ("  TextFile.guess_columns: header ", header, " columns ", columns)
         coy = columns.copy ()
-        
+
         # end
         exp = self._build_regex (bestsep, columns, regex = regex)
         self.LOG ("  TextFile.guess_columns: regex ", exp)
-        
+
         # determines the length of columns
         length  = {}
         no      = 0
         for line in lines :
             spl = line.split (bestsep)
-            if len (spl) != len (columns) : 
+            if len (spl) != len (columns) :
                 continue
             no += 1
             for i,c in enumerate (spl) :
                 vl = length.get (i, 0)
                 if vl < len (c) : length [i] = len (c)
-        
+
         for c in columns :
             v = columns [c]
             if v [1] == str and c in length and length [c] > 0 :
                 v = (v [0], (v [1], length [c]*2))
                 columns [c] = v
-                
+
         if coy != columns :
             self.LOG ("  TextFile.guess_columns: header ", header, " columns ", columns)
-        
+
         return header, columns, bestsep, exp
-        
+
     def count_rejected_lines (self, header, exp, output = None) :
         """
         count the number of rejected lines by regular expression exp
-        
+
         @param      header          header or not in the first line
         @param      exp             regular expression
         @param      output          if != None, output is a stream which will receive the unrecognized line (see below)
         @return                     nb_accepted, nb rejected
-        
+
         Format for the file containing the unrecognized lines:
         @code
         line number \t  line
         @endcode
-        
+
         """
         if isinstance (exp, str) :
             exp = re.compile (exp, re.U)
@@ -581,45 +581,45 @@ class TextFile :
                 continue
             r = exp.search (line)
             if r : acc += 1
-            else : 
+            else :
                 rej += 1
                 if output != None :
                     output.write ("%d\t%s\n" % (nb-1, line))
         temp.close ()
         return acc,rej
-        
+
     _build_regex_default_value_types = {  int:  "([-]?[1-9][0-9]*?)|(0?)",
                                           decimal.Decimal: "([-]?[1-9][0-9]*?L?)|(0?)",
                                           float:      "[-]?[0-9]*?([.][0-9]*?)?([eE][-]?[0-9]{0,4})?",
                                           str:    ".*"}
-            
-    def _build_regex (self, 
-                        sep, 
-                        columns,  
-                        exp     = _build_regex_default_value_types, 
+
+    def _build_regex (self,
+                        sep,
+                        columns,
+                        exp     = _build_regex_default_value_types,
                         nomore  = False,
                         regex   = { }) :
         """
         Build a regular expression.
-        
+
         @param          sep             separator
         @param          columns         columns definition
         @param          exp             regular expression associated to each type, (see below for the default value)
         @param          nomore          private argument, no more try, not possible to simplify
         @param          regex           if the default expression for a field is not the expected one, look into regex if there is one
         @return                         regex
-        
+
         Default value for ``exp``:
-        
+
         @code
-            {   
+            {
                 int:             "([-]?[1-9][0-9]*?)|(0?)",
                 decimal.Decimal: "([-]?[1-9][0-9]*?L?)|(0?)",
                 float:           "[-]?[0-9]*?([.][0-9]*?)?([eE][-]?[0-9]{0,4})?",
                 str:             ".*"
             }
         @endcode
-        
+
         """
         mx      = max (columns.keys ())+1
         res     = [ None for i in range (mx) ]
@@ -627,12 +627,12 @@ class TextFile :
             t = v [1]
             if t not in exp :
                 raise Exception ("unknown type %s" % str (t))
-            if v [0] in regex : res [k] = (v [0], regex [ v [0] ]) 
+            if v [0] in regex : res [k] = (v [0], regex [ v [0] ])
             else :              res [k] = (v [0], exp [t])
         res = [ "(?P<%s>%s)" % c for c in res ]
         if sep == "\t" : sep = "\\t"
         final = "^%s$" % sep.join (res)
-        
+
         try :
             self.LOG("  compiling",final)
             exp = re.compile (final)
@@ -648,8 +648,8 @@ class TextFile :
                     raise Exception ("this expression does not compile (%s), pattern %s, columns %s" % (str (e), final, s))
                 else :
                     raise Exception ("this expression does not compile (%s), pattern %s" % (str (e), final))
-                
-        exp = {     int:        "[-]?[0-9]*?", 
+
+        exp = {     int:        "[-]?[0-9]*?",
                     float:      "[0-9.eE]*?",
                     str:        ".*"}
         return self._build_regex (sep, columns, exp, True)

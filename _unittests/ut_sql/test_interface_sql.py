@@ -26,7 +26,7 @@ from src.pyensae import Database, InterfaceSQL
 
 
 class TestInterfaceSQL (unittest.TestCase):
-    
+
     def test_interface_sql(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         file = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data", "ACA.PA.txt")
@@ -37,40 +37,40 @@ class TestInterfaceSQL (unittest.TestCase):
 
         face = InterfaceSQL.create(dbf)
         face.connect()
-        
+
         tbls = face.get_table_list()
         fLOG(tbls)
         assert tbls == ['ACAPA']
-        
+
         cols  = face.get_table_columns('ACAPA')
         fLOG(cols )
-        assert cols == {0: ('Date', str), 
-                        1: ('Open', float), 
-                        2: ('High', float), 
-                        3: ('Low', float), 
-                        4: ('Close', float), 
-                        5: ('Volume', int), 
+        assert cols == {0: ('Date', str),
+                        1: ('Open', float),
+                        2: ('High', float),
+                        3: ('Low', float),
+                        4: ('Close', float),
+                        5: ('Volume', int),
                         6: ('Adj_Close', float)}
-        
+
         assert face.CC.ACAPA._ == "ACAPA"
         assert face.CC.ACAPA.Date._ == "Date"
-        
+
         sql = "SELECT COUNT(*) FROM ACAPA"
         df = face.execute(sql)
         fLOG(df)
         assert df.columns== ["COUNT(*)"]
         assert len(df) == 1
         assert df.values[0][0] == 2333
-        
+
         sql = "SELECT COUNT(*) FROM DB.CC.ACAPA"
         df2 = face.execute(sql)
         fLOG(df)
         assert df.columns== ["COUNT(*)"]
         assert len(df) == 1
         assert df.values[0][0] == 2333
-        
+
         face.close()
-        
+
     def test_import_sql(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         file = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data", "ACA.PA.txt")
@@ -80,12 +80,12 @@ class TestInterfaceSQL (unittest.TestCase):
 
         face = InterfaceSQL.create(dbf)
         face.connect()
-        
+
         face.import_flat_file(file, "ACAPA2")
         assert face.CC.ACAPA2._ == "ACAPA2"
-        
+
         face.close()
-        
+
 
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

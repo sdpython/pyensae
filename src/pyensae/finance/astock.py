@@ -12,7 +12,7 @@ class StockPrices:
     """
     defines a class containing stock prices, provides basic functions,
     the class uses `pandas <http://pandas.pydata.org/>`_ to load the data.
-    
+
     @example(retrieve stock prices from the Yahoo source)
     @code
     prices = StockPrices(tick = "BNP.PA")
@@ -20,18 +20,18 @@ class StockPrices:
     @endcode
     @endexample
     """
-    
+
     def __init__(self, tick, url="yahoo", folder="cache",
-                begin = None, end = None, sep = ",", 
-                intern=False): 
+                begin = None, end = None, sep = ",",
+                intern=False):
         """
         Loads a stock price from either a url or a folder where the data was cached.
         If a filename ``<folder>/<tick>.<day1>.<day2>.txt`` already exists, it takes it from here.
         Otherwise, it downloads it.
-        
+
         If url is yahoo, the data will be download using ``http://finance.yahoo.com/q/cp?s=^FCHI+Components``.
         The CAC40 composition is described `here <http://fr.wikipedia.org/wiki/CAC_40>`_.
-        
+
         @param      tick        tick name, ex ``BNP.PA``
         @param      url         if yahoo, downloads the data from there if it was not done before
         @param      folder      cache folder (created if it does not exists
@@ -39,11 +39,11 @@ class StockPrices:
         @param      end         last day (datetime), see below
         @param      sep         column separator
         @param      intern      do not use unless you know what to do (see :meth:`__getitem__ <pyensae.finance.astock.StockPrices.__getitem__>`)
-        
+
         If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
         prices for a date before this one).
         If end is None, the date will the date of yesterday.
-        
+
         @example(Compute the average returns and correlation matrix)
         @code
         import pyensae, pandas
@@ -71,9 +71,9 @@ class StockPrices:
         ret, cor = StockPrices.covariance(stocks.values(), cov = False, ret = True)
         @endcode
         @endexample
-        
+
         You should also look at `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_.
-    
+
         """
         if isinstance(url, pandas.DataFrame) :
             self.datadf = url
@@ -96,17 +96,17 @@ class StockPrices:
                 except PermissionError as e :
                     raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")") from e
             self.tickname = tick
-            
+
             if begin is None :
                 begin = datetime.datetime(2000,1,3)
             if end is None :
                 now = datetime.datetime.now()
                 end = now - datetime.timedelta(1)
-            
+
             sbeg = begin.strftime("%Y-%m-%d")
             send = end.strftime("%Y-%m-%d")
             name = os.path.join(folder, tick + ".{0}.{1}.txt".format(sbeg, send))
-            
+
             if not os.path.exists (name) :
                 if url == "yahoo" :
                     url = "http://ichart.finance.yahoo.com/table.csv?s=%s&d={0}&e={1}&f={2}&g=d&a={3}&b={4}&c={5}&ignore=.csv".format(
@@ -115,24 +115,24 @@ class StockPrices:
                     url = url % tick
                 else :
                     raise Exception("unable to download data from the following website" + url)
-                
+
                 try :
                     u = urllib.request.urlopen (url)
                     text = u.read ()
                     u.close ()
                 except urllib.error.HTTPError as e :
                     raise Exception ("unable to load tick " + tick) from e
-                
+
                 if len(text) < 10 :
                     raise Exception("nothing to download for " + tick)
-                       
+
                 try:
                     f = open (name, "wb")
                     f.write(text)
                     f.close ()
                 except PermissionError as e :
                     raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")") from e
-                
+
             try:
                 self.datadf = pandas.read_csv(name, sep=sep)
             except Exception as e :
@@ -141,47 +141,47 @@ class StockPrices:
                     raise Exception("pandas cannot parse the file, check your have access to internet") from e
                 else :
                     raise e
-            
+
         if not intern:
             self.datadf = self.datadf.sort("Date")
             self.datadf.reset_index(drop = True, inplace=True)
             self.datadf.set_index("Date", drop=False, inplace=True)
-        
+
     def __getitem__(self, key):
         """
         overloads the ``getitem`` operator to get a StockPrice object
-        
+
         @param      key     key
         @return             StockPrice
         """
         return StockPrices(self.tick, self.datadf.__getitem__(key), intern=True)
-        
+
     def __len__(self):
         """
         @return     number of observations
         """
         return len(self.datadf)
-        
+
     @property
     def tick(self):
         """
         returns the tick name
         """
         return self.tickname
-    
+
     @property
     def dataframe(self):
         """
         returns the dataframe
         """
         return self.datadf
-        
+
     def df(self):
         """
         returns the dataframe
         """
         return self.datadf
-        
+
     def FirstDate(self):
         """
         returns the first date
@@ -193,39 +193,39 @@ class StockPrices:
         returns the first date
         """
         return self.datadf["Date"].max()
-        
+
     def missing(self, trading_dates):
         """
         return the list of missing dates from an overset of trading dates
-        
+
         @param      trading_dates       trading_dates (DataFrame having the column ``Date`` or in the index)
         @return                         missing dates (or None if issues)
         """
         da = self.dataframe["Date"]
         da2 = { v:1 for v in da }
-        
+
         if isinstance(trading_dates, dict) :
             se = trading_dates
         else :
             se = trading_dates["Date"] if "Date" in trading_dates.columns else trading_dates.index
-            
+
         tbl = [ { "Date":v } for v in se if v not in da2 ]
         if len(tbl) > 0 :
             df = pandas.DataFrame(tbl)
             return df.sort("Date")
         else :
             return None
-        
+
     @staticmethod
     def available_dates ( listStockPrices, missing = True, field="Close") :
         """
         Returns the list of values (Open or High or Low or Close or Volume) from each stock
         for all the available_dates for a list of stock prices.
-        
+
         A missing date is a date for which there is at least one stock price and one missing stock price.
-        
+
         if ``missing`` is true a column is added which gives the number of missing stock prices for this dates
-        
+
         @param      listStockPrices     list of StockPrices
         @param      missing             True or False
         @param      field               which field to use to fill the matrix
@@ -245,7 +245,7 @@ class StockPrices:
                 indexes = [ lifi.index(f) for f in field ]
                 for row in st.dataframe.values :
                     date = row[0]
-                    r = { "Date":date, "tick": st.tick, } 
+                    r = { "Date":date, "tick": st.tick, }
                     for i,f in zip(indexes,field) : r[f] = row[i]
                     dates.append(r)
         else :
@@ -266,7 +266,7 @@ class StockPrices:
                     piv = piv.merge(p,how="outer", left_index=True, right_index=True)
         else :
             raise TypeError("field must be a string, a tuple or a list")
-        
+
         if missing :
             def count_nan(row) :
                 n = 0
@@ -275,37 +275,37 @@ class StockPrices:
                     if numpy.isnan(v) : n+= 1
                 return n
             piv ["missing"] = piv.apply( lambda row : count_nan(row), axis=1 )
-        
+
         piv = piv.sort()
         return piv
-        
+
     def head(self):
         """
         usual
         """
         return self.dataframe.head()
-        
+
     def tail(self):
         """
         usual
         """
         return self.dataframe.tail()
-        
+
     def keep_dates(self, trading_dates):
         """
         removes undesired dates
-        
+
         @param      trading_dates   dates
         @return                     new series
         """
         da = self.dataframe["Date"]
         da2 = { v:1 for v in da }
-        
+
         if isinstance(trading_dates, dict) :
             se = trading_dates
         else :
             se = trading_dates["Date"] if "Date" in trading_dates.columns else trading_dates.index
-            
+
         tbl = { v:1 for v in se if v in da2 }
         if len(tbl) > 0 :
             ave = self.dataframe.apply(lambda row : row["Date"] in tbl, axis=1)
@@ -316,32 +316,32 @@ class StockPrices:
     def returns(self):
         """
         builds the returns series
-        
+
         @param      col     column to use to compute the returns
         @return             StockPrices
         """
         df    = self.dataframe
         fd    = self.FirstDate()
         ld    = self.LastDate()
-        
+
         plus  = df ["Date"] > fd    # dates from FirstDate+1 to LastDate
         moins = df ["Date"] < ld    # dates from FirstDate to LastDate-1
-        
+
         res   = df.ix[plus , ["Date", "Volume"]]
-        
+
         for k in df.columns:
             if k in ["Date", "Volume"] : continue
             m = numpy.array(df.ix[moins,k])
             p = numpy.array(df.ix[plus,k])
             res[k] = (p - m) / m
-            
+
         return StockPrices(self.tickname, res)
-    
+
     @staticmethod
     def covariance(listStockPrices, missing = True, field="Close", cov = True, ret = False) :
         """
         computes the covariances matrix (of returns)
-        
+
         @param      listStockPrices     list of StockPrices
         @param      field               which field to use to fill the matrix
         @param      cov                 if True, returns the covariance, otherwise, the correlations
@@ -355,7 +355,7 @@ class StockPrices:
         cov = numpy.cov (npmat.transpose()) if cov else numpy.corrcoef (npmat.transpose())
         names = [ v.tick for v in listStockPrices ]
         ret_mat = pandas.DataFrame (cov, columns = names, index = names)
-        
+
         if ret :
             rows = [ {"tick":v.tick, "return": v.dataframe[field].mean() } for v in listStockPrices ]
             ret = pandas.DataFrame(rows)
@@ -363,8 +363,8 @@ class StockPrices:
             return ret, ret_mat
         else :
             return ret_mat
-            
-    def plot(self, begin = None, end = None, 
+
+    def plot(self, begin = None, end = None,
                 field="Close", date_format = None,
                 existing = None, axis = 1,
                 **args):
@@ -374,16 +374,16 @@ class StockPrices:
         return StockPrices.draw(self, begin=begin, end=end,
                         field=field, date_format=date_format,
                         existing=existing, axis = axis, **args)
-            
+
     @staticmethod
-    def draw(listStockPrices, begin = None, end = None, 
+    def draw(listStockPrices, begin = None, end = None,
                 field="Close", date_format = None,
                 existing = None, axis = 1,
                 **args) :
         """
         Draw a graph showing one or several time series.
         The example was taken `here <http://matplotlib.org/examples/api/date_demo.html>`_.
-        
+
         @param      listStockPrices     list of @see cl StockPrices (or one @see cl StockPrices if it is the only one)
         @param      begin               first date (datetime) or None to take the first one
         @param      end                 last included date (datetime) or None to take the last one
@@ -394,10 +394,10 @@ class StockPrices:
         @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curves on the second axis.
         @param      args                other parameters to give method ``plt.subplots``
         @return                         fig, ax, plt, (fig,ax) comes ``plt.subplot``, ``plt`` is ``matplotlib.pyplot``
-        
+
         The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
         can change the graph size (see the example below).
-        
+
         @example(graph of a financial series)
         @code
         stocks = [ StockPrices ("BNP.PA", folder = cache),
@@ -407,9 +407,9 @@ class StockPrices:
         fig, ax, plt = StockPrices.draw(stocks)
         fig.savefig("image.png")
         fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01", figsize=(16,8))
-        plt.show()  
+        plt.show()
         @endcode
-        
+
         You can also chain the graphs and add a series on a second graph:
         @code
         stock = StockPrices ("BNP.PA", folder = cache)
@@ -422,7 +422,7 @@ class StockPrices:
         """
         if isinstance(listStockPrices, StockPrices):
             listStockPrices = [ listStockPrices ]
-        
+
         data = StockPrices.available_dates(listStockPrices, missing = False, field = field)
         if begin is None :
             if end is not None :
@@ -432,13 +432,13 @@ class StockPrices:
                 data = data [ (data.index >= begin) &  (data.index <= end)]
             else :
                 data = data [ data.index >= begin ]
-                
+
         dates = [ datetime.datetime.strptime(_, '%Y-%m-%d') for _ in data.index ]
         begin = dates[0]
-        end   = dates[-1] 
-        
+        end   = dates[-1]
+
         def price(x): return '%1.2f'%x
-        
+
         if existing is not None:
             if not isinstance(existing,list) and not isinstance(existing,tuple):
                 raise Exception("existing must be a list or a tuple")
@@ -453,14 +453,14 @@ class StockPrices:
         else :
             fig, ax = plt.subplots(**args)
             ex_h, ex_l = tuple(), tuple()
-        
+
         curve = [ ]
         for stock in data.columns :
             if axis == 2 :
                 curve.append ( ax.plot(dates, data[stock], "r", linestyle='solid', label=str(stock)) )
             else :
                 curve.append ( ax.plot(dates, data[stock], linestyle='solid', label=str(stock)) )
-            
+
         if existing is None :
             ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
             if len(dates) < 30:
@@ -473,7 +473,7 @@ class StockPrices:
                 else :
                     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
             elif len(dates) < 500:
-                months   = mdates.MonthLocator() 
+                months   = mdates.MonthLocator()
                 days     = mdates.DayLocator()
                 ax.xaxis.set_major_locator(months)
                 ax.xaxis.set_minor_locator(days)
@@ -484,7 +484,7 @@ class StockPrices:
                 else :
                     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
             else :
-                years    = mdates.YearLocator() 
+                years    = mdates.YearLocator()
                 months   = mdates.MonthLocator()
                 ax.xaxis.set_major_locator(years)
                 ax.xaxis.set_minor_locator(months)
@@ -493,11 +493,11 @@ class StockPrices:
                     ax.xaxis.set_major_formatter(fmt)
                 else :
                     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
-                
+
         ax.set_xlim(begin, end)
         ax.format_ydata = price
         fig.autofmt_xdate()
-          
+
         if axis == 2 :
             if isinstance(curve,list):
                 curve = [_[0] for _ in curve ]
@@ -506,12 +506,12 @@ class StockPrices:
             ax.grid(True)
             ax.legend( ex_l + tuple(data.columns))
         return fig, ax, plt
-        
+
     def to_csv(self, filename, sep = "\t", index=False, **params):
         """
-        saves the file in text format 
+        saves the file in text format
         see `to_csv <http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_csv.html>`_
-        
+
         @param      filename        filename
         @param      sep             separator
         @param      index           to keep or drop the index
@@ -525,4 +525,3 @@ class StockPrices:
         see `to_excel <http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_excel.html>`_
         """
         self.dataframe.to_excel(excel_writer,**params)
-

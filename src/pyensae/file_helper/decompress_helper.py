@@ -8,7 +8,7 @@ from pyquickhelper import noLOG
 def decompress_zip(filename, whereTo = ".", fLOG = noLOG) :
     """
     unzip a zip file
-    
+
     @param      filename        file to process
     @param      whereTo         location of the result
     @param      fLOG            logging function
@@ -40,7 +40,7 @@ def decompress_zip(filename, whereTo = ".", fLOG = noLOG) :
 def decompress_targz(filename, whereTo = ".", fLOG = noLOG) :
     """
     decompress a tar.gz file
-    
+
     @param      filename        file to process
     @param      folder          location of the result
     @param      fLOG            logging function
@@ -51,11 +51,11 @@ def decompress_targz(filename, whereTo = ".", fLOG = noLOG) :
     tfile.extractall(whereTo)
     t = [ os.path.join(whereTo, f.name) for f in files ]
     return [ f for f in t if os.path.isfile(f) ]
-    
+
 def decompress_gz(filename, whereTo = ".", fLOG = noLOG) :
     """
     decompress a tar.gz file
-    
+
     @param      filename        file to process
     @param      folder          location of the result
     @param      fLOG            logging function
@@ -68,4 +68,3 @@ def decompress_gz(filename, whereTo = ".", fLOG = noLOG) :
         with open(dest, "wb") as g :
             g.write(f.read())
     return [ dest ]
-    

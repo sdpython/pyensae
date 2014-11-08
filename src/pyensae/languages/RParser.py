@@ -181,15 +181,15 @@ class RParser ( Parser ):
     NL=62
     WS=63
 
-    tokenNames = [ "<INVALID>", "'&'", "'['", "'*'", "'<'", "'!='", "'<='", 
-                   "'<<-'", "'next'", "'TRUE'", "'}'", "'[['", "'->'", "'->>'", 
-                   "')'", "'NaN'", "'::'", "'@'", "'='", "'repeat'", "'NA'", 
-                   "'|'", "'!'", "']'", "'in'", "','", "'while'", "'-'", 
-                   "'('", "':'", "'if'", "'?'", "'{'", "'...'", "'break'", 
-                   "'else'", "'<-'", "'$'", "':::'", "'FALSE'", "'^'", "'NULL'", 
-                   "'function'", "'+'", "'for'", "';'", "'&&'", "'||'", 
-                   "'>'", "':='", "'/'", "'=='", "'~'", "'Inf'", "'>='", 
-                   "HEX", "INT", "FLOAT", "COMPLEX", "STRING", "ID", "USER_OP", 
+    tokenNames = [ "<INVALID>", "'&'", "'['", "'*'", "'<'", "'!='", "'<='",
+                   "'<<-'", "'next'", "'TRUE'", "'}'", "'[['", "'->'", "'->>'",
+                   "')'", "'NaN'", "'::'", "'@'", "'='", "'repeat'", "'NA'",
+                   "'|'", "'!'", "']'", "'in'", "','", "'while'", "'-'",
+                   "'('", "':'", "'if'", "'?'", "'{'", "'...'", "'break'",
+                   "'else'", "'<-'", "'$'", "':::'", "'FALSE'", "'^'", "'NULL'",
+                   "'function'", "'+'", "'for'", "';'", "'&&'", "'||'",
+                   "'>'", "':='", "'/'", "'=='", "'~'", "'Inf'", "'>='",
+                   "HEX", "INT", "FLOAT", "COMPLEX", "STRING", "ID", "USER_OP",
                    "NL", "WS" ]
 
     RULE_parse = 0
@@ -200,7 +200,7 @@ class RParser ( Parser ):
     RULE_sublist = 5
     RULE_sub = 6
 
-    ruleNames =  [ "parse", "expr", "exprlist", "formlist", "form", "sublist", 
+    ruleNames =  [ "parse", "expr", "exprlist", "formlist", "form", "sublist",
                    "sub" ]
 
     def __init__(self, input:TokenStream):
@@ -261,7 +261,7 @@ class RParser ( Parser ):
                 self.state = 18
                 token = self._input.LA(1)
                 if token in [self.T__46, self.T__45, self.T__39, self.T__35, self.T__34, self.T__32, self.T__28, self.T__27, self.T__26, self.T__24, self.T__23, self.T__22, self.T__20, self.T__15, self.T__13, self.T__12, self.T__11, self.T__10, self.T__2, self.T__1, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID]:
-                    self.state = 14 
+                    self.state = 14
                     self.expr(0)
                     self.state = 15
                     _la = self._input.LA(1)
@@ -367,21 +367,21 @@ class RParser ( Parser ):
                 if not(_la==RParser.T__27 or _la==RParser.T__11):
                     self._errHandler.recoverInline(self)
                 self.consume()
-                self.state = 27 
+                self.state = 27
                 self.expr(36)
                 pass
 
             elif la_ == 2:
                 self.state = 28
                 self.match(self.T__32)
-                self.state = 29 
+                self.state = 29
                 self.expr(30)
                 pass
 
             elif la_ == 3:
                 self.state = 30
                 self.match(self.T__2)
-                self.state = 31 
+                self.state = 31
                 self.expr(27)
                 pass
 
@@ -393,34 +393,34 @@ class RParser ( Parser ):
                 self.state = 35
                 _la = self._input.LA(1)
                 if _la==RParser.T__21 or _la==RParser.ID:
-                    self.state = 34 
+                    self.state = 34
                     self.formlist()
 
 
                 self.state = 37
                 self.match(self.T__40)
-                self.state = 38 
+                self.state = 38
                 self.expr(24)
                 pass
 
             elif la_ == 5:
                 self.state = 39
                 self.match(self.T__35)
-                self.state = 40 
+                self.state = 40
                 self.expr(17)
                 pass
 
             elif la_ == 6:
                 self.state = 41
                 self.match(self.T__23)
-                self.state = 42 
+                self.state = 42
                 self.expr(16)
                 pass
 
             elif la_ == 7:
                 self.state = 43
                 self.match(self.T__22)
-                self.state = 44 
+                self.state = 44
                 self.exprlist()
                 self.state = 45
                 self.match(self.T__44)
@@ -431,11 +431,11 @@ class RParser ( Parser ):
                 self.match(self.T__24)
                 self.state = 48
                 self.match(self.T__26)
-                self.state = 49 
+                self.state = 49
                 self.expr(0)
                 self.state = 50
                 self.match(self.T__40)
-                self.state = 51 
+                self.state = 51
                 self.expr(0)
                 pass
 
@@ -444,15 +444,15 @@ class RParser ( Parser ):
                 self.match(self.T__24)
                 self.state = 54
                 self.match(self.T__26)
-                self.state = 55 
+                self.state = 55
                 self.expr(0)
                 self.state = 56
                 self.match(self.T__40)
-                self.state = 57 
+                self.state = 57
                 self.expr(0)
                 self.state = 58
                 self.match(self.T__19)
-                self.state = 59 
+                self.state = 59
                 self.expr(0)
                 pass
 
@@ -465,11 +465,11 @@ class RParser ( Parser ):
                 self.match(self.ID)
                 self.state = 64
                 self.match(self.T__30)
-                self.state = 65 
+                self.state = 65
                 self.expr(0)
                 self.state = 66
                 self.match(self.T__40)
-                self.state = 67 
+                self.state = 67
                 self.expr(0)
                 pass
 
@@ -478,11 +478,11 @@ class RParser ( Parser ):
                 self.match(self.T__28)
                 self.state = 70
                 self.match(self.T__26)
-                self.state = 71 
+                self.state = 71
                 self.expr(0)
                 self.state = 72
                 self.match(self.T__40)
-                self.state = 73 
+                self.state = 73
                 self.expr(0)
                 pass
 
@@ -499,7 +499,7 @@ class RParser ( Parser ):
             elif la_ == 14:
                 self.state = 77
                 self.match(self.T__26)
-                self.state = 78 
+                self.state = 78
                 self.expr(0)
                 self.state = 79
                 self.match(self.T__40)
@@ -588,7 +588,7 @@ class RParser ( Parser ):
                         if not(_la==RParser.T__38 or _la==RParser.T__16):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 97 
+                        self.state = 97
                         self.expr(40)
                         pass
 
@@ -603,7 +603,7 @@ class RParser ( Parser ):
                         if not(_la==RParser.T__37 or _la==RParser.T__17):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 100 
+                        self.state = 100
                         self.expr(39)
                         pass
 
@@ -615,7 +615,7 @@ class RParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 37)")
                         self.state = 102
                         self.match(self.T__14)
-                        self.state = 103 
+                        self.state = 103
                         self.expr(38)
                         pass
 
@@ -627,7 +627,7 @@ class RParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 35)")
                         self.state = 105
                         self.match(self.T__25)
-                        self.state = 106 
+                        self.state = 106
                         self.expr(36)
                         pass
 
@@ -639,7 +639,7 @@ class RParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 34)")
                         self.state = 108
                         self.match(self.USER_OP)
-                        self.state = 109 
+                        self.state = 109
                         self.expr(35)
                         pass
 
@@ -654,7 +654,7 @@ class RParser ( Parser ):
                         if not(_la==RParser.T__51 or _la==RParser.T__4):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 112 
+                        self.state = 112
                         self.expr(34)
                         pass
 
@@ -669,7 +669,7 @@ class RParser ( Parser ):
                         if not(_la==RParser.T__27 or _la==RParser.T__11):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 115 
+                        self.state = 115
                         self.expr(33)
                         pass
 
@@ -684,7 +684,7 @@ class RParser ( Parser ):
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.T__50) | (1 << self.T__49) | (1 << self.T__48) | (1 << self.T__6) | (1 << self.T__3) | (1 << self.T__0))) != 0)):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 118 
+                        self.state = 118
                         self.expr(32)
                         pass
 
@@ -699,7 +699,7 @@ class RParser ( Parser ):
                         if not(_la==RParser.T__53 or _la==RParser.T__8):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 121 
+                        self.state = 121
                         self.expr(30)
                         pass
 
@@ -714,7 +714,7 @@ class RParser ( Parser ):
                         if not(_la==RParser.T__33 or _la==RParser.T__7):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 124 
+                        self.state = 124
                         self.expr(29)
                         pass
 
@@ -726,7 +726,7 @@ class RParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 26)")
                         self.state = 126
                         self.match(self.T__2)
-                        self.state = 127 
+                        self.state = 127
                         self.expr(27)
                         pass
 
@@ -741,7 +741,7 @@ class RParser ( Parser ):
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.T__47) | (1 << self.T__42) | (1 << self.T__41) | (1 << self.T__36) | (1 << self.T__18) | (1 << self.T__5))) != 0)):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 130 
+                        self.state = 130
                         self.expr(26)
                         pass
 
@@ -753,7 +753,7 @@ class RParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 41)")
                         self.state = 132
                         self.match(self.T__43)
-                        self.state = 133 
+                        self.state = 133
                         self.sublist()
                         self.state = 134
                         self.match(self.T__31)
@@ -769,7 +769,7 @@ class RParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 40)")
                         self.state = 138
                         self.match(self.T__52)
-                        self.state = 139 
+                        self.state = 139
                         self.sublist()
                         self.state = 140
                         self.match(self.T__31)
@@ -783,13 +783,13 @@ class RParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 23)")
                         self.state = 143
                         self.match(self.T__26)
-                        self.state = 144 
+                        self.state = 144
                         self.sublist()
                         self.state = 145
                         self.match(self.T__40)
                         pass
 
-             
+
                 self.state = 151
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,5,self._ctx)
@@ -845,7 +845,7 @@ class RParser ( Parser ):
             token = self._input.LA(1)
             if token in [self.T__46, self.T__45, self.T__39, self.T__35, self.T__34, self.T__32, self.T__28, self.T__27, self.T__26, self.T__24, self.T__23, self.T__22, self.T__20, self.T__15, self.T__13, self.T__12, self.T__11, self.T__10, self.T__2, self.T__1, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 152 
+                self.state = 152
                 self.expr(0)
                 self.state = 159
                 self._errHandler.sync(self)
@@ -859,7 +859,7 @@ class RParser ( Parser ):
                     self.state = 155
                     _la = self._input.LA(1)
                     if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.T__46) | (1 << self.T__45) | (1 << self.T__39) | (1 << self.T__35) | (1 << self.T__34) | (1 << self.T__32) | (1 << self.T__28) | (1 << self.T__27) | (1 << self.T__26) | (1 << self.T__24) | (1 << self.T__23) | (1 << self.T__22) | (1 << self.T__20) | (1 << self.T__15) | (1 << self.T__13) | (1 << self.T__12) | (1 << self.T__11) | (1 << self.T__10) | (1 << self.T__2) | (1 << self.T__1) | (1 << self.HEX) | (1 << self.INT) | (1 << self.FLOAT) | (1 << self.COMPLEX) | (1 << self.STRING) | (1 << self.ID))) != 0):
-                        self.state = 154 
+                        self.state = 154
                         self.expr(0)
 
 
@@ -917,7 +917,7 @@ class RParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 165 
+            self.state = 165
             self.form()
             self.state = 170
             self._errHandler.sync(self)
@@ -925,7 +925,7 @@ class RParser ( Parser ):
             while _la==RParser.T__29:
                 self.state = 166
                 self.match(self.T__29)
-                self.state = 167 
+                self.state = 167
                 self.form()
                 self.state = 172
                 self._errHandler.sync(self)
@@ -985,7 +985,7 @@ class RParser ( Parser ):
                 self.match(self.ID)
                 self.state = 175
                 self.match(self.T__36)
-                self.state = 176 
+                self.state = 176
                 self.expr(0)
                 pass
 
@@ -1038,7 +1038,7 @@ class RParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 180 
+            self.state = 180
             self.sub()
             self.state = 185
             self._errHandler.sync(self)
@@ -1046,7 +1046,7 @@ class RParser ( Parser ):
             while _la==RParser.T__29:
                 self.state = 181
                 self.match(self.T__29)
-                self.state = 182 
+                self.state = 182
                 self.sub()
                 self.state = 187
                 self._errHandler.sync(self)
@@ -1099,7 +1099,7 @@ class RParser ( Parser ):
             la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 188 
+                self.state = 188
                 self.expr(0)
                 pass
 
@@ -1117,7 +1117,7 @@ class RParser ( Parser ):
                 self.match(self.ID)
                 self.state = 192
                 self.match(self.T__36)
-                self.state = 193 
+                self.state = 193
                 self.expr(0)
                 pass
 
@@ -1135,7 +1135,7 @@ class RParser ( Parser ):
                 self.match(self.STRING)
                 self.state = 197
                 self.match(self.T__36)
-                self.state = 198 
+                self.state = 198
                 self.expr(0)
                 pass
 
@@ -1153,7 +1153,7 @@ class RParser ( Parser ):
                 self.match(self.T__13)
                 self.state = 202
                 self.match(self.T__36)
-                self.state = 203 
+                self.state = 203
                 self.expr(0)
                 pass
 
@@ -1192,63 +1192,59 @@ class RParser ( Parser ):
     def expr_sempred(self, localctx:ExprContext, predIndex:int):
             if predIndex == 0:
                 return self.precpred(self._ctx, 39)
-         
+
 
             if predIndex == 1:
                 return self.precpred(self._ctx, 38)
-         
+
 
             if predIndex == 2:
                 return self.precpred(self._ctx, 37)
-         
+
 
             if predIndex == 3:
                 return self.precpred(self._ctx, 35)
-         
+
 
             if predIndex == 4:
                 return self.precpred(self._ctx, 34)
-         
+
 
             if predIndex == 5:
                 return self.precpred(self._ctx, 33)
-         
+
 
             if predIndex == 6:
                 return self.precpred(self._ctx, 32)
-         
+
 
             if predIndex == 7:
                 return self.precpred(self._ctx, 31)
-         
+
 
             if predIndex == 8:
                 return self.precpred(self._ctx, 29)
-         
+
 
             if predIndex == 9:
                 return self.precpred(self._ctx, 28)
-         
+
 
             if predIndex == 10:
                 return self.precpred(self._ctx, 26)
-         
+
 
             if predIndex == 11:
                 return self.precpred(self._ctx, 25)
-         
+
 
             if predIndex == 12:
                 return self.precpred(self._ctx, 41)
-         
+
 
             if predIndex == 13:
                 return self.precpred(self._ctx, 40)
-         
+
 
             if predIndex == 14:
                 return self.precpred(self._ctx, 23)
-         
-
-
-

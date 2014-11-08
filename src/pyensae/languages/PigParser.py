@@ -363,24 +363,24 @@ class PigParser ( Parser ):
     RIGHT_CURLY=99
     BAG_VAL=100
 
-    tokenNames = [ "<INVALID>", "'define'", "'load'", "'filter'", "'foreach'", 
-                   "'order'", "'arrange'", "'distinct'", "'cogroup'", "'join'", 
-                   "'cross'", "'union'", "'split'", "'into'", "'if'", "'all'", 
-                   "'any'", "'as'", "'by'", "'using'", "'inner'", "'outer'", 
-                   "'ONSCHEMA'", "'*'", "'parallel'", "'partition'", "'group'", 
-                   "'and'", "'or'", "'not'", "'generate'", "'flatten'", 
-                   "'eval'", "'asc'", "'desc'", "'int'", "'long'", "'float'", 
-                   "'double'", "'chararray'", "'bytearray'", "'bag'", "'tuple'", 
-                   "'map'", "'is'", "'null'", "'stream'", "'through'", "'store'", 
-                   "'mapreduce'", "'ship'", "'cache'", "'input'", "'output'", 
-                   "'stderr'", "'stdin'", "'stdout'", "'limit'", "'sample'", 
-                   "'left'", "'right'", "'full'", "IDENTIFIER", "INTEGER", 
-                   "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING", 
-                   "EXECCOMMAND", "'$'", "WS", "SL_COMMENT", "ML_COMMENT", 
-                   "FILTEROP", "':'", "';'", "'('", "')'", "'{'", "'}'", 
-                   "'['", "']'", "'#'", "'='", "','", "'.'", "'/'", "'%'", 
-                   "'+'", "'-'", "'?'", "FUNC", "START", "CAST_EXPR", "BIN_EXPR", 
-                   "LONGINEGER", "MAP_VAL", "KEY_VAL_PAIR", "LEFT_CURLY", 
+    tokenNames = [ "<INVALID>", "'define'", "'load'", "'filter'", "'foreach'",
+                   "'order'", "'arrange'", "'distinct'", "'cogroup'", "'join'",
+                   "'cross'", "'union'", "'split'", "'into'", "'if'", "'all'",
+                   "'any'", "'as'", "'by'", "'using'", "'inner'", "'outer'",
+                   "'ONSCHEMA'", "'*'", "'parallel'", "'partition'", "'group'",
+                   "'and'", "'or'", "'not'", "'generate'", "'flatten'",
+                   "'eval'", "'asc'", "'desc'", "'int'", "'long'", "'float'",
+                   "'double'", "'chararray'", "'bytearray'", "'bag'", "'tuple'",
+                   "'map'", "'is'", "'null'", "'stream'", "'through'", "'store'",
+                   "'mapreduce'", "'ship'", "'cache'", "'input'", "'output'",
+                   "'stderr'", "'stdin'", "'stdout'", "'limit'", "'sample'",
+                   "'left'", "'right'", "'full'", "IDENTIFIER", "INTEGER",
+                   "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING",
+                   "EXECCOMMAND", "'$'", "WS", "SL_COMMENT", "ML_COMMENT",
+                   "FILTEROP", "':'", "';'", "'('", "')'", "'{'", "'}'",
+                   "'['", "']'", "'#'", "'='", "','", "'.'", "'/'", "'%'",
+                   "'+'", "'-'", "'?'", "FUNC", "START", "CAST_EXPR", "BIN_EXPR",
+                   "LONGINEGER", "MAP_VAL", "KEY_VAL_PAIR", "LEFT_CURLY",
                    "RIGHT_CURLY", "BAG_VAL" ]
 
     RULE_parse = 0
@@ -434,17 +434,17 @@ class PigParser ( Parser ):
     RULE_bag = 48
     RULE_tuple = 49
 
-    ruleNames =  [ "parse", "query", "statement", "alias", "op_clause", 
-                   "load_clause", "filename", "as_clause", "tuple_def", 
-                   "field", "type", "simple_type", "tuple_type", "bag_type", 
-                   "map_type", "func_clause", "func_name", "func_args", 
-                   "store_clause", "filter_clause", "cond", "or_cond", "and_cond", 
-                   "unary_cond", "not_cond", "null_check_cond", "expr", 
-                   "add_expr", "multi_expr", "cast_expr", "unary_expr", 
-                   "eval_expr", "var_expr", "projectable_expr", "dot_proj", 
-                   "pound_proj", "bin_expr", "neg_expr", "distinct_clause", 
-                   "col_ref", "alias_col_ref", "dollar_col_ref", "infix_expr", 
-                   "const_expr", "scalar", "map", "keyvalue", "string_val", 
+    ruleNames =  [ "parse", "query", "statement", "alias", "op_clause",
+                   "load_clause", "filename", "as_clause", "tuple_def",
+                   "field", "type", "simple_type", "tuple_type", "bag_type",
+                   "map_type", "func_clause", "func_name", "func_args",
+                   "store_clause", "filter_clause", "cond", "or_cond", "and_cond",
+                   "unary_cond", "not_cond", "null_check_cond", "expr",
+                   "add_expr", "multi_expr", "cast_expr", "unary_expr",
+                   "eval_expr", "var_expr", "projectable_expr", "dot_proj",
+                   "pound_proj", "bin_expr", "neg_expr", "distinct_clause",
+                   "col_ref", "alias_col_ref", "dollar_col_ref", "infix_expr",
+                   "const_expr", "scalar", "map", "keyvalue", "string_val",
                    "bag", "tuple" ]
 
     def __init__(self, input:TokenStream):
@@ -488,7 +488,7 @@ class PigParser ( Parser ):
         self.enterRule(localctx, 0, self.RULE_parse)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 100 
+            self.state = 100
             self.query(0)
             self.state = 101
             self.match(self.EOF)
@@ -550,8 +550,8 @@ class PigParser ( Parser ):
                 _alt = self._interp.adaptivePredict(self._input,0,self._ctx)
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt==1:
-                        self.state = 104 
-                        self.statement() 
+                        self.state = 104
+                        self.statement()
                     self.state = 109
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,0,self._ctx)
@@ -561,7 +561,7 @@ class PigParser ( Parser ):
             elif la_ == 2:
                 self.state = 110
                 self.match(self.NOT)
-                self.state = 111 
+                self.state = 111
                 self.statement()
                 pass
 
@@ -580,8 +580,8 @@ class PigParser ( Parser ):
                     self.state = 114
                     if not self.precpred(self._ctx, 1):
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
-                    self.state = 115 
-                    self.statement() 
+                    self.state = 115
+                    self.statement()
                 self.state = 120
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,2,self._ctx)
@@ -648,13 +648,13 @@ class PigParser ( Parser ):
                 self.state = 124
                 _la = self._input.LA(1)
                 if _la==PigParser.IDENTIFIER:
-                    self.state = 121 
+                    self.state = 121
                     self.alias()
                     self.state = 122
                     self.match(self.EQUAL)
 
 
-                self.state = 126 
+                self.state = 126
                 self.op_clause()
                 self.state = 127
                 self.match(self.SEMI_COLON)
@@ -664,16 +664,16 @@ class PigParser ( Parser ):
                 self.state = 129
                 self.match(self.NOT)
 
-                self.state = 130 
+                self.state = 130
                 self.statement()
                 self.state = 132
                 _la = self._input.LA(1)
                 if _la==PigParser.IDENTIFIER:
-                    self.state = 131 
+                    self.state = 131
                     self.alias()
 
 
-                self.state = 134 
+                self.state = 134
                 self.op_clause()
 
             else:
@@ -771,22 +771,22 @@ class PigParser ( Parser ):
             token = self._input.LA(1)
             if token in [self.LOAD]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 140 
+                self.state = 140
                 self.load_clause()
 
             elif token in [self.STORE]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 141 
+                self.state = 141
                 self.store_clause()
 
             elif token in [self.FILTER]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 142 
+                self.state = 142
                 self.filter_clause()
 
             elif token in [self.DISTINCT]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 143 
+                self.state = 143
                 self.distinct_clause()
 
             else:
@@ -846,21 +846,21 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 146
             self.match(self.LOAD)
-            self.state = 147 
+            self.state = 147
             self.filename()
             self.state = 150
             la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
             if la_ == 1:
                 self.state = 148
                 self.match(self.USING)
-                self.state = 149 
+                self.state = 149
                 self.func_clause()
 
 
             self.state = 153
             la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
             if la_ == 1:
-                self.state = 152 
+                self.state = 152
                 self.as_clause()
 
 
@@ -946,7 +946,7 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 157
             self.match(self.AS)
-            self.state = 158 
+            self.state = 158
             self.tuple_def()
         except RecognitionException as re:
             localctx.exception = re
@@ -1014,7 +1014,7 @@ class PigParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 160
                 self.match(self.LEFT_PAREN)
-                self.state = 161 
+                self.state = 161
                 self.field()
                 self.state = 166
                 self._errHandler.sync(self)
@@ -1022,7 +1022,7 @@ class PigParser ( Parser ):
                 while _la==PigParser.COMMA:
                     self.state = 162
                     self.match(self.COMMA)
-                    self.state = 163 
+                    self.state = 163
                     self.field()
                     self.state = 168
                     self._errHandler.sync(self)
@@ -1036,19 +1036,19 @@ class PigParser ( Parser ):
                 self.state = 171
                 self.match(self.NOT)
 
-                self.state = 172 
+                self.state = 172
                 self.tuple_def()
-                self.state = 174 
+                self.state = 174
                 self._errHandler.sync(self)
                 _alt = 1
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
-                        self.state = 173 
+                        self.state = 173
                         self.field()
 
                     else:
                         raise NoViableAltException(self)
-                    self.state = 176 
+                    self.state = 176
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,10,self._ctx)
 
@@ -1117,7 +1117,7 @@ class PigParser ( Parser ):
                 if la_ == 1:
                     self.state = 181
                     self.match(self.COLON)
-                    self.state = 182 
+                    self.state = 182
                     self.type()
 
 
@@ -1127,14 +1127,14 @@ class PigParser ( Parser ):
                 self.state = 185
                 self.match(self.NOT)
 
-                self.state = 186 
+                self.state = 186
                 self.field()
                 self.state = 187
                 self.match(self.IDENTIFIER)
                 self.state = 189
                 la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
                 if la_ == 1:
-                    self.state = 188 
+                    self.state = 188
                     self.type()
 
 
@@ -1195,22 +1195,22 @@ class PigParser ( Parser ):
             token = self._input.LA(1)
             if token in [self.INT, self.LONG, self.FLOAT, self.DOUBLE, self.CHARARRAY, self.BYTEARRAY]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 193 
+                self.state = 193
                 self.simple_type()
 
             elif token in [self.NOT, self.LEFT_PAREN]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 194 
+                self.state = 194
                 self.tuple_type()
 
             elif token in [self.BAG]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 195 
+                self.state = 195
                 self.bag_type()
 
             elif token in [self.MAP]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 196 
+                self.state = 196
                 self.map_type()
 
             else:
@@ -1316,9 +1316,9 @@ class PigParser ( Parser ):
         self.enterRule(localctx, 24, self.RULE_tuple_type)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 201 
+            self.state = 201
             self.tuple()
-            self.state = 202 
+            self.state = 202
             self.tuple_def()
         except RecognitionException as re:
             localctx.exception = re
@@ -1363,7 +1363,7 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 204
             self.match(self.BAG)
-            self.state = 205 
+            self.state = 205
             self.tuple_def()
         except RecognitionException as re:
             localctx.exception = re
@@ -1472,14 +1472,14 @@ class PigParser ( Parser ):
             token = self._input.LA(1)
             if token in [self.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 211 
+                self.state = 211
                 self.func_name()
                 self.state = 212
                 self.match(self.LEFT_PAREN)
                 self.state = 214
                 _la = self._input.LA(1)
                 if _la==PigParser.QUOTEDSTRING:
-                    self.state = 213 
+                    self.state = 213
                     self.func_args()
 
 
@@ -1493,12 +1493,12 @@ class PigParser ( Parser ):
 
                 self.state = 219
                 self.match(self.FUNC)
-                self.state = 220 
+                self.state = 220
                 self.func_name()
                 self.state = 222
                 la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
                 if la_ == 1:
-                    self.state = 221 
+                    self.state = 221
                     self.func_args()
 
 
@@ -1565,7 +1565,7 @@ class PigParser ( Parser ):
                         self.state = 227
                         self.match(self.PERIOD)
                         self.state = 228
-                        self.match(self.IDENTIFIER) 
+                        self.match(self.IDENTIFIER)
                     self.state = 233
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
@@ -1574,7 +1574,7 @@ class PigParser ( Parser ):
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 235 
+                self.state = 235
                 self._errHandler.sync(self)
                 _alt = 1
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1584,7 +1584,7 @@ class PigParser ( Parser ):
 
                     else:
                         raise NoViableAltException(self)
-                    self.state = 237 
+                    self.state = 237
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
 
@@ -1650,7 +1650,7 @@ class PigParser ( Parser ):
                         self.state = 242
                         self.match(self.COMMA)
                         self.state = 243
-                        self.match(self.QUOTEDSTRING) 
+                        self.match(self.QUOTEDSTRING)
                     self.state = 248
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,22,self._ctx)
@@ -1659,7 +1659,7 @@ class PigParser ( Parser ):
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 250 
+                self.state = 250
                 self._errHandler.sync(self)
                 _alt = 1
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -1669,7 +1669,7 @@ class PigParser ( Parser ):
 
                     else:
                         raise NoViableAltException(self)
-                    self.state = 252 
+                    self.state = 252
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,23,self._ctx)
 
@@ -1733,18 +1733,18 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 256
             self.match(self.STORE)
-            self.state = 257 
+            self.state = 257
             self.alias()
             self.state = 258
             self.match(self.INTO)
-            self.state = 259 
+            self.state = 259
             self.filename()
             self.state = 262
             la_ = self._interp.adaptivePredict(self._input,25,self._ctx)
             if la_ == 1:
                 self.state = 260
                 self.match(self.USING)
-                self.state = 261 
+                self.state = 261
                 self.func_clause()
 
 
@@ -1798,11 +1798,11 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 264
             self.match(self.FILTER)
-            self.state = 265 
+            self.state = 265
             self.alias()
             self.state = 266
             self.match(self.BY)
-            self.state = 267 
+            self.state = 267
             self.cond()
         except RecognitionException as re:
             localctx.exception = re
@@ -1842,7 +1842,7 @@ class PigParser ( Parser ):
         self.enterRule(localctx, 40, self.RULE_cond)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 269 
+            self.state = 269
             self.or_cond()
         except RecognitionException as re:
             localctx.exception = re
@@ -1891,7 +1891,7 @@ class PigParser ( Parser ):
         self.enterRule(localctx, 42, self.RULE_or_cond)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 271 
+            self.state = 271
             self.and_cond()
             self.state = 276
             self._errHandler.sync(self)
@@ -1900,8 +1900,8 @@ class PigParser ( Parser ):
                 if _alt==1:
                     self.state = 272
                     self.match(self.OR)
-                    self.state = 273 
-                    self.and_cond() 
+                    self.state = 273
+                    self.and_cond()
                 self.state = 278
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,26,self._ctx)
@@ -1953,7 +1953,7 @@ class PigParser ( Parser ):
         self.enterRule(localctx, 44, self.RULE_and_cond)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 279 
+            self.state = 279
             self.unary_cond()
             self.state = 284
             self._errHandler.sync(self)
@@ -1962,8 +1962,8 @@ class PigParser ( Parser ):
                 if _alt==1:
                     self.state = 280
                     self.match(self.AND)
-                    self.state = 281 
-                    self.unary_cond() 
+                    self.state = 281
+                    self.unary_cond()
                 self.state = 286
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,27,self._ctx)
@@ -2039,7 +2039,7 @@ class PigParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 287
                 self.match(self.LEFT_PAREN)
-                self.state = 288 
+                self.state = 288
                 self.cond()
                 self.state = 289
                 self.match(self.RIGHT_PAREN)
@@ -2047,29 +2047,29 @@ class PigParser ( Parser ):
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 291 
+                self.state = 291
                 self.expr()
                 self.state = 292
                 self.match(self.FILTEROP)
-                self.state = 293 
+                self.state = 293
                 self.expr()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 295 
+                self.state = 295
                 self.func_clause()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 296 
+                self.state = 296
                 self.null_check_cond()
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 297 
+                self.state = 297
                 self.not_cond()
                 pass
 
@@ -2117,7 +2117,7 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 300
             self.match(self.NOT)
-            self.state = 301 
+            self.state = 301
             self.unary_cond()
         except RecognitionException as re:
             localctx.exception = re
@@ -2167,7 +2167,7 @@ class PigParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 303 
+            self.state = 303
             self.expr()
             self.state = 304
             self.match(self.IS)
@@ -2218,7 +2218,7 @@ class PigParser ( Parser ):
         self.enterRule(localctx, 52, self.RULE_expr)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 310 
+            self.state = 310
             self.add_expr()
         except RecognitionException as re:
             localctx.exception = re
@@ -2274,7 +2274,7 @@ class PigParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 312 
+            self.state = 312
             self.multi_expr()
             self.state = 317
             self._errHandler.sync(self)
@@ -2286,8 +2286,8 @@ class PigParser ( Parser ):
                     if not(_la==PigParser.PLUS or _la==PigParser.MINUS):
                         self._errHandler.recoverInline(self)
                     self.consume()
-                    self.state = 314 
-                    self.multi_expr() 
+                    self.state = 314
+                    self.multi_expr()
                 self.state = 319
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,30,self._ctx)
@@ -2352,7 +2352,7 @@ class PigParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 320 
+            self.state = 320
             self.cast_expr()
             self.state = 325
             self._errHandler.sync(self)
@@ -2364,8 +2364,8 @@ class PigParser ( Parser ):
                     if not(((((_la - 86)) & ~0x3f) == 0 and ((1 << (_la - 86)) & ((1 << (self.DIV - 86)) | (1 << (self.PERCENT - 86)) | (1 << (self.START - 86)))) != 0)):
                         self._errHandler.recoverInline(self)
                     self.consume()
-                    self.state = 322 
-                    self.cast_expr() 
+                    self.state = 322
+                    self.cast_expr()
                 self.state = 327
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,31,self._ctx)
@@ -2429,11 +2429,11 @@ class PigParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 328
                 self.match(self.LEFT_PAREN)
-                self.state = 329 
+                self.state = 329
                 self.type()
                 self.state = 330
                 self.match(self.RIGHT_PAREN)
-                self.state = 332 
+                self.state = 332
                 self.unary_expr()
                 pass
 
@@ -2444,15 +2444,15 @@ class PigParser ( Parser ):
 
                 self.state = 335
                 self.match(self.CAST_EXPR)
-                self.state = 336 
+                self.state = 336
                 self.type()
-                self.state = 337 
+                self.state = 337
                 self.unary_expr()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 339 
+                self.state = 339
                 self.unary_expr()
                 pass
 
@@ -2512,7 +2512,7 @@ class PigParser ( Parser ):
             la_ = self._interp.adaptivePredict(self._input,33,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 342 
+                self.state = 342
                 self.eval_expr()
                 pass
 
@@ -2520,7 +2520,7 @@ class PigParser ( Parser ):
                 self.enterOuterAlt(localctx, 2)
                 self.state = 343
                 self.match(self.LEFT_PAREN)
-                self.state = 344 
+                self.state = 344
                 self.infix_expr()
                 self.state = 345
                 self.match(self.RIGHT_PAREN)
@@ -2528,7 +2528,7 @@ class PigParser ( Parser ):
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 347 
+                self.state = 347
                 self.neg_expr()
                 pass
 
@@ -2578,13 +2578,13 @@ class PigParser ( Parser ):
             la_ = self._interp.adaptivePredict(self._input,34,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 350 
+                self.state = 350
                 self.const_expr()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 351 
+                self.state = 351
                 self.var_expr()
                 pass
 
@@ -2641,7 +2641,7 @@ class PigParser ( Parser ):
         self.enterRule(localctx, 64, self.RULE_var_expr)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 354 
+            self.state = 354
             self.projectable_expr()
             self.state = 359
             self._errHandler.sync(self)
@@ -2651,16 +2651,16 @@ class PigParser ( Parser ):
                     self.state = 357
                     token = self._input.LA(1)
                     if token in [self.NOT, self.PERIOD]:
-                        self.state = 355 
+                        self.state = 355
                         self.dot_proj()
 
                     elif token in [self.POUND]:
-                        self.state = 356 
+                        self.state = 356
                         self.pound_proj()
 
                     else:
                         raise NoViableAltException(self)
-             
+
                 self.state = 361
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,36,self._ctx)
@@ -2714,19 +2714,19 @@ class PigParser ( Parser ):
             la_ = self._interp.adaptivePredict(self._input,37,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 362 
+                self.state = 362
                 self.func_clause()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 363 
+                self.state = 363
                 self.col_ref()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 364 
+                self.state = 364
                 self.bin_expr()
                 pass
 
@@ -2799,13 +2799,13 @@ class PigParser ( Parser ):
                 self.state = 380
                 token = self._input.LA(1)
                 if token in [self.GROUP, self.IDENTIFIER, self.DOLLAR]:
-                    self.state = 368 
+                    self.state = 368
                     self.col_ref()
 
                 elif token in [self.LEFT_PAREN]:
                     self.state = 369
                     self.match(self.LEFT_PAREN)
-                    self.state = 370 
+                    self.state = 370
                     self.col_ref()
                     self.state = 375
                     self._errHandler.sync(self)
@@ -2813,7 +2813,7 @@ class PigParser ( Parser ):
                     while _la==PigParser.COMMA:
                         self.state = 371
                         self.match(self.COMMA)
-                        self.state = 372 
+                        self.state = 372
                         self.col_ref()
                         self.state = 377
                         self._errHandler.sync(self)
@@ -2833,17 +2833,17 @@ class PigParser ( Parser ):
 
                 self.state = 383
                 self.match(self.PERIOD)
-                self.state = 385 
+                self.state = 385
                 self._errHandler.sync(self)
                 _alt = 1
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
-                        self.state = 384 
+                        self.state = 384
                         self.col_ref()
 
                     else:
                         raise NoViableAltException(self)
-                    self.state = 387 
+                    self.state = 387
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,40,self._ctx)
 
@@ -2970,15 +2970,15 @@ class PigParser ( Parser ):
                 self.enterOuterAlt(localctx, 1)
                 self.state = 394
                 self.match(self.LEFT_PAREN)
-                self.state = 395 
+                self.state = 395
                 self.cond()
                 self.state = 396
                 self.match(self.QMARK)
-                self.state = 397 
+                self.state = 397
                 self.infix_expr()
                 self.state = 398
                 self.match(self.COLON)
-                self.state = 399 
+                self.state = 399
                 self.infix_expr()
                 self.state = 400
                 self.match(self.RIGHT_PAREN)
@@ -2990,11 +2990,11 @@ class PigParser ( Parser ):
 
                 self.state = 403
                 self.match(self.BIN_EXPR)
-                self.state = 404 
+                self.state = 404
                 self.cond()
-                self.state = 405 
+                self.state = 405
                 self.infix_expr()
-                self.state = 406 
+                self.state = 406
                 self.infix_expr()
 
             else:
@@ -3043,7 +3043,7 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 410
             self.match(self.MINUS)
-            self.state = 411 
+            self.state = 411
             self.cast_expr()
         except RecognitionException as re:
             localctx.exception = re
@@ -3088,7 +3088,7 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 413
             self.match(self.DISTINCT)
-            self.state = 414 
+            self.state = 414
             self.alias()
         except RecognitionException as re:
             localctx.exception = re
@@ -3135,12 +3135,12 @@ class PigParser ( Parser ):
             token = self._input.LA(1)
             if token in [self.GROUP, self.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 416 
+                self.state = 416
                 self.alias_col_ref()
 
             elif token in [self.DOLLAR]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 417 
+                self.state = 417
                 self.dollar_col_ref()
 
             else:
@@ -3274,7 +3274,7 @@ class PigParser ( Parser ):
         self.enterRule(localctx, 84, self.RULE_infix_expr)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 425 
+            self.state = 425
             self.add_expr()
         except RecognitionException as re:
             localctx.exception = re
@@ -3329,25 +3329,25 @@ class PigParser ( Parser ):
             la_ = self._interp.adaptivePredict(self._input,44,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 427 
+                self.state = 427
                 self.scalar()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 428 
+                self.state = 428
                 self.map()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 429 
+                self.state = 429
                 self.bag()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 430 
+                self.state = 430
                 self.tuple()
                 pass
 
@@ -3478,7 +3478,7 @@ class PigParser ( Parser ):
                 self.state = 444
                 _la = self._input.LA(1)
                 if ((((_la - 29)) & ~0x3f) == 0 and ((1 << (_la - 29)) & ((1 << (self.NOT - 29)) | (1 << (self.NULL - 29)) | (1 << (self.QUOTEDSTRING - 29)))) != 0):
-                    self.state = 436 
+                    self.state = 436
                     self.keyvalue()
                     self.state = 441
                     self._errHandler.sync(self)
@@ -3486,7 +3486,7 @@ class PigParser ( Parser ):
                     while _la==PigParser.COMMA:
                         self.state = 437
                         self.match(self.COMMA)
-                        self.state = 438 
+                        self.state = 438
                         self.keyvalue()
                         self.state = 443
                         self._errHandler.sync(self)
@@ -3504,17 +3504,17 @@ class PigParser ( Parser ):
 
                 self.state = 448
                 self.match(self.MAP_VAL)
-                self.state = 450 
+                self.state = 450
                 self._errHandler.sync(self)
                 _alt = 1
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
-                        self.state = 449 
+                        self.state = 449
                         self.keyvalue()
 
                     else:
                         raise NoViableAltException(self)
-                    self.state = 452 
+                    self.state = 452
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,47,self._ctx)
 
@@ -3576,11 +3576,11 @@ class PigParser ( Parser ):
             token = self._input.LA(1)
             if token in [self.NULL, self.QUOTEDSTRING]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 456 
+                self.state = 456
                 self.string_val()
                 self.state = 457
                 self.match(self.POUND)
-                self.state = 458 
+                self.state = 458
                 self.const_expr()
 
             elif token in [self.NOT]:
@@ -3590,9 +3590,9 @@ class PigParser ( Parser ):
 
                 self.state = 461
                 self.match(self.KEY_VAL_PAIR)
-                self.state = 462 
+                self.state = 462
                 self.string_val()
-                self.state = 463 
+                self.state = 463
                 self.const_expr()
 
             else:
@@ -3712,7 +3712,7 @@ class PigParser ( Parser ):
                 self.state = 478
                 _la = self._input.LA(1)
                 if _la==PigParser.NOT or _la==PigParser.LEFT_PAREN:
-                    self.state = 470 
+                    self.state = 470
                     self.tuple()
                     self.state = 475
                     self._errHandler.sync(self)
@@ -3720,7 +3720,7 @@ class PigParser ( Parser ):
                     while _la==PigParser.COMMA:
                         self.state = 471
                         self.match(self.COMMA)
-                        self.state = 472 
+                        self.state = 472
                         self.tuple()
                         self.state = 477
                         self._errHandler.sync(self)
@@ -3738,17 +3738,17 @@ class PigParser ( Parser ):
 
                 self.state = 482
                 self.match(self.BAG_VAL)
-                self.state = 484 
+                self.state = 484
                 self._errHandler.sync(self)
                 _alt = 1
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
-                        self.state = 483 
+                        self.state = 483
                         self.tuple()
 
                     else:
                         raise NoViableAltException(self)
-                    self.state = 486 
+                    self.state = 486
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,52,self._ctx)
 
@@ -3825,7 +3825,7 @@ class PigParser ( Parser ):
                 self.state = 499
                 _la = self._input.LA(1)
                 if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.NOT) | (1 << self.NULL) | (1 << self.INTEGER))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (self.DOUBLENUMBER - 65)) | (1 << (self.FLOATNUMBER - 65)) | (1 << (self.QUOTEDSTRING - 65)) | (1 << (self.LEFT_PAREN - 65)) | (1 << (self.LEFT_BRACKET - 65)) | (1 << (self.LONGINEGER - 65)) | (1 << (self.LEFT_CURLY - 65)))) != 0):
-                    self.state = 491 
+                    self.state = 491
                     self.const_expr()
                     self.state = 496
                     self._errHandler.sync(self)
@@ -3833,7 +3833,7 @@ class PigParser ( Parser ):
                     while _la==PigParser.COMMA:
                         self.state = 492
                         self.match(self.COMMA)
-                        self.state = 493 
+                        self.state = 493
                         self.const_expr()
                         self.state = 498
                         self._errHandler.sync(self)
@@ -3849,19 +3849,19 @@ class PigParser ( Parser ):
                 self.state = 502
                 self.match(self.NOT)
 
-                self.state = 503 
+                self.state = 503
                 self.tuple()
-                self.state = 505 
+                self.state = 505
                 self._errHandler.sync(self)
                 _alt = 1
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
-                        self.state = 504 
+                        self.state = 504
                         self.const_expr()
 
                     else:
                         raise NoViableAltException(self)
-                    self.state = 507 
+                    self.state = 507
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,56,self._ctx)
 
@@ -3892,7 +3892,3 @@ class PigParser ( Parser ):
     def query_sempred(self, localctx:QueryContext, predIndex:int):
             if predIndex == 0:
                 return self.precpred(self._ctx, 1)
-         
-
-
-

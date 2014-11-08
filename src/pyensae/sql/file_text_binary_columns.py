@@ -13,16 +13,16 @@ from pyquickhelper.loghelper.flog import GetPath
 from .file_text_binary import TextFile
 
 class TextFileColumns (TextFile) :
-    
+
     """
     This class opens a text file as if it were a binary file. It can deal with null characters.
     The file is interpreted as a TSV file or file containing columns.
     The separator is found automatically.
-    The columns are assumed to be in the first line but it is not mandatory.   
+    The columns are assumed to be in the first line but it is not mandatory.
 
     We walk along a file through an iterator, every line is automatically converted into a dictionary ``{ column : value }``.
     If the class was able to guess what type is which column, the conversion will automatically take place.
-    
+
     @code
     f = TextFileColumns (filename)
             # filename is a file
@@ -32,7 +32,7 @@ class TextFileColumns (TextFile) :
     for d in f :
         print d        # d is a dictionary
     f.close ()
-    @endcode    
+    @endcode
 
     @var _force_header      there is a header even if not detected
     @var _force_noheader    there is no header even if detected
@@ -42,10 +42,10 @@ class TextFileColumns (TextFile) :
     @var _fields            name of the columns (if there is no header)
     """
 
-    def __init__ (self, filename,   utf8                    = True, 
-                                    errors                  = None, 
-                                    fLOG                    = print, 
-                                    force_header            = False, 
+    def __init__ (self, filename,   utf8                    = True,
+                                    errors                  = None,
+                                    fLOG                    = print,
+                                    force_header            = False,
                                     changes                 = { },
                                     force_noheader          = False,
                                     regex                   = None,
@@ -67,7 +67,7 @@ class TextFileColumns (TextFile) :
         @param      force_header                defines the first line as columns header whatever is it relevant or not
         @param      changes                     to change the column name, gives the correspondence, example: { "query":"query___" },
                                                 it can be a list if there is no header and you want to name any column
-        @param      force_noheader              there is no header at all      
+        @param      force_noheader              there is no header at all
         @param      regex                       specify a different regular expression (only if changes is a list)
                                                 if it is a dictionary, the class will replace the default by the one associated in regex for this field
         @param      filter                      None if there is no filter, otherwise it is a function which takes a dictionary and returns a boolean
@@ -82,7 +82,7 @@ class TextFileColumns (TextFile) :
         @param      strict_separator            strict number of columns, it assumes there is no separator in the content of every column
         """
         TextFile.__init__ (self, filename, utf8, errors, fLOG = fLOG)
-        
+
         self._force_header      = force_header
         self._force_noheader    = force_noheader
         self._changes           = changes
@@ -96,16 +96,16 @@ class TextFileColumns (TextFile) :
         self._nb_guess_line     = nb_line_guess
         self._mistake           = mistake
         self._strict_separator  = strict_separator
-        
+
         if isinstance (changes, list) :
             hhhh,_ = 0,len(changes)
             while _ > 0 : hhhh,_ = hhhh,_/10
             forma_ = "c%0" + str (hhhh) + "d"
-            
+
             self._changes = { }
             for i,c in enumerate (changes) :
                 self._changes [ forma_ % i ] = c
-                
+
             if self._regexfix is not None and \
                        not isinstance (self._regexfix, dict) and \
                        "(?P<" not in self._regexfix :
@@ -122,16 +122,16 @@ class TextFileColumns (TextFile) :
                 self._regexfix = s.join (exp)
                 self.LOG ("split: ", fi)
                 self.LOG ("new regex: ", self._regexfix)
-            else: 
+            else:
                 self.LOG ("    TextFileColumns (1): regex: ",self._regexfix)
-        else: 
+        else:
             self.LOG ("    TextFileColumns (2): regex: ",self._regexfix)
-                
+
     def __str__ (self) :
         """return the header
         """
         return str(self.__dict__)
-                
+
     def get_columns (self) :
         """
         @return         the columns
@@ -139,22 +139,22 @@ class TextFileColumns (TextFile) :
         if "_columns" not in self.__dict__ :
             raise Exception ("there is no available columns")
         return self._columns
-            
+
     def open (self) :
         """
         open the file and find out if there is a header, what are the columns, what are their type...
         any information about which format was found is logged
         """
         if "_header" not in self.__dict__ :
-            header,columns,sep,regex = self.guess_columns ( force_header    = self._force_header, 
-                                                            changes         = self._changes, 
+            header,columns,sep,regex = self.guess_columns ( force_header    = self._force_header,
+                                                            changes         = self._changes,
                                                             force_noheader  = self._force_noheader,
                                                             fields          = self._fields,
                                                             regex           = self._regexfix if isinstance (self._regexfix, dict) else { },
                                                             force_sep       = self._force_sep,
                                                             nb              = self._nb_guess_line,
                                                             mistake         = self._mistake)
-            if self._regexfix != None and not isinstance (self._regexfix, dict) : 
+            if self._regexfix != None and not isinstance (self._regexfix, dict) :
                 regex = self._regexfix
             self._header    = header
             self._columns   = columns
@@ -171,7 +171,7 @@ class TextFileColumns (TextFile) :
                 if v [1] in [int, float, decimal.Decimal] : self._conv [v [0]] = v [1]
         self._nb += 1
         TextFile.open (self)
-        
+
     def close (self) :
         """
         close the file and remove all information related to the format,
@@ -185,20 +185,20 @@ class TextFileColumns (TextFile) :
             del self.__dict__ ["_regex"]
             del self.__dict__ ["_name"]
             del self.__dict__ ["_conv"]
-            
+
     def __iter__ (self) :
         """iterator
         @return         a dictionary { column_name: value }
         """
-        class tempo__ : 
-            def __init__ (self, r) : self.res = r 
+        class tempo__ :
+            def __init__ (self, r) : self.res = r
             def groupdict (self) : return self.res
-                
+
         if "_header" not in self.__dict__ :
             raise Exception ("file not open %s" % self.filename)
-            
+
         regex_simple = re.compile (self._regex.pattern.replace (">.*)", ">.*?)"))
-        
+
         nb    = 0
         nberr = 0
         nbert = 0
@@ -206,9 +206,9 @@ class TextFileColumns (TextFile) :
             if nb == 0 and self._header :
                 nb += 1
                 continue
-                
+
             tempc = line.split (self._sep)
-            
+
             if len (tempc) == len (self._columns) :
                 res = { }
                 for i,a in enumerate (tempc) :
@@ -225,7 +225,7 @@ class TextFileColumns (TextFile) :
                         r = self._regex.match (line)
             else :
                 r = None
-                
+
             if r is None :
                 if nberr == 0 :
                     self.LOG (self._regex.pattern)
@@ -240,9 +240,9 @@ class TextFileColumns (TextFile) :
                     for k in res :
                         res [k] = res [k].strip ()
                 giveup = False
-                
+
                 for k in res :
-                    if k in self._conv : 
+                    if k in self._conv :
                         try:
                             if len (res [k]) == 0 and (self._conv [k] == int or self._conv [k] == float or self._conv[k] == decimal.Decimal) :
                                     ttt =  self._conv [k] (0)
@@ -263,10 +263,10 @@ class TextFileColumns (TextFile) :
                 if giveup : continue
                 if self._filter_dict is None or self._filter_dict (res) :
                     yield res
-                    
+
             nb += 1
             if self._break_at != -1 and nb > self._break_at : break
-                
+
     def _store (output, l) :
         """
         store a list of dictionaries into a file (add a header)
@@ -283,15 +283,15 @@ class TextFileColumns (TextFile) :
                 keys = list(d.keys ())
                 keys.sort ()
                 f.write ("\t".join (keys) + sepline)
-            
+
             val = [ str (d [k]) for k in keys ]
             s   = "\t".join (val)
             f.write (s + sepline)
-            
+
             nbline += 1
         f.close ()
     _store = staticmethod (_store)
-                
+
     def sort (self, output, key, maxmemory = 2**28, folder = None, fLOG = print) :
         """sort a text file, even a big one, one or several columns gives the order
         @param      output      output file result
@@ -301,7 +301,7 @@ class TextFileColumns (TextFile) :
                                 before they get removed
         @param      fLOG        logging function
         @return
-        
+
         @warning  We assume this file is not opened.
         """
         if isinstance (key, str) :
@@ -310,13 +310,13 @@ class TextFileColumns (TextFile) :
             folder = GetPath ()
         if not os.path.exists (folder) :
             raise Exception ("unable to find folder %s" % folder)
-            
+
         try :
             file = open (output, "w")
             file.close ()
         except Exception as e :
             raise Exception ("unable to create file %s, reason: %s" % (output, str (e)))
-            
+
         self.LOG ("sorting file ", self.filename)
         #root   = self.filename.replace (":", "_").replace ("/", "_").replace ("\\", "_").replace (".", "_")
         files  = [ ]
@@ -333,7 +333,7 @@ class TextFileColumns (TextFile) :
                 TextFileColumns._store (tempout, memo)
                 files.append (tempout)
                 memo = []
-                
+
         if len (memo) > 0 :
             memo.sort (key = lambda el : el[0] )
             memo = [ l[1] for l in memo ]
@@ -342,14 +342,14 @@ class TextFileColumns (TextFile) :
             TextFileColumns._store (tempout, memo)
             files.append (tempout)
             memo = []
-            
+
         self.close ()
-        
+
         TextFileColumns.fusion (key, files, output, force_header = self._force_header, fLOG = self.LOG)
         for m in files :
             self.LOG ("removing ", m)
             os.remove (m)
-        
+
     def fusion (key, files, output, force_header = False, fLOG = print) :
         """
         does a fusion between several files with the same columns (different order is allowed)
@@ -365,11 +365,11 @@ class TextFileColumns (TextFile) :
             h = TextFileColumns (f, force_header = force_header, fLOG = fLOG)
             h.open ()
             fh.append ( [ h, iter (h) ])
-            
+
         res    = open (output, "w", encoding="utf-8")
         nbline = 0
         sepline= "\n" #GetSepLine ()
-        
+
         # start
         kline = []
         for li in fh :
@@ -381,49 +381,47 @@ class TextFileColumns (TextFile) :
             if d is not None :
                 k = tuple ([ d [k] for k in key ] )
                 kline.append ( [ k, d ] + li )
-            
+
         # loop
         while len (kline) > 0 :
-            
+
             # minimum
             mi = None
             for i,line in enumerate (kline) :
                 if mi is None or line [0] < mi :
                     mi  = line [0]
                     pos = i
-            
-            
+
+
             # picking
             line = kline [pos]
             del kline [pos]
-            
+
             # adding
             d = line [1]
             if nbline == 0 :
                 keys = list(d.keys ())
                 keys.sort ()
                 res.write ("\t".join (keys) + sepline)
-            
+
             val = [ str (d [k]) for k in keys ]
             s   = "\t".join (val)
             res.write (s + sepline)
             nbline += 1
-            
+
             # next
             try :
                 d = line [-1].__next__ ()
             except StopIteration :
                 d = None
-                
+
             if d is not None :
                 k = tuple ([ d [k] for k in key ] )
                 kline.append ( [ k, d ] + line [2:] )
-        
+
         # end
         for li in fh :
             li [0].close ()
         res.close ()
-        
+
     fusion = staticmethod (fusion)
-        
-        

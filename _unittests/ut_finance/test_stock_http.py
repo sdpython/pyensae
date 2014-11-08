@@ -22,7 +22,7 @@ from src.pyensae.finance.astock import StockPrices
 
 
 class TestStockHttp (unittest.TestCase):
-    
+
     def test_download_stock(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
@@ -44,10 +44,10 @@ class TestStockHttp (unittest.TestCase):
                     ]
         av = StockPrices.available_dates(stocks)
         assert len(av)>0
-        
+
         missing = stocks[-1].missing(av)
         assert missing is None or len(missing)>0
-        
+
     def test_covariance(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
@@ -56,22 +56,22 @@ class TestStockHttp (unittest.TestCase):
                     StockPrices ("CA.PA", folder = cache),
                     StockPrices ("SAF.PA", folder = cache),
                     ]
-                    
+
         dates = StockPrices.available_dates( stocks )
         ok    = dates[ dates["missing"] == 0 ]
         stocks= [ v.keep_dates(ok) for v in stocks ]
-                    
+
         cov = StockPrices.covariance(stocks)
         assert len(cov) == 3
-        
+
         cor = StockPrices.covariance(stocks, cov = False)
         assert len(cor) == 3
         assert cor.ix["BNP.PA","BNP.PA"]==1
         assert cor.ix[2,2]==1
-        
+
         ret, mat = StockPrices.covariance(stocks, cov = False, ret = True)
         assert len(ret) == 3
-        
+
     def test_no_wifi(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         data = os.path.abspath(os.path.split(__file__)[0])
@@ -83,7 +83,7 @@ class TestStockHttp (unittest.TestCase):
             stock = StockPrices(file)
         except Exception as e :
             assert "pandas cannot parse the file" in str(e)
-            
+
     def test_index(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
@@ -93,8 +93,8 @@ class TestStockHttp (unittest.TestCase):
         some = stock["2001-01-01":"2002-02-02"]
         assert isinstance(some,StockPrices)
         assert len(some)<1000
-        
-                
+
+
 
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

@@ -8,7 +8,7 @@ from ..file_helper.decompress_helper import decompress_zip, decompress_targz, de
 def remove_empty_line(file) :
     """
     remove empty line in an imported file
-    
+
     @param      file        local file name
     """
     try :
@@ -27,7 +27,7 @@ def remove_empty_line(file) :
             lines   = f.readlines ()
             f.close ()
             encoding = "utf8"
-        
+
     nbrn    = len( [ _ for _ in lines if _.endswith("\n") ])
     lines   = [ _.rstrip(" \n") for _ in lines ]
     nbempty = len ( [ _ for _ in lines if len(_) == 0 ] )
@@ -48,11 +48,11 @@ def remove_empty_line(file) :
     if skip > 0 :
         with open(file,"w", encoding = encoding) as f :
             f.write("\n".join(lines))
-            
-def download_data ( name, 
-                    moduleName  = None, 
-                    url         = None, 
-                    glo         = None, 
+
+def download_data ( name,
+                    moduleName  = None,
+                    url         = None,
+                    glo         = None,
                     loc         = None,
                     whereTo     = ".",
                     website     = "xd",
@@ -61,7 +61,7 @@ def download_data ( name,
     retrieve a module given its name, a text file or a zip file,
     look for it on http://www.xavierdupre.fr/... (website),
     the file is copied at this file location and uncompressed if it is a zip file (or a tar.gz file)
-    
+
     @param      name        (str) name of the module
     @param      moduleName  (str|None) like import name as moduleName, None for name
     @param      url         (str|None) link to the website to use
@@ -71,40 +71,40 @@ def download_data ( name,
     @param      website     website to look for
     @param      fLOG        logging function
     @return                 modules or list of files
-    
-    By extension, this function also download various zip files and decompresses it. 
+
+    By extension, this function also download various zip files and decompresses it.
     If the file was already downloaded, the function will not do it again.
-    
+
     @example(Download data for a practical lesson)
     @code
     from pyensae import download_data
     download_data('voeux.zip', website = 'xd')
     @endcode
     @endexample
-    
+
     @example(Download data from a website)
     @code
-    download_data("facebook.tar.gz",website="http://snap.stanford.edu/data/")    
+    download_data("facebook.tar.gz",website="http://snap.stanford.edu/data/")
     @endcode
     @endexample
     """
     if glo is None : glo = globals()
     if loc is None : loc = locals()
-    
+
     if website == "xd" :
         website = "http://www.xavierdupre.fr/enseignement/complements/"
     elif website == "xdtd":
         website = "http://www.xavierdupre.fr/site2013/enseignements/tddata/"
-    
+
     if not os.path.exists (whereTo) :
         raise FileExistsError("this folder should exists " + whereTo)
-        
+
     origname = name
     if name in sys.modules :
         return sys.modules[name]
     elif "." not in name :
         fLOG ("    unable to find module ", name)
-    
+
     file    = name if "." in name else "%s.py" % name
     outfile = file if whereTo == "." else os.path.join( whereTo, file)
 
@@ -129,24 +129,24 @@ def download_data ( name,
             u = open (outfile, "wb")
             u.write ( alls )
             u.close()
-                
+
     if name.endswith(".zip"):
         return decompress_zip(outfile, whereTo, fLOG)
-   
+
     elif name.endswith(".tar.gz"):
         return decompress_targz(outfile, whereTo, fLOG)
-   
+
     elif name.endswith(".gz"):
         return decompress_gz(outfile, whereTo, fLOG)
-   
+
     elif "." not in name :
         path,filename = os.path.split(outfile)
         if filename != outfile :
             if path not in sys.path :
                 sys.path.append (path)
-            
+
         remove_empty_line(outfile)
-        
+
         try :
             temp = importlib.import_module (name)
         except SystemError as e :
@@ -159,23 +159,23 @@ def download_data ( name,
                 fir = True
                 for l in lines :
                     r1 = reg1.search(l)
-                    r2 = reg2.search(l) 
+                    r2 = reg2.search(l)
                     if r2 :
                         l = ""
-                        if fir: 
+                        if fir:
                             l = "fLOG = print"
                             fir = False
                     elif r1 :
                         st = r1.groups()[0]
                         l = l.replace(st, "from ")
-                        if fir: 
+                        if fir:
                             l += "\nfLOG = print"
                             fir = False
                     fil.append(l.strip("\n\r"))
                 if not fir:
                     fLOG("end removing relative import for ", name)
                     with open(outfile, "w") as f : f.write("\n".join(fil))
-                    
+
             try :
                 temp = importlib.import_module (name)
             except Exception as e :
@@ -185,7 +185,7 @@ def download_data ( name,
                 fLOG ("sys.modules.keys()", list(sys.modules.keys()))
                 for _ in sorted(sys.modules) : fLOG ("    modules ", _)
                 raise e
-                
+
         except Exception as e :
             fLOG ("issue (2) while importing ", name, " -- ", origname)
             fLOG ("sys.path ", sys.path)
@@ -193,17 +193,16 @@ def download_data ( name,
             fLOG ("sys.modules.keys()", list(sys.modules.keys()))
             for _ in sorted(sys.modules) : fLOG ("    modules ", _)
             raise e
-            
+
         if name not in temp.__name__ :
             raise NameError ("name should be present in __name__ " + name + " ? " + temp.__name__ )
         glo[moduleName] = temp
         sys.modules[moduleName] = temp
         sys.modules[origname] = temp
         return temp
-        
+
     elif file.split(".")[-1] in ["txt", "csv", "tsv", "xml", "html"] :
         remove_empty_line(outfile)
         return outfile
     else :
         return outfile
-    

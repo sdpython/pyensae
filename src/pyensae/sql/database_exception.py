@@ -26,7 +26,7 @@ class ExceptionSQL (DBException) :
         self.sql = sql
         if False and log :
             print (description + "\n" + sql)
-        
+
     def __str__ (self) :
         mes  = Exception.__str__ (self)
         mes += "\n" + str (self.ex)

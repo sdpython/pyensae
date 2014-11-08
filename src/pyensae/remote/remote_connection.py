@@ -8,11 +8,11 @@ import time, socket
 class ASSHClient():
     """
     A simple class to access to remote machine through SSH.
-    It requires modules 
+    It requires modules
     `paramiko <http://www.paramiko.org/>`_,
     `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_,
     `ecdsa <https://pypi.python.org/pypi/ecdsa>`_.
-    
+
     This class is used in magic command @see me remote_open.
     On Windows, the installation of pycrypto can be tricky.
     See `Pycrypto on Windows <http://www.xavierdupre.fr/blog/2014-10-21_nojs.html>`_.
@@ -22,7 +22,7 @@ class ASSHClient():
     def __init__(self, server, username, password):
         """
         constructor
-        
+
         @param      server      server
         @param      username    username
         @param      password    password
@@ -33,7 +33,7 @@ class ASSHClient():
         self.password = password
         self.connection = None
         self.session = None
-        
+
     def __str__(self):
         """
         usual
@@ -53,46 +53,46 @@ class ASSHClient():
         """
         execute a command line, it raises an error
         if there is an error
-        
+
         @param      command         command
         @param      no_exception    if True, do not raise any exception
         @param      fill_stdin      data to send on the stdin input
         @return                     stdout, stderr
-        
+
         Example of commands::
-        
+
             ssh.execute_command("ls")
             ssh.execute_command("hdfs dfs -ls")
-            
+
         """
         stdin,stdout,stderr = self.connection.exec_command(command)
-        
+
         if fill_stdin is not None:
             if isinstance(fill_stdin, list):
                 fill_stdin = "\n".join(stdin)
-            if isinstance(fill_stdin, str): 
+            if isinstance(fill_stdin, str):
                 stdin.write(fill_stdin)
                 stdin.flush()
             else:
                 raise TypeError("fill_stdin must be a string, not: {0}".format(type(fill_stdin)))
-                    
+
         stdin.close()
-        
+
         err = stderr.read()
         out = stdout.read()
-        
+
         # weird...
         if isinstance(err, str) and err.startswith("b'") : err = eval(err)
         if isinstance(out, str) and out.startswith("b'") : out = eval(out)
-                
+
         if isinstance(err, bytes):
             err = err.decode("utf-8")
         if isinstance(out, bytes):
             out = out.decode("utf-8")
-            
+
         if not no_exception and len(err) > 0 :
             raise Exception("unable to run: {0}\nOUT:\n{1}\nERR:\n{2}".format(command, out, err))
-            
+
         return out,err
 
     def close(self):
@@ -101,17 +101,17 @@ class ASSHClient():
         """
         self.connection.close()
         self.connection = None
-        
+
     def upload(self, localpath, remotepath):
         """
         upload a file to the remote machine (not on the cluster)
-        
+
         @param      localpath     local file
         @param      remotepath    remote file
         """
         sftp = self.connection.open_sftp()
         sftp.put(localpath, remotepath)
-        sftp.close()        
+        sftp.close()
 
     def download(self, remotepath, localpath):
         """
@@ -124,12 +124,12 @@ class ASSHClient():
         sftp.close()
 
     _allowed_form = { None:None, "plain":None, "html":None }
-    
+
     @staticmethod
     def _get_out_format(format):
         """
         returns a function which converts an ANSI string into a different format
-        
+
         @param      format      string
         @return                 function
         """
@@ -137,7 +137,7 @@ class ASSHClient():
             raise KeyError("unexpected format, it should be in " + ",".join(ASSHClient._allowed_form.keys()))
         func = ASSHClient._allowed_form[format]
         if func is None:
-            if format is None: func = lambda s : s 
+            if format is None: func = lambda s : s
             elif format == "plain":
                 import ansiconv
                 def convert_plain(s):
@@ -151,26 +151,26 @@ class ASSHClient():
                 func = convert_html
             ASSHClient._allowed_form[format] = func
         return func
-        
-    def open_session(self, 
-                        no_exception = False, 
-                        timeout = 1.0, 
-                        add_eol = True, 
+
+    def open_session(self,
+                        no_exception = False,
+                        timeout = 1.0,
+                        add_eol = True,
                         prompts = ("~$", ">>>"),
                         out_format = None):
         """
         open a session with method `invoke_shell <http://docs.paramiko.org/en/latest/api/client.html?highlight=invoke_shell#paramiko.client.SSHClient.invoke_shell>`_
-        
+
         @param      no_exception    if True, do not raise any exception in case of error
         @param      timeout         timeout in s
         @param      add_eol         if True, the function will add a EOL to the sent command if it does not have one
         @param      prompts         if function terminates if the output ends by one of those strings.
         @param      out_format      None, plain, html
-        
+
         @example(How to open a remote shell?)
         @code
-        ssh = ASSHClient(   "<server>", 
-                            "<login>", 
+        ssh = ASSHClient(   "<server>",
+                            "<login>",
                             "<password>")
         ssh.connect()
         out = ssh.send_recv_session("ls")
@@ -182,10 +182,10 @@ class ASSHClient():
         ssh.close_session()
         ssh.close()
         @endcode
-        
+
         The notebook :ref:`exampleofsshclientcommunicationrst` illustrates
         the output of these instructions.
-        
+
         @endexample
         """
         if self.connection is None:
@@ -194,9 +194,9 @@ class ASSHClient():
             raise Exception("A session is already open. Cannot open a second one.")
         if out_format not in ASSHClient._allowed_form:
             raise KeyError("unexpected format, it should be in {0}".format(";".join(str(_) for _ in ASSHClient._allowed_form.keys())))
-            
+
         self.session = self.connection.invoke_shell(width=300, height=1000)
-        self.session_params = { 
+        self.session_params = {
                     "no_exception":no_exception,
                     "timeout":timeout,
                     "add_eol":add_eol,
@@ -204,35 +204,35 @@ class ASSHClient():
                     "out_format":out_format,
                     "out_func":ASSHClient._get_out_format(out_format)
                     }
-                    
+
         self.session.settimeout(timeout)
-                    
+
         return self.session
-        
+
     def close_session(self):
         """
         close a session
         """
         if self.session is None:
             raise Exception("No open session. Cannot close anything.")
-        
+
         self.session.close()
         self.session = None
-        
+
     def send_recv_session(self, fillin):
         """
-        Send something through a session, 
+        Send something through a session,
         the function is supposed to return when the execute of the given command is done,
         but this is quite difficult to detect without knowing what exactly was send.
-        
-        So we add a timeout just to tell the function it has to return even if nothing 
-        tells the command has finished. It fillin is None, the function will just 
+
+        So we add a timeout just to tell the function it has to return even if nothing
+        tells the command has finished. It fillin is None, the function will just
         listen to the output.
-        
+
         @param      fillin          sent to stdin
         @return                     stdout
-        
-        The output contains        
+
+        The output contains
         `escape codes <http://ascii-table.com/ansi-escape-sequences-vt-100.php>`_.
         They can be converted to plain text or HTML
         by using the module `ansiconv <http://pythonhosted.org/ansiconv/>`_
@@ -243,12 +243,12 @@ class ASSHClient():
         timeout = self.session_params["timeout"]
         add_eol = self.session_params["add_eol"]
         func    = self.session_params["out_func"]
-        
+
         if fillin is not None:
             self.session.send(fillin.encode("utf-8"))
             if add_eol and not fillin.endswith('\n'):
                 self.session.send("\n".encode("utf-8"))
-                
+
         buff = ''
         begin = time.perf_counter()
         while True:
@@ -263,7 +263,5 @@ class ASSHClient():
                     break
             if time.perf_counter() - begin > timeout:
                 break
-            
+
         return func ( buff.replace("\r","") )
-        
-    

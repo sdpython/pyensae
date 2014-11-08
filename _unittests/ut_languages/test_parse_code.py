@@ -24,16 +24,16 @@ from pyquickhelper import fLOG
 from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
 
 class TestParseCode (unittest.TestCase):
-    
+
     def test_r(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        
+
         code = """
         a = 4 ;
         b = 5 ;
         c = a + b ;
         """
-        
+
         clparser,cllexer = get_parser_lexer("R")
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
@@ -45,15 +45,15 @@ class TestParseCode (unittest.TestCase):
 
     def test_sql(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        
+
         code = """
-        SELECT a,tbl.b,nb FROM tbl 
+        SELECT a,tbl.b,nb FROM tbl
         INNER JOIN (
             SELECT b, COUNT(*) AS nb FROM tbl
             ) AS tblG
         ON tbl.b == tblG.b ;
         """
-        
+
         clparser,cllexer = get_parser_lexer("SQLite")
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
@@ -63,15 +63,15 @@ class TestParseCode (unittest.TestCase):
 
     def test_error(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        
+
         code = """
-        SELECT a,tbl.b,nb$ FROM tbl 
+        SELECT a,tbl.b,nb$ FROM tbl
         INNER JOIN (
             SELECT b, COUNT(*) AS nb FROM tbl
             ) AS tblG
         ON tbl.b == tblG.b ;
         """
-        
+
         clparser,cllexer = get_parser_lexer("SQLite")
         parser = parse_code(code, clparser, cllexer)
         try:
@@ -79,17 +79,17 @@ class TestParseCode (unittest.TestCase):
         except SyntaxError as e :
             fLOG(e)
             return
-            
+
         raise Exception("should not be here")
 
     def test_pig(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        
+
         code = """
         A = LOAD 'filename.txt' USING PigStorage('\t');
         STORE A INTO 'samefile.txt' ;
         """
-        
+
         clparser,cllexer = get_parser_lexer("Pig")
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
@@ -97,8 +97,8 @@ class TestParseCode (unittest.TestCase):
         fLOG(st.replace("\\n","\n"))
         assert len(st)>0
 
-        
-        
+
+
 
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

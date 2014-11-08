@@ -425,36 +425,36 @@ class PigLexer(Lexer):
     modeNames = [ "DEFAULT_MODE" ]
 
     tokenNames = [ "<INVALID>",
-            "'\\u0000'", "'\\u0001'", "'\\u0002'", "'\\u0003'", "'\\u0004'", 
-            "'\\u0005'", "'\\u0006'", "'\\u0007'", "'\b'", "'\t'", "'\n'", 
-            "'\\u000B'", "'\f'", "'\r'", "'\\u000E'", "'\\u000F'", "'\\u0010'", 
-            "'\\u0011'", "'\\u0012'", "'\\u0013'", "'\\u0014'", "'\\u0015'", 
-            "'\\u0016'", "'\\u0017'", "'\\u0018'", "'\\u0019'", "'\\u001A'", 
-            "'\\u001B'", "'\\u001C'", "'\\u001D'", "'\\u001E'", "'\\u001F'", 
-            "' '", "'!'", "'\"'", "'#'", "'$'", "'%'", "'&'", "'''", "'('", 
-            "')'", "'*'", "'+'", "','", "'-'", "'.'", "'/'", "'0'", "'1'", 
-            "'2'", "'3'", "'4'", "'5'", "'6'", "'7'", "'8'", "'9'", "':'", 
-            "';'", "'<'", "'='", "'>'", "'?'", "'@'", "'A'", "'B'", "'C'", 
-            "'D'", "'E'", "'F'", "'G'", "'H'", "'I'", "'J'", "'K'", "'L'", 
-            "'M'", "'N'", "'O'", "'P'", "'Q'", "'R'", "'S'", "'T'", "'U'", 
+            "'\\u0000'", "'\\u0001'", "'\\u0002'", "'\\u0003'", "'\\u0004'",
+            "'\\u0005'", "'\\u0006'", "'\\u0007'", "'\b'", "'\t'", "'\n'",
+            "'\\u000B'", "'\f'", "'\r'", "'\\u000E'", "'\\u000F'", "'\\u0010'",
+            "'\\u0011'", "'\\u0012'", "'\\u0013'", "'\\u0014'", "'\\u0015'",
+            "'\\u0016'", "'\\u0017'", "'\\u0018'", "'\\u0019'", "'\\u001A'",
+            "'\\u001B'", "'\\u001C'", "'\\u001D'", "'\\u001E'", "'\\u001F'",
+            "' '", "'!'", "'\"'", "'#'", "'$'", "'%'", "'&'", "'''", "'('",
+            "')'", "'*'", "'+'", "','", "'-'", "'.'", "'/'", "'0'", "'1'",
+            "'2'", "'3'", "'4'", "'5'", "'6'", "'7'", "'8'", "'9'", "':'",
+            "';'", "'<'", "'='", "'>'", "'?'", "'@'", "'A'", "'B'", "'C'",
+            "'D'", "'E'", "'F'", "'G'", "'H'", "'I'", "'J'", "'K'", "'L'",
+            "'M'", "'N'", "'O'", "'P'", "'Q'", "'R'", "'S'", "'T'", "'U'",
             "'V'", "'W'", "'X'", "'Y'", "'Z'" ]
 
-    ruleNames = [ "DEFINE", "LOAD", "FILTER", "FOREACH", "ORDER", "ARRANGE", 
-                  "DISTINCT", "COGROUP", "JOIN", "CROSS", "UNION", "SPLIT", 
-                  "INTO", "IF", "ALL", "ANY", "AS", "BY", "USING", "INNER", 
-                  "OUTER", "ONSCHEMA", "STAR", "PARALLEL", "PARTITION", 
-                  "GROUP", "AND", "OR", "NOT", "GENERATE", "FLATTEN", "EVAL", 
-                  "ASC", "DESC", "INT", "LONG", "FLOAT", "DOUBLE", "CHARARRAY", 
-                  "BYTEARRAY", "BAG", "TUPLE", "MAP", "IS", "NULL", "STREAM", 
-                  "THROUGH", "STORE", "MAPREDUCE", "SHIP", "CACHE", "INPUT", 
-                  "OUTPUT", "ERROR", "STDIN", "STDOUT", "LIMIT", "SAMPLE", 
-                  "LEFT", "RIGHT", "FULL", "DIGIT", "LETTER", "SPECIALCHAR", 
-                  "FSSPECIALCHAR", "IDENTIFIER", "FLOATINGPOINT", "INTEGER", 
-                  "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING", 
-                  "EXECCOMMAND", "DOLLAR", "WS", "SL_COMMENT", "ML_COMMENT", 
-                  "STRFILTEROP", "NUMFILTEROP", "FILTEROP", "COLON", "SEMI_COLON", 
-                  "LEFT_PAREN", "RIGHT_PAREN", "LEFT_CURLYP", "RIGHT_CURLYP", 
-                  "LEFT_BRACKET", "RIGHT_BRACKET", "POUND", "EQUAL", "COMMA", 
+    ruleNames = [ "DEFINE", "LOAD", "FILTER", "FOREACH", "ORDER", "ARRANGE",
+                  "DISTINCT", "COGROUP", "JOIN", "CROSS", "UNION", "SPLIT",
+                  "INTO", "IF", "ALL", "ANY", "AS", "BY", "USING", "INNER",
+                  "OUTER", "ONSCHEMA", "STAR", "PARALLEL", "PARTITION",
+                  "GROUP", "AND", "OR", "NOT", "GENERATE", "FLATTEN", "EVAL",
+                  "ASC", "DESC", "INT", "LONG", "FLOAT", "DOUBLE", "CHARARRAY",
+                  "BYTEARRAY", "BAG", "TUPLE", "MAP", "IS", "NULL", "STREAM",
+                  "THROUGH", "STORE", "MAPREDUCE", "SHIP", "CACHE", "INPUT",
+                  "OUTPUT", "ERROR", "STDIN", "STDOUT", "LIMIT", "SAMPLE",
+                  "LEFT", "RIGHT", "FULL", "DIGIT", "LETTER", "SPECIALCHAR",
+                  "FSSPECIALCHAR", "IDENTIFIER", "FLOATINGPOINT", "INTEGER",
+                  "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING",
+                  "EXECCOMMAND", "DOLLAR", "WS", "SL_COMMENT", "ML_COMMENT",
+                  "STRFILTEROP", "NUMFILTEROP", "FILTEROP", "COLON", "SEMI_COLON",
+                  "LEFT_PAREN", "RIGHT_PAREN", "LEFT_CURLYP", "RIGHT_CURLYP",
+                  "LEFT_BRACKET", "RIGHT_BRACKET", "POUND", "EQUAL", "COMMA",
                   "PERIOD", "DIV", "PERCENT", "PLUS", "MINUS", "QMARK" ]
 
     grammarFileName = "Pig.g4"
@@ -465,5 +465,3 @@ class PigLexer(Lexer):
         self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
         self._predicates = None
-
-

@@ -7,7 +7,7 @@ import sys, os, pandas
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
-from IPython.core.display import HTML   
+from IPython.core.display import HTML
 
 from .sql_interface import InterfaceSQL
 
@@ -16,19 +16,19 @@ class MagicSQL(Magics):
     """
     Defines SQL commands to play with `sqlite3 <https://docs.python.org/3.4/library/sqlite3.html>`_
     """
-    
+
     def get_connection(self):
         """
         returns the connection stored in the workspace
         """
         if self.shell is None:
             raise Exception("No detected workspace.")
-            
+
         if "DB" not in self.shell.user_ns:
             raise KeyError("No opened sqlite3 database.")
-            
+
         return self.shell.user_ns["DB"]
-        
+
     @line_magic
     def SQL_connect(self, line):
         """
@@ -43,7 +43,7 @@ class MagicSQL(Magics):
             obj.connect()
             self.shell.user_ns["DB"] = obj
             return obj
-        
+
     @line_magic
     def SQL_close(self, line):
         """
@@ -52,7 +52,7 @@ class MagicSQL(Magics):
         db = self.get_connection()
         db.close()
         del self.shell.user_ns["DB"]
-        
+
     @line_magic
     def SQL_tables(self, line):
         """
@@ -60,7 +60,7 @@ class MagicSQL(Magics):
         """
         db = self.get_connection()
         return db.get_table_list()
-        
+
     def SQL_schema(self, line):
         """
         define ``SQL_schema``
@@ -71,7 +71,7 @@ class MagicSQL(Magics):
         else:
             db = self.get_connection()
             return db.get_table_columns(line)
-        
+
     @line_cell_magic
     def SQL(self, line, cell = None):
         """
@@ -83,7 +83,7 @@ class MagicSQL(Magics):
             print("or")
             print("  %%SQL  <variable dataframe>")
             print("  <query>")
-            
+
         cont = True
         addv = None
         if cell is None:
@@ -92,10 +92,10 @@ class MagicSQL(Magics):
                 cont = False
             else:
                 query = line.strip()
-                
+
                 if self.shell is not None and query in self.shell.user_ns:
                     query = self.shell.user_ns[query]
-                
+
         elif len(cell) == 0 :
             usage()
             cont = False
@@ -103,15 +103,15 @@ class MagicSQL(Magics):
             query = cell
             addv = line.strip()
             if len(addv) == 0 : addv = None
-                
+
         if cont:
             db = self.get_connection()
             df = db.execute(query)
-            
+
             if addv is not None and self.shell is not None:
                 self.shell.user_ns[addv] = df
             return df
-        
+
 
 def register_sql_magics():
     """
@@ -120,4 +120,3 @@ def register_sql_magics():
     from IPython import get_ipython
     ip = get_ipython()
     ip.register_magics(MagicSQL)
-    

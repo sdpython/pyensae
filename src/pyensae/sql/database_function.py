@@ -18,14 +18,14 @@ def get_list_server () :
     line        = out.split ("\n")
     line        = [ _.strip ("\r\n ") for _ in line ]
     line        = [ _ for _ in line if len(_) > 0 ]
-        
+
     # we place all server containing the machine name in the first place
     machine = os.environ.get ("COMPUTERNAME", "------")
     line    = [ (-1 if _.startswith (machine) else 0, _) for _ in line ]
     line.sort ()
     line    = [ _[1] for _ in line ]
     return line
-    
+
 def get_list_instance (server) :
     """
     @param      server      server name
@@ -38,12 +38,12 @@ def get_list_instance (server) :
         out,err     = run_cmd (cmd, wait = True, shell = True, log_error = False)
         if len (err) > 0 :
             raise Exception ("unable to find instances for server %s (%s)" % (server, err))
-            
+
     li = [ _.strip ("\r\n ") for _ in out.split ("\n") ]
     li = [ _ for _ in li if len (_) > 0 ]
     li = li [ 1:-1]
     return li
-    
+
 def get_list_database (instance) :
     """
     @param      instance    instance name
@@ -56,14 +56,14 @@ def get_list_database (instance) :
     li = [ _ for _ in li if len (_) > 0 and _ not in no ]
     li = li [ 2:-1]
     return li
-    
+
 def create_database (instance, database, exc = True) :
     """
     create a database
     @param      instance    instance name
     @param      database    database name
     @param      exc         if True and if the database exists, raise an Exception
-    
+
     Example:
     @code
     fLOG (OutputPrint = True)
@@ -80,7 +80,7 @@ def create_database (instance, database, exc = True) :
         out,err     = run_cmd (cmd, wait = True, shell = True, log_error = False)
         if len (err) > 0 :
             raise Exception ("error: %s" % err)
-    
+
 def drop_database (instance, database, exc = True) :
     """
     remove a database
@@ -96,7 +96,3 @@ def drop_database (instance, database, exc = True) :
         out,err     = run_cmd (cmd, wait = True, shell = True, log_error = False)
         if len (err) > 0 :
             raise Exception ("error: %s" % err)
-    
-    
-
-

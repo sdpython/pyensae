@@ -740,5 +740,3 @@ class SQLiteListener(ParseTreeListener):
     # Exit a parse tree produced by SQLiteParser#analyze_stmt.
     def exitAnalyze_stmt(self, ctx):
         pass
-
-

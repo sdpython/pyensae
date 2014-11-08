@@ -8,7 +8,7 @@ import pandas
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
-from IPython.core.display import HTML                                
+from IPython.core.display import HTML
 from .azure_connection import AzureClient, AzureException
 
 @magics_class
@@ -16,45 +16,45 @@ class MagicAzure(Magics):
     """
     Defines magic commands to access `blob storage <http://azure.microsoft.com/fr-fr/documentation/articles/storage-dotnet-how-to-use-blobs/>`_
     and `HDInsight <http://azure.microsoft.com/fr-fr/services/hdinsight/>`_.
-    
+
     When the container is not specified, it will take the default one.
     """
-    
+
     def _replace_params(self, cell):
         """
         replaces parameter such ``__PASSWORD__`` by variable in the notebook environment
-        
+
         @param  cell    string
         @return         modified string
         """
         if "__PASSWORD__" in cell and self.shell is not None and "password" in self.shell.user_ns:
             cell = cell.replace("__PASSWORD__", self.shell.user_ns["password"])
         return cell
-    
+
     def get_blob_connection(self):
         """
         returns the connection stored in the workspace
         """
         if self.shell is None:
             raise Exception("No detected workspace.")
-            
+
         if "remote_azure_client" not in self.shell.user_ns:
             raise KeyError("No opened Azure connection.")
-            
+
         if "remote_azure_blob" not in self.shell.user_ns:
             raise KeyError("No opened Blob Storage connection.")
-                
+
         cl = self.shell.user_ns["remote_azure_client"]
         bs = self.shell.user_ns["remote_azure_blob"]
         return cl, bs
-        
+
     @line_magic
     def open_blob(self, line):
         """
         @see me open_blob
         """
         return self.blob_open(line)
-        
+
     @line_magic
     def azureclient(self,line):
         """
@@ -62,7 +62,7 @@ class MagicAzure(Magics):
         """
         cl, bs = self.get_blob_connection()
         return cl
-    
+
     @line_magic
     def blobservice(self,line):
         """
@@ -70,7 +70,7 @@ class MagicAzure(Magics):
         """
         cl, bs = self.get_blob_connection()
         return bs
-    
+
     @line_magic
     def blob_open (self, line):
         """
@@ -93,10 +93,10 @@ class MagicAzure(Magics):
                 if password is None : raise KeyError("unable to find blobpassword")
             else:
                 raise Exception("No detected workspace.")
-                
+
             if self.shell is None:
                 raise Exception("No detected workspace.")
-                
+
             if "remote_azure_blob" in self.shell.user_ns:
                 raise Exception("a connection is still open, close it first")
 
@@ -104,7 +104,7 @@ class MagicAzure(Magics):
             bs = cl.open_blob_service()
             self.shell.user_ns["remote_azure_blob"] = bs
             return bs
-            
+
     @line_magic
     def hd_open (self, line):
         """
@@ -133,10 +133,10 @@ class MagicAzure(Magics):
                 if hadoop_password  is None : raise KeyError("unable to find hadoop_password")
             else:
                 raise Exception("No detected workspace.")
-                
+
             if self.shell is None:
                 raise Exception("No detected workspace.")
-                
+
             if "remote_azure_blob" in self.shell.user_ns:
                 raise Exception("a connection is still open, close it first")
 
@@ -144,11 +144,11 @@ class MagicAzure(Magics):
             bs = cl.open_blob_service()
             self.shell.user_ns["remote_azure_blob"] = bs
             return bs
-            
+
     def create_client(self, account_name, account_key, hadoop_server = None, hadoop_password = None):
         """
         Create a @see cl AzureClient and stores in the workspace.
-        
+
         @param      account_name        login
         @param      account_key         password
         @param      hadoop_server       hadoop server
@@ -157,14 +157,14 @@ class MagicAzure(Magics):
         cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password)
         self.shell.user_ns["remote_azure_client"] = cl
         return cl
-            
+
     @line_magic
     def close_blob(self, line):
         """
         @see me close_blob
         """
         return self.blob_close(line)
-    
+
     @line_magic
     def blob_close (self, line):
         """
@@ -175,7 +175,7 @@ class MagicAzure(Magics):
         #bs.close()
         del self.shell.user_ns["remote_azure_blob"]
         return True
-        
+
     @line_magic
     def blob_containers(self, line):
         """
@@ -184,18 +184,18 @@ class MagicAzure(Magics):
         cl, bs = self.get_blob_connection()
         res = bs.list_containers()
         return [ r.name for r in res ]
-        
+
     @line_magic
     def ls_blob(self, line):
         """
         @see me blob_ls
         """
         return self.blob_ls(line)
-        
+
     def _interpret_path(self, line, cl, bs, empty_is_value = False):
         """
         Interpret a path
-        
+
         @param      line                line
         @param      cl                  @see cl AzureClient
         @param      bs                  blob service
@@ -211,12 +211,12 @@ class MagicAzure(Magics):
             spl = line.split("/")
             container = spl[0]
             remotepath = None if len(spl)==1 else "/".join(spl[1:])
-            
+
         if not empty_is_value and len(remotepath)==0:
             raise FileNotFoundError("path should not be empty: " + line)
-            
+
         return container, remotepath
-        
+
     @line_magic
     def blob_ls(self, line):
         """
@@ -232,24 +232,24 @@ class MagicAzure(Magics):
             container, remotepath = self._interpret_path(line, cl, bs, True)
             l = cl.ls(bs, container, remotepath)
             return pandas.DataFrame(l)
-        
+
     @line_magic
     def up_blob(self, line):
         """
         @see me blob_up
         """
         return self.blob_up(line)
-    
+
     @line_magic
     def blob_up(self, line):
         """
-        upload a file to the blob storage, 
+        upload a file to the blob storage,
         we assume the container is the first element of the path
-        
+
         Example::
-        
+
             %blob_up localfile remotepath
-            
+
         the command does not allow spaces in files
         """
         spl = line.strip().split()
@@ -267,23 +267,23 @@ class MagicAzure(Magics):
             container,remotepath = self._interpret_path(remotepath, cl, bs)
             cl.upload(bs, container, remotepath, localfile)
             return remotepath
-            
+
     @line_magic
     def down_blob(self, line):
         """
         @see me blob_down
         """
         return self.blob_down(line)
-        
+
     @line_magic
     def blob_down(self, line):
         """
         download a file from the blob storage
-        
+
         Example::
-        
+
             %blob_down remotepath localfile
-            
+
         the command does not allow spaces in files
         """
         spl = line.strip().split()
@@ -301,7 +301,7 @@ class MagicAzure(Magics):
             container,remotepath = self._interpret_path(remotepath, cl, bs)
             cl.download(bs, container, remotepath, localfile)
             return localfile
-            
+
     @line_magic
     def blob_delete(self, line):
         """
@@ -338,8 +338,8 @@ class MagicAzure(Magics):
                 raise AzureException("containers should be the same: {0} != {1}".format(container, container_), None)
             cl.copy_blob(bs, container, dest, src)
             return True
-            
-    @line_magic 
+
+    @line_magic
     def hd_queue(self, line):
         """
         defines ``%hq_queue``
@@ -347,8 +347,8 @@ class MagicAzure(Magics):
         showall = line in ["showall", "1", 1, "True", True, "true"]
         cl, bs = self.get_blob_connection()
         return cl.job_queue(showall = showall)
-        
-    @line_magic 
+
+    @line_magic
     def hd_job_status(self, line):
         """
         defines ``%hd_job_status``
@@ -361,8 +361,8 @@ class MagicAzure(Magics):
             jobid = line
             cl, bs = self.get_blob_connection()
             return cl.job_status(jobid)
-        
-    @line_magic 
+
+    @line_magic
     def hd_job_kill(self, line):
         """
         defines ``%hd_job_kill``
@@ -375,8 +375,8 @@ class MagicAzure(Magics):
             jobid = line
             cl, bs = self.get_blob_connection()
             return cl.job_kill(jobid)
-            
-    @line_magic 
+
+    @line_magic
     def hd_wasb_prefix(self, line):
         """
         defines ``%hd_wasb_prefix``
@@ -403,7 +403,7 @@ class MagicAzure(Magics):
             script = script.replace("__CONTAINER__", prefix + "/")
             with open(filename, "w", encoding="utf8") as f :
                 f.write(script)
-    
+
     @line_magic
     def hd_pig_submit(self, line):
         """
@@ -418,16 +418,16 @@ class MagicAzure(Magics):
             line = line.strip()
             if not os.path.exists(line):
                 raise FileNotFoundError(line)
-                
+
             username = self.shell.user_ns["username"] if "username" in self.shell.user_ns else os.environ.get("USERNAME","nouser")
             remote   = "scripts/pig/{0}/{1}".format(username, os.path.split(line)[-1])
             sd       = "scripts/run/{0}".format(username)
-            
+
             cl, bs = self.get_blob_connection()
             cl.upload(bs, cl.account_name, remote, line)
             r = cl.pig_submit(cl.account_name,remote,status_dir=sd)
             return r
-            
+
     @line_magic
     def tail_stderr(self, line):
         """
@@ -446,7 +446,7 @@ class MagicAzure(Magics):
                 print("     %tail_stderr [nblines]")
                 cont = False
                 nbline = 0
-            
+
         if cont:
             username = self.shell.user_ns["username"] if "username" in self.shell.user_ns else os.environ.get("USERNAME","nouser")
             #remote   = "scripts/pig/{0}/{1}".format(username, os.path.split(line)[-1])
@@ -454,17 +454,17 @@ class MagicAzure(Magics):
             loc      = "stderr"
             sd      += "/" + loc
             loc     += ".txt"
-            
+
             if os.path.exists(loc):
                 os.remove(loc)
-            
+
             cl, bs = self.get_blob_connection()
             fi = cl.download(bs, cl.account_name, sd, loc)
             with open(fi, "r") as f : lines = f.readlines()
             nb = min(nbline, len(lines))
             show = "\n".join( _.strip("\n\r") for _ in lines[-nb:])
             return HTML("<pre>\n%s\n</pre>" % show)
-            
+
 
 
 def register_azure_magics():
@@ -474,4 +474,3 @@ def register_azure_magics():
     from IPython import get_ipython
     ip = get_ipython()
     ip.register_magics(MagicAzure)
-    

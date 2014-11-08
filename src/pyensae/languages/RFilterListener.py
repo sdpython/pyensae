@@ -47,5 +47,3 @@ class RFilterListener(ParseTreeListener):
     # Exit a parse tree produced by RFilter#eat.
     def exitEat(self, ctx):
         pass
-
-

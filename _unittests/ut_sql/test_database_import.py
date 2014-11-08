@@ -27,7 +27,7 @@ from src.pyensae.sql.database_core2 import NoHeaderException
 
 
 class TestDatabaseImport (unittest.TestCase):
-    
+
     def test_import_person(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         file = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data", "person.txt")
@@ -35,10 +35,10 @@ class TestDatabaseImport (unittest.TestCase):
         if os.path.exists(dbf) : os.remove(dbf)
         columns = "sequence tag timestamp dateformat x y z activity".split()
         try:
-            import_flatfile_into_database(dbf, file, fLOG = fLOG, columns=columns, header=False)                
+            import_flatfile_into_database(dbf, file, fLOG = fLOG, columns=columns, header=False)
         except NoHeaderException:
             return
-            
+
         assert os.path.exists(dbf)
         db = Database(dbf, LOG = fLOG)
         db.connect()
@@ -47,4 +47,4 @@ class TestDatabaseImport (unittest.TestCase):
         assert len(view[0]) == 7
 
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

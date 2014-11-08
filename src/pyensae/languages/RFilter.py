@@ -148,15 +148,15 @@ class RFilter ( Parser ):
     T__2=52
     STRING=59
 
-    tokenNames = [ "<INVALID>", "'&'", "'['", "'*'", "'<'", "'!='", "'<='", 
-                   "'<<-'", "'next'", "'TRUE'", "'}'", "'[['", "'->'", "'->>'", 
-                   "')'", "'NaN'", "'::'", "'@'", "'='", "'repeat'", "'NA'", 
-                   "'|'", "'!'", "']'", "'in'", "','", "'while'", "'-'", 
-                   "'('", "':'", "'if'", "'?'", "'{'", "'...'", "'break'", 
-                   "'else'", "'<-'", "'$'", "':::'", "'FALSE'", "'^'", "'NULL'", 
-                   "'function'", "'+'", "'for'", "';'", "'&&'", "'||'", 
-                   "'>'", "':='", "'/'", "'=='", "'~'", "'Inf'", "'>='", 
-                   "HEX", "INT", "FLOAT", "COMPLEX", "STRING", "ID", "USER_OP", 
+    tokenNames = [ "<INVALID>", "'&'", "'['", "'*'", "'<'", "'!='", "'<='",
+                   "'<<-'", "'next'", "'TRUE'", "'}'", "'[['", "'->'", "'->>'",
+                   "')'", "'NaN'", "'::'", "'@'", "'='", "'repeat'", "'NA'",
+                   "'|'", "'!'", "']'", "'in'", "','", "'while'", "'-'",
+                   "'('", "':'", "'if'", "'?'", "'{'", "'...'", "'break'",
+                   "'else'", "'<-'", "'$'", "':::'", "'FALSE'", "'^'", "'NULL'",
+                   "'function'", "'+'", "'for'", "';'", "'&&'", "'||'",
+                   "'>'", "':='", "'/'", "'=='", "'~'", "'Inf'", "'>='",
+                   "HEX", "INT", "FLOAT", "COMPLEX", "STRING", "ID", "USER_OP",
                    "NL", "WS" ]
 
     RULE_stream = 0
@@ -228,7 +228,7 @@ class RFilter ( Parser ):
                 self.state = 13
                 token = self._input.LA(1)
                 if token in [self.T__53, self.T__52, self.T__51, self.T__50, self.T__49, self.T__48, self.T__46, self.T__45, self.T__43, self.T__42, self.T__39, self.T__38, self.T__37, self.T__36, self.T__35, self.T__34, self.T__33, self.T__32, self.T__30, self.T__29, self.T__28, self.T__27, self.T__26, self.T__25, self.T__24, self.T__23, self.T__22, self.T__21, self.T__20, self.T__19, self.T__18, self.T__17, self.T__16, self.T__15, self.T__14, self.T__13, self.T__12, self.T__11, self.T__10, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__1, self.T__0, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID, self.USER_OP]:
-                    self.state = 10 
+                    self.state = 10
                     self.elem()
 
                 elif token in [self.NL]:
@@ -289,7 +289,7 @@ class RFilter ( Parser ):
         self.enterRule(localctx, 2, self.RULE_eat)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 22 
+            self.state = 22
             self._errHandler.sync(self)
             _alt = 1
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
@@ -300,7 +300,7 @@ class RFilter ( Parser ):
 
                 else:
                     raise NoViableAltException(self)
-                self.state = 24 
+                self.state = 24
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,2,self._ctx)
 
@@ -370,19 +370,19 @@ class RFilter ( Parser ):
             token = self._input.LA(1)
             if token in [self.T__53, self.T__51, self.T__50, self.T__49, self.T__48, self.T__42, self.T__38, self.T__37, self.T__36, self.T__35, self.T__33, self.T__32, self.T__30, self.T__29, self.T__27, self.T__25, self.T__23, self.T__21, self.T__18, self.T__17, self.T__16, self.T__14, self.T__11, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__0, self.USER_OP]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 26 
+                self.state = 26
                 self.op()
                 self.state = 28
                 la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
                 if la_ == 1:
-                    self.state = 27 
+                    self.state = 27
                     self.eat()
 
 
 
             elif token in [self.T__46, self.T__45, self.T__39, self.T__34, self.T__20, self.T__15, self.T__13, self.T__1, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 30 
+                self.state = 30
                 self.atom()
 
             elif token in [self.T__22]:
@@ -392,7 +392,7 @@ class RFilter ( Parser ):
                 self.state = 33
                 la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
                 if la_ == 1:
-                    self.state = 32 
+                    self.state = 32
                     self.eat()
 
 
@@ -404,7 +404,7 @@ class RFilter ( Parser ):
                     self.state = 39
                     token = self._input.LA(1)
                     if token in [self.T__53, self.T__52, self.T__51, self.T__50, self.T__49, self.T__48, self.T__46, self.T__45, self.T__43, self.T__42, self.T__39, self.T__38, self.T__37, self.T__36, self.T__35, self.T__34, self.T__33, self.T__32, self.T__30, self.T__29, self.T__28, self.T__27, self.T__26, self.T__25, self.T__24, self.T__23, self.T__22, self.T__21, self.T__20, self.T__19, self.T__18, self.T__17, self.T__16, self.T__15, self.T__14, self.T__13, self.T__12, self.T__11, self.T__10, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__1, self.T__0, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID, self.USER_OP]:
-                        self.state = 36 
+                        self.state = 36
                         self.elem()
 
                     elif token in [self.NL]:
@@ -437,11 +437,11 @@ class RFilter ( Parser ):
                     self.state = 49
                     token = self._input.LA(1)
                     if token in [self.T__53, self.T__52, self.T__51, self.T__50, self.T__49, self.T__48, self.T__46, self.T__45, self.T__43, self.T__42, self.T__39, self.T__38, self.T__37, self.T__36, self.T__35, self.T__34, self.T__33, self.T__32, self.T__30, self.T__29, self.T__28, self.T__27, self.T__26, self.T__25, self.T__24, self.T__23, self.T__22, self.T__21, self.T__20, self.T__19, self.T__18, self.T__17, self.T__16, self.T__15, self.T__14, self.T__13, self.T__12, self.T__11, self.T__10, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__1, self.T__0, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID, self.USER_OP]:
-                        self.state = 47 
+                        self.state = 47
                         self.elem()
 
                     elif token in [self.NL]:
-                        self.state = 48 
+                        self.state = 48
                         self.eat()
 
                     else:
@@ -465,11 +465,11 @@ class RFilter ( Parser ):
                     self.state = 58
                     token = self._input.LA(1)
                     if token in [self.T__53, self.T__52, self.T__51, self.T__50, self.T__49, self.T__48, self.T__46, self.T__45, self.T__43, self.T__42, self.T__39, self.T__38, self.T__37, self.T__36, self.T__35, self.T__34, self.T__33, self.T__32, self.T__30, self.T__29, self.T__28, self.T__27, self.T__26, self.T__25, self.T__24, self.T__23, self.T__22, self.T__21, self.T__20, self.T__19, self.T__18, self.T__17, self.T__16, self.T__15, self.T__14, self.T__13, self.T__12, self.T__11, self.T__10, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__1, self.T__0, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID, self.USER_OP]:
-                        self.state = 56 
+                        self.state = 56
                         self.elem()
 
                     elif token in [self.NL]:
-                        self.state = 57 
+                        self.state = 57
                         self.eat()
 
                     else:
@@ -493,11 +493,11 @@ class RFilter ( Parser ):
                     self.state = 67
                     token = self._input.LA(1)
                     if token in [self.T__53, self.T__52, self.T__51, self.T__50, self.T__49, self.T__48, self.T__46, self.T__45, self.T__43, self.T__42, self.T__39, self.T__38, self.T__37, self.T__36, self.T__35, self.T__34, self.T__33, self.T__32, self.T__30, self.T__29, self.T__28, self.T__27, self.T__26, self.T__25, self.T__24, self.T__23, self.T__22, self.T__21, self.T__20, self.T__19, self.T__18, self.T__17, self.T__16, self.T__15, self.T__14, self.T__13, self.T__12, self.T__11, self.T__10, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__1, self.T__0, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID, self.USER_OP]:
-                        self.state = 65 
+                        self.state = 65
                         self.elem()
 
                     elif token in [self.NL]:
-                        self.state = 66 
+                        self.state = 66
                         self.eat()
 
                     else:
@@ -519,7 +519,7 @@ class RFilter ( Parser ):
                 self.state = 76
                 _la = self._input.LA(1)
                 if _la==RFilter.NL:
-                    self.state = 75 
+                    self.state = 75
                     self.eat()
 
 
@@ -532,11 +532,11 @@ class RFilter ( Parser ):
                     self.state = 81
                     token = self._input.LA(1)
                     if token in [self.T__53, self.T__52, self.T__51, self.T__50, self.T__49, self.T__48, self.T__46, self.T__45, self.T__43, self.T__42, self.T__39, self.T__38, self.T__37, self.T__36, self.T__35, self.T__34, self.T__33, self.T__32, self.T__30, self.T__29, self.T__28, self.T__27, self.T__26, self.T__25, self.T__24, self.T__23, self.T__22, self.T__21, self.T__20, self.T__19, self.T__18, self.T__17, self.T__16, self.T__15, self.T__14, self.T__13, self.T__12, self.T__11, self.T__10, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__1, self.T__0, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID, self.USER_OP]:
-                        self.state = 79 
+                        self.state = 79
                         self.elem()
 
                     elif token in [self.NL]:
-                        self.state = 80 
+                        self.state = 80
                         self.eat()
 
                     else:
@@ -551,7 +551,7 @@ class RFilter ( Parser ):
                 self.state = 88
                 la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
                 if la_ == 1:
-                    self.state = 87 
+                    self.state = 87
                     self.eat()
 
 
@@ -563,7 +563,7 @@ class RFilter ( Parser ):
                 self.state = 92
                 _la = self._input.LA(1)
                 if _la==RFilter.NL:
-                    self.state = 91 
+                    self.state = 91
                     self.eat()
 
 
@@ -576,11 +576,11 @@ class RFilter ( Parser ):
                     self.state = 97
                     token = self._input.LA(1)
                     if token in [self.T__53, self.T__52, self.T__51, self.T__50, self.T__49, self.T__48, self.T__46, self.T__45, self.T__43, self.T__42, self.T__39, self.T__38, self.T__37, self.T__36, self.T__35, self.T__34, self.T__33, self.T__32, self.T__30, self.T__29, self.T__28, self.T__27, self.T__26, self.T__25, self.T__24, self.T__23, self.T__22, self.T__21, self.T__20, self.T__19, self.T__18, self.T__17, self.T__16, self.T__15, self.T__14, self.T__13, self.T__12, self.T__11, self.T__10, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__1, self.T__0, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID, self.USER_OP]:
-                        self.state = 95 
+                        self.state = 95
                         self.elem()
 
                     elif token in [self.NL]:
-                        self.state = 96 
+                        self.state = 96
                         self.eat()
 
                     else:
@@ -595,7 +595,7 @@ class RFilter ( Parser ):
                 self.state = 104
                 la_ = self._interp.adaptivePredict(self._input,20,self._ctx)
                 if la_ == 1:
-                    self.state = 103 
+                    self.state = 103
                     self.eat()
 
 
@@ -607,7 +607,7 @@ class RFilter ( Parser ):
                 self.state = 108
                 _la = self._input.LA(1)
                 if _la==RFilter.NL:
-                    self.state = 107 
+                    self.state = 107
                     self.eat()
 
 
@@ -620,11 +620,11 @@ class RFilter ( Parser ):
                     self.state = 113
                     token = self._input.LA(1)
                     if token in [self.T__53, self.T__52, self.T__51, self.T__50, self.T__49, self.T__48, self.T__46, self.T__45, self.T__43, self.T__42, self.T__39, self.T__38, self.T__37, self.T__36, self.T__35, self.T__34, self.T__33, self.T__32, self.T__30, self.T__29, self.T__28, self.T__27, self.T__26, self.T__25, self.T__24, self.T__23, self.T__22, self.T__21, self.T__20, self.T__19, self.T__18, self.T__17, self.T__16, self.T__15, self.T__14, self.T__13, self.T__12, self.T__11, self.T__10, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__1, self.T__0, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID, self.USER_OP]:
-                        self.state = 111 
+                        self.state = 111
                         self.elem()
 
                     elif token in [self.NL]:
-                        self.state = 112 
+                        self.state = 112
                         self.eat()
 
                     else:
@@ -639,7 +639,7 @@ class RFilter ( Parser ):
                 self.state = 120
                 la_ = self._interp.adaptivePredict(self._input,24,self._ctx)
                 if la_ == 1:
-                    self.state = 119 
+                    self.state = 119
                     self.eat()
 
 
@@ -651,7 +651,7 @@ class RFilter ( Parser ):
                 self.state = 124
                 _la = self._input.LA(1)
                 if _la==RFilter.NL:
-                    self.state = 123 
+                    self.state = 123
                     self.eat()
 
 
@@ -664,11 +664,11 @@ class RFilter ( Parser ):
                     self.state = 129
                     token = self._input.LA(1)
                     if token in [self.T__53, self.T__52, self.T__51, self.T__50, self.T__49, self.T__48, self.T__46, self.T__45, self.T__43, self.T__42, self.T__39, self.T__38, self.T__37, self.T__36, self.T__35, self.T__34, self.T__33, self.T__32, self.T__30, self.T__29, self.T__28, self.T__27, self.T__26, self.T__25, self.T__24, self.T__23, self.T__22, self.T__21, self.T__20, self.T__19, self.T__18, self.T__17, self.T__16, self.T__15, self.T__14, self.T__13, self.T__12, self.T__11, self.T__10, self.T__8, self.T__7, self.T__6, self.T__4, self.T__3, self.T__2, self.T__1, self.T__0, self.HEX, self.INT, self.FLOAT, self.COMPLEX, self.STRING, self.ID, self.USER_OP]:
-                        self.state = 127 
+                        self.state = 127
                         self.elem()
 
                     elif token in [self.NL]:
-                        self.state = 128 
+                        self.state = 128
                         self.eat()
 
                     else:
@@ -683,7 +683,7 @@ class RFilter ( Parser ):
                 self.state = 136
                 la_ = self._interp.adaptivePredict(self._input,28,self._ctx)
                 if la_ == 1:
-                    self.state = 135 
+                    self.state = 135
                     self.eat()
 
 
@@ -696,7 +696,7 @@ class RFilter ( Parser ):
                 tok = _input.LT(-2);
                 if curlies>0 and tok.getType()==NL :
                     tok.setChannel(Token.HIDDEN_CHANNEL);
-                        
+
 
             else:
                 raise NoViableAltException(self)
@@ -809,7 +809,3 @@ class RFilter ( Parser ):
         finally:
             self.exitRule()
         return localctx
-
-
-
-

@@ -25,12 +25,12 @@ from src.pyensae.sql.database_main import Database
 
 
 class TestDatabaseDF (unittest.TestCase):
-    
+
     def test_import_df(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         dbf = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "temp_database_df.db3")
         if os.path.exists(dbf): os.remove(dbf)
-        
+
         values = [  {"name":"A", "age":10, "score":34.5 },
                     {"name":"B", "age":20, "score":-34.5 }, ]
         df  = pandas.DataFrame(values)
@@ -48,4 +48,4 @@ class TestDatabaseDF (unittest.TestCase):
         db.close()
 
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

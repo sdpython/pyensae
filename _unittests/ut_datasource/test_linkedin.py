@@ -22,7 +22,7 @@ from pyquickhelper import fLOG
 from src.pyensae.datasource.linkedin_access   import LinkedInAccess
 
 class TestLinkedIn (unittest.TestCase):
-    
+
     s = """
         Application Details
         Company:
@@ -38,16 +38,16 @@ class TestLinkedIn (unittest.TestCase):
         OAuth User Secret:
         ????????-????-????-????-????????????
     """
-    
+
     accessToken = [ "????????????",  # API Key
                     "????????????????", # Secret Key
                     "????????-????-????-????-????????????", # Oauth User Token
                     "????????-????-????-????-????????????", # OAuth User Secret ]
-                    ] 
-                    
+                    ]
+
     my_url = "http://www.linkedin.com/profile/view?id=2288976"
     my_id  = "9nsW-6OsQF"
-    
+
     def start(self):
         try :
             import linkedin
@@ -55,7 +55,7 @@ class TestLinkedIn (unittest.TestCase):
             path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..", "..", "python-linkedin")))
             if path not in sys.path : sys.path.append (path)
             import linkedin
-    
+
     def test_linkedin (self) :
         self.start()
         return
@@ -81,14 +81,14 @@ class TestLinkedIn (unittest.TestCase):
             try :
                 prof.append ( linkedin.get_profile (id = _['id']) )
             except Exception as e :
-                fLOG("error",e)   
-            
+                fLOG("error",e)
+
         fLOG("----")
         assert len(se["people"]["values"]) > 1
         assert len(prof) > 0
-        for p in prof : 
+        for p in prof :
             fLOG(p)
-        
+
     def test_linkedin_basic (self) :
         self.start()
         return
@@ -115,13 +115,13 @@ class TestLinkedIn (unittest.TestCase):
                 prof.append ( linkedin.get_profile (id = _['id']) )
             except Exception as e :
                 fLOG("error",e)
-                
+
         fLOG("----")
         assert len(se["people"]["values"]) > 1
         assert len(prof) > 0
-        for p in prof : 
+        for p in prof :
             fLOG(p)
-            
+
     def test_linkedin_search_key (self) :
         self.start()
         return
@@ -133,37 +133,37 @@ class TestLinkedIn (unittest.TestCase):
             if False :
                 for year in range(2010,2014) :
                     fLOG("**** year ", year)
-                    se = linkedin.search_profile ( 
-                                    params = {"keywords":"ensae %d" % year}, 
-                                    count = -1, 
+                    se = linkedin.search_profile (
+                                    params = {"keywords":"ensae %d" % year},
+                                    count = -1,
                                     as_table = True )
                     if se != None :
                         temp_file = os.path.abspath(os.path.join(os.path.split(__file__)[0], "temp_ensae_%d.txt" % year))
                         fLOG("writing ", len(se))
                         se.save(temp_file, encoding="utf8")
-                
-                se = linkedin.search_profile ( 
-                                params = {"keywords":"ensae"}, 
-                                count = -1, 
+
+                se = linkedin.search_profile (
+                                params = {"keywords":"ensae"},
+                                count = -1,
                                 as_table = True )
                 temp_file = os.path.abspath(os.path.join(os.path.split(__file__)[0], "temp_ensae2.txt"))
                 fLOG("writing ", len(se))
                 se.save(temp_file, encoding="utf8")
-                
+
             if True :
-                
+
                 for key in "new-york paris londres singapour montreal pekin shangai tokyo kyoto san francisco boston bank research economy statistics insurance".split() :
                     fLOG("**** key ", key)
-                    se = linkedin.search_profile ( 
-                                    params = {"keywords":"ensae %s" % key}, 
-                                    count = -1, 
+                    se = linkedin.search_profile (
+                                    params = {"keywords":"ensae %s" % key},
+                                    count = -1,
                                     as_df = True )
                     if se != None :
                         temp_file = os.path.abspath(os.path.join(os.path.split(__file__)[0], "temp_ensae_%s.txt" % key))
                         fLOG("writing ", len(se))
                         se.save(temp_file, encoding="utf8")
-                
-                
+
+
         else :
             fLOG("***",res)
             try :
@@ -181,7 +181,7 @@ class TestLinkedIn (unittest.TestCase):
             fLOG(se)
             assert "headline" in se.header
             assert len(se) > 0
-            
+
     def test_linkedin_connection (self) :
         self.start()
         return
@@ -201,7 +201,7 @@ class TestLinkedIn (unittest.TestCase):
         assert len(values)>0
         for v in values :
             fLOG(v)
-        
-        
+
+
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

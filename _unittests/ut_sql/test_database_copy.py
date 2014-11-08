@@ -26,20 +26,20 @@ from src.pyensae.sql.database_main import Database
 
 
 class TestDatabaseCopy (unittest.TestCase):
-    
+
     def test_import_flatflitand_copy(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        
+
         file = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data", "ACA.PA.txt")
         dbf  = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "temp_database_copy.db3")
         if os.path.exists(dbf) : os.remove(dbf)
 
         dbf2  = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "out_copy.db3")
         if os.path.exists(dbf2) : os.remove(dbf2)
-        
+
         import_flatfile_into_database(dbf, file, fLOG = fLOG)
         assert os.path.exists(dbf)
-        
+
         db = Database(dbf, LOG = fLOG)
         dbm = Database(dbf2, LOG = fLOG)
         db.copy_to(dbm)
@@ -53,7 +53,7 @@ class TestDatabaseCopy (unittest.TestCase):
         db.close()
         dbm.close()
         assert len(view) == len(viewm)
-        
+
         dbm2 = Database(":memory:", LOG = fLOG)
         db.copy_to(dbm2)
         dbm2.connect()
@@ -63,7 +63,7 @@ class TestDatabaseCopy (unittest.TestCase):
         dbm2.close()
         assert len(view) == len(viewm2)
 
-        
+
 
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

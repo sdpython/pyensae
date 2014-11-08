@@ -25,7 +25,7 @@ from src.pyensae.resources.http_retrieve import download_data
 
 
 class TestResources (unittest.TestCase):
-    
+
     def test_import_one(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         fold = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "temp_http")
@@ -42,7 +42,7 @@ class TestResources (unittest.TestCase):
         for f in exp :
             g = os.path.join(fold, f)
             assert os.path.exists(g)
-        
+
     def test_import_all(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         all = [" " ]
@@ -51,7 +51,7 @@ class TestResources (unittest.TestCase):
             # otherwise it takes too much time
             for a in all :
                 pass
-        
+
 
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

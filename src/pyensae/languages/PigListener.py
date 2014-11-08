@@ -452,5 +452,3 @@ class PigListener(ParseTreeListener):
     # Exit a parse tree produced by PigParser#var_expr.
     def exitVar_expr(self, ctx):
         pass
-
-

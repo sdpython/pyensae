@@ -1102,36 +1102,36 @@ class SQLiteParser ( Parser ):
     SPACES=156
     UNEXPECTED_CHAR=157
 
-    tokenNames = [ "<INVALID>", "';'", "'.'", "'('", "')'", "','", "'='", 
-                   "'*'", "'+'", "'-'", "'~'", "'||'", "'/'", "'%'", "'<<'", 
-                   "'>>'", "'&'", "'|'", "'<'", "'<='", "'>'", "'>='", "'=='", 
-                   "'!='", "'<>'", "K_ABORT", "K_ACTION", "K_ADD", "K_AFTER", 
-                   "K_ALL", "K_ALTER", "K_ANALYZE", "K_AND", "K_AS", "K_ASC", 
-                   "K_ATTACH", "K_AUTOINCREMENT", "K_BEFORE", "K_BEGIN", 
-                   "K_BETWEEN", "K_BY", "K_CASCADE", "K_CASE", "K_CAST", 
-                   "K_CHECK", "K_COLLATE", "K_COLUMN", "K_COMMIT", "K_CONFLICT", 
-                   "K_CONSTRAINT", "K_CREATE", "K_CROSS", "K_CURRENT_DATE", 
-                   "K_CURRENT_TIME", "K_CURRENT_TIMESTAMP", "K_DATABASE", 
-                   "K_DEFAULT", "K_DEFERRABLE", "K_DEFERRED", "K_DELETE", 
-                   "K_DESC", "K_DETACH", "K_DISTINCT", "K_DROP", "K_EACH", 
-                   "K_ELSE", "K_END", "K_ESCAPE", "K_EXCEPT", "K_EXCLUSIVE", 
-                   "K_EXISTS", "K_EXPLAIN", "K_FAIL", "K_FOR", "K_FOREIGN", 
-                   "K_FROM", "K_FULL", "K_GLOB", "K_GROUP", "K_HAVING", 
-                   "K_IF", "K_IGNORE", "K_IMMEDIATE", "K_IN", "K_INDEX", 
-                   "K_INDEXED", "K_INITIALLY", "K_INNER", "K_INSERT", "K_INSTEAD", 
-                   "K_INTERSECT", "K_INTO", "K_IS", "K_ISNULL", "K_JOIN", 
-                   "K_KEY", "K_LEFT", "K_LIKE", "K_LIMIT", "K_MATCH", "K_NATURAL", 
-                   "K_NO", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_OFFSET", 
-                   "K_ON", "K_OR", "K_ORDER", "K_OUTER", "K_PLAN", "K_PRAGMA", 
-                   "K_PRIMARY", "K_QUERY", "K_RAISE", "K_RECURSIVE", "K_REFERENCES", 
-                   "K_REGEXP", "K_REINDEX", "K_RELEASE", "K_RENAME", "K_REPLACE", 
-                   "K_RESTRICT", "K_RIGHT", "K_ROLLBACK", "K_ROW", "K_SAVEPOINT", 
-                   "K_SELECT", "K_SET", "K_TABLE", "K_TEMP", "K_TEMPORARY", 
-                   "K_THEN", "K_TO", "K_TRANSACTION", "K_TRIGGER", "K_UNION", 
-                   "K_UNIQUE", "K_UPDATE", "K_USING", "K_VACUUM", "K_VALUES", 
-                   "K_VIEW", "K_VIRTUAL", "K_WHEN", "K_WHERE", "K_WITH", 
-                   "K_WITHOUT", "IDENTIFIER", "NUMERIC_LITERAL", "BIND_PARAMETER", 
-                   "STRING_LITERAL", "BLOB_LITERAL", "SINGLE_LINE_COMMENT", 
+    tokenNames = [ "<INVALID>", "';'", "'.'", "'('", "')'", "','", "'='",
+                   "'*'", "'+'", "'-'", "'~'", "'||'", "'/'", "'%'", "'<<'",
+                   "'>>'", "'&'", "'|'", "'<'", "'<='", "'>'", "'>='", "'=='",
+                   "'!='", "'<>'", "K_ABORT", "K_ACTION", "K_ADD", "K_AFTER",
+                   "K_ALL", "K_ALTER", "K_ANALYZE", "K_AND", "K_AS", "K_ASC",
+                   "K_ATTACH", "K_AUTOINCREMENT", "K_BEFORE", "K_BEGIN",
+                   "K_BETWEEN", "K_BY", "K_CASCADE", "K_CASE", "K_CAST",
+                   "K_CHECK", "K_COLLATE", "K_COLUMN", "K_COMMIT", "K_CONFLICT",
+                   "K_CONSTRAINT", "K_CREATE", "K_CROSS", "K_CURRENT_DATE",
+                   "K_CURRENT_TIME", "K_CURRENT_TIMESTAMP", "K_DATABASE",
+                   "K_DEFAULT", "K_DEFERRABLE", "K_DEFERRED", "K_DELETE",
+                   "K_DESC", "K_DETACH", "K_DISTINCT", "K_DROP", "K_EACH",
+                   "K_ELSE", "K_END", "K_ESCAPE", "K_EXCEPT", "K_EXCLUSIVE",
+                   "K_EXISTS", "K_EXPLAIN", "K_FAIL", "K_FOR", "K_FOREIGN",
+                   "K_FROM", "K_FULL", "K_GLOB", "K_GROUP", "K_HAVING",
+                   "K_IF", "K_IGNORE", "K_IMMEDIATE", "K_IN", "K_INDEX",
+                   "K_INDEXED", "K_INITIALLY", "K_INNER", "K_INSERT", "K_INSTEAD",
+                   "K_INTERSECT", "K_INTO", "K_IS", "K_ISNULL", "K_JOIN",
+                   "K_KEY", "K_LEFT", "K_LIKE", "K_LIMIT", "K_MATCH", "K_NATURAL",
+                   "K_NO", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_OFFSET",
+                   "K_ON", "K_OR", "K_ORDER", "K_OUTER", "K_PLAN", "K_PRAGMA",
+                   "K_PRIMARY", "K_QUERY", "K_RAISE", "K_RECURSIVE", "K_REFERENCES",
+                   "K_REGEXP", "K_REINDEX", "K_RELEASE", "K_RENAME", "K_REPLACE",
+                   "K_RESTRICT", "K_RIGHT", "K_ROLLBACK", "K_ROW", "K_SAVEPOINT",
+                   "K_SELECT", "K_SET", "K_TABLE", "K_TEMP", "K_TEMPORARY",
+                   "K_THEN", "K_TO", "K_TRANSACTION", "K_TRIGGER", "K_UNION",
+                   "K_UNIQUE", "K_UPDATE", "K_USING", "K_VACUUM", "K_VALUES",
+                   "K_VIEW", "K_VIRTUAL", "K_WHEN", "K_WHERE", "K_WITH",
+                   "K_WITHOUT", "IDENTIFIER", "NUMERIC_LITERAL", "BIND_PARAMETER",
+                   "STRING_LITERAL", "BLOB_LITERAL", "SINGLE_LINE_COMMENT",
                    "MULTILINE_COMMENT", "SPACES", "UNEXPECTED_CHAR" ]
 
     RULE_parse = 0
@@ -1217,29 +1217,29 @@ class SQLiteParser ( Parser ):
     RULE_transaction_name = 80
     RULE_any_name = 81
 
-    ruleNames =  [ "parse", "error", "sql_stmt_list", "sql_stmt", "alter_table_stmt", 
-                   "analyze_stmt", "attach_stmt", "begin_stmt", "commit_stmt", 
-                   "compound_select_stmt", "create_index_stmt", "create_table_stmt", 
-                   "create_trigger_stmt", "create_view_stmt", "create_virtual_table_stmt", 
-                   "delete_stmt", "delete_stmt_limited", "detach_stmt", 
-                   "drop_index_stmt", "drop_table_stmt", "drop_trigger_stmt", 
-                   "drop_view_stmt", "factored_select_stmt", "insert_stmt", 
-                   "pragma_stmt", "reindex_stmt", "release_stmt", "rollback_stmt", 
-                   "savepoint_stmt", "simple_select_stmt", "select_stmt", 
-                   "select_or_values", "update_stmt", "update_stmt_limited", 
-                   "vacuum_stmt", "column_def", "type_name", "column_constraint", 
-                   "conflict_clause", "expr", "foreign_key_clause", "raise_function", 
-                   "indexed_column", "table_constraint", "with_clause", 
-                   "qualified_table_name", "ordering_term", "pragma_value", 
-                   "common_table_expression", "result_column", "table_or_subquery", 
-                   "join_clause", "join_operator", "join_constraint", "select_core", 
-                   "compound_operator", "cte_table_name", "signed_number", 
-                   "literal_value", "unary_operator", "error_message", "module_argument", 
-                   "column_alias", "keyword", "name", "function_name", "database_name", 
-                   "table_name", "table_or_index_name", "new_table_name", 
-                   "column_name", "collation_name", "foreign_table", "index_name", 
-                   "trigger_name", "view_name", "module_name", "pragma_name", 
-                   "savepoint_name", "table_alias", "transaction_name", 
+    ruleNames =  [ "parse", "error", "sql_stmt_list", "sql_stmt", "alter_table_stmt",
+                   "analyze_stmt", "attach_stmt", "begin_stmt", "commit_stmt",
+                   "compound_select_stmt", "create_index_stmt", "create_table_stmt",
+                   "create_trigger_stmt", "create_view_stmt", "create_virtual_table_stmt",
+                   "delete_stmt", "delete_stmt_limited", "detach_stmt",
+                   "drop_index_stmt", "drop_table_stmt", "drop_trigger_stmt",
+                   "drop_view_stmt", "factored_select_stmt", "insert_stmt",
+                   "pragma_stmt", "reindex_stmt", "release_stmt", "rollback_stmt",
+                   "savepoint_stmt", "simple_select_stmt", "select_stmt",
+                   "select_or_values", "update_stmt", "update_stmt_limited",
+                   "vacuum_stmt", "column_def", "type_name", "column_constraint",
+                   "conflict_clause", "expr", "foreign_key_clause", "raise_function",
+                   "indexed_column", "table_constraint", "with_clause",
+                   "qualified_table_name", "ordering_term", "pragma_value",
+                   "common_table_expression", "result_column", "table_or_subquery",
+                   "join_clause", "join_operator", "join_constraint", "select_core",
+                   "compound_operator", "cte_table_name", "signed_number",
+                   "literal_value", "unary_operator", "error_message", "module_argument",
+                   "column_alias", "keyword", "name", "function_name", "database_name",
+                   "table_name", "table_or_index_name", "new_table_name",
+                   "column_name", "collation_name", "foreign_table", "index_name",
+                   "trigger_name", "view_name", "module_name", "pragma_name",
+                   "savepoint_name", "table_alias", "transaction_name",
                    "any_name" ]
 
     def __init__(self, input:TokenStream):
@@ -1301,11 +1301,11 @@ class SQLiteParser ( Parser ):
                 self.state = 166
                 token = self._input.LA(1)
                 if token in [self.SCOL, self.K_ALTER, self.K_ANALYZE, self.K_ATTACH, self.K_BEGIN, self.K_COMMIT, self.K_CREATE, self.K_DELETE, self.K_DETACH, self.K_DROP, self.K_END, self.K_EXPLAIN, self.K_INSERT, self.K_PRAGMA, self.K_REINDEX, self.K_RELEASE, self.K_REPLACE, self.K_ROLLBACK, self.K_SAVEPOINT, self.K_SELECT, self.K_UPDATE, self.K_VACUUM, self.K_VALUES, self.K_WITH]:
-                    self.state = 164 
+                    self.state = 164
                     self.sql_stmt_list()
 
                 elif token in [self.UNEXPECTED_CHAR]:
-                    self.state = 165 
+                    self.state = 165
                     self.error()
 
                 else:
@@ -1357,9 +1357,9 @@ class SQLiteParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 173
             localctx._UNEXPECTED_CHAR = self.match(self.UNEXPECTED_CHAR)
-             
-            raise SyntaxError("UNEXPECTED_CHAR=" + (None if localctx._UNEXPECTED_CHAR is None else localctx._UNEXPECTED_CHAR.text)); 
-               
+
+            raise SyntaxError("UNEXPECTED_CHAR=" + (None if localctx._UNEXPECTED_CHAR is None else localctx._UNEXPECTED_CHAR.text));
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1412,27 +1412,27 @@ class SQLiteParser ( Parser ):
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 182 
+            self.state = 182
             self.sql_stmt()
             self.state = 191
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 184 
+                    self.state = 184
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     while True:
                         self.state = 183
                         self.match(self.SCOL)
-                        self.state = 186 
+                        self.state = 186
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
                         if not (_la==SQLiteParser.SCOL):
                             break
 
-                    self.state = 188 
-                    self.sql_stmt() 
+                    self.state = 188
+                    self.sql_stmt()
                 self.state = 193
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
@@ -1443,7 +1443,7 @@ class SQLiteParser ( Parser ):
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     self.state = 194
-                    self.match(self.SCOL) 
+                    self.match(self.SCOL)
                 self.state = 199
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,5,self._ctx)
@@ -1631,152 +1631,152 @@ class SQLiteParser ( Parser ):
             self.state = 237
             la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
             if la_ == 1:
-                self.state = 207 
+                self.state = 207
                 self.alter_table_stmt()
                 pass
 
             elif la_ == 2:
-                self.state = 208 
+                self.state = 208
                 self.analyze_stmt()
                 pass
 
             elif la_ == 3:
-                self.state = 209 
+                self.state = 209
                 self.attach_stmt()
                 pass
 
             elif la_ == 4:
-                self.state = 210 
+                self.state = 210
                 self.begin_stmt()
                 pass
 
             elif la_ == 5:
-                self.state = 211 
+                self.state = 211
                 self.commit_stmt()
                 pass
 
             elif la_ == 6:
-                self.state = 212 
+                self.state = 212
                 self.compound_select_stmt()
                 pass
 
             elif la_ == 7:
-                self.state = 213 
+                self.state = 213
                 self.create_index_stmt()
                 pass
 
             elif la_ == 8:
-                self.state = 214 
+                self.state = 214
                 self.create_table_stmt()
                 pass
 
             elif la_ == 9:
-                self.state = 215 
+                self.state = 215
                 self.create_trigger_stmt()
                 pass
 
             elif la_ == 10:
-                self.state = 216 
+                self.state = 216
                 self.create_view_stmt()
                 pass
 
             elif la_ == 11:
-                self.state = 217 
+                self.state = 217
                 self.create_virtual_table_stmt()
                 pass
 
             elif la_ == 12:
-                self.state = 218 
+                self.state = 218
                 self.delete_stmt()
                 pass
 
             elif la_ == 13:
-                self.state = 219 
+                self.state = 219
                 self.delete_stmt_limited()
                 pass
 
             elif la_ == 14:
-                self.state = 220 
+                self.state = 220
                 self.detach_stmt()
                 pass
 
             elif la_ == 15:
-                self.state = 221 
+                self.state = 221
                 self.drop_index_stmt()
                 pass
 
             elif la_ == 16:
-                self.state = 222 
+                self.state = 222
                 self.drop_table_stmt()
                 pass
 
             elif la_ == 17:
-                self.state = 223 
+                self.state = 223
                 self.drop_trigger_stmt()
                 pass
 
             elif la_ == 18:
-                self.state = 224 
+                self.state = 224
                 self.drop_view_stmt()
                 pass
 
             elif la_ == 19:
-                self.state = 225 
+                self.state = 225
                 self.factored_select_stmt()
                 pass
 
             elif la_ == 20:
-                self.state = 226 
+                self.state = 226
                 self.insert_stmt()
                 pass
 
             elif la_ == 21:
-                self.state = 227 
+                self.state = 227
                 self.pragma_stmt()
                 pass
 
             elif la_ == 22:
-                self.state = 228 
+                self.state = 228
                 self.reindex_stmt()
                 pass
 
             elif la_ == 23:
-                self.state = 229 
+                self.state = 229
                 self.release_stmt()
                 pass
 
             elif la_ == 24:
-                self.state = 230 
+                self.state = 230
                 self.rollback_stmt()
                 pass
 
             elif la_ == 25:
-                self.state = 231 
+                self.state = 231
                 self.savepoint_stmt()
                 pass
 
             elif la_ == 26:
-                self.state = 232 
+                self.state = 232
                 self.simple_select_stmt()
                 pass
 
             elif la_ == 27:
-                self.state = 233 
+                self.state = 233
                 self.select_stmt()
                 pass
 
             elif la_ == 28:
-                self.state = 234 
+                self.state = 234
                 self.update_stmt()
                 pass
 
             elif la_ == 29:
-                self.state = 235 
+                self.state = 235
                 self.update_stmt_limited()
                 pass
 
             elif la_ == 30:
-                self.state = 236 
+                self.state = 236
                 self.vacuum_stmt()
                 pass
 
@@ -1856,13 +1856,13 @@ class SQLiteParser ( Parser ):
             self.state = 244
             la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
             if la_ == 1:
-                self.state = 241 
+                self.state = 241
                 self.database_name()
                 self.state = 242
                 self.match(self.DOT)
 
 
-            self.state = 246 
+            self.state = 246
             self.table_name()
             self.state = 255
             token = self._input.LA(1)
@@ -1871,7 +1871,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_RENAME)
                 self.state = 248
                 self.match(self.K_TO)
-                self.state = 249 
+                self.state = 249
                 self.new_table_name()
 
             elif token in [self.K_ADD]:
@@ -1884,7 +1884,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_COLUMN)
 
 
-                self.state = 254 
+                self.state = 254
                 self.column_def()
 
             else:
@@ -1940,19 +1940,19 @@ class SQLiteParser ( Parser ):
             self.state = 264
             la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
             if la_ == 1:
-                self.state = 258 
+                self.state = 258
                 self.database_name()
 
             elif la_ == 2:
-                self.state = 259 
+                self.state = 259
                 self.table_or_index_name()
 
             elif la_ == 3:
-                self.state = 260 
+                self.state = 260
                 self.database_name()
                 self.state = 261
                 self.match(self.DOT)
-                self.state = 262 
+                self.state = 262
                 self.table_or_index_name()
 
 
@@ -2016,11 +2016,11 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_DATABASE)
 
 
-            self.state = 270 
+            self.state = 270
             self.expr(0)
             self.state = 271
             self.match(self.K_AS)
-            self.state = 272 
+            self.state = 272
             self.database_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -2096,7 +2096,7 @@ class SQLiteParser ( Parser ):
                 self.state = 280
                 la_ = self._interp.adaptivePredict(self._input,15,self._ctx)
                 if la_ == 1:
-                    self.state = 279 
+                    self.state = 279
                     self.transaction_name()
 
 
@@ -2163,7 +2163,7 @@ class SQLiteParser ( Parser ):
                 self.state = 287
                 la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
                 if la_ == 1:
-                    self.state = 286 
+                    self.state = 286
                     self.transaction_name()
 
 
@@ -2286,7 +2286,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_RECURSIVE)
 
 
-                self.state = 295 
+                self.state = 295
                 self.common_table_expression()
                 self.state = 300
                 self._errHandler.sync(self)
@@ -2294,7 +2294,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 296
                     self.match(self.COMMA)
-                    self.state = 297 
+                    self.state = 297
                     self.common_table_expression()
                     self.state = 302
                     self._errHandler.sync(self)
@@ -2302,9 +2302,9 @@ class SQLiteParser ( Parser ):
 
 
 
-            self.state = 305 
+            self.state = 305
             self.select_core()
-            self.state = 315 
+            self.state = 315
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
@@ -2332,9 +2332,9 @@ class SQLiteParser ( Parser ):
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 314 
+                self.state = 314
                 self.select_core()
-                self.state = 317 
+                self.state = 317
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==SQLiteParser.K_EXCEPT or _la==SQLiteParser.K_INTERSECT or _la==SQLiteParser.K_UNION):
@@ -2347,7 +2347,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_ORDER)
                 self.state = 320
                 self.match(self.K_BY)
-                self.state = 321 
+                self.state = 321
                 self.ordering_term()
                 self.state = 326
                 self._errHandler.sync(self)
@@ -2355,7 +2355,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 322
                     self.match(self.COMMA)
-                    self.state = 323 
+                    self.state = 323
                     self.ordering_term()
                     self.state = 328
                     self._errHandler.sync(self)
@@ -2368,7 +2368,7 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_LIMIT:
                 self.state = 331
                 self.match(self.K_LIMIT)
-                self.state = 332 
+                self.state = 332
                 self.expr(0)
                 self.state = 335
                 _la = self._input.LA(1)
@@ -2378,7 +2378,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     self.consume()
-                    self.state = 334 
+                    self.state = 334
                     self.expr(0)
 
 
@@ -2491,21 +2491,21 @@ class SQLiteParser ( Parser ):
             self.state = 352
             la_ = self._interp.adaptivePredict(self._input,31,self._ctx)
             if la_ == 1:
-                self.state = 349 
+                self.state = 349
                 self.database_name()
                 self.state = 350
                 self.match(self.DOT)
 
 
-            self.state = 354 
+            self.state = 354
             self.index_name()
             self.state = 355
             self.match(self.K_ON)
-            self.state = 356 
+            self.state = 356
             self.table_name()
             self.state = 357
             self.match(self.OPEN_PAR)
-            self.state = 358 
+            self.state = 358
             self.indexed_column()
             self.state = 363
             self._errHandler.sync(self)
@@ -2513,7 +2513,7 @@ class SQLiteParser ( Parser ):
             while _la==SQLiteParser.COMMA:
                 self.state = 359
                 self.match(self.COMMA)
-                self.state = 360 
+                self.state = 360
                 self.indexed_column()
                 self.state = 365
                 self._errHandler.sync(self)
@@ -2526,7 +2526,7 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_WHERE:
                 self.state = 367
                 self.match(self.K_WHERE)
-                self.state = 368 
+                self.state = 368
                 self.expr(0)
 
 
@@ -2649,20 +2649,20 @@ class SQLiteParser ( Parser ):
             self.state = 384
             la_ = self._interp.adaptivePredict(self._input,36,self._ctx)
             if la_ == 1:
-                self.state = 381 
+                self.state = 381
                 self.database_name()
                 self.state = 382
                 self.match(self.DOT)
 
 
-            self.state = 386 
+            self.state = 386
             self.table_name()
             self.state = 410
             token = self._input.LA(1)
             if token in [self.OPEN_PAR]:
                 self.state = 387
                 self.match(self.OPEN_PAR)
-                self.state = 388 
+                self.state = 388
                 self.column_def()
                 self.state = 393
                 self._errHandler.sync(self)
@@ -2671,8 +2671,8 @@ class SQLiteParser ( Parser ):
                     if _alt==1:
                         self.state = 389
                         self.match(self.COMMA)
-                        self.state = 390 
-                        self.column_def() 
+                        self.state = 390
+                        self.column_def()
                     self.state = 395
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,37,self._ctx)
@@ -2683,7 +2683,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 396
                     self.match(self.COMMA)
-                    self.state = 397 
+                    self.state = 397
                     self.table_constraint()
                     self.state = 402
                     self._errHandler.sync(self)
@@ -2704,7 +2704,7 @@ class SQLiteParser ( Parser ):
             elif token in [self.K_AS]:
                 self.state = 408
                 self.match(self.K_AS)
-                self.state = 409 
+                self.state = 409
                 self.select_stmt()
 
             else:
@@ -2893,13 +2893,13 @@ class SQLiteParser ( Parser ):
             self.state = 425
             la_ = self._interp.adaptivePredict(self._input,43,self._ctx)
             if la_ == 1:
-                self.state = 422 
+                self.state = 422
                 self.database_name()
                 self.state = 423
                 self.match(self.DOT)
 
 
-            self.state = 427 
+            self.state = 427
             self.trigger_name()
             self.state = 432
             token = self._input.LA(1)
@@ -2939,7 +2939,7 @@ class SQLiteParser ( Parser ):
                 if _la==SQLiteParser.K_OF:
                     self.state = 437
                     self.match(self.K_OF)
-                    self.state = 438 
+                    self.state = 438
                     self.column_name()
                     self.state = 443
                     self._errHandler.sync(self)
@@ -2947,7 +2947,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 439
                         self.match(self.COMMA)
-                        self.state = 440 
+                        self.state = 440
                         self.column_name()
                         self.state = 445
                         self._errHandler.sync(self)
@@ -2964,13 +2964,13 @@ class SQLiteParser ( Parser ):
             self.state = 454
             la_ = self._interp.adaptivePredict(self._input,48,self._ctx)
             if la_ == 1:
-                self.state = 451 
+                self.state = 451
                 self.database_name()
                 self.state = 452
                 self.match(self.DOT)
 
 
-            self.state = 456 
+            self.state = 456
             self.table_name()
             self.state = 460
             _la = self._input.LA(1)
@@ -2988,42 +2988,42 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_WHEN:
                 self.state = 462
                 self.match(self.K_WHEN)
-                self.state = 463 
+                self.state = 463
                 self.expr(0)
 
 
             self.state = 466
             self.match(self.K_BEGIN)
-            self.state = 475 
+            self.state = 475
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
                 self.state = 471
                 la_ = self._interp.adaptivePredict(self._input,51,self._ctx)
                 if la_ == 1:
-                    self.state = 467 
+                    self.state = 467
                     self.update_stmt()
                     pass
 
                 elif la_ == 2:
-                    self.state = 468 
+                    self.state = 468
                     self.insert_stmt()
                     pass
 
                 elif la_ == 3:
-                    self.state = 469 
+                    self.state = 469
                     self.delete_stmt()
                     pass
 
                 elif la_ == 4:
-                    self.state = 470 
+                    self.state = 470
                     self.select_stmt()
                     pass
 
 
                 self.state = 473
                 self.match(self.SCOL)
-                self.state = 477 
+                self.state = 477
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==SQLiteParser.K_DELETE or ((((_la - 88)) & ~0x3f) == 0 and ((1 << (_la - 88)) & ((1 << (self.K_INSERT - 88)) | (1 << (self.K_REPLACE - 88)) | (1 << (self.K_SELECT - 88)) | (1 << (self.K_UPDATE - 88)) | (1 << (self.K_VALUES - 88)) | (1 << (self.K_WITH - 88)))) != 0)):
@@ -3130,17 +3130,17 @@ class SQLiteParser ( Parser ):
             self.state = 494
             la_ = self._interp.adaptivePredict(self._input,55,self._ctx)
             if la_ == 1:
-                self.state = 491 
+                self.state = 491
                 self.database_name()
                 self.state = 492
                 self.match(self.DOT)
 
 
-            self.state = 496 
+            self.state = 496
             self.view_name()
             self.state = 497
             self.match(self.K_AS)
-            self.state = 498 
+            self.state = 498
             self.select_stmt()
         except RecognitionException as re:
             localctx.exception = re
@@ -3237,24 +3237,24 @@ class SQLiteParser ( Parser ):
             self.state = 511
             la_ = self._interp.adaptivePredict(self._input,57,self._ctx)
             if la_ == 1:
-                self.state = 508 
+                self.state = 508
                 self.database_name()
                 self.state = 509
                 self.match(self.DOT)
 
 
-            self.state = 513 
+            self.state = 513
             self.table_name()
             self.state = 514
             self.match(self.K_USING)
-            self.state = 515 
+            self.state = 515
             self.module_name()
             self.state = 527
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 516
                 self.match(self.OPEN_PAR)
-                self.state = 517 
+                self.state = 517
                 self.module_argument()
                 self.state = 522
                 self._errHandler.sync(self)
@@ -3262,7 +3262,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 518
                     self.match(self.COMMA)
-                    self.state = 519 
+                    self.state = 519
                     self.module_argument()
                     self.state = 524
                     self._errHandler.sync(self)
@@ -3331,7 +3331,7 @@ class SQLiteParser ( Parser ):
             self.state = 530
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
-                self.state = 529 
+                self.state = 529
                 self.with_clause()
 
 
@@ -3339,14 +3339,14 @@ class SQLiteParser ( Parser ):
             self.match(self.K_DELETE)
             self.state = 533
             self.match(self.K_FROM)
-            self.state = 534 
+            self.state = 534
             self.qualified_table_name()
             self.state = 537
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WHERE:
                 self.state = 535
                 self.match(self.K_WHERE)
-                self.state = 536 
+                self.state = 536
                 self.expr(0)
 
 
@@ -3431,7 +3431,7 @@ class SQLiteParser ( Parser ):
             self.state = 540
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
-                self.state = 539 
+                self.state = 539
                 self.with_clause()
 
 
@@ -3439,14 +3439,14 @@ class SQLiteParser ( Parser ):
             self.match(self.K_DELETE)
             self.state = 543
             self.match(self.K_FROM)
-            self.state = 544 
+            self.state = 544
             self.qualified_table_name()
             self.state = 547
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WHERE:
                 self.state = 545
                 self.match(self.K_WHERE)
-                self.state = 546 
+                self.state = 546
                 self.expr(0)
 
 
@@ -3460,7 +3460,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_ORDER)
                     self.state = 550
                     self.match(self.K_BY)
-                    self.state = 551 
+                    self.state = 551
                     self.ordering_term()
                     self.state = 556
                     self._errHandler.sync(self)
@@ -3468,7 +3468,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 552
                         self.match(self.COMMA)
-                        self.state = 553 
+                        self.state = 553
                         self.ordering_term()
                         self.state = 558
                         self._errHandler.sync(self)
@@ -3478,7 +3478,7 @@ class SQLiteParser ( Parser ):
 
                 self.state = 561
                 self.match(self.K_LIMIT)
-                self.state = 562 
+                self.state = 562
                 self.expr(0)
                 self.state = 565
                 _la = self._input.LA(1)
@@ -3488,7 +3488,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     self.consume()
-                    self.state = 564 
+                    self.state = 564
                     self.expr(0)
 
 
@@ -3547,7 +3547,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_DATABASE)
 
 
-            self.state = 573 
+            self.state = 573
             self.database_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -3619,13 +3619,13 @@ class SQLiteParser ( Parser ):
             self.state = 584
             la_ = self._interp.adaptivePredict(self._input,70,self._ctx)
             if la_ == 1:
-                self.state = 581 
+                self.state = 581
                 self.database_name()
                 self.state = 582
                 self.match(self.DOT)
 
 
-            self.state = 586 
+            self.state = 586
             self.index_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -3697,13 +3697,13 @@ class SQLiteParser ( Parser ):
             self.state = 597
             la_ = self._interp.adaptivePredict(self._input,72,self._ctx)
             if la_ == 1:
-                self.state = 594 
+                self.state = 594
                 self.database_name()
                 self.state = 595
                 self.match(self.DOT)
 
 
-            self.state = 599 
+            self.state = 599
             self.table_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -3775,13 +3775,13 @@ class SQLiteParser ( Parser ):
             self.state = 610
             la_ = self._interp.adaptivePredict(self._input,74,self._ctx)
             if la_ == 1:
-                self.state = 607 
+                self.state = 607
                 self.database_name()
                 self.state = 608
                 self.match(self.DOT)
 
 
-            self.state = 612 
+            self.state = 612
             self.trigger_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -3853,13 +3853,13 @@ class SQLiteParser ( Parser ):
             self.state = 623
             la_ = self._interp.adaptivePredict(self._input,76,self._ctx)
             if la_ == 1:
-                self.state = 620 
+                self.state = 620
                 self.database_name()
                 self.state = 621
                 self.match(self.DOT)
 
 
-            self.state = 625 
+            self.state = 625
             self.view_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -3961,7 +3961,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_RECURSIVE)
 
 
-                self.state = 631 
+                self.state = 631
                 self.common_table_expression()
                 self.state = 636
                 self._errHandler.sync(self)
@@ -3969,7 +3969,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 632
                     self.match(self.COMMA)
-                    self.state = 633 
+                    self.state = 633
                     self.common_table_expression()
                     self.state = 638
                     self._errHandler.sync(self)
@@ -3977,15 +3977,15 @@ class SQLiteParser ( Parser ):
 
 
 
-            self.state = 641 
+            self.state = 641
             self.select_core()
             self.state = 647
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==SQLiteParser.K_EXCEPT or _la==SQLiteParser.K_INTERSECT or _la==SQLiteParser.K_UNION:
-                self.state = 642 
+                self.state = 642
                 self.compound_operator()
-                self.state = 643 
+                self.state = 643
                 self.select_core()
                 self.state = 649
                 self._errHandler.sync(self)
@@ -3998,7 +3998,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_ORDER)
                 self.state = 651
                 self.match(self.K_BY)
-                self.state = 652 
+                self.state = 652
                 self.ordering_term()
                 self.state = 657
                 self._errHandler.sync(self)
@@ -4006,7 +4006,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 653
                     self.match(self.COMMA)
-                    self.state = 654 
+                    self.state = 654
                     self.ordering_term()
                     self.state = 659
                     self._errHandler.sync(self)
@@ -4019,7 +4019,7 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_LIMIT:
                 self.state = 662
                 self.match(self.K_LIMIT)
-                self.state = 663 
+                self.state = 663
                 self.expr(0)
                 self.state = 666
                 _la = self._input.LA(1)
@@ -4029,7 +4029,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     self.consume()
-                    self.state = 665 
+                    self.state = 665
                     self.expr(0)
 
 
@@ -4133,7 +4133,7 @@ class SQLiteParser ( Parser ):
             self.state = 671
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
-                self.state = 670 
+                self.state = 670
                 self.with_clause()
 
 
@@ -4200,20 +4200,20 @@ class SQLiteParser ( Parser ):
             self.state = 696
             la_ = self._interp.adaptivePredict(self._input,87,self._ctx)
             if la_ == 1:
-                self.state = 693 
+                self.state = 693
                 self.database_name()
                 self.state = 694
                 self.match(self.DOT)
 
 
-            self.state = 698 
+            self.state = 698
             self.table_name()
             self.state = 710
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 699
                 self.match(self.OPEN_PAR)
-                self.state = 700 
+                self.state = 700
                 self.column_name()
                 self.state = 705
                 self._errHandler.sync(self)
@@ -4221,7 +4221,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 701
                     self.match(self.COMMA)
-                    self.state = 702 
+                    self.state = 702
                     self.column_name()
                     self.state = 707
                     self._errHandler.sync(self)
@@ -4238,7 +4238,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_VALUES)
                 self.state = 713
                 self.match(self.OPEN_PAR)
-                self.state = 714 
+                self.state = 714
                 self.expr(0)
                 self.state = 719
                 self._errHandler.sync(self)
@@ -4246,7 +4246,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 715
                     self.match(self.COMMA)
-                    self.state = 716 
+                    self.state = 716
                     self.expr(0)
                     self.state = 721
                     self._errHandler.sync(self)
@@ -4262,7 +4262,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.COMMA)
                     self.state = 724
                     self.match(self.OPEN_PAR)
-                    self.state = 725 
+                    self.state = 725
                     self.expr(0)
                     self.state = 730
                     self._errHandler.sync(self)
@@ -4270,7 +4270,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 726
                         self.match(self.COMMA)
-                        self.state = 727 
+                        self.state = 727
                         self.expr(0)
                         self.state = 732
                         self._errHandler.sync(self)
@@ -4285,7 +4285,7 @@ class SQLiteParser ( Parser ):
                 pass
 
             elif la_ == 2:
-                self.state = 740 
+                self.state = 740
                 self.select_stmt()
                 pass
 
@@ -4351,26 +4351,26 @@ class SQLiteParser ( Parser ):
             self.state = 749
             la_ = self._interp.adaptivePredict(self._input,94,self._ctx)
             if la_ == 1:
-                self.state = 746 
+                self.state = 746
                 self.database_name()
                 self.state = 747
                 self.match(self.DOT)
 
 
-            self.state = 751 
+            self.state = 751
             self.pragma_name()
             self.state = 758
             token = self._input.LA(1)
             if token in [self.ASSIGN]:
                 self.state = 752
                 self.match(self.ASSIGN)
-                self.state = 753 
+                self.state = 753
                 self.pragma_value()
                 pass
             elif token in [self.OPEN_PAR]:
                 self.state = 754
                 self.match(self.OPEN_PAR)
-                self.state = 755 
+                self.state = 755
                 self.pragma_value()
                 self.state = 756
                 self.match(self.CLOSE_PAR)
@@ -4437,14 +4437,14 @@ class SQLiteParser ( Parser ):
             self.state = 771
             la_ = self._interp.adaptivePredict(self._input,98,self._ctx)
             if la_ == 1:
-                self.state = 761 
+                self.state = 761
                 self.collation_name()
 
             elif la_ == 2:
                 self.state = 765
                 la_ = self._interp.adaptivePredict(self._input,96,self._ctx)
                 if la_ == 1:
-                    self.state = 762 
+                    self.state = 762
                     self.database_name()
                     self.state = 763
                     self.match(self.DOT)
@@ -4453,12 +4453,12 @@ class SQLiteParser ( Parser ):
                 self.state = 769
                 la_ = self._interp.adaptivePredict(self._input,97,self._ctx)
                 if la_ == 1:
-                    self.state = 767 
+                    self.state = 767
                     self.table_name()
                     pass
 
                 elif la_ == 2:
-                    self.state = 768 
+                    self.state = 768
                     self.index_name()
                     pass
 
@@ -4518,7 +4518,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_SAVEPOINT)
 
 
-            self.state = 777 
+            self.state = 777
             self.savepoint_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -4585,7 +4585,7 @@ class SQLiteParser ( Parser ):
                 self.state = 782
                 la_ = self._interp.adaptivePredict(self._input,100,self._ctx)
                 if la_ == 1:
-                    self.state = 781 
+                    self.state = 781
                     self.transaction_name()
 
 
@@ -4603,7 +4603,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_SAVEPOINT)
 
 
-                self.state = 790 
+                self.state = 790
                 self.savepoint_name()
 
 
@@ -4650,7 +4650,7 @@ class SQLiteParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 793
             self.match(self.K_SAVEPOINT)
-            self.state = 794 
+            self.state = 794
             self.savepoint_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -4742,7 +4742,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_RECURSIVE)
 
 
-                self.state = 800 
+                self.state = 800
                 self.common_table_expression()
                 self.state = 805
                 self._errHandler.sync(self)
@@ -4750,7 +4750,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 801
                     self.match(self.COMMA)
-                    self.state = 802 
+                    self.state = 802
                     self.common_table_expression()
                     self.state = 807
                     self._errHandler.sync(self)
@@ -4758,7 +4758,7 @@ class SQLiteParser ( Parser ):
 
 
 
-            self.state = 810 
+            self.state = 810
             self.select_core()
             self.state = 821
             _la = self._input.LA(1)
@@ -4767,7 +4767,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_ORDER)
                 self.state = 812
                 self.match(self.K_BY)
-                self.state = 813 
+                self.state = 813
                 self.ordering_term()
                 self.state = 818
                 self._errHandler.sync(self)
@@ -4775,7 +4775,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 814
                     self.match(self.COMMA)
-                    self.state = 815 
+                    self.state = 815
                     self.ordering_term()
                     self.state = 820
                     self._errHandler.sync(self)
@@ -4788,7 +4788,7 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_LIMIT:
                 self.state = 823
                 self.match(self.K_LIMIT)
-                self.state = 824 
+                self.state = 824
                 self.expr(0)
                 self.state = 827
                 _la = self._input.LA(1)
@@ -4798,7 +4798,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     self.consume()
-                    self.state = 826 
+                    self.state = 826
                     self.expr(0)
 
 
@@ -4904,7 +4904,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_RECURSIVE)
 
 
-                self.state = 835 
+                self.state = 835
                 self.common_table_expression()
                 self.state = 840
                 self._errHandler.sync(self)
@@ -4912,7 +4912,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 836
                     self.match(self.COMMA)
-                    self.state = 837 
+                    self.state = 837
                     self.common_table_expression()
                     self.state = 842
                     self._errHandler.sync(self)
@@ -4920,15 +4920,15 @@ class SQLiteParser ( Parser ):
 
 
 
-            self.state = 845 
+            self.state = 845
             self.select_or_values()
             self.state = 851
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==SQLiteParser.K_EXCEPT or _la==SQLiteParser.K_INTERSECT or _la==SQLiteParser.K_UNION:
-                self.state = 846 
+                self.state = 846
                 self.compound_operator()
-                self.state = 847 
+                self.state = 847
                 self.select_or_values()
                 self.state = 853
                 self._errHandler.sync(self)
@@ -4941,7 +4941,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_ORDER)
                 self.state = 855
                 self.match(self.K_BY)
-                self.state = 856 
+                self.state = 856
                 self.ordering_term()
                 self.state = 861
                 self._errHandler.sync(self)
@@ -4949,7 +4949,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 857
                     self.match(self.COMMA)
-                    self.state = 858 
+                    self.state = 858
                     self.ordering_term()
                     self.state = 863
                     self._errHandler.sync(self)
@@ -4962,7 +4962,7 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_LIMIT:
                 self.state = 866
                 self.match(self.K_LIMIT)
-                self.state = 867 
+                self.state = 867
                 self.expr(0)
                 self.state = 870
                 _la = self._input.LA(1)
@@ -4972,7 +4972,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     self.consume()
-                    self.state = 869 
+                    self.state = 869
                     self.expr(0)
 
 
@@ -5080,7 +5080,7 @@ class SQLiteParser ( Parser ):
                     self.consume()
 
 
-                self.state = 878 
+                self.state = 878
                 self.result_column()
                 self.state = 883
                 self._errHandler.sync(self)
@@ -5088,7 +5088,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 879
                     self.match(self.COMMA)
-                    self.state = 880 
+                    self.state = 880
                     self.result_column()
                     self.state = 885
                     self._errHandler.sync(self)
@@ -5102,7 +5102,7 @@ class SQLiteParser ( Parser ):
                     self.state = 896
                     la_ = self._interp.adaptivePredict(self._input,122,self._ctx)
                     if la_ == 1:
-                        self.state = 887 
+                        self.state = 887
                         self.table_or_subquery()
                         self.state = 892
                         self._errHandler.sync(self)
@@ -5110,7 +5110,7 @@ class SQLiteParser ( Parser ):
                         while _la==SQLiteParser.COMMA:
                             self.state = 888
                             self.match(self.COMMA)
-                            self.state = 889 
+                            self.state = 889
                             self.table_or_subquery()
                             self.state = 894
                             self._errHandler.sync(self)
@@ -5119,7 +5119,7 @@ class SQLiteParser ( Parser ):
                         pass
 
                     elif la_ == 2:
-                        self.state = 895 
+                        self.state = 895
                         self.join_clause()
                         pass
 
@@ -5131,7 +5131,7 @@ class SQLiteParser ( Parser ):
                 if _la==SQLiteParser.K_WHERE:
                     self.state = 900
                     self.match(self.K_WHERE)
-                    self.state = 901 
+                    self.state = 901
                     self.expr(0)
 
 
@@ -5142,7 +5142,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_GROUP)
                     self.state = 905
                     self.match(self.K_BY)
-                    self.state = 906 
+                    self.state = 906
                     self.expr(0)
                     self.state = 911
                     self._errHandler.sync(self)
@@ -5150,7 +5150,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 907
                         self.match(self.COMMA)
-                        self.state = 908 
+                        self.state = 908
                         self.expr(0)
                         self.state = 913
                         self._errHandler.sync(self)
@@ -5161,7 +5161,7 @@ class SQLiteParser ( Parser ):
                     if _la==SQLiteParser.K_HAVING:
                         self.state = 914
                         self.match(self.K_HAVING)
-                        self.state = 915 
+                        self.state = 915
                         self.expr(0)
 
 
@@ -5174,7 +5174,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_VALUES)
                 self.state = 921
                 self.match(self.OPEN_PAR)
-                self.state = 922 
+                self.state = 922
                 self.expr(0)
                 self.state = 927
                 self._errHandler.sync(self)
@@ -5182,7 +5182,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 923
                     self.match(self.COMMA)
-                    self.state = 924 
+                    self.state = 924
                     self.expr(0)
                     self.state = 929
                     self._errHandler.sync(self)
@@ -5198,7 +5198,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.COMMA)
                     self.state = 932
                     self.match(self.OPEN_PAR)
-                    self.state = 933 
+                    self.state = 933
                     self.expr(0)
                     self.state = 938
                     self._errHandler.sync(self)
@@ -5206,7 +5206,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 934
                         self.match(self.COMMA)
-                        self.state = 935 
+                        self.state = 935
                         self.expr(0)
                         self.state = 940
                         self._errHandler.sync(self)
@@ -5309,7 +5309,7 @@ class SQLiteParser ( Parser ):
             self.state = 951
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
-                self.state = 950 
+                self.state = 950
                 self.with_clause()
 
 
@@ -5348,15 +5348,15 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_IGNORE)
 
 
-            self.state = 966 
+            self.state = 966
             self.qualified_table_name()
             self.state = 967
             self.match(self.K_SET)
-            self.state = 968 
+            self.state = 968
             self.column_name()
             self.state = 969
             self.match(self.ASSIGN)
-            self.state = 970 
+            self.state = 970
             self.expr(0)
             self.state = 978
             self._errHandler.sync(self)
@@ -5364,11 +5364,11 @@ class SQLiteParser ( Parser ):
             while _la==SQLiteParser.COMMA:
                 self.state = 971
                 self.match(self.COMMA)
-                self.state = 972 
+                self.state = 972
                 self.column_name()
                 self.state = 973
                 self.match(self.ASSIGN)
-                self.state = 974 
+                self.state = 974
                 self.expr(0)
                 self.state = 980
                 self._errHandler.sync(self)
@@ -5379,7 +5379,7 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_WHERE:
                 self.state = 981
                 self.match(self.K_WHERE)
-                self.state = 982 
+                self.state = 982
                 self.expr(0)
 
 
@@ -5489,7 +5489,7 @@ class SQLiteParser ( Parser ):
             self.state = 986
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
-                self.state = 985 
+                self.state = 985
                 self.with_clause()
 
 
@@ -5528,15 +5528,15 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_IGNORE)
 
 
-            self.state = 1001 
+            self.state = 1001
             self.qualified_table_name()
             self.state = 1002
             self.match(self.K_SET)
-            self.state = 1003 
+            self.state = 1003
             self.column_name()
             self.state = 1004
             self.match(self.ASSIGN)
-            self.state = 1005 
+            self.state = 1005
             self.expr(0)
             self.state = 1013
             self._errHandler.sync(self)
@@ -5544,11 +5544,11 @@ class SQLiteParser ( Parser ):
             while _la==SQLiteParser.COMMA:
                 self.state = 1006
                 self.match(self.COMMA)
-                self.state = 1007 
+                self.state = 1007
                 self.column_name()
                 self.state = 1008
                 self.match(self.ASSIGN)
-                self.state = 1009 
+                self.state = 1009
                 self.expr(0)
                 self.state = 1015
                 self._errHandler.sync(self)
@@ -5559,7 +5559,7 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_WHERE:
                 self.state = 1016
                 self.match(self.K_WHERE)
-                self.state = 1017 
+                self.state = 1017
                 self.expr(0)
 
 
@@ -5573,7 +5573,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_ORDER)
                     self.state = 1021
                     self.match(self.K_BY)
-                    self.state = 1022 
+                    self.state = 1022
                     self.ordering_term()
                     self.state = 1027
                     self._errHandler.sync(self)
@@ -5581,7 +5581,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 1023
                         self.match(self.COMMA)
-                        self.state = 1024 
+                        self.state = 1024
                         self.ordering_term()
                         self.state = 1029
                         self._errHandler.sync(self)
@@ -5591,7 +5591,7 @@ class SQLiteParser ( Parser ):
 
                 self.state = 1032
                 self.match(self.K_LIMIT)
-                self.state = 1033 
+                self.state = 1033
                 self.expr(0)
                 self.state = 1036
                 _la = self._input.LA(1)
@@ -5601,7 +5601,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     self.consume()
-                    self.state = 1035 
+                    self.state = 1035
                     self.expr(0)
 
 
@@ -5696,12 +5696,12 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1042 
+            self.state = 1042
             self.column_name()
             self.state = 1044
             la_ = self._interp.adaptivePredict(self._input,144,self._ctx)
             if la_ == 1:
-                self.state = 1043 
+                self.state = 1043
                 self.type_name()
 
 
@@ -5709,7 +5709,7 @@ class SQLiteParser ( Parser ):
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.K_CHECK) | (1 << self.K_COLLATE) | (1 << self.K_CONSTRAINT) | (1 << self.K_DEFAULT))) != 0) or ((((_la - 102)) & ~0x3f) == 0 and ((1 << (_la - 102)) & ((1 << (self.K_NOT - 102)) | (1 << (self.K_NULL - 102)) | (1 << (self.K_PRIMARY - 102)) | (1 << (self.K_REFERENCES - 102)) | (1 << (self.K_UNIQUE - 102)))) != 0):
-                self.state = 1046 
+                self.state = 1046
                 self.column_constraint()
                 self.state = 1051
                 self._errHandler.sync(self)
@@ -5763,17 +5763,17 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 72, self.RULE_type_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1053 
+            self.state = 1053
             self._errHandler.sync(self)
             _alt = 1
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt == 1:
-                    self.state = 1052 
+                    self.state = 1052
                     self.name()
 
                 else:
                     raise NoViableAltException(self)
-                self.state = 1055 
+                self.state = 1055
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,146,self._ctx)
 
@@ -5782,7 +5782,7 @@ class SQLiteParser ( Parser ):
             if la_ == 1:
                 self.state = 1057
                 self.match(self.OPEN_PAR)
-                self.state = 1058 
+                self.state = 1058
                 self.signed_number()
                 self.state = 1059
                 self.match(self.CLOSE_PAR)
@@ -5790,11 +5790,11 @@ class SQLiteParser ( Parser ):
             elif la_ == 2:
                 self.state = 1061
                 self.match(self.OPEN_PAR)
-                self.state = 1062 
+                self.state = 1062
                 self.signed_number()
                 self.state = 1063
                 self.match(self.COMMA)
-                self.state = 1064 
+                self.state = 1064
                 self.signed_number()
                 self.state = 1065
                 self.match(self.CLOSE_PAR)
@@ -5904,7 +5904,7 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_CONSTRAINT:
                 self.state = 1069
                 self.match(self.K_CONSTRAINT)
-                self.state = 1070 
+                self.state = 1070
                 self.name()
 
 
@@ -5925,7 +5925,7 @@ class SQLiteParser ( Parser ):
                     self.consume()
 
 
-                self.state = 1078 
+                self.state = 1078
                 self.conflict_clause()
                 self.state = 1080
                 _la = self._input.LA(1)
@@ -5945,13 +5945,13 @@ class SQLiteParser ( Parser ):
 
                 self.state = 1085
                 self.match(self.K_NULL)
-                self.state = 1086 
+                self.state = 1086
                 self.conflict_clause()
 
             elif token in [self.K_UNIQUE]:
                 self.state = 1087
                 self.match(self.K_UNIQUE)
-                self.state = 1088 
+                self.state = 1088
                 self.conflict_clause()
 
             elif token in [self.K_CHECK]:
@@ -5959,7 +5959,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_CHECK)
                 self.state = 1090
                 self.match(self.OPEN_PAR)
-                self.state = 1091 
+                self.state = 1091
                 self.expr(0)
                 self.state = 1092
                 self.match(self.CLOSE_PAR)
@@ -5970,19 +5970,19 @@ class SQLiteParser ( Parser ):
                 self.state = 1101
                 la_ = self._interp.adaptivePredict(self._input,152,self._ctx)
                 if la_ == 1:
-                    self.state = 1095 
+                    self.state = 1095
                     self.signed_number()
                     pass
 
                 elif la_ == 2:
-                    self.state = 1096 
+                    self.state = 1096
                     self.literal_value()
                     pass
 
                 elif la_ == 3:
                     self.state = 1097
                     self.match(self.OPEN_PAR)
-                    self.state = 1098 
+                    self.state = 1098
                     self.expr(0)
                     self.state = 1099
                     self.match(self.CLOSE_PAR)
@@ -5993,11 +5993,11 @@ class SQLiteParser ( Parser ):
             elif token in [self.K_COLLATE]:
                 self.state = 1103
                 self.match(self.K_COLLATE)
-                self.state = 1104 
+                self.state = 1104
                 self.collation_name()
 
             elif token in [self.K_REFERENCES]:
-                self.state = 1105 
+                self.state = 1105
                 self.foreign_key_clause()
 
             else:
@@ -6241,14 +6241,14 @@ class SQLiteParser ( Parser ):
             self.state = 1189
             la_ = self._interp.adaptivePredict(self._input,165,self._ctx)
             if la_ == 1:
-                self.state = 1114 
+                self.state = 1114
                 self.unary_operator()
-                self.state = 1115 
+                self.state = 1115
                 self.expr(21)
                 pass
 
             elif la_ == 2:
-                self.state = 1117 
+                self.state = 1117
                 self.literal_value()
                 pass
 
@@ -6264,24 +6264,24 @@ class SQLiteParser ( Parser ):
                     self.state = 1122
                     la_ = self._interp.adaptivePredict(self._input,155,self._ctx)
                     if la_ == 1:
-                        self.state = 1119 
+                        self.state = 1119
                         self.database_name()
                         self.state = 1120
                         self.match(self.DOT)
 
 
-                    self.state = 1124 
+                    self.state = 1124
                     self.table_name()
                     self.state = 1125
                     self.match(self.DOT)
 
 
-                self.state = 1129 
+                self.state = 1129
                 self.column_name()
                 pass
 
             elif la_ == 5:
-                self.state = 1130 
+                self.state = 1130
                 self.function_name()
                 self.state = 1131
                 self.match(self.OPEN_PAR)
@@ -6295,7 +6295,7 @@ class SQLiteParser ( Parser ):
                         self.match(self.K_DISTINCT)
 
 
-                    self.state = 1135 
+                    self.state = 1135
                     self.expr(0)
                     self.state = 1140
                     self._errHandler.sync(self)
@@ -6303,7 +6303,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 1136
                         self.match(self.COMMA)
-                        self.state = 1137 
+                        self.state = 1137
                         self.expr(0)
                         self.state = 1142
                         self._errHandler.sync(self)
@@ -6325,7 +6325,7 @@ class SQLiteParser ( Parser ):
             elif la_ == 6:
                 self.state = 1148
                 self.match(self.OPEN_PAR)
-                self.state = 1149 
+                self.state = 1149
                 self.expr(0)
                 self.state = 1150
                 self.match(self.CLOSE_PAR)
@@ -6336,11 +6336,11 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_CAST)
                 self.state = 1153
                 self.match(self.OPEN_PAR)
-                self.state = 1154 
+                self.state = 1154
                 self.expr(0)
                 self.state = 1155
                 self.match(self.K_AS)
-                self.state = 1156 
+                self.state = 1156
                 self.type_name()
                 self.state = 1157
                 self.match(self.CLOSE_PAR)
@@ -6363,7 +6363,7 @@ class SQLiteParser ( Parser ):
 
                 self.state = 1165
                 self.match(self.OPEN_PAR)
-                self.state = 1166 
+                self.state = 1166
                 self.select_stmt()
                 self.state = 1167
                 self.match(self.CLOSE_PAR)
@@ -6375,23 +6375,23 @@ class SQLiteParser ( Parser ):
                 self.state = 1171
                 la_ = self._interp.adaptivePredict(self._input,162,self._ctx)
                 if la_ == 1:
-                    self.state = 1170 
+                    self.state = 1170
                     self.expr(0)
 
 
-                self.state = 1178 
+                self.state = 1178
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 while True:
                     self.state = 1173
                     self.match(self.K_WHEN)
-                    self.state = 1174 
+                    self.state = 1174
                     self.expr(0)
                     self.state = 1175
                     self.match(self.K_THEN)
-                    self.state = 1176 
+                    self.state = 1176
                     self.expr(0)
-                    self.state = 1180 
+                    self.state = 1180
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if not (_la==SQLiteParser.K_WHEN):
@@ -6402,7 +6402,7 @@ class SQLiteParser ( Parser ):
                 if _la==SQLiteParser.K_ELSE:
                     self.state = 1182
                     self.match(self.K_ELSE)
-                    self.state = 1183 
+                    self.state = 1183
                     self.expr(0)
 
 
@@ -6411,7 +6411,7 @@ class SQLiteParser ( Parser ):
                 pass
 
             elif la_ == 10:
-                self.state = 1188 
+                self.state = 1188
                 self.raise_function()
                 pass
 
@@ -6435,7 +6435,7 @@ class SQLiteParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 20)")
                         self.state = 1192
                         self.match(self.PIPE2)
-                        self.state = 1193 
+                        self.state = 1193
                         self.expr(21)
                         pass
 
@@ -6450,7 +6450,7 @@ class SQLiteParser ( Parser ):
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.STAR) | (1 << self.DIV) | (1 << self.MOD))) != 0)):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 1196 
+                        self.state = 1196
                         self.expr(20)
                         pass
 
@@ -6465,7 +6465,7 @@ class SQLiteParser ( Parser ):
                         if not(_la==SQLiteParser.PLUS or _la==SQLiteParser.MINUS):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 1199 
+                        self.state = 1199
                         self.expr(19)
                         pass
 
@@ -6480,7 +6480,7 @@ class SQLiteParser ( Parser ):
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.LT2) | (1 << self.GT2) | (1 << self.AMP) | (1 << self.PIPE))) != 0)):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 1202 
+                        self.state = 1202
                         self.expr(18)
                         pass
 
@@ -6495,7 +6495,7 @@ class SQLiteParser ( Parser ):
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.LT) | (1 << self.LT_EQ) | (1 << self.GT) | (1 << self.GT_EQ))) != 0)):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 1205 
+                        self.state = 1205
                         self.expr(17)
                         pass
 
@@ -6565,7 +6565,7 @@ class SQLiteParser ( Parser ):
                             pass
 
 
-                        self.state = 1221 
+                        self.state = 1221
                         self.expr(16)
                         pass
 
@@ -6577,7 +6577,7 @@ class SQLiteParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 14)")
                         self.state = 1223
                         self.match(self.K_AND)
-                        self.state = 1224 
+                        self.state = 1224
                         self.expr(15)
                         pass
 
@@ -6589,7 +6589,7 @@ class SQLiteParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 13)")
                         self.state = 1226
                         self.match(self.K_OR)
-                        self.state = 1227 
+                        self.state = 1227
                         self.expr(14)
                         pass
 
@@ -6608,7 +6608,7 @@ class SQLiteParser ( Parser ):
                             self.match(self.K_NOT)
 
 
-                        self.state = 1233 
+                        self.state = 1233
                         self.expr(7)
                         pass
 
@@ -6627,11 +6627,11 @@ class SQLiteParser ( Parser ):
 
                         self.state = 1238
                         self.match(self.K_BETWEEN)
-                        self.state = 1239 
+                        self.state = 1239
                         self.expr(0)
                         self.state = 1240
                         self.match(self.K_AND)
-                        self.state = 1241 
+                        self.state = 1241
                         self.expr(6)
                         pass
 
@@ -6643,7 +6643,7 @@ class SQLiteParser ( Parser ):
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 9)")
                         self.state = 1244
                         self.match(self.K_COLLATE)
-                        self.state = 1245 
+                        self.state = 1245
                         self.collation_name()
                         pass
 
@@ -6665,14 +6665,14 @@ class SQLiteParser ( Parser ):
                         if not(((((_la - 77)) & ~0x3f) == 0 and ((1 << (_la - 77)) & ((1 << (self.K_GLOB - 77)) | (1 << (self.K_LIKE - 77)) | (1 << (self.K_MATCH - 77)) | (1 << (self.K_REGEXP - 77)))) != 0)):
                             self._errHandler.recoverInline(self)
                         self.consume()
-                        self.state = 1251 
+                        self.state = 1251
                         self.expr(0)
                         self.state = 1254
                         la_ = self._interp.adaptivePredict(self._input,170,self._ctx)
                         if la_ == 1:
                             self.state = 1252
                             self.match(self.K_ESCAPE)
-                            self.state = 1253 
+                            self.state = 1253
                             self.expr(0)
 
 
@@ -6728,11 +6728,11 @@ class SQLiteParser ( Parser ):
                             self.state = 1278
                             la_ = self._interp.adaptivePredict(self._input,174,self._ctx)
                             if la_ == 1:
-                                self.state = 1269 
+                                self.state = 1269
                                 self.select_stmt()
 
                             elif la_ == 2:
-                                self.state = 1270 
+                                self.state = 1270
                                 self.expr(0)
                                 self.state = 1275
                                 self._errHandler.sync(self)
@@ -6740,7 +6740,7 @@ class SQLiteParser ( Parser ):
                                 while _la==SQLiteParser.COMMA:
                                     self.state = 1271
                                     self.match(self.COMMA)
-                                    self.state = 1272 
+                                    self.state = 1272
                                     self.expr(0)
                                     self.state = 1277
                                     self._errHandler.sync(self)
@@ -6756,20 +6756,20 @@ class SQLiteParser ( Parser ):
                             self.state = 1284
                             la_ = self._interp.adaptivePredict(self._input,175,self._ctx)
                             if la_ == 1:
-                                self.state = 1281 
+                                self.state = 1281
                                 self.database_name()
                                 self.state = 1282
                                 self.match(self.DOT)
 
 
-                            self.state = 1286 
+                            self.state = 1286
                             self.table_name()
                             pass
 
 
                         pass
 
-             
+
                 self.state = 1293
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,178,self._ctx)
@@ -6913,14 +6913,14 @@ class SQLiteParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 1294
             self.match(self.K_REFERENCES)
-            self.state = 1295 
+            self.state = 1295
             self.foreign_table()
             self.state = 1307
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 1296
                 self.match(self.OPEN_PAR)
-                self.state = 1297 
+                self.state = 1297
                 self.column_name()
                 self.state = 1302
                 self._errHandler.sync(self)
@@ -6928,7 +6928,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 1298
                     self.match(self.COMMA)
-                    self.state = 1299 
+                    self.state = 1299
                     self.column_name()
                     self.state = 1304
                     self._errHandler.sync(self)
@@ -6990,7 +6990,7 @@ class SQLiteParser ( Parser ):
                 elif token in [self.K_MATCH]:
                     self.state = 1321
                     self.match(self.K_MATCH)
-                    self.state = 1322 
+                    self.state = 1322
                     self.name()
 
                 else:
@@ -7101,7 +7101,7 @@ class SQLiteParser ( Parser ):
                 self.consume()
                 self.state = 1346
                 self.match(self.COMMA)
-                self.state = 1347 
+                self.state = 1347
                 self.error_message()
 
             else:
@@ -7161,14 +7161,14 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1352 
+            self.state = 1352
             self.column_name()
             self.state = 1355
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_COLLATE:
                 self.state = 1353
                 self.match(self.K_COLLATE)
-                self.state = 1354 
+                self.state = 1354
                 self.collation_name()
 
 
@@ -7270,7 +7270,7 @@ class SQLiteParser ( Parser ):
             if _la==SQLiteParser.K_CONSTRAINT:
                 self.state = 1360
                 self.match(self.K_CONSTRAINT)
-                self.state = 1361 
+                self.state = 1361
                 self.name()
 
 
@@ -7294,7 +7294,7 @@ class SQLiteParser ( Parser ):
 
                 self.state = 1369
                 self.match(self.OPEN_PAR)
-                self.state = 1370 
+                self.state = 1370
                 self.indexed_column()
                 self.state = 1375
                 self._errHandler.sync(self)
@@ -7302,7 +7302,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 1371
                     self.match(self.COMMA)
-                    self.state = 1372 
+                    self.state = 1372
                     self.indexed_column()
                     self.state = 1377
                     self._errHandler.sync(self)
@@ -7310,7 +7310,7 @@ class SQLiteParser ( Parser ):
 
                 self.state = 1378
                 self.match(self.CLOSE_PAR)
-                self.state = 1379 
+                self.state = 1379
                 self.conflict_clause()
 
             elif token in [self.K_CHECK]:
@@ -7318,7 +7318,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_CHECK)
                 self.state = 1382
                 self.match(self.OPEN_PAR)
-                self.state = 1383 
+                self.state = 1383
                 self.expr(0)
                 self.state = 1384
                 self.match(self.CLOSE_PAR)
@@ -7330,7 +7330,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_KEY)
                 self.state = 1388
                 self.match(self.OPEN_PAR)
-                self.state = 1389 
+                self.state = 1389
                 self.column_name()
                 self.state = 1394
                 self._errHandler.sync(self)
@@ -7338,7 +7338,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 1390
                     self.match(self.COMMA)
-                    self.state = 1391 
+                    self.state = 1391
                     self.column_name()
                     self.state = 1396
                     self._errHandler.sync(self)
@@ -7346,7 +7346,7 @@ class SQLiteParser ( Parser ):
 
                 self.state = 1397
                 self.match(self.CLOSE_PAR)
-                self.state = 1398 
+                self.state = 1398
                 self.foreign_key_clause()
 
             else:
@@ -7422,13 +7422,13 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_RECURSIVE)
 
 
-            self.state = 1406 
+            self.state = 1406
             self.cte_table_name()
             self.state = 1407
             self.match(self.K_AS)
             self.state = 1408
             self.match(self.OPEN_PAR)
-            self.state = 1409 
+            self.state = 1409
             self.select_stmt()
             self.state = 1410
             self.match(self.CLOSE_PAR)
@@ -7438,13 +7438,13 @@ class SQLiteParser ( Parser ):
             while _la==SQLiteParser.COMMA:
                 self.state = 1411
                 self.match(self.COMMA)
-                self.state = 1412 
+                self.state = 1412
                 self.cte_table_name()
                 self.state = 1413
                 self.match(self.K_AS)
                 self.state = 1414
                 self.match(self.OPEN_PAR)
-                self.state = 1415 
+                self.state = 1415
                 self.select_stmt()
                 self.state = 1416
                 self.match(self.CLOSE_PAR)
@@ -7510,13 +7510,13 @@ class SQLiteParser ( Parser ):
             self.state = 1426
             la_ = self._interp.adaptivePredict(self._input,197,self._ctx)
             if la_ == 1:
-                self.state = 1423 
+                self.state = 1423
                 self.database_name()
                 self.state = 1424
                 self.match(self.DOT)
 
 
-            self.state = 1428 
+            self.state = 1428
             self.table_name()
             self.state = 1434
             token = self._input.LA(1)
@@ -7525,7 +7525,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_INDEXED)
                 self.state = 1430
                 self.match(self.K_BY)
-                self.state = 1431 
+                self.state = 1431
                 self.index_name()
                 pass
             elif token in [self.K_NOT]:
@@ -7590,14 +7590,14 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1436 
+            self.state = 1436
             self.expr(0)
             self.state = 1439
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_COLLATE:
                 self.state = 1437
                 self.match(self.K_COLLATE)
-                self.state = 1438 
+                self.state = 1438
                 self.collation_name()
 
 
@@ -7659,13 +7659,13 @@ class SQLiteParser ( Parser ):
             la_ = self._interp.adaptivePredict(self._input,201,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 1444 
+                self.state = 1444
                 self.signed_number()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 1445 
+                self.state = 1445
                 self.name()
                 pass
 
@@ -7729,14 +7729,14 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1449 
+            self.state = 1449
             self.table_name()
             self.state = 1461
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 1450
                 self.match(self.OPEN_PAR)
-                self.state = 1451 
+                self.state = 1451
                 self.column_name()
                 self.state = 1456
                 self._errHandler.sync(self)
@@ -7744,7 +7744,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 1452
                     self.match(self.COMMA)
-                    self.state = 1453 
+                    self.state = 1453
                     self.column_name()
                     self.state = 1458
                     self._errHandler.sync(self)
@@ -7758,7 +7758,7 @@ class SQLiteParser ( Parser ):
             self.match(self.K_AS)
             self.state = 1464
             self.match(self.OPEN_PAR)
-            self.state = 1465 
+            self.state = 1465
             self.select_stmt()
             self.state = 1466
             self.match(self.CLOSE_PAR)
@@ -7821,7 +7821,7 @@ class SQLiteParser ( Parser ):
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 1469 
+                self.state = 1469
                 self.table_name()
                 self.state = 1470
                 self.match(self.DOT)
@@ -7831,7 +7831,7 @@ class SQLiteParser ( Parser ):
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 1473 
+                self.state = 1473
                 self.expr(0)
                 self.state = 1478
                 _la = self._input.LA(1)
@@ -7843,7 +7843,7 @@ class SQLiteParser ( Parser ):
                         self.match(self.K_AS)
 
 
-                    self.state = 1477 
+                    self.state = 1477
                     self.column_alias()
 
 
@@ -7934,13 +7934,13 @@ class SQLiteParser ( Parser ):
                 self.state = 1485
                 la_ = self._interp.adaptivePredict(self._input,207,self._ctx)
                 if la_ == 1:
-                    self.state = 1482 
+                    self.state = 1482
                     self.database_name()
                     self.state = 1483
                     self.match(self.DOT)
 
 
-                self.state = 1487 
+                self.state = 1487
                 self.table_name()
                 self.state = 1492
                 la_ = self._interp.adaptivePredict(self._input,209,self._ctx)
@@ -7952,7 +7952,7 @@ class SQLiteParser ( Parser ):
                         self.match(self.K_AS)
 
 
-                    self.state = 1491 
+                    self.state = 1491
                     self.table_alias()
 
 
@@ -7963,7 +7963,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_INDEXED)
                     self.state = 1495
                     self.match(self.K_BY)
-                    self.state = 1496 
+                    self.state = 1496
                     self.index_name()
                     pass
                 elif token in [self.K_NOT]:
@@ -7985,7 +7985,7 @@ class SQLiteParser ( Parser ):
                 self.state = 1511
                 la_ = self._interp.adaptivePredict(self._input,212,self._ctx)
                 if la_ == 1:
-                    self.state = 1502 
+                    self.state = 1502
                     self.table_or_subquery()
                     self.state = 1507
                     self._errHandler.sync(self)
@@ -7993,7 +7993,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 1503
                         self.match(self.COMMA)
-                        self.state = 1504 
+                        self.state = 1504
                         self.table_or_subquery()
                         self.state = 1509
                         self._errHandler.sync(self)
@@ -8002,7 +8002,7 @@ class SQLiteParser ( Parser ):
                     pass
 
                 elif la_ == 2:
-                    self.state = 1510 
+                    self.state = 1510
                     self.join_clause()
                     pass
 
@@ -8019,7 +8019,7 @@ class SQLiteParser ( Parser ):
                         self.match(self.K_AS)
 
 
-                    self.state = 1517 
+                    self.state = 1517
                     self.table_alias()
 
 
@@ -8029,7 +8029,7 @@ class SQLiteParser ( Parser ):
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1520
                 self.match(self.OPEN_PAR)
-                self.state = 1521 
+                self.state = 1521
                 self.select_stmt()
                 self.state = 1522
                 self.match(self.CLOSE_PAR)
@@ -8043,7 +8043,7 @@ class SQLiteParser ( Parser ):
                         self.match(self.K_AS)
 
 
-                    self.state = 1526 
+                    self.state = 1526
                     self.table_alias()
 
 
@@ -8106,17 +8106,17 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1531 
+            self.state = 1531
             self.table_or_subquery()
             self.state = 1538
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==SQLiteParser.COMMA or _la==SQLiteParser.K_CROSS or ((((_la - 87)) & ~0x3f) == 0 and ((1 << (_la - 87)) & ((1 << (self.K_INNER - 87)) | (1 << (self.K_JOIN - 87)) | (1 << (self.K_LEFT - 87)) | (1 << (self.K_NATURAL - 87)))) != 0):
-                self.state = 1532 
+                self.state = 1532
                 self.join_operator()
-                self.state = 1533 
+                self.state = 1533
                 self.table_or_subquery()
-                self.state = 1534 
+                self.state = 1534
                 self.join_constraint()
                 self.state = 1540
                 self._errHandler.sync(self)
@@ -8278,7 +8278,7 @@ class SQLiteParser ( Parser ):
             if token in [self.K_ON]:
                 self.state = 1556
                 self.match(self.K_ON)
-                self.state = 1557 
+                self.state = 1557
                 self.expr(0)
                 pass
             elif token in [self.K_USING]:
@@ -8286,7 +8286,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_USING)
                 self.state = 1559
                 self.match(self.OPEN_PAR)
-                self.state = 1560 
+                self.state = 1560
                 self.column_name()
                 self.state = 1565
                 self._errHandler.sync(self)
@@ -8294,7 +8294,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 1561
                     self.match(self.COMMA)
-                    self.state = 1562 
+                    self.state = 1562
                     self.column_name()
                     self.state = 1567
                     self._errHandler.sync(self)
@@ -8409,7 +8409,7 @@ class SQLiteParser ( Parser ):
                     self.consume()
 
 
-                self.state = 1576 
+                self.state = 1576
                 self.result_column()
                 self.state = 1581
                 self._errHandler.sync(self)
@@ -8417,7 +8417,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 1577
                     self.match(self.COMMA)
-                    self.state = 1578 
+                    self.state = 1578
                     self.result_column()
                     self.state = 1583
                     self._errHandler.sync(self)
@@ -8431,7 +8431,7 @@ class SQLiteParser ( Parser ):
                     self.state = 1594
                     la_ = self._interp.adaptivePredict(self._input,228,self._ctx)
                     if la_ == 1:
-                        self.state = 1585 
+                        self.state = 1585
                         self.table_or_subquery()
                         self.state = 1590
                         self._errHandler.sync(self)
@@ -8439,7 +8439,7 @@ class SQLiteParser ( Parser ):
                         while _la==SQLiteParser.COMMA:
                             self.state = 1586
                             self.match(self.COMMA)
-                            self.state = 1587 
+                            self.state = 1587
                             self.table_or_subquery()
                             self.state = 1592
                             self._errHandler.sync(self)
@@ -8448,7 +8448,7 @@ class SQLiteParser ( Parser ):
                         pass
 
                     elif la_ == 2:
-                        self.state = 1593 
+                        self.state = 1593
                         self.join_clause()
                         pass
 
@@ -8460,7 +8460,7 @@ class SQLiteParser ( Parser ):
                 if _la==SQLiteParser.K_WHERE:
                     self.state = 1598
                     self.match(self.K_WHERE)
-                    self.state = 1599 
+                    self.state = 1599
                     self.expr(0)
 
 
@@ -8471,7 +8471,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.K_GROUP)
                     self.state = 1603
                     self.match(self.K_BY)
-                    self.state = 1604 
+                    self.state = 1604
                     self.expr(0)
                     self.state = 1609
                     self._errHandler.sync(self)
@@ -8479,7 +8479,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 1605
                         self.match(self.COMMA)
-                        self.state = 1606 
+                        self.state = 1606
                         self.expr(0)
                         self.state = 1611
                         self._errHandler.sync(self)
@@ -8490,7 +8490,7 @@ class SQLiteParser ( Parser ):
                     if _la==SQLiteParser.K_HAVING:
                         self.state = 1612
                         self.match(self.K_HAVING)
-                        self.state = 1613 
+                        self.state = 1613
                         self.expr(0)
 
 
@@ -8503,7 +8503,7 @@ class SQLiteParser ( Parser ):
                 self.match(self.K_VALUES)
                 self.state = 1619
                 self.match(self.OPEN_PAR)
-                self.state = 1620 
+                self.state = 1620
                 self.expr(0)
                 self.state = 1625
                 self._errHandler.sync(self)
@@ -8511,7 +8511,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 1621
                     self.match(self.COMMA)
-                    self.state = 1622 
+                    self.state = 1622
                     self.expr(0)
                     self.state = 1627
                     self._errHandler.sync(self)
@@ -8527,7 +8527,7 @@ class SQLiteParser ( Parser ):
                     self.match(self.COMMA)
                     self.state = 1630
                     self.match(self.OPEN_PAR)
-                    self.state = 1631 
+                    self.state = 1631
                     self.expr(0)
                     self.state = 1636
                     self._errHandler.sync(self)
@@ -8535,7 +8535,7 @@ class SQLiteParser ( Parser ):
                     while _la==SQLiteParser.COMMA:
                         self.state = 1632
                         self.match(self.COMMA)
-                        self.state = 1633 
+                        self.state = 1633
                         self.expr(0)
                         self.state = 1638
                         self._errHandler.sync(self)
@@ -8671,14 +8671,14 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1655 
+            self.state = 1655
             self.table_name()
             self.state = 1667
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 1656
                 self.match(self.OPEN_PAR)
-                self.state = 1657 
+                self.state = 1657
                 self.column_name()
                 self.state = 1662
                 self._errHandler.sync(self)
@@ -8686,7 +8686,7 @@ class SQLiteParser ( Parser ):
                 while _la==SQLiteParser.COMMA:
                     self.state = 1658
                     self.match(self.COMMA)
-                    self.state = 1659 
+                    self.state = 1659
                     self.column_name()
                     self.state = 1664
                     self._errHandler.sync(self)
@@ -8934,13 +8934,13 @@ class SQLiteParser ( Parser ):
             la_ = self._interp.adaptivePredict(self._input,242,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 1680 
+                self.state = 1680
                 self.expr(0)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 1681 
+                self.state = 1681
                 self.column_def()
                 pass
 
@@ -9441,7 +9441,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 128, self.RULE_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1688 
+            self.state = 1688
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9481,7 +9481,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 130, self.RULE_function_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1690 
+            self.state = 1690
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9521,7 +9521,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 132, self.RULE_database_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1692 
+            self.state = 1692
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9561,7 +9561,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 134, self.RULE_table_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1694 
+            self.state = 1694
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9601,7 +9601,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 136, self.RULE_table_or_index_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1696 
+            self.state = 1696
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9641,7 +9641,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 138, self.RULE_new_table_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1698 
+            self.state = 1698
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9681,7 +9681,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 140, self.RULE_column_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1700 
+            self.state = 1700
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9721,7 +9721,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 142, self.RULE_collation_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1702 
+            self.state = 1702
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9761,7 +9761,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 144, self.RULE_foreign_table)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1704 
+            self.state = 1704
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9801,7 +9801,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 146, self.RULE_index_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1706 
+            self.state = 1706
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9841,7 +9841,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 148, self.RULE_trigger_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1708 
+            self.state = 1708
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9881,7 +9881,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 150, self.RULE_view_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1710 
+            self.state = 1710
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9921,7 +9921,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 152, self.RULE_module_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1712 
+            self.state = 1712
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -9961,7 +9961,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 154, self.RULE_pragma_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1714 
+            self.state = 1714
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -10001,7 +10001,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 156, self.RULE_savepoint_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1716 
+            self.state = 1716
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -10041,7 +10041,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 158, self.RULE_table_alias)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1718 
+            self.state = 1718
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -10081,7 +10081,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 160, self.RULE_transaction_name)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 1720 
+            self.state = 1720
             self.any_name()
         except RecognitionException as re:
             localctx.exception = re
@@ -10139,7 +10139,7 @@ class SQLiteParser ( Parser ):
 
             elif token in [self.K_ABORT, self.K_ACTION, self.K_ADD, self.K_AFTER, self.K_ALL, self.K_ALTER, self.K_ANALYZE, self.K_AND, self.K_AS, self.K_ASC, self.K_ATTACH, self.K_AUTOINCREMENT, self.K_BEFORE, self.K_BEGIN, self.K_BETWEEN, self.K_BY, self.K_CASCADE, self.K_CASE, self.K_CAST, self.K_CHECK, self.K_COLLATE, self.K_COLUMN, self.K_COMMIT, self.K_CONFLICT, self.K_CONSTRAINT, self.K_CREATE, self.K_CROSS, self.K_CURRENT_DATE, self.K_CURRENT_TIME, self.K_CURRENT_TIMESTAMP, self.K_DATABASE, self.K_DEFAULT, self.K_DEFERRABLE, self.K_DEFERRED, self.K_DELETE, self.K_DESC, self.K_DETACH, self.K_DISTINCT, self.K_DROP, self.K_EACH, self.K_ELSE, self.K_END, self.K_ESCAPE, self.K_EXCEPT, self.K_EXCLUSIVE, self.K_EXISTS, self.K_EXPLAIN, self.K_FAIL, self.K_FOR, self.K_FOREIGN, self.K_FROM, self.K_FULL, self.K_GLOB, self.K_GROUP, self.K_HAVING, self.K_IF, self.K_IGNORE, self.K_IMMEDIATE, self.K_IN, self.K_INDEX, self.K_INDEXED, self.K_INITIALLY, self.K_INNER, self.K_INSERT, self.K_INSTEAD, self.K_INTERSECT, self.K_INTO, self.K_IS, self.K_ISNULL, self.K_JOIN, self.K_KEY, self.K_LEFT, self.K_LIKE, self.K_LIMIT, self.K_MATCH, self.K_NATURAL, self.K_NO, self.K_NOT, self.K_NOTNULL, self.K_NULL, self.K_OF, self.K_OFFSET, self.K_ON, self.K_OR, self.K_ORDER, self.K_OUTER, self.K_PLAN, self.K_PRAGMA, self.K_PRIMARY, self.K_QUERY, self.K_RAISE, self.K_RECURSIVE, self.K_REFERENCES, self.K_REGEXP, self.K_REINDEX, self.K_RELEASE, self.K_RENAME, self.K_REPLACE, self.K_RESTRICT, self.K_RIGHT, self.K_ROLLBACK, self.K_ROW, self.K_SAVEPOINT, self.K_SELECT, self.K_SET, self.K_TABLE, self.K_TEMP, self.K_TEMPORARY, self.K_THEN, self.K_TO, self.K_TRANSACTION, self.K_TRIGGER, self.K_UNION, self.K_UNIQUE, self.K_UPDATE, self.K_USING, self.K_VACUUM, self.K_VALUES, self.K_VIEW, self.K_VIRTUAL, self.K_WHEN, self.K_WHERE, self.K_WITH, self.K_WITHOUT]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 1723 
+                self.state = 1723
                 self.keyword()
 
             elif token in [self.STRING_LITERAL]:
@@ -10151,7 +10151,7 @@ class SQLiteParser ( Parser ):
                 self.enterOuterAlt(localctx, 4)
                 self.state = 1725
                 self.match(self.OPEN_PAR)
-                self.state = 1726 
+                self.state = 1726
                 self.any_name()
                 self.state = 1727
                 self.match(self.CLOSE_PAR)
@@ -10182,59 +10182,55 @@ class SQLiteParser ( Parser ):
     def expr_sempred(self, localctx:ExprContext, predIndex:int):
             if predIndex == 0:
                 return self.precpred(self._ctx, 20)
-         
+
 
             if predIndex == 1:
                 return self.precpred(self._ctx, 19)
-         
+
 
             if predIndex == 2:
                 return self.precpred(self._ctx, 18)
-         
+
 
             if predIndex == 3:
                 return self.precpred(self._ctx, 17)
-         
+
 
             if predIndex == 4:
                 return self.precpred(self._ctx, 16)
-         
+
 
             if predIndex == 5:
                 return self.precpred(self._ctx, 15)
-         
+
 
             if predIndex == 6:
                 return self.precpred(self._ctx, 14)
-         
+
 
             if predIndex == 7:
                 return self.precpred(self._ctx, 13)
-         
+
 
             if predIndex == 8:
                 return self.precpred(self._ctx, 6)
-         
+
 
             if predIndex == 9:
                 return self.precpred(self._ctx, 5)
-         
+
 
             if predIndex == 10:
                 return self.precpred(self._ctx, 9)
-         
+
 
             if predIndex == 11:
                 return self.precpred(self._ctx, 8)
-         
+
 
             if predIndex == 12:
                 return self.precpred(self._ctx, 7)
-         
+
 
             if predIndex == 13:
                 return self.precpred(self._ctx, 4)
-         
-
-
-

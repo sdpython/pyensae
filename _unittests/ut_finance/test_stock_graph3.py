@@ -22,7 +22,7 @@ from src.pyensae.finance.astock import StockPrices
 
 
 class TestStockGraph3 (unittest.TestCase):
-    
+
     def test_graph3(self) :
         """
         This test is failing with Python 3.4 if many pictures are drawn.
@@ -33,7 +33,7 @@ class TestStockGraph3 (unittest.TestCase):
         cache = os.path.join(cache, "temp_cache3")
         stock = StockPrices ("BNP.PA", folder = cache)
         stock2 = StockPrices ("CA.PA", folder = cache)
-                    
+
         fig, ax, plt = stock.plot(figsize=(16,8))
         fig, ax, plt = stock2.plot(existing=(fig,ax), axis=2)
         img = os.path.abspath(os.path.join(os.path.split(__file__)[0],"temp_image3.png"))
@@ -43,4 +43,4 @@ class TestStockGraph3 (unittest.TestCase):
 
 
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

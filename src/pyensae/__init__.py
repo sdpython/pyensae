@@ -7,7 +7,7 @@
 import sys
 if sys.version_info[0] < 3 :
     raise ImportError("pyensae only works with Python 3")
-    
+
 __version__ = "0.9.1"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pyensae"
@@ -19,14 +19,14 @@ def check( log = False):
     """
     Checks the library is working.
     It raises an exception.
-    
+
     @param      log     if True, display information, otherwise
     @return             0 or exception
     """
     return True
-    
+
 from .resources.http_retrieve import download_data
-from .sql.database_helper import import_flatfile_into_database    
+from .sql.database_helper import import_flatfile_into_database
 from .file_helper.content_helper import replace_comma_by_point
 from .finance.astock import StockPrices
 from .sql.database_main import Database
@@ -41,7 +41,7 @@ try:
     from .remote.magic_remote import register_magics
     from .remote.magic_azure import register_azure_magics
     from .sql.magic_sql import register_sql_magics
-    ip = get_ipython()    
+    ip = get_ipython()
     if ip is not None:
         # the program is not run from a notebook
         register_magics()

@@ -26,7 +26,7 @@ from src.pyensae.sql.database_main import Database
 
 
 class TestDatabase (unittest.TestCase):
-    
+
     def test_import_flatflit(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         file = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data", "ACA.PA.txt")
@@ -41,4 +41,4 @@ class TestDatabase (unittest.TestCase):
         assert len(view[0]) == 7
 
 if __name__ == "__main__"  :
-    unittest.main ()    
+    unittest.main ()

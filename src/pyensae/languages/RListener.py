@@ -65,5 +65,3 @@ class RListener(ParseTreeListener):
     # Exit a parse tree produced by RParser#parse.
     def exitParse(self, ctx):
         pass
-
-

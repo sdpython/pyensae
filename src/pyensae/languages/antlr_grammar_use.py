@@ -1,6 +1,6 @@
 """
 @file
-@brief Helpers around language grammar. 
+@brief Helpers around language grammar.
 This module requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
 """
 import os, sys
@@ -9,7 +9,7 @@ from antlr4 import *
 def get_parser_lexer(language):
     """
     returns two classes, a parser and a lexer from antlr4
-    
+
     @param      language    to analyse
     @return                 Parser, Lexer
     """
@@ -27,23 +27,23 @@ def get_parser_lexer(language):
         return PigParser, PigLexer
     else:
         raise ImportError("unable to import parsers for language: " + language)
-        
+
 def parse_code(code, class_parser, class_lexer):
     """
     parse a code and returns a tree
-    
+
     @param      code                code to parse
     @param      class_parser        parser
     @param      class_lexer         lexer
     @return                         parsed code
-    
+
     @example(Check the syntax of a script PIG)
     @code
     code = '''
     A = LOAD 'filename.txt' USING PigStorage('\t');
     STORE A INTO 'samefile.txt' ;
     '''
-    
+
     clparser,cllexer = get_parser_lexer("Pig")
     parser = parse_code(code, clparser, cllexer)
     tree = parser.parse()
@@ -53,11 +53,11 @@ def parse_code(code, class_parser, class_lexer):
     @endexample
     """
     from antlr4 import CommonTokenStream, InputStream
-    
+
     if isinstance(code, str):
         # we assume it is a string
         code = InputStream.InputStream(code)
-        
+
     lexer = class_lexer(code)
     stream = CommonTokenStream(lexer)
     parser = class_parser(stream)
@@ -71,28 +71,28 @@ class TreeStringListener(ParseTreeListener):
     def __init__(self, parser):
         """
         constructor
-        
+
         @param      parser      parser used to parse the code
         """
         super()
         self.buffer = [ ]
         self.level = 0
         self.parser = parser
-        
+
     def visitTerminal(self, node):
         """
         event
         """
-        text = ("    " * self.level) + "v " + str(node.symbol) 
+        text = ("    " * self.level) + "v " + str(node.symbol)
         self.buffer.append(text)
-        
+
     def visitErrorNode(self, node):
         """
         event
         """
         text = ("    " * self.level) + "error: " + str(node)
         self.buffer.append(text)
-        
+
     def enterEveryRule(self, ctx):
         """
         event
@@ -103,7 +103,7 @@ class TreeStringListener(ParseTreeListener):
             text = ("    " * self.level) + "+ " + ", LT(1)=" + self.parser._input.LT(1).text
         self.buffer.append(text)
         self.level += 1
-        
+
     def exitEveryRule(self, ctx):
         """
         event
@@ -114,17 +114,17 @@ class TreeStringListener(ParseTreeListener):
         else:
             text = ("    " * self.level) + "- " + ", LT(1)=" + self.parser._input.LT(1).text
         self.buffer.append(text)
-        
+
     def __str__(self):
         """
         usual
         """
-        return "\n".join(self.buffer)   
+        return "\n".join(self.buffer)
 
 def get_tree_string(tree, parser, format = TreeStringListener):
     """
     returns a string which shows the parsed tree
-    
+
     @param      tree        from @see fn parse_code
     @param      parser      the parser used to build the tree
     @param      format      None or a class ParseTreeListener
@@ -135,6 +135,5 @@ def get_tree_string(tree, parser, format = TreeStringListener):
     else :
         walker = ParseTreeWalker()
         listen = TreeStringListener(parser)
-        walker.walk(listen, tree)    
+        walker.walk(listen, tree)
         return str(listen)
-        
