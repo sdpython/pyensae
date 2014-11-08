@@ -81,7 +81,7 @@ class InterfaceSQLDatabase(InterfaceSQL):
         """
         self.obj.import_table_from_flat_file(filename, table_name, columns = None, header=True)
         self.populate_completion()
-        
+
     def drop_table(self, table_name):
         """
         drops a table
@@ -90,24 +90,23 @@ class InterfaceSQLDatabase(InterfaceSQL):
         """
         self.obj.remove_table(table_name)
         self.populate_completion()
-        
+
     def add_function(self, code_function):
         """
         add a function to the database which can be called in a SELECT statement
-        
+
         @param      code_function  pointer to the function
         """
         name = code_function.__name__
         nbp = code_function.__code__.co_argcount
         self.obj.add_function(name, nbp, code_function)
-        
+
     def import_dataframe(self, tablename, df):
         """
         import a dataframe into the database
-        
+
         @param      tablename       name of the table
         @param      df              dataframe
         """
         df.to_sql(tablename, self.obj._connection)
         self.populate_completion()
-        

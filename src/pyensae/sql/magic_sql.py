@@ -60,7 +60,7 @@ class MagicSQL(Magics):
         """
         db = self.get_connection()
         return db.get_table_list()
-        
+
     @line_magic
     def SQL_drop_table(self,line):
         """
@@ -73,7 +73,7 @@ class MagicSQL(Magics):
         else:
             db = self.get_connection()
             db.drop_table(line)
-            
+
     @line_magic
     def SQL_refresh_completion(self):
         """
@@ -141,7 +141,7 @@ class MagicSQL(Magics):
                     return df.shape
                 else:
                     return df
-            
+
     @line_magic
     def SQL_import_tsv(self,line):
         """
@@ -156,7 +156,7 @@ class MagicSQL(Magics):
                 raise FileNotFoundError(spl[1])
             db = self.get_connection()
             db.import_flat_file(spl[1], spl[0])
-        
+
     @line_magic
     def SQL_add_function(self, line):
         """
@@ -187,7 +187,7 @@ class MagicSQL(Magics):
             print("   SQL_import_df tablename dataframe")
         else:
             db = self.get_connection()
-            
+
             df = spl[1]
             if self.shell is not None:
                 if df not in self.shell.user_ns:
@@ -195,9 +195,9 @@ class MagicSQL(Magics):
                 odf = self.shell.user_ns[df]
             else:
                 raise Exception("unable to find IPython workspace")
-            
+
             db.import_dataframe(spl[0], odf)
-        
+
 
 def register_sql_magics():
     """
@@ -206,4 +206,3 @@ def register_sql_magics():
     from IPython import get_ipython
     ip = get_ipython()
     ip.register_magics(MagicSQL)
-    

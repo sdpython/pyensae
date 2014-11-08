@@ -68,21 +68,21 @@ class TestInterfaceSQL (unittest.TestCase):
         assert df.columns== ["COUNT(*)"]
         assert len(df) == 1
         assert df.values[0][0] == 2333
-        
+
         def minc(x) :
             return x+1
-            
+
         face.add_function(minc)
         sql = "SELECT minc(nb) FROM ( SELECT COUNT(*) AS nb FROM ACAPA )"
         df = face.execute(sql)
         assert df.values[0][0] == 2334
-        
+
         if 'newtable' in face.get_table_list() :
             face.drop_table('newtable')
-        
+
         face.import_dataframe("newtable", df)
         assert "newtable" in face.get_table_list()
-        
+
         sql = "SELECT blblable"
         try:
             df = face.execute(sql)
