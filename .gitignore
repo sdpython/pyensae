@@ -233,6 +233,7 @@ _doc/notebooks/World*.db3
 _doc/notebooks/flatfile*
 _doc/notebooks/*.pig
 _doc/notebooks/Conf*.txt
+_doc/notebooks/*.db3
 
 _unittests/ut_resources/facebook*
 README

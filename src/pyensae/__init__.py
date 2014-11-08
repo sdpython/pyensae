@@ -8,7 +8,7 @@ import sys
 if sys.version_info[0] < 3 :
     raise ImportError("pyensae only works with Python 3")
 
-__version__ = "0.9.1"
+__version__ = "0.9.3"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pyensae"
 __url__ = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html"
@@ -34,7 +34,7 @@ from .datasource.data_velib import DataVelibCollect
 from .datasource.convert import dBase2df, dBase2sqllite
 from .file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
 from .remote.remote_connection import ASSHClient
-from .sql.sql_interface import InterfaceSQL
+from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
 
 try:
     from IPython import get_ipython

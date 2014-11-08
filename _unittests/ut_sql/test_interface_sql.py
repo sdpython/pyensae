@@ -22,7 +22,7 @@ except ImportError :
 
 from pyquickhelper import fLOG
 from src.pyensae.sql.database_helper import import_flatfile_into_database
-from src.pyensae import Database, InterfaceSQL
+from src.pyensae import Database, InterfaceSQL, InterfaceSQLException
 
 
 class TestInterfaceSQL (unittest.TestCase):
@@ -40,7 +40,7 @@ class TestInterfaceSQL (unittest.TestCase):
 
         tbls = face.get_table_list()
         fLOG(tbls)
-        assert tbls == ['ACAPA']
+        assert 'ACAPA' in tbls
 
         cols  = face.get_table_columns('ACAPA')
         fLOG(cols )
@@ -68,6 +68,26 @@ class TestInterfaceSQL (unittest.TestCase):
         assert df.columns== ["COUNT(*)"]
         assert len(df) == 1
         assert df.values[0][0] == 2333
+        
+        def minc(x) :
+            return x+1
+            
+        face.add_function(minc)
+        sql = "SELECT minc(nb) FROM ( SELECT COUNT(*) AS nb FROM ACAPA )"
+        df = face.execute(sql)
+        assert df.values[0][0] == 2334
+        
+        if 'newtable' in face.get_table_list() :
+            face.drop_table('newtable')
+        
+        face.import_dataframe("newtable", df)
+        assert "newtable" in face.get_table_list()
+        
+        sql = "SELECT blblable"
+        try:
+            df = face.execute(sql)
+        except InterfaceSQLException as e :
+            pass
 
         face.close()
 

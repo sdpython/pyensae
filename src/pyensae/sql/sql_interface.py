@@ -7,6 +7,24 @@ It will be used to implement magic functions
 
 import re
 
+class InterfaceSQLException(BaseException):
+    """
+    a specific exception
+    """
+    def __init__(self, message):
+        """
+        constructor
+        
+        @param      message     exception message
+        """
+        self.message = message
+        
+    def __str__(self):
+        """
+        usual
+        """
+        return self.message
+
 class AutoCompletionSQLObject:
     """
     a simple class which allows auto completion
@@ -201,3 +219,39 @@ class InterfaceSQL:
         @param      table           table name
         """
         raise NotImplementedError()
+        
+    def drop_table(self, table_name):
+        """
+        drops a table
+
+        @param      table           table name
+        """
+        raise NotImplementedError()
+        
+    def refresh_completion(self):
+        """
+        refresh the auto completion
+        
+        @return         completion object
+        """
+        return self.populate_completion()
+        
+    def add_function(self, code_function):
+        """
+        add a function to the database which can be called in a SELECT statement
+        
+        @param      code_function  pointer to the function
+        """
+        raise NotImplementedError()
+        
+    def import_dataframe(self, tablename, df):
+        """
+        import a dataframe into the database
+        
+        @param      tablename       name of the table
+        @param      df              dataframe
+        """
+        raise NotImplementedError()
+        
+        
+    

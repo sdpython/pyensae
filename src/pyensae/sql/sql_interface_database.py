@@ -5,8 +5,10 @@
 It will be used to implement magic functions
 """
 import sys, os, pandas, sqlite3
+
 from .database_main import Database
-from .sql_interface import InterfaceSQL
+from .database_exception import ExceptionSQL
+from .sql_interface import InterfaceSQL, InterfaceSQLException
 from pyquickhelper import noLOG
 
 class InterfaceSQLDatabase(InterfaceSQL):
@@ -61,7 +63,13 @@ class InterfaceSQLDatabase(InterfaceSQL):
         @return                     pandas DataFrame
         """
         con = self.obj._connection
-        return pandas.read_sql(sql_query, con)
+        try:
+            return pandas.read_sql(sql_query, con)
+        except pandas.io.sql.DatabaseError as e :
+            try:
+                self.obj.execute_view(sql_query)
+            except Exception as ee :
+                raise InterfaceSQLException(str(ee)) from ee
 
     def import_flat_file(self, filename, table_name):
         """
@@ -73,3 +81,33 @@ class InterfaceSQLDatabase(InterfaceSQL):
         """
         self.obj.import_table_from_flat_file(filename, table_name, columns = None, header=True)
         self.populate_completion()
+        
+    def drop_table(self, table_name):
+        """
+        drops a table
+
+        @param      table           table name
+        """
+        self.obj.remove_table(table_name)
+        self.populate_completion()
+        
+    def add_function(self, code_function):
+        """
+        add a function to the database which can be called in a SELECT statement
+        
+        @param      code_function  pointer to the function
+        """
+        name = code_function.__name__
+        nbp = code_function.__code__.co_argcount
+        self.obj.add_function(name, nbp, code_function)
+        
+    def import_dataframe(self, tablename, df):
+        """
+        import a dataframe into the database
+        
+        @param      tablename       name of the table
+        @param      df              dataframe
+        """
+        df.to_sql(tablename, self.obj._connection)
+        self.populate_completion()
+        

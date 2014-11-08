@@ -9,7 +9,7 @@ from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 
-from .sql_interface import InterfaceSQL
+from .sql_interface import InterfaceSQL, InterfaceSQLException
 
 @magics_class
 class MagicSQL(Magics):
@@ -56,11 +56,33 @@ class MagicSQL(Magics):
     @line_magic
     def SQL_tables(self, line):
         """
-        define ``SQL_tables``
+        define ``%SQL_tables``
         """
         db = self.get_connection()
         return db.get_table_list()
+        
+    @line_magic
+    def SQL_drop_table(self,line):
+        """
+        define ``%SQL_drop_table``
+        """
+        line = line.strip()
+        if len(line) == 0 :
+            print("Usage:")
+            print("    SQL_drop_table <table_name>")
+        else:
+            db = self.get_connection()
+            db.drop_table(line)
+            
+    @line_magic
+    def SQL_refresh_completion(self):
+        """
+        define SQL_refresh_completion
+        """
+        db = self.get_connection()
+        db.refresh_completion()
 
+    @line_magic
     def SQL_schema(self, line):
         """
         define ``SQL_schema``
@@ -106,12 +128,76 @@ class MagicSQL(Magics):
 
         if cont:
             db = self.get_connection()
-            df = db.execute(query)
+            try:
+                df = db.execute(query)
+                ok = True
+            except InterfaceSQLException as e :
+                print (str(e))
+                ok = False
 
-            if addv is not None and self.shell is not None:
-                self.shell.user_ns[addv] = df
-            return df
+            if ok:
+                if addv is not None and self.shell is not None:
+                    self.shell.user_ns[addv] = df
+                    return df.shape
+                else:
+                    return df
+            
+    @line_magic
+    def SQL_import_tsv(self,line):
+        """
+        define ``%SQL_import_tsv``
+        """
+        spl = line.strip().split()
+        if len(spl) != 2 :
+            print("Usage:")
+            print("   SQL_import_tsv tablename filename")
+        else:
+            if not os.path.exists(spl[1]):
+                raise FileNotFoundError(spl[1])
+            db = self.get_connection()
+            db.import_flat_file(spl[1], spl[0])
+        
+    @line_magic
+    def SQL_add_function(self, line):
+        """
+        define ``%SQL_add_function``
+        """
+        line.strip()
+        if len(line)==0:
+            print("Usage:")
+            print("   SQL_add_function function_name")
+        else:
+            if self.shell is not None:
+                if line not in self.shell.user_ns:
+                    raise KeyError("unable to find function %s in your workspace" % line)
+                fu = self.shell.user_ns[line]
+            else:
+                raise Exception("unable to find IPython workspace")
+            db = self.get_connection()
+            db.add_function(fu)
 
+    @line_magic
+    def SQL_import_df(self, line):
+        """
+        define ``%SQL_import_dataframe``
+        """
+        spl = line.strip().split()
+        if len(spl) != 2 :
+            print("Usage:")
+            print("   SQL_import_df tablename dataframe")
+        else:
+            db = self.get_connection()
+            
+            df = spl[1]
+            if self.shell is not None:
+                if df not in self.shell.user_ns:
+                    raise KeyError("unable to find dataframe %s in your workspace" % df)
+                odf = self.shell.user_ns[df]
+            else:
+                raise Exception("unable to find IPython workspace")
+            
+            db.import_dataframe(spl[0], odf)
+        
 
 def register_sql_magics():
     """
@@ -120,3 +206,4 @@ def register_sql_magics():
     from IPython import get_ipython
     ip = get_ipython()
     ip.register_magics(MagicSQL)
+    
