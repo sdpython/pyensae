@@ -27,7 +27,8 @@ class DatabaseJoinGroup :
             """constructor
             this node defines a join on two tables (parent_table, table)
             on two keys (parent_key, key). The keys can be tuple or string.
-            @param      table
+
+            @param      table           table name
             @param      parent_key      None if it is the root
             @param      key             None if it is the root
             @param      where           clause where
@@ -41,7 +42,7 @@ class DatabaseJoinGroup :
                                                 You may add field not connected to a table,
                                                 they will not taken into account.
             @param      prefix          add a prefix, avoid different fields collide
-            @param      avoid_prefix    avoid using a prefix to build SQL queries (use syntax ( ... ) AS ...
+            @param      avoid_prefix    avoid using a prefix to build SQL queries, use syntax ``( ... ) AS ...``
             """
             self.table          = table
             self.parent_key     = parent_key
