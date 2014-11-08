@@ -7,6 +7,7 @@ It will be used to implement magic functions
 import sys, os, pandas, sqlite3
 from .database_main import Database
 from .sql_interface import InterfaceSQL
+from pyquickhelper import noLOG
 
 class InterfaceSQLDatabase(InterfaceSQL):
     """
@@ -20,7 +21,7 @@ class InterfaceSQLDatabase(InterfaceSQL):
         
         @param      filename        str
         """
-        self.obj = Database(filename)
+        self.obj = Database(filename, LOG = noLOG)
             
     def connect(self):
         """
