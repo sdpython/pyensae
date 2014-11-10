@@ -76,7 +76,7 @@ Started in 2013/08.
 Versions
 --------
 
-* **0.9.1 - 2014/??/??**
+* **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
     * **add:** add magic commands for SQLite3 + a notebook
     * **fix:** the setup does not need the file ``README.rst`` anymore
