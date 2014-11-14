@@ -103,7 +103,7 @@ class MagicAzure(Magics):
             cl = self.create_client(server, password)
             bs = cl.open_blob_service()
             self.shell.user_ns["remote_azure_blob"] = bs
-            return bs
+            return cl, bs
 
     @line_magic
     def hd_open (self, line):
@@ -143,7 +143,7 @@ class MagicAzure(Magics):
             cl = self.create_client(server, password, hadoop_server, hadoop_password)
             bs = cl.open_blob_service()
             self.shell.user_ns["remote_azure_blob"] = bs
-            return bs
+            return cl, bs
 
     def create_client(self, account_name, account_key, hadoop_server = None, hadoop_password = None):
         """
