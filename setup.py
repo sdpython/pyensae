@@ -48,7 +48,7 @@ else :
     subversion = 1
 
 project_var_name    = "pyensae"
-sversion            = "1.0"
+sversion            = "1.1"
 versionPython       = "%s.%s" % (sys.version_info.major, sys.version_info.minor)
 path                = "Lib/site-packages/" + project_var_name
 readme              = 'README.rst'

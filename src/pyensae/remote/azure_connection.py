@@ -240,7 +240,7 @@ class AzureClient():
                     blob_name,
                     file_path):
         """
-        Downloads data from a file to a blob storage.
+        Downloads data from a blob storage to a file.
         No more than 64Mb can be downloaded  at the same, it needs to be split into
         pieces.
 
@@ -271,6 +271,27 @@ class AzureClient():
                     break
         return file_path
 
+    def download_merge(   self,
+                    blob_service,
+                    container_name,
+                    blob_folder,
+                    file_path):
+        """
+        Downloads all files from a folder in a blob storage to a single local file.
+        Files will be merged.
+        No more than 64Mb can be downloaded  at the same, it needs to be split into
+        pieces.
+
+        @param      blob_service        returns by @see me open_blob_service
+        @param      container_name      container name
+        @param      blob_folder         blob folder(remote file name)
+        @param      file_path           local file path
+        @return                         local file
+        
+        .. versionadded:: 1.1
+        """
+        raise NotImplementedError()
+        
     def delete_blob(self, blob_service, container_name, blob_name):
         """
         delete a blob
@@ -539,3 +560,5 @@ class AzureClient():
         if r.status_code != 200:
             raise AzureException("unable to the version of server: " + webHCatUrl, r)
         return r.json()
+        
+        

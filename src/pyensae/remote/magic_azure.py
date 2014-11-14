@@ -74,7 +74,10 @@ class MagicAzure(Magics):
     @line_magic
     def blob_open (self, line):
         """
-        open a connection to blob service
+        Open a connection to blob service.
+        It returns objects @see cl AzureClient and `BlobService <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/storage/blobservice.html?highlight=blobservice#azure.storage.blobservice.BlobService>`_.
+        
+        .. versionchanged:: 1.1
         """
         spl = line.strip().split()
         if len(spl) != 3 and len(spl) != 0:
