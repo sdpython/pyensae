@@ -37,7 +37,7 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 #  OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import sys,os
+import sys,os,io
 from distutils.core import setup
 from setuptools import find_packages
 
@@ -86,7 +86,7 @@ package_data = { project_var_name + ".subproject": ["*.tohelp"],
                  project_var_name + ".languages": ["*.g4", "*.tokens"], }
 
 if os.path.exists(readme):
-    with open(readme) as f : long_description = f.read()
+    with io.open(readme, encoding='utf-8') as f : long_description = f.read()
 else:
     long_description = ""
 
