@@ -76,7 +76,7 @@ class MagicAzure(Magics):
         """
         Open a connection to blob service.
         It returns objects @see cl AzureClient and `BlobService <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/storage/blobservice.html?highlight=blobservice#azure.storage.blobservice.BlobService>`_.
-        
+
         .. versionchanged:: 1.1
         """
         spl = line.strip().split()
@@ -188,13 +188,6 @@ class MagicAzure(Magics):
         res = bs.list_containers()
         return [ r.name for r in res ]
 
-    @line_magic
-    def ls_blob(self, line):
-        """
-        @see me blob_ls
-        """
-        return self.blob_ls(line)
-
     def _interpret_path(self, line, cl, bs, empty_is_value = False):
         """
         Interpret a path
@@ -221,6 +214,13 @@ class MagicAzure(Magics):
         return container, remotepath
 
     @line_magic
+    def ls_blob(self, line):
+        """
+        @see me blob_ls
+        """
+        return self.blob_ls(line)
+
+    @line_magic
     def blob_ls(self, line):
         """
         defines command %blob_ls
@@ -234,6 +234,33 @@ class MagicAzure(Magics):
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(line, cl, bs, True)
             l = cl.ls(bs, container, remotepath)
+            df = pandas.DataFrame(l)
+            if len(df) > 0 :
+                return df [["name","last_modified","content_type","content_length","blob_type"]]
+            else:
+                return df
+
+    @line_magic
+    def lsl_blob(self, line):
+        """
+        @see me blob_lse
+        """
+        return self.blob_lse(line)
+
+    @line_magic
+    def blob_lsl(self, line):
+        """
+        defines command %blob_lse (extended version of blob_ls)
+        """
+        if line is None or len(line.strip()) == 0:
+            print("Usage:")
+            print("    blob_ls <container/path>")
+            print("or")
+            print("    blob_ls </path>")
+        else :
+            cl, bs = self.get_blob_connection()
+            container, remotepath = self._interpret_path(line, cl, bs, True)
+            l = cl.ls(bs, container, remotepath, add_metadata=True)
             return pandas.DataFrame(l)
 
     @line_magic
@@ -287,7 +314,7 @@ class MagicAzure(Magics):
 
             %blob_down remotepath localfile
 
-        the command does not allow spaces in files
+        the command does not allow spaces in file names
         """
         spl = line.strip().split()
         if len(spl) != 2 :
@@ -303,6 +330,35 @@ class MagicAzure(Magics):
             cl, bs = self.get_blob_connection()
             container,remotepath = self._interpret_path(remotepath, cl, bs)
             cl.download(bs, container, remotepath, localfile)
+            return localfile
+
+    @line_magic
+    def blob_downmerge(self, line):
+        """
+        download all files from a folder
+
+        Example::
+
+            %blob_downmerge remotepath localfile
+
+        the command does not allow spaces in file names
+
+        ..versionadded:: 1.1
+        """
+        spl = line.strip().split()
+        if len(spl) != 2 :
+            print("Usage:")
+            print("   blob_down <container/remotepath> <localfile>")
+            print("or")
+            print("   blob_down </remotepath> <localfile>")
+        else :
+            remotepath,localfile = spl
+            if os.path.exists(localfile) :
+                raise Exception("file {0} cannot be overwritten".format(localfile))
+
+            cl, bs = self.get_blob_connection()
+            container,remotepath = self._interpret_path(remotepath, cl, bs)
+            cl.download_merge(bs, container, remotepath, localfile)
             return localfile
 
     @line_magic

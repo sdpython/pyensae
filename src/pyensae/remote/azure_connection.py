@@ -116,6 +116,7 @@ class AzureClient():
                         "xms_blob_sequence_number",
                         "lease_status",
                         "etag",
+                        "last_modified",
                         ]
 
     def __init__(self,  blob_name,
@@ -167,31 +168,41 @@ class AzureClient():
         """
         return azure.storage.BlobService(self.account_name, self.account_key)
 
-    def ls(self, blob_service, container_name = None, path = None):
+    def ls(self, blob_service, container_name = None, path = None, add_metadata = False):
         """
         return the content of a blob storage
 
         @param      blob_service        blob service, returned by @see me open_blob_service
         @param      container_name      None for all, its name otherwise
         @param      path                path in the container
+        @param      add_metadata        add the metadata to the blob
         @return                         list of dictionaries
+
+        .. versionchanged:: 1.1
+            Parameter *add_metadata* was added and the function now returns the
+            property *last_modified*.
         """
         res = [ ]
         if container_name is None:
             for cn in blob_service.list_containers():
                 self.LOG("exploring ", cn.name)
-                r = self.ls(blob_service, cn.name, path = path)
+                r = self.ls(blob_service, cn.name, path = path, add_metadata=add_metadata)
                 res.extend(r)
             return res
         else :
             res = [ ]
-            for b in blob_service.list_blobs(container_name, prefix = path):
+            for b in blob_service.list_blobs(container_name, prefix = path,
+                        include = "metadata" if add_metadata else None):
                 obs = { }
                 obs["name"] = b.name
                 obs["url"] = b.url
-                obs["metadata"] = b.metadata
                 for p in AzureClient._blob_properties:
                     obs[p] = b.properties.__dict__[p]
+
+                if b.metadata is not None:
+                    for k,v in b.metadata.items():
+                        obs["meta_%s"%k] = v
+
                 res.append ( obs )
             return res
 
@@ -238,7 +249,8 @@ class AzureClient():
                     blob_service,
                     container_name,
                     blob_name,
-                    file_path):
+                    file_path,
+                    append = False):
         """
         Downloads data from a blob storage to a file.
         No more than 64Mb can be downloaded  at the same, it needs to be split into
@@ -248,15 +260,21 @@ class AzureClient():
         @param      container_name      container name
         @param      blob_name           blob name (remote file name)
         @param      file_path           local file path
+        @param      append              if True, append the content to an existing file
         @return                         local file
 
         The code comes from `Utilisation du service de stockage d'objets blob à partir de Python <http://azure.microsoft.com/fr-fr/documentation/articles/storage-python-how-to-use-blob-storage/>`_.
+
+        .. versionchanged:: 1.1
+            Parameter *append* was added.
         """
         props = blob_service.get_blob_properties(container_name, blob_name)
         blob_size = int(props['content-length'])
 
         index = 0
-        with open(file_path, 'wb') as f:
+
+        mode = 'ab' if append else 'wb'
+        with open(file_path, mode) as f:
             while index < blob_size:
                 chunk_range = 'bytes={}-{}'.format(index, index + AzureClient._chunk_size - 1)
                 data = blob_service.get_blob(container_name, blob_name, x_ms_range=chunk_range)
@@ -287,11 +305,20 @@ class AzureClient():
         @param      blob_folder         blob folder(remote file name)
         @param      file_path           local file path
         @return                         local file
-        
+
         .. versionadded:: 1.1
         """
-        raise NotImplementedError()
-        
+        content = self.ls(blob_service, container_name, blob_folder)
+        first = True
+        for cont in content:
+            if cont["content_length"] > 0 :
+                if first:
+                    self.download(blob_service, container_name, cont["name"], file_path, append=False)
+                    first = False
+                else:
+                    self.download(blob_service, container_name, cont["name"], file_path, append=True)
+        return file_path
+
     def delete_blob(self, blob_service, container_name, blob_name):
         """
         delete a blob
@@ -560,5 +587,3 @@ class AzureClient():
         if r.status_code != 200:
             raise AzureException("unable to the version of server: " + webHCatUrl, r)
         return r.json()
-        
-        
