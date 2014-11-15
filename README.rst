@@ -80,6 +80,8 @@ Versions
     * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
     * **add:** add magic commands for SQLite3 + a notebook
     * **fix:** the setup does not need the file ``README.rst`` anymore
+    * **new:** magic commands ``%lsr`` to retrieve the content of a folder
+    * **new:** various function to format the size of a file
 * **0.9 - 2014/11/03**
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
     * **add:** option -local to %jobsubmit    

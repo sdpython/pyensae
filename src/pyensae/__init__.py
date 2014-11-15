@@ -41,12 +41,14 @@ try:
     from .remote.magic_remote import register_magics
     from .remote.magic_azure import register_azure_magics
     from .sql.magic_sql import register_sql_magics
+    from .file_helper.magic_file import register_file_magics
     ip = get_ipython()
     if ip is not None:
         # the program is not run from a notebook
         register_magics()
         register_azure_magics()
         register_sql_magics()
+        register_file_magics()
 except ImportError:
     # IPython is not installed
     pass
