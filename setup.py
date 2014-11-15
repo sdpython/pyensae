@@ -37,7 +37,7 @@
 #  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 #  OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import sys,os,io
+import sys,os
 from distutils.core import setup
 from setuptools import find_packages
 
@@ -86,10 +86,17 @@ package_data = { project_var_name + ".subproject": ["*.tohelp"],
                  project_var_name + ".languages": ["*.g4", "*.tokens"], }
 
 if os.path.exists(readme):
-    with io.open(readme, encoding='utf-8') as f : long_description = f.read()
+    try:
+        with open(readme, "r", encoding='utf-8') as f : long_description = f.read()
+        long_description = long_description.replace("\ufeff","")
+    except :
+        try:
+            with open(readme, "r") as f : long_description = f.read()
+        except:
+            long_description = ""
 else:
     long_description = ""
-
+    
 if "--verbose" in sys.argv :
     print ("---------------------------------")
     print ("package_dir =",package_dir)
