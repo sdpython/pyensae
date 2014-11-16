@@ -14,40 +14,29 @@ README
 Description        
 -----------
 
-This project contain helpers used at the `ENSAE <http://www.ensae.fr/>`_ for teaching purposes.
-The project is hosted `here <http://www.xavierdupre.fr/site2013/index_code.html>`_ 
-on github: `github/pyensae <https://github.com/sdpython/pyensae/>`_,
-on pypi: `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_.
+This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_ 
+for teaching purposes but not only.
 It requires `github/pyquickhelper <https://github.com/sdpython/pyquickhelper/>`_.
 
-The main function is used to download data used for my teachings at the 
+Data used for teachings at the
 `ENSAE <http://www.xavierdupre.fr/site2013/enseignements/index.html>`_
-from the website `xavierdupre.fr <http://www.xavierdupre.fr/>`_::
+are available through function::
 
     download_data("td8_velib.zip", website = "xd")
     
-The second functionality is the ability to import a text file into a SQLite database::
+The data comes from `xavierdupre.fr <http://www.xavierdupre.fr/>`_.
+    
+Functionalities
+---------------
 
-    import_flatfile_into_database("sqlitedb.db3", "flat_file.txt")
-    
-The last function is about getting stock prives from `Yahoo Finance <http://fr.finance.yahoo.com/>`_ ::
+* retrieve data for practical lessons
+* import a tsv file into a database
+* retrieve stock prices from Yahoo Finance
+* magic commands to easily use SQLite3 from a notebook
+* magic commands to access a Cloudera Cluster and run PIG jobs
+* magic commands to access Azure Blob Storage and HDInsight
+* magic commands to display content of a folder in DataFrame
 
-    stock = StockPrices( "BNP.PA", folder = "temp" )
-    
-To draw a graph with multiple stock prices::
-
-    stocks = [ StockPrices ("BNP.PA", folder = cache),
-                StockPrices ("CA.PA", folder = cache),
-                StockPrices ("SAN.PA", folder = cache), ]
-    fig, ax, plt = StockPrices.draw(stocks)
-    fig.savefig("image.png")
-    
-    # or 
-    
-    fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01")
-    plt.show()  
-
-    
 Dependencies
 ------------
 
@@ -58,11 +47,21 @@ Dependencies
 For the class :class:`StockPrices <finance.astock.StockPrices>`:
     * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
     * `six <https://pypi.python.org/pypi/six>`_
-
+    
 The :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` requires:
     * `paramiko <http://www.paramiko.org/>`_
     * `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_
     * `ecdsa <https://pypi.python.org/pypi/ecdsa>`_
+
+The :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>` requires:
+    * `azure <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/index.html>`_
+
+The function :func:`register_magics <pyensae.remote.magic_remote.register_magics>` defines magic commands
+to send commands to a remote commands through a SSH connection:
+    * ``%remote_open``, ``%remote_close``
+    * ``%remote_cmd``, ``%remote_up``, ``%remote_down``
+    
+The magic commands will be automatically enabled if the module is imported from a notebook.
     
 
 Contributions
@@ -97,7 +96,3 @@ Versions
     * **new:** add class :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` to communicate with a remote SSH connection 
       (it uses `paramiko <http://www.paramiko.org/>`_)
     * **new:** add magic command to use :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` in a notebook (``%remote_open``, ...)
-* **0.7 - 2014/08/24**
-    * **fix:** fix an unexpected zero length column in :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>`
-    * **add:** add parameter ``add_key`` to function :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>` to add a primary key
-    * **fix:** improve behavior of :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>`, it is more robust to not so clean flat files
