@@ -96,7 +96,7 @@ if os.path.exists(readme):
             long_description = ""
 else:
     long_description = ""
-    
+
 if "--verbose" in sys.argv :
     print ("---------------------------------")
     print ("package_dir =",package_dir)
