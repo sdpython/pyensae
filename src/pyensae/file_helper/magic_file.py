@@ -3,7 +3,7 @@
 @file
 @brief Magic command to handle files
 """
-import sys, os, pandas
+import sys, os, pandas, argparse, shlex
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
@@ -20,35 +20,78 @@ class MagicFile(Magics):
 
     ..versionadded:: 1.1
     """
+    
+    @staticmethod
+    def head_parser():
+        """
+        defines the way to parse the magic command ``%head``
+        """
+        parser = argparse.ArgumentParser(description='display the first lines of a text file')
+        parser.add_argument('f', help='filename')
+        parser.add_argument('-n', '--n', type=int, default=10, help='number of lines to display')
+        parser.add_argument('-e', '--encoding', default="utf8", help='file encoding')
+        return parser
+    _parser_head = None
+    
+    @line_magic
+    def head(self, line):
+        """
+        defines ``%head``
+        which displays the first lines of a file
+        """
+        if MagicFile._parser_head is None:
+            MagicFile._parser_head = MagicFile.head_parser()
+        parser = MagicFile._parser_head
 
+        args = shlex.split(line)
+        try:
+            args = parser.parse_args(args)
+        except SystemExit:            
+            print( parser.print_help() )
+            args = None
+        
+        if args is not None:
+            rows = [ ]
+            with open(args.f, "r", encoding=args.encoding) as f :
+                for line in f :
+                    rows.append(line)
+                    if len(rows) >= args.n :
+                        break
+                        
+            return "<pre>\n{0}\n</pre>".format("\n".join(rows))
+
+    @staticmethod
+    def lsr_parser():
+        """
+        defines the way to parse the magic command ``%lsr``
+        """
+        parser = argparse.ArgumentParser(description='display the content of a folder as a dataframe')
+        parser.add_argument('path', type=str, nargs="?", help='path', default=".")
+        parser.add_argument('-f', '--filter', type=str, default=".*", help='filter, same syntax as a regular expression')
+        return parser
+    _parser_lsr = None
+    
     @line_magic
     def lsr(self, line):
         """
         define ``%lsr``, the method stops after around 10000 files --> you should precise the filter.
         """
-        filename = line.strip()
-        if filename == "-h":
-            print("Usage:")
-            print("  %lsl [path] [filter]")
-            print("if path is not filled, it is replaced by '.'")
-            print("filter is optional and is a regular expression")
-            print("the function is recursive but stops after around 10000 files")
-            print("path do not allow spaces")
-        else:
-            if filename is None or len(filename) == 0 :
+        if MagicFile._parser_lsr is None:
+            MagicFile._parser_lsr = MagicFile.lsr_parser()
+        parser = MagicFile._parser_lsr
+        args = shlex.split(line)
+        try:
+            args = parser.parse_args(args)
+        except SystemExit:            
+            print( parser.print_help() )
+            args = None
+        
+        if args is not None:
+            if args.path is None or len(args.path) == 0 :
                 filename = "."
-            spl = filename.split()
-            if len(spl) == 2 :
-                filename,pattern = spl
-            elif len(spl) == 1:
-                if "*" in filename or "+" in filename:
-                    pattern = filename
-                    filename = "."
-                else:
-                    pattern = None
-            else:
-                raise Exception("unexpected parameters (try %lsr -h): " + filename)
-
+            else: filename = args.path
+            pattern = args.filter
+            
             iter = explore_folder_iterfile(filename, pattern)
             rows = [ ]
             for r in iter :

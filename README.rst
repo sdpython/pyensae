@@ -75,6 +75,9 @@ Started in 2013/08.
 Versions
 --------
 
+* **1.1 - 2014/??/??**
+    * **change:** magic command ``%tail_stderr`` nows displays keyword ``ERROR`` in red.
+    * **new:** magic command ``%blob_downmerge`` to download the content of a folder from a blob storage
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
     * **add:** add magic commands for SQLite3 + a notebook

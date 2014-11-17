@@ -522,6 +522,7 @@ class MagicAzure(Magics):
             with open(fi, "r") as f : lines = f.readlines()
             nb = min(nbline, len(lines))
             show = "\n".join( _.strip("\n\r") for _ in lines[-nb:])
+            show = show.replace("ERROR", '<b><font color="#DD0000">ERROR</font></b>')
             return HTML("<pre>\n%s\n</pre>" % show)
 
 
