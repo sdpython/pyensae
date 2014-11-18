@@ -58,7 +58,7 @@ class MagicFile(Magics):
                     if len(rows) >= args.n :
                         break
                         
-            return "<pre>\n{0}\n</pre>".format("\n".join(rows))
+            return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
 
     @staticmethod
     def lsr_parser():
