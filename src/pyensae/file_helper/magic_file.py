@@ -20,7 +20,7 @@ class MagicFile(Magics):
 
     ..versionadded:: 1.1
     """
-    
+
     @staticmethod
     def head_parser():
         """
@@ -32,7 +32,7 @@ class MagicFile(Magics):
         parser.add_argument('-e', '--encoding', default="utf8", help='file encoding')
         return parser
     _parser_head = None
-    
+
     @line_magic
     def head(self, line):
         """
@@ -46,10 +46,10 @@ class MagicFile(Magics):
         args = shlex.split(line)
         try:
             args = parser.parse_args(args)
-        except SystemExit:            
+        except SystemExit:
             print( parser.print_help() )
             args = None
-        
+
         if args is not None:
             rows = [ ]
             with open(args.f, "r", encoding=args.encoding) as f :
@@ -57,7 +57,7 @@ class MagicFile(Magics):
                     rows.append(line)
                     if len(rows) >= args.n :
                         break
-                        
+
             return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
 
     @staticmethod
@@ -70,7 +70,7 @@ class MagicFile(Magics):
         parser.add_argument('-f', '--filter', type=str, default=".*", help='filter, same syntax as a regular expression')
         return parser
     _parser_lsr = None
-    
+
     @line_magic
     def lsr(self, line):
         """
@@ -82,16 +82,16 @@ class MagicFile(Magics):
         args = shlex.split(line)
         try:
             args = parser.parse_args(args)
-        except SystemExit:            
+        except SystemExit:
             print( parser.print_help() )
             args = None
-        
+
         if args is not None:
             if args.path is None or len(args.path) == 0 :
                 filename = "."
             else: filename = args.path
             pattern = args.filter
-            
+
             iter = explore_folder_iterfile(filename, pattern)
             rows = [ ]
             for r in iter :
