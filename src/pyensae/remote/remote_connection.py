@@ -3,7 +3,7 @@
 @brief A class to help connect with a remote machine and send command line.
 """
 
-import time, socket
+import time, socket, os
 
 class ASSHClient():
     """
@@ -106,23 +106,89 @@ class ASSHClient():
         """
         upload a file to the remote machine (not on the cluster)
 
-        @param      localpath     local file
+        @param      localpath     local file (or a list of files)
         @param      remotepath    remote file
+        
+        .. versionchanged:: 1.1
+            it can upload multiple files if localpath is a list
         """
         sftp = self.connection.open_sftp()
-        sftp.put(localpath, remotepath)
+        if not os.path.exists(localpath):
+            raise FileNotFoundError(localpath)
+        if isinstance(localpath, str):
+            sftp.put(localpath, remotepath)
+        else:
+            for f in localpath:
+                sftp.put(f, remotepath + "/" + os.path.split(f)[-1])
         sftp.close()
+        
+    def upload_cluster(self, localpath, remotepath):
+        """
+        the function directly uploads the file to the cluster, it first goes
+        to the bridge, uploads it to the cluster and deletes it from the bridge
+        
+        @param  localpath       local filename (or list of files)
+        @param  remotepath      path to the cluster
+        @return                 filename
+        
+        .. versionadded:: 1.1
+        """
+        if isinstance(localpath, str):
+            filename = os.path.split(localpath)[-1]
+            self.upload(localpath, filename)
+            self.execute_command("hdfs dfs -put {0} {1}".format(filename, remotepath))
+            self.execute_command("rm {0}".format(filename))
+        else:
+            self.upload(localpath, ".")
+            for afile in localpath:
+                filename = os.path.split(afile)[-1]
+                self.execute_command("hdfs dfs -put {0} {1}".format(filename, remotepath))
+                self.execute_command("rm {0}".format(filename))
+                
+        return remotepath
 
     def download(self, remotepath, localpath):
         """
         download a file from the remote machine (not on the cluster)
         @param      localpath     local file
-        @param      remotepath    remote file
+        @param      remotepath    remote file (it can be a list, localpath is a folder in that case)
+        
+        ..versionchanged:: 1.1
+            remotepath can be a list of paths
         """
         sftp = self.connection.open_sftp()
-        sftp.get(remotepath, localpath)
+        if isinstance(remotepath, str):
+            sftp.get(remotepath, localpath)
+        else:
+            for path in remotepath:
+                filename = os.path.split(path)[-1]
+                sftp.get(path, localpath + "/" + filename)
         sftp.close()
 
+    def download_cluster(self, remotepath, localpath):
+        """
+        download a file directly from the cluster to the local machine
+        @param      localpath     local file
+        @param      remotepath    remote file (it can be a list, localpath is a folder in that case)
+        
+        ..versionadded:: 1.1
+        """
+        if isinstance(remotepath, str):
+            filename = os.path.split(localpath)[-1]
+            self.execute_command("hdfs dfs -get {0} {1}".format(remotepath, filename))
+            self.download(filename, localpath)
+            self.execute_command("rm {0}".format(filename))
+        else:
+            for afile in remotepath:
+                filename = os.path.split(afile)[-1]
+                self.execute_command("hdfs dfs -get {0} {1}".format(remotepath, filename))
+            self.download(filename, localpath)
+            for afile in remotepath:
+                filename = os.path.split(afile)[-1]
+                self.execute_command("rm {0}".format(filename))
+                
+        return remotepath
+        
     _allowed_form = { None:None, "plain":None, "html":None }
 
     @staticmethod

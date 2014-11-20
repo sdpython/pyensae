@@ -319,6 +319,33 @@ class MagicRemote(Magics):
             return remotepath
 
     @line_magic
+    def remote_up_cluster(self, line):
+        """
+        upload a file to the remote machine and then to the remote cluster,
+
+        Example::
+
+            %remote_up_cluster localfile remotepath
+
+        the command does not allow spaces in files
+        
+        .. versionadded:: 1.1
+        """
+        spl = line.strip().split()
+        if len(spl) != 2 :
+            print("Usage:")
+            print("   remote_up_cluster <localfile> <remotepath>")
+            print("")
+            print("no space allowed in file names")
+        else :
+            ssh = self.get_connection()
+            localfile,remotepath = spl
+            if not os.path.exists(localfile) :
+                raise FileNotFoundError(localfile)
+            ssh.upload_cluster(localfile, remotepath)
+            return remotepath
+
+    @line_magic
     def down_remote(self, line):
         """
         @see me remote_down
