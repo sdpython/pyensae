@@ -3,7 +3,7 @@
 @brief A class to help connect with a remote machine and send command line.
 """
 
-import time, socket, os
+import time, socket, os, io
 
 class ASSHClient():
     """
@@ -108,29 +108,31 @@ class ASSHClient():
 
         @param      localpath     local file (or a list of files)
         @param      remotepath    remote file
-        
+
         .. versionchanged:: 1.1
             it can upload multiple files if localpath is a list
         """
         sftp = self.connection.open_sftp()
-        if not os.path.exists(localpath):
-            raise FileNotFoundError(localpath)
         if isinstance(localpath, str):
+            if not os.path.exists(localpath):
+                raise FileNotFoundError(localpath)
             sftp.put(localpath, remotepath)
         else:
             for f in localpath:
+                if not os.path.exists(f):
+                    raise FileNotFoundError(f)
                 sftp.put(f, remotepath + "/" + os.path.split(f)[-1])
         sftp.close()
-        
+
     def upload_cluster(self, localpath, remotepath):
         """
         the function directly uploads the file to the cluster, it first goes
         to the bridge, uploads it to the cluster and deletes it from the bridge
-        
+
         @param  localpath       local filename (or list of files)
         @param  remotepath      path to the cluster
         @return                 filename
-        
+
         .. versionadded:: 1.1
         """
         if isinstance(localpath, str):
@@ -144,7 +146,7 @@ class ASSHClient():
                 filename = os.path.split(afile)[-1]
                 self.execute_command("hdfs dfs -put {0} {1}".format(filename, remotepath))
                 self.execute_command("rm {0}".format(filename))
-                
+
         return remotepath
 
     def download(self, remotepath, localpath):
@@ -152,7 +154,7 @@ class ASSHClient():
         download a file from the remote machine (not on the cluster)
         @param      localpath     local file
         @param      remotepath    remote file (it can be a list, localpath is a folder in that case)
-        
+
         ..versionchanged:: 1.1
             remotepath can be a list of paths
         """
@@ -165,30 +167,33 @@ class ASSHClient():
                 sftp.get(path, localpath + "/" + filename)
         sftp.close()
 
-    def download_cluster(self, remotepath, localpath):
+    def download_cluster(self, remotepath, localpath, merge = False):
         """
         download a file directly from the cluster to the local machine
-        @param      localpath     local file
-        @param      remotepath    remote file (it can be a list, localpath is a folder in that case)
-        
+        @param      localpath       local file
+        @param      remotepath      remote file (it can be a list, localpath is a folder in that case)
+        @param      merge           True to use getmerge instead of get
+
         ..versionadded:: 1.1
         """
+        cget = "getmerge" if merge else "get"
         if isinstance(remotepath, str):
             filename = os.path.split(localpath)[-1]
-            self.execute_command("hdfs dfs -get {0} {1}".format(remotepath, filename))
+            self.execute_command("hdfs dfs -{2} {0} {1}".format(remotepath, filename, cget))
             self.download(filename, localpath)
             self.execute_command("rm {0}".format(filename))
         else:
+            tod = []
             for afile in remotepath:
                 filename = os.path.split(afile)[-1]
-                self.execute_command("hdfs dfs -get {0} {1}".format(remotepath, filename))
-            self.download(filename, localpath)
-            for afile in remotepath:
-                filename = os.path.split(afile)[-1]
-                self.execute_command("rm {0}".format(filename))
-                
+                self.execute_command("hdfs dfs -{2} {0} {1}".format(afile, filename, cget))
+                tod.append(filename)
+            self.download(tod, localpath)
+            for afile in tod:
+                self.execute_command("rm {0}".format(afile))
+
         return remotepath
-        
+
     _allowed_form = { None:None, "plain":None, "html":None }
 
     @staticmethod
@@ -331,3 +336,134 @@ class ASSHClient():
                 break
 
         return func ( buff.replace("\r","") )
+
+    @staticmethod
+    def parse_lsout(out, local_schema = True):
+        """
+        parses the output of a command ls
+
+        @param  out             output
+        @param  local_schema    schema for the bridge or the cluster (False)
+        @return                 DataFrame
+
+        .. versionadded:: 1.1
+        """
+        import pandas
+        if local_schema:
+            names = ["attributes", "code", "alias", "folder",
+                     "size", "unit", "name"]
+        else:
+            names = ["attributes", "code", "alias", "folder",
+                     "size", "date", "time", "name"]
+        out = out.replace("\r","").split("\n")
+        out = [ _ for _ in out if len(_.split()) > 3 ]
+        if len(out) == 0 :
+            df = pandas.DataFrame(columns=names)
+            return df
+
+        try:
+            out_ = [ _.split() for _ in out ]
+            df = pandas.DataFrame(data=out_, columns=names)
+        except :
+            out = "\n".join(out)
+            buf = io.StringIO(out)
+            df = pandas.read_fwf(buf, names =  names, index=False)
+
+        df["isdir"] = df.apply( lambda r : r["attributes"][0] == "d", axis= 1)
+        return df
+
+    def ls(self, path):
+        """
+        return the content of a folder on the bridge as a DataFrame
+
+        @param  path        path on the bridge
+        @return             DataFrame
+
+        .. versionadded:: 1.1
+        """
+        out,err = self.execute_command("ls -l " + path)
+        if len(err) > 0 :
+            raise Exception("unable to execute ls " + path + "\nERR:\n" + err)
+        return ASSHClient.parse_lsout(out)
+
+    def dfs_ls(self, path):
+        """
+        return the content of a folder on the cluster as a DataFrame
+
+        @param  path        path on the cluster
+        @return             DataFrame
+
+        .. versionadded:: 1.1
+        """
+        out,err = self.execute_command("hdfs dfs -ls " + path)
+        if len(err) > 0 :
+            raise Exception("unable to execute hdfs dfs -ls " + path + "\nERR:\n" + err)
+        return ASSHClient.parse_lsout(out, False)
+
+    def exists(self, path):
+        """
+        tells if a file exists on the bridge
+
+        @param      path        path
+        @return                 boolean
+
+        .. versionadded:: 1.1
+        """
+        try:
+            df = self.ls(path)
+        except Exception as e :
+            if "No such file or directory" in str(e):
+                return False
+        ex = df [ df.name == path ]
+        return len(ex) > 0
+
+    def dfs_exists(self, path):
+        """
+        tells if a file exists on the cluster
+
+        @param      path        path
+        @return                 boolean
+
+        .. versionadded:: 1.1
+        """
+        try:
+            df = self.dfs_ls(path)
+        except Exception as e :
+            if "No such file or directory" in str(e):
+                return False
+            else:
+                raise e
+        if len(df) == 0 :
+            # it is a folder
+            return True
+        ex = df [ df.name == path ]
+        if len(ex) > 0 : return True
+        ex = df [ df.apply( lambda r : r["name"].startswith(path + "/"), axis= 1) ]
+        if len(ex) > 0 : return True
+        return False
+
+    def dfs_mkdir(self, path):
+        """
+        creates a directory on the cluster
+
+        @param      path        path
+
+        .. versionadded:: 1.1
+        """
+        return self.execute_command("hdfs dfs -mkdir " + path)
+
+    def dfs_rm(self, path, recursive = False):
+        """
+        removes a file on the cluster
+
+        @param      path        path
+        @param      recursive   boolean
+
+        .. versionadded:: 1.1
+        """
+        cmd = "hdfs dfs -rm "
+        if recursive : cmd += "-r "
+        out, err = self.execute_command(cmd + path, no_exception = True)
+        if out.startswith("Moved"): return out, err
+        else:
+            raise Exception("unable to remove " + path + "\nOUT\n" + out + "\nERR:\n" + err)

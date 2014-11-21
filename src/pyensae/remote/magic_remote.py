@@ -3,12 +3,14 @@
 @file
 @brief Magic command to communicate with an Hadoop cluster.
 """
-import os
+import os, sys
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 from .remote_connection import ASSHClient
+
+from pyquickhelper import run_cmd
 
 @magics_class
 class MagicRemote(Magics):
@@ -75,6 +77,37 @@ class MagicRemote(Magics):
             with open(filename, "w", encoding="utf8") as f :
                 f.write(cell.replace("\r",""))
 
+    @cell_magic
+    def runpy(self, line, cell = None):
+        """
+        defines command ``%%runpy``
+
+        run a python script which accepts standards input and produces standard outputs,
+        a timeout is set up at 10s
+
+        ..versionadded:: 1.1
+        """
+        if line in [None, ""] :
+            print("Usage:")
+            print("     %%runpy <pythonfile.py> <args>")
+            print("     first row")
+            print("     second row")
+            print("     ...")
+        else:
+            filename = line.strip().split()
+            if len(filename) == 0:
+                self.runpy("")
+            else:
+                args = " ".join(filename[1:])
+                filename = filename[0]
+                cmd = sys.executable.replace("pythonw", "python") + " " + filename + " " + args
+                tosend = cell
+                out,err = run_cmd(cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
+                if len(err) > 0 :
+                    return HTML ('<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+                else:
+                    return HTML ('<pre>\n%s\n</pre>' % out)
+
     @line_magic
     def pigsubmit(self, line):
         """
@@ -89,9 +122,10 @@ class MagicRemote(Magics):
         """
         if line in [None, ""]:
             print("Usage:")
-            print("  %jobsubmit <jobname.pig> [redirection] [-local]")
+            print("  %jobsubmit <jobname.pig> [files.py] [redirection] [-local]")
             print("")
             print("The file <jobname.pig> is local.")
+            print("Some streaming files can be added such as stream.py. They must have the extension .py.")
             print("If redirection is specified, the standard output and error are redirected to")
             print("redirection.out, redirection.err and the function does not wait.")
             print("If -local is added, the job runs locally (option -x local).")
@@ -105,6 +139,8 @@ class MagicRemote(Magics):
                 local = False
 
             filename = spl[0]
+            pythons = [ _ for _ in spl if _.endswith(".py") ]
+            spl = [ _ for _ in spl if not _.endswith(".py") ]
 
             redirection = None if len(spl) == 1 else spl[1]
             if not os.path.exists(filename):
@@ -113,6 +149,8 @@ class MagicRemote(Magics):
             dest = os.path.split(filename)[-1]
             ssh = self.get_connection()
             ssh.upload(filename, dest)
+            for py in pythons:
+                ssh.upload(py, os.path.split(py)[-1])
             slocal = " -x local" if local else ""
 
             if redirection is None:
@@ -125,13 +163,6 @@ class MagicRemote(Magics):
                 return HTML("<pre>\n%s\n</pre>" % err)
             else:
                 return HTML("<pre>\n%s\n</pre>" % out)
-
-    @line_magic
-    def py_remote(self, line):
-        """
-        @see me remote_py
-        """
-        return self.remote_py(line)
 
     @line_magic
     def remote_py(self, line):
@@ -194,13 +225,6 @@ class MagicRemote(Magics):
                 return HTML("<pre>\n%s\n</pre>" % out)
 
     @line_magic
-    def open_remote(self, line):
-        """
-        @see me remote_open
-        """
-        return self.remote_open(line)
-
-    @line_magic
     def remote_open (self, line):
         """
         open a SSH connection and store the connection
@@ -236,13 +260,6 @@ class MagicRemote(Magics):
             return ssh
 
     @line_magic
-    def close_remote(self, line):
-        """
-        @see me remote_close
-        """
-        return self.remote_close(line)
-
-    @line_magic
     def remote_close (self, line):
         """
         close a SSH connection and store the connection
@@ -250,13 +267,6 @@ class MagicRemote(Magics):
         """
         self.get_connection().close()
         return True
-
-    @line_cell_magic
-    def cmd_remote(self, line, cell = None):
-        """
-        @see me remote_cmd
-        """
-        return self.remote_cmd(line, cell)
 
     @line_cell_magic
     def remote_cmd(self, line, cell = None):
@@ -285,13 +295,6 @@ class MagicRemote(Magics):
             return HTML("<pre>\n%s\n</pre>" % err)
         else:
             return HTML("<pre>\n%s\n</pre>" % out)
-
-    @line_magic
-    def up_remote(self, line):
-        """
-        @see me remote_up
-        """
-        return self.remote_up(line)
 
     @line_magic
     def remote_up(self, line):
@@ -328,7 +331,7 @@ class MagicRemote(Magics):
             %remote_up_cluster localfile remotepath
 
         the command does not allow spaces in files
-        
+
         .. versionadded:: 1.1
         """
         spl = line.strip().split()
@@ -344,13 +347,6 @@ class MagicRemote(Magics):
                 raise FileNotFoundError(localfile)
             ssh.upload_cluster(localfile, remotepath)
             return remotepath
-
-    @line_magic
-    def down_remote(self, line):
-        """
-        @see me remote_down
-        """
-        return self.remote_down(line)
 
     @line_magic
     def remote_down(self, line):
@@ -407,6 +403,81 @@ class MagicRemote(Magics):
             out = ssh.send_recv_session(cell)
 
         return HTML(out)
+
+    @line_magic
+    def remote_ls(self, line):
+        """
+        returns the content of a folder as a dataframe
+
+        Example::
+
+            %remote_ls .
+
+        ..versionadded:: 1.1
+        """
+        ssh = self.get_connection()
+        df = ssh.ls(line)
+        return df
+
+    @line_magic
+    def dfs_ls(self, line):
+        """
+        returns the content of a folder on the cluster as a dataframe
+
+        Example::
+
+            %dfs_ls .
+
+        ..versionadded:: 1.1
+        """
+        ssh = self.get_connection()
+        df = ssh.dfs_ls(line)
+        return df
+
+    @line_magic
+    def dfs_rm(self, line):
+        """
+        remove a file on the cluster
+
+        Example::
+
+            %dfs_rm .
+
+        ..versionadded:: 1.1
+        """
+        ssh = self.get_connection()
+        df = ssh.dfs_rm(line)
+        return df
+
+    @line_magic
+    def dfs_rmr(self, line):
+        """
+        remove a folder on the cluster
+
+        Example::
+
+            %dfs_rmr .
+
+        ..versionadded:: 1.1
+        """
+        ssh = self.get_connection()
+        df = ssh.dfs_rm(line, recursive = True)
+        return df
+
+    @line_magic
+    def dfs_mkdir(self, line):
+        """
+        create a folder on the cluster
+
+        Example::
+
+            %dfs_mkdir afolder
+
+        ..versionadded:: 1.1
+        """
+        ssh = self.get_connection()
+        df = ssh.dfs_mkdir(line)
+        return df
 
 
 def register_magics():
