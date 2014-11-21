@@ -24,33 +24,10 @@ from pyquickhelper import fLOG
 from src.pyensae.resources.http_retrieve import download_data
 
 
-class TestResources (unittest.TestCase):
+class TestAzure (unittest.TestCase):
 
     def test_import_one(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        fold = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "temp_http")
-        if not os.path.exists(fold): os.mkdir(fold)
-        exp = ["VOEUX01.txt", "voeux.zip"]
-        for f in exp :
-            g = os.path.join(fold, f)
-            if os.path.exists(g): os.remove(g)
-        one = "voeux.zip"
-        res = download_data(one, website = "xd", whereTo = fold, fLOG = fLOG)
-        fLOG(len(res),res)
-        assert len(res) == 14
-        assert "VOEUX01.txt" in res[0]
-        for f in exp :
-            g = os.path.join(fold, f)
-            assert os.path.exists(g)
-
-    def test_import_all(self):
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        all = [" " ]
-        if __name__ == "__main__" :
-            # we only test all the resources if this file is the main file
-            # otherwise it takes too much time
-            for a in all :
-                pass
 
 
 if __name__ == "__main__"  :

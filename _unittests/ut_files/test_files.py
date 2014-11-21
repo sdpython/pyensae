@@ -28,7 +28,7 @@ class TestFiles (unittest.TestCase):
 
     def test_files(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        path = os.path.dirname(__file__)
+        path = os.path.abspath(os.path.dirname(__file__))
         mg = MagicFile()
         cmd = path + " -f .*[.]py"
         fLOG("**",cmd)
@@ -44,8 +44,8 @@ class TestFiles (unittest.TestCase):
         path = os.path.dirname(__file__)
         mg = MagicFile()
         res = mg.head("{0} -n 3".format(__file__))
-        fLOG(res)
-        assert "test log" in res
+        fLOG("*****",res)
+        assert "test log" in res.data
         res = mg.head("{0} --n 3 -e ascii".format(__file__))
         res = mg.head("{0} --n 3 -e utf8".format(__file__))
 

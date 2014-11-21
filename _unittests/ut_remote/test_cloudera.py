@@ -33,28 +33,35 @@ from common import get_codes
 class TestCloudera (unittest.TestCase):
 
     def setUp(self):
-        codes = get_codes() [-3:]
-        cl = ASSHClient(*codes)
-        cl.connect()
-        self.client = cl
+        if get_codes() is None :
+            self.client = None
+        else :
+            codes = get_codes() [-3:]
+            cl = ASSHClient(*codes)
+            cl.connect()
+            self.client = cl
 
     def tearDown(self):
-        self.client.close()
+        if self.client is not None:
+            self.client.close()
 
     def test_ls(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        if self.client is None: return
         df = self.client.ls(".")
         fLOG(df)
         assert isinstance(df, pandas.DataFrame)
 
     def test_hdfs_dfs_ls(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        if self.client is None: return
         df = self.client.dfs_ls(".")
         fLOG(df)
         assert isinstance(df, pandas.DataFrame)
 
     def test_upload_download(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        if self.client is None: return
         data = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data")
         fold = os.path.join(data, "..", "temp_updown")
         if not os.path.exists(fold): os.mkdir(fold)
@@ -91,6 +98,7 @@ class TestCloudera (unittest.TestCase):
 
     def test_script_pig(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        if self.client is None: return
         data = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data")
 
         # python script
