@@ -3,13 +3,14 @@
 @file
 @brief Magic command to handle files
 """
-import sys, os, pandas, argparse, shlex
+import sys, os, pandas
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 
 from pyquickhelper.sync.synchelper import explore_folder_iterfile
+from pyquickhelper import MagicCommandParser
 from .format_helper import format_file_size, format_file_mtime
 
 
@@ -26,8 +27,8 @@ class MagicFile(Magics):
         """
         defines the way to parse the magic command ``%head``
         """
-        parser = argparse.ArgumentParser(description='display the first lines of a text file')
-        parser.add_argument('f', help='filename')
+        parser = MagicCommandParser(description='display the first lines of a text file')
+        parser.add_argument('f', type=str, help='filename')
         parser.add_argument('-n', '--n', type=int, default=10, help='number of lines to display')
         parser.add_argument('-e', '--encoding', default="utf8", help='file encoding')
         return parser
@@ -43,14 +44,17 @@ class MagicFile(Magics):
             MagicFile._parser_head = MagicFile.head_parser()
         parser = MagicFile._parser_head
 
-        args = shlex.split(line)
         try:
-            args = parser.parse_args(args)
+            args = parser.parse_cmd(line)
         except SystemExit:
             print( parser.print_help() )
             args = None
 
         if args is not None:
+            if not os.path.exists(args.f) :
+                raise FileNotFoundError(args.f)
+            if not os.path.isfile(args.f):
+                raise FileNotFoundError("{0} is not a file".format(args.f))
             rows = [ ]
             with open(args.f, "r", encoding=args.encoding) as f :
                 for line in f :
@@ -65,7 +69,7 @@ class MagicFile(Magics):
         """
         defines the way to parse the magic command ``%lsr``
         """
-        parser = argparse.ArgumentParser(description='display the content of a folder as a dataframe')
+        parser = MagicCommandParser(description='display the content of a folder as a dataframe')
         parser.add_argument('path', type=str, nargs="?", help='path', default=".")
         parser.add_argument('-f', '--filter', type=str, default=".*", help='filter, same syntax as a regular expression')
         return parser
@@ -79,9 +83,9 @@ class MagicFile(Magics):
         if MagicFile._parser_lsr is None:
             MagicFile._parser_lsr = MagicFile.lsr_parser()
         parser = MagicFile._parser_lsr
-        args = shlex.split(line)
+
         try:
-            args = parser.parse_args(args)
+            args = parser.parse_cmd(line)
         except SystemExit:
             print( parser.print_help() )
             args = None

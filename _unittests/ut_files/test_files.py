@@ -6,7 +6,7 @@ will sort all test files by increasing time and run them.
 """
 
 
-import sys, os, unittest
+import sys, os, unittest, shlex
 
 
 try :
@@ -26,6 +26,13 @@ from src.pyensae.file_helper.magic_file import MagicFile
 
 class TestFiles (unittest.TestCase):
 
+    def test_shlex(self) :
+        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        this = r"c:\rep1\rep2\frep\_urep.py rrr c:\rr\i.py"
+        r = shlex.split(this, posix=False)
+        fLOG(r)
+        assert r[0] == r"c:\rep1\rep2\frep\_urep.py"
+
     def test_files(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         path = os.path.abspath(os.path.dirname(__file__))
@@ -34,20 +41,22 @@ class TestFiles (unittest.TestCase):
         fLOG("**",cmd)
         res = mg.lsr(cmd)
         fLOG(res)
-        assert len(res) > 0
+        if len(res) == 0:
+            raise FileNotFoundError("cmd: " + cmd)
         res = mg.lsr("")
         fLOG(res)
         assert len(res) > 0
 
     def test_head(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        path = os.path.dirname(__file__)
+        fp = os.path.abspath(__file__)
         mg = MagicFile()
-        res = mg.head("{0} -n 3".format(__file__))
+        fLOG("--",fp)
+        res = mg.head("{0} -n 3".format(fp))
         fLOG("*****",res)
         assert "test log" in res.data
-        res = mg.head("{0} --n 3 -e ascii".format(__file__))
-        res = mg.head("{0} --n 3 -e utf8".format(__file__))
+        res = mg.head("{0} --n 3 -e ascii".format(fp))
+        res = mg.head("{0} --n 3 -e utf8".format(fp))
 
 if __name__ == "__main__"  :
     unittest.main ()
