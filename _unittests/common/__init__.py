@@ -1,12 +1,15 @@
 """
-To speed up to unitesting of the module
+To speed up the unit testing of the module
 """
 def get_codes():
     """
     if a given file is present, connect itself to the cluster
     """
-    import os
-    f = [ ".." ] * 5
+    import os, sys
+    if sys.platform.startswith("win"):
+        f = [ ".." ] * 5
+    else:
+        f = [ ".." ] * 3
     fold = os.path.abspath(os.path.dirname(__file__))
     f = os.path.normpath(os.path.join(fold, *f))
     files = os.listdir(f)
@@ -19,3 +22,4 @@ def get_codes():
                 f = [ _.strip() for _ in lines ]
                 return [ _ for _ in f if len(_) > 0 ]
     return None
+        

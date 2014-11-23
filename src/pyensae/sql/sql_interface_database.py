@@ -78,9 +78,11 @@ class InterfaceSQLDatabase(InterfaceSQL):
 
         @param      filename        filename
         @param      table           table name
+        @return                     the number of added rows
         """
-        self.obj.import_table_from_flat_file(filename, table_name, columns = None, header=True)
+        r = self.obj.import_table_from_flat_file(filename, table_name, columns = None, header=True)
         self.populate_completion()
+        return r
 
     def drop_table(self, table_name):
         """
@@ -107,6 +109,8 @@ class InterfaceSQLDatabase(InterfaceSQL):
 
         @param      tablename       name of the table
         @param      df              dataframe
+        @return                     the number of added rows
         """
         df.to_sql(tablename, self.obj._connection)
         self.populate_completion()
+        return len(df)

@@ -335,6 +335,7 @@ class DatabaseImportExport :
         @param      display             if True, print more information on stdout
         @param      strict_separator    strict number of columns, it assumes there is no separator in the content of every column
         @param      add_key             name of a key to add (or None if nothing to add)
+        @return                         the number of added rows
 
         The columns definition must follow the schema:
             - dictionary ``{ key:(column_name,python_type) }``

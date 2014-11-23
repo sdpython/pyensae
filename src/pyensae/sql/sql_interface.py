@@ -110,7 +110,7 @@ class InterfaceSQL:
 
         @return         @see cl AutoCompletionSQLObject
 
-        The method should called when the method @see me connect
+        The method should be called when the method @see me connect
         is called.
         """
         self.CC = AutoCompletionSQLObject("TBL")
@@ -217,6 +217,7 @@ class InterfaceSQL:
 
         @param      filename        filename
         @param      table           table name
+        @return                     the number of added rows
         """
         raise NotImplementedError()
 
@@ -250,5 +251,6 @@ class InterfaceSQL:
 
         @param      tablename       name of the table
         @param      df              dataframe
+        @return                     the number of added rows
         """
         raise NotImplementedError()

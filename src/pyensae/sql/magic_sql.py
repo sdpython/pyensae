@@ -50,8 +50,9 @@ class MagicSQL(Magics):
         define ``SQL_close``
         """
         db = self.get_connection()
-        db.close()
+        r = db.close()
         del self.shell.user_ns["DB"]
+        return r
 
     @line_magic
     def SQL_tables(self, line):
@@ -72,7 +73,7 @@ class MagicSQL(Magics):
             print("    SQL_drop_table <table_name>")
         else:
             db = self.get_connection()
-            db.drop_table(line)
+            return db.drop_table(line)
 
     @line_magic
     def SQL_refresh_completion(self):
@@ -155,7 +156,7 @@ class MagicSQL(Magics):
             if not os.path.exists(spl[1]):
                 raise FileNotFoundError(spl[1])
             db = self.get_connection()
-            db.import_flat_file(spl[1], spl[0])
+            return db.import_flat_file(spl[1], spl[0])
 
     @line_magic
     def SQL_add_function(self, line):
@@ -174,7 +175,7 @@ class MagicSQL(Magics):
             else:
                 raise Exception("unable to find IPython workspace")
             db = self.get_connection()
-            db.add_function(fu)
+            return db.add_function(fu)
 
     @line_magic
     def SQL_import_df(self, line):
@@ -196,7 +197,7 @@ class MagicSQL(Magics):
             else:
                 raise Exception("unable to find IPython workspace")
 
-            db.import_dataframe(spl[0], odf)
+            return db.import_dataframe(spl[0], odf)
 
 
 def register_sql_magics():
