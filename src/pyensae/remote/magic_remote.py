@@ -362,7 +362,7 @@ class MagicRemote(Magics):
         spl = line.strip().split()
         if len(spl) != 2 :
             print("Usage:")
-            print("   remote_up <localfile> <remotepath>")
+            print("   remote_down <remotepath> <localfile>")
             print("")
             print("no space allowed in file names")
         else :
@@ -371,6 +371,60 @@ class MagicRemote(Magics):
             if os.path.exists(localfile) :
                 raise Exception("file {0} cannot be overwritten".format(localfile))
             ssh.download(remotepath,localfile)
+            return localfile
+
+    @line_magic
+    def remote_down_cluster(self, line):
+        """
+        download a file from the cluster to the local machine through the bridge
+
+        Example::
+
+            %remote_down remotepath localfile
+
+        the command does not allow spaces in files
+
+        .. versionadded:: 1.1
+        """
+        spl = line.strip().split()
+        if len(spl) != 2 :
+            print("Usage:")
+            print("   remote_down_cluster <remotepath> <localfile>")
+            print("")
+            print("no space allowed in file names")
+        else :
+            ssh = self.get_connection()
+            remotepath,localfile = spl
+            if os.path.exists(localfile) :
+                raise Exception("file {0} cannot be overwritten".format(localfile))
+            ssh.download_cluster(remotepath,localfile)
+            return localfile
+
+    @line_magic
+    def remote_down_cluster_merge(self, line):
+        """
+        download files from a cluster directory to local machine and merge them
+
+        Example::
+
+            %remote_down remotepath localfile
+
+        the command does not allow spaces in files
+
+        .. versionadded:: 1.1
+        """
+        spl = line.strip().split()
+        if len(spl) != 2 :
+            print("Usage:")
+            print("   remote_down_cluster_merge <remotepath> <localfile>")
+            print("")
+            print("no space allowed in file names")
+        else :
+            ssh = self.get_connection()
+            remotepath,localfile = spl
+            if os.path.exists(localfile) :
+                raise Exception("file {0} cannot be overwritten".format(localfile))
+            ssh.download_cluster(remotepath,localfile, merge=True)
             return localfile
 
     @line_magic
