@@ -39,14 +39,21 @@ from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
 try:
     from IPython import get_ipython
     from .remote.magic_remote import register_magics
-    from .remote.magic_azure import register_azure_magics
+    try:
+        from .remote.magic_azure import register_azure_magics
+        az = True
+    except ImportError as e :
+        if "azure" in str(e):
+            az= False
+        else:
+            raise e
     from .sql.magic_sql import register_sql_magics
     from .file_helper.magic_file import register_file_magics
     ip = get_ipython()
     if ip is not None:
         # the program is not run from a notebook
         register_magics()
-        register_azure_magics()
+        if az: register_azure_magics()
         register_sql_magics()
         register_file_magics()
 except ImportError:
