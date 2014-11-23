@@ -355,6 +355,7 @@ class ASSHClient():
         else:
             names = ["attributes", "code", "alias", "folder",
                      "size", "date", "time", "name"]
+        kout = out
         out = out.replace("\r","").split("\n")
         out = [ _ for _ in out if len(_.split()) > 3 ]
         if len(out) == 0 :
@@ -364,10 +365,13 @@ class ASSHClient():
         try:
             out_ = [ _.split() for _ in out ]
             df = pandas.DataFrame(data=out_, columns=names)
-        except :
+        except AssertionError as e :
             out = "\n".join(out)
             buf = io.StringIO(out)
-            df = pandas.read_fwf(buf, names =  names, index=False)
+            try:
+                df = pandas.read_fwf(buf, names =  names, index=False)
+            except ValueError as e : 
+                raise ValueError("unable to parse output:\n{0}".format(kout)) from e
 
         df["isdir"] = df.apply( lambda r : r["attributes"][0] == "d", axis= 1)
         return df
