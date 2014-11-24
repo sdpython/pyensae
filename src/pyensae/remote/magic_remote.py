@@ -145,20 +145,10 @@ class MagicRemote(Magics):
             redirection = None if len(spl) == 1 else spl[1]
             if not os.path.exists(filename):
                 raise FileNotFoundError(filename)
-
-            dest = os.path.split(filename)[-1]
+                
             ssh = self.get_connection()
-            ssh.upload(filename, dest)
-            for py in pythons:
-                ssh.upload(py, os.path.split(py)[-1])
-            slocal = " -x local" if local else ""
+            out, err = ssh.pig_submit( filename, dependencies = python, redirection = redirection, local = local)
 
-            if redirection is None:
-                cmd = "pig{0} -execute -f ".format(slocal) + dest
-            else:
-                cmd = "pig{2} -execute -f {0} 2> {1}.err 1> {1}.out &".format(filename, redirection, slocal)
-
-            out, err = ssh.execute_command(cmd, no_exception = True)
             if len(err) > 0 and (len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
                 return HTML("<pre>\n%s\n</pre>" % err)
             else:
@@ -217,8 +207,7 @@ class MagicRemote(Magics):
 
             dest = os.path.split(filename)[-1]
             ssh = self.get_connection()
-            ssh.upload(filename, dest)
-            out, err = ssh.execute_command("pig -check " + dest, no_exception = True)
+            out, err = ssh.pig_submit(filename, check=True, no_exception=True)
             if len(err) > 0 and (len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
                 return HTML("<pre>\n%s\n</pre>" % err)
             else:

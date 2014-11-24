@@ -45,21 +45,21 @@ class TestCloudera (unittest.TestCase):
         if self.client is not None:
             self.client.close()
 
-    def test_ls(self):
+    def _test_ls(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         if self.client is None: return
         df = self.client.ls(".")
         fLOG(df)
         assert isinstance(df, pandas.DataFrame)
 
-    def test_hdfs_dfs_ls(self):
+    def _test_hdfs_dfs_ls(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         if self.client is None: return
         df = self.client.dfs_ls(".")
         fLOG(df)
         assert isinstance(df, pandas.DataFrame)
 
-    def test_upload_download(self) :
+    def _test_upload_download(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         if self.client is None: return
         data = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data")
@@ -124,23 +124,25 @@ class TestCloudera (unittest.TestCase):
         pyfile = os.path.join(fold, "pystream.py")
         with open(pyfile,"w", encoding="utf8") as f : f.write(pyth)
 
-        tosend = """[{'address': "52 RUE D'ENGHIEN / ANGLE RUE DU FAUBOURG POISSONIERE - 75010 PARIS", 'collect_date': datetime.datetime(2014, 11, 11, 22, 1, 18, 331070), 'lng': 2.348395236282807, 'contract_name': 'Paris', 'name': '10042 - POISSONNIÈRE - ENGHIEN', 'banking': 0, 'lat': 48.87242006305313, 'bonus': 0, 'status': 'OPEN', 'available_bikes': 32, 'last_update': datetime.datetime(2014, 11, 11, 21, 59, 5), 'number': 10042, 'available_bike_stands': 1, 'bike_stands': 33}]"""
+        tosend = """[{'address': "52 RUE D'ENGHIEN / ANGLE RUE DU FAUBOURG POISSONIERE - 75010 PARIS", 'collect_date': datetime.datetime(2014, 11, 11, 22, 1, 18, 331070), 'lng': 2.348395236282807, 'contract_name': 'Paris', 'name': '10042 - POISSONNIÈRE - ENGHIEN', 'banking': 0, 'lat': 48.87242006305313, 'bonus': 0, 'status': 'OPEN', 'available_bikes': 32, 'last_update': datetime.datetime(2014, 11, 11, 21, 59, 5), 'number': 10042, 'available_bike_stands': 1, 'bike_stands': 33},{'address': "52 RUE D'ENGHIEN / ANGLE RUE DU FAUBOURG POISSONIERE - 75010 PARIS", 'collect_date': datetime.datetime(2014, 11, 11, 22, 1, 18, 331070), 'lng': 2.348395236282807, 'contract_name': 'Paris', 'name': '10042 - POISSONNIÈRE - ENGHIEN', 'banking': 0, 'lat': 48.87242006305313, 'bonus': 0, 'status': 'OPEN', 'available_bikes': 32, 'last_update': datetime.datetime(2014, 11, 11, 21, 59, 5), 'number': 10042, 'available_bike_stands': 1, 'bike_stands': 33}]"""
 
         cmd = sys.executable.replace("pythonw", "python") + " " + pyfile + " name"
         out,err = run_cmd(cmd, wait=True, sin=tosend, communicate=True, timeout=3, shell=False)
-        fLOG("OUT\n",out)
-        fLOG("ERR\n",err)
-        assert len(out) > 0
-
+        out = out.strip("\n\r ")
+        spl = out.split("\n")
+        if len(spl) != 2:
+            raise Exception("len:{2}\nOUT:\n{0}\nERR:\n{1}".format(out,err,len(out)))
 
         # PIG script
 
         pig = """
-                DEFINE pystream `python pystream.py bonus available_bike_stands available_bikes lat lng name status` SHIP ('pystream.py') INPUT(stdin USING PigStreaming(',')) OUTPUT (stdout USING PigStreaming(','));
+                DEFINE pystream `python pystream.py bonus available_bike_stands available_bikes lat lng name status` 
+                        SHIP ('pystream.py') 
+                        INPUT(stdin USING PigStreaming(',')) OUTPUT (stdout USING PigStreaming(','));
 
-                jspy = LOAD 'unittest2/*.txt' USING PigStorage('\t') AS (arow:chararray);
+                jspy = LOAD '$UTT/*.txt' USING PigStorage('\t') AS (arow:chararray);
 
-                DUMP jspy ;
+                --DUMP jspy ;
 
                 matrice = STREAM jspy THROUGH pystream AS
                                 (   bonus:chararray,
@@ -178,20 +180,21 @@ class TestCloudera (unittest.TestCase):
         if self.client.dfs_exists("unittest2/results.txt"):
             self.client.dfs_rm("unittest2/results.txt", True)
 
-        # we upload the scripts
-        self.client.upload( [ pyfile, pigfile ], ".")
-
         # we test the syntax
-        out, err = self.client.execute_command("pig -check pystream.pig", no_exception = True)
-        fLOG("OUT\n",out)
-        fLOG("ERR\n",err)
-        assert "pystream.pig syntax OK" in err
+        out, err = self.client.pig_submit(pigfile, dependencies = [pyfile], check=True,
+                                    no_exception = True,
+                                    params=dict(UTT="unittest2"))
+        if "pystream.pig syntax OK" not in err:
+            raise Exception("OUT:\n{0}\nERR:\n{1}".format(out,err))
 
         # we submit the job
-        out, err = self.client.execute_command("pig -execute -stop_on_failure -f pystream.pig", no_exception = True)
-        fLOG("OUT\n",out)
-        fLOG("ERR\n",err)
-        assert "Total records written : 4" in err
+        out, err = self.client.pig_submit(pigfile, dependencies = [pyfile],
+                    stop_on_failure = True, no_exception = True,
+                    redirection = None,
+                    params=dict(UTT="unittest2"))
+
+        if "Total records written : 4" not in err:
+            raise Exception("OUT:\n{0}\nERR:\n{1}".format(out,err))
 
         dest = os.path.join(fold, "out_merged.txt")
         fLOG("dest=",dest)
