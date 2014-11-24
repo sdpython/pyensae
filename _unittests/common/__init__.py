@@ -16,7 +16,7 @@ def get_codes():
     fold=f
     for f in files:
         f = os.path.join(fold,f)
-        if os.path.isfile(f) and f != ".":
+        if os.path.isfile(f) and f != "." and "code" in f:
             with open(f,"r") as f:
                 lines = f.readlines()
                 f = [ _.strip() for _ in lines ]
