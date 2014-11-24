@@ -45,21 +45,21 @@ class TestCloudera (unittest.TestCase):
         if self.client is not None:
             self.client.close()
 
-    def _test_ls(self):
+    def test_ls(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         if self.client is None: return
         df = self.client.ls(".")
         fLOG(df)
         assert isinstance(df, pandas.DataFrame)
 
-    def _test_hdfs_dfs_ls(self):
+    def test_hdfs_dfs_ls(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         if self.client is None: return
         df = self.client.dfs_ls(".")
         fLOG(df)
         assert isinstance(df, pandas.DataFrame)
 
-    def _test_upload_download(self) :
+    def test_upload_download(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         if self.client is None: return
         data = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data")
