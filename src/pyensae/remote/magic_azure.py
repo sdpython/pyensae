@@ -326,7 +326,7 @@ class MagicAzure(Magics):
     def blob_rm(self, line):
         """
         calls blob_delete
-        
+
         .. versionadded:: 1.1
         """
         return self.blob_delete(line)
@@ -468,8 +468,8 @@ class MagicAzure(Magics):
 
             cl, bs = self.get_blob_connection()
             r = cl.pig_submit(bs, cl.account_name, pig, pys)
-            
-            self.shell.user_ns["last_job"] = r 
+
+            self.shell.user_ns["last_job"] = r
             return r
 
     @line_magic
@@ -490,7 +490,7 @@ class MagicAzure(Magics):
             job = job[0]
         else:
             raise Excepion("more than one job to look at:" + ",".join(job))
-        
+
         if len(nbline)==0:
             nbline = 20
             cont = True
@@ -503,7 +503,7 @@ class MagicAzure(Magics):
                 print("     %tail_stderr [nblines] [job_id]")
                 cont = False
                 nbline = 0
-            
+
         if cont:
             cl, bs = self.get_blob_connection()
             out, err = cl.standard_outputs(job, bs, cl.account_name, ".")

@@ -93,10 +93,10 @@ class MagicFile(Magics):
         if args is not None:
             if args.path is None or len(args.path) == 0 :
                 filename = "."
-            else: 
+            else:
                 filename = args.path
             pattern = args.filter
-            
+
             if "*" in filename:
                 pattern = filename
                 filename = "."

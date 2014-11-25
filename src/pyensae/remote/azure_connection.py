@@ -65,7 +65,7 @@ class AzureClient():
     Many function uses WebHCat API.
     The error code can be found here:
     `Error Codes and Responses <https://cwiki.apache.org/confluence/display/Hive/WebHCat+UsingWebHCat#WebHCatUsingWebHCat-ErrorCodesandResponses>`_.
-    
+
     .. versionchanged::
         PSEUDO, CONTAINER, SCRIPT will be passed to the script as parameters
     """
@@ -105,7 +105,7 @@ class AzureClient():
         @param      blob_key        account key for the blob storage
         @param      hadoop_name     hadoop server name (can be None if HDInsight is not used)
         @param      hadoop_key      hadoop key (can be None if HDInsight is not used)
-        @param      pseudo          sometimes, the same identification is used to connect to HDInsight, 
+        @param      pseudo          sometimes, the same identification is used to connect to HDInsight,
                                     the pseudo is meant to avoid collisions
         @param      fLOG            logging function
         """
@@ -120,30 +120,30 @@ class AzureClient():
             self.LOG = _log_
         else:
             self.LOG = fLOG
-            
+
         if pseudo is None:
             raise ValueError("pseudo cannot be None")
-            
+
         container = self.account_name
         self.default_parameters = dict(
                     SCRIPTPIG = self.pseudo+"/scripts/pig",
                     PSEUDO    = self.pseudo,
                     CONTAINER = "")
-                    
+
     def _interpret_path(self, blob_path):
         """
         replace variavble such as ``$PSEUDO``, ``$USERNAME``
-        
+
         @param      blob_path       path
         @return                     modified path
-        
+
         .. versionadded:: 1.1
         """
         if blob_path is None : return None
         if "$" in blob_path:
             for k,v in self.default_parameters.items():
                 blob_path = blob_path.replace("$" + k, v)
-        return blob_path 
+        return blob_path
 
     @staticmethod
     def mask_string(s):
@@ -168,16 +168,16 @@ class AzureClient():
         """
         import azure.storage
         return azure.storage.BlobService(self.account_name, self.account_key)
-        
+
     def exists(self, blob_service, container_name, path):
         """
         test the existence of a path on the blob storage
-        
+
         @param      blob_service        blob service, returned by @see me open_blob_service
         @param      container_name      None for all, its name otherwise
         @param      path                path in the container
         @return                         boolean
-        
+
         .. versionadded:: 1.1
         """
         path = self._interpret_path(path)
@@ -251,7 +251,7 @@ class AzureClient():
         @param      container_name      container name
         @param      blob_name           blob name (remote file name)
         @param      file_path           local file path
-        @return                         list of uploaded blob names 
+        @return                         list of uploaded blob names
 
         The code comes from `Utilisation du service de stockage d'objets blob à partir de Python <http://azure.microsoft.com/fr-fr/documentation/articles/storage-python-how-to-use-blob-storage/>`_.
         """
@@ -388,7 +388,7 @@ class AzureClient():
         @param      blob_service        returns by @see me open_blob_service
         @param      container_name      container name
         @param      blob_folder         blob folder (remote folder name)
-        
+
         .. versionadded:: 1.1
         """
         blob_folder = self._interpret_path(blob_folder)
@@ -497,12 +497,12 @@ class AzureClient():
             raise AzureException("unable to the version of server: " + webHCatUrl, r)
         return r.json()
 
-    def pig_submit(self, 
+    def pig_submit(self,
                 blob_service,
-                container_name, 
-                pig_file, 
+                container_name,
+                pig_file,
                 dependencies = None,
-                status_dir = None, 
+                status_dir = None,
                 params = None):
         """
         Submit a PIG job, the function uploads it to the cluster
@@ -518,7 +518,7 @@ class AzureClient():
         @param      dependencies    dependencies
         @param      status_dir      folder used by Hadoop to store job's progress, it should contain
                                     your alias if you want to avoid collision with others' jobs
-        @param      params          to 
+        @param      params          to
         @return                     json
 
         @example(Azure___Submit a job PIG)
@@ -532,12 +532,12 @@ class AzureClient():
         The function will then load your script,
         modify it and save another one with the by adding
         ``.wasb.pig``.
-        
+
         Others constants you could use:
             * ``$PSEUDO``
             * ``$CONTAINER``
             * ``$SCRIPTSPIG``
-            
+
         However, this replacement is not done by this class, but your code could
         be such as:
 
@@ -575,20 +575,20 @@ class AzureClient():
             raise AttributeError("no hadoop user name was given to the constructor")
         if self.hadoop_key is None:
             raise AttributeError("no hadoop password was given to the constructor")
-            
+
         # upload
         scripts = self.default_parameters["SCRIPTPIG"]
         toup = [ pig_file ]
         if dependencies is not None:
             toup.extend ( dependencies)
         res = self.upload ( blob_service, container_name, scripts, toup )
-        
+
         # path modification
         wasb =  self.wasb_to_file( container_name, res[0])
-        if dependencies is not None: 
+        if dependencies is not None:
             wasbdep = ",".join( self.wasb_to_file(container_name, _) for _ in res[1:])
         else: wasbdep = None
-            
+
         # parameter
         args = ['-v' ]
         for k,v in sorted(self.default_parameters.items()):
@@ -604,7 +604,7 @@ class AzureClient():
         params =    {'user.name':self.hadoop_user_name,
                      'file': wasb,
                      'arg':args}
-                     
+
         if wasbdep is not None:
             params["files"] = wasbdep
 
@@ -614,9 +614,9 @@ class AzureClient():
         else:
             status_dir = self.default_parameters["SCRIPTPIG"]
             params['statusdir'] = self.wasb_to_file(container_name, self.default_parameters["SCRIPTPIG"] + "/" + os.path.split(pig_file)[-1] + ".log" )
-            
+
         webHCatUrl = self.url_webHCatUrl("pig")
-        
+
         # submit the job
         r = requests.post(  webHCatUrl,
                             auth=(self.hadoop_user_name, self.hadoop_key),
@@ -674,32 +674,32 @@ class AzureClient():
 
         r = requests.get(  webHCatUrl,
                             auth=(self.hadoop_user_name, self.hadoop_key),
-                            params=params) 
+                            params=params)
         if r.status_code != 200:
             raise AzureException("unable to the version of server: " + webHCatUrl, r)
         return r.json()
-    
+
     def wait_job(self, job_id, delay = 5, fLOG = noLOG):
         """
         wait until a job has run or failed
-        
+
         @params     job_id      job_id
         @param      delay       check every N seconds
         @return                 status
-        
+
         .. versionadded:: 1.1
         """
         status = self.job_status(job_id)
         while status["status"]["state"] in ["PREP", "RUNNING"] :
             fLOG("job_id", job_id,":",status["status"]["state"])
-            time.sleep(delay)        
+            time.sleep(delay)
             status = self.job_status(job_id)
         return status
-        
+
     def standard_outputs(self, job_id, blob_service, container, folder):
         """
         returns the standard output and error for a specific job id
-        
+
         @params     job_id          job_id or status
         @param      blob_service    returns by @see me open_blob_service
         @param      container_name  name of a container
@@ -710,11 +710,11 @@ class AzureClient():
             status = self.job_status(job_id)
         else:
             status = job_id
-            
+
         status_dir = status["userargs"]["statusdir"]
         spl = status_dir.split("core.windows.net/")  # to change
         path = spl[-1]
-        res = self.download(blob_service, container, 
+        res = self.download(blob_service, container,
                         [ path + "/" + _ for _ in ["stderr", "stdout"] ],
                         folder)
 

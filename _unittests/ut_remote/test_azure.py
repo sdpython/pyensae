@@ -43,7 +43,7 @@ class TestAzure (unittest.TestCase):
 
     def tearDown(self):
         pass
-            
+
     def _test_ls(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         if self.client is None: return
@@ -66,7 +66,7 @@ class TestAzure (unittest.TestCase):
         files = [ _ for _ in files if os.path.isfile(_) and "paris" in _ ]
 
         if not self.client.exists(self.blob_serv, self.container, "unittest"):
-            # no folder creation 
+            # no folder creation
             pass
         else:
             df = self.client.ls(self.blob_serv, self.container, "unittest")
@@ -131,8 +131,8 @@ class TestAzure (unittest.TestCase):
         # PIG script
 
         pig = """
-                DEFINE pystream `python pystream.py bonus available_bike_stands available_bikes lat lng name status` 
-                        SHIP ('pystream.py') 
+                DEFINE pystream `python pystream.py bonus available_bike_stands available_bikes lat lng name status`
+                        SHIP ('pystream.py')
                         INPUT(stdin USING PigStreaming(',')) OUTPUT (stdout USING PigStreaming(','));
 
                 jspy = LOAD '$CONTAINER/$UTT/*.txt' USING PigStorage('\t') AS (arow:chararray);
@@ -175,21 +175,21 @@ class TestAzure (unittest.TestCase):
         # we submit the job
         recall = None
         if recall is None:
-            job = self.client.pig_submit(self.blob_serv, self.container, 
+            job = self.client.pig_submit(self.blob_serv, self.container,
                             pigfile, dependencies = [pyfile],
                         params=dict(UTT="unittest2"))
             job_id = job["id"]
         else:
             job_id = recall
 
-        
+
         status = self.client.wait_job(job_id, fLOG=fLOG)
-                    
+
         out,err = self.client.standard_outputs(status, self.blob_serv, self.container, fold)
 
         if "Total records written : 4" not in err:
             raise Exception("OUT:\n{0}\nERR:\n{1}".format(out,err))
-    
+
         dest = os.path.join(fold, "out_merged.txt")
         fLOG("dest=",dest)
         if os.path.exists(dest): os.remove(dest)

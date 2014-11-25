@@ -145,7 +145,7 @@ class MagicRemote(Magics):
             redirection = None if len(spl) == 1 else spl[1]
             if not os.path.exists(filename):
                 raise FileNotFoundError(filename)
-                
+
             ssh = self.get_connection()
             out, err = ssh.pig_submit( filename, dependencies = python, redirection = redirection, local = local)
 

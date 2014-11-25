@@ -471,8 +471,8 @@ class ASSHClient():
         if out.startswith("Moved"): return out, err
         else:
             raise Exception("unable to remove " + path + "\nOUT\n" + out + "\nERR:\n" + err)
-            
-    def pig_submit(self,    pig_file, 
+
+    def pig_submit(self,    pig_file,
                             dependencies        = None,
                             params              = None,
                             redirection         = "redirection",
@@ -483,55 +483,55 @@ class ASSHClient():
         """
         submits a PIG script, it first upload the script
         to the default folder and submit it
-        
+
         @param      pig_file        pig script
         @param      dependencies    others files to upload (still in the default folder)
         @param      params          parameters to send to the job
-        @param      redirection     string empty or not 
+        @param      redirection     string empty or not
         @param      local           local run or not (option `-x local <https://cwiki.apache.org/confluence/display/PIG/PigTutorial>`_)  (in that case, redirection will be empty)
         @param      stop_on_failure if True, add option ``-stop_on_failure`` on the command line
         @param      check           if True, add option ``-check`` (in that case, redirection will be empty)
         @param      no_exception    sent to @see me execute_command
         @return                     out, err from @see me execute_command
-        
-        If *redirection* is not empty, the job is submitted but 
+
+        If *redirection* is not empty, the job is submitted but
         the function returns after the standard output and error were
         redirected to ``redirection.out`` and ``redirection.err``.
-        
-        The first file will contain the results of commands 
+
+        The first file will contain the results of commands
         `DESCRIBE <http://pig.apache.org/docs/r0.14.0/test.html#describe>`_
         `DUMP <http://pig.apache.org/docs/r0.14.0/test.html#dump>`_,
         `EXPLAIN <http://pig.apache.org/docs/r0.14.0/test.html#explain>`_.
         The standard error receives logs and exceptions.
-        
+
         The function executes the command line::
-        
+
             pig  -execute -f <filename>
-            
+
         With redirection::
-        
+
             pig -execute -f <filename> 2> redirection.err 1> redirection.out &
-            
+
         .. versionadded:: 1.1
         """
         dest = os.path.split(pig_file)[-1]
         self.upload(pig_file, dest)
         for py in dependencies:
             self.upload(py, os.path.split(py)[-1])
-            
+
         slocal = " -x local" if local else ""
         sstop_on_failure = " -stop_on_failure" if stop_on_failure else ""
         scheck = " -check" if check else ""
-        
+
         if local or check:
             redirection = None
 
         if redirection is None:
             cmd = "pig{0}{1}{2} -execute -f ".format(slocal, sstop_on_failure, scheck) + dest
         else:
-            cmd = "pig{2}{3}{4} -execute -f {0} 2> {1}.err 1> {1}.out &".format(dest, 
+            cmd = "pig{2}{3}{4} -execute -f {0} 2> {1}.err 1> {1}.out &".format(dest,
                     redirection, slocal, sstop_on_failure, scheck)
-                                    
+
         if params is not None:
             sparams = ASSHClient.build_command_line_parameters(params)
             if len(sparams) > 0 :
@@ -542,18 +542,18 @@ class ASSHClient():
 
         out, err = self.execute_command(cmd, no_exception = no_exception)
         return out, err
-        
+
     @staticmethod
     def build_command_line_parameters(params):
         """
         builds a string for ``pig`` based on the parameters in params
-        
+
         @param      params      dictionary
         @return                 string
-        
+
         .. versionadded:: 1.1
         """
-        if params is None : 
+        if params is None :
             return ""
         res = [ ]
         for k,v in sorted(params.items()):
@@ -561,4 +561,3 @@ class ASSHClient():
             one = '-param {0}="{1}"'.format(k,v)
             res.append(one)
         return " ".join(res)
-        

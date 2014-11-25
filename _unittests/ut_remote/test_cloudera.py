@@ -136,8 +136,8 @@ class TestCloudera (unittest.TestCase):
         # PIG script
 
         pig = """
-                DEFINE pystream `python pystream.py bonus available_bike_stands available_bikes lat lng name status` 
-                        SHIP ('pystream.py') 
+                DEFINE pystream `python pystream.py bonus available_bike_stands available_bikes lat lng name status`
+                        SHIP ('pystream.py')
                         INPUT(stdin USING PigStreaming(',')) OUTPUT (stdout USING PigStreaming(','));
 
                 jspy = LOAD '$UTT/*.txt' USING PigStorage('\t') AS (arow:chararray);
