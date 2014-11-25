@@ -44,14 +44,14 @@ class TestAzure (unittest.TestCase):
     def tearDown(self):
         pass
 
-    def _test_ls(self):
+    def test_ls(self):
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         if self.client is None: return
         df = self.client.ls(self.blob_serv, None)
         fLOG(df)
         assert isinstance(df, pandas.DataFrame)
 
-    def _test_upload_download(self) :
+    def test_upload_download(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         if self.client is None: return
         data = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data")

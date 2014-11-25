@@ -10,8 +10,9 @@ from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 
 from pyquickhelper.sync.synchelper import explore_folder_iterfile
-from pyquickhelper import MagicCommandParser
+from pyquickhelper import MagicCommandParser, run_cmd
 from .format_helper import format_file_size, format_file_mtime
+
 
 
 @magics_class
@@ -115,6 +116,39 @@ class MagicFile(Magics):
                     r = { "name":r, "directory":True }
                 rows.append(r)
             return pandas.DataFrame(rows)
+
+    @cell_magic
+    def runpy(self, line, cell = None):
+        """
+        defines command ``%%runpy``
+
+        run a python script which accepts standards input and produces standard outputs,
+        a timeout is set up at 10s
+
+        ..versionadded:: 1.1
+        """
+        if line in [None, ""] :
+            print("Usage:")
+            print("     %%runpy <pythonfile.py> <args>")
+            print("     first row")
+            print("     second row")
+            print("     ...")
+        else:
+            filename = line.strip().split()
+            if len(filename) == 0:
+                self.runpy("")
+            else:
+                args = " ".join(filename[1:])
+                filename = filename[0]
+                cmd = sys.executable.replace("pythonw", "python") + " " + filename + " " + args
+                tosend = cell
+                out,err = run_cmd(cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
+                if len(err) > 0 :
+                    return HTML ('<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+                else:
+                    return HTML ('<pre>\n%s\n</pre>' % out)
+
+
 
 def register_file_magics():
     """

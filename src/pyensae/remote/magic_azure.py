@@ -6,6 +6,8 @@
 import sys, os
 import pandas
 
+from pyquickhelper import run_cmd
+
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
@@ -452,22 +454,26 @@ class MagicAzure(Magics):
         """
         if line in [None, ""]:
             print("Usage:")
-            print("  %hd_pig_submit <jobname.pig>")
+            print("  %hd_pig_submit <jobname.pig> [dependencies.py] [-stop_on_failure]")
             print("")
             print("The file <jobname.pig> is local.")
         else:
             line = line.strip()
-            spl      = line.split()
-            pys      = [ _ for _ in spl if _.endswith(".py") ]
-            pig      = [ _ for _ in spl if _ not in pys ]
+            spl  = line.split()
+            opt  = [ _ for _ in spl if _.startswith("-") ]
+            pys  = [ _ for _ in spl if _.endswith(".py") ]
+            pig  = [ _ for _ in spl if _ not in pys and _ not in opt ]
             if len(pig) != 1:
                 raise ValueError("unable to interpret line: {0}".format(line))
             pig      = pig [0]
             if not os.path.exists(pig):
                 raise FileNotFoundError(pig)
 
+            options = { "stop_on_failure":False }
+            options.update( { k.strip("-"):True for k in opt } )
+
             cl, bs = self.get_blob_connection()
-            r = cl.pig_submit(bs, cl.account_name, pig, pys)
+            r = cl.pig_submit(bs, cl.account_name, pig, pys, **options)
 
             self.shell.user_ns["last_job"] = r
             return r
@@ -507,10 +513,81 @@ class MagicAzure(Magics):
         if cont:
             cl, bs = self.get_blob_connection()
             out, err = cl.standard_outputs(job, bs, cl.account_name, ".")
+
             lines = err.split("\n")
-            show = "\n".join( _.strip("\n\r") for _ in lines[-nbline:])
-            show = show.replace("ERROR", '<b><font color="#DD0000">ERROR</font></b>')
-            return HTML("<pre>\n%s\n</pre>" % show)
+            show  = "\n".join( _.strip("\n\r") for _ in lines[-nbline:])
+            show  = show.replace("ERROR", '<b><font color="#DD0000">ERROR</font></b>')
+
+            if len(out) > 0 :
+                lineo = out.split("\n")
+                shoo  = "\n".join( _.strip("\n\r") for _ in lineo[-nbline:])
+                return HTML("<pre>\n%s\n</pre><br /><b>OUT:</b><br /><pre>\n%s\n</pre>" % (show, shoo))
+            else:
+                return HTML("<pre>\n%s\n</pre><br />" % show)
+
+    @cell_magic
+    def runjython(self, line, cell = None):
+        """
+        defines command ``%%runjython``
+
+        run a jython script used for streaming in HDInsight,
+        the function appends fake decorator
+        a timeout is set up at 10s
+
+        The magic function create another file included the decoration.
+
+        See `In a python script how can I ignore Apache Pig's Python Decorators for standalone unit testing <http://stackoverflow.com/questions/18223898/in-a-python-script-how-can-i-ignore-apache-pigs-python-decorators-for-standalon>`_
+
+        ..versionadded:: 1.1
+        """
+        if line in [None, ""] :
+            print("Usage:")
+            print("     %%runjython <pythonfile.py> <function_name> <args>")
+            print("     first row")
+            print("     second row")
+            print("     ...")
+        else:
+            filename = line.strip().split()
+            if len(filename) <= 1:
+                self.runjython("")
+            else:
+                args = " ".join(filename[2:])
+                func_name = filename[1]
+                filename = filename[0]
+
+                with open(filename,'r',encoding="utf8") as pyf :
+                    content = pyf.read()
+                temp = filename.replace(".py", ".temp.py")
+                with open(temp, "w", encoding="utf8") as pyf :
+                    pyf.write("""
+                            if __name__ != '__lib__':
+                                def outputSchema(dont_care):
+                                    def wrapper(func):
+                                        def inner(*args, **kwargs):
+                                            return func(*args, **kwargs)
+                                        return inner
+                                    return wrapper
+                            """.replace("                            ",""))
+                    pyf.write(content.replace("except Exception,", "except Exception as "))
+                    pyf.write("""
+                            if __name__ != '__lib__':
+                                import sys
+                                for row in sys.stdin:
+                                    row = row.strip()
+                                    res = {0}(row)
+                                    sys.stdout.write(str(res))
+                                    sys.stdout.write("\\n")
+                                    sys.stdout.flush()
+                            """.format(func_name).replace("                            ",""))
+
+                cmd = sys.executable.replace("pythonw", "python") + " " + temp + " " + args
+                tosend = cell
+                out,err = run_cmd(cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
+                if len(err) > 0 :
+                    return HTML ('<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+                else:
+                    return HTML ('<pre>\n%s\n</pre>' % out)
+
 
 
 

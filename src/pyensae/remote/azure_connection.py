@@ -503,6 +503,7 @@ class AzureClient():
                 pig_file,
                 dependencies = None,
                 status_dir = None,
+                stop_on_failure = True,
                 params = None):
         """
         Submit a PIG job, the function uploads it to the cluster
@@ -518,6 +519,7 @@ class AzureClient():
         @param      dependencies    dependencies
         @param      status_dir      folder used by Hadoop to store job's progress, it should contain
                                     your alias if you want to avoid collision with others' jobs
+        @param      stop_on_failure stop on failure, do not wait as long as possible
         @param      params          to
         @return                     json
 
@@ -570,6 +572,9 @@ class AzureClient():
         js = cl.job_status('job_1414863995725_0013')
         @endcode
         @endexample
+
+        .. versionadded:: 1.1
+            parameter *stop_on_failure*
         """
         if self.hadoop_user_name is None:
             raise AttributeError("no hadoop user name was given to the constructor")
@@ -599,6 +604,9 @@ class AzureClient():
         if params is not None:
             for k,v in sorted(params.items()):
                 args.extend ( [ "-param", '%s=%s' % (k, v.replace('"','\\"')) ] )
+
+        if stop_on_failure:
+            args.append ("-stop_on_failure")
 
         # params
         params =    {'user.name':self.hadoop_user_name,

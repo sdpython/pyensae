@@ -33,13 +33,13 @@ from .sql.database_main import Database
 from .datasource.data_velib import DataVelibCollect
 from .datasource.convert import dBase2df, dBase2sqllite
 from .file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
-from .remote.remote_connection import ASSHClient
+from .remote.ssh_remote_connection import ASSHClient
 from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
 from .remote.azure_connection import AzureClient
 
 try:
     from IPython import get_ipython
-    from .remote.magic_remote import register_magics
+    from .remote.magic_remote_ssh import register_magics_ssh
     try:
         from .remote.magic_azure import register_azure_magics
         az = True
@@ -53,7 +53,7 @@ try:
     ip = get_ipython()
     if ip is not None:
         # the program is not run from a notebook
-        register_magics()
+        register_magics_ssh()
         if az: register_azure_magics()
         register_sql_magics()
         register_file_magics()

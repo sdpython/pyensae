@@ -8,12 +8,11 @@ import os, sys
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
-from .remote_connection import ASSHClient
+from .ssh_remote_connection import ASSHClient
 
-from pyquickhelper import run_cmd
 
 @magics_class
-class MagicRemote(Magics):
+class MagicRemoteSSH(Magics):
     """
     Defines commands to access a remote machine (bridge) through SSH,
     for the time being, all the command do not accept another parameters
@@ -76,37 +75,6 @@ class MagicRemote(Magics):
             filename = line.strip()
             with open(filename, "w", encoding="utf8") as f :
                 f.write(cell.replace("\r",""))
-
-    @cell_magic
-    def runpy(self, line, cell = None):
-        """
-        defines command ``%%runpy``
-
-        run a python script which accepts standards input and produces standard outputs,
-        a timeout is set up at 10s
-
-        ..versionadded:: 1.1
-        """
-        if line in [None, ""] :
-            print("Usage:")
-            print("     %%runpy <pythonfile.py> <args>")
-            print("     first row")
-            print("     second row")
-            print("     ...")
-        else:
-            filename = line.strip().split()
-            if len(filename) == 0:
-                self.runpy("")
-            else:
-                args = " ".join(filename[1:])
-                filename = filename[0]
-                cmd = sys.executable.replace("pythonw", "python") + " " + filename + " " + args
-                tosend = cell
-                out,err = run_cmd(cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
-                if len(err) > 0 :
-                    return HTML ('<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
-                else:
-                    return HTML ('<pre>\n%s\n</pre>' % out)
 
     @line_magic
     def pigsubmit(self, line):
@@ -523,10 +491,10 @@ class MagicRemote(Magics):
         return df
 
 
-def register_magics():
+def register_magics_ssh():
     """
     register magics function, can be called from a notebook
     """
     from IPython import get_ipython
     ip = get_ipython()
-    ip.register_magics(MagicRemote)
+    ip.register_magics(MagicRemoteSSH)
