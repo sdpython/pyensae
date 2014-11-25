@@ -48,12 +48,6 @@ class MagicAzure(Magics):
         bs = self.shell.user_ns["remote_azure_blob"]
         return cl, bs
 
-    @line_magic
-    def open_blob(self, line):
-        """
-        @see me open_blob
-        """
-        return self.blob_open(line)
 
     @line_magic
     def azureclient(self,line):
@@ -130,10 +124,12 @@ class MagicAzure(Magics):
                 password        = self.shell.user_ns.get("blobpassword",None)
                 hadoop_server   = self.shell.user_ns.get("hadoop_server",None)
                 hadoop_password = self.shell.user_ns.get("hadoop_password",None)
+                username        = self.shell.user_ns.get("username",None)
                 if server           is None : raise KeyError("unable to find blobstorage")
                 if password         is None : raise KeyError("unable to find blobpassword")
                 if hadoop_server    is None : raise KeyError("unable to find hadoop_server")
                 if hadoop_password  is None : raise KeyError("unable to find hadoop_password")
+                if username         is None : raise KeyError("unable to find username")
             else:
                 raise Exception("No detected workspace.")
 
@@ -143,12 +139,12 @@ class MagicAzure(Magics):
             if "remote_azure_blob" in self.shell.user_ns:
                 raise Exception("a connection is still open, close it first")
 
-            cl = self.create_client(server, password, hadoop_server, hadoop_password)
+            cl = self.create_client(server, password, hadoop_server, hadoop_password, username = username)
             bs = cl.open_blob_service()
             self.shell.user_ns["remote_azure_blob"] = bs
             return cl, bs
 
-    def create_client(self, account_name, account_key, hadoop_server = None, hadoop_password = None):
+    def create_client(self, account_name, account_key, hadoop_server = None, hadoop_password = None, username = None):
         """
         Create a @see cl AzureClient and stores in the workspace.
 
@@ -156,22 +152,17 @@ class MagicAzure(Magics):
         @param      account_key         password
         @param      hadoop_server       hadoop server
         @param      hadoop_password     hadoop password
+        @param      username            username
         """
-        cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password)
+        if username is None : username = "any"
+        cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo = username)
         self.shell.user_ns["remote_azure_client"] = cl
         return cl
 
     @line_magic
-    def close_blob(self, line):
-        """
-        @see me close_blob
-        """
-        return self.blob_close(line)
-
-    @line_magic
     def blob_close (self, line):
         """
-        close a SSH connection and store the connection
+        close the connection and store the connection
         into the notebook workspace
         """
         cl, bs = self.get_blob_connection()
@@ -214,13 +205,6 @@ class MagicAzure(Magics):
         return container, remotepath
 
     @line_magic
-    def ls_blob(self, line):
-        """
-        @see me blob_ls
-        """
-        return self.blob_ls(line)
-
-    @line_magic
     def blob_ls(self, line):
         """
         defines command %blob_ls
@@ -233,19 +217,11 @@ class MagicAzure(Magics):
         else :
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(line, cl, bs, True)
-            l = cl.ls(bs, container, remotepath)
-            df = pandas.DataFrame(l)
+            df = cl.ls(bs, container, remotepath)
             if len(df) > 0 :
                 return df [["name","last_modified","content_type","content_length","blob_type"]]
             else:
                 return df
-
-    @line_magic
-    def lsl_blob(self, line):
-        """
-        @see me blob_lse
-        """
-        return self.blob_lse(line)
 
     @line_magic
     def blob_lsl(self, line):
@@ -260,15 +236,7 @@ class MagicAzure(Magics):
         else :
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(line, cl, bs, True)
-            l = cl.ls(bs, container, remotepath, add_metadata=True)
-            return pandas.DataFrame(l)
-
-    @line_magic
-    def up_blob(self, line):
-        """
-        @see me blob_up
-        """
-        return self.blob_up(line)
+            return cl.ls(bs, container, remotepath, add_metadata=True)
 
     @line_magic
     def blob_up(self, line):
@@ -297,13 +265,6 @@ class MagicAzure(Magics):
             container,remotepath = self._interpret_path(remotepath, cl, bs)
             cl.upload(bs, container, remotepath, localfile)
             return remotepath
-
-    @line_magic
-    def down_blob(self, line):
-        """
-        @see me blob_down
-        """
-        return self.blob_down(line)
 
     @line_magic
     def blob_down(self, line):
@@ -362,6 +323,15 @@ class MagicAzure(Magics):
             return localfile
 
     @line_magic
+    def blob_rm(self, line):
+        """
+        calls blob_delete
+        
+        .. versionadded:: 1.1
+        """
+        return self.blob_delete(line)
+
+    @line_magic
     def blob_delete(self, line):
         """
         deletes a blob
@@ -375,6 +345,22 @@ class MagicAzure(Magics):
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(line, cl, bs)
             cl.delete_blob(bs, container, remotepath)
+            return True
+
+    @line_magic
+    def blob_rmr(self, line):
+        """
+        deletes a folder
+        """
+        if line is None or len(line.strip()) == 0:
+            print("Usage:")
+            print("   blob_rmr <container/remotepath>")
+            print("or")
+            print("   blob_rmr </remotepath>")
+        else :
+            cl, bs = self.get_blob_connection()
+            container, remotepath = self._interpret_path(line, cl, bs)
+            cl.delete_folder(bs, container, remotepath)
             return True
 
     @line_magic
@@ -453,13 +439,9 @@ class MagicAzure(Magics):
             print("     %%PIG_azure <filename>")
             print("")
             print("The command store the content of the cell as a local file.")
-            print("It also replaces __CONTAINER__ as a right prefix for streams.")
         else:
             filename = line.strip()
-            script = cell.replace("\r","")
-            cl, bs = self.get_blob_connection()
-            prefix = cl.wasb_prefix(cl.account_name)
-            script = script.replace("__CONTAINER__", prefix + "/")
+            script   = cell.replace("\r","")
             with open(filename, "w", encoding="utf8") as f :
                 f.write(script)
 
@@ -475,16 +457,19 @@ class MagicAzure(Magics):
             print("The file <jobname.pig> is local.")
         else:
             line = line.strip()
-            if not os.path.exists(line):
-                raise FileNotFoundError(line)
-
-            username = self.shell.user_ns["username"] if "username" in self.shell.user_ns else os.environ.get("USERNAME","nouser")
-            remote   = "scripts/pig/{0}/{1}".format(username, os.path.split(line)[-1])
-            sd       = "scripts/run/{0}".format(username)
+            spl      = line.split()
+            pys      = [ _ for _ in spl if _.endswith(".py") ]
+            pig      = [ _ for _ in spl if _ not in pys ]
+            if len(pig) != 1:
+                raise ValueError("unable to interpret line: {0}".format(line))
+            pig      = pig [0]
+            if not os.path.exists(pig):
+                raise FileNotFoundError(pig)
 
             cl, bs = self.get_blob_connection()
-            cl.upload(bs, cl.account_name, remote, line)
-            r = cl.pig_submit(cl.account_name,remote,status_dir=sd)
+            r = cl.pig_submit(bs, cl.account_name, pig, pys)
+            
+            self.shell.user_ns["last_job"] = r 
             return r
 
     @line_magic
@@ -497,31 +482,35 @@ class MagicAzure(Magics):
             nbline = 30
             cont = True
         else:
-            try:
-                nbline = int(line)
-                cont = True
-            except ValueError:
-                print("Usage:")
-                print("     %tail_stderr [nblines]")
-                cont = False
-                nbline = 0
-
-        if cont:
-            username = self.shell.user_ns["username"] if "username" in self.shell.user_ns else os.environ.get("USERNAME","nouser")
-            #remote   = "scripts/pig/{0}/{1}".format(username, os.path.split(line)[-1])
-            sd       = "scripts/run/{0}".format(username)
-            loc      = "stderr"
-            sd      += "/" + loc
-            loc     += ".txt"
-
-            if os.path.exists(loc):
-                os.remove(loc)
-
+            spl = line.strip().split()
+            job = [ _ for _ in spl if _.startswith("job") ]
+            nbline = [ _ for _ in spl if not _.startswith("job") ]
+            if len(job) == 0 :
+                if  self.shell is None or "last_job" not in self.shell.user_ns["last_job"]:
+                    raise Exception("no submitted jobs found in the workspace")
+                else:
+                    job = self.shell.user_ns["last_job"]["jid"]
+            elif len(job) == 1:
+                job = job[0]
+            else:
+                raise Excepion("more than one job to look at:" + ",".join(job))
+            
+            if len(nbline)==0:
+                nbline = 20
+            else:
+                try:
+                    nbline = int(line)
+                    cont = True
+                except ValueError:
+                    print("Usage:")
+                    print("     %tail_stderr [nblines] [job_id]")
+                    cont = False
+                    nbline = 0
+                
             cl, bs = self.get_blob_connection()
-            fi = cl.download(bs, cl.account_name, sd, loc)
-            with open(fi, "r") as f : lines = f.readlines()
-            nb = min(nbline, len(lines))
-            show = "\n".join( _.strip("\n\r") for _ in lines[-nb:])
+            out, err = cl.standard_outputs(job, bs, cl.account_name, ".")
+            lines = err.split("\n")
+            show = "\n".join( _.strip("\n\r") for _ in lines[-nbline:])
             show = show.replace("ERROR", '<b><font color="#DD0000">ERROR</font></b>')
             return HTML("<pre>\n%s\n</pre>" % show)
 

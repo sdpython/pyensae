@@ -35,6 +35,7 @@ from .datasource.convert import dBase2df, dBase2sqllite
 from .file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
 from .remote.remote_connection import ASSHClient
 from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
+from .remote.azure_connection import AzureClient
 
 try:
     from IPython import get_ipython
