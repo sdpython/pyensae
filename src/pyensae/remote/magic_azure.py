@@ -478,35 +478,33 @@ class MagicAzure(Magics):
         defines ``%tail_stderr``
         """
         line = line.strip()
-        if len(line) == 0 :
-            nbline = 30
+        spl = line.strip().split()
+        job = [ _ for _ in spl if _.startswith("job") ]
+        nbline = [ _ for _ in spl if not _.startswith("job") ]
+        if len(job) == 0 :
+            if  self.shell is None or "last_job" not in self.shell.user_ns:
+                raise Exception("no submitted jobs found in the workspace")
+            else:
+                job = self.shell.user_ns["last_job"]["jid"]
+        elif len(job) == 1:
+            job = job[0]
+        else:
+            raise Excepion("more than one job to look at:" + ",".join(job))
+        
+        if len(nbline)==0:
+            nbline = 20
             cont = True
         else:
-            spl = line.strip().split()
-            job = [ _ for _ in spl if _.startswith("job") ]
-            nbline = [ _ for _ in spl if not _.startswith("job") ]
-            if len(job) == 0 :
-                if  self.shell is None or "last_job" not in self.shell.user_ns["last_job"]:
-                    raise Exception("no submitted jobs found in the workspace")
-                else:
-                    job = self.shell.user_ns["last_job"]["jid"]
-            elif len(job) == 1:
-                job = job[0]
-            else:
-                raise Excepion("more than one job to look at:" + ",".join(job))
+            try:
+                nbline = int(nbline[0])
+                cont = True
+            except ValueError:
+                print("Usage:")
+                print("     %tail_stderr [nblines] [job_id]")
+                cont = False
+                nbline = 0
             
-            if len(nbline)==0:
-                nbline = 20
-            else:
-                try:
-                    nbline = int(line)
-                    cont = True
-                except ValueError:
-                    print("Usage:")
-                    print("     %tail_stderr [nblines] [job_id]")
-                    cont = False
-                    nbline = 0
-                
+        if cont:
             cl, bs = self.get_blob_connection()
             out, err = cl.standard_outputs(job, bs, cl.account_name, ".")
             lines = err.split("\n")

@@ -93,8 +93,13 @@ class MagicFile(Magics):
         if args is not None:
             if args.path is None or len(args.path) == 0 :
                 filename = "."
-            else: filename = args.path
+            else: 
+                filename = args.path
             pattern = args.filter
+            
+            if "*" in filename:
+                pattern = filename
+                filename = "."
 
             iter = explore_folder_iterfile(filename, pattern)
             rows = [ ]
