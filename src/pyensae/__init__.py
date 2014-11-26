@@ -36,6 +36,7 @@ from .file_helper.decompress_helper import decompress_zip, decompress_targz, dec
 from .remote.ssh_remote_connection import ASSHClient
 from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
 from .remote.azure_connection import AzureClient
+from .remote.ftp_connection import TransferFTP
 
 try:
     from IPython import get_ipython
