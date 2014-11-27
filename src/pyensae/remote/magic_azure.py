@@ -12,6 +12,7 @@ from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 from .azure_connection import AzureClient, AzureException
+from ..file_helper.jython_helper import run_jython, get_jython_jar, is_java_installed, download_java_standalone
 
 @magics_class
 class MagicAzure(Magics):
@@ -535,6 +536,7 @@ class MagicAzure(Magics):
         a timeout is set up at 10s
 
         The magic function create another file included the decoration.
+        It runs the script with this version of Python.
 
         See `In a python script how can I ignore Apache Pig's Python Decorators for standalone unit testing <http://stackoverflow.com/questions/18223898/in-a-python-script-how-can-i-ignore-apache-pigs-python-decorators-for-standalon>`_
 
@@ -588,7 +590,69 @@ class MagicAzure(Magics):
                 else:
                     return HTML ('<pre>\n%s\n</pre>' % out)
 
+    @cell_magic
+    def jython(self, line, cell = None):
+        """
+        defines command ``%%runjython``
 
+        run a jython script used for streaming in HDInsight,
+        the function appends fake decorator
+        a timeout is set up at 10s
+
+        The magic function create another file included the decoration.
+        It runs the script with Jython (see the default version)
+
+        See `In a python script how can I ignore Apache Pig's Python Decorators for standalone unit testing <http://stackoverflow.com/questions/18223898/in-a-python-script-how-can-i-ignore-apache-pigs-python-decorators-for-standalon>`_
+
+        ..versionadded:: 1.1
+        """
+        if line in [None, ""] :
+            print("Usage:")
+            print("     %%jython <pythonfile.py> <function_name> <args>")
+            print("     first row")
+            print("     second row")
+            print("     ...")
+        else:
+            filename = line.strip().split()
+            if len(filename) <= 1:
+                self.jython("")
+            else:
+                args = " ".join(filename[2:])
+                func_name = filename[1]
+                filename = filename[0]
+
+                with open(filename,'r',encoding="utf8") as pyf :
+                    content = pyf.read()
+                temp = filename.replace(".py", ".temp.py")
+                with open(temp, "w", encoding="utf8") as pyf :
+                    pyf.write("""
+                            if __name__ != '__lib__':
+                                def outputSchema(dont_care):
+                                    def wrapper(func):
+                                        def inner(*args, **kwargs):
+                                            return func(*args, **kwargs)
+                                        return inner
+                                    return wrapper
+                            """.replace("                            ",""))
+                    pyf.write(content)
+                    pyf.write("""
+                            if __name__ != '__lib__':
+                                import sys
+                                for row in sys.stdin:
+                                    row = row.strip()
+                                    res = {0}(row)
+                                    sys.stdout.write(str(res))
+                                    sys.stdout.write("\\n")
+                                    sys.stdout.flush()
+                            """.format(func_name).replace("                            ",""))
+
+                download_java_standalone()
+                tosend = cell
+                out,err = run_jython(temp, sin = cell, timeout = 10)
+                if len(err) > 0 :
+                    return HTML ('<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+                else:
+                    return HTML ('<pre>\n%s\n</pre>' % out)
 
 
 def register_azure_magics():

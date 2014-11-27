@@ -37,6 +37,8 @@ from .remote.ssh_remote_connection import ASSHClient
 from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
 from .remote.azure_connection import AzureClient
 from .remote.ftp_connection import TransferFTP
+from .file_helper.jython_helper import run_jython, get_jython_jar, is_java_installed, download_java_standalone
+
 
 try:
     from IPython import get_ipython
