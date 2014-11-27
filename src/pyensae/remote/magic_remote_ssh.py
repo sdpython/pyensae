@@ -61,21 +61,6 @@ class MagicRemoteSSH(Magics):
             with open(filename, "w", encoding="utf8") as f :
                 f.write(cell.replace("\r",""))
 
-    @cell_magic
-    def PYTHON(self, line, cell = None):
-        """
-        defines command ``%%PIG``
-        """
-        if line in [None, ""] :
-            print("Usage:")
-            print("     %%PYTHON <filename>")
-            print("")
-            print("The command store the content of the cell as a local file.")
-        else:
-            filename = line.strip()
-            with open(filename, "w", encoding="utf8") as f :
-                f.write(cell.replace("\r",""))
-
     @line_magic
     def pigsubmit(self, line):
         """

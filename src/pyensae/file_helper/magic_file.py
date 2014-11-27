@@ -118,6 +118,22 @@ class MagicFile(Magics):
             return pandas.DataFrame(rows)
 
     @cell_magic
+    def PYTHON(self, line, cell = None):
+        """
+        defines command ``%%PIG``
+        """
+        if line in [None, ""] :
+            print("Usage:")
+            print("     %%PYTHON <filename>")
+            print("")
+            print("The command store the content of the cell as a local file.")
+        else:
+            filename = line.strip()
+            with open(filename, "w", encoding="utf8") as f :
+                f.write("# -*- coding: utf8 -*-\n")
+                f.write(cell.replace("\r",""))
+
+    @cell_magic
     def runpy(self, line, cell = None):
         """
         defines command ``%%runpy``

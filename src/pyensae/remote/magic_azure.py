@@ -562,6 +562,7 @@ class MagicAzure(Magics):
                 temp = filename.replace(".py", ".temp.py")
                 with open(temp, "w", encoding="utf8") as pyf :
                     pyf.write("""
+                            # -*- coding: utf8 -*-
                             if __name__ != '__lib__':
                                 def outputSchema(dont_care):
                                     def wrapper(func):
@@ -626,6 +627,7 @@ class MagicAzure(Magics):
                 temp = filename.replace(".py", ".temp.py")
                 with open(temp, "w", encoding="utf8") as pyf :
                     pyf.write("""
+                            # -*- coding: utf8 -*-
                             if __name__ != '__lib__':
                                 def outputSchema(dont_care):
                                     def wrapper(func):

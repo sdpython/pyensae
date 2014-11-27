@@ -144,7 +144,6 @@ class AzureClient():
         if "$" in blob_path:
             for k,v in self.default_parameters.items():
                 blob_path = blob_path.replace("$" + k, v)
-        print("*",blob_path)
         return blob_path
 
     @staticmethod

@@ -484,7 +484,7 @@ class ASSHClient():
         submits a PIG script, it first upload the script
         to the default folder and submit it
 
-        @param      pig_file        pig script
+        @param      pig_file        pig script (local)
         @param      dependencies    others files to upload (still in the default folder)
         @param      params          parameters to send to the job
         @param      redirection     string empty or not
