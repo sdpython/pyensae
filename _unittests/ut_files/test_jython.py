@@ -28,32 +28,32 @@ class TestJython (unittest.TestCase):
 
     def test_simple_jython(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        
+
         download_java_standalone()
-        assert is_java_installed() 
-        
+        assert is_java_installed()
+
         this = os.path.abspath(os.path.dirname(__file__))
         temp = os.path.join(this, "temp_jython")
         if not os.path.exists(temp) : os.mkdir(temp)
-        
+
         jyt = os.path.join(temp, "jy1.py")
         with open(jyt, "w", encoding="utf8") as f :
             f.write('print("first try with jython")')
-            
+
         out,err = run_jython(jyt, fLOG=fLOG)
         if  "first try with jython" not in out:
             raise Exception("OUT:\n{0}\nERR:\n{1}\n".format(out,err))
-        
+
     def test_complex_jython(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        
+
         download_java_standalone()
-        assert is_java_installed() 
-        
+        assert is_java_installed()
+
         this = os.path.abspath(os.path.dirname(__file__))
         temp = os.path.join(this, "temp_jython")
         if not os.path.exists(temp) : os.mkdir(temp)
-        
+
         jyt = os.path.join(temp, "jy2.py")
         with open(jyt, "w", encoding="utf8") as f :
             f.write('''
@@ -86,7 +86,7 @@ class TestJython (unittest.TestCase):
                                     sys.stdout.write("\\n")
                                     sys.stdout.flush()
                     '''.replace("                            ",""))
-            
+
         sin =     '''
                     [{'address': 'RUE DES CHAMPEAUX (PRES DE LA GARE ROUTIERE) - 93170 BAGNOLET', 'collect_date': datetime.datetime(2014, 11, 11, 22, 2, 18, 47270), 'lng': 2.416170724425901, 'contract_name': 'Paris', 'name': '31705 - CHAMPEAUX (BAGNOLET)', 'banking': 0, 'lat': 48.8645278209514, 'bonus': 0, 'status': 'OPEN', 'available_bikes': 1, 'last_update': datetime.datetime(2014, 11, 11, 21, 55, 22), 'number': 31705, 'available_bike_stands': 49, 'bike_stands': 50}]
                     [{'address': 'RUE DES CHAMPEAUX (PRES DE LA GARE ROUTIERE) - 93170 BAGNOLET', 'collect_date': datetime.datetime(2014, 11, 11, 22, 2, 18, 47270), 'lng': 2.416170724425901, 'contract_name': 'Paris', 'name': '31705 - CHAMPEAUX (BAGNOLET)', 'banking': 0, 'lat': 48.8645278209514, 'bonus': 0, 'status': 'OPEN', 'available_bikes': 1, 'last_update': datetime.datetime(2014, 11, 11, 21, 55, 22), 'number': 31705, 'available_bike_stands': 49, 'bike_stands': 50}]
@@ -97,10 +97,10 @@ class TestJython (unittest.TestCase):
         exp = "[('49', '1', '48.864527821',"
         if  exp not in out:
             raise Exception("OUT:\n{0}\nERR:\n{1}\n".format(out,err))
-        
-        
 
-        
+
+
+
 
 
 if __name__ == "__main__"  :
