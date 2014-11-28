@@ -20,7 +20,7 @@ class MagicFile(Magics):
     """
     Defines magic commands to list the content of a folder
 
-    ..versionadded:: 1.1
+    .. versionadded:: 1.1
     """
 
     @staticmethod
@@ -141,7 +141,7 @@ class MagicFile(Magics):
         run a python script which accepts standards input and produces standard outputs,
         a timeout is set up at 10s
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         if line in [None, ""] :
             print("Usage:")

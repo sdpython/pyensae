@@ -307,7 +307,7 @@ class MagicAzure(Magics):
 
         the command does not allow spaces in file names
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         spl = line.strip().split()
         if len(spl) != 2 :
@@ -544,7 +544,7 @@ class MagicAzure(Magics):
 
         See `In a python script how can I ignore Apache Pig's Python Decorators for standalone unit testing <http://stackoverflow.com/questions/18223898/in-a-python-script-how-can-i-ignore-apache-pigs-python-decorators-for-standalon>`_
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         if line in [None, ""] :
             print("Usage:")
@@ -609,7 +609,7 @@ class MagicAzure(Magics):
 
         See `In a python script how can I ignore Apache Pig's Python Decorators for standalone unit testing <http://stackoverflow.com/questions/18223898/in-a-python-script-how-can-i-ignore-apache-pigs-python-decorators-for-standalon>`_
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         if line in [None, ""] :
             print("Usage:")

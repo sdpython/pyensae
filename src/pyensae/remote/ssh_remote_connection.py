@@ -157,7 +157,7 @@ class ASSHClient():
         @param      localpath     local file
         @param      remotepath    remote file (it can be a list, localpath is a folder in that case)
 
-        ..versionchanged:: 1.1
+        .. versionchanged:: 1.1
             remotepath can be a list of paths
         """
         sftp = self.connection.open_sftp()
@@ -176,7 +176,7 @@ class ASSHClient():
         @param      remotepath      remote file (it can be a list, localpath is a folder in that case)
         @param      merge           True to use getmerge instead of get
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         cget = "getmerge" if merge else "get"
         if isinstance(remotepath, str):

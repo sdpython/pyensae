@@ -409,7 +409,7 @@ class MagicRemoteSSH(Magics):
 
             %remote_ls .
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         ssh = self.get_connection()
         df = ssh.ls(line)
@@ -424,7 +424,7 @@ class MagicRemoteSSH(Magics):
 
             %dfs_ls .
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         ssh = self.get_connection()
         df = ssh.dfs_ls(line)
@@ -439,7 +439,7 @@ class MagicRemoteSSH(Magics):
 
             %dfs_rm .
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         ssh = self.get_connection()
         df = ssh.dfs_rm(line)
@@ -454,7 +454,7 @@ class MagicRemoteSSH(Magics):
 
             %dfs_rmr .
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         ssh = self.get_connection()
         df = ssh.dfs_rm(line, recursive = True)
@@ -469,7 +469,7 @@ class MagicRemoteSSH(Magics):
 
             %dfs_mkdir afolder
 
-        ..versionadded:: 1.1
+        .. versionadded:: 1.1
         """
         ssh = self.get_connection()
         df = ssh.dfs_mkdir(line)

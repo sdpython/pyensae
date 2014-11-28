@@ -11,19 +11,17 @@ from pyquickhelper import noLOG
 class AzureClient():
     """
 
-    .. index: Azure
-
     A simple class to access and communicate with `Azure <http://azure.microsoft.com/>`_.
     It requires modules:
 
     * `azure <https://github.com/Azure/azure-sdk-for-python>`_
     * `requests <http://docs.python-requests.org/en/latest/>`_
 
+    .. index: blob, Azure
+
     Main functionalities related to blob:
         * list_containers, create_container, list_blobs, put_blob, put_block_blob_from_bytes
         * put_block_blob_from_text, put_page_blob_from_file, get_blob, get_blob
-
-    .. index: blob
 
     @example(Azure___Get the list of containers and files from a blob storage?)
 
@@ -43,6 +41,7 @@ class AzureClient():
 
     @example(Azure___Upload, download, to a blob storage)
     The following example uploads and downloads a file on a Blob Storage.
+
     @code
     from pyensae.remote.azure_connection import AzureClient
     cl = AzureClient("<blob_storage_service>",
@@ -60,6 +59,7 @@ class AzureClient():
                                    "another_local_filename.txt")
 
     @endcode
+
     @endexample
 
     Many function uses WebHCat API.
@@ -68,6 +68,7 @@ class AzureClient():
 
     .. versionchanged::
         PSEUDO, CONTAINER, SCRIPT will be passed to the script as parameters
+
     """
 
     _blob_properties = [
@@ -108,6 +109,7 @@ class AzureClient():
         @param      pseudo          sometimes, the same identification is used to connect to HDInsight,
                                     the pseudo is meant to avoid collisions
         @param      fLOG            logging function
+
         """
         self.account_name       = blob_name
         self.account_key        = blob_key
@@ -199,6 +201,7 @@ class AzureClient():
         .. versionchanged:: 1.1
             Parameter *add_metadata* was added and the function now returns the
             property *last_modified*, parameter *as_df*
+
         """
         res = [ ]
         if container_name is None:
@@ -693,11 +696,12 @@ class AzureClient():
         """
         wait until a job has run or failed
 
-        @params     job_id      job_id
+        @param      job_id      job_id
         @param      delay       check every N seconds
         @return                 status
 
         .. versionadded:: 1.1
+
         """
         status = self.job_status(job_id)
         while status["status"]["state"] in ["PREP", "RUNNING"] :
@@ -710,7 +714,7 @@ class AzureClient():
         """
         returns the standard output and error for a specific job id
 
-        @params     job_id          job_id or status
+        @param      job_id          job_id or status
         @param      blob_service    returns by @see me open_blob_service
         @param      container_name  name of a container
         @parm       folder          folder where to download them
