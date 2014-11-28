@@ -516,8 +516,9 @@ class ASSHClient():
         """
         dest = os.path.split(pig_file)[-1]
         self.upload(pig_file, dest)
-        for py in dependencies:
-            self.upload(py, os.path.split(py)[-1])
+        if dependencies is not None:
+            for py in dependencies:
+                self.upload(py, os.path.split(py)[-1])
 
         slocal = " -x local" if local else ""
         sstop_on_failure = " -stop_on_failure" if stop_on_failure else ""
@@ -526,16 +527,18 @@ class ASSHClient():
         if local or check:
             redirection = None
 
-        if redirection is None:
-            cmd = "pig{0}{1}{2} -execute -f ".format(slocal, sstop_on_failure, scheck) + dest
-        else:
-            cmd = "pig{2}{3}{4} -execute -f {0} 2> {1}.err 1> {1}.out &".format(dest,
-                    redirection, slocal, sstop_on_failure, scheck)
-
         if params is not None:
             sparams = ASSHClient.build_command_line_parameters(params)
             if len(sparams) > 0 :
-                cmd += " " + sparams
+                sparams = " " + sparams
+        else :
+            sparams = ""
+
+        if redirection is None:
+            cmd = "pig{0}{1}{2} -execute -f{3}".format(slocal, sstop_on_failure, scheck, sparams) + dest
+        else:
+            cmd = "pig{2}{3}{4} -execute -f {0}{5} 2> {1}.err 1> {1}.out &".format(dest,
+                    redirection, slocal, sstop_on_failure, scheck, sparams)
 
         if isinstance(cmd, list):
             raise TypeError("this should not happen:" + str(cmd))

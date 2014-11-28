@@ -363,8 +363,7 @@ class MagicAzure(Magics):
         else :
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(line, cl, bs)
-            cl.delete_folder(bs, container, remotepath)
-            return True
+            return cl.delete_folder(bs, container, remotepath)
 
     @line_magic
     def blob_copy(self, line):
@@ -483,6 +482,11 @@ class MagicAzure(Magics):
     def tail_stderr(self, line):
         """
         defines ``%tail_stderr``
+
+        @warning This function gets the status of the job to get the script name.
+                 But the rediction uses the script name and not the job id. As a consequence,
+                 if the same script name is run multiple times, the redirection will contain
+                 the output of two jobs.
         """
         line = line.strip()
         spl = line.strip().split()

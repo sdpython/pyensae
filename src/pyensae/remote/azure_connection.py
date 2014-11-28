@@ -380,7 +380,8 @@ class AzureClient():
         @param      blob_name           blob name (remote file name)
         """
         blob_name = self._interpret_path(blob_name)
-        return blob_service.delete_blob(container_name, blob_name)
+        blob_service.delete_blob(container_name, blob_name)
+        return blob_name
 
     def delete_folder(self, blob_service, container_name, blob_folder):
         """
@@ -396,7 +397,7 @@ class AzureClient():
         df = self.ls(blob_service, container_name, blob_folder)
         rem = [ ]
         for name in df["name"] :
-            r = blob_service.delete_blob(container_name, name)
+            r = self.delete_blob(blob_service, container_name, name)
             rem.append(r)
         return rem
 
