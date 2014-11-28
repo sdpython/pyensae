@@ -5,6 +5,8 @@
 
 import time, socket, os, io
 
+from pyquickhelper import noLOG
+
 class ASSHClient():
     """
     A simple class to access to remote machine through SSH.
@@ -479,7 +481,8 @@ class ASSHClient():
                             local               = False,
                             stop_on_failure     = False,
                             check               = False,
-                            no_exception        = True) :
+                            no_exception        = True,
+                            fLOG                = noLOG) :
         """
         submits a PIG script, it first upload the script
         to the default folder and submit it
@@ -492,6 +495,7 @@ class ASSHClient():
         @param      stop_on_failure if True, add option ``-stop_on_failure`` on the command line
         @param      check           if True, add option ``-check`` (in that case, redirection will be empty)
         @param      no_exception    sent to @see me execute_command
+        @param      fLOG            logging function
         @return                     out, err from @see me execute_command
 
         If *redirection* is not empty, the job is submitted but
@@ -535,7 +539,7 @@ class ASSHClient():
             sparams = ""
 
         if redirection is None:
-            cmd = "pig{0}{1}{2} -execute -f{3}".format(slocal, sstop_on_failure, scheck, sparams) + dest
+            cmd = "pig{0}{1}{2} -execute -f {3}{4}".format(slocal, sstop_on_failure, scheck, dest, sparams)
         else:
             cmd = "pig{2}{3}{4} -execute -f {0}{5} 2> {1}.err 1> {1}.out &".format(dest,
                     redirection, slocal, sstop_on_failure, scheck, sparams)
@@ -543,6 +547,7 @@ class ASSHClient():
         if isinstance(cmd, list):
             raise TypeError("this should not happen:" + str(cmd))
 
+        fLOG("[pig_submit]:", cmd)
         out, err = self.execute_command(cmd, no_exception = no_exception)
         return out, err
 

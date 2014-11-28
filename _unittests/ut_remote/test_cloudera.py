@@ -183,7 +183,8 @@ class TestCloudera (unittest.TestCase):
         # we test the syntax
         out, err = self.client.pig_submit(pigfile, dependencies = [pyfile], check=True,
                                     no_exception = True,
-                                    params=dict(UTT="unittest2"))
+                                    params=dict(UTT="unittest2"),
+                                    fLOG = fLOG)
         if "pystream.pig syntax OK" not in err:
             raise Exception("OUT:\n{0}\nERR:\n{1}".format(out,err))
 
