@@ -100,7 +100,7 @@ class MagicRemoteSSH(Magics):
                 raise FileNotFoundError(filename)
 
             ssh = self.get_connection()
-            out, err = ssh.pig_submit( filename, dependencies = python, redirection = redirection, local = local)
+            out, err = ssh.pig_submit( filename, dependencies = pythons, redirection = redirection, local = local)
 
             if len(err) > 0 and (len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
                 return HTML("<pre>\n%s\n</pre>" % err)
