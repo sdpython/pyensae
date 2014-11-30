@@ -238,3 +238,9 @@ _doc/notebooks/*.db3
 _unittests/ut_resources/facebook*
 README
 *.jar
+
+src/pyensae/file_helper/pigjar/*
+src/pyensae/file_helper/hadoopjar/*
+src/pyensae/file_helper/winutils/*
+
+
