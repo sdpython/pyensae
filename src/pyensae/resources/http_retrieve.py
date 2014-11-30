@@ -129,6 +129,9 @@ def download_data ( name,
             u = open (outfile, "wb")
             u.write ( alls )
             u.close()
+    else:
+        if name.endswith(".tar.gz") and os.stat(outfile).st_size > 2**20 :
+            return [ outfile ]
 
     if name.endswith(".zip"):
         return decompress_zip(outfile, whereTo, fLOG)

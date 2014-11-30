@@ -37,14 +37,30 @@ def download_java_standalone(version = "2.5.3"):
 
     return final
 
+def get_java_path():
+    """
+    returns the java path
+    """
+    if "JAVA_HOME" in os.environ:
+        java = os.environ["JAVA_HOME"]
+    else:
+        if sys.platform.startswith("win"):
+            java = r'C:\Program Files\Java\jre7'
+            if not os.path.exists(java) :
+                raise FileNotFoundError(java)
+        else:
+            java = ""
+    return java
+
 def get_java_cmd():
     """
     return the java path
 
-    @return     java path
+    @return     java cmd
     """
     if sys.platform.startswith("win"):
-        cmd = r'C:\Program Files\Java\jre7\bin\java.exe'
+        java = get_java_path()
+        cmd = os.path.join(java, 'bin', 'java.exe')
         if not os.path.exists(cmd):
             raise FileNotFoundError(cmd)
         return '"{0}"'.format(cmd)
