@@ -4,8 +4,7 @@
 """
 import os, urllib.request, urllib.error, datetime
 import pandas, numpy
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
+
 
 
 class StockPrices:
@@ -439,6 +438,10 @@ class StockPrices:
 
         def price(x): return '%1.2f'%x
 
+        import matplotlib
+        import matplotlib.pyplot as plt
+        import matplotlib.dates as mdates
+
         if existing is not None:
             if not isinstance(existing,list) and not isinstance(existing,tuple):
                 raise Exception("existing must be a list or a tuple")
@@ -505,6 +508,9 @@ class StockPrices:
         else :
             ax.grid(True)
             ax.legend( ex_l + tuple(data.columns))
+
+        # avoid matplotlib to crash later
+        plt.close('all')
         return fig, ax, plt
 
     def to_csv(self, filename, sep = "\t", index=False, **params):

@@ -37,25 +37,30 @@ class TestStockGraph (unittest.TestCase):
                     ]
 
         if True:
+            fLOG("A", sys.executable)
             fig, ax, plt = StockPrices.draw(stocks, figsize=(16,8), field = ["Adj Close", "Close"])
             img = os.path.abspath(os.path.join(os.path.split(__file__)[0],"temp_image.png"))
             if os.path.exists(img): os.remove(img)
             fig.savefig(img)
             assert os.path.exists(img)
 
-        if True and sys.version_info < (3,4) :
+        if True :
+            fLOG("B")
             fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01")
             img = os.path.abspath(os.path.join(os.path.split(__file__)[0],"temp_image2.png"))
             if os.path.exists(img): os .remove(img)
             fig.savefig(img)
             assert os.path.exists(img)
 
-        if True and sys.version_info < (3,4):
+        if True :
+            fLOG("C")
             fig, ax, plt = StockPrices.draw(stocks[:1], begin="2010-01-01")
             img = os.path.abspath(os.path.join(os.path.split(__file__)[0],"temp_image3.png"))
             if os.path.exists(img): os .remove(img)
             fig.savefig(img)
             assert os.path.exists(img)
+
+        fLOG("thisend")
 
 
 if __name__ == "__main__"  :

@@ -61,7 +61,8 @@ class TestDataVelibOffline (unittest.TestCase):
         anime = DataVelibCollect.js_animation(df)
 
         from JSAnimation import HTMLWriter
-        anime.save(os.path.join(fold,"out_animation.html"), writer=HTMLWriter(embed_frames=False))
+        wr = HTMLWriter(embed_frames=False)
+        anime.save(os.path.join(fold,"out_animation.html"), writer=wr)
 
 
 if __name__ == "__main__"  :
