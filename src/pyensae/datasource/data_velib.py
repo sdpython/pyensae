@@ -388,6 +388,7 @@ class DataVelibCollect :
 
         anim = animation.FuncAnimation(fig, animate, frames=len(datas),
                 interval=interval, fargs=(datas, scat1, scat2), blit=True)
+        plt.close('all')
         return anim
 
     @staticmethod
