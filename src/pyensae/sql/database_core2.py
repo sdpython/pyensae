@@ -134,8 +134,10 @@ class DatabaseCore2 :
         if header:
             _aa,_bb,_cc,_dd = f.guess_columns(fields = columns_name)
             if _cc != "\t":
+                f.close()
                 raise Exception("unexpected separator, it should be \\t instead of: " + _cc)
         else:
+            f.close()
             raise NoHeaderException("a header is expected for that function")
 
         lines  = []
