@@ -40,7 +40,7 @@ def download_java_standalone(version = "2.5.3"):
 def get_java_path():
     """
     returns the java path
-    
+
     :raises FileNotFoundError: if java is not found
     """
     if "JAVA_HOME" in os.environ:
