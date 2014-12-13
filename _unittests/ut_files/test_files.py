@@ -22,6 +22,7 @@ except ImportError :
 
 from pyquickhelper import fLOG
 from src.pyensae.file_helper.magic_file import MagicFile
+from src.pyensae import file_tail
 
 
 class TestFiles (unittest.TestCase):
@@ -68,6 +69,10 @@ class TestFiles (unittest.TestCase):
         assert "unittest.main" in res.data
         res = mg.tail("{0} --n 3 -e ascii".format(fp))
         res = mg.tail("{0} --n 3 -e utf8".format(fp))
+        res = file_tail ( fp, threshold = 300, nbline = 3 )
+        fLOG("#####",res)
+        assert "unittest.main" in res[-1]
+
 
 if __name__ == "__main__"  :
     unittest.main ()
