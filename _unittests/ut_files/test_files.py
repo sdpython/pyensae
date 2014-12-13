@@ -58,5 +58,16 @@ class TestFiles (unittest.TestCase):
         res = mg.head("{0} --n 3 -e ascii".format(fp))
         res = mg.head("{0} --n 3 -e utf8".format(fp))
 
+    def test_tail(self) :
+        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        fp = os.path.abspath(__file__)
+        mg = MagicFile()
+        fLOG("--",fp)
+        res = mg.tail("{0} -n 3".format(fp))
+        fLOG("*****",res)
+        assert "unittest.main" in res.data
+        res = mg.tail("{0} --n 3 -e ascii".format(fp))
+        res = mg.tail("{0} --n 3 -e utf8".format(fp))
+
 if __name__ == "__main__"  :
     unittest.main ()

@@ -12,7 +12,7 @@ from IPython.core.display import HTML
 from pyquickhelper.sync.synchelper import explore_folder_iterfile
 from pyquickhelper import MagicCommandParser, run_cmd
 from .format_helper import format_file_size, format_file_mtime
-
+from .content_helper import file_head, file_tail
 
 
 @magics_class
@@ -52,17 +52,39 @@ class MagicFile(Magics):
             args = None
 
         if args is not None:
-            if not os.path.exists(args.f) :
-                raise FileNotFoundError(args.f)
-            if not os.path.isfile(args.f):
-                raise FileNotFoundError("{0} is not a file".format(args.f))
-            rows = [ ]
-            with open(args.f, "r", encoding=args.encoding) as f :
-                for line in f :
-                    rows.append(line)
-                    if len(rows) >= args.n :
-                        break
+            rows = file_head(args.f, args.n, args.encoding)
+            return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
 
+    @staticmethod
+    def tail_parser():
+        """
+        defines the way to parse the magic command ``%tail``
+        """
+        parser = MagicCommandParser(description='display the last lines of a text file')
+        parser.add_argument('f', type=str, help='filename')
+        parser.add_argument('-n', '--n', type=int, default=10, help='number of lines to display')
+        parser.add_argument('-e', '--encoding', default="utf8", help='file encoding')
+        return parser
+    _parser_tail = None
+
+    @line_magic
+    def tail(self, line):
+        """
+        defines ``%tail``
+        which displays the last lines of a file
+        """
+        if MagicFile._parser_tail is None:
+            MagicFile._parser_tail = MagicFile.tail_parser()
+        parser = MagicFile._parser_tail
+
+        try:
+            args = parser.parse_cmd(line)
+        except SystemExit:
+            print( parser.print_help() )
+            args = None
+
+        if args is not None:
+            rows = file_tail(args.f, args.n, args.encoding)
             return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
 
     @staticmethod
