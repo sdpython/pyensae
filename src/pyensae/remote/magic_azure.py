@@ -447,6 +447,22 @@ class MagicAzure(Magics):
             with open(filename, "w", encoding="utf8") as f :
                 f.write(script)
 
+    @cell_magic
+    def HIVE_azure(self, line, cell = None):
+        """
+        defines command ``%%HIVE_azure``
+        """
+        if line in [None, ""] :
+            print("Usage:")
+            print("     %%HIVE_azure <filename>")
+            print("")
+            print("The command store the content of the cell as a local file.")
+        else:
+            filename = line.strip()
+            script   = cell.replace("\r","")
+            with open(filename, "w", encoding="utf8") as f :
+                f.write(script)
+
     @line_magic
     def hd_pig_submit(self, line):
         """
