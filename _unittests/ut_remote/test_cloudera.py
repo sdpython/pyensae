@@ -36,10 +36,14 @@ class TestCloudera (unittest.TestCase):
         if get_codes() is None :
             self.client = None
         else :
-            codes = get_codes() [-3:]
-            cl = ASSHClient(*codes)
-            cl.connect()
-            self.client = cl
+            codes = get_codes()
+            if len(codes) >= 7 or len(codes) == 3:
+                codes = codes[-3:]
+                cl = ASSHClient(*codes)
+                cl.connect()
+                self.client = cl
+            else:
+                self.client = None
 
     def tearDown(self):
         if self.client is not None:

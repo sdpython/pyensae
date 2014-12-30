@@ -22,3 +22,6 @@ def get_codes():
                 f = [ _.strip() for _ in lines ]
                 return [ _ for _ in f if len(_) > 0 ]
     return None
+
+if __name__ == "__main__":
+    print(get_codes())
