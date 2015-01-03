@@ -9,7 +9,7 @@ from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 
-from pyquickhelper.filehelper.synchelper import explore_folder_iterfile
+from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore_folder_iterfile_repo
 from pyquickhelper import MagicCommandParser, run_cmd
 from .format_helper import format_file_size, format_file_mtime
 from .content_helper import file_head, file_tail
@@ -101,7 +101,8 @@ class MagicFile(Magics):
     @line_magic
     def lsr(self, line):
         """
-        define ``%lsr``, the method stops after around 10000 files --> you should precise the filter.
+        define ``%lsr`` which returns the content of a folder,
+        the method stops after around 10000 files --> you should precise the filter.
         """
         if MagicFile._parser_lsr is None:
             MagicFile._parser_lsr = MagicFile.lsr_parser()
@@ -142,7 +143,7 @@ class MagicFile(Magics):
     @cell_magic
     def PYTHON(self, line, cell = None):
         """
-        defines command ``%%PIG``
+        defines command ``%%PYTHON``
         """
         if line in [None, ""] :
             print("Usage:")
@@ -186,6 +187,53 @@ class MagicFile(Magics):
                 else:
                     return HTML ('<pre>\n%s\n</pre>' % out)
 
+    @staticmethod
+    def _lsrepo_parser():
+        """
+        defines the way to parse the magic command ``%lsrepo``
+        """
+        parser = MagicCommandParser(description='display the content of a repository (GIT or SVN)')
+        parser.add_argument('path', type=str, nargs="?", help='path', default=".")
+        return parser
+    _parser_lsrepo = None
+
+    @line_magic
+    def lsrepo(self, line):
+        """
+        define ``%lsrepo``, the method returns 
+        
+        .. versionadded:: 1.1
+        """
+        if MagicFile._parser_lsrepo is None:
+            MagicFile._parser_lsrepo = MagicFile._lsrepo_parser()
+        parser = MagicFile._parser_lsrepo
+
+        try:
+            args = parser.parse_cmd(line)
+        except SystemExit:
+            print( parser.print_help() )
+            args = None
+
+        if args is not None:
+            if args.path is None or len(args.path) == 0 :
+                filename = "."
+            else:
+                filename = args.path
+
+            iter = explore_folder_iterfile_repo(filename)
+            rows = [ ]
+            for r in iter :
+                d = os.path.isfile(r)
+                if d :
+                    st = os.stat(r)
+                    r = {   "name":r,
+                            "size":format_file_size(st.st_size),
+                            "last_modified":format_file_mtime(st.st_mtime),
+                            "directory":False }
+                else:
+                    r = { "name":r, "directory":True }
+                rows.append(r)
+            return pandas.DataFrame(rows)
 
 
 def register_file_magics():

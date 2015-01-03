@@ -73,6 +73,20 @@ class TestFiles (unittest.TestCase):
         fLOG("#####",res)
         assert "unittest.main" in res[-1]
 
+    def test_files_repo(self) :
+        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        path = os.path.abspath(os.path.dirname(__file__))
+        mg = MagicFile()
+        cmd = path
+        fLOG("**",cmd)
+        res = mg.lsrepo(cmd)
+        fLOG(res)
+        if len(res) == 0:
+            raise FileNotFoundError("cmd: " + cmd)
+        res = mg.lsrepo("")
+        fLOG(res)
+        assert len(res) > 0
+
 
 if __name__ == "__main__"  :
     unittest.main ()
