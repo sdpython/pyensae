@@ -9,7 +9,7 @@ from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 
-from pyquickhelper.sync.synchelper import explore_folder_iterfile
+from pyquickhelper.filehelper.synchelper import explore_folder_iterfile
 from pyquickhelper import MagicCommandParser, run_cmd
 from .format_helper import format_file_size, format_file_mtime
 from .content_helper import file_head, file_tail
