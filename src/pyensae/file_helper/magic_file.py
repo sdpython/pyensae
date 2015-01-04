@@ -10,7 +10,7 @@ from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 
 from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore_folder_iterfile_repo
-from pyquickhelper import MagicCommandParser, run_cmd
+from pyquickhelper import MagicCommandParser, run_cmd, zip_files, gzip_files, zip7_files
 from .format_helper import format_file_size, format_file_mtime
 from .content_helper import file_head, file_tail
 
@@ -22,6 +22,17 @@ class MagicFile(Magics):
 
     .. versionadded:: 1.1
     """
+
+    @property
+    def Context(self):
+        """
+        return the context or None
+
+        .. versionadded:: 1.1
+        """
+        if self.shell is None :
+            return None
+        return self.shell.user_ns
 
     @staticmethod
     def head_parser():
@@ -46,7 +57,7 @@ class MagicFile(Magics):
         parser = MagicFile._parser_head
 
         try:
-            args = parser.parse_cmd(line)
+            args = parser.parse_cmd(line, context = self.Context)
         except SystemExit:
             print( parser.print_help() )
             args = None
@@ -78,7 +89,7 @@ class MagicFile(Magics):
         parser = MagicFile._parser_tail
 
         try:
-            args = parser.parse_cmd(line)
+            args = parser.parse_cmd(line, context = self.Context)
         except SystemExit:
             print( parser.print_help() )
             args = None
@@ -109,7 +120,7 @@ class MagicFile(Magics):
         parser = MagicFile._parser_lsr
 
         try:
-            args = parser.parse_cmd(line)
+            args = parser.parse_cmd(line, context = self.Context)
         except SystemExit:
             print( parser.print_help() )
             args = None
@@ -200,8 +211,8 @@ class MagicFile(Magics):
     @line_magic
     def lsrepo(self, line):
         """
-        define ``%lsrepo``, the method returns 
-        
+        define ``%lsrepo``, the method returns the files present in a repository (GIT or SVN)
+
         .. versionadded:: 1.1
         """
         if MagicFile._parser_lsrepo is None:
@@ -209,7 +220,7 @@ class MagicFile(Magics):
         parser = MagicFile._parser_lsrepo
 
         try:
-            args = parser.parse_cmd(line)
+            args = parser.parse_cmd(line, context = self.Context)
         except SystemExit:
             print( parser.print_help() )
             args = None
@@ -235,6 +246,64 @@ class MagicFile(Magics):
                 rows.append(r)
             return pandas.DataFrame(rows)
 
+    def add_context(self, context):
+        """
+        add context to the class
+
+        @param      context     dictionary
+        """
+        if self.shell is None:
+            class EmptyClass:
+                def __init__(self):
+                    self.user_ns={}
+            self.shell = EmptyClass()
+        for k,v in context.items():
+            self.shell.user_ns[k]=v
+
+    @staticmethod
+    def _compress_parser():
+        """
+        defines the way to parse the magic command ``%compress``
+
+        .. versionadded:: 1.1
+        """
+        parser = MagicCommandParser(description='display the content of a repository (GIT or SVN)')
+        parser.add_argument('dest', type=str, help='destination, the extension defines the compression format, zip, gzip 7z')
+        parser.add_argument('files', type=str, nargs="?", help='files to compress or a python list')
+        return parser
+    _parser_compress = None
+
+    @line_magic
+    def compress(self, line):
+        """
+        define ``%compress``, it compress a list of files,
+        it returns the number of compressed files
+
+        .. versionadded:: 1.1
+        """
+        if MagicFile._parser_compress is None:
+            MagicFile._parser_compress = MagicFile._compress_parser()
+        parser = MagicFile._parser_compress
+
+        try:
+            args = parser.parse_cmd(line, context = self.Context)
+        except SystemExit:
+            print( parser.print_help() )
+            args = None
+
+        if args is not None:
+            dest   = args.dest
+            files  = args.files
+            format = os.path.splitext(dest)[-1].strip(".").lower()
+
+            if format == "zip":
+                return zip_files(dest, files)
+            elif format == "gzip":
+                return gzip_files(dest, files)
+            elif format == "7z":
+                return zip7_files(dest, files)
+            else:
+                raise ValueError("unexpected format: " + format)
 
 def register_file_magics():
     """

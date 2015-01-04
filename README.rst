@@ -82,6 +82,7 @@ Versions
     * **add:** method :meth:`download_cluster <pyensae.remote.remote_connection.ASSHClient.download_cluster>`
     * **add:** add magic command to test a streaming script for PIG
     * **add:** function :func:`file_head <pyensae.file_helper.content_helper.file_head>`, :func:`file_tail <pyensae.file_helper.content_helper.file_tail>`,
+    * **add:** add magic command ``%lsrepo``, ``%compress``
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
     * **add:** add magic commands for SQLite3 + a notebook
@@ -95,11 +96,3 @@ Versions
     * **new:** function :func:`parse_code <pyensae.languages.antlr_grammar_use.parse_code>` parses a script in R, PIG, SQLite syntax and checks if there is any mistake, it requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_
     * **new:** new class :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>` to handle some basic needs with Azure
     * **add:** add magic command and methods to handle Azure from a notebook
-* **0.8 - 2014/10/24**
-    * **add:** add method :meth:`copy_to <pyensae.sql.database_main.Database.copy_to>` to copy every table from a database to another one
-    * **fix:** class :class:`Database <pyensae.sql.database_main.Database>` can now handle in memory database
-    * **add:** functions to decompress files, see :mod:`decompress_helper <pyensae.decompress_helper>`
-    * **change:** function `download_data <pyensae.resources.http_retrieve.download_data>` now works with files .zip, .gz, .tar.gz
-    * **new:** add class :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` to communicate with a remote SSH connection 
-      (it uses `paramiko <http://www.paramiko.org/>`_)
-    * **new:** add magic command to use :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` in a notebook (``%remote_open``, ...)

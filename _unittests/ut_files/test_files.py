@@ -20,7 +20,7 @@ except ImportError :
     import src
     import pyquickhelper
 
-from pyquickhelper import fLOG
+from pyquickhelper import fLOG, get_temp_folder
 from src.pyensae.file_helper.magic_file import MagicFile
 from src.pyensae import file_tail
 
@@ -86,6 +86,22 @@ class TestFiles (unittest.TestCase):
         res = mg.lsrepo("")
         fLOG(res)
         assert len(res) > 0
+
+    def test_files_compress(self) :
+        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        this = os.path.abspath(__file__)
+        temp = get_temp_folder(__file__, "temp_compress")
+        dest = os.path.join(temp, "temp_this.zip")
+
+        mg = MagicFile()
+        cmd = "dest [this]"
+        fLOG("**",cmd)
+        assert not os.path.exists(dest)
+        mg.add_context ({"this":this,"dest":dest})
+        res = mg.compress(cmd)
+        fLOG(res)
+        assert os.path.exists(dest)
+        assert res == 1
 
 
 if __name__ == "__main__"  :
