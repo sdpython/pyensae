@@ -83,7 +83,7 @@ Versions
     * **add:** method :meth:`download_cluster <pyensae.remote.remote_connection.ASSHClient.download_cluster>`
     * **add:** add magic command to test a streaming script for PIG
     * **add:** function :func:`file_head <pyensae.file_helper.content_helper.file_head>`, :func:`file_tail <pyensae.file_helper.content_helper.file_tail>`,
-    * **add:** add magic command ``%lsrepo``, ``%compress``
+    * **add:** add magic command ``%lsrepo``, ``%compress``, ``%mpl_style``
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
     * **add:** add magic commands for SQLite3 + a notebook

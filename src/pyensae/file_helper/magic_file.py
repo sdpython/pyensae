@@ -10,29 +10,18 @@ from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 
 from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore_folder_iterfile_repo
-from pyquickhelper import MagicCommandParser, run_cmd, zip_files, gzip_files, zip7_files
+from pyquickhelper import MagicCommandParser, run_cmd, zip_files, gzip_files, zip7_files, MagicClassWithHelpers
 from .format_helper import format_file_size, format_file_mtime
 from .content_helper import file_head, file_tail
 
 
 @magics_class
-class MagicFile(Magics):
+class MagicFile(MagicClassWithHelpers):
     """
     Defines magic commands to list the content of a folder
 
     .. versionadded:: 1.1
     """
-
-    @property
-    def Context(self):
-        """
-        return the context or None
-
-        .. versionadded:: 1.1
-        """
-        if self.shell is None :
-            return None
-        return self.shell.user_ns
 
     @staticmethod
     def head_parser():
@@ -245,20 +234,6 @@ class MagicFile(Magics):
                     r = { "name":r, "directory":True }
                 rows.append(r)
             return pandas.DataFrame(rows)
-
-    def add_context(self, context):
-        """
-        add context to the class
-
-        @param      context     dictionary
-        """
-        if self.shell is None:
-            class EmptyClass:
-                def __init__(self):
-                    self.user_ns={}
-            self.shell = EmptyClass()
-        for k,v in context.items():
-            self.shell.user_ns[k]=v
 
     @staticmethod
     def _compress_parser():

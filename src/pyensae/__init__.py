@@ -53,6 +53,7 @@ try:
             raise e
     from .sql.magic_sql import register_sql_magics
     from .file_helper.magic_file import register_file_magics
+    from .graph_helper.pagic_graph import register_graph_magics
     ip = get_ipython()
     if ip is not None:
         # the program is not run from a notebook
@@ -60,6 +61,7 @@ try:
         if az: register_azure_magics()
         register_sql_magics()
         register_file_magics()
+        register_graph_magics()
 except ImportError:
     # IPython is not installed
     pass
