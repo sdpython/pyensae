@@ -56,6 +56,7 @@ def download_data ( name,
                     loc         = None,
                     whereTo     = ".",
                     website     = "xd",
+                    timeout     = None,
                     fLOG        = print) :
     """
     retrieve a module given its name, a text file or a zip file,
@@ -69,6 +70,7 @@ def download_data ( name,
     @param      loc         (dict|None) if None, it will be replaced ``locals()``
     @param      whereTo     specify a folder where downloaded files will be placed
     @param      website     website to look for
+    @param      timeout     timeout (seconds) when establishing the connection (see `urlopen <https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen>`_)
     @param      fLOG        logging function
     @return                 modules or list of files
 
@@ -121,7 +123,7 @@ def download_data ( name,
             url += file
             fLOG ("    downloading of ", url, " to ", outfile)
             try:
-                u = urllib.request.urlopen (url)
+                u = urllib.request.urlopen (url) if timeout is None else urllib.request.urlopen (url, timeout=timeout)
                 alls = u.read ()
                 u.close ()
             except Exception as e :
