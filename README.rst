@@ -1,8 +1,8 @@
-﻿
+
 .. _l-README:
 
-README
-======
+README / Changes
+================
 
    
 **Links:**
@@ -70,7 +70,7 @@ Contributions
 
 Started in 2013/08.
 
-* First contributor: `Xavier Dupré <http://www.xavierdupre.fr/>`_.
+* First contributor: `Xavier Dupr� <http://www.xavierdupre.fr/>`_.
 * Others contributors: ENSAE's students.
 
 Versions

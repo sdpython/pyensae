@@ -97,6 +97,17 @@ if os.path.exists(readme):
 else:
     long_description = ""
 
+def import_pyquickhelper():
+    try:
+        import pyquickhelper
+    except ImportError:
+        sys.path.append ( os.path.normpath (os.path.abspath(os.path.join("..", "pyquickhelper", "src" ))))
+        try:
+            import pyquickhelper
+        except ImportError as e :
+            raise ImportError("module pyquickhelper is needed to build the documentation ({0})".format(sys.executable)) from e
+    return pyquickhelper
+
 if "--verbose" in sys.argv :
     print ("---------------------------------")
     print ("package_dir =",package_dir)
@@ -106,32 +117,19 @@ if "--verbose" in sys.argv :
     print ("---------------------------------")
 
 if "clean_space" in sys.argv:
-    # clean the extra space in all files
-    try:
-        import pyquickhelper
-    except ImportError:
-        sys.path.append ( os.path.normpath (os.path.abspath(os.path.join("..", "pyquickhelper", "src" ))))
-        try:
-            import pyquickhelper
-        except ImportError as e :
-            raise ImportError("module pyquickhelper is needed to build the documentation") from e
+    pyquickhelper = import_pyquickhelper()
 
     fold = os.path.dirname(__file__)
     fold = os.path.abspath(fold)
     rem  = pyquickhelper.remove_extra_spaces_folder(fold, extensions=[".py","rst",".bat",".sh"])
     print("number of impacted files", len(rem))
 
-elif "build_sphinx" in sys.argv:
-    # we take a shortcut
+elif "clean_pyd" in sys.argv:
+    pyquickhelper = import_pyquickhelper()
+    pyquickhelper.clean_exts()
 
-    try:
-        import pyquickhelper
-    except ImportError:
-        sys.path.append ( os.path.normpath (os.path.abspath(os.path.join("..", "pyquickhelper", "src" ))))
-        try:
-            import pyquickhelper
-        except ImportError as e :
-            raise ImportError("module pyquickhelper is needed to build the documentation") from e
+elif "build_sphinx" in sys.argv:
+    pyquickhelper = import_pyquickhelper()
 
     if "--help" in sys.argv:
         print(pyquickhelper.get_help_usage())
@@ -151,25 +149,12 @@ elif "unittests" in sys.argv:
     if not os.path.exists("_unittests"):
         raise FileNotFoundError("you must get the source from GitHub to run the unittests")
 
-    fold  = os.path.abspath(os.path.dirname(__file__))
-    foldu = os.path.join(fold, "_unittests")
-    docu  = os.path.join(fold, "_doc")
-    dest  = os.path.join(fold, "_doc","sphinxdoc","source", "coverage")
-    if not os.path.exists(dest):
-        os.mkdir(dest)
+    run_unit = os.path.join("_unittests", "run_unittests.py")
+    if not os.path.exists(run_unit):
+        raise FileNotFoundError("the folder should contain run_unittests.py")
 
-    sys.path.append(foldu)
-
-    from coverage import coverage
-    cov = coverage(source = ["src/" + project_var_name])
-    cov.exclude ('if __name__ == "__main__"')
-    cov.start()
-
-    from run_unittests import main
-    main()
-
-    cov.stop()
-    cov.html_report(directory=dest)
+    pyquickhelper = import_pyquickhelper()
+    pyquickhelper.main_wrapper_tests(run_unit, add_coverage=True)
 
 else :
 
