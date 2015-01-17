@@ -22,6 +22,8 @@ except ImportError :
 
 from pyquickhelper import fLOG
 from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
+from src.pyensae.languages.antlr_grammar_build import build_grammar
+import src.pyensae.languages.antlr_grammar_use as source_parser
 
 class TestParseCode (unittest.TestCase):
 
@@ -97,7 +99,21 @@ class TestParseCode (unittest.TestCase):
         fLOG(st.replace("\\n","\n"))
         assert len(st)>0
 
+    def test_build_parser(self):
+        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
 
+        try:
+            clparser,cllexer = get_parser_lexer("SQLite")
+            return
+        except ImportError :
+            pass
+
+        folder = os.path.dirname(source_parser.__file__)
+
+        for lang in ["R", "SQLite", "Pig"]:
+            gr = os.path.join(folder, lang + ".g4")
+            assert os.path.exists(gr)
+            final = build_grammar(lang, fLOG=fLOG)
 
 
 if __name__ == "__main__"  :

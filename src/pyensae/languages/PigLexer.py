@@ -1,6 +1,7 @@
-# Generated from java-escape by ANTLR 4.4
+# Generated from java-escape by ANTLR 4.5
 from antlr4 import *
 from io import StringIO
+
 
 def serializedATN():
     with StringIO() as buf:
@@ -322,13 +323,14 @@ def serializedATN():
         buf.write("\u025c\u025f\u0263\u0270\u0272\u027b\u028a\u0293\u02af")
         buf.write("\u02bb\u02bf\2")
         return buf.getvalue()
-		
+
 
 class PigLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
     decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
+
 
     DEFINE = 1
     LOAD = 2
@@ -421,23 +423,37 @@ class PigLexer(Lexer):
     MINUS = 89
     QMARK = 90
 
+    modeNames = [ u"DEFAULT_MODE" ]
 
-    modeNames = [ "DEFAULT_MODE" ]
+    literalNames = [ u"<INVALID>",
+            "'define'", "'load'", "'filter'", "'foreach'", "'order'", "'arrange'",
+            "'distinct'", "'cogroup'", "'join'", "'cross'", "'union'", "'split'",
+            "'into'", "'if'", "'all'", "'any'", "'as'", "'by'", "'using'",
+            "'inner'", "'outer'", "'ONSCHEMA'", "'*'", "'parallel'", "'partition'",
+            "'group'", "'and'", "'or'", "'not'", "'generate'", "'flatten'",
+            "'eval'", "'asc'", "'desc'", "'int'", "'long'", "'float'", "'double'",
+            "'chararray'", "'bytearray'", "'bag'", "'tuple'", "'map'", "'is'",
+            "'null'", "'stream'", "'through'", "'store'", "'mapreduce'",
+            "'ship'", "'cache'", "'input'", "'output'", "'stderr'", "'stdin'",
+            "'stdout'", "'limit'", "'sample'", "'left'", "'right'", "'full'",
+            "'$'", "':'", "';'", "'('", "')'", "'{'", "'}'", "'['", "']'",
+            "'#'", "'='", "','", "'.'", "'/'", "'%'", "'+'", "'-'", "'?'" ]
 
-    tokenNames = [ "<INVALID>",
-            "'\\u0000'", "'\\u0001'", "'\\u0002'", "'\\u0003'", "'\\u0004'",
-            "'\\u0005'", "'\\u0006'", "'\\u0007'", "'\b'", "'\t'", "'\n'",
-            "'\\u000B'", "'\f'", "'\r'", "'\\u000E'", "'\\u000F'", "'\\u0010'",
-            "'\\u0011'", "'\\u0012'", "'\\u0013'", "'\\u0014'", "'\\u0015'",
-            "'\\u0016'", "'\\u0017'", "'\\u0018'", "'\\u0019'", "'\\u001A'",
-            "'\\u001B'", "'\\u001C'", "'\\u001D'", "'\\u001E'", "'\\u001F'",
-            "' '", "'!'", "'\"'", "'#'", "'$'", "'%'", "'&'", "'''", "'('",
-            "')'", "'*'", "'+'", "','", "'-'", "'.'", "'/'", "'0'", "'1'",
-            "'2'", "'3'", "'4'", "'5'", "'6'", "'7'", "'8'", "'9'", "':'",
-            "';'", "'<'", "'='", "'>'", "'?'", "'@'", "'A'", "'B'", "'C'",
-            "'D'", "'E'", "'F'", "'G'", "'H'", "'I'", "'J'", "'K'", "'L'",
-            "'M'", "'N'", "'O'", "'P'", "'Q'", "'R'", "'S'", "'T'", "'U'",
-            "'V'", "'W'", "'X'", "'Y'", "'Z'" ]
+    symbolicNames = [ u"<INVALID>",
+            "DEFINE", "LOAD", "FILTER", "FOREACH", "ORDER", "ARRANGE", "DISTINCT",
+            "COGROUP", "JOIN", "CROSS", "UNION", "SPLIT", "INTO", "IF",
+            "ALL", "ANY", "AS", "BY", "USING", "INNER", "OUTER", "ONSCHEMA",
+            "STAR", "PARALLEL", "PARTITION", "GROUP", "AND", "OR", "NOT",
+            "GENERATE", "FLATTEN", "EVAL", "ASC", "DESC", "INT", "LONG",
+            "FLOAT", "DOUBLE", "CHARARRAY", "BYTEARRAY", "BAG", "TUPLE",
+            "MAP", "IS", "NULL", "STREAM", "THROUGH", "STORE", "MAPREDUCE",
+            "SHIP", "CACHE", "INPUT", "OUTPUT", "ERROR", "STDIN", "STDOUT",
+            "LIMIT", "SAMPLE", "LEFT", "RIGHT", "FULL", "IDENTIFIER", "INTEGER",
+            "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING",
+            "EXECCOMMAND", "DOLLAR", "WS", "SL_COMMENT", "ML_COMMENT", "FILTEROP",
+            "COLON", "SEMI_COLON", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_CURLYP",
+            "RIGHT_CURLYP", "LEFT_BRACKET", "RIGHT_BRACKET", "POUND", "EQUAL",
+            "COMMA", "PERIOD", "DIV", "PERCENT", "PLUS", "MINUS", "QMARK" ]
 
     ruleNames = [ "DEFINE", "LOAD", "FILTER", "FOREACH", "ORDER", "ARRANGE",
                   "DISTINCT", "COGROUP", "JOIN", "CROSS", "UNION", "SPLIT",
@@ -461,7 +477,7 @@ class PigLexer(Lexer):
 
     def __init__(self, input=None):
         super().__init__(input)
-        self.checkVersion("4.4")
+        self.checkVersion("4.5")
         self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
         self._predicates = None

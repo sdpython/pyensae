@@ -2,8 +2,10 @@
 @file
 @brief Helpers around building language grammar.
 This module requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
+The grammar were compiled for the version 4.5.
 """
 import os, sys
+from pyquickhelper import noLOG
 
 def _is_syntax_is_missing(language):
     """
@@ -28,21 +30,31 @@ def _is_syntax_is_missing(language):
     else:
         raise KeyError("unexpected language: {0}, not in {1}".format(language, ",".join( locations.keys() ) ) )
 
-def build_grammar(g4):
+def build_grammar(g4, version="4.5-rc-2", fLOG=noLOG):
     """
     compile the grammar for a specific file
 
-    @param      g4      grammar format antlr4
-    @return             list of files
+    @param      g4          grammar format antlr4
+    @param      version     version of *antlr4* to use, 4.4, 4.5-rc-2
+    @param      fLOG        logging function
+    @return                 list of files
 
     The compilation must be done with `antlr4 <http://www.antlr.org/>`_.
     It generates a lexer and a parser which can be imported in Python.
     The options for the command line are described at: `antlr4 options <https://theantlrguy.atlassian.net/wiki/display/ANTLR4/Options>`_.
+
+    @example(Build a Antlr4 grammer)
+
+    See `grammars-v4 <https://github.com/antlr/grammars-v4>`_
+
+    @code
+    build_grammar("R.g4")
+    @endcode
+    @endexample
     """
     if not g4.endswith(".g4"):
-        g4 = g4 + ".g4"
-
-    version = "4.4"
+        fold = os.path.abspath(os.path.dirname(__file__))
+        g4 = os.path.join(fold, g4 + ".g4")
 
     url = "http://www.antlr.org/download/antlr-{0}-complete.jar".format(version)
     spl = url.split("/")
@@ -52,31 +64,38 @@ def build_grammar(g4):
     if not os.path.exists(final):
         from ..resources.http_retrieve import download_data
         name = download_data(name, website=domain,whereTo=folder)
-        print(name)
         if not os.path.exists(name):
             raise FileNotFoundError("unable to download: " + url)
+
     path = os.environ.get("CLASSPATH","")
     if name not in path:
-        path = ".;{0}\antlr-{1}-complete.jar;%CLASSPATH%".format(folder,version)
-        os.environ["CLASSPATH"] = path
+        path = ".;{0}\\antlr-{1}-complete.jar".format(folder,version)
     else:
-        path = ".;{0}\antlr-{1}-complete.jar;%CLASSPATH%".format(folder,version)
-        os.environ["CLASSPATH"] = os.environ["CLASSPATH"] + ";" + path
+        path = ".;{0}\\antlr-{1}-complete.jar;{2}".format(folder,version, os.environ["CLASSPATH"])
+
+    os.environ["CLASSPATH"] = path
+    fLOG("CLASSPATH", os.environ["CLASSPATH"])
+
+    # we remove -rc...
+    version = version.split("-")[0]
 
     cmd = "org.antlr.v4.Tool -Dlanguage=Python3 " + g4
     from pyquickhelper import run_cmd
-    out,err= run_cmd("java " + cmd, wait=True)
+    out,err= run_cmd("java " + cmd, wait=True, fLOG=fLOG)
 
-    if len(err)>0:
+    def compiled():
+        lexer = g4.replace(".g4", "Lexer.py")
+        return os.path.exists(lexer)
 
-        javapath = r"C:\Program Files\Java\jre7\bin"
+    if not compiled() or (len(err)>0 and "error" in err):
+
+        javapath = r'C:\Program Files\Java\jre7\bin\java.exe'
         os.environ["PATH"] = os.environ["PATH"] + ";" + javapath
         if sys.platform.startswith("win") and os.path.exists(javapath):
-            cp = os.path.abspath(folder)
-            out,err= run_cmd("java " + cmd, wait=True)
-            if len(err)>0:
-                raise Exception("unable to compile: " + final + "\nERR:\n" + err + "\nCMD:\njava " + cmd + "\nYou should do it manually.")
+            out,err= run_cmd('"' + javapath + '" ' + cmd, wait=True, fLOG=fLOG)
+            if not compiled() or (len(err)>0 and "error" in err):
+                raise Exception("unable to compile: " + final + "\nCLASSPATH:\n" +  os.environ["CLASSPATH"] +"\nERR:\n" + err + "\nCMD:\njava " + cmd + "\nYou should do it manually.")
         else:
-            raise Exception("unable to compile: " + final + "\nERR:\n" + err + "\nCMD:\njava " + cmd)
+            raise Exception("unable to compile: " + final + "\nCLASSPATH:\n" +  os.environ["CLASSPATH"] +"\nERR:\n" + err + "\nCMD:\njava " + cmd)
 
-    return out
+    return out + "\nERR:\n" + err

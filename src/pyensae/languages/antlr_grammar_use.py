@@ -13,20 +13,29 @@ def get_parser_lexer(language):
     @param      language    to analyse
     @return                 Parser, Lexer
     """
-    if language == "R":
-        from .RLexer import RLexer
-        from .RParser import RParser
-        return RParser, RLexer
-    elif language == "SQLite":
-        from .SQLiteLexer import SQLiteLexer
-        from .SQLiteParser import SQLiteParser
-        return SQLiteParser, SQLiteLexer
-    elif language == "Pig":
-        from .PigLexer import PigLexer
-        from .PigParser import PigParser
-        return PigParser, PigLexer
-    else:
-        raise ImportError("unable to import parsers for language: " + language)
+    try:
+        if language == "R":
+            from .RLexer import RLexer
+            from .RParser import RParser
+            return RParser, RLexer
+        elif language == "SQLite":
+            from .SQLiteLexer import SQLiteLexer
+            from .SQLiteParser import SQLiteParser
+            return SQLiteParser, SQLiteLexer
+        elif language == "Pig":
+            from .PigLexer import PigLexer
+            from .PigParser import PigParser
+            return PigParser, PigLexer
+        else:
+            folder = os.path.dirname(__file__)
+            if folder == "" : folder = "."
+            files = os.listdir(folder)
+            raise ImportError("unable to import parsers for language: " + language  +"\navailable files:\n{0}".format( "\n".join(files)))
+    except ImportError as e:
+        folder = os.path.dirname(__file__)
+        if folder == "" : folder = "."
+        files = os.listdir(folder)
+        raise ImportError("unable to import parsers for language: " + language  +"\navailable files:\n{0}".format( "\n".join(files))) from e
 
 def parse_code(code, class_parser, class_lexer):
     """

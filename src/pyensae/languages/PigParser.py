@@ -1,4 +1,5 @@
-# Generated from java-escape by ANTLR 4.4
+# Generated from java-escape by ANTLR 4.5
+# encoding: utf-8
 from antlr4 import *
 from io import StringIO
 package = globals().get("__package__", None)
@@ -249,7 +250,7 @@ def serializedATN():
         buf.write("\u0185\u0187\u019a\u01a4\u01b1\u01bb\u01be\u01c6\u01c8")
         buf.write("\u01d3\u01dd\u01e0\u01e8\u01ea\u01f2\u01f5\u01fd\u01ff")
         return buf.getvalue()
-		
+
 
 class PigParser ( Parser ):
 
@@ -260,6 +261,112 @@ class PigParser ( Parser ):
     decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
 
     sharedContextCache = PredictionContextCache()
+
+    literalNames = [ u"<INVALID>", u"'define'", u"'load'", u"'filter'",
+                     u"'foreach'", u"'order'", u"'arrange'", u"'distinct'",
+                     u"'cogroup'", u"'join'", u"'cross'", u"'union'", u"'split'",
+                     u"'into'", u"'if'", u"'all'", u"'any'", u"'as'", u"'by'",
+                     u"'using'", u"'inner'", u"'outer'", u"'ONSCHEMA'",
+                     u"'*'", u"'parallel'", u"'partition'", u"'group'",
+                     u"'and'", u"'or'", u"'not'", u"'generate'", u"'flatten'",
+                     u"'eval'", u"'asc'", u"'desc'", u"'int'", u"'long'",
+                     u"'float'", u"'double'", u"'chararray'", u"'bytearray'",
+                     u"'bag'", u"'tuple'", u"'map'", u"'is'", u"'null'",
+                     u"'stream'", u"'through'", u"'store'", u"'mapreduce'",
+                     u"'ship'", u"'cache'", u"'input'", u"'output'", u"'stderr'",
+                     u"'stdin'", u"'stdout'", u"'limit'", u"'sample'", u"'left'",
+                     u"'right'", u"'full'", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"'$'", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"':'", u"';'", u"'('", u"')'", u"'{'",
+                     u"'}'", u"'['", u"']'", u"'#'", u"'='", u"','", u"'.'",
+                     u"'/'", u"'%'", u"'+'", u"'-'", u"'?'" ]
+
+    symbolicNames = [ u"<INVALID>", u"DEFINE", u"LOAD", u"FILTER", u"FOREACH",
+                      u"ORDER", u"ARRANGE", u"DISTINCT", u"COGROUP", u"JOIN",
+                      u"CROSS", u"UNION", u"SPLIT", u"INTO", u"IF", u"ALL",
+                      u"ANY", u"AS", u"BY", u"USING", u"INNER", u"OUTER",
+                      u"ONSCHEMA", u"STAR", u"PARALLEL", u"PARTITION", u"GROUP",
+                      u"AND", u"OR", u"NOT", u"GENERATE", u"FLATTEN", u"EVAL",
+                      u"ASC", u"DESC", u"INT", u"LONG", u"FLOAT", u"DOUBLE",
+                      u"CHARARRAY", u"BYTEARRAY", u"BAG", u"TUPLE", u"MAP",
+                      u"IS", u"NULL", u"STREAM", u"THROUGH", u"STORE", u"MAPREDUCE",
+                      u"SHIP", u"CACHE", u"INPUT", u"OUTPUT", u"ERROR",
+                      u"STDIN", u"STDOUT", u"LIMIT", u"SAMPLE", u"LEFT",
+                      u"RIGHT", u"FULL", u"IDENTIFIER", u"INTEGER", u"LONGINTEGER",
+                      u"DOUBLENUMBER", u"FLOATNUMBER", u"QUOTEDSTRING",
+                      u"EXECCOMMAND", u"DOLLAR", u"WS", u"SL_COMMENT", u"ML_COMMENT",
+                      u"FILTEROP", u"COLON", u"SEMI_COLON", u"LEFT_PAREN",
+                      u"RIGHT_PAREN", u"LEFT_CURLYP", u"RIGHT_CURLYP", u"LEFT_BRACKET",
+                      u"RIGHT_BRACKET", u"POUND", u"EQUAL", u"COMMA", u"PERIOD",
+                      u"DIV", u"PERCENT", u"PLUS", u"MINUS", u"QMARK", u"FUNC",
+                      u"START", u"CAST_EXPR", u"BIN_EXPR", u"LONGINEGER",
+                      u"MAP_VAL", u"KEY_VAL_PAIR", u"LEFT_CURLY", u"RIGHT_CURLY",
+                      u"BAG_VAL" ]
+
+    RULE_parse = 0
+    RULE_query = 1
+    RULE_statement = 2
+    RULE_alias = 3
+    RULE_op_clause = 4
+    RULE_load_clause = 5
+    RULE_filename = 6
+    RULE_as_clause = 7
+    RULE_tuple_def = 8
+    RULE_field = 9
+    RULE_type = 10
+    RULE_simple_type = 11
+    RULE_tuple_type = 12
+    RULE_bag_type = 13
+    RULE_map_type = 14
+    RULE_func_clause = 15
+    RULE_func_name = 16
+    RULE_func_args = 17
+    RULE_store_clause = 18
+    RULE_filter_clause = 19
+    RULE_cond = 20
+    RULE_or_cond = 21
+    RULE_and_cond = 22
+    RULE_unary_cond = 23
+    RULE_not_cond = 24
+    RULE_null_check_cond = 25
+    RULE_expr = 26
+    RULE_add_expr = 27
+    RULE_multi_expr = 28
+    RULE_cast_expr = 29
+    RULE_unary_expr = 30
+    RULE_eval_expr = 31
+    RULE_var_expr = 32
+    RULE_projectable_expr = 33
+    RULE_dot_proj = 34
+    RULE_pound_proj = 35
+    RULE_bin_expr = 36
+    RULE_neg_expr = 37
+    RULE_distinct_clause = 38
+    RULE_col_ref = 39
+    RULE_alias_col_ref = 40
+    RULE_dollar_col_ref = 41
+    RULE_infix_expr = 42
+    RULE_const_expr = 43
+    RULE_scalar = 44
+    RULE_map = 45
+    RULE_keyvalue = 46
+    RULE_string_val = 47
+    RULE_bag = 48
+    RULE_tuple = 49
+
+    ruleNames =  [ "parse", "query", "statement", "alias", "op_clause",
+                   "load_clause", "filename", "as_clause", "tuple_def",
+                   "field", "type", "simple_type", "tuple_type", "bag_type",
+                   "map_type", "func_clause", "func_name", "func_args",
+                   "store_clause", "filter_clause", "cond", "or_cond", "and_cond",
+                   "unary_cond", "not_cond", "null_check_cond", "expr",
+                   "add_expr", "multi_expr", "cast_expr", "unary_expr",
+                   "eval_expr", "var_expr", "projectable_expr", "dot_proj",
+                   "pound_proj", "bin_expr", "neg_expr", "distinct_clause",
+                   "col_ref", "alias_col_ref", "dollar_col_ref", "infix_expr",
+                   "const_expr", "scalar", "map", "keyvalue", "string_val",
+                   "bag", "tuple" ]
 
     EOF = Token.EOF
     DEFINE=1
@@ -363,93 +470,9 @@ class PigParser ( Parser ):
     RIGHT_CURLY=99
     BAG_VAL=100
 
-    tokenNames = [ "<INVALID>", "'define'", "'load'", "'filter'", "'foreach'",
-                   "'order'", "'arrange'", "'distinct'", "'cogroup'", "'join'",
-                   "'cross'", "'union'", "'split'", "'into'", "'if'", "'all'",
-                   "'any'", "'as'", "'by'", "'using'", "'inner'", "'outer'",
-                   "'ONSCHEMA'", "'*'", "'parallel'", "'partition'", "'group'",
-                   "'and'", "'or'", "'not'", "'generate'", "'flatten'",
-                   "'eval'", "'asc'", "'desc'", "'int'", "'long'", "'float'",
-                   "'double'", "'chararray'", "'bytearray'", "'bag'", "'tuple'",
-                   "'map'", "'is'", "'null'", "'stream'", "'through'", "'store'",
-                   "'mapreduce'", "'ship'", "'cache'", "'input'", "'output'",
-                   "'stderr'", "'stdin'", "'stdout'", "'limit'", "'sample'",
-                   "'left'", "'right'", "'full'", "IDENTIFIER", "INTEGER",
-                   "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING",
-                   "EXECCOMMAND", "'$'", "WS", "SL_COMMENT", "ML_COMMENT",
-                   "FILTEROP", "':'", "';'", "'('", "')'", "'{'", "'}'",
-                   "'['", "']'", "'#'", "'='", "','", "'.'", "'/'", "'%'",
-                   "'+'", "'-'", "'?'", "FUNC", "START", "CAST_EXPR", "BIN_EXPR",
-                   "LONGINEGER", "MAP_VAL", "KEY_VAL_PAIR", "LEFT_CURLY",
-                   "RIGHT_CURLY", "BAG_VAL" ]
-
-    RULE_parse = 0
-    RULE_query = 1
-    RULE_statement = 2
-    RULE_alias = 3
-    RULE_op_clause = 4
-    RULE_load_clause = 5
-    RULE_filename = 6
-    RULE_as_clause = 7
-    RULE_tuple_def = 8
-    RULE_field = 9
-    RULE_type = 10
-    RULE_simple_type = 11
-    RULE_tuple_type = 12
-    RULE_bag_type = 13
-    RULE_map_type = 14
-    RULE_func_clause = 15
-    RULE_func_name = 16
-    RULE_func_args = 17
-    RULE_store_clause = 18
-    RULE_filter_clause = 19
-    RULE_cond = 20
-    RULE_or_cond = 21
-    RULE_and_cond = 22
-    RULE_unary_cond = 23
-    RULE_not_cond = 24
-    RULE_null_check_cond = 25
-    RULE_expr = 26
-    RULE_add_expr = 27
-    RULE_multi_expr = 28
-    RULE_cast_expr = 29
-    RULE_unary_expr = 30
-    RULE_eval_expr = 31
-    RULE_var_expr = 32
-    RULE_projectable_expr = 33
-    RULE_dot_proj = 34
-    RULE_pound_proj = 35
-    RULE_bin_expr = 36
-    RULE_neg_expr = 37
-    RULE_distinct_clause = 38
-    RULE_col_ref = 39
-    RULE_alias_col_ref = 40
-    RULE_dollar_col_ref = 41
-    RULE_infix_expr = 42
-    RULE_const_expr = 43
-    RULE_scalar = 44
-    RULE_map = 45
-    RULE_keyvalue = 46
-    RULE_string_val = 47
-    RULE_bag = 48
-    RULE_tuple = 49
-
-    ruleNames =  [ "parse", "query", "statement", "alias", "op_clause",
-                   "load_clause", "filename", "as_clause", "tuple_def",
-                   "field", "type", "simple_type", "tuple_type", "bag_type",
-                   "map_type", "func_clause", "func_name", "func_args",
-                   "store_clause", "filter_clause", "cond", "or_cond", "and_cond",
-                   "unary_cond", "not_cond", "null_check_cond", "expr",
-                   "add_expr", "multi_expr", "cast_expr", "unary_expr",
-                   "eval_expr", "var_expr", "projectable_expr", "dot_proj",
-                   "pound_proj", "bin_expr", "neg_expr", "distinct_clause",
-                   "col_ref", "alias_col_ref", "dollar_col_ref", "infix_expr",
-                   "const_expr", "scalar", "map", "keyvalue", "string_val",
-                   "bag", "tuple" ]
-
     def __init__(self, input:TokenStream):
         super().__init__(input)
-        self.checkVersion("4.4")
+        self.checkVersion("4.5")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -461,12 +484,12 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def EOF(self):
-            return self.getToken(PigParser.EOF, 0)
-
         def query(self):
             return self.getTypedRuleContext(PigParser.QueryContext,0)
 
+
+        def EOF(self):
+            return self.getToken(PigParser.EOF, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_parse
@@ -491,7 +514,7 @@ class PigParser ( Parser ):
             self.state = 100
             self.query(0)
             self.state = 101
-            self.match(self.EOF)
+            self.match(PigParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -506,18 +529,18 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
-
-        def query(self):
-            return self.getTypedRuleContext(PigParser.QueryContext,0)
-
-
         def statement(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.StatementContext)
             else:
                 return self.getTypedRuleContext(PigParser.StatementContext,i)
+
+
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
+
+        def query(self):
+            return self.getTypedRuleContext(PigParser.QueryContext,0)
 
 
         def getRuleIndex(self):
@@ -560,7 +583,7 @@ class PigParser ( Parser ):
 
             elif la_ == 2:
                 self.state = 110
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
                 self.state = 111
                 self.statement()
                 pass
@@ -579,6 +602,7 @@ class PigParser ( Parser ):
                     self.pushNewRecursionContext(localctx, _startState, self.RULE_query)
                     self.state = 114
                     if not self.precpred(self._ctx, 1):
+                        from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
                     self.state = 115
                     self.statement()
@@ -600,25 +624,25 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def statement(self):
-            return self.getTypedRuleContext(PigParser.StatementContext,0)
+        def op_clause(self):
+            return self.getTypedRuleContext(PigParser.Op_clauseContext,0)
 
 
         def SEMI_COLON(self):
             return self.getToken(PigParser.SEMI_COLON, 0)
 
-        def op_clause(self):
-            return self.getTypedRuleContext(PigParser.Op_clauseContext,0)
+        def alias(self):
+            return self.getTypedRuleContext(PigParser.AliasContext,0)
 
-
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
 
         def EQUAL(self):
             return self.getToken(PigParser.EQUAL, 0)
 
-        def alias(self):
-            return self.getTypedRuleContext(PigParser.AliasContext,0)
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
+
+        def statement(self):
+            return self.getTypedRuleContext(PigParser.StatementContext,0)
 
 
         def getRuleIndex(self):
@@ -643,7 +667,7 @@ class PigParser ( Parser ):
         try:
             self.state = 136
             token = self._input.LA(1)
-            if token in [self.LOAD, self.FILTER, self.DISTINCT, self.STORE, self.IDENTIFIER]:
+            if token in [PigParser.LOAD, PigParser.FILTER, PigParser.DISTINCT, PigParser.STORE, PigParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 124
                 _la = self._input.LA(1)
@@ -651,18 +675,18 @@ class PigParser ( Parser ):
                     self.state = 121
                     self.alias()
                     self.state = 122
-                    self.match(self.EQUAL)
+                    self.match(PigParser.EQUAL)
 
 
                 self.state = 126
                 self.op_clause()
                 self.state = 127
-                self.match(self.SEMI_COLON)
+                self.match(PigParser.SEMI_COLON)
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 129
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 130
                 self.statement()
@@ -717,7 +741,7 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 138
-            self.match(self.IDENTIFIER)
+            self.match(PigParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -740,12 +764,12 @@ class PigParser ( Parser ):
             return self.getTypedRuleContext(PigParser.Store_clauseContext,0)
 
 
-        def distinct_clause(self):
-            return self.getTypedRuleContext(PigParser.Distinct_clauseContext,0)
-
-
         def filter_clause(self):
             return self.getTypedRuleContext(PigParser.Filter_clauseContext,0)
+
+
+        def distinct_clause(self):
+            return self.getTypedRuleContext(PigParser.Distinct_clauseContext,0)
 
 
         def getRuleIndex(self):
@@ -769,22 +793,22 @@ class PigParser ( Parser ):
         try:
             self.state = 144
             token = self._input.LA(1)
-            if token in [self.LOAD]:
+            if token in [PigParser.LOAD]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 140
                 self.load_clause()
 
-            elif token in [self.STORE]:
+            elif token in [PigParser.STORE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 141
                 self.store_clause()
 
-            elif token in [self.FILTER]:
+            elif token in [PigParser.FILTER]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 142
                 self.filter_clause()
 
-            elif token in [self.DISTINCT]:
+            elif token in [PigParser.DISTINCT]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 143
                 self.distinct_clause()
@@ -806,6 +830,13 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def LOAD(self):
+            return self.getToken(PigParser.LOAD, 0)
+
+        def filename(self):
+            return self.getTypedRuleContext(PigParser.FilenameContext,0)
+
+
         def USING(self):
             return self.getToken(PigParser.USING, 0)
 
@@ -813,15 +844,8 @@ class PigParser ( Parser ):
             return self.getTypedRuleContext(PigParser.Func_clauseContext,0)
 
 
-        def LOAD(self):
-            return self.getToken(PigParser.LOAD, 0)
-
         def as_clause(self):
             return self.getTypedRuleContext(PigParser.As_clauseContext,0)
-
-
-        def filename(self):
-            return self.getTypedRuleContext(PigParser.FilenameContext,0)
 
 
         def getRuleIndex(self):
@@ -845,14 +869,14 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 146
-            self.match(self.LOAD)
+            self.match(PigParser.LOAD)
             self.state = 147
             self.filename()
             self.state = 150
             la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
             if la_ == 1:
                 self.state = 148
-                self.match(self.USING)
+                self.match(PigParser.USING)
                 self.state = 149
                 self.func_clause()
 
@@ -902,7 +926,7 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 155
-            self.match(self.QUOTEDSTRING)
+            self.match(PigParser.QUOTEDSTRING)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -945,7 +969,7 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 157
-            self.match(self.AS)
+            self.match(PigParser.AS)
             self.state = 158
             self.tuple_def()
         except RecognitionException as re:
@@ -962,9 +986,8 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def tuple_def(self):
-            return self.getTypedRuleContext(PigParser.Tuple_defContext,0)
-
+        def LEFT_PAREN(self):
+            return self.getToken(PigParser.LEFT_PAREN, 0)
 
         def field(self, i:int=None):
             if i is None:
@@ -973,20 +996,21 @@ class PigParser ( Parser ):
                 return self.getTypedRuleContext(PigParser.FieldContext,i)
 
 
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
-
         def RIGHT_PAREN(self):
             return self.getToken(PigParser.RIGHT_PAREN, 0)
-
-        def LEFT_PAREN(self):
-            return self.getToken(PigParser.LEFT_PAREN, 0)
 
         def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:
                 return self.getToken(PigParser.COMMA, i)
+
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
+
+        def tuple_def(self):
+            return self.getTypedRuleContext(PigParser.Tuple_defContext,0)
+
 
         def getRuleIndex(self):
             return PigParser.RULE_tuple_def
@@ -1010,10 +1034,10 @@ class PigParser ( Parser ):
         try:
             self.state = 178
             token = self._input.LA(1)
-            if token in [self.LEFT_PAREN]:
+            if token in [PigParser.LEFT_PAREN]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 160
-                self.match(self.LEFT_PAREN)
+                self.match(PigParser.LEFT_PAREN)
                 self.state = 161
                 self.field()
                 self.state = 166
@@ -1021,7 +1045,7 @@ class PigParser ( Parser ):
                 _la = self._input.LA(1)
                 while _la==PigParser.COMMA:
                     self.state = 162
-                    self.match(self.COMMA)
+                    self.match(PigParser.COMMA)
                     self.state = 163
                     self.field()
                     self.state = 168
@@ -1029,12 +1053,12 @@ class PigParser ( Parser ):
                     _la = self._input.LA(1)
 
                 self.state = 169
-                self.match(self.RIGHT_PAREN)
+                self.match(PigParser.RIGHT_PAREN)
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 171
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 172
                 self.tuple_def()
@@ -1073,19 +1097,19 @@ class PigParser ( Parser ):
         def IDENTIFIER(self):
             return self.getToken(PigParser.IDENTIFIER, 0)
 
+        def COLON(self):
+            return self.getToken(PigParser.COLON, 0)
+
+        def type(self):
+            return self.getTypedRuleContext(PigParser.TypeContext,0)
+
+
         def NOT(self):
             return self.getToken(PigParser.NOT, 0)
 
         def field(self):
             return self.getTypedRuleContext(PigParser.FieldContext,0)
 
-
-        def type(self):
-            return self.getTypedRuleContext(PigParser.TypeContext,0)
-
-
-        def COLON(self):
-            return self.getToken(PigParser.COLON, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_field
@@ -1108,29 +1132,29 @@ class PigParser ( Parser ):
         try:
             self.state = 191
             token = self._input.LA(1)
-            if token in [self.IDENTIFIER]:
+            if token in [PigParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 180
-                self.match(self.IDENTIFIER)
+                self.match(PigParser.IDENTIFIER)
                 self.state = 183
                 la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
                 if la_ == 1:
                     self.state = 181
-                    self.match(self.COLON)
+                    self.match(PigParser.COLON)
                     self.state = 182
                     self.type()
 
 
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 185
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 186
                 self.field()
                 self.state = 187
-                self.match(self.IDENTIFIER)
+                self.match(PigParser.IDENTIFIER)
                 self.state = 189
                 la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
                 if la_ == 1:
@@ -1156,20 +1180,20 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def tuple_type(self):
-            return self.getTypedRuleContext(PigParser.Tuple_typeContext,0)
-
-
-        def map_type(self):
-            return self.getTypedRuleContext(PigParser.Map_typeContext,0)
-
-
         def simple_type(self):
             return self.getTypedRuleContext(PigParser.Simple_typeContext,0)
 
 
+        def tuple_type(self):
+            return self.getTypedRuleContext(PigParser.Tuple_typeContext,0)
+
+
         def bag_type(self):
             return self.getTypedRuleContext(PigParser.Bag_typeContext,0)
+
+
+        def map_type(self):
+            return self.getTypedRuleContext(PigParser.Map_typeContext,0)
 
 
         def getRuleIndex(self):
@@ -1193,22 +1217,22 @@ class PigParser ( Parser ):
         try:
             self.state = 197
             token = self._input.LA(1)
-            if token in [self.INT, self.LONG, self.FLOAT, self.DOUBLE, self.CHARARRAY, self.BYTEARRAY]:
+            if token in [PigParser.INT, PigParser.LONG, PigParser.FLOAT, PigParser.DOUBLE, PigParser.CHARARRAY, PigParser.BYTEARRAY]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 193
                 self.simple_type()
 
-            elif token in [self.NOT, self.LEFT_PAREN]:
+            elif token in [PigParser.NOT, PigParser.LEFT_PAREN]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 194
                 self.tuple_type()
 
-            elif token in [self.BAG]:
+            elif token in [PigParser.BAG]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 195
                 self.bag_type()
 
-            elif token in [self.MAP]:
+            elif token in [PigParser.MAP]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 196
                 self.map_type()
@@ -1230,23 +1254,23 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def BYTEARRAY(self):
-            return self.getToken(PigParser.BYTEARRAY, 0)
-
-        def FLOAT(self):
-            return self.getToken(PigParser.FLOAT, 0)
-
         def INT(self):
             return self.getToken(PigParser.INT, 0)
 
         def LONG(self):
             return self.getToken(PigParser.LONG, 0)
 
+        def FLOAT(self):
+            return self.getToken(PigParser.FLOAT, 0)
+
         def DOUBLE(self):
             return self.getToken(PigParser.DOUBLE, 0)
 
         def CHARARRAY(self):
             return self.getToken(PigParser.CHARARRAY, 0)
+
+        def BYTEARRAY(self):
+            return self.getToken(PigParser.BYTEARRAY, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_simple_type
@@ -1271,7 +1295,7 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 199
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.INT) | (1 << self.LONG) | (1 << self.FLOAT) | (1 << self.DOUBLE) | (1 << self.CHARARRAY) | (1 << self.BYTEARRAY))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PigParser.INT) | (1 << PigParser.LONG) | (1 << PigParser.FLOAT) | (1 << PigParser.DOUBLE) | (1 << PigParser.CHARARRAY) | (1 << PigParser.BYTEARRAY))) != 0)):
                 self._errHandler.recoverInline(self)
             self.consume()
         except RecognitionException as re:
@@ -1362,7 +1386,7 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 204
-            self.match(self.BAG)
+            self.match(PigParser.BAG)
             self.state = 205
             self.tuple_def()
         except RecognitionException as re:
@@ -1409,11 +1433,11 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 207
-            self.match(self.MAP)
+            self.match(PigParser.MAP)
             self.state = 208
-            self.match(self.LEFT_BRACKET)
+            self.match(PigParser.LEFT_BRACKET)
             self.state = 209
-            self.match(self.RIGHT_BRACKET)
+            self.match(PigParser.RIGHT_BRACKET)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1432,11 +1456,8 @@ class PigParser ( Parser ):
             return self.getTypedRuleContext(PigParser.Func_nameContext,0)
 
 
-        def FUNC(self):
-            return self.getToken(PigParser.FUNC, 0)
-
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
+        def LEFT_PAREN(self):
+            return self.getToken(PigParser.LEFT_PAREN, 0)
 
         def RIGHT_PAREN(self):
             return self.getToken(PigParser.RIGHT_PAREN, 0)
@@ -1445,8 +1466,11 @@ class PigParser ( Parser ):
             return self.getTypedRuleContext(PigParser.Func_argsContext,0)
 
 
-        def LEFT_PAREN(self):
-            return self.getToken(PigParser.LEFT_PAREN, 0)
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
+
+        def FUNC(self):
+            return self.getToken(PigParser.FUNC, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_func_clause
@@ -1470,12 +1494,12 @@ class PigParser ( Parser ):
         try:
             self.state = 224
             token = self._input.LA(1)
-            if token in [self.IDENTIFIER]:
+            if token in [PigParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 211
                 self.func_name()
                 self.state = 212
-                self.match(self.LEFT_PAREN)
+                self.match(PigParser.LEFT_PAREN)
                 self.state = 214
                 _la = self._input.LA(1)
                 if _la==PigParser.QUOTEDSTRING:
@@ -1484,15 +1508,15 @@ class PigParser ( Parser ):
 
 
                 self.state = 216
-                self.match(self.RIGHT_PAREN)
+                self.match(PigParser.RIGHT_PAREN)
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 218
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 219
-                self.match(self.FUNC)
+                self.match(PigParser.FUNC)
                 self.state = 220
                 self.func_name()
                 self.state = 222
@@ -1556,16 +1580,16 @@ class PigParser ( Parser ):
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 226
-                self.match(self.IDENTIFIER)
+                self.match(PigParser.IDENTIFIER)
                 self.state = 231
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt==1:
                         self.state = 227
-                        self.match(self.PERIOD)
+                        self.match(PigParser.PERIOD)
                         self.state = 228
-                        self.match(self.IDENTIFIER)
+                        self.match(PigParser.IDENTIFIER)
                     self.state = 233
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,19,self._ctx)
@@ -1580,7 +1604,7 @@ class PigParser ( Parser ):
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
                         self.state = 234
-                        self.match(self.IDENTIFIER)
+                        self.match(PigParser.IDENTIFIER)
 
                     else:
                         raise NoViableAltException(self)
@@ -1641,16 +1665,16 @@ class PigParser ( Parser ):
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 241
-                self.match(self.QUOTEDSTRING)
+                self.match(PigParser.QUOTEDSTRING)
                 self.state = 246
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,22,self._ctx)
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt==1:
                         self.state = 242
-                        self.match(self.COMMA)
+                        self.match(PigParser.COMMA)
                         self.state = 243
-                        self.match(self.QUOTEDSTRING)
+                        self.match(PigParser.QUOTEDSTRING)
                     self.state = 248
                     self._errHandler.sync(self)
                     _alt = self._interp.adaptivePredict(self._input,22,self._ctx)
@@ -1665,7 +1689,7 @@ class PigParser ( Parser ):
                 while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
                         self.state = 249
-                        self.match(self.QUOTEDSTRING)
+                        self.match(PigParser.QUOTEDSTRING)
 
                     else:
                         raise NoViableAltException(self)
@@ -1690,25 +1714,25 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def STORE(self):
+            return self.getToken(PigParser.STORE, 0)
+
+        def alias(self):
+            return self.getTypedRuleContext(PigParser.AliasContext,0)
+
+
         def INTO(self):
             return self.getToken(PigParser.INTO, 0)
+
+        def filename(self):
+            return self.getTypedRuleContext(PigParser.FilenameContext,0)
+
 
         def USING(self):
             return self.getToken(PigParser.USING, 0)
 
         def func_clause(self):
             return self.getTypedRuleContext(PigParser.Func_clauseContext,0)
-
-
-        def filename(self):
-            return self.getTypedRuleContext(PigParser.FilenameContext,0)
-
-
-        def STORE(self):
-            return self.getToken(PigParser.STORE, 0)
-
-        def alias(self):
-            return self.getTypedRuleContext(PigParser.AliasContext,0)
 
 
         def getRuleIndex(self):
@@ -1732,18 +1756,18 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 256
-            self.match(self.STORE)
+            self.match(PigParser.STORE)
             self.state = 257
             self.alias()
             self.state = 258
-            self.match(self.INTO)
+            self.match(PigParser.INTO)
             self.state = 259
             self.filename()
             self.state = 262
             la_ = self._interp.adaptivePredict(self._input,25,self._ctx)
             if la_ == 1:
                 self.state = 260
-                self.match(self.USING)
+                self.match(PigParser.USING)
                 self.state = 261
                 self.func_clause()
 
@@ -1762,18 +1786,18 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def BY(self):
-            return self.getToken(PigParser.BY, 0)
-
         def FILTER(self):
             return self.getToken(PigParser.FILTER, 0)
 
-        def cond(self):
-            return self.getTypedRuleContext(PigParser.CondContext,0)
-
-
         def alias(self):
             return self.getTypedRuleContext(PigParser.AliasContext,0)
+
+
+        def BY(self):
+            return self.getToken(PigParser.BY, 0)
+
+        def cond(self):
+            return self.getTypedRuleContext(PigParser.CondContext,0)
 
 
         def getRuleIndex(self):
@@ -1797,11 +1821,11 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 264
-            self.match(self.FILTER)
+            self.match(PigParser.FILTER)
             self.state = 265
             self.alias()
             self.state = 266
-            self.match(self.BY)
+            self.match(PigParser.BY)
             self.state = 267
             self.cond()
         except RecognitionException as re:
@@ -1858,18 +1882,18 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def OR(self, i:int=None):
-            if i is None:
-                return self.getTokens(PigParser.OR)
-            else:
-                return self.getToken(PigParser.OR, i)
-
         def and_cond(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.And_condContext)
             else:
                 return self.getTypedRuleContext(PigParser.And_condContext,i)
 
+
+        def OR(self, i:int=None):
+            if i is None:
+                return self.getTokens(PigParser.OR)
+            else:
+                return self.getToken(PigParser.OR, i)
 
         def getRuleIndex(self):
             return PigParser.RULE_or_cond
@@ -1899,7 +1923,7 @@ class PigParser ( Parser ):
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     self.state = 272
-                    self.match(self.OR)
+                    self.match(PigParser.OR)
                     self.state = 273
                     self.and_cond()
                 self.state = 278
@@ -1961,7 +1985,7 @@ class PigParser ( Parser ):
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     self.state = 280
-                    self.match(self.AND)
+                    self.match(PigParser.AND)
                     self.state = 281
                     self.unary_cond()
                 self.state = 286
@@ -1982,6 +2006,16 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def LEFT_PAREN(self):
+            return self.getToken(PigParser.LEFT_PAREN, 0)
+
+        def cond(self):
+            return self.getTypedRuleContext(PigParser.CondContext,0)
+
+
+        def RIGHT_PAREN(self):
+            return self.getToken(PigParser.RIGHT_PAREN, 0)
+
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.ExprContext)
@@ -1989,29 +2023,19 @@ class PigParser ( Parser ):
                 return self.getTypedRuleContext(PigParser.ExprContext,i)
 
 
-        def not_cond(self):
-            return self.getTypedRuleContext(PigParser.Not_condContext,0)
-
+        def FILTEROP(self):
+            return self.getToken(PigParser.FILTEROP, 0)
 
         def func_clause(self):
             return self.getTypedRuleContext(PigParser.Func_clauseContext,0)
 
 
-        def RIGHT_PAREN(self):
-            return self.getToken(PigParser.RIGHT_PAREN, 0)
-
-        def cond(self):
-            return self.getTypedRuleContext(PigParser.CondContext,0)
-
-
-        def LEFT_PAREN(self):
-            return self.getToken(PigParser.LEFT_PAREN, 0)
-
-        def FILTEROP(self):
-            return self.getToken(PigParser.FILTEROP, 0)
-
         def null_check_cond(self):
             return self.getTypedRuleContext(PigParser.Null_check_condContext,0)
+
+
+        def not_cond(self):
+            return self.getTypedRuleContext(PigParser.Not_condContext,0)
 
 
         def getRuleIndex(self):
@@ -2038,11 +2062,11 @@ class PigParser ( Parser ):
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 287
-                self.match(self.LEFT_PAREN)
+                self.match(PigParser.LEFT_PAREN)
                 self.state = 288
                 self.cond()
                 self.state = 289
-                self.match(self.RIGHT_PAREN)
+                self.match(PigParser.RIGHT_PAREN)
                 pass
 
             elif la_ == 2:
@@ -2050,7 +2074,7 @@ class PigParser ( Parser ):
                 self.state = 291
                 self.expr()
                 self.state = 292
-                self.match(self.FILTEROP)
+                self.match(PigParser.FILTEROP)
                 self.state = 293
                 self.expr()
                 pass
@@ -2088,12 +2112,12 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
+
         def unary_cond(self):
             return self.getTypedRuleContext(PigParser.Unary_condContext,0)
 
-
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_not_cond
@@ -2116,7 +2140,7 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 300
-            self.match(self.NOT)
+            self.match(PigParser.NOT)
             self.state = 301
             self.unary_cond()
         except RecognitionException as re:
@@ -2137,14 +2161,14 @@ class PigParser ( Parser ):
             return self.getTypedRuleContext(PigParser.ExprContext,0)
 
 
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
-
         def IS(self):
             return self.getToken(PigParser.IS, 0)
 
         def NULL(self):
             return self.getToken(PigParser.NULL, 0)
+
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_null_check_cond
@@ -2170,16 +2194,16 @@ class PigParser ( Parser ):
             self.state = 303
             self.expr()
             self.state = 304
-            self.match(self.IS)
+            self.match(PigParser.IS)
             self.state = 306
             _la = self._input.LA(1)
             if _la==PigParser.NOT:
                 self.state = 305
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
 
             self.state = 308
-            self.match(self.NULL)
+            self.match(PigParser.NULL)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -2234,12 +2258,6 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def MINUS(self, i:int=None):
-            if i is None:
-                return self.getTokens(PigParser.MINUS)
-            else:
-                return self.getToken(PigParser.MINUS, i)
-
         def multi_expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Multi_exprContext)
@@ -2252,6 +2270,12 @@ class PigParser ( Parser ):
                 return self.getTokens(PigParser.PLUS)
             else:
                 return self.getToken(PigParser.PLUS, i)
+
+        def MINUS(self, i:int=None):
+            if i is None:
+                return self.getTokens(PigParser.MINUS)
+            else:
+                return self.getToken(PigParser.MINUS, i)
 
         def getRuleIndex(self):
             return PigParser.RULE_add_expr
@@ -2313,11 +2337,11 @@ class PigParser ( Parser ):
                 return self.getTypedRuleContext(PigParser.Cast_exprContext,i)
 
 
-        def PERCENT(self, i:int=None):
+        def START(self, i:int=None):
             if i is None:
-                return self.getTokens(PigParser.PERCENT)
+                return self.getTokens(PigParser.START)
             else:
-                return self.getToken(PigParser.PERCENT, i)
+                return self.getToken(PigParser.START, i)
 
         def DIV(self, i:int=None):
             if i is None:
@@ -2325,11 +2349,11 @@ class PigParser ( Parser ):
             else:
                 return self.getToken(PigParser.DIV, i)
 
-        def START(self, i:int=None):
+        def PERCENT(self, i:int=None):
             if i is None:
-                return self.getTokens(PigParser.START)
+                return self.getTokens(PigParser.PERCENT)
             else:
-                return self.getToken(PigParser.START, i)
+                return self.getToken(PigParser.PERCENT, i)
 
         def getRuleIndex(self):
             return PigParser.RULE_multi_expr
@@ -2361,7 +2385,7 @@ class PigParser ( Parser ):
                 if _alt==1:
                     self.state = 321
                     _la = self._input.LA(1)
-                    if not(((((_la - 86)) & ~0x3f) == 0 and ((1 << (_la - 86)) & ((1 << (self.DIV - 86)) | (1 << (self.PERCENT - 86)) | (1 << (self.START - 86)))) != 0)):
+                    if not(((((_la - 86)) & ~0x3f) == 0 and ((1 << (_la - 86)) & ((1 << (PigParser.DIV - 86)) | (1 << (PigParser.PERCENT - 86)) | (1 << (PigParser.START - 86)))) != 0)):
                         self._errHandler.recoverInline(self)
                     self.consume()
                     self.state = 322
@@ -2384,11 +2408,12 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def CAST_EXPR(self):
-            return self.getToken(PigParser.CAST_EXPR, 0)
+        def unary_expr(self):
+            return self.getTypedRuleContext(PigParser.Unary_exprContext,0)
 
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
+
+        def LEFT_PAREN(self):
+            return self.getToken(PigParser.LEFT_PAREN, 0)
 
         def type(self):
             return self.getTypedRuleContext(PigParser.TypeContext,0)
@@ -2397,12 +2422,11 @@ class PigParser ( Parser ):
         def RIGHT_PAREN(self):
             return self.getToken(PigParser.RIGHT_PAREN, 0)
 
-        def unary_expr(self):
-            return self.getTypedRuleContext(PigParser.Unary_exprContext,0)
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
 
-
-        def LEFT_PAREN(self):
-            return self.getToken(PigParser.LEFT_PAREN, 0)
+        def CAST_EXPR(self):
+            return self.getToken(PigParser.CAST_EXPR, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_cast_expr
@@ -2428,11 +2452,11 @@ class PigParser ( Parser ):
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 328
-                self.match(self.LEFT_PAREN)
+                self.match(PigParser.LEFT_PAREN)
                 self.state = 329
                 self.type()
                 self.state = 330
-                self.match(self.RIGHT_PAREN)
+                self.match(PigParser.RIGHT_PAREN)
                 self.state = 332
                 self.unary_expr()
                 pass
@@ -2440,10 +2464,10 @@ class PigParser ( Parser ):
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 334
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 335
-                self.match(self.CAST_EXPR)
+                self.match(PigParser.CAST_EXPR)
                 self.state = 336
                 self.type()
                 self.state = 337
@@ -2471,19 +2495,19 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def infix_expr(self):
-            return self.getTypedRuleContext(PigParser.Infix_exprContext,0)
-
-
         def eval_expr(self):
             return self.getTypedRuleContext(PigParser.Eval_exprContext,0)
 
 
-        def RIGHT_PAREN(self):
-            return self.getToken(PigParser.RIGHT_PAREN, 0)
-
         def LEFT_PAREN(self):
             return self.getToken(PigParser.LEFT_PAREN, 0)
+
+        def infix_expr(self):
+            return self.getTypedRuleContext(PigParser.Infix_exprContext,0)
+
+
+        def RIGHT_PAREN(self):
+            return self.getToken(PigParser.RIGHT_PAREN, 0)
 
         def neg_expr(self):
             return self.getTypedRuleContext(PigParser.Neg_exprContext,0)
@@ -2519,11 +2543,11 @@ class PigParser ( Parser ):
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 343
-                self.match(self.LEFT_PAREN)
+                self.match(PigParser.LEFT_PAREN)
                 self.state = 344
                 self.infix_expr()
                 self.state = 345
-                self.match(self.RIGHT_PAREN)
+                self.match(PigParser.RIGHT_PAREN)
                 pass
 
             elif la_ == 3:
@@ -2607,18 +2631,18 @@ class PigParser ( Parser ):
             return self.getTypedRuleContext(PigParser.Projectable_exprContext,0)
 
 
-        def pound_proj(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(PigParser.Pound_projContext)
-            else:
-                return self.getTypedRuleContext(PigParser.Pound_projContext,i)
-
-
         def dot_proj(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Dot_projContext)
             else:
                 return self.getTypedRuleContext(PigParser.Dot_projContext,i)
+
+
+        def pound_proj(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(PigParser.Pound_projContext)
+            else:
+                return self.getTypedRuleContext(PigParser.Pound_projContext,i)
 
 
         def getRuleIndex(self):
@@ -2650,11 +2674,11 @@ class PigParser ( Parser ):
                 if _alt==1:
                     self.state = 357
                     token = self._input.LA(1)
-                    if token in [self.NOT, self.PERIOD]:
+                    if token in [PigParser.NOT, PigParser.PERIOD]:
                         self.state = 355
                         self.dot_proj()
 
-                    elif token in [self.POUND]:
+                    elif token in [PigParser.POUND]:
                         self.state = 356
                         self.pound_proj()
 
@@ -2679,12 +2703,12 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def col_ref(self):
-            return self.getTypedRuleContext(PigParser.Col_refContext,0)
-
-
         def func_clause(self):
             return self.getTypedRuleContext(PigParser.Func_clauseContext,0)
+
+
+        def col_ref(self):
+            return self.getTypedRuleContext(PigParser.Col_refContext,0)
 
 
         def bin_expr(self):
@@ -2745,8 +2769,8 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
+        def PERIOD(self):
+            return self.getToken(PigParser.PERIOD, 0)
 
         def col_ref(self, i:int=None):
             if i is None:
@@ -2755,11 +2779,11 @@ class PigParser ( Parser ):
                 return self.getTypedRuleContext(PigParser.Col_refContext,i)
 
 
-        def RIGHT_PAREN(self):
-            return self.getToken(PigParser.RIGHT_PAREN, 0)
-
         def LEFT_PAREN(self):
             return self.getToken(PigParser.LEFT_PAREN, 0)
+
+        def RIGHT_PAREN(self):
+            return self.getToken(PigParser.RIGHT_PAREN, 0)
 
         def COMMA(self, i:int=None):
             if i is None:
@@ -2767,8 +2791,8 @@ class PigParser ( Parser ):
             else:
                 return self.getToken(PigParser.COMMA, i)
 
-        def PERIOD(self):
-            return self.getToken(PigParser.PERIOD, 0)
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_dot_proj
@@ -2792,19 +2816,19 @@ class PigParser ( Parser ):
         try:
             self.state = 389
             token = self._input.LA(1)
-            if token in [self.PERIOD]:
+            if token in [PigParser.PERIOD]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 367
-                self.match(self.PERIOD)
+                self.match(PigParser.PERIOD)
                 self.state = 380
                 token = self._input.LA(1)
-                if token in [self.GROUP, self.IDENTIFIER, self.DOLLAR]:
+                if token in [PigParser.GROUP, PigParser.IDENTIFIER, PigParser.DOLLAR]:
                     self.state = 368
                     self.col_ref()
 
-                elif token in [self.LEFT_PAREN]:
+                elif token in [PigParser.LEFT_PAREN]:
                     self.state = 369
-                    self.match(self.LEFT_PAREN)
+                    self.match(PigParser.LEFT_PAREN)
                     self.state = 370
                     self.col_ref()
                     self.state = 375
@@ -2812,7 +2836,7 @@ class PigParser ( Parser ):
                     _la = self._input.LA(1)
                     while _la==PigParser.COMMA:
                         self.state = 371
-                        self.match(self.COMMA)
+                        self.match(PigParser.COMMA)
                         self.state = 372
                         self.col_ref()
                         self.state = 377
@@ -2820,19 +2844,19 @@ class PigParser ( Parser ):
                         _la = self._input.LA(1)
 
                     self.state = 378
-                    self.match(self.RIGHT_PAREN)
+                    self.match(PigParser.RIGHT_PAREN)
 
                 else:
                     raise NoViableAltException(self)
 
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 382
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 383
-                self.match(self.PERIOD)
+                self.match(PigParser.PERIOD)
                 self.state = 385
                 self._errHandler.sync(self)
                 _alt = 1
@@ -2865,11 +2889,11 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def QUOTEDSTRING(self):
-            return self.getToken(PigParser.QUOTEDSTRING, 0)
-
         def POUND(self):
             return self.getToken(PigParser.POUND, 0)
+
+        def QUOTEDSTRING(self):
+            return self.getToken(PigParser.QUOTEDSTRING, 0)
 
         def NULL(self):
             return self.getToken(PigParser.NULL, 0)
@@ -2896,7 +2920,7 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 391
-            self.match(self.POUND)
+            self.match(PigParser.POUND)
             self.state = 392
             _la = self._input.LA(1)
             if not(_la==PigParser.NULL or _la==PigParser.QUOTEDSTRING):
@@ -2916,8 +2940,15 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def BIN_EXPR(self):
-            return self.getToken(PigParser.BIN_EXPR, 0)
+        def LEFT_PAREN(self):
+            return self.getToken(PigParser.LEFT_PAREN, 0)
+
+        def cond(self):
+            return self.getTypedRuleContext(PigParser.CondContext,0)
+
+
+        def QMARK(self):
+            return self.getToken(PigParser.QMARK, 0)
 
         def infix_expr(self, i:int=None):
             if i is None:
@@ -2926,24 +2957,17 @@ class PigParser ( Parser ):
                 return self.getTypedRuleContext(PigParser.Infix_exprContext,i)
 
 
-        def QMARK(self):
-            return self.getToken(PigParser.QMARK, 0)
-
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
+        def COLON(self):
+            return self.getToken(PigParser.COLON, 0)
 
         def RIGHT_PAREN(self):
             return self.getToken(PigParser.RIGHT_PAREN, 0)
 
-        def cond(self):
-            return self.getTypedRuleContext(PigParser.CondContext,0)
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
 
-
-        def LEFT_PAREN(self):
-            return self.getToken(PigParser.LEFT_PAREN, 0)
-
-        def COLON(self):
-            return self.getToken(PigParser.COLON, 0)
+        def BIN_EXPR(self):
+            return self.getToken(PigParser.BIN_EXPR, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_bin_expr
@@ -2966,30 +2990,30 @@ class PigParser ( Parser ):
         try:
             self.state = 408
             token = self._input.LA(1)
-            if token in [self.LEFT_PAREN]:
+            if token in [PigParser.LEFT_PAREN]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 394
-                self.match(self.LEFT_PAREN)
+                self.match(PigParser.LEFT_PAREN)
                 self.state = 395
                 self.cond()
                 self.state = 396
-                self.match(self.QMARK)
+                self.match(PigParser.QMARK)
                 self.state = 397
                 self.infix_expr()
                 self.state = 398
-                self.match(self.COLON)
+                self.match(PigParser.COLON)
                 self.state = 399
                 self.infix_expr()
                 self.state = 400
-                self.match(self.RIGHT_PAREN)
+                self.match(PigParser.RIGHT_PAREN)
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 402
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 403
-                self.match(self.BIN_EXPR)
+                self.match(PigParser.BIN_EXPR)
                 self.state = 404
                 self.cond()
                 self.state = 405
@@ -3042,7 +3066,7 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 410
-            self.match(self.MINUS)
+            self.match(PigParser.MINUS)
             self.state = 411
             self.cast_expr()
         except RecognitionException as re:
@@ -3087,7 +3111,7 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 413
-            self.match(self.DISTINCT)
+            self.match(PigParser.DISTINCT)
             self.state = 414
             self.alias()
         except RecognitionException as re:
@@ -3104,12 +3128,12 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def dollar_col_ref(self):
-            return self.getTypedRuleContext(PigParser.Dollar_col_refContext,0)
-
-
         def alias_col_ref(self):
             return self.getTypedRuleContext(PigParser.Alias_col_refContext,0)
+
+
+        def dollar_col_ref(self):
+            return self.getTypedRuleContext(PigParser.Dollar_col_refContext,0)
 
 
         def getRuleIndex(self):
@@ -3133,12 +3157,12 @@ class PigParser ( Parser ):
         try:
             self.state = 418
             token = self._input.LA(1)
-            if token in [self.GROUP, self.IDENTIFIER]:
+            if token in [PigParser.GROUP, PigParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 416
                 self.alias_col_ref()
 
-            elif token in [self.DOLLAR]:
+            elif token in [PigParser.DOLLAR]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 417
                 self.dollar_col_ref()
@@ -3160,11 +3184,11 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def IDENTIFIER(self):
-            return self.getToken(PigParser.IDENTIFIER, 0)
-
         def GROUP(self):
             return self.getToken(PigParser.GROUP, 0)
+
+        def IDENTIFIER(self):
+            return self.getToken(PigParser.IDENTIFIER, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_alias_col_ref
@@ -3233,9 +3257,9 @@ class PigParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 422
-            self.match(self.DOLLAR)
+            self.match(PigParser.DOLLAR)
             self.state = 423
-            self.match(self.INTEGER)
+            self.match(PigParser.INTEGER)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -3290,20 +3314,20 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def tuple(self):
-            return self.getTypedRuleContext(PigParser.TupleContext,0)
-
-
-        def bag(self):
-            return self.getTypedRuleContext(PigParser.BagContext,0)
+        def scalar(self):
+            return self.getTypedRuleContext(PigParser.ScalarContext,0)
 
 
         def map(self):
             return self.getTypedRuleContext(PigParser.MapContext,0)
 
 
-        def scalar(self):
-            return self.getTypedRuleContext(PigParser.ScalarContext,0)
+        def bag(self):
+            return self.getTypedRuleContext(PigParser.BagContext,0)
+
+
+        def tuple(self):
+            return self.getTypedRuleContext(PigParser.TupleContext,0)
 
 
         def getRuleIndex(self):
@@ -3366,8 +3390,8 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def QUOTEDSTRING(self):
-            return self.getToken(PigParser.QUOTEDSTRING, 0)
+        def INTEGER(self):
+            return self.getToken(PigParser.INTEGER, 0)
 
         def LONGINEGER(self):
             return self.getToken(PigParser.LONGINEGER, 0)
@@ -3378,11 +3402,11 @@ class PigParser ( Parser ):
         def DOUBLENUMBER(self):
             return self.getToken(PigParser.DOUBLENUMBER, 0)
 
+        def QUOTEDSTRING(self):
+            return self.getToken(PigParser.QUOTEDSTRING, 0)
+
         def NULL(self):
             return self.getToken(PigParser.NULL, 0)
-
-        def INTEGER(self):
-            return self.getToken(PigParser.INTEGER, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_scalar
@@ -3407,7 +3431,7 @@ class PigParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 433
             _la = self._input.LA(1)
-            if not(((((_la - 45)) & ~0x3f) == 0 and ((1 << (_la - 45)) & ((1 << (self.NULL - 45)) | (1 << (self.INTEGER - 45)) | (1 << (self.DOUBLENUMBER - 45)) | (1 << (self.FLOATNUMBER - 45)) | (1 << (self.QUOTEDSTRING - 45)) | (1 << (self.LONGINEGER - 45)))) != 0)):
+            if not(((((_la - 45)) & ~0x3f) == 0 and ((1 << (_la - 45)) & ((1 << (PigParser.NULL - 45)) | (1 << (PigParser.INTEGER - 45)) | (1 << (PigParser.DOUBLENUMBER - 45)) | (1 << (PigParser.FLOATNUMBER - 45)) | (1 << (PigParser.QUOTEDSTRING - 45)) | (1 << (PigParser.LONGINEGER - 45)))) != 0)):
                 self._errHandler.recoverInline(self)
             self.consume()
         except RecognitionException as re:
@@ -3424,6 +3448,12 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def LEFT_BRACKET(self):
+            return self.getToken(PigParser.LEFT_BRACKET, 0)
+
+        def RIGHT_BRACKET(self):
+            return self.getToken(PigParser.RIGHT_BRACKET, 0)
+
         def keyvalue(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.KeyvalueContext)
@@ -3431,23 +3461,17 @@ class PigParser ( Parser ):
                 return self.getTypedRuleContext(PigParser.KeyvalueContext,i)
 
 
-        def MAP_VAL(self):
-            return self.getToken(PigParser.MAP_VAL, 0)
-
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
-
-        def LEFT_BRACKET(self):
-            return self.getToken(PigParser.LEFT_BRACKET, 0)
-
         def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:
                 return self.getToken(PigParser.COMMA, i)
 
-        def RIGHT_BRACKET(self):
-            return self.getToken(PigParser.RIGHT_BRACKET, 0)
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
+
+        def MAP_VAL(self):
+            return self.getToken(PigParser.MAP_VAL, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_map
@@ -3471,13 +3495,13 @@ class PigParser ( Parser ):
         try:
             self.state = 454
             token = self._input.LA(1)
-            if token in [self.LEFT_BRACKET]:
+            if token in [PigParser.LEFT_BRACKET]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 435
-                self.match(self.LEFT_BRACKET)
+                self.match(PigParser.LEFT_BRACKET)
                 self.state = 444
                 _la = self._input.LA(1)
-                if ((((_la - 29)) & ~0x3f) == 0 and ((1 << (_la - 29)) & ((1 << (self.NOT - 29)) | (1 << (self.NULL - 29)) | (1 << (self.QUOTEDSTRING - 29)))) != 0):
+                if ((((_la - 29)) & ~0x3f) == 0 and ((1 << (_la - 29)) & ((1 << (PigParser.NOT - 29)) | (1 << (PigParser.NULL - 29)) | (1 << (PigParser.QUOTEDSTRING - 29)))) != 0):
                     self.state = 436
                     self.keyvalue()
                     self.state = 441
@@ -3485,7 +3509,7 @@ class PigParser ( Parser ):
                     _la = self._input.LA(1)
                     while _la==PigParser.COMMA:
                         self.state = 437
-                        self.match(self.COMMA)
+                        self.match(PigParser.COMMA)
                         self.state = 438
                         self.keyvalue()
                         self.state = 443
@@ -3495,15 +3519,15 @@ class PigParser ( Parser ):
 
 
                 self.state = 446
-                self.match(self.RIGHT_BRACKET)
+                self.match(PigParser.RIGHT_BRACKET)
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 447
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 448
-                self.match(self.MAP_VAL)
+                self.match(PigParser.MAP_VAL)
                 self.state = 450
                 self._errHandler.sync(self)
                 _alt = 1
@@ -3536,22 +3560,22 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def const_expr(self):
-            return self.getTypedRuleContext(PigParser.Const_exprContext,0)
+        def string_val(self):
+            return self.getTypedRuleContext(PigParser.String_valContext,0)
 
-
-        def KEY_VAL_PAIR(self):
-            return self.getToken(PigParser.KEY_VAL_PAIR, 0)
-
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
 
         def POUND(self):
             return self.getToken(PigParser.POUND, 0)
 
-        def string_val(self):
-            return self.getTypedRuleContext(PigParser.String_valContext,0)
+        def const_expr(self):
+            return self.getTypedRuleContext(PigParser.Const_exprContext,0)
 
+
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
+
+        def KEY_VAL_PAIR(self):
+            return self.getToken(PigParser.KEY_VAL_PAIR, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_keyvalue
@@ -3574,22 +3598,22 @@ class PigParser ( Parser ):
         try:
             self.state = 465
             token = self._input.LA(1)
-            if token in [self.NULL, self.QUOTEDSTRING]:
+            if token in [PigParser.NULL, PigParser.QUOTEDSTRING]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 456
                 self.string_val()
                 self.state = 457
-                self.match(self.POUND)
+                self.match(PigParser.POUND)
                 self.state = 458
                 self.const_expr()
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 460
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 461
-                self.match(self.KEY_VAL_PAIR)
+                self.match(PigParser.KEY_VAL_PAIR)
                 self.state = 462
                 self.string_val()
                 self.state = 463
@@ -3658,11 +3682,11 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def BAG_VAL(self):
-            return self.getToken(PigParser.BAG_VAL, 0)
+        def LEFT_CURLY(self):
+            return self.getToken(PigParser.LEFT_CURLY, 0)
 
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
+        def RIGHT_CURLY(self):
+            return self.getToken(PigParser.RIGHT_CURLY, 0)
 
         def tuple(self, i:int=None):
             if i is None:
@@ -3671,17 +3695,17 @@ class PigParser ( Parser ):
                 return self.getTypedRuleContext(PigParser.TupleContext,i)
 
 
-        def LEFT_CURLY(self):
-            return self.getToken(PigParser.LEFT_CURLY, 0)
-
-        def RIGHT_CURLY(self):
-            return self.getToken(PigParser.RIGHT_CURLY, 0)
-
         def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:
                 return self.getToken(PigParser.COMMA, i)
+
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
+
+        def BAG_VAL(self):
+            return self.getToken(PigParser.BAG_VAL, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_bag
@@ -3705,10 +3729,10 @@ class PigParser ( Parser ):
         try:
             self.state = 488
             token = self._input.LA(1)
-            if token in [self.LEFT_CURLY]:
+            if token in [PigParser.LEFT_CURLY]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 469
-                self.match(self.LEFT_CURLY)
+                self.match(PigParser.LEFT_CURLY)
                 self.state = 478
                 _la = self._input.LA(1)
                 if _la==PigParser.NOT or _la==PigParser.LEFT_PAREN:
@@ -3719,7 +3743,7 @@ class PigParser ( Parser ):
                     _la = self._input.LA(1)
                     while _la==PigParser.COMMA:
                         self.state = 471
-                        self.match(self.COMMA)
+                        self.match(PigParser.COMMA)
                         self.state = 472
                         self.tuple()
                         self.state = 477
@@ -3729,15 +3753,15 @@ class PigParser ( Parser ):
 
 
                 self.state = 480
-                self.match(self.RIGHT_CURLY)
+                self.match(PigParser.RIGHT_CURLY)
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 481
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 482
-                self.match(self.BAG_VAL)
+                self.match(PigParser.BAG_VAL)
                 self.state = 484
                 self._errHandler.sync(self)
                 _alt = 1
@@ -3770,9 +3794,11 @@ class PigParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def tuple(self):
-            return self.getTypedRuleContext(PigParser.TupleContext,0)
+        def LEFT_PAREN(self):
+            return self.getToken(PigParser.LEFT_PAREN, 0)
 
+        def RIGHT_PAREN(self):
+            return self.getToken(PigParser.RIGHT_PAREN, 0)
 
         def const_expr(self, i:int=None):
             if i is None:
@@ -3781,20 +3807,18 @@ class PigParser ( Parser ):
                 return self.getTypedRuleContext(PigParser.Const_exprContext,i)
 
 
-        def NOT(self):
-            return self.getToken(PigParser.NOT, 0)
-
-        def RIGHT_PAREN(self):
-            return self.getToken(PigParser.RIGHT_PAREN, 0)
-
-        def LEFT_PAREN(self):
-            return self.getToken(PigParser.LEFT_PAREN, 0)
-
         def COMMA(self, i:int=None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:
                 return self.getToken(PigParser.COMMA, i)
+
+        def NOT(self):
+            return self.getToken(PigParser.NOT, 0)
+
+        def tuple(self):
+            return self.getTypedRuleContext(PigParser.TupleContext,0)
+
 
         def getRuleIndex(self):
             return PigParser.RULE_tuple
@@ -3818,13 +3842,13 @@ class PigParser ( Parser ):
         try:
             self.state = 509
             token = self._input.LA(1)
-            if token in [self.LEFT_PAREN]:
+            if token in [PigParser.LEFT_PAREN]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 490
-                self.match(self.LEFT_PAREN)
+                self.match(PigParser.LEFT_PAREN)
                 self.state = 499
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << self.NOT) | (1 << self.NULL) | (1 << self.INTEGER))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (self.DOUBLENUMBER - 65)) | (1 << (self.FLOATNUMBER - 65)) | (1 << (self.QUOTEDSTRING - 65)) | (1 << (self.LEFT_PAREN - 65)) | (1 << (self.LEFT_BRACKET - 65)) | (1 << (self.LONGINEGER - 65)) | (1 << (self.LEFT_CURLY - 65)))) != 0):
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PigParser.NOT) | (1 << PigParser.NULL) | (1 << PigParser.INTEGER))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (PigParser.DOUBLENUMBER - 65)) | (1 << (PigParser.FLOATNUMBER - 65)) | (1 << (PigParser.QUOTEDSTRING - 65)) | (1 << (PigParser.LEFT_PAREN - 65)) | (1 << (PigParser.LEFT_BRACKET - 65)) | (1 << (PigParser.LONGINEGER - 65)) | (1 << (PigParser.LEFT_CURLY - 65)))) != 0):
                     self.state = 491
                     self.const_expr()
                     self.state = 496
@@ -3832,7 +3856,7 @@ class PigParser ( Parser ):
                     _la = self._input.LA(1)
                     while _la==PigParser.COMMA:
                         self.state = 492
-                        self.match(self.COMMA)
+                        self.match(PigParser.COMMA)
                         self.state = 493
                         self.const_expr()
                         self.state = 498
@@ -3842,12 +3866,12 @@ class PigParser ( Parser ):
 
 
                 self.state = 501
-                self.match(self.RIGHT_PAREN)
+                self.match(PigParser.RIGHT_PAREN)
 
-            elif token in [self.NOT]:
+            elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 502
-                self.match(self.NOT)
+                self.match(PigParser.NOT)
 
                 self.state = 503
                 self.tuple()

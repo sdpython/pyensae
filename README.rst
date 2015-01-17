@@ -76,11 +76,11 @@ Started in 2013/08.
 Versions
 --------
 
-* **1.1 - 2014/??/??**
+* **1.1 - 2015/??/??**
     * **change:** magic command ``%tail_stderr`` nows displays keyword ``ERROR`` in red.
     * **new:** magic command ``%blob_downmerge`` to download the content of a folder from a blob storage
-    * **add:** method :meth:`upload_cluster <pyensae.remote.remote_connection.ASSHClient.upload_cluster>`
-    * **add:** method :meth:`download_cluster <pyensae.remote.remote_connection.ASSHClient.download_cluster>`
+    * **add:** method :meth:`upload_cluster <pyensae.remote.remote_connection_ssh.ASSHClient.upload_cluster>`
+    * **add:** method :meth:`download_cluster <pyensae.remote.remote_connection_ssh.ASSHClient.download_cluster>`
     * **add:** add magic command to test a streaming script for PIG
     * **add:** function :func:`file_head <pyensae.file_helper.content_helper.file_head>`, :func:`file_tail <pyensae.file_helper.content_helper.file_tail>`,
     * **add:** add magic command ``%lsrepo``, ``%compress``, ``%mpl_style``
