@@ -4,7 +4,6 @@
 @brief Various functions about matplotlib
 """
 
-import matplotlib.pyplot
 
 
 def mpl_switch_style(style="ggplot"):
@@ -15,4 +14,10 @@ def mpl_switch_style(style="ggplot"):
 
     .. versionadded:: 1.1
     """
-    matplotlib.pyplot.style.use(style)
+    # this import was moved here because ths code is executed when
+    # the module is imported and for some reasons, it overides some of the settings
+    # sphinx is doing and graphs are not part of the documentation but show up
+    # in a separate window
+    if "plt" not in sys.modules:
+        import matplotlib.pyplot as plt
+    plt.style.use(style)

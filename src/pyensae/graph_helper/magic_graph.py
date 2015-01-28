@@ -12,12 +12,16 @@ from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 
 from pyquickhelper import MagicCommandParser, MagicClassWithHelpers
+
+# do not import a module which imports matplotlib
+# if this module is imported, this class is being tested and it affects sphinx
+# when it generates the documentation
 from .matplotlib_helper import mpl_switch_style
 
 @magics_class
 class MagicGraph(MagicClassWithHelpers):
     """
-    Defines magic commands to list the content of a folder
+    Defines magic commands about graphs
 
     .. versionadded:: 1.1
     """
