@@ -3,8 +3,7 @@
 @file
 @brief Various functions about matplotlib
 """
-
-
+import sys
 
 def mpl_switch_style(style="ggplot"):
     """
