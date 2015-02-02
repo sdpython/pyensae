@@ -59,6 +59,25 @@ class TestFiles (unittest.TestCase):
         res = mg.head("{0} --n 3 -e ascii".format(fp))
         res = mg.head("{0} --n 3 -e utf8".format(fp))
 
+    def test_head2(self) :
+        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        fp = os.path.join(os.path.dirname(os.path.abspath(__file__)),"data","Exportutf8.txt")
+        mg = MagicFile()
+        fLOG("--",fp)
+        res = mg.head("{0} -n 3".format(fp))
+        fLOG("*****",res)
+        res = mg.head("{0} -n=3".format(fp))
+        fLOG("*****",res)
+        res = mg.head("{0}".format(fp))
+        fLOG("*****",res)
+        assert "9.0" in res.data
+        res = mg.head("{0} --n 3 -e utf8".format(fp))
+        
+        try:
+            res = mg.head("Exportutf8.txt")
+        except FileNotFoundError:
+            pass
+
     def test_tail(self) :
         fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
         fp = os.path.abspath(__file__)
