@@ -72,7 +72,7 @@ class TestFiles (unittest.TestCase):
         fLOG("*****",res)
         assert "9.0" in res.data
         res = mg.head("{0} --n 3 -e utf8".format(fp))
-        
+
         try:
             res = mg.head("Exportutf8.txt")
         except FileNotFoundError:
