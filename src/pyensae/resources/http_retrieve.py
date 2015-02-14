@@ -89,7 +89,7 @@ def download_data ( name,
     download_data("facebook.tar.gz",website="http://snap.stanford.edu/data/")
     @endcode
     @endexample
-    
+
     If it does not work, I suggest to use standard python:
     `Download a file from Dropbox with Python <http://www.xavierdupre.fr/blog/2015-01-20_nojs.html>`_.
     """
