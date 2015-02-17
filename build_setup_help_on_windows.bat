@@ -1,6 +1,11 @@
 echo off
 IF EXIST dist del /Q dist\*.*
 
+if "%1"=="" goto default_value:
+set pythonexe="%1"
+goto custom_python:
+
+:default_value:
 IF NOT EXIST c:\Python34 GOTO checkinstall64:
 
 :checkinstall:
@@ -34,14 +39,6 @@ c:\Python34_64vir\install\Scripts\python -u setup.py install
 if %errorlevel% neq 0 exit /b %errorlevel%
 echo #######################################################
 
-:utpy34_64:
-set pythonexe="c:\Python34_x64\python"
-%pythonexe% -u setup.py clean_space
-if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u setup.py unittests
-if %errorlevel% neq 0 exit /b %errorlevel%
-echo #######################################################
-
 :setup33:
 IF NOT EXIST c:\Python33 GOTO setup33_64:
 set pythonexe="c:\Python33\python"
@@ -68,8 +65,17 @@ set pythonexe="c:\Python34\python"
 if %errorlevel% neq 0 exit /b %errorlevel%
 echo #######################################################
 
+:utpy34_64:
+set pythonexe="c:\Python34_x64\python"
+%pythonexe% -u setup.py clean_space
+if %errorlevel% neq 0 exit /b %errorlevel%
+%pythonexe% -u setup.py unittests
+if %errorlevel% neq 0 exit /b %errorlevel%
+echo #######################################################
+
 :setup34_x64_msi_wheel:
 set pythonexe="c:\Python34_x64\python"
+:custom_python:
 %pythonexe% setup.py clean_pyd
 %pythonexe% setup.py sdist --formats=gztar,zip --verbose
 if %errorlevel% neq 0 exit /b %errorlevel%

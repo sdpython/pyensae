@@ -142,7 +142,7 @@ elif "build_sphinx" in sys.argv:
 
         fLOG (OutputPrint = True)
         project_name = os.path.split(os.path.split(os.path.abspath(__file__))[0])[-1]
-        generate_help_sphinx(project_name)
+        generate_help_sphinx(project_name, module_name = project_var_name)
 
 elif "unittests" in sys.argv:
 
