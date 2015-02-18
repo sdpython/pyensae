@@ -58,7 +58,7 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 echo #######################################################
 
 :setup34:
-IF NOT EXIST c:\Python34 GOTO setup34_x64_msi_wheel:
+IF NOT EXIST c:\Python34 GOTO utpy34_64:
 set pythonexe="c:\Python34\python"
 %pythonexe% setup.py clean_pyd
 %pythonexe% setup.py build bdist_wininst --plat-name=win-amd64
