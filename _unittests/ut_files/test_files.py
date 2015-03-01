@@ -126,8 +126,10 @@ class TestFiles (unittest.TestCase):
         res = mg.tail("{0} --n 3 -e ascii".format(fp))
         res = mg.tail("{0} --n 3 -e utf8".format(fp))
         res = file_tail(fp, threshold=300, nbline=3)
+        res = [ _ for _ in res if len(_) > 0 ]
         fLOG("#####", res)
-        assert "unittest.main" in res[-1]
+        if "unittest.main" not in res[-1]:
+            raise Exception("unittest.main not in " + str(res[-1]))
 
     def test_files_repo(self):
         fLOG(
