@@ -39,6 +39,7 @@ from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
 from .remote.azure_connection import AzureClient
 from .file_helper.jython_helper import run_jython, get_jython_jar, is_java_installed, download_java_standalone
 from .file_helper.content_helper import file_head, file_tail
+from .graph_helper.graphviz_helper import run_dot
 
 try:
     from IPython import get_ipython
