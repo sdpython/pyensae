@@ -5,12 +5,17 @@
 README / Changes
 ================
 
+.. image:: https://travis-ci.org/sdpython/pyensae.svg?branch=master
+    :target: https://travis-ci.org/sdpython/pyensae
+    :alt: Build status
+   
    
 **Links:**
     * `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_
     * `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
     * `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_
     * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pyensae>`_
+    * `Travis/pyensae <https://travis-ci.org/sdpython/pyensae>`_
 
 
 Description        
