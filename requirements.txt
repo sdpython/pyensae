@@ -22,7 +22,6 @@ brewer2mpl>=1.4
 cloud-sptheme>=1.6
 colorama>=0.3.1
 coverage>=3.7.1
-d3py>=0.2.3
 dateutils>=0.6.6
 dbfread>=2.0.0
 decorator>=3.4.0
