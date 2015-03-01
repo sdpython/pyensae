@@ -38,9 +38,10 @@ except ImportError:
     import src
     import pyquickhelper
 
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper import fLOG, get_temp_folder, docstring2html
 from src.pyensae.file_helper.magic_file import MagicFile
 from src.pyensae import file_tail
+from src.pyensae import Database
 
 
 class TestFiles (unittest.TestCase):
@@ -126,7 +127,7 @@ class TestFiles (unittest.TestCase):
         res = mg.tail("{0} --n 3 -e ascii".format(fp))
         res = mg.tail("{0} --n 3 -e utf8".format(fp))
         res = file_tail(fp, threshold=300, nbline=3)
-        res = [ _ for _ in res if len(_) > 0 ]
+        res = [_ for _ in res if len(_) > 0]
         fLOG("#####", res)
         if "unittest.main" not in res[-1]:
             raise Exception("unittest.main not in " + str(res[-1]))
@@ -166,6 +167,33 @@ class TestFiles (unittest.TestCase):
         fLOG(res)
         assert os.path.exists(dest)
         assert res == 1
+
+    def test_htmlhelp(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        mg = MagicFile()
+        mg.add_context(
+            {"file_tail": file_tail, "Database": Database, "text": 3})
+        cmd = "-np -f rawhtml file_tail"
+        res = mg.htmlhelp(cmd)
+        assert "<p>extracts the first nbline of a file " in res
+        res = mg.htmlhelp("-np -f rst file_tail")
+        assert ":param      threshold:" in res
+        res = mg.htmlhelp("-np -f rawhtml Database")
+        assert "SQL file which can be empty or not," in res
+        doc = docstring2html(Database.__init__, format="rawhtml")
+        assert "it can also contain several files separated by" in doc
+        fLOG("----------")
+        res = mg.htmlhelp("-np -f rst Database.__init__")
+        assert "it can also contain several files separated by" in res
+        res = mg.htmlhelp("Database.__init__")
+        assert res is not None
+        res = mg.htmlhelp("-np -f text Database.__init__")
+        assert "it can also contain several files separated by" in res
+        assert "@param" in res
 
 
 if __name__ == "__main__":

@@ -91,6 +91,7 @@ Versions
     * **add:** function :func:`file_head <pyensae.file_helper.content_helper.file_head>`, :func:`file_tail <pyensae.file_helper.content_helper.file_tail>`,
     * **add:** add magic command ``%lsrepo``, ``%compress``, ``%mpl_style``
     * **del:** delete class TransferFTP, moves it to module `pyquickhelper <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/index.html>`_
+    * **add:** add magic command ``%htmlhtlp`` to display the help for an object in HTML format
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
     * **add:** add magic commands for SQLite3 + a notebook

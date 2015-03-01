@@ -50,7 +50,7 @@ class TestPig (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-            
+
         if "travis" in sys.executable:
             return
 

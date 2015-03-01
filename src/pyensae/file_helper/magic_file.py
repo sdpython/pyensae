@@ -15,6 +15,7 @@ from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore
 from pyquickhelper import MagicCommandParser, run_cmd, zip_files, gzip_files, zip7_files, MagicClassWithHelpers
 from .format_helper import format_file_size, format_file_mtime
 from .content_helper import file_head, file_tail
+from pyquickhelper import docstring2html
 
 
 @magics_class
@@ -46,7 +47,6 @@ class MagicFile(MagicClassWithHelpers):
             default="utf8",
             help='file encoding')
         return parser
-    _parser_head = None
 
     @line_magic
     def head(self, line):
@@ -54,15 +54,8 @@ class MagicFile(MagicClassWithHelpers):
         defines ``%head``
         which displays the first lines of a file
         """
-        if MagicFile._parser_head is None:
-            MagicFile._parser_head = MagicFile.head_parser()
-        parser = MagicFile._parser_head
-
-        try:
-            args = parser.parse_cmd(line, context=self.Context)
-        except SystemExit:
-            print(parser.print_help())
-            args = None
+        parser = self.get_parser(MagicFile.head_parser, "head")
+        args = self.get_args(line, parser)
 
         if args is not None:
             rows = file_head(args.f, args.n, args.encoding)
@@ -88,7 +81,6 @@ class MagicFile(MagicClassWithHelpers):
             default="utf8",
             help='file encoding')
         return parser
-    _parser_tail = None
 
     @line_magic
     def tail(self, line):
@@ -96,15 +88,8 @@ class MagicFile(MagicClassWithHelpers):
         defines ``%tail``
         which displays the last lines of a file
         """
-        if MagicFile._parser_tail is None:
-            MagicFile._parser_tail = MagicFile.tail_parser()
-        parser = MagicFile._parser_tail
-
-        try:
-            args = parser.parse_cmd(line, context=self.Context)
-        except SystemExit:
-            print(parser.print_help())
-            args = None
+        parser = self.get_parser(MagicFile.tail_parser, "tail")
+        args = self.get_args(line, parser)
 
         if args is not None:
             rows = file_tail(args.f, args.n, args.encoding)
@@ -130,7 +115,6 @@ class MagicFile(MagicClassWithHelpers):
             default=".*",
             help='filter, same syntax as a regular expression')
         return parser
-    _parser_lsr = None
 
     @line_magic
     def lsr(self, line):
@@ -138,15 +122,8 @@ class MagicFile(MagicClassWithHelpers):
         define ``%lsr`` which returns the content of a folder,
         the method stops after around 10000 files --> you should precise the filter.
         """
-        if MagicFile._parser_lsr is None:
-            MagicFile._parser_lsr = MagicFile.lsr_parser()
-        parser = MagicFile._parser_lsr
-
-        try:
-            args = parser.parse_cmd(line, context=self.Context)
-        except SystemExit:
-            print(parser.print_help())
-            args = None
+        parser = self.get_parser(MagicFile.lsr_parser, "lsr")
+        args = self.get_args(line, parser)
 
         if args is not None:
             if args.path is None or len(args.path) == 0:
@@ -226,7 +203,7 @@ class MagicFile(MagicClassWithHelpers):
                     return HTML('<pre>\n%s\n</pre>' % out)
 
     @staticmethod
-    def _lsrepo_parser():
+    def lsrepo_parser():
         """
         defines the way to parse the magic command ``%lsrepo``
         """
@@ -239,7 +216,6 @@ class MagicFile(MagicClassWithHelpers):
             help='path',
             default=".")
         return parser
-    _parser_lsrepo = None
 
     @line_magic
     def lsrepo(self, line):
@@ -248,15 +224,8 @@ class MagicFile(MagicClassWithHelpers):
 
         .. versionadded:: 1.1
         """
-        if MagicFile._parser_lsrepo is None:
-            MagicFile._parser_lsrepo = MagicFile._lsrepo_parser()
-        parser = MagicFile._parser_lsrepo
-
-        try:
-            args = parser.parse_cmd(line, context=self.Context)
-        except SystemExit:
-            print(parser.print_help())
-            args = None
+        parser = self.get_parser(MagicFile.lsrepo_parser, "lsrepo")
+        args = self.get_args(line, parser)
 
         if args is not None:
             if args.path is None or len(args.path) == 0:
@@ -280,7 +249,7 @@ class MagicFile(MagicClassWithHelpers):
             return pandas.DataFrame(rows)
 
     @staticmethod
-    def _compress_parser():
+    def compress_parser():
         """
         defines the way to parse the magic command ``%compress``
 
@@ -298,7 +267,6 @@ class MagicFile(MagicClassWithHelpers):
             nargs="?",
             help='files to compress or a python list')
         return parser
-    _parser_compress = None
 
     @line_magic
     def compress(self, line):
@@ -308,15 +276,8 @@ class MagicFile(MagicClassWithHelpers):
 
         .. versionadded:: 1.1
         """
-        if MagicFile._parser_compress is None:
-            MagicFile._parser_compress = MagicFile._compress_parser()
-        parser = MagicFile._parser_compress
-
-        try:
-            args = parser.parse_cmd(line, context=self.Context)
-        except SystemExit:
-            print(parser.print_help())
-            args = None
+        parser = self.get_parser(MagicFile.compress_parser, "compress")
+        args = self.get_args(line, parser)
 
         if args is not None:
             dest = args.dest
@@ -331,6 +292,54 @@ class MagicFile(MagicClassWithHelpers):
                 return zip7_files(dest, files)
             else:
                 raise ValueError("unexpected format: " + format)
+
+    @staticmethod
+    def htmlhelp_parser():
+        """
+        defines the way to parse the magic command ``%helphelp``
+
+        .. versionadded:: 1.1
+        """
+        parser = MagicCommandParser(
+            description='display help for an object in HTML format')
+        parser.add_argument(
+            'obj',
+            type=str,
+            help='a python object')
+        parser.add_argument(
+            '-f',
+            '--format',
+            type=str,
+            default="html",
+            help='format',
+            choices=['text', 'html', 'rst', 'rawhtml'])
+        parser.add_argument(
+            '-np',
+            '--no-print',
+            action='store_true',
+            help='by default, the magic command outputs everything on the standard output, '
+                 'if specified, it returns a string')
+        return parser
+
+    @line_magic
+    def htmlhelp(self, line):
+        """
+        define ``%htmlhelp``, it displays the help for an object in HTML
+
+        .. versionadded:: 1.1
+        """
+        parser = self.get_parser(MagicFile.htmlhelp_parser, "htmlhelp")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            obj = args.obj
+            format = args.format
+            nop = args.no_print
+            res = docstring2html(obj, format=format)
+            if nop or format == "html":
+                return docstring2html(obj, format=format)
+            else:
+                print(docstring2html(obj, format=format))
 
 
 def register_file_magics():
