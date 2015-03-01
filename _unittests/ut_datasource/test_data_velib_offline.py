@@ -88,6 +88,9 @@ class TestDataVelibOffline (unittest.TestCase):
         fold = os.path.abspath(os.path.split(__file__)[0])
         data = os.path.join(fold, "data")
 
+        if "travis" in sys.executable:
+            return
+
         try:
             from JSAnimation import IPython_display
         except ImportError:
@@ -101,9 +104,6 @@ class TestDataVelibOffline (unittest.TestCase):
         df = DataVelibCollect.to_df(data)
         anime = DataVelibCollect.js_animation(df)
         
-        if "travis" in sys.executable:
-            return
-
         from JSAnimation import HTMLWriter
         wr = HTMLWriter(embed_frames=False)
         anime.save(os.path.join(fold, "out_animation.html"), writer=wr)
