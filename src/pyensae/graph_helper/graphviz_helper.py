@@ -1,8 +1,11 @@
 #-*- coding: utf-8 -*-
 """
 @file
-@brief Various functions about graphviz
+@brief Various functions about graphviz.
+
+.. versionadded:: 1.1
 """
+
 import sys
 import os
 from pyquickhelper.helpgen.default_conf import get_graphviz_dot
@@ -14,6 +17,8 @@ def dot_exe():
     retrieve graphivz executable
 
     @return     filename
+    
+    .. versionadded:: 1.1
     """
     r = get_graphviz_dot()
     if r is None:
@@ -28,6 +33,8 @@ def run_dot(dot_file, outimg):
     @param      dot_file        file, format `DOT <http://www.graphviz.org/doc/info/lang.html>`_
     @param      outimg          output image
     @return                     out, err (stdout, stderr from graphviz)
+    
+    .. versionadded:: 1.1
     """
     ext = os.path.splitext(outimg)[-1].strip(".")
     exe = dot_exe()
