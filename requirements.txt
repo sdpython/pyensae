@@ -1,7 +1,6 @@
 Cython>=0.20.2
 Flask>=0.10.1
 Flask-SQLAlchemy>=2.0
-HDDM>=0.5.5
 Jinja2>=2.7.3
 Markdown>=2.4.1
 MarkupSafe>=0.23
@@ -46,7 +45,6 @@ license-info>=0.8.7
 lxml>=3.3.5
 matplotlib>=1.4.0
 mechanize>=0.2.5
-mlpy>=3.5.0
 mock>=1.0.1
 mpld3>=0.2
 networkx>=1.9
