@@ -82,6 +82,10 @@ class TestNotebookRunner (unittest.TestCase):
         outfile = os.path.join(temp, "out_notebook.ipynb")
         assert not os.path.exists(outfile)
         valid = lambda code: 'run_cmd("SQLiteSpy.exe velib_vanves.db3")' not in code
+        
+        if "travis" in sys.executable:
+            return
+
         out = run_notebook(nbfile, working_dir=temp, outfilename=outfile, additional_path=addpath,
                            valid=valid, fLOG=fLOG)
         fLOG(out)

@@ -100,6 +100,9 @@ class TestDataVelibOffline (unittest.TestCase):
 
         df = DataVelibCollect.to_df(data)
         anime = DataVelibCollect.js_animation(df)
+        
+        if "travis" in sys.executable:
+            return
 
         from JSAnimation import HTMLWriter
         wr = HTMLWriter(embed_frames=False)
