@@ -122,6 +122,7 @@ def import_pyquickhelper():
                     sys.executable)) from e
     return pyquickhelper
 
+
 if "--verbose" in sys.argv:
     print("---------------------------------")
     print("package_dir =", package_dir)
