@@ -71,7 +71,6 @@ pytz>=2013b
 pyzmq>=14.3.1
 requests>=2.3.0
 requests-oauthlib>=0.4.2
-rpy2>=2.4.3
 scikit-image>=0.10.1
 scikit-learn>=0.15.1
 scipy>=0.14.0
