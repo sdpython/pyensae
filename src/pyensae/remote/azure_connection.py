@@ -4,11 +4,15 @@
 @brief A class to help connect with a remote machine and send command line.
 """
 
-import requests, os, time
+import requests
+import os
+import time
 from .azure_exception import AzureException
 from pyquickhelper import noLOG
 
+
 class AzureClient():
+
     """
 
     A simple class to access and communicate with `Azure <http://azure.microsoft.com/>`_.
@@ -72,33 +76,33 @@ class AzureClient():
     """
 
     _blob_properties = [
-                        "copy_completion_time",
-                        "content_encoding",
-                        "content_language",
-                        "blob_type",
-                        "copy_status_description",
-                        "copy_id",
-                        "content_md5",
-                        "lease_duration",
-                        "copy_source",
-                        "content_type",
-                        "content_length",
-                        "lease_state",
-                        "copy_progress",
-                        "copy_status",
-                        "xms_blob_sequence_number",
-                        "lease_status",
-                        "etag",
-                        "last_modified",
-                        ]
+        "copy_completion_time",
+        "content_encoding",
+        "content_language",
+        "blob_type",
+        "copy_status_description",
+        "copy_id",
+        "content_md5",
+        "lease_duration",
+        "copy_source",
+        "content_type",
+        "content_length",
+        "lease_state",
+        "copy_progress",
+        "copy_status",
+        "xms_blob_sequence_number",
+        "lease_status",
+        "etag",
+        "last_modified",
+    ]
 
-    def __init__(self,  blob_name,
-                        blob_key,
-                        hadoop_name      = None,
-                        hadoop_key       = None,
-                        hadoop_user_name = "admin",
-                        pseudo           = "any",
-                        fLOG             = None):
+    def __init__(self, blob_name,
+                 blob_key,
+                 hadoop_name=None,
+                 hadoop_key=None,
+                 hadoop_user_name="admin",
+                 pseudo="any",
+                 fLOG=None):
         """
         constructor
 
@@ -111,14 +115,14 @@ class AzureClient():
         @param      fLOG            logging function
 
         """
-        self.account_name       = blob_name
-        self.account_key        = blob_key
-        self.hadoop_name        = hadoop_name
-        self.hadoop_key         = hadoop_key
-        self.hadoop_user_name   = hadoop_user_name
-        self.pseudo             = pseudo
+        self.account_name = blob_name
+        self.account_key = blob_key
+        self.hadoop_name = hadoop_name
+        self.hadoop_key = hadoop_key
+        self.hadoop_user_name = hadoop_user_name
+        self.pseudo = pseudo
         if fLOG is None:
-            def _log_(*l,**p): return
+            def _log_(*l, **p): return
             self.LOG = _log_
         else:
             self.LOG = fLOG
@@ -128,9 +132,9 @@ class AzureClient():
 
         container = self.account_name
         self.default_parameters = dict(
-                    SCRIPTPIG = self.pseudo+"/scripts/pig",
-                    PSEUDO    = self.pseudo,
-                    CONTAINER = "")
+            SCRIPTPIG=self.pseudo + "/scripts/pig",
+            PSEUDO=self.pseudo,
+            CONTAINER="")
 
     def _interpret_path(self, blob_path):
         """
@@ -141,10 +145,10 @@ class AzureClient():
 
         .. versionadded:: 1.1
         """
-        if blob_path is None :
+        if blob_path is None:
             return None
         if "$" in blob_path:
-            for k,v in self.default_parameters.items():
+            for k, v in self.default_parameters.items():
                 blob_path = blob_path.replace("$" + k, v)
         return blob_path
 
@@ -153,16 +157,20 @@ class AzureClient():
         """
         return empty string or as many ``*`` as the length of the string
         """
-        if s is None : return ""
-        else: return "*" * len(s)
+        if s is None:
+            return ""
+        else:
+            return "*" * len(s)
 
     def __str__(self):
         """
         usual
         """
-        mes = "AzureClient [blob:({0},{1}), hadoop:({2},{3},{4})]".format( AzureClient.mask_string(self.account_name),
-                    AzureClient.mask_string(self.account_key), AzureClient.mask_string(self.hadoop_name),
-                    AzureClient.mask_string(self.hadoop_key), AzureClient.mask_string(self.hadoop_user_name))
+        mes = "AzureClient [blob:({0},{1}), hadoop:({2},{3},{4})]".format(AzureClient.mask_string(self.account_name),
+                                                                          AzureClient.mask_string(
+            self.account_key), AzureClient.mask_string(
+            self.hadoop_name),
+            AzureClient.mask_string(self.hadoop_key), AzureClient.mask_string(self.hadoop_user_name))
         return mes
 
     def open_blob_service(self):
@@ -184,10 +192,11 @@ class AzureClient():
         .. versionadded:: 1.1
         """
         path = self._interpret_path(path)
-        df = self.ls(blob_service, container_name, path, as_df= False)
+        df = self.ls(blob_service, container_name, path, as_df=False)
         return len(df) > 0
 
-    def ls(self, blob_service, container_name = None, path = None, add_metadata = False, as_df=True):
+    def ls(self, blob_service, container_name=None,
+           path=None, add_metadata=False, as_df=True):
         """
         return the content of a blob storage
 
@@ -203,49 +212,54 @@ class AzureClient():
             property *last_modified*, parameter *as_df*
 
         """
-        res = [ ]
+        res = []
         if container_name is None:
             for cn in blob_service.list_containers():
                 self.LOG("exploring ", cn.name)
-                r = self.ls(blob_service, cn.name, path = path, add_metadata=add_metadata, as_df=False)
+                r = self.ls(
+                    blob_service,
+                    cn.name,
+                    path=path,
+                    add_metadata=add_metadata,
+                    as_df=False)
                 res.extend(r)
             if as_df:
                 import pandas
                 return pandas.DataFrame(res)
             else:
                 return res
-        else :
+        else:
             path = self._interpret_path(path)
-            res = [ ]
-            for b in blob_service.list_blobs(container_name, prefix = path,
-                        include = "metadata" if add_metadata else None):
-                obs = { }
+            res = []
+            for b in blob_service.list_blobs(container_name, prefix=path,
+                                             include="metadata" if add_metadata else None):
+                obs = {}
                 obs["name"] = b.name
                 obs["url"] = b.url
                 for p in AzureClient._blob_properties:
                     obs[p] = b.properties.__dict__[p]
 
                 if b.metadata is not None:
-                    for k,v in b.metadata.items():
-                        obs["meta_%s"%k] = v
+                    for k, v in b.metadata.items():
+                        obs["meta_%s" % k] = v
 
-                res.append ( obs )
+                res.append(obs)
             if as_df:
                 import pandas
-                if len(res)>0:
+                if len(res) > 0:
                     return pandas.DataFrame(res)
                 else:
-                    return pandas.DataFrame(columns=["name","url"])
+                    return pandas.DataFrame(columns=["name", "url"])
             else:
                 return res
 
     _chunk_size = 4 * 1024 * 1024
 
-    def upload( self,
-                blob_service,
-                container_name,
-                blob_name,
-                file_path):
+    def upload(self,
+               blob_service,
+               container_name,
+               blob_name,
+               file_path):
         """
         Uploads data from a file to a blob storage.
         No more than 64Mb can be uploaded at the same, it needs to be split into
@@ -260,14 +274,14 @@ class AzureClient():
         The code comes from `Utilisation du service de stockage d'objets blob à partir de Python <http://azure.microsoft.com/fr-fr/documentation/articles/storage-python-how-to-use-blob-storage/>`_.
         """
         if isinstance(file_path, list):
-            res = [ ]
+            res = []
             for filename in file_path:
                 only = os.path.split(filename)[-1]
                 bn = blob_name.rstrip("/") + "/" + only
                 r = self.upload(blob_service, container_name, bn, filename)
                 res.append(r)
             return res
-        else :
+        else:
             blob_name = self._interpret_path(blob_name)
             blob_service.create_container(container_name, None, None, False)
             blob_service.put_blob(container_name, blob_name, None, 'BlockBlob')
@@ -280,22 +294,26 @@ class AzureClient():
                     if data:
                         length = len(data)
                         block_id = '{0:08d}'.format(index)
-                        blob_service.put_block(container_name, blob_name, data, block_id)
+                        blob_service.put_block(
+                            container_name,
+                            blob_name,
+                            data,
+                            block_id)
                         block_ids.append(block_id)
                         index += 1
-                        self.LOG("uploaded", index, " bytes from ",file_path)
+                        self.LOG("uploaded", index, " bytes from ", file_path)
                     else:
                         break
 
             blob_service.put_block_list(container_name, blob_name, block_ids)
             return blob_name
 
-    def download(   self,
-                    blob_service,
-                    container_name,
-                    blob_name,
-                    file_path,
-                    append = False):
+    def download(self,
+                 blob_service,
+                 container_name,
+                 blob_name,
+                 file_path,
+                 append=False):
         """
         Downloads data from a blob storage to a file.
         No more than 64Mb can be downloaded  at the same, it needs to be split into
@@ -314,13 +332,18 @@ class AzureClient():
             Parameter *append* was added.
         """
         if not isinstance(blob_name, str):
-            res = [ ]
+            res = []
             for blob in blob_name:
-                dest = os.path.join (file_path, os.path.split(blob)[-1])
-                r = self.download(blob_service, container_name, blob, dest, append)
+                dest = os.path.join(file_path, os.path.split(blob)[-1])
+                r = self.download(
+                    blob_service,
+                    container_name,
+                    blob,
+                    dest,
+                    append)
                 res.append(r)
             return res
-        else :
+        else:
             blob_name = self._interpret_path(blob_name)
             props = blob_service.get_blob_properties(container_name, blob_name)
             blob_size = int(props['content-length'])
@@ -330,11 +353,15 @@ class AzureClient():
             mode = 'ab' if append else 'wb'
             with open(file_path, mode) as f:
                 while index < blob_size:
-                    chunk_range = 'bytes={}-{}'.format(index, index + AzureClient._chunk_size - 1)
-                    data = blob_service.get_blob(container_name, blob_name, x_ms_range=chunk_range)
+                    chunk_range = 'bytes={}-{}'.format(index,
+                                                       index + AzureClient._chunk_size - 1)
+                    data = blob_service.get_blob(
+                        container_name,
+                        blob_name,
+                        x_ms_range=chunk_range)
                     length = len(data)
                     index += length
-                    self.LOG("downloaded ", index, "bytes from ",file_path)
+                    self.LOG("downloaded ", index, "bytes from ", file_path)
                     if length > 0:
                         f.write(data)
                         if length < AzureClient._chunk_size:
@@ -343,11 +370,11 @@ class AzureClient():
                         break
             return file_path
 
-    def download_merge(   self,
-                    blob_service,
-                    container_name,
-                    blob_folder,
-                    file_path):
+    def download_merge(self,
+                       blob_service,
+                       container_name,
+                       blob_folder,
+                       file_path):
         """
         Downloads all files from a folder in a blob storage to a single local file.
         Files will be merged.
@@ -363,15 +390,29 @@ class AzureClient():
         .. versionadded:: 1.1
         """
         blob_folder = self._interpret_path(blob_folder)
-        content = self.ls(blob_service, container_name, blob_folder, as_df = False)
+        content = self.ls(
+            blob_service,
+            container_name,
+            blob_folder,
+            as_df=False)
         first = True
         for cont in content:
-            if cont["content_length"] > 0 :
+            if cont["content_length"] > 0:
                 if first:
-                    self.download(blob_service, container_name, cont["name"], file_path, append=False)
+                    self.download(
+                        blob_service,
+                        container_name,
+                        cont["name"],
+                        file_path,
+                        append=False)
                     first = False
                 else:
-                    self.download(blob_service, container_name, cont["name"], file_path, append=True)
+                    self.download(
+                        blob_service,
+                        container_name,
+                        cont["name"],
+                        file_path,
+                        append=True)
         return file_path
 
     def delete_blob(self, blob_service, container_name, blob_name):
@@ -398,8 +439,8 @@ class AzureClient():
         """
         blob_folder = self._interpret_path(blob_folder)
         df = self.ls(blob_service, container_name, blob_folder)
-        rem = [ ]
-        for name in df["name"] :
+        rem = []
+        for name in df["name"]:
             r = self.delete_blob(blob_service, container_name, name)
             rem.append(r)
         return rem
@@ -438,8 +479,10 @@ class AzureClient():
         @return             url
         """
         if self.hadoop_name is None:
-            raise AttributeError("no hadoop server was given to the constructor")
-        webHCatUrl='https://' + self.hadoop_name + '.azurehdinsight.net/templeton/v1/' + cmd
+            raise AttributeError(
+                "no hadoop server was given to the constructor")
+        webHCatUrl = 'https://' + self.hadoop_name + \
+            '.azurehdinsight.net/templeton/v1/' + cmd
         return webHCatUrl
 
     def wasb_to_file(self, container_name, blob_file):
@@ -452,7 +495,7 @@ class AzureClient():
         """
         blob_file = self._interpret_path(blob_file)
         return 'wasb://{1}@{0}.blob.core.windows.net/{2}'.format(container_name,
-                            self.account_name, blob_file)
+                                                                 self.account_name, blob_file)
 
     def wasb_prefix(self, container_name):
         """
@@ -471,16 +514,21 @@ class AzureClient():
         @return                     json
         """
         if self.hadoop_user_name is None:
-            raise AttributeError("no hadoop user name was given to the constructor")
+            raise AttributeError(
+                "no hadoop user name was given to the constructor")
         if self.hadoop_key is None:
-            raise AttributeError("no hadoop password was given to the constructor")
+            raise AttributeError(
+                "no hadoop password was given to the constructor")
 
         webHCatUrl = self.url_webHCatUrl("status")
 
-        r = requests.get(  webHCatUrl,
-                            auth=(self.hadoop_user_name, self.hadoop_key))
+        r = requests.get(webHCatUrl,
+                         auth=(self.hadoop_user_name, self.hadoop_key))
         if r.status_code != 200:
-            raise AzureException("unable to the status of server: " + webHCatUrl, r)
+            raise AzureException(
+                "unable to the status of server: " +
+                webHCatUrl,
+                r)
         return r.json()
 
     def get_version(self):
@@ -490,26 +538,31 @@ class AzureClient():
         @return                     json
         """
         if self.hadoop_user_name is None:
-            raise AttributeError("no hadoop user name was given to the constructor")
+            raise AttributeError(
+                "no hadoop user name was given to the constructor")
         if self.hadoop_key is None:
-            raise AttributeError("no hadoop password was given to the constructor")
+            raise AttributeError(
+                "no hadoop password was given to the constructor")
 
         webHCatUrl = self.url_webHCatUrl("version/hive")
 
-        r = requests.get(  webHCatUrl,
-                            auth=(self.hadoop_user_name, self.hadoop_key))
+        r = requests.get(webHCatUrl,
+                         auth=(self.hadoop_user_name, self.hadoop_key))
         if r.status_code != 200:
-            raise AzureException("unable to the version of server: " + webHCatUrl, r)
+            raise AzureException(
+                "unable to the version of server: " +
+                webHCatUrl,
+                r)
         return r.json()
 
     def pig_submit(self,
-                blob_service,
-                container_name,
-                pig_file,
-                dependencies = None,
-                status_dir = None,
-                stop_on_failure = True,
-                params = None):
+                   blob_service,
+                   container_name,
+                   pig_file,
+                   dependencies=None,
+                   status_dir=None,
+                   stop_on_failure=True,
+                   params=None):
         """
         Submit a PIG job, the function uploads it to the cluster
         as well as the dependencies.
@@ -582,64 +635,74 @@ class AzureClient():
             parameter *stop_on_failure*
         """
         if self.hadoop_user_name is None:
-            raise AttributeError("no hadoop user name was given to the constructor")
+            raise AttributeError(
+                "no hadoop user name was given to the constructor")
         if self.hadoop_key is None:
-            raise AttributeError("no hadoop password was given to the constructor")
+            raise AttributeError(
+                "no hadoop password was given to the constructor")
 
         # upload
         scripts = self.default_parameters["SCRIPTPIG"]
-        toup = [ pig_file ]
+        toup = [pig_file]
         if dependencies is not None:
-            toup.extend ( dependencies)
-        res = self.upload ( blob_service, container_name, scripts, toup )
+            toup.extend(dependencies)
+        res = self.upload(blob_service, container_name, scripts, toup)
 
         # path modification
-        wasb =  self.wasb_to_file( container_name, res[0])
+        wasb = self.wasb_to_file(container_name, res[0])
         if dependencies is not None:
-            wasbdep = ",".join( self.wasb_to_file(container_name, _) for _ in res[1:])
-        else: wasbdep = None
+            wasbdep = ",".join(
+                self.wasb_to_file(
+                    container_name,
+                    _) for _ in res[
+                    1:])
+        else:
+            wasbdep = None
 
         # parameter
-        args = ['-v' ]
-        for k,v in sorted(self.default_parameters.items()):
+        args = ['-v']
+        for k, v in sorted(self.default_parameters.items()):
             if k == "CONTAINER":
-                args.extend ( [ "-param", '%s=%s' % (k, self.wasb_to_file(container_name, v)) ] )
+                args.extend(["-param", '%s=%s' %
+                             (k, self.wasb_to_file(container_name, v))])
             else:
-                args.extend ( [ "-param", '%s=%s' % (k, v.replace('"','\\"')) ] )
+                args.extend(["-param", '%s=%s' % (k, v.replace('"', '\\"'))])
         if params is not None:
-            for k,v in sorted(params.items()):
-                args.extend ( [ "-param", '%s=%s' % (k, v.replace('"','\\"')) ] )
+            for k, v in sorted(params.items()):
+                args.extend(["-param", '%s=%s' % (k, v.replace('"', '\\"'))])
 
         if stop_on_failure:
-            args.append ("-stop_on_failure")
+            args.append("-stop_on_failure")
 
         # params
-        params =    {'user.name':self.hadoop_user_name,
-                     'file': wasb,
-                     'arg':args}
+        params = {'user.name': self.hadoop_user_name,
+                  'file': wasb,
+                  'arg': args}
 
         if wasbdep is not None:
             params["files"] = wasbdep
 
         if status_dir is not None:
             status_dir = self._interpret_path(status_dir)
-            params['statusdir'] = self.wasb_to_file(container_name, status_dir + "/" + os.path.split(pig_file)[-1] + ".log" )
+            params['statusdir'] = self.wasb_to_file(
+                container_name, status_dir + "/" + os.path.split(pig_file)[-1] + ".log")
         else:
             status_dir = self.default_parameters["SCRIPTPIG"]
-            params['statusdir'] = self.wasb_to_file(container_name, self.default_parameters["SCRIPTPIG"] + "/" + os.path.split(pig_file)[-1] + ".log" )
+            params['statusdir'] = self.wasb_to_file(container_name, self.default_parameters[
+                                                    "SCRIPTPIG"] + "/" + os.path.split(pig_file)[-1] + ".log")
 
         webHCatUrl = self.url_webHCatUrl("pig")
 
         # submit the job
-        r = requests.post(  webHCatUrl,
-                            auth=(self.hadoop_user_name, self.hadoop_key),
-                            data=params)
+        r = requests.post(webHCatUrl,
+                          auth=(self.hadoop_user_name, self.hadoop_key),
+                          data=params)
 
         if r.status_code != 200:
             raise AzureException("unable to submit job: " + pig_file, r)
         return r.json()
 
-    def job_queue(self, showall = False):
+    def job_queue(self, showall=False):
         """
         returns the list of jobs
 
@@ -649,19 +712,21 @@ class AzureClient():
         @return                 list of jobs
         """
         if self.hadoop_user_name is None:
-            raise AttributeError("no hadoop user name was given to the constructor")
+            raise AttributeError(
+                "no hadoop user name was given to the constructor")
         if self.hadoop_key is None:
-            raise AttributeError("no hadoop password was given to the constructor")
+            raise AttributeError(
+                "no hadoop password was given to the constructor")
 
         webHCatUrl = self.url_webHCatUrl("jobs")
 
-        params = { "user.name": self.hadoop_user_name }
+        params = {"user.name": self.hadoop_user_name}
         if showall:
-            params["showall"]="true"
+            params["showall"] = "true"
 
-        r = requests.get(   webHCatUrl,
-                            auth=(self.hadoop_user_name, self.hadoop_key),
-                            params=params)
+        r = requests.get(webHCatUrl,
+                         auth=(self.hadoop_user_name, self.hadoop_key),
+                         params=params)
 
         if r.status_code != 200:
             raise AzureException("unable to get job queue", r)
@@ -678,21 +743,26 @@ class AzureClient():
         @return                     json
         """
         if self.hadoop_user_name is None:
-            raise AttributeError("no hadoop user name was given to the constructor")
+            raise AttributeError(
+                "no hadoop user name was given to the constructor")
         if self.hadoop_key is None:
-            raise AttributeError("no hadoop password was given to the constructor")
+            raise AttributeError(
+                "no hadoop password was given to the constructor")
 
-        params = { "user.name":self.hadoop_user_name}
+        params = {"user.name": self.hadoop_user_name}
         webHCatUrl = self.url_webHCatUrl("jobs/" + jobid)
 
-        r = requests.get(  webHCatUrl,
-                            auth=(self.hadoop_user_name, self.hadoop_key),
-                            params=params)
+        r = requests.get(webHCatUrl,
+                         auth=(self.hadoop_user_name, self.hadoop_key),
+                         params=params)
         if r.status_code != 200:
-            raise AzureException("unable to the version of server: " + webHCatUrl, r)
+            raise AzureException(
+                "unable to the version of server: " +
+                webHCatUrl,
+                r)
         return r.json()
 
-    def wait_job(self, job_id, delay = 5, fLOG = noLOG):
+    def wait_job(self, job_id, delay=5, fLOG=noLOG):
         """
         wait until a job has run or failed
 
@@ -704,8 +774,8 @@ class AzureClient():
 
         """
         status = self.job_status(job_id)
-        while status["status"]["state"] in ["PREP", "RUNNING"] :
-            fLOG("job_id", job_id,":",status["status"]["state"])
+        while status["status"]["state"] in ["PREP", "RUNNING"]:
+            fLOG("job_id", job_id, ":", status["status"]["state"])
             time.sleep(delay)
             status = self.job_status(job_id)
         return status
@@ -729,12 +799,14 @@ class AzureClient():
         spl = status_dir.split("core.windows.net/")  # to change
         path = spl[-1]
         res = self.download(blob_service, container,
-                        [ path + "/" + _ for _ in ["stderr", "stdout"] ],
-                        folder)
+                            [path + "/" + _ for _ in ["stderr", "stdout"]],
+                            folder)
 
-        with open(os.path.join(folder, "stdout"), "r", encoding="utf8") as f : out = f.read()
-        with open(os.path.join(folder, "stderr"), "r", encoding="utf8") as f : err = f.read()
-        return out,err
+        with open(os.path.join(folder, "stdout"), "r", encoding="utf8") as f:
+            out = f.read()
+        with open(os.path.join(folder, "stderr"), "r", encoding="utf8") as f:
+            err = f.read()
+        return out, err
 
     def job_kill(self, jobid):
         """
@@ -747,16 +819,21 @@ class AzureClient():
         @return                     json
         """
         if self.hadoop_user_name is None:
-            raise AttributeError("no hadoop user name was given to the constructor")
+            raise AttributeError(
+                "no hadoop user name was given to the constructor")
         if self.hadoop_key is None:
-            raise AttributeError("no hadoop password was given to the constructor")
+            raise AttributeError(
+                "no hadoop password was given to the constructor")
 
-        params = { "user.name":self.hadoop_user_name}
+        params = {"user.name": self.hadoop_user_name}
         webHCatUrl = self.url_webHCatUrl("jobs/" + jobid)
 
-        r = requests.delete(  webHCatUrl,
+        r = requests.delete(webHCatUrl,
                             auth=(self.hadoop_user_name, self.hadoop_key),
                             params=params)
         if r.status_code != 200:
-            raise AzureException("unable to the version of server: " + webHCatUrl, r)
+            raise AzureException(
+                "unable to the version of server: " +
+                webHCatUrl,
+                r)
         return r.json()

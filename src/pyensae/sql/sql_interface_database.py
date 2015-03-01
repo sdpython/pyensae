@@ -4,14 +4,19 @@
 @brief Abstract class to connect to a SQL server using various way.
 It will be used to implement magic functions
 """
-import sys, os, pandas, sqlite3
+import sys
+import os
+import pandas
+import sqlite3
 
 from .database_main import Database
 from .database_exception import ExceptionSQL
 from .sql_interface import InterfaceSQL, InterfaceSQLException
 from pyquickhelper import noLOG
 
+
 class InterfaceSQLDatabase(InterfaceSQL):
+
     """
     Abstract class to connect to a SQL server using various way.
     It will be used to implement magic functions
@@ -23,7 +28,7 @@ class InterfaceSQLDatabase(InterfaceSQL):
 
         @param      filename        str
         """
-        self.obj = Database(filename, LOG = noLOG)
+        self.obj = Database(filename, LOG=noLOG)
 
     def connect(self):
         """
@@ -65,10 +70,10 @@ class InterfaceSQLDatabase(InterfaceSQL):
         con = self.obj._connection
         try:
             return pandas.read_sql(sql_query, con)
-        except pandas.io.sql.DatabaseError as e :
+        except pandas.io.sql.DatabaseError as e:
             try:
                 self.obj.execute_view(sql_query)
-            except Exception as ee :
+            except Exception as ee:
                 raise InterfaceSQLException(str(ee)) from ee
 
     def import_flat_file(self, filename, table_name):
@@ -80,7 +85,11 @@ class InterfaceSQLDatabase(InterfaceSQL):
         @param      table           table name
         @return                     the number of added rows
         """
-        r = self.obj.import_table_from_flat_file(filename, table_name, columns = None, header=True)
+        r = self.obj.import_table_from_flat_file(
+            filename,
+            table_name,
+            columns=None,
+            header=True)
         self.populate_completion()
         return r
 

@@ -5,7 +5,9 @@
 
 .. versionadded:: 1.1
 """
-import sys, os, pandas
+import sys
+import os
+import pandas
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
@@ -18,8 +20,10 @@ from pyquickhelper import MagicCommandParser, MagicClassWithHelpers
 # when it generates the documentation
 from .matplotlib_helper import mpl_switch_style
 
+
 @magics_class
 class MagicGraph(MagicClassWithHelpers):
+
     """
     Defines magic commands about graphs
 
@@ -32,7 +36,11 @@ class MagicGraph(MagicClassWithHelpers):
         defines the way to parse the magic command ``%mpl_style``
         """
         parser = MagicCommandParser(description='changes matplotlib style')
-        parser.add_argument('style', type=str, help='style, ggplot for exemple', default="ggplot")
+        parser.add_argument(
+            'style',
+            type=str,
+            help='style, ggplot for exemple',
+            default="ggplot")
         return parser
 
     @line_magic

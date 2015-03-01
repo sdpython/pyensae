@@ -5,7 +5,7 @@
 """
 
 import sys
-if sys.version_info[0] < 3 :
+if sys.version_info[0] < 3:
     raise ImportError("pyensae only works with Python 3")
 
 __version__ = "1.1"
@@ -15,7 +15,8 @@ __url__ = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html"
 __downloadUrl__ = "http://www.xavierdupre.fr/site2013/index_code.html#pyensae"
 __license__ = "BSD License"
 
-def check( log = False):
+
+def check(log=False):
     """
     Checks the library is working.
     It raises an exception.
@@ -45,16 +46,16 @@ try:
     try:
         from .remote.magic_azure import register_azure_magics
         az = True
-    except ImportError as e :
+    except ImportError as e:
         if "azure" in str(e):
-            az= False
+            az = False
         else:
             raise e
     try:
         from .sql.magic_sql import register_sql_magics
         from .file_helper.magic_file import register_file_magics
         from .graph_helper.magic_graph import register_graph_magics
-    except Exception as e :
+    except Exception as e:
         import warnings
         warnings.warn(str(e))
         raise ImportError("ipython does not seem to be available") from e
@@ -62,7 +63,8 @@ try:
     if ip is not None:
         # the program is not run from a notebook
         register_magics_ssh()
-        if az: register_azure_magics()
+        if az:
+            register_azure_magics()
         register_sql_magics()
         register_file_magics()
         register_graph_magics()

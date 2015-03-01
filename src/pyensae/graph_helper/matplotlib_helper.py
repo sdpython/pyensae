@@ -5,6 +5,7 @@
 """
 import sys
 
+
 def mpl_switch_style(style="ggplot"):
     """
     changes the graph style

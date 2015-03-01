@@ -329,8 +329,7 @@ class PigLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
-    decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
-
+    decisionsToDFA = [DFA(ds, i) for i, ds in enumerate(atn.decisionToState)]
 
     DEFINE = 1
     LOAD = 2
@@ -423,61 +422,65 @@ class PigLexer(Lexer):
     MINUS = 89
     QMARK = 90
 
-    modeNames = [ u"DEFAULT_MODE" ]
+    modeNames = [u"DEFAULT_MODE"]
 
-    literalNames = [ u"<INVALID>",
-            "'define'", "'load'", "'filter'", "'foreach'", "'order'", "'arrange'",
-            "'distinct'", "'cogroup'", "'join'", "'cross'", "'union'", "'split'",
-            "'into'", "'if'", "'all'", "'any'", "'as'", "'by'", "'using'",
-            "'inner'", "'outer'", "'ONSCHEMA'", "'*'", "'parallel'", "'partition'",
-            "'group'", "'and'", "'or'", "'not'", "'generate'", "'flatten'",
-            "'eval'", "'asc'", "'desc'", "'int'", "'long'", "'float'", "'double'",
-            "'chararray'", "'bytearray'", "'bag'", "'tuple'", "'map'", "'is'",
-            "'null'", "'stream'", "'through'", "'store'", "'mapreduce'",
-            "'ship'", "'cache'", "'input'", "'output'", "'stderr'", "'stdin'",
-            "'stdout'", "'limit'", "'sample'", "'left'", "'right'", "'full'",
-            "'$'", "':'", "';'", "'('", "')'", "'{'", "'}'", "'['", "']'",
-            "'#'", "'='", "','", "'.'", "'/'", "'%'", "'+'", "'-'", "'?'" ]
+    literalNames = [u"<INVALID>",
+                    "'define'", "'load'", "'filter'", "'foreach'", "'order'", "'arrange'",
+                    "'distinct'", "'cogroup'", "'join'", "'cross'", "'union'", "'split'",
+                    "'into'", "'if'", "'all'", "'any'", "'as'", "'by'", "'using'",
+                    "'inner'", "'outer'", "'ONSCHEMA'", "'*'", "'parallel'", "'partition'",
+                    "'group'", "'and'", "'or'", "'not'", "'generate'", "'flatten'",
+                    "'eval'", "'asc'", "'desc'", "'int'", "'long'", "'float'", "'double'",
+                    "'chararray'", "'bytearray'", "'bag'", "'tuple'", "'map'", "'is'",
+                    "'null'", "'stream'", "'through'", "'store'", "'mapreduce'",
+                    "'ship'", "'cache'", "'input'", "'output'", "'stderr'", "'stdin'",
+                    "'stdout'", "'limit'", "'sample'", "'left'", "'right'", "'full'",
+                    "'$'", "':'", "';'", "'('", "')'", "'{'", "'}'", "'['", "']'",
+                    "'#'", "'='", "','", "'.'", "'/'", "'%'", "'+'", "'-'", "'?'"]
 
-    symbolicNames = [ u"<INVALID>",
-            "DEFINE", "LOAD", "FILTER", "FOREACH", "ORDER", "ARRANGE", "DISTINCT",
-            "COGROUP", "JOIN", "CROSS", "UNION", "SPLIT", "INTO", "IF",
-            "ALL", "ANY", "AS", "BY", "USING", "INNER", "OUTER", "ONSCHEMA",
-            "STAR", "PARALLEL", "PARTITION", "GROUP", "AND", "OR", "NOT",
-            "GENERATE", "FLATTEN", "EVAL", "ASC", "DESC", "INT", "LONG",
-            "FLOAT", "DOUBLE", "CHARARRAY", "BYTEARRAY", "BAG", "TUPLE",
-            "MAP", "IS", "NULL", "STREAM", "THROUGH", "STORE", "MAPREDUCE",
-            "SHIP", "CACHE", "INPUT", "OUTPUT", "ERROR", "STDIN", "STDOUT",
-            "LIMIT", "SAMPLE", "LEFT", "RIGHT", "FULL", "IDENTIFIER", "INTEGER",
-            "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING",
-            "EXECCOMMAND", "DOLLAR", "WS", "SL_COMMENT", "ML_COMMENT", "FILTEROP",
-            "COLON", "SEMI_COLON", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_CURLYP",
-            "RIGHT_CURLYP", "LEFT_BRACKET", "RIGHT_BRACKET", "POUND", "EQUAL",
-            "COMMA", "PERIOD", "DIV", "PERCENT", "PLUS", "MINUS", "QMARK" ]
+    symbolicNames = [u"<INVALID>",
+                     "DEFINE", "LOAD", "FILTER", "FOREACH", "ORDER", "ARRANGE", "DISTINCT",
+                     "COGROUP", "JOIN", "CROSS", "UNION", "SPLIT", "INTO", "IF",
+                     "ALL", "ANY", "AS", "BY", "USING", "INNER", "OUTER", "ONSCHEMA",
+                     "STAR", "PARALLEL", "PARTITION", "GROUP", "AND", "OR", "NOT",
+                     "GENERATE", "FLATTEN", "EVAL", "ASC", "DESC", "INT", "LONG",
+                     "FLOAT", "DOUBLE", "CHARARRAY", "BYTEARRAY", "BAG", "TUPLE",
+                     "MAP", "IS", "NULL", "STREAM", "THROUGH", "STORE", "MAPREDUCE",
+                     "SHIP", "CACHE", "INPUT", "OUTPUT", "ERROR", "STDIN", "STDOUT",
+                     "LIMIT", "SAMPLE", "LEFT", "RIGHT", "FULL", "IDENTIFIER", "INTEGER",
+                     "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING",
+                     "EXECCOMMAND", "DOLLAR", "WS", "SL_COMMENT", "ML_COMMENT", "FILTEROP",
+                     "COLON", "SEMI_COLON", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_CURLYP",
+                     "RIGHT_CURLYP", "LEFT_BRACKET", "RIGHT_BRACKET", "POUND", "EQUAL",
+                     "COMMA", "PERIOD", "DIV", "PERCENT", "PLUS", "MINUS", "QMARK"]
 
-    ruleNames = [ "DEFINE", "LOAD", "FILTER", "FOREACH", "ORDER", "ARRANGE",
-                  "DISTINCT", "COGROUP", "JOIN", "CROSS", "UNION", "SPLIT",
-                  "INTO", "IF", "ALL", "ANY", "AS", "BY", "USING", "INNER",
-                  "OUTER", "ONSCHEMA", "STAR", "PARALLEL", "PARTITION",
-                  "GROUP", "AND", "OR", "NOT", "GENERATE", "FLATTEN", "EVAL",
-                  "ASC", "DESC", "INT", "LONG", "FLOAT", "DOUBLE", "CHARARRAY",
-                  "BYTEARRAY", "BAG", "TUPLE", "MAP", "IS", "NULL", "STREAM",
-                  "THROUGH", "STORE", "MAPREDUCE", "SHIP", "CACHE", "INPUT",
-                  "OUTPUT", "ERROR", "STDIN", "STDOUT", "LIMIT", "SAMPLE",
-                  "LEFT", "RIGHT", "FULL", "DIGIT", "LETTER", "SPECIALCHAR",
-                  "FSSPECIALCHAR", "IDENTIFIER", "FLOATINGPOINT", "INTEGER",
-                  "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING",
-                  "EXECCOMMAND", "DOLLAR", "WS", "SL_COMMENT", "ML_COMMENT",
-                  "STRFILTEROP", "NUMFILTEROP", "FILTEROP", "COLON", "SEMI_COLON",
-                  "LEFT_PAREN", "RIGHT_PAREN", "LEFT_CURLYP", "RIGHT_CURLYP",
-                  "LEFT_BRACKET", "RIGHT_BRACKET", "POUND", "EQUAL", "COMMA",
-                  "PERIOD", "DIV", "PERCENT", "PLUS", "MINUS", "QMARK" ]
+    ruleNames = ["DEFINE", "LOAD", "FILTER", "FOREACH", "ORDER", "ARRANGE",
+                 "DISTINCT", "COGROUP", "JOIN", "CROSS", "UNION", "SPLIT",
+                 "INTO", "IF", "ALL", "ANY", "AS", "BY", "USING", "INNER",
+                 "OUTER", "ONSCHEMA", "STAR", "PARALLEL", "PARTITION",
+                 "GROUP", "AND", "OR", "NOT", "GENERATE", "FLATTEN", "EVAL",
+                 "ASC", "DESC", "INT", "LONG", "FLOAT", "DOUBLE", "CHARARRAY",
+                 "BYTEARRAY", "BAG", "TUPLE", "MAP", "IS", "NULL", "STREAM",
+                 "THROUGH", "STORE", "MAPREDUCE", "SHIP", "CACHE", "INPUT",
+                 "OUTPUT", "ERROR", "STDIN", "STDOUT", "LIMIT", "SAMPLE",
+                 "LEFT", "RIGHT", "FULL", "DIGIT", "LETTER", "SPECIALCHAR",
+                 "FSSPECIALCHAR", "IDENTIFIER", "FLOATINGPOINT", "INTEGER",
+                 "LONGINTEGER", "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING",
+                 "EXECCOMMAND", "DOLLAR", "WS", "SL_COMMENT", "ML_COMMENT",
+                 "STRFILTEROP", "NUMFILTEROP", "FILTEROP", "COLON", "SEMI_COLON",
+                 "LEFT_PAREN", "RIGHT_PAREN", "LEFT_CURLYP", "RIGHT_CURLYP",
+                 "LEFT_BRACKET", "RIGHT_BRACKET", "POUND", "EQUAL", "COMMA",
+                 "PERIOD", "DIV", "PERCENT", "PLUS", "MINUS", "QMARK"]
 
     grammarFileName = "Pig.g4"
 
     def __init__(self, input=None):
         super().__init__(input)
         self.checkVersion("4.5")
-        self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
+        self._interp = LexerATNSimulator(
+            self,
+            self.atn,
+            self.decisionsToDFA,
+            PredictionContextCache())
         self._actions = None
         self._predicates = None

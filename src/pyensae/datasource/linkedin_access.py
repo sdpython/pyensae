@@ -16,10 +16,15 @@ Existing Python libraries:
 You should install: `sdpython/python-linkedin <https://github.com/sdpython/python-linkedin>`_
 
 """
-import collections, datetime, urllib, copy
+import collections
+import datetime
+import urllib
+import copy
 from pyquickhelper import fLOG
 
-class LinkedInAccess :
+
+class LinkedInAccess:
+
     """
     This class manages the access to LinkedIn functionalities.
 
@@ -80,33 +85,33 @@ class LinkedInAccess :
 
     """
 
-    default_selectors_profile           = [     'id',
-                                                'first-name',
-                                                'last-name',
-                                                'location',
-                                                'distance', 'num-connections', 'skills',
-                                                'educations',
-                                                #'school-name',
-                                                ]
+    default_selectors_profile = ['id',
+                                 'first-name',
+                                 'last-name',
+                                 'location',
+                                 'distance', 'num-connections', 'skills',
+                                 'educations',
+                                 #'school-name',
+                                 ]
 
-    default_selectors_search_profile    = [
-                    {'people': [ 'id',
-                                'first-name',
-                                'last-name',
-                                'educations',
-                                #'school-name',
-                                'public-profile-url',
-                                'location', 'headline',
-                                'last-modified-timestamp',
-                                'date-of-birth',
-                                'member-url-resources',
-                                'email-address',
-                                ]}]
+    default_selectors_search_profile = [
+        {'people': ['id',
+                    'first-name',
+                    'last-name',
+                    'educations',
+                    #'school-name',
+                    'public-profile-url',
+                    'location', 'headline',
+                    'last-modified-timestamp',
+                    'date-of-birth',
+                    'member-url-resources',
+                    'email-address',
+                    ]}]
 
-    def __init__ (self, api_key,
-                        secret_key,
-                        user_token,
-                        user_secret) :
+    def __init__(self, api_key,
+                 secret_key,
+                 user_token,
+                 user_secret):
         """
         constructor, all the following parameter are given when you request an access
         to linkedin
@@ -122,7 +127,7 @@ class LinkedInAccess :
         self.user_token = user_token
         self.user_secret = user_secret
 
-    def connect(self, all_permissions = True):
+    def connect(self, all_permissions=True):
         """
         open the connection to linkedin (using the api_key and the secret_key)
 
@@ -131,20 +136,20 @@ class LinkedInAccess :
         """
         from linkedin import linkedin
         permissions = linkedin.PERMISSIONS.enums.values() if all_permissions \
-                        else linkedin.PERMISSIONS.BASIC_PROFILE
+            else linkedin.PERMISSIONS.BASIC_PROFILE
         self.authentication = linkedin.LinkedInDeveloperAuthentication(
-                        self.api_key,
-                        self.secret_key,
-                        self.user_token,
-                        self.user_secret,
-                        "http://localhost:8000/",
-                        )
+            self.api_key,
+            self.secret_key,
+            self.user_token,
+            self.user_secret,
+            "http://localhost:8000/",
+        )
 
         self.application = linkedin.LinkedInApplication(self.authentication)
         self.all_permissions = all_permissions
         return self.application
 
-    def get_profile(self, selectors=None, id = None, url = None):
+    def get_profile(self, selectors=None, id=None, url=None):
         """
         returns the profile of the connected user,
 
@@ -155,16 +160,16 @@ class LinkedInAccess :
         @param      url             search by url
         @return     json
         """
-        if selectors is None and self.all_permissions :
+        if selectors is None and self.all_permissions:
             selectors = LinkedInAccess.default_selectors_profile
-        return self.application.get_profile(selectors = selectors,
-                            member_id = id, member_url = url)
+        return self.application.get_profile(selectors=selectors,
+                                            member_id=id, member_url=url)
 
-    def search_profile (self,   params,
-                                selectors = None,
-                                count = 10,
-                                as_df = False,
-                                start = 0):
+    def search_profile(self, params,
+                       selectors=None,
+                       count=10,
+                       as_df=False,
+                       start=0):
         """
         search profiles on linkedin, allowed parameters (replace _ by -):
             - first-name
@@ -215,7 +220,7 @@ class LinkedInAccess :
 
         """
         from linkedin import linkedin
-        if selectors is None and self.all_permissions :
+        if selectors is None and self.all_permissions:
             selectors = LinkedInAccess.default_selectors_search_profile
 
         bound = count if count != -1 and count <= 25 else 25
@@ -223,68 +228,73 @@ class LinkedInAccess :
         params["count"] = bound
         params["start"] = start
 
-        if 0 <= count <= 25 :
+        if 0 <= count <= 25:
             res = self.application.search_profile(
-                            selectors = selectors,
-                            params = params)
-            if as_df :
-                if len(res) == 1 :
+                selectors=selectors,
+                params=params)
+            if as_df:
+                if len(res) == 1:
                     key, first = res.popitem()
                     values = first["values"]
                     import pandas
                     return pandas.DataFrame(values)
-                else :
-                    raise Exception("expecting a result such as {'people': ...}")
-            else :
+                else:
+                    raise Exception(
+                        "expecting a result such as {'people': ...}")
+            else:
                 return res
 
-        else :
-            res = [ ]
+        else:
+            res = []
             start = 0
             total = 0
-            while True :
+            while True:
                 params["start"] = start
-                try :
+                try:
                     se = self.application.search_profile(
-                                selectors = selectors,
-                                params = params)
-                except linkedin.LinkedInError as e :
-                    if "Throttle limit" in str(e) :
+                        selectors=selectors,
+                        params=params)
+                except linkedin.LinkedInError as e:
+                    if "Throttle limit" in str(e):
                         fLOG(e)
                     break
 
-                if len(se) == 1 :
+                if len(se) == 1:
                     key, first = se.popitem()
-                    fetched = first.get("_count",0)
+                    fetched = first.get("_count", 0)
                     total += fetched
-                    alls = first.get("_total",0)
-                else :
-                    raise Exception("expecting a result such as {'people': ...} +\n" + str(se))
+                    alls = first.get("_total", 0)
+                else:
+                    raise Exception(
+                        "expecting a result such as {'people': ...} +\n" +
+                        str(se))
 
-                if as_df :
+                if as_df:
                     values = first.get("values", [])
                     res.extend(values)
-                else :
+                else:
                     res.append(se)
 
-                fLOG("LinkedInAccess.search_profile [bound=%d,count=%d,fetched=%d,total=%d,alls=%d]"% (bound,count, fetched, total, alls))
-                if fetched < bound or (count != -1 and len(res) >= count) :
+                fLOG(
+                    "LinkedInAccess.search_profile [bound=%d,count=%d,fetched=%d,total=%d,alls=%d]" %
+                    (bound, count, fetched, total, alls))
+                if fetched < bound or (count != -1 and len(res) >= count):
                     break
                 start = total
 
-            if as_df :
-                if len(res) > 0 :
+            if as_df:
+                if len(res) > 0:
                     import pandas
                     return pandas.DataFrame(res)
-                else :
+                else:
                     return None
-            else :
+            else:
                 return res
 
-    def get_connections (self,  member_id   = None,
-                                member_url  = None,
-                                selectors   = None,
-                                params      = None) :
+    def get_connections(self, member_id=None,
+                        member_url=None,
+                        selectors=None,
+                        params=None):
         """
         retrieve the connection for a given profile
 
@@ -312,8 +322,8 @@ class LinkedInAccess :
         @endcode
         """
         res = self.application.get_connections(
-                        member_id = member_id,
-                        member_url = member_url,
-                        selectors = selectors,
-                        params = params)
+            member_id=member_id,
+            member_url=member_url,
+            selectors=selectors,
+            params=params)
         return res

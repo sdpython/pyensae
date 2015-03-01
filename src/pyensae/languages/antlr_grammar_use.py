@@ -3,8 +3,10 @@
 @brief Helpers around language grammar.
 This module requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
 """
-import os, sys
+import os
+import sys
 from antlr4 import *
+
 
 def get_parser_lexer(language):
     """
@@ -28,14 +30,25 @@ def get_parser_lexer(language):
             return PigParser, PigLexer
         else:
             folder = os.path.dirname(__file__)
-            if folder == "" : folder = "."
+            if folder == "":
+                folder = "."
             files = os.listdir(folder)
-            raise ImportError("unable to import parsers for language: " + language  +"\navailable files:\n{0}".format( "\n".join(files)))
+            raise ImportError(
+                "unable to import parsers for language: " +
+                language +
+                "\navailable files:\n{0}".format(
+                    "\n".join(files)))
     except ImportError as e:
         folder = os.path.dirname(__file__)
-        if folder == "" : folder = "."
+        if folder == "":
+            folder = "."
         files = os.listdir(folder)
-        raise ImportError("unable to import parsers for language: " + language  +"\navailable files:\n{0}".format( "\n".join(files))) from e
+        raise ImportError(
+            "unable to import parsers for language: " +
+            language +
+            "\navailable files:\n{0}".format(
+                "\n".join(files))) from e
+
 
 def parse_code(code, class_parser, class_lexer):
     """
@@ -72,11 +85,14 @@ def parse_code(code, class_parser, class_lexer):
     parser = class_parser(stream)
     return parser
 
+
 class TreeStringListener(ParseTreeListener):
+
     """
     this class is an attempt to run through the tree
     but it is not complete
     """
+
     def __init__(self, parser):
         """
         constructor
@@ -84,7 +100,7 @@ class TreeStringListener(ParseTreeListener):
         @param      parser      parser used to parse the code
         """
         super()
-        self.buffer = [ ]
+        self.buffer = []
         self.level = 0
         self.parser = parser
 
@@ -107,9 +123,12 @@ class TreeStringListener(ParseTreeListener):
         event
         """
         if "ruleIndex" in ctx.__dict__:
-            text = ("    " * self.level) + "+ " + self.parser.ruleNames[ctx.ruleIndex] + ", LT(1)=" + parser._input.LT(1).text
+            text = ("    " * self.level) + "+ " + \
+                self.parser.ruleNames[
+                ctx.ruleIndex] + ", LT(1)=" + parser._input.LT(1).text
         else:
-            text = ("    " * self.level) + "+ " + ", LT(1)=" + self.parser._input.LT(1).text
+            text = ("    " * self.level) + "+ " + \
+                ", LT(1)=" + self.parser._input.LT(1).text
         self.buffer.append(text)
         self.level += 1
 
@@ -119,9 +138,12 @@ class TreeStringListener(ParseTreeListener):
         """
         self.level -= 1
         if "ruleIndex" in ctx.__dict__:
-            text = ("    " * self.level) + "- " + self.parser.ruleNames[ctx.ruleIndex] + ", LT(1)=" + parser._input.LT(1).text
+            text = ("    " * self.level) + "- " + \
+                self.parser.ruleNames[
+                ctx.ruleIndex] + ", LT(1)=" + parser._input.LT(1).text
         else:
-            text = ("    " * self.level) + "- " + ", LT(1)=" + self.parser._input.LT(1).text
+            text = ("    " * self.level) + "- " + \
+                ", LT(1)=" + self.parser._input.LT(1).text
         self.buffer.append(text)
 
     def __str__(self):
@@ -130,7 +152,8 @@ class TreeStringListener(ParseTreeListener):
         """
         return "\n".join(self.buffer)
 
-def get_tree_string(tree, parser, format = TreeStringListener):
+
+def get_tree_string(tree, parser, format=TreeStringListener):
     """
     returns a string which shows the parsed tree
 
@@ -141,7 +164,7 @@ def get_tree_string(tree, parser, format = TreeStringListener):
     """
     if format is None:
         return tree.toStringTree()
-    else :
+    else:
         walker = ParseTreeWalker()
         listen = TreeStringListener(parser)
         walker.walk(listen, tree)

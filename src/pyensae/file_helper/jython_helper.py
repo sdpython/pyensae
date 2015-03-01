@@ -4,11 +4,14 @@
 This provides provides helper around that.
 """
 
-import os, sys, urllib, urllib.request
+import os
+import sys
+import urllib
+import urllib.request
 from pyquickhelper import run_cmd, noLOG
 
 
-def download_java_standalone(version = "2.5.3"):
+def download_java_standalone(version="2.5.3"):
     """
     download the standalone jython
     if it does not exists, we should version 2.5.3 by default
@@ -20,22 +23,27 @@ def download_java_standalone(version = "2.5.3"):
 
     dest = "jython-standalone-%s.jar" % version
     if version == "2.5.3":
-        url = "http://repo1.maven.org/maven2/org/python/jython-standalone/{1}/{0}".format(dest, version)
+        url = "http://repo1.maven.org/maven2/org/python/jython-standalone/{1}/{0}".format(
+            dest,
+            version)
     else:
-        url = "http://search.maven.org/remotecontent?filepath=org/python/jython-standalone/{1}/{0}".format(dest, version)
+        url = "http://search.maven.org/remotecontent?filepath=org/python/jython-standalone/{1}/{0}".format(
+            dest,
+            version)
     this = os.path.abspath(os.path.dirname(__file__))
     final = os.path.join(this, dest)
-    if os.path.exists(final) :
+    if os.path.exists(final):
         return final
 
-    u = urllib.request.urlopen (url)
-    alls = u.read ()
-    u.close ()
+    u = urllib.request.urlopen(url)
+    alls = u.read()
+    u.close()
 
-    with open(final, "wb") as f :
+    with open(final, "wb") as f:
         f.write(alls)
 
     return final
+
 
 def get_java_path():
     """
@@ -49,18 +57,22 @@ def get_java_path():
         if sys.platform.startswith("win"):
             location = r'C:\Program Files\Java'
             if not os.path.exists(location):
-                raise FileNotFoundError("path {0} does not exists, you need to install java.\nGo to http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
+                raise FileNotFoundError(
+                    "path {0} does not exists, you need to install java.\nGo to http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
             pa = os.listdir(location)
-            if len(pa) == 0 :
-                raise FileNotFoundError("path {0} does not exists, you need to install java.\nGo to http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
-            pa = [os.path.join(location, _) for _ in pa ]
-            for p in pa :
-                if os.path.isdir(p) and os.path.exists(p) :
+            if len(pa) == 0:
+                raise FileNotFoundError(
+                    "path {0} does not exists, you need to install java.\nGo to http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
+            pa = [os.path.join(location, _) for _ in pa]
+            for p in pa:
+                if os.path.isdir(p) and os.path.exists(p):
                     return p
-            raise FileNotFoundError("path {0} does not exists, you need to install java.\nGo to http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
+            raise FileNotFoundError(
+                "path {0} does not exists, you need to install java.\nGo to http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
         else:
             java = ""
     return java
+
 
 def get_java_cmd():
     """
@@ -77,17 +89,19 @@ def get_java_cmd():
     else:
         return "java"
 
-def is_java_installed(fLOG = noLOG):
+
+def is_java_installed(fLOG=noLOG):
     """
     this function checks if java is installed
 
     @return     boolean
     """
     cmd = get_java_cmd() + " -showversion"
-    out,err = run_cmd(cmd, wait=True, log_error = False)
-    fLOG("OUT:\n",out)
-    fLOG("ERR:\n",err)
+    out, err = run_cmd(cmd, wait=True, log_error=False)
+    fLOG("OUT:\n", out)
+    fLOG("ERR:\n", err)
     return "Java(TM)" in err
+
 
 def get_jython_jar():
     """
@@ -97,20 +111,25 @@ def get_jython_jar():
     @return     absolute path
     """
     this = os.path.abspath(os.path.dirname(__file__))
-    files = [ os.path.join(this, _) for _ in os.listdir(this) ]
-    files = [ _ for _ in files if "jython-standalone" in _ ]
-    if len(files) == 0 :
+    files = [os.path.join(this, _) for _ in os.listdir(this)]
+    files = [_ for _ in files if "jython-standalone" in _]
+    if len(files) == 0:
         raise FileNotFoundError("no jython-standalone*.jar found in " + this)
-    if len(files) != 1 :
-        raise FileNotFoundError("more than one jython-standalone*.jar found in " + this + "\n:" + "\n".join(files))
+    if len(files) != 1:
+        raise FileNotFoundError(
+            "more than one jython-standalone*.jar found in " +
+            this +
+            "\n:" +
+            "\n".join(files))
     return files[0]
 
-def run_jython( pyfile,
-                argv = None,
-                jython_path = None,
-                sin = None,
-                timeout = None,
-                fLOG = noLOG):
+
+def run_jython(pyfile,
+               argv=None,
+               jython_path=None,
+               sin=None,
+               timeout=None,
+               fLOG=noLOG):
     """
     runs a jython script and returns the standard output and error
 
@@ -127,16 +146,19 @@ def run_jython( pyfile,
     if jython_path is None:
         jython_path = get_jython_jar()
 
-    def clean(i,p):
-        if i == 0 :
+    def clean(i, p):
+        if i == 0:
             return p
-        if '"' in p : p = p.replace('"', '\\"')
-        if " " in p : p = '"{0}"'.format(p)
+        if '"' in p:
+            p = p.replace('"', '\\"')
+        if " " in p:
+            p = '"{0}"'.format(p)
         return p
 
-    cmd = [ get_java_cmd(), "-jar", jython_path, pyfile ]
+    cmd = [get_java_cmd(), "-jar", jython_path, pyfile]
     if argv is not None:
         cmd.extend(argv)
-    cmd = " ".join( clean(i,_) for i,_ in enumerate(cmd))
-    out,err = run_cmd(cmd, wait=True, sin=sin, communicate=True, timeout=timeout, shell=False)
-    return out,err
+    cmd = " ".join(clean(i, _) for i, _ in enumerate(cmd))
+    out, err = run_cmd(
+        cmd, wait=True, sin=sin, communicate=True, timeout=timeout, shell=False)
+    return out, err

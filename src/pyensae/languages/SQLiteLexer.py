@@ -781,8 +781,7 @@ class SQLiteLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
-    decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
-
+    decisionsToDFA = [DFA(ds, i) for i, ds in enumerate(atn.decisionToState)]
 
     SCOL = 1
     DOT = 2
@@ -942,82 +941,86 @@ class SQLiteLexer(Lexer):
     SPACES = 156
     UNEXPECTED_CHAR = 157
 
-    modeNames = [ u"DEFAULT_MODE" ]
+    modeNames = [u"DEFAULT_MODE"]
 
-    literalNames = [ u"<INVALID>",
-            "';'", "'.'", "'('", "')'", "','", "'='", "'*'", "'+'", "'-'",
-            "'~'", "'||'", "'/'", "'%'", "'<<'", "'>>'", "'&'", "'|'", "'<'",
-            "'<='", "'>'", "'>='", "'=='", "'!='", "'<>'" ]
+    literalNames = [u"<INVALID>",
+                    "';'", "'.'", "'('", "')'", "','", "'='", "'*'", "'+'", "'-'",
+                    "'~'", "'||'", "'/'", "'%'", "'<<'", "'>>'", "'&'", "'|'", "'<'",
+                    "'<='", "'>'", "'>='", "'=='", "'!='", "'<>'"]
 
-    symbolicNames = [ u"<INVALID>",
-            "SCOL", "DOT", "OPEN_PAR", "CLOSE_PAR", "COMMA", "ASSIGN", "STAR",
-            "PLUS", "MINUS", "TILDE", "PIPE2", "DIV", "MOD", "LT2", "GT2",
-            "AMP", "PIPE", "LT", "LT_EQ", "GT", "GT_EQ", "EQ", "NOT_EQ1",
-            "NOT_EQ2", "K_ABORT", "K_ACTION", "K_ADD", "K_AFTER", "K_ALL",
-            "K_ALTER", "K_ANALYZE", "K_AND", "K_AS", "K_ASC", "K_ATTACH",
-            "K_AUTOINCREMENT", "K_BEFORE", "K_BEGIN", "K_BETWEEN", "K_BY",
-            "K_CASCADE", "K_CASE", "K_CAST", "K_CHECK", "K_COLLATE", "K_COLUMN",
-            "K_COMMIT", "K_CONFLICT", "K_CONSTRAINT", "K_CREATE", "K_CROSS",
-            "K_CURRENT_DATE", "K_CURRENT_TIME", "K_CURRENT_TIMESTAMP", "K_DATABASE",
-            "K_DEFAULT", "K_DEFERRABLE", "K_DEFERRED", "K_DELETE", "K_DESC",
-            "K_DETACH", "K_DISTINCT", "K_DROP", "K_EACH", "K_ELSE", "K_END",
-            "K_ESCAPE", "K_EXCEPT", "K_EXCLUSIVE", "K_EXISTS", "K_EXPLAIN",
-            "K_FAIL", "K_FOR", "K_FOREIGN", "K_FROM", "K_FULL", "K_GLOB",
-            "K_GROUP", "K_HAVING", "K_IF", "K_IGNORE", "K_IMMEDIATE", "K_IN",
-            "K_INDEX", "K_INDEXED", "K_INITIALLY", "K_INNER", "K_INSERT",
-            "K_INSTEAD", "K_INTERSECT", "K_INTO", "K_IS", "K_ISNULL", "K_JOIN",
-            "K_KEY", "K_LEFT", "K_LIKE", "K_LIMIT", "K_MATCH", "K_NATURAL",
-            "K_NO", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_OFFSET",
-            "K_ON", "K_OR", "K_ORDER", "K_OUTER", "K_PLAN", "K_PRAGMA",
-            "K_PRIMARY", "K_QUERY", "K_RAISE", "K_RECURSIVE", "K_REFERENCES",
-            "K_REGEXP", "K_REINDEX", "K_RELEASE", "K_RENAME", "K_REPLACE",
-            "K_RESTRICT", "K_RIGHT", "K_ROLLBACK", "K_ROW", "K_SAVEPOINT",
-            "K_SELECT", "K_SET", "K_TABLE", "K_TEMP", "K_TEMPORARY", "K_THEN",
-            "K_TO", "K_TRANSACTION", "K_TRIGGER", "K_UNION", "K_UNIQUE",
-            "K_UPDATE", "K_USING", "K_VACUUM", "K_VALUES", "K_VIEW", "K_VIRTUAL",
-            "K_WHEN", "K_WHERE", "K_WITH", "K_WITHOUT", "IDENTIFIER", "NUMERIC_LITERAL",
-            "BIND_PARAMETER", "STRING_LITERAL", "BLOB_LITERAL", "SINGLE_LINE_COMMENT",
-            "MULTILINE_COMMENT", "SPACES", "UNEXPECTED_CHAR" ]
+    symbolicNames = [u"<INVALID>",
+                     "SCOL", "DOT", "OPEN_PAR", "CLOSE_PAR", "COMMA", "ASSIGN", "STAR",
+                     "PLUS", "MINUS", "TILDE", "PIPE2", "DIV", "MOD", "LT2", "GT2",
+                     "AMP", "PIPE", "LT", "LT_EQ", "GT", "GT_EQ", "EQ", "NOT_EQ1",
+                     "NOT_EQ2", "K_ABORT", "K_ACTION", "K_ADD", "K_AFTER", "K_ALL",
+                     "K_ALTER", "K_ANALYZE", "K_AND", "K_AS", "K_ASC", "K_ATTACH",
+                     "K_AUTOINCREMENT", "K_BEFORE", "K_BEGIN", "K_BETWEEN", "K_BY",
+                     "K_CASCADE", "K_CASE", "K_CAST", "K_CHECK", "K_COLLATE", "K_COLUMN",
+                     "K_COMMIT", "K_CONFLICT", "K_CONSTRAINT", "K_CREATE", "K_CROSS",
+                     "K_CURRENT_DATE", "K_CURRENT_TIME", "K_CURRENT_TIMESTAMP", "K_DATABASE",
+                     "K_DEFAULT", "K_DEFERRABLE", "K_DEFERRED", "K_DELETE", "K_DESC",
+                     "K_DETACH", "K_DISTINCT", "K_DROP", "K_EACH", "K_ELSE", "K_END",
+                     "K_ESCAPE", "K_EXCEPT", "K_EXCLUSIVE", "K_EXISTS", "K_EXPLAIN",
+                     "K_FAIL", "K_FOR", "K_FOREIGN", "K_FROM", "K_FULL", "K_GLOB",
+                     "K_GROUP", "K_HAVING", "K_IF", "K_IGNORE", "K_IMMEDIATE", "K_IN",
+                     "K_INDEX", "K_INDEXED", "K_INITIALLY", "K_INNER", "K_INSERT",
+                     "K_INSTEAD", "K_INTERSECT", "K_INTO", "K_IS", "K_ISNULL", "K_JOIN",
+                     "K_KEY", "K_LEFT", "K_LIKE", "K_LIMIT", "K_MATCH", "K_NATURAL",
+                     "K_NO", "K_NOT", "K_NOTNULL", "K_NULL", "K_OF", "K_OFFSET",
+                     "K_ON", "K_OR", "K_ORDER", "K_OUTER", "K_PLAN", "K_PRAGMA",
+                     "K_PRIMARY", "K_QUERY", "K_RAISE", "K_RECURSIVE", "K_REFERENCES",
+                     "K_REGEXP", "K_REINDEX", "K_RELEASE", "K_RENAME", "K_REPLACE",
+                     "K_RESTRICT", "K_RIGHT", "K_ROLLBACK", "K_ROW", "K_SAVEPOINT",
+                     "K_SELECT", "K_SET", "K_TABLE", "K_TEMP", "K_TEMPORARY", "K_THEN",
+                     "K_TO", "K_TRANSACTION", "K_TRIGGER", "K_UNION", "K_UNIQUE",
+                     "K_UPDATE", "K_USING", "K_VACUUM", "K_VALUES", "K_VIEW", "K_VIRTUAL",
+                     "K_WHEN", "K_WHERE", "K_WITH", "K_WITHOUT", "IDENTIFIER", "NUMERIC_LITERAL",
+                     "BIND_PARAMETER", "STRING_LITERAL", "BLOB_LITERAL", "SINGLE_LINE_COMMENT",
+                     "MULTILINE_COMMENT", "SPACES", "UNEXPECTED_CHAR"]
 
-    ruleNames = [ "SCOL", "DOT", "OPEN_PAR", "CLOSE_PAR", "COMMA", "ASSIGN",
-                  "STAR", "PLUS", "MINUS", "TILDE", "PIPE2", "DIV", "MOD",
-                  "LT2", "GT2", "AMP", "PIPE", "LT", "LT_EQ", "GT", "GT_EQ",
-                  "EQ", "NOT_EQ1", "NOT_EQ2", "K_ABORT", "K_ACTION", "K_ADD",
-                  "K_AFTER", "K_ALL", "K_ALTER", "K_ANALYZE", "K_AND", "K_AS",
-                  "K_ASC", "K_ATTACH", "K_AUTOINCREMENT", "K_BEFORE", "K_BEGIN",
-                  "K_BETWEEN", "K_BY", "K_CASCADE", "K_CASE", "K_CAST",
-                  "K_CHECK", "K_COLLATE", "K_COLUMN", "K_COMMIT", "K_CONFLICT",
-                  "K_CONSTRAINT", "K_CREATE", "K_CROSS", "K_CURRENT_DATE",
-                  "K_CURRENT_TIME", "K_CURRENT_TIMESTAMP", "K_DATABASE",
-                  "K_DEFAULT", "K_DEFERRABLE", "K_DEFERRED", "K_DELETE",
-                  "K_DESC", "K_DETACH", "K_DISTINCT", "K_DROP", "K_EACH",
-                  "K_ELSE", "K_END", "K_ESCAPE", "K_EXCEPT", "K_EXCLUSIVE",
-                  "K_EXISTS", "K_EXPLAIN", "K_FAIL", "K_FOR", "K_FOREIGN",
-                  "K_FROM", "K_FULL", "K_GLOB", "K_GROUP", "K_HAVING", "K_IF",
-                  "K_IGNORE", "K_IMMEDIATE", "K_IN", "K_INDEX", "K_INDEXED",
-                  "K_INITIALLY", "K_INNER", "K_INSERT", "K_INSTEAD", "K_INTERSECT",
-                  "K_INTO", "K_IS", "K_ISNULL", "K_JOIN", "K_KEY", "K_LEFT",
-                  "K_LIKE", "K_LIMIT", "K_MATCH", "K_NATURAL", "K_NO", "K_NOT",
-                  "K_NOTNULL", "K_NULL", "K_OF", "K_OFFSET", "K_ON", "K_OR",
-                  "K_ORDER", "K_OUTER", "K_PLAN", "K_PRAGMA", "K_PRIMARY",
-                  "K_QUERY", "K_RAISE", "K_RECURSIVE", "K_REFERENCES", "K_REGEXP",
-                  "K_REINDEX", "K_RELEASE", "K_RENAME", "K_REPLACE", "K_RESTRICT",
-                  "K_RIGHT", "K_ROLLBACK", "K_ROW", "K_SAVEPOINT", "K_SELECT",
-                  "K_SET", "K_TABLE", "K_TEMP", "K_TEMPORARY", "K_THEN",
-                  "K_TO", "K_TRANSACTION", "K_TRIGGER", "K_UNION", "K_UNIQUE",
-                  "K_UPDATE", "K_USING", "K_VACUUM", "K_VALUES", "K_VIEW",
-                  "K_VIRTUAL", "K_WHEN", "K_WHERE", "K_WITH", "K_WITHOUT",
-                  "IDENTIFIER", "NUMERIC_LITERAL", "BIND_PARAMETER", "STRING_LITERAL",
-                  "BLOB_LITERAL", "SINGLE_LINE_COMMENT", "MULTILINE_COMMENT",
-                  "SPACES", "UNEXPECTED_CHAR", "DIGIT", "A", "B", "C", "D",
-                  "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
-                  "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ]
+    ruleNames = ["SCOL", "DOT", "OPEN_PAR", "CLOSE_PAR", "COMMA", "ASSIGN",
+                 "STAR", "PLUS", "MINUS", "TILDE", "PIPE2", "DIV", "MOD",
+                 "LT2", "GT2", "AMP", "PIPE", "LT", "LT_EQ", "GT", "GT_EQ",
+                 "EQ", "NOT_EQ1", "NOT_EQ2", "K_ABORT", "K_ACTION", "K_ADD",
+                 "K_AFTER", "K_ALL", "K_ALTER", "K_ANALYZE", "K_AND", "K_AS",
+                 "K_ASC", "K_ATTACH", "K_AUTOINCREMENT", "K_BEFORE", "K_BEGIN",
+                 "K_BETWEEN", "K_BY", "K_CASCADE", "K_CASE", "K_CAST",
+                 "K_CHECK", "K_COLLATE", "K_COLUMN", "K_COMMIT", "K_CONFLICT",
+                 "K_CONSTRAINT", "K_CREATE", "K_CROSS", "K_CURRENT_DATE",
+                 "K_CURRENT_TIME", "K_CURRENT_TIMESTAMP", "K_DATABASE",
+                 "K_DEFAULT", "K_DEFERRABLE", "K_DEFERRED", "K_DELETE",
+                 "K_DESC", "K_DETACH", "K_DISTINCT", "K_DROP", "K_EACH",
+                 "K_ELSE", "K_END", "K_ESCAPE", "K_EXCEPT", "K_EXCLUSIVE",
+                 "K_EXISTS", "K_EXPLAIN", "K_FAIL", "K_FOR", "K_FOREIGN",
+                 "K_FROM", "K_FULL", "K_GLOB", "K_GROUP", "K_HAVING", "K_IF",
+                 "K_IGNORE", "K_IMMEDIATE", "K_IN", "K_INDEX", "K_INDEXED",
+                 "K_INITIALLY", "K_INNER", "K_INSERT", "K_INSTEAD", "K_INTERSECT",
+                 "K_INTO", "K_IS", "K_ISNULL", "K_JOIN", "K_KEY", "K_LEFT",
+                 "K_LIKE", "K_LIMIT", "K_MATCH", "K_NATURAL", "K_NO", "K_NOT",
+                 "K_NOTNULL", "K_NULL", "K_OF", "K_OFFSET", "K_ON", "K_OR",
+                 "K_ORDER", "K_OUTER", "K_PLAN", "K_PRAGMA", "K_PRIMARY",
+                 "K_QUERY", "K_RAISE", "K_RECURSIVE", "K_REFERENCES", "K_REGEXP",
+                 "K_REINDEX", "K_RELEASE", "K_RENAME", "K_REPLACE", "K_RESTRICT",
+                 "K_RIGHT", "K_ROLLBACK", "K_ROW", "K_SAVEPOINT", "K_SELECT",
+                 "K_SET", "K_TABLE", "K_TEMP", "K_TEMPORARY", "K_THEN",
+                 "K_TO", "K_TRANSACTION", "K_TRIGGER", "K_UNION", "K_UNIQUE",
+                 "K_UPDATE", "K_USING", "K_VACUUM", "K_VALUES", "K_VIEW",
+                 "K_VIRTUAL", "K_WHEN", "K_WHERE", "K_WITH", "K_WITHOUT",
+                 "IDENTIFIER", "NUMERIC_LITERAL", "BIND_PARAMETER", "STRING_LITERAL",
+                 "BLOB_LITERAL", "SINGLE_LINE_COMMENT", "MULTILINE_COMMENT",
+                 "SPACES", "UNEXPECTED_CHAR", "DIGIT", "A", "B", "C", "D",
+                 "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
+                 "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
     grammarFileName = "SQLite.g4"
 
     def __init__(self, input=None):
         super().__init__(input)
         self.checkVersion("4.5")
-        self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
+        self._interp = LexerATNSimulator(
+            self,
+            self.atn,
+            self.decisionsToDFA,
+            PredictionContextCache())
         self._actions = None
         self._predicates = None

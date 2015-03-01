@@ -3,13 +3,15 @@
 @brief      generic class to access a SQL database
 """
 
-from .database_core             import DatabaseCore
-from .database_import_export    import DatabaseImportExport
-from .database_object           import DatabaseObject
-from .database_join_group       import DatabaseJoinGroup
-from pyquickhelper              import fLOG
+from .database_core import DatabaseCore
+from .database_import_export import DatabaseImportExport
+from .database_object import DatabaseObject
+from .database_join_group import DatabaseJoinGroup
+from pyquickhelper import fLOG
 
-class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoinGroup) :
+
+class Database (
+        DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoinGroup):
 
     """
     This class allows the user to load table from text files and store them into a
@@ -20,13 +22,13 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
     http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index
     """
 
-    def __init__ (self, dbfile,
-                        engine      = "SQLite",
-                        user        = None,
-                        password    = None,
-                        host        = "localhost",
-                        LOG         = print,
-                        attach      = None) :
+    def __init__(self, dbfile,
+                 engine="SQLite",
+                 user=None,
+                 password=None,
+                 host="localhost",
+                 LOG=print,
+                 attach=None):
         """
         constructor
 
@@ -43,17 +45,17 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
         @param      attach          dictionary: { nickname: filename }, list of database to attach
         @warning If the folder does not exist, it will be created
         """
-        DatabaseJoinGroup.__init__ (self)
-        DatabaseCore.__init__ (self,    sql_file    = dbfile,
-                                        engine      = engine,
-                                        user        = user,
-                                        password    = password,
-                                        host        = host,
-                                        LOG         = LOG,
-                                        attach      = attach)
+        DatabaseJoinGroup.__init__(self)
+        DatabaseCore.__init__(self, sql_file=dbfile,
+                              engine=engine,
+                              user=user,
+                              password=password,
+                              host=host,
+                              LOG=LOG,
+                              attach=attach)
 
     @staticmethod
-    def schema_database(df, add_id = True):
+    def schema_database(df, add_id=True):
         """
         returns the schema for a database which would contains this database
 
@@ -61,24 +63,24 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
         @param      add_id      if True, adds an index "PRIMARYKEY"
         @return                 dictionary { index_column: (name, type) }
         """
-        schema = { i:(l,str) for i,l in enumerate(df.columns) }
-        if add_id != None :
+        schema = {i: (l, str) for i, l in enumerate(df.columns)}
+        if add_id is not None:
             if isinstance(add_id, bool):
-                if add_id :
+                if add_id:
                     add_id = "PRIMARYKEY"
-                    schema [-1] = (add_id, int, "PRIMARYKEY", "AUTOINCREMENT")
-            else :
-                schema [-1] = (add_id, int, "PRIMARYKEY", "AUTOINCREMENT")
+                    schema[-1] = (add_id, int, "PRIMARYKEY", "AUTOINCREMENT")
+            else:
+                schema[-1] = (add_id, int, "PRIMARYKEY", "AUTOINCREMENT")
 
-        if len(df) > 0 :
+        if len(df) > 0:
             # we use the first row to determine type
-            for i,v in enumerate(df.values[0]) :
-                if not isinstance(v,str) :
-                    schema [i] = (schema[i][0], type(v) )
+            for i, v in enumerate(df.values[0]):
+                if not isinstance(v, str):
+                    schema[i] = (schema[i][0], type(v))
         return schema
 
     @staticmethod
-    def fill_sql_table (df, filename_or_database, tablename, add_id = "idr") :
+    def fill_sql_table(df, filename_or_database, tablename, add_id="idr"):
         """
         returns a Database object, creates the database if it does not exists,
         same for the table
@@ -118,26 +120,26 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
 
         schema = Database.schema_database(df, add_id)
 
-        if isinstance(filename_or_database, str) :
-            db = Database(filename_or_database, LOG = fLOG)
+        if isinstance(filename_or_database, str):
+            db = Database(filename_or_database, LOG=fLOG)
             db.connect()
 
-            if tablename not in db.get_table_list () :
-                cursor = db.create_table (tablename, schema)
-                db.append_values ( df.values, tablename, schema, cursor = cursor)
-            else :
-                db.append_values ( df.values, tablename, schema)
-        else :
+            if tablename not in db.get_table_list():
+                cursor = db.create_table(tablename, schema)
+                db.append_values(df.values, tablename, schema, cursor=cursor)
+            else:
+                db.append_values(df.values, tablename, schema)
+        else:
             db = filename_or_database
-            if tablename not in db.get_table_list () :
-                cursor = db.create_table (tablename, schema)
-                db.append_values ( df.values, tablename, schema, cursor = cursor)
-            else :
-                db.append_values ( df.values, tablename, schema)
+            if tablename not in db.get_table_list():
+                cursor = db.create_table(tablename, schema)
+                db.append_values(df.values, tablename, schema, cursor=cursor)
+            else:
+                db.append_values(df.values, tablename, schema)
 
         return db
 
-    def import_dataframe(self, df, tablename, add_id = "idr"):
+    def import_dataframe(self, df, tablename, add_id="idr"):
         """
         imports a DataFrame into a table
 
@@ -160,7 +162,7 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
         iter = self.execute_view(request, nolog=True)
         return pandas.DataFrame(iter, columns=cols)
 
-    def copy_to(self, db, subset = None):
+    def copy_to(self, db, subset=None):
         """
         copy all tables into db, we assume both database are not connected
 
@@ -170,18 +172,18 @@ class Database (DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoin
         self.connect()
         db.connect()
         for tbl in self.get_table_list():
-            if subset is None or tbl in subset :
+            if subset is None or tbl in subset:
                 self.LOG("copy_to: create table " + tbl)
                 sch = self.get_table_columns_list(tbl, True)
                 curins = db.create_table(tbl, sch)
                 cursor = self.execute("SELECT * FROM %s" % tbl)
-                buffer = [ ]
+                buffer = []
                 for row in cursor:
                     buffer.append(row)
-                    if len(buffer) >= 1000 :
-                        db.insert(tbl, buffer, cursor = curins)
-                        buffer = [ ]
-                if len(buffer) > 0 :
+                    if len(buffer) >= 1000:
+                        db.insert(tbl, buffer, cursor=curins)
+                        buffer = []
+                if len(buffer) > 0:
                     db.insert(tbl, buffer)
                 db.commit()
                 cursor.close()

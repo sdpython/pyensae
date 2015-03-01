@@ -4,10 +4,13 @@
 @brief An specific exception for Azure
 """
 
+
 class AzureException(Exception):
+
     """
     exception raised by @see cl AzureClient
     """
+
     def __init__(self, message, ret):
         """
         store more information than a regular exception
@@ -21,12 +24,12 @@ class AzureException(Exception):
             code = ret.status_code
             try:
                 js = ret.json()
-            except Exception as e :
+            except Exception as e:
                 js = str(e) + "\n" + str(ret)
 
             self.ret = (code, js)
         else:
-            self.ret = (None,None)
+            self.ret = (None, None)
 
     def __str__(self):
         """

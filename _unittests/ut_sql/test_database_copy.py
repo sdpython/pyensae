@@ -6,17 +6,34 @@ will sort all test files by increasing time and run them.
 """
 
 
-import sys, os, unittest
+import sys
+import os
+import unittest
 
 
-try :
+try:
     import src
     import pyquickhelper
-except ImportError :
-    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..")))
-    if path not in sys.path : sys.path.append (path)
-    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..", "..", "pyquickhelper", "src")))
-    if path not in sys.path : sys.path.append (path)
+except ImportError:
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..")))
+    if path not in sys.path:
+        sys.path.append(path)
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..",
+                "..",
+                "pyquickhelper",
+                "src")))
+    if path not in sys.path:
+        sys.path.append(path)
     import src
     import pyquickhelper
 
@@ -27,43 +44,59 @@ from src.pyensae.sql.database_main import Database
 
 class TestDatabaseCopy (unittest.TestCase):
 
-    def test_import_flatflitand_copy(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_import_flatflitand_copy(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
 
-        file = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "data", "ACA.PA.txt")
-        dbf  = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "temp_database_copy.db3")
-        if os.path.exists(dbf) : os.remove(dbf)
+        file = os.path.join(
+            os.path.abspath(
+                os.path.split(__file__)[0]),
+            "data",
+            "ACA.PA.txt")
+        dbf = os.path.join(
+            os.path.abspath(
+                os.path.split(__file__)[0]),
+            "temp_database_copy.db3")
+        if os.path.exists(dbf):
+            os.remove(dbf)
 
-        dbf2  = os.path.join(os.path.abspath(os.path.split(__file__)[0]), "out_copy.db3")
-        if os.path.exists(dbf2) : os.remove(dbf2)
+        dbf2 = os.path.join(
+            os.path.abspath(
+                os.path.split(__file__)[0]),
+            "out_copy.db3")
+        if os.path.exists(dbf2):
+            os.remove(dbf2)
 
-        import_flatfile_into_database(dbf, file, fLOG = fLOG)
+        import_flatfile_into_database(dbf, file, fLOG=fLOG)
         assert os.path.exists(dbf)
 
-        db = Database(dbf, LOG = fLOG)
-        dbm = Database(dbf2, LOG = fLOG)
+        db = Database(dbf, LOG=fLOG)
+        dbm = Database(dbf2, LOG=fLOG)
         db.copy_to(dbm)
 
         db.connect()
         dbm.connect()
         tbls = dbm.get_table_list()
-        if len(tbls)!=1 : raise Exception("expects one table not %d" % len(tbls))
+        if len(tbls) != 1:
+            raise Exception("expects one table not %d" % len(tbls))
         view = db.execute_view("SELECT * FROM ACAPA")
         viewm = dbm.execute_view("SELECT * FROM ACAPA")
         db.close()
         dbm.close()
         assert len(view) == len(viewm)
 
-        dbm2 = Database(":memory:", LOG = fLOG)
+        dbm2 = Database(":memory:", LOG=fLOG)
         db.copy_to(dbm2)
         dbm2.connect()
         tbls = dbm2.get_table_list()
-        if len(tbls)!=1 : raise Exception("expects one table not %d" % len(tbls))
+        if len(tbls) != 1:
+            raise Exception("expects one table not %d" % len(tbls))
         viewm2 = dbm2.execute_view("SELECT * FROM ACAPA")
         dbm2.close()
         assert len(view) == len(viewm2)
 
 
-
-if __name__ == "__main__"  :
-    unittest.main ()
+if __name__ == "__main__":
+    unittest.main()

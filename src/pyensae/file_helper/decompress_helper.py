@@ -2,10 +2,14 @@
 @file
 @brief Various functions to decompress files
 """
-import zipfile, tarfile, os, gzip
+import zipfile
+import tarfile
+import os
+import gzip
 from pyquickhelper import noLOG
 
-def decompress_zip(filename, whereTo = ".", fLOG = noLOG) :
+
+def decompress_zip(filename, whereTo=".", fLOG=noLOG):
     """
     unzip a zip file
 
@@ -14,30 +18,31 @@ def decompress_zip(filename, whereTo = ".", fLOG = noLOG) :
     @param      fLOG            logging function
     @return                     return the list of decompressed files
     """
-    file = zipfile.ZipFile (filename, "r")
+    file = zipfile.ZipFile(filename, "r")
     files = []
-    for info in file.infolist () :
-        if not os.path.exists (info.filename) :
-            data = file.read (info.filename)
-            tos = os.path.join (whereTo, info.filename)
-            if not os.path.exists (tos) :
+    for info in file.infolist():
+        if not os.path.exists(info.filename):
+            data = file.read(info.filename)
+            tos = os.path.join(whereTo, info.filename)
+            if not os.path.exists(tos):
                 finalfolder = os.path.split(tos)[0]
-                if not os.path.exists (finalfolder) :
-                    fLOG ("    creating folder ", finalfolder)
-                    os.makedirs (finalfolder)
-                if not info.filename.endswith ("/") :
-                    u = open (tos, "wb")
-                    u.write ( data )
+                if not os.path.exists(finalfolder):
+                    fLOG("    creating folder ", finalfolder)
+                    os.makedirs(finalfolder)
+                if not info.filename.endswith("/"):
+                    u = open(tos, "wb")
+                    u.write(data)
                     u.close()
-                    files.append (tos)
-                    fLOG ("    unzipped ", info.filename, " to ", tos)
-            elif not tos.endswith("/") :
-                files.append (tos)
-        elif not info.filename.endswith ("/") :
-            files.append (info.filename)
+                    files.append(tos)
+                    fLOG("    unzipped ", info.filename, " to ", tos)
+            elif not tos.endswith("/"):
+                files.append(tos)
+        elif not info.filename.endswith("/"):
+            files.append(info.filename)
     return files
 
-def decompress_targz(filename, whereTo = ".", fLOG = noLOG) :
+
+def decompress_targz(filename, whereTo=".", fLOG=noLOG):
     """
     decompress a tar.gz file
 
@@ -49,10 +54,11 @@ def decompress_targz(filename, whereTo = ".", fLOG = noLOG) :
     tfile = tarfile.open(filename, 'r:gz')
     files = tfile.getmembers()
     tfile.extractall(whereTo)
-    t = [ os.path.join(whereTo, f.name) for f in files ]
-    return [ f for f in t if os.path.isfile(f) ]
+    t = [os.path.join(whereTo, f.name) for f in files]
+    return [f for f in t if os.path.isfile(f)]
 
-def decompress_gz(filename, whereTo = ".", fLOG = noLOG) :
+
+def decompress_gz(filename, whereTo=".", fLOG=noLOG):
     """
     decompress a tar.gz file
 
@@ -61,10 +67,10 @@ def decompress_gz(filename, whereTo = ".", fLOG = noLOG) :
     @param      fLOG            logging function
     @return                     return the list of decompressed files (only one)
     """
-    if not filename.endswith(".gz") :
+    if not filename.endswith(".gz"):
         raise NameError("the file should end with .gz: " + filename)
     dest = os.path.join(whereTo, filename[:-3])
     with gzip.open(filename, 'rb') as f:
-        with open(dest, "wb") as g :
+        with open(dest, "wb") as g:
             g.write(f.read())
-    return [ dest ]
+    return [dest]

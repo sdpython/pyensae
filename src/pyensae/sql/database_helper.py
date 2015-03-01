@@ -6,16 +6,17 @@
 import os
 from .database_main import Database
 
-def import_flatfile_into_database (
-                    filedb,
-                    filetext,
-                    table   = None,
-                    header  = True,
-                    columns = None,
-                    engine  = 'SQLite',
-                    host    = 'localhost',
-                    add_key = None,
-                    fLOG    = print) :
+
+def import_flatfile_into_database(
+        filedb,
+        filetext,
+        table=None,
+        header=True,
+        columns=None,
+        engine='SQLite',
+        host='localhost',
+        add_key=None,
+        fLOG=print):
     """
 
     Function which imports a file into a database.
@@ -44,20 +45,21 @@ def import_flatfile_into_database (
     @endexample
     """
     # connection
-    db = Database (filedb, engine = engine, host = host, LOG = fLOG)
-    db.connect ()
+    db = Database(filedb, engine=engine, host=host, LOG=fLOG)
+    db.connect()
 
-    if table is None :
-        table = os.path.splitext(os.path.split(filetext)[-1])[0].replace(".","").replace(",","")
+    if table is None:
+        table = os.path.splitext(
+            os.path.split(filetext)[-1])[0].replace(".", "").replace(",", "")
 
-    if db.has_table (table) :
-        fLOG ("remove ", table)
-        db.remove_table (table)
+    if db.has_table(table):
+        fLOG("remove ", table)
+        db.remove_table(table)
 
-    if header :
+    if header:
         columns = None
 
-    db.import_table_from_flat_file (filetext, table, columns = columns,
-                                    header = header, add_key = add_key)
+    db.import_table_from_flat_file(filetext, table, columns=columns,
+                                   header=header, add_key=add_key)
 
-    db.close ()
+    db.close()

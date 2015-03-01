@@ -2,12 +2,16 @@
 @file
 @brief Download stock prices (from Yahoo website) and other prices
 """
-import os, urllib.request, urllib.error, datetime
-import pandas, numpy
-
+import os
+import urllib.request
+import urllib.error
+import datetime
+import pandas
+import numpy
 
 
 class StockPrices:
+
     """
     defines a class containing stock prices, provides basic functions,
     the class uses `pandas <http://pandas.pydata.org/>`_ to load the data.
@@ -21,8 +25,8 @@ class StockPrices:
     """
 
     def __init__(self, tick, url="yahoo", folder="cache",
-                begin = None, end = None, sep = ",",
-                intern=False):
+                 begin=None, end=None, sep=",",
+                 intern=False):
         """
         Loads a stock price from either a url or a folder where the data was cached.
         If a filename ``<folder>/<tick>.<day1>.<day2>.txt`` already exists, it takes it from here.
@@ -74,76 +78,100 @@ class StockPrices:
         You should also look at `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_.
 
         """
-        if isinstance(url, pandas.DataFrame) :
+        if isinstance(url, pandas.DataFrame):
             self.datadf = url
             self.tickname = tick
             if "Date" not in url.columns:
-                raise Exception("the dataframe does not contain any column 'Date': {0}".format(",".join( _ for _ in url.columns)))
+                raise Exception(
+                    "the dataframe does not contain any column 'Date': {0}".format(
+                        ",".join(
+                            _ for _ in url.columns)))
         elif isinstance(tick, str) and os.path.exists(tick):
             try:
                 self.datadf = pandas.read_csv(tick, sep=sep)
-            except Exception as e :
-                with open(tick,"r") as t : content = t.read()
-                if "Firewall Authentication" in content :
-                    raise Exception("pandas cannot parse the file, check your have access to internet") from e
-                else :
+            except Exception as e:
+                with open(tick, "r") as t:
+                    content = t.read()
+                if "Firewall Authentication" in content:
+                    raise Exception(
+                        "pandas cannot parse the file, check your have access to internet") from e
+                else:
                     raise e
-        else :
-            if not os.path.exists(folder) :
+        else:
+            if not os.path.exists(folder):
                 try:
                     os.mkdir(folder)
-                except PermissionError as e :
-                    raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")") from e
+                except PermissionError as e:
+                    raise Exception(
+                        "unable to create directory " +
+                        folder +
+                        ", check you execute the program in a folder you have permission to modify (" +
+                        os.getcwd() +
+                        ")") from e
             self.tickname = tick
 
-            if begin is None :
-                begin = datetime.datetime(2000,1,3)
-            if end is None :
+            if begin is None:
+                begin = datetime.datetime(2000, 1, 3)
+            if end is None:
                 now = datetime.datetime.now()
                 end = now - datetime.timedelta(1)
 
             sbeg = begin.strftime("%Y-%m-%d")
             send = end.strftime("%Y-%m-%d")
-            name = os.path.join(folder, tick + ".{0}.{1}.txt".format(sbeg, send))
+            name = os.path.join(
+                folder,
+                tick +
+                ".{0}.{1}.txt".format(
+                    sbeg,
+                    send))
 
-            if not os.path.exists (name) :
-                if url == "yahoo" :
+            if not os.path.exists(name):
+                if url == "yahoo":
                     url = "http://ichart.finance.yahoo.com/table.csv?s=%s&d={0}&e={1}&f={2}&g=d&a={3}&b={4}&c={5}&ignore=.csv".format(
-                                    end.month-1, end.day, end.year,
-                                    begin.month-1,begin.day, begin.year)
+                        end.month - 1, end.day, end.year,
+                        begin.month - 1, begin.day, begin.year)
                     url = url % tick
-                else :
-                    raise Exception("unable to download data from the following website" + url)
+                else:
+                    raise Exception(
+                        "unable to download data from the following website" +
+                        url)
 
-                try :
-                    u = urllib.request.urlopen (url)
-                    text = u.read ()
-                    u.close ()
-                except urllib.error.HTTPError as e :
-                    raise Exception ("unable to load tick " + tick) from e
+                try:
+                    u = urllib.request.urlopen(url)
+                    text = u.read()
+                    u.close()
+                except urllib.error.HTTPError as e:
+                    raise Exception("unable to load tick " + tick) from e
 
-                if len(text) < 10 :
+                if len(text) < 10:
                     raise Exception("nothing to download for " + tick)
 
                 try:
-                    f = open (name, "wb")
+                    f = open(name, "wb")
                     f.write(text)
-                    f.close ()
-                except PermissionError as e :
-                    raise Exception("unable to create directory " + folder + ", check you execute the program in a folder you have permission to modify (" + os.getcwd() + ")") from e
+                    f.close()
+                except PermissionError as e:
+                    raise Exception(
+                        "unable to create directory " +
+                        folder +
+                        ", check you execute the program in a folder you have permission to modify (" +
+                        os.getcwd() +
+                        ")") from e
 
             try:
                 self.datadf = pandas.read_csv(name, sep=sep)
-            except Exception as e :
-                with open(tick,"r") as t : content = t.read()
-                if "Firewall Authentication" in content :
-                    raise Exception("pandas cannot parse the file, check your have access to internet") from e
-                else :
+            except Exception as e:
+                with open(tick, "r") as t:
+                    content = t.read()
+                if "Firewall Authentication" in content:
+                    raise Exception(
+                        "pandas cannot parse the file, check your have access to internet") from e
+                else:
                     raise e
 
         if not intern:
             self.datadf = self.datadf.sort("Date")
-            self.datadf.reset_index(drop = True, inplace=True)
+            self.datadf.reset_index(drop=True, inplace=True)
             self.datadf.set_index("Date", drop=False, inplace=True)
 
     def __getitem__(self, key):
@@ -153,7 +181,8 @@ class StockPrices:
         @param      key     key
         @return             StockPrice
         """
-        return StockPrices(self.tick, self.datadf.__getitem__(key), intern=True)
+        return StockPrices(
+            self.tick, self.datadf.__getitem__(key), intern=True)
 
     def __len__(self):
         """
@@ -201,22 +230,23 @@ class StockPrices:
         @return                         missing dates (or None if issues)
         """
         da = self.dataframe["Date"]
-        da2 = { v:1 for v in da }
+        da2 = {v: 1 for v in da}
 
-        if isinstance(trading_dates, dict) :
+        if isinstance(trading_dates, dict):
             se = trading_dates
-        else :
-            se = trading_dates["Date"] if "Date" in trading_dates.columns else trading_dates.index
+        else:
+            se = trading_dates[
+                "Date"] if "Date" in trading_dates.columns else trading_dates.index
 
-        tbl = [ { "Date":v } for v in se if v not in da2 ]
-        if len(tbl) > 0 :
+        tbl = [{"Date": v} for v in se if v not in da2]
+        if len(tbl) > 0:
             df = pandas.DataFrame(tbl)
             return df.sort("Date")
-        else :
+        else:
             return None
 
     @staticmethod
-    def available_dates ( listStockPrices, missing = True, field="Close") :
+    def available_dates(listStockPrices, missing=True, field="Close"):
         """
         Returns the list of values (Open or High or Low or Close or Volume) from each stock
         for all the available_dates for a list of stock prices.
@@ -231,49 +261,62 @@ class StockPrices:
         @return                         matrix with the available dates for each stock
         """
         dates = []
-        if isinstance(field,str):
-            for st in listStockPrices :
+        if isinstance(field, str):
+            for st in listStockPrices:
                 lifi = list(st.dataframe.columns)
                 index = lifi.index(field)
-                for row in st.dataframe.values :
+                for row in st.dataframe.values:
                     date = row[0]
-                    dates.append ( { "Date":date, "tick": st.tick, field:row[index] } )
+                    dates.append(
+                        {"Date": date, "tick": st.tick, field: row[index]})
         elif isinstance(field, tuple) or isinstance(field, list):
-            for st in listStockPrices :
+            for st in listStockPrices:
                 lifi = list(st.dataframe.columns)
-                indexes = [ lifi.index(f) for f in field ]
-                for row in st.dataframe.values :
+                indexes = [lifi.index(f) for f in field]
+                for row in st.dataframe.values:
                     date = row[0]
-                    r = { "Date":date, "tick": st.tick, }
-                    for i,f in zip(indexes,field) : r[f] = row[i]
+                    r = {"Date": date, "tick": st.tick, }
+                    for i, f in zip(indexes, field):
+                        r[f] = row[i]
                     dates.append(r)
-        else :
+        else:
             raise TypeError("field must be a string, a tuple or a list")
 
         df = pandas.DataFrame(dates)
-        if isinstance(field,str):
+        if isinstance(field, str):
             piv = df.pivot("Date", "tick", field)
         elif isinstance(field, tuple) or isinstance(field, list):
-            pivs = [ df.pivot("Date", "tick", f) for f in field ]
-            for fi,piv in zip(field,pivs):
-                col = [ c + "," + fi for c in piv.columns ]
+            pivs = [df.pivot("Date", "tick", f) for f in field]
+            for fi, piv in zip(field, pivs):
+                col = [c + "," + fi for c in piv.columns]
                 piv.columns = col
-            if len(pivs)==1: piv = pivs[0]
-            else :
-                piv = pivs[0].merge(pivs[1],how="outer", left_index=True, right_index=True)
+            if len(pivs) == 1:
+                piv = pivs[0]
+            else:
+                piv = pivs[0].merge(
+                    pivs[1],
+                    how="outer",
+                    left_index=True,
+                    right_index=True)
                 for p in pivs[2:]:
-                    piv = piv.merge(p,how="outer", left_index=True, right_index=True)
-        else :
+                    piv = piv.merge(
+                        p,
+                        how="outer",
+                        left_index=True,
+                        right_index=True)
+        else:
             raise TypeError("field must be a string, a tuple or a list")
 
-        if missing :
-            def count_nan(row) :
+        if missing:
+            def count_nan(row):
                 n = 0
-                for k,v in row.items():
-                    if k == "Date": continue
-                    if numpy.isnan(v) : n+= 1
+                for k, v in row.items():
+                    if k == "Date":
+                        continue
+                    if numpy.isnan(v):
+                        n += 1
                 return n
-            piv ["missing"] = piv.apply( lambda row : count_nan(row), axis=1 )
+            piv["missing"] = piv.apply(lambda row: count_nan(row), axis=1)
 
         piv = piv.sort()
         return piv
@@ -298,18 +341,19 @@ class StockPrices:
         @return                     new series
         """
         da = self.dataframe["Date"]
-        da2 = { v:1 for v in da }
+        da2 = {v: 1 for v in da}
 
-        if isinstance(trading_dates, dict) :
+        if isinstance(trading_dates, dict):
             se = trading_dates
-        else :
-            se = trading_dates["Date"] if "Date" in trading_dates.columns else trading_dates.index
+        else:
+            se = trading_dates[
+                "Date"] if "Date" in trading_dates.columns else trading_dates.index
 
-        tbl = { v:1 for v in se if v in da2 }
-        if len(tbl) > 0 :
-            ave = self.dataframe.apply(lambda row : row["Date"] in tbl, axis=1)
-            return StockPrices( self.tickname, self.dataframe.ix[ ave ,: ] )
-        else :
+        tbl = {v: 1 for v in se if v in da2}
+        if len(tbl) > 0:
+            ave = self.dataframe.apply(lambda row: row["Date"] in tbl, axis=1)
+            return StockPrices(self.tickname, self.dataframe.ix[ave, :])
+        else:
             raise Exception("no trading dates left")
 
     def returns(self):
@@ -319,25 +363,27 @@ class StockPrices:
         @param      col     column to use to compute the returns
         @return             StockPrices
         """
-        df    = self.dataframe
-        fd    = self.FirstDate()
-        ld    = self.LastDate()
+        df = self.dataframe
+        fd = self.FirstDate()
+        ld = self.LastDate()
 
-        plus  = df ["Date"] > fd    # dates from FirstDate+1 to LastDate
-        moins = df ["Date"] < ld    # dates from FirstDate to LastDate-1
+        plus = df["Date"] > fd    # dates from FirstDate+1 to LastDate
+        moins = df["Date"] < ld    # dates from FirstDate to LastDate-1
 
-        res   = df.ix[plus , ["Date", "Volume"]]
+        res = df.ix[plus, ["Date", "Volume"]]
 
         for k in df.columns:
-            if k in ["Date", "Volume"] : continue
-            m = numpy.array(df.ix[moins,k])
-            p = numpy.array(df.ix[plus,k])
+            if k in ["Date", "Volume"]:
+                continue
+            m = numpy.array(df.ix[moins, k])
+            p = numpy.array(df.ix[plus, k])
             res[k] = (p - m) / m
 
         return StockPrices(self.tickname, res)
 
     @staticmethod
-    def covariance(listStockPrices, missing = True, field="Close", cov = True, ret = False) :
+    def covariance(
+            listStockPrices, missing=True, field="Close", cov=True, ret=False):
         """
         computes the covariances matrix (of returns)
 
@@ -347,38 +393,41 @@ class StockPrices:
         @param      ret                 if True, also add the returns
         @return                         square dataframe or 2 dataframe (returns, correlation)
         """
-        listStockPrices = [ v.returns() for v in listStockPrices ]
-        mat = StockPrices.available_dates (listStockPrices, False, field)
+        listStockPrices = [v.returns() for v in listStockPrices]
+        mat = StockPrices.available_dates(listStockPrices, False, field)
 
         npmat = numpy.matrix(mat)
-        cov = numpy.cov (npmat.transpose()) if cov else numpy.corrcoef (npmat.transpose())
-        names = [ v.tick for v in listStockPrices ]
-        ret_mat = pandas.DataFrame (cov, columns = names, index = names)
+        cov = numpy.cov(
+            npmat.transpose()) if cov else numpy.corrcoef(
+            npmat.transpose())
+        names = [v.tick for v in listStockPrices]
+        ret_mat = pandas.DataFrame(cov, columns=names, index=names)
 
-        if ret :
-            rows = [ {"tick":v.tick, "return": v.dataframe[field].mean() } for v in listStockPrices ]
+        if ret:
+            rows = [{"tick": v.tick, "return": v.dataframe[field].mean()}
+                    for v in listStockPrices]
             ret = pandas.DataFrame(rows)
             ret.set_index("tick", drop=True, inplace=True)
             return ret, ret_mat
-        else :
+        else:
             return ret_mat
 
-    def plot(self, begin = None, end = None,
-                field="Close", date_format = None,
-                existing = None, axis = 1,
-                **args):
+    def plot(self, begin=None, end=None,
+             field="Close", date_format=None,
+             existing=None, axis=1,
+             **args):
         """
         see :meth:`draw <pyensae.finance.astock.StockPrices.draw>`
         """
         return StockPrices.draw(self, begin=begin, end=end,
-                        field=field, date_format=date_format,
-                        existing=existing, axis = axis, **args)
+                                field=field, date_format=date_format,
+                                existing=existing, axis=axis, **args)
 
     @staticmethod
-    def draw(listStockPrices, begin = None, end = None,
-                field="Close", date_format = None,
-                existing = None, axis = 1,
-                **args) :
+    def draw(listStockPrices, begin=None, end=None,
+             field="Close", date_format=None,
+             existing=None, axis=1,
+             **args):
         """
         Draw a graph showing one or several time series.
         The example was taken `here <http://matplotlib.org/examples/api/date_demo.html>`_.
@@ -420,100 +469,116 @@ class StockPrices:
         @endexample
         """
         if isinstance(listStockPrices, StockPrices):
-            listStockPrices = [ listStockPrices ]
+            listStockPrices = [listStockPrices]
 
-        data = StockPrices.available_dates(listStockPrices, missing = False, field = field)
-        if begin is None :
-            if end is not None :
-                data = data [ data.index <= end ]
-        else :
-            if end is not None :
-                data = data [ (data.index >= begin) &  (data.index <= end)]
-            else :
-                data = data [ data.index >= begin ]
+        data = StockPrices.available_dates(
+            listStockPrices,
+            missing=False,
+            field=field)
+        if begin is None:
+            if end is not None:
+                data = data[data.index <= end]
+        else:
+            if end is not None:
+                data = data[(data.index >= begin) & (data.index <= end)]
+            else:
+                data = data[data.index >= begin]
 
-        dates = [ datetime.datetime.strptime(_, '%Y-%m-%d') for _ in data.index ]
+        dates = [datetime.datetime.strptime(_, '%Y-%m-%d') for _ in data.index]
         begin = dates[0]
-        end   = dates[-1]
+        end = dates[-1]
 
-        def price(x): return '%1.2f'%x
+        def price(x): return '%1.2f' % x
 
         import matplotlib
         import matplotlib.pyplot as plt
         import matplotlib.dates as mdates
 
         if existing is not None:
-            if not isinstance(existing,list) and not isinstance(existing,tuple):
+            if not isinstance(existing, list) and not isinstance(
+                    existing, tuple):
                 raise Exception("existing must be a list or a tuple")
-            if len(existing) != 2 :
+            if len(existing) != 2:
                 raise Exception("existing must contain two elements: fix,ax")
             fig, ax = existing
             ex_h, ex_l = ax.get_legend_handles_labels()
             ex_l = tuple(ex_l)
             ex_h = tuple(ex_h)
-            if axis == 2 :
+            if axis == 2:
                 ax = ax.twinx()
-        else :
+        else:
             fig, ax = plt.subplots(**args)
             ex_h, ex_l = tuple(), tuple()
 
-        curve = [ ]
-        for stock in data.columns :
-            if axis == 2 :
-                curve.append ( ax.plot(dates, data[stock], "r", linestyle='solid', label=str(stock)) )
-            else :
-                curve.append ( ax.plot(dates, data[stock], linestyle='solid', label=str(stock)) )
+        curve = []
+        for stock in data.columns:
+            if axis == 2:
+                curve.append(
+                    ax.plot(
+                        dates,
+                        data[stock],
+                        "r",
+                        linestyle='solid',
+                        label=str(stock)))
+            else:
+                curve.append(
+                    ax.plot(
+                        dates,
+                        data[stock],
+                        linestyle='solid',
+                        label=str(stock)))
 
-        if existing is None :
+        if existing is None:
             ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
             if len(dates) < 30:
-                days     = mdates.DayLocator()
+                days = mdates.DayLocator()
                 ax.xaxis.set_major_locator(days)
                 ax.xaxis.set_minor_locator(days)
-                if date_format is not None :
+                if date_format is not None:
                     fmt = mdates.DateFormatter(date_format)
                     ax.xaxis.set_major_formatter(fmt)
-                else :
-                    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
+                else:
+                    ax.xaxis.set_major_formatter(
+                        mdates.DateFormatter("%Y-%m-%d"))
             elif len(dates) < 500:
-                months   = mdates.MonthLocator()
-                days     = mdates.DayLocator()
+                months = mdates.MonthLocator()
+                days = mdates.DayLocator()
                 ax.xaxis.set_major_locator(months)
                 ax.xaxis.set_minor_locator(days)
                 ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
-                if date_format is not None :
+                if date_format is not None:
                     fmt = mdates.DateFormatter(date_format)
                     ax.xaxis.set_major_formatter(fmt)
-                else :
+                else:
                     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
-            else :
-                years    = mdates.YearLocator()
-                months   = mdates.MonthLocator()
+            else:
+                years = mdates.YearLocator()
+                months = mdates.MonthLocator()
                 ax.xaxis.set_major_locator(years)
                 ax.xaxis.set_minor_locator(months)
-                if date_format is not None :
+                if date_format is not None:
                     fmt = mdates.DateFormatter(date_format)
                     ax.xaxis.set_major_formatter(fmt)
-                else :
+                else:
                     ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
 
         ax.set_xlim(begin, end)
         ax.format_ydata = price
         fig.autofmt_xdate()
 
-        if axis == 2 :
-            if isinstance(curve,list):
-                curve = [_[0] for _ in curve ]
-            ax.legend( ex_h + tuple(curve), ex_l + tuple(data.columns))
-        else :
+        if axis == 2:
+            if isinstance(curve, list):
+                curve = [_[0] for _ in curve]
+            ax.legend(ex_h + tuple(curve), ex_l + tuple(data.columns))
+        else:
             ax.grid(True)
-            ax.legend( ex_l + tuple(data.columns))
+            ax.legend(ex_l + tuple(data.columns))
 
         # avoid matplotlib to crash later
         plt.close('all')
         return fig, ax, plt
 
-    def to_csv(self, filename, sep = "\t", index=False, **params):
+    def to_csv(self, filename, sep="\t", index=False, **params):
         """
         saves the file in text format
         see `to_csv <http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_csv.html>`_
@@ -523,11 +588,11 @@ class StockPrices:
         @param      index           to keep or drop the index
         @param      params          other parameters
         """
-        self.dataframe.to_csv(filename, sep=sep,index=index, **params)
+        self.dataframe.to_csv(filename, sep=sep, index=index, **params)
 
-    def to_excel(self,  excel_writer, **params):
+    def to_excel(self, excel_writer, **params):
         """
         saves the file in Excel format,
         see `to_excel <http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_excel.html>`_
         """
-        self.dataframe.to_excel(excel_writer,**params)
+        self.dataframe.to_excel(excel_writer, **params)

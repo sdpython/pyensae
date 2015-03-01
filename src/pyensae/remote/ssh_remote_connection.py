@@ -3,11 +3,16 @@
 @brief A class to help connect with a remote machine and send command line.
 """
 
-import time, socket, os, io
+import time
+import socket
+import os
+import io
 
 from pyquickhelper import noLOG
 
+
 class ASSHClient():
+
     """
     A simple class to access to remote machine through SSH.
     It requires modules
@@ -49,9 +54,12 @@ class ASSHClient():
         import paramiko
         self.connection = paramiko.SSHClient()
         self.connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        self.connection.connect(self.server, username=self.username, password=self.password)
+        self.connection.connect(
+            self.server,
+            username=self.username,
+            password=self.password)
 
-    def execute_command(self, command, no_exception = False, fill_stdin = None):
+    def execute_command(self, command, no_exception=False, fill_stdin=None):
         """
         execute a command line, it raises an error
         if there is an error
@@ -67,7 +75,7 @@ class ASSHClient():
             ssh.execute_command("hdfs dfs -ls")
 
         """
-        stdin,stdout,stderr = self.connection.exec_command(command)
+        stdin, stdout, stderr = self.connection.exec_command(command)
 
         if fill_stdin is not None:
             if isinstance(fill_stdin, list):
@@ -76,7 +84,9 @@ class ASSHClient():
                 stdin.write(fill_stdin)
                 stdin.flush()
             else:
-                raise TypeError("fill_stdin must be a string, not: {0}".format(type(fill_stdin)))
+                raise TypeError(
+                    "fill_stdin must be a string, not: {0}".format(
+                        type(fill_stdin)))
 
         stdin.close()
 
@@ -84,18 +94,24 @@ class ASSHClient():
         out = stdout.read()
 
         # weird...
-        if isinstance(err, str) and err.startswith("b'") : err = eval(err)
-        if isinstance(out, str) and out.startswith("b'") : out = eval(out)
+        if isinstance(err, str) and err.startswith("b'"):
+            err = eval(err)
+        if isinstance(out, str) and out.startswith("b'"):
+            out = eval(out)
 
         if isinstance(err, bytes):
             err = err.decode("utf-8")
         if isinstance(out, bytes):
             out = out.decode("utf-8")
 
-        if not no_exception and len(err) > 0 :
-            raise Exception("unable to run: {0}\nOUT:\n{1}\nERR:\n{2}".format(command, out, err))
+        if not no_exception and len(err) > 0:
+            raise Exception(
+                "unable to run: {0}\nOUT:\n{1}\nERR:\n{2}".format(
+                    command,
+                    out,
+                    err))
 
-        return out,err
+        return out, err
 
     def close(self):
         """
@@ -140,13 +156,15 @@ class ASSHClient():
         if isinstance(localpath, str):
             filename = os.path.split(localpath)[-1]
             self.upload(localpath, filename)
-            self.execute_command("hdfs dfs -put {0} {1}".format(filename, remotepath))
+            self.execute_command(
+                "hdfs dfs -put {0} {1}".format(filename, remotepath))
             self.execute_command("rm {0}".format(filename))
         else:
             self.upload(localpath, ".")
             for afile in localpath:
                 filename = os.path.split(afile)[-1]
-                self.execute_command("hdfs dfs -put {0} {1}".format(filename, remotepath))
+                self.execute_command(
+                    "hdfs dfs -put {0} {1}".format(filename, remotepath))
                 self.execute_command("rm {0}".format(filename))
 
         return remotepath
@@ -169,7 +187,7 @@ class ASSHClient():
                 sftp.get(path, localpath + "/" + filename)
         sftp.close()
 
-    def download_cluster(self, remotepath, localpath, merge = False):
+    def download_cluster(self, remotepath, localpath, merge=False):
         """
         download a file directly from the cluster to the local machine
         @param      localpath       local file
@@ -181,14 +199,16 @@ class ASSHClient():
         cget = "getmerge" if merge else "get"
         if isinstance(remotepath, str):
             filename = os.path.split(localpath)[-1]
-            self.execute_command("hdfs dfs -{2} {0} {1}".format(remotepath, filename, cget))
+            self.execute_command(
+                "hdfs dfs -{2} {0} {1}".format(remotepath, filename, cget))
             self.download(filename, localpath)
             self.execute_command("rm {0}".format(filename))
         else:
             tod = []
             for afile in remotepath:
                 filename = os.path.split(afile)[-1]
-                self.execute_command("hdfs dfs -{2} {0} {1}".format(afile, filename, cget))
+                self.execute_command(
+                    "hdfs dfs -{2} {0} {1}".format(afile, filename, cget))
                 tod.append(filename)
             self.download(tod, localpath)
             for afile in tod:
@@ -196,7 +216,7 @@ class ASSHClient():
 
         return remotepath
 
-    _allowed_form = { None:None, "plain":None, "html":None }
+    _allowed_form = {None: None, "plain": None, "html": None}
 
     @staticmethod
     def _get_out_format(format):
@@ -207,18 +227,24 @@ class ASSHClient():
         @return                 function
         """
         if format not in ASSHClient._allowed_form:
-            raise KeyError("unexpected format, it should be in " + ",".join(ASSHClient._allowed_form.keys()))
+            raise KeyError(
+                "unexpected format, it should be in " +
+                ",".join(
+                    ASSHClient._allowed_form.keys()))
         func = ASSHClient._allowed_form[format]
         if func is None:
-            if format is None: func = lambda s : s
+            if format is None:
+                func = lambda s: s
             elif format == "plain":
                 import ansiconv
+
                 def convert_plain(s):
                     return ansiconv.to_plain(s)
                 func = convert_plain
             elif format == "html":
                 from ansi2html import Ansi2HTMLConverter
                 conv = Ansi2HTMLConverter()
+
                 def convert_html(s):
                     return conv.convert(s)
                 func = convert_html
@@ -226,11 +252,11 @@ class ASSHClient():
         return func
 
     def open_session(self,
-                        no_exception = False,
-                        timeout = 1.0,
-                        add_eol = True,
-                        prompts = ("~$", ">>>"),
-                        out_format = None):
+                     no_exception=False,
+                     timeout=1.0,
+                     add_eol=True,
+                     prompts=("~$", ">>>"),
+                     out_format=None):
         """
         open a session with method `invoke_shell <http://docs.paramiko.org/en/latest/api/client.html?highlight=invoke_shell#paramiko.client.SSHClient.invoke_shell>`_
 
@@ -264,19 +290,23 @@ class ASSHClient():
         if self.connection is None:
             raise Exception("No open connection.")
         if self.session is not None:
-            raise Exception("A session is already open. Cannot open a second one.")
+            raise Exception(
+                "A session is already open. Cannot open a second one.")
         if out_format not in ASSHClient._allowed_form:
-            raise KeyError("unexpected format, it should be in {0}".format(";".join(str(_) for _ in ASSHClient._allowed_form.keys())))
+            raise KeyError(
+                "unexpected format, it should be in {0}".format(
+                    ";".join(
+                        str(_) for _ in ASSHClient._allowed_form.keys())))
 
         self.session = self.connection.invoke_shell(width=300, height=1000)
         self.session_params = {
-                    "no_exception":no_exception,
-                    "timeout":timeout,
-                    "add_eol":add_eol,
-                    "prompts":[] if prompts is None else prompts,
-                    "out_format":out_format,
-                    "out_func":ASSHClient._get_out_format(out_format)
-                    }
+            "no_exception": no_exception,
+            "timeout": timeout,
+            "add_eol": add_eol,
+            "prompts": [] if prompts is None else prompts,
+            "out_format": out_format,
+            "out_func": ASSHClient._get_out_format(out_format)
+        }
 
         self.session.settimeout(timeout)
 
@@ -315,7 +345,7 @@ class ASSHClient():
         prompts = self.session_params["prompts"]
         timeout = self.session_params["timeout"]
         add_eol = self.session_params["add_eol"]
-        func    = self.session_params["out_func"]
+        func = self.session_params["out_func"]
 
         if fillin is not None:
             self.session.send(fillin.encode("utf-8"))
@@ -337,10 +367,10 @@ class ASSHClient():
             if time.perf_counter() - begin > timeout:
                 break
 
-        return func ( buff.replace("\r","") )
+        return func(buff.replace("\r", ""))
 
     @staticmethod
-    def parse_lsout(out, local_schema = True):
+    def parse_lsout(out, local_schema=True):
         """
         parses the output of a command ls
 
@@ -358,24 +388,25 @@ class ASSHClient():
             names = ["attributes", "code", "alias", "folder",
                      "size", "date", "time", "name"]
         kout = out
-        out = out.replace("\r","").split("\n")
-        out = [ _ for _ in out if len(_.split()) > 3 ]
-        if len(out) == 0 :
+        out = out.replace("\r", "").split("\n")
+        out = [_ for _ in out if len(_.split()) > 3]
+        if len(out) == 0:
             df = pandas.DataFrame(columns=names)
             return df
 
         try:
-            out_ = [ _.split() for _ in out ]
+            out_ = [_.split() for _ in out]
             df = pandas.DataFrame(data=out_, columns=names)
-        except AssertionError as e :
+        except AssertionError as e:
             out = "\n".join(out)
             buf = io.StringIO(out)
             try:
-                df = pandas.read_fwf(buf, names =  names, index=False)
-            except ValueError as e :
-                raise ValueError("unable to parse output:\n{0}".format(kout)) from e
+                df = pandas.read_fwf(buf, names=names, index=False)
+            except ValueError as e:
+                raise ValueError(
+                    "unable to parse output:\n{0}".format(kout)) from e
 
-        df["isdir"] = df.apply( lambda r : r["attributes"][0] == "d", axis= 1)
+        df["isdir"] = df.apply(lambda r: r["attributes"][0] == "d", axis=1)
         return df
 
     def ls(self, path):
@@ -387,8 +418,8 @@ class ASSHClient():
 
         .. versionadded:: 1.1
         """
-        out,err = self.execute_command("ls -l " + path)
-        if len(err) > 0 :
+        out, err = self.execute_command("ls -l " + path)
+        if len(err) > 0:
             raise Exception("unable to execute ls " + path + "\nERR:\n" + err)
         return ASSHClient.parse_lsout(out)
 
@@ -401,9 +432,13 @@ class ASSHClient():
 
         .. versionadded:: 1.1
         """
-        out,err = self.execute_command("hdfs dfs -ls " + path)
-        if len(err) > 0 :
-            raise Exception("unable to execute hdfs dfs -ls " + path + "\nERR:\n" + err)
+        out, err = self.execute_command("hdfs dfs -ls " + path)
+        if len(err) > 0:
+            raise Exception(
+                "unable to execute hdfs dfs -ls " +
+                path +
+                "\nERR:\n" +
+                err)
         return ASSHClient.parse_lsout(out, False)
 
     def exists(self, path):
@@ -417,10 +452,10 @@ class ASSHClient():
         """
         try:
             df = self.ls(path)
-        except Exception as e :
+        except Exception as e:
             if "No such file or directory" in str(e):
                 return False
-        ex = df [ df.name == path ]
+        ex = df[df.name == path]
         return len(ex) > 0
 
     def dfs_exists(self, path):
@@ -434,18 +469,20 @@ class ASSHClient():
         """
         try:
             df = self.dfs_ls(path)
-        except Exception as e :
+        except Exception as e:
             if "No such file or directory" in str(e):
                 return False
             else:
                 raise e
-        if len(df) == 0 :
+        if len(df) == 0:
             # it is a folder
             return True
-        ex = df [ df.name == path ]
-        if len(ex) > 0 : return True
-        ex = df [ df.apply( lambda r : r["name"].startswith(path + "/"), axis= 1) ]
-        if len(ex) > 0 : return True
+        ex = df[df.name == path]
+        if len(ex) > 0:
+            return True
+        ex = df[df.apply(lambda r: r["name"].startswith(path + "/"), axis=1)]
+        if len(ex) > 0:
+            return True
         return False
 
     def dfs_mkdir(self, path):
@@ -458,7 +495,7 @@ class ASSHClient():
         """
         return self.execute_command("hdfs dfs -mkdir " + path)
 
-    def dfs_rm(self, path, recursive = False):
+    def dfs_rm(self, path, recursive=False):
         """
         removes a file on the cluster
 
@@ -468,21 +505,29 @@ class ASSHClient():
         .. versionadded:: 1.1
         """
         cmd = "hdfs dfs -rm "
-        if recursive : cmd += "-r "
-        out, err = self.execute_command(cmd + path, no_exception = True)
-        if out.startswith("Moved"): return out, err
+        if recursive:
+            cmd += "-r "
+        out, err = self.execute_command(cmd + path, no_exception=True)
+        if out.startswith("Moved"):
+            return out, err
         else:
-            raise Exception("unable to remove " + path + "\nOUT\n" + out + "\nERR:\n" + err)
+            raise Exception(
+                "unable to remove " +
+                path +
+                "\nOUT\n" +
+                out +
+                "\nERR:\n" +
+                err)
 
-    def pig_submit(self,    pig_file,
-                            dependencies        = None,
-                            params              = None,
-                            redirection         = "redirection",
-                            local               = False,
-                            stop_on_failure     = False,
-                            check               = False,
-                            no_exception        = True,
-                            fLOG                = noLOG) :
+    def pig_submit(self, pig_file,
+                   dependencies=None,
+                   params=None,
+                   redirection="redirection",
+                   local=False,
+                   stop_on_failure=False,
+                   check=False,
+                   no_exception=True,
+                   fLOG=noLOG):
         """
         submits a PIG script, it first upload the script
         to the default folder and submit it
@@ -533,22 +578,27 @@ class ASSHClient():
 
         if params is not None:
             sparams = ASSHClient.build_command_line_parameters(params)
-            if len(sparams) > 0 :
+            if len(sparams) > 0:
                 sparams = " " + sparams
-        else :
+        else:
             sparams = ""
 
         if redirection is None:
-            cmd = "pig{0}{1}{2} -execute -f {3}{4}".format(slocal, sstop_on_failure, scheck, dest, sparams)
+            cmd = "pig{0}{1}{2} -execute -f {3}{4}".format(
+                slocal,
+                sstop_on_failure,
+                scheck,
+                dest,
+                sparams)
         else:
             cmd = "pig{2}{3}{4} -execute -f {0}{5} 2> {1}.err 1> {1}.out &".format(dest,
-                    redirection, slocal, sstop_on_failure, scheck, sparams)
+                                                                                   redirection, slocal, sstop_on_failure, scheck, sparams)
 
         if isinstance(cmd, list):
             raise TypeError("this should not happen:" + str(cmd))
 
         fLOG("[pig_submit]:", cmd)
-        out, err = self.execute_command(cmd, no_exception = no_exception)
+        out, err = self.execute_command(cmd, no_exception=no_exception)
         return out, err
 
     @staticmethod
@@ -561,11 +611,12 @@ class ASSHClient():
 
         .. versionadded:: 1.1
         """
-        if params is None :
+        if params is None:
             return ""
-        res = [ ]
-        for k,v in sorted(params.items()):
-            if '"' in v : v = v.replace('"', '\\"')
-            one = '-param {0}="{1}"'.format(k,v)
+        res = []
+        for k, v in sorted(params.items()):
+            if '"' in v:
+                v = v.replace('"', '\\"')
+            one = '-param {0}="{1}"'.format(k, v)
             res.append(one)
         return " ".join(res)

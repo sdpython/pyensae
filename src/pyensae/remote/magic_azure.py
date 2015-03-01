@@ -3,7 +3,8 @@
 @file
 @brief Magic command to run PIG script with Azure.
 """
-import sys, os
+import sys
+import os
 import pandas
 
 from pyquickhelper import run_cmd
@@ -14,8 +15,10 @@ from IPython.core.display import HTML
 from .azure_connection import AzureClient, AzureException
 from ..file_helper.jython_helper import run_jython, get_jython_jar, is_java_installed, download_java_standalone
 
+
 @magics_class
 class MagicAzure(Magics):
+
     """
     Defines magic commands to access `blob storage <http://azure.microsoft.com/fr-fr/documentation/articles/storage-dotnet-how-to-use-blobs/>`_
     and `HDInsight <http://azure.microsoft.com/fr-fr/services/hdinsight/>`_.
@@ -51,9 +54,8 @@ class MagicAzure(Magics):
         bs = self.shell.user_ns["remote_azure_blob"]
         return cl, bs
 
-
     @line_magic
-    def azureclient(self,line):
+    def azureclient(self, line):
         """
         returns the AzureClient object
         """
@@ -61,7 +63,7 @@ class MagicAzure(Magics):
         return cl
 
     @line_magic
-    def blobservice(self,line):
+    def blobservice(self, line):
         """
         returns the BlobService object
         """
@@ -69,7 +71,7 @@ class MagicAzure(Magics):
         return bs
 
     @line_magic
-    def blob_open (self, line):
+    def blob_open(self, line):
         """
         Open a connection to blob service.
         It returns objects @see cl AzureClient and `BlobService <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/storage/blobservice.html?highlight=blobservice#azure.storage.blobservice.BlobService>`_.
@@ -82,15 +84,18 @@ class MagicAzure(Magics):
             print("   blob_open <blobstorage> <blobpassword>")
             print("   blob_open")
             print("")
-            print("No parameter means blobstorage, blobpassword will be found in the workspace")
+            print(
+                "No parameter means blobstorage, blobpassword will be found in the workspace")
         else:
-            if len(spl)==2:
-                server,password = spl
+            if len(spl) == 2:
+                server, password = spl
             elif self.shell is not None:
-                server   = self.shell.user_ns.get("blobstorage",None)
-                password = self.shell.user_ns.get("blobpassword",None)
-                if server is None : raise KeyError("unable to find blobstorage")
-                if password is None : raise KeyError("unable to find blobpassword")
+                server = self.shell.user_ns.get("blobstorage", None)
+                password = self.shell.user_ns.get("blobpassword", None)
+                if server is None:
+                    raise KeyError("unable to find blobstorage")
+                if password is None:
+                    raise KeyError("unable to find blobpassword")
             else:
                 raise Exception("No detected workspace.")
 
@@ -106,33 +111,42 @@ class MagicAzure(Magics):
             return cl, bs
 
     @line_magic
-    def hd_open (self, line):
+    def hd_open(self, line):
         """
         open a connection to blob service
         """
         spl = line.strip().split()
         if len(spl) != 3 and len(spl) != 0:
             print("Usage:")
-            print("   hd_open <blobstorage> <blobpassword> <hadoop_server> <hadoop_password>")
+            print(
+                "   hd_open <blobstorage> <blobpassword> <hadoop_server> <hadoop_password>")
             print("   hd_open")
             print("")
-            print("No parameter means blobstorage, blobpassword, hadoop_server, hadoop_password will be found in the workspace.")
+            print(
+                "No parameter means blobstorage, blobpassword, hadoop_server, hadoop_password will be found in the workspace.")
             print("HDInsight is able to work with multiple blob storage.")
             print("Only one is allowed here.")
         else:
-            if len(spl)==4:
-                server,password,hadoop_server,hadoop_password = spl
+            if len(spl) == 4:
+                server, password, hadoop_server, hadoop_password = spl
             elif self.shell is not None:
-                server          = self.shell.user_ns.get("blobstorage",None)
-                password        = self.shell.user_ns.get("blobpassword",None)
-                hadoop_server   = self.shell.user_ns.get("hadoop_server",None)
-                hadoop_password = self.shell.user_ns.get("hadoop_password",None)
-                username        = self.shell.user_ns.get("username",None)
-                if server           is None : raise KeyError("unable to find blobstorage")
-                if password         is None : raise KeyError("unable to find blobpassword")
-                if hadoop_server    is None : raise KeyError("unable to find hadoop_server")
-                if hadoop_password  is None : raise KeyError("unable to find hadoop_password")
-                if username         is None : raise KeyError("unable to find username")
+                server = self.shell.user_ns.get("blobstorage", None)
+                password = self.shell.user_ns.get("blobpassword", None)
+                hadoop_server = self.shell.user_ns.get("hadoop_server", None)
+                hadoop_password = self.shell.user_ns.get(
+                    "hadoop_password",
+                    None)
+                username = self.shell.user_ns.get("username", None)
+                if server is None:
+                    raise KeyError("unable to find blobstorage")
+                if password is None:
+                    raise KeyError("unable to find blobpassword")
+                if hadoop_server is None:
+                    raise KeyError("unable to find hadoop_server")
+                if hadoop_password is None:
+                    raise KeyError("unable to find hadoop_password")
+                if username is None:
+                    raise KeyError("unable to find username")
             else:
                 raise Exception("No detected workspace.")
 
@@ -142,12 +156,18 @@ class MagicAzure(Magics):
             if "remote_azure_blob" in self.shell.user_ns:
                 raise Exception("a connection is still open, close it first")
 
-            cl = self.create_client(server, password, hadoop_server, hadoop_password, username = username)
+            cl = self.create_client(
+                server,
+                password,
+                hadoop_server,
+                hadoop_password,
+                username=username)
             bs = cl.open_blob_service()
             self.shell.user_ns["remote_azure_blob"] = bs
             return cl, bs
 
-    def create_client(self, account_name, account_key, hadoop_server = None, hadoop_password = None, username = None):
+    def create_client(self, account_name, account_key,
+                      hadoop_server=None, hadoop_password=None, username=None):
         """
         Create a @see cl AzureClient and stores in the workspace.
 
@@ -157,19 +177,25 @@ class MagicAzure(Magics):
         @param      hadoop_password     hadoop password
         @param      username            username
         """
-        if username is None : username = "any"
-        cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo = username)
+        if username is None:
+            username = "any"
+        cl = AzureClient(
+            account_name,
+            account_key,
+            hadoop_server,
+            hadoop_password,
+            pseudo=username)
         self.shell.user_ns["remote_azure_client"] = cl
         return cl
 
     @line_magic
-    def blob_close (self, line):
+    def blob_close(self, line):
         """
         close the connection and store the connection
         into the notebook workspace
         """
         cl, bs = self.get_blob_connection()
-        #bs.close()
+        # bs.close()
         del self.shell.user_ns["remote_azure_blob"]
         return True
 
@@ -180,9 +206,9 @@ class MagicAzure(Magics):
         """
         cl, bs = self.get_blob_connection()
         res = bs.list_containers()
-        return [ r.name for r in res ]
+        return [r.name for r in res]
 
-    def _interpret_path(self, line, cl, bs, empty_is_value = False):
+    def _interpret_path(self, line, cl, bs, empty_is_value=False):
         """
         Interpret a path
 
@@ -200,9 +226,9 @@ class MagicAzure(Magics):
         else:
             spl = line.split("/")
             container = spl[0]
-            remotepath = None if len(spl)==1 else "/".join(spl[1:])
+            remotepath = None if len(spl) == 1 else "/".join(spl[1:])
 
-        if not empty_is_value and len(remotepath)==0:
+        if not empty_is_value and len(remotepath) == 0:
             raise FileNotFoundError("path should not be empty: " + line)
 
         return container, remotepath
@@ -217,12 +243,13 @@ class MagicAzure(Magics):
             print("    blob_ls <container/path>")
             print("or")
             print("    blob_ls </path>")
-        else :
+        else:
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(line, cl, bs, True)
             df = cl.ls(bs, container, remotepath)
-            if len(df) > 0 :
-                return df [["name","last_modified","content_type","content_length","blob_type"]]
+            if len(df) > 0:
+                return df[
+                    ["name", "last_modified", "content_type", "content_length", "blob_type"]]
             else:
                 return df
 
@@ -236,7 +263,7 @@ class MagicAzure(Magics):
             print("    blob_ls <container/path>")
             print("or")
             print("    blob_ls </path>")
-        else :
+        else:
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(line, cl, bs, True)
             return cl.ls(bs, container, remotepath, add_metadata=True)
@@ -254,18 +281,18 @@ class MagicAzure(Magics):
         the command does not allow spaces in files
         """
         spl = line.strip().split()
-        if len(spl) != 2 :
+        if len(spl) != 2:
             print("Usage:")
             print("   blob_up <localfile> <container/remotepath>")
             print("or")
             print("   blob_up <localfile> </remotepath>")
-        else :
-            localfile,remotepath = spl
-            if not os.path.exists(localfile) :
+        else:
+            localfile, remotepath = spl
+            if not os.path.exists(localfile):
                 raise FileNotFoundError(localfile)
 
             cl, bs = self.get_blob_connection()
-            container,remotepath = self._interpret_path(remotepath, cl, bs)
+            container, remotepath = self._interpret_path(remotepath, cl, bs)
             cl.upload(bs, container, remotepath, localfile)
             return remotepath
 
@@ -281,18 +308,19 @@ class MagicAzure(Magics):
         the command does not allow spaces in file names
         """
         spl = line.strip().split()
-        if len(spl) != 2 :
+        if len(spl) != 2:
             print("Usage:")
             print("   blob_down <container/remotepath> <localfile>")
             print("or")
             print("   blob_down </remotepath> <localfile>")
-        else :
-            remotepath,localfile = spl
-            if os.path.exists(localfile) :
-                raise Exception("file {0} cannot be overwritten".format(localfile))
+        else:
+            remotepath, localfile = spl
+            if os.path.exists(localfile):
+                raise Exception(
+                    "file {0} cannot be overwritten".format(localfile))
 
             cl, bs = self.get_blob_connection()
-            container,remotepath = self._interpret_path(remotepath, cl, bs)
+            container, remotepath = self._interpret_path(remotepath, cl, bs)
             cl.download(bs, container, remotepath, localfile)
             return localfile
 
@@ -310,18 +338,19 @@ class MagicAzure(Magics):
         .. versionadded:: 1.1
         """
         spl = line.strip().split()
-        if len(spl) != 2 :
+        if len(spl) != 2:
             print("Usage:")
             print("   blob_down <container/remotepath> <localfile>")
             print("or")
             print("   blob_down </remotepath> <localfile>")
-        else :
-            remotepath,localfile = spl
-            if os.path.exists(localfile) :
-                raise Exception("file {0} cannot be overwritten".format(localfile))
+        else:
+            remotepath, localfile = spl
+            if os.path.exists(localfile):
+                raise Exception(
+                    "file {0} cannot be overwritten".format(localfile))
 
             cl, bs = self.get_blob_connection()
-            container,remotepath = self._interpret_path(remotepath, cl, bs)
+            container, remotepath = self._interpret_path(remotepath, cl, bs)
             cl.download_merge(bs, container, remotepath, localfile)
             return localfile
 
@@ -344,7 +373,7 @@ class MagicAzure(Magics):
             print("   blob_delete <container/remotepath>")
             print("or")
             print("   blob_delete </remotepath>")
-        else :
+        else:
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(line, cl, bs)
             cl.delete_blob(bs, container, remotepath)
@@ -360,7 +389,7 @@ class MagicAzure(Magics):
             print("   blob_rmr <container/remotepath>")
             print("or")
             print("   blob_rmr </remotepath>")
-        else :
+        else:
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(line, cl, bs)
             return cl.delete_folder(bs, container, remotepath)
@@ -371,18 +400,22 @@ class MagicAzure(Magics):
         deletes a blob
         """
         spl = line.strip().split()
-        if len(spl) != 2 :
+        if len(spl) != 2:
             print("Usage:")
             print("   blob_copy <container/source> <container/dest>")
             print("or")
             print("   blob_copy </source> </dest>")
-        else :
-            src,dest = spl
+        else:
+            src, dest = spl
             cl, bs = self.get_blob_connection()
-            container,src  = self._interpret_path(src, cl, bs)
-            container_,dest = self._interpret_path(dest, cl, bs)
+            container, src = self._interpret_path(src, cl, bs)
+            container_, dest = self._interpret_path(dest, cl, bs)
             if container != container_:
-                raise AzureException("containers should be the same: {0} != {1}".format(container, container_), None)
+                raise AzureException(
+                    "containers should be the same: {0} != {1}".format(
+                        container,
+                        container_),
+                    None)
             cl.copy_blob(bs, container, dest, src)
             return True
 
@@ -393,7 +426,7 @@ class MagicAzure(Magics):
         """
         showall = line in ["showall", "1", 1, "True", True, "true"]
         cl, bs = self.get_blob_connection()
-        return cl.job_queue(showall = showall)
+        return cl.job_queue(showall=showall)
 
     @line_magic
     def hd_job_status(self, line):
@@ -401,7 +434,7 @@ class MagicAzure(Magics):
         defines ``%hd_job_status``
         """
         line = line.strip()
-        if len(line) == 0 :
+        if len(line) == 0:
             print("Usage:")
             print("    hd_job_status <jobid>")
         else:
@@ -415,7 +448,7 @@ class MagicAzure(Magics):
         defines ``%hd_job_kill``
         """
         line = line.strip()
-        if len(line) == 0 :
+        if len(line) == 0:
             print("Usage:")
             print("    hd_job_kill <jobid>")
         else:
@@ -432,35 +465,35 @@ class MagicAzure(Magics):
         return cl.wasb_to_file(cl.account_name)
 
     @cell_magic
-    def PIG_azure(self, line, cell = None):
+    def PIG_azure(self, line, cell=None):
         """
         defines command ``%%PIG_azure``
         """
-        if line in [None, ""] :
+        if line in [None, ""]:
             print("Usage:")
             print("     %%PIG_azure <filename>")
             print("")
             print("The command store the content of the cell as a local file.")
         else:
             filename = line.strip()
-            script   = cell.replace("\r","")
-            with open(filename, "w", encoding="utf8") as f :
+            script = cell.replace("\r", "")
+            with open(filename, "w", encoding="utf8") as f:
                 f.write(script)
 
     @cell_magic
-    def HIVE_azure(self, line, cell = None):
+    def HIVE_azure(self, line, cell=None):
         """
         defines command ``%%HIVE_azure``
         """
-        if line in [None, ""] :
+        if line in [None, ""]:
             print("Usage:")
             print("     %%HIVE_azure <filename>")
             print("")
             print("The command store the content of the cell as a local file.")
         else:
             filename = line.strip()
-            script   = cell.replace("\r","")
-            with open(filename, "w", encoding="utf8") as f :
+            script = cell.replace("\r", "")
+            with open(filename, "w", encoding="utf8") as f:
                 f.write(script)
 
     @line_magic
@@ -470,23 +503,24 @@ class MagicAzure(Magics):
         """
         if line in [None, ""]:
             print("Usage:")
-            print("  %hd_pig_submit <jobname.pig> [dependencies.py] [-stop_on_failure]")
+            print(
+                "  %hd_pig_submit <jobname.pig> [dependencies.py] [-stop_on_failure]")
             print("")
             print("The file <jobname.pig> is local.")
         else:
             line = line.strip()
-            spl  = line.split()
-            opt  = [ _ for _ in spl if _.startswith("-") ]
-            pys  = [ _ for _ in spl if _.endswith(".py") ]
-            pig  = [ _ for _ in spl if _ not in pys and _ not in opt ]
+            spl = line.split()
+            opt = [_ for _ in spl if _.startswith("-")]
+            pys = [_ for _ in spl if _.endswith(".py")]
+            pig = [_ for _ in spl if _ not in pys and _ not in opt]
             if len(pig) != 1:
                 raise ValueError("unable to interpret line: {0}".format(line))
-            pig      = pig [0]
+            pig = pig[0]
             if not os.path.exists(pig):
                 raise FileNotFoundError(pig)
 
-            options = { "stop_on_failure":False }
-            options.update( { k.strip("-"):True for k in opt } )
+            options = {"stop_on_failure": False}
+            options.update({k.strip("-"): True for k in opt})
 
             cl, bs = self.get_blob_connection()
             r = cl.pig_submit(bs, cl.account_name, pig, pys, **options)
@@ -506,10 +540,10 @@ class MagicAzure(Magics):
         """
         line = line.strip()
         spl = line.strip().split()
-        job = [ _ for _ in spl if _.startswith("job") ]
-        nbline = [ _ for _ in spl if not _.startswith("job") ]
-        if len(job) == 0 :
-            if  self.shell is None or "last_job" not in self.shell.user_ns:
+        job = [_ for _ in spl if _.startswith("job")]
+        nbline = [_ for _ in spl if not _.startswith("job")]
+        if len(job) == 0:
+            if self.shell is None or "last_job" not in self.shell.user_ns:
                 raise Exception("no submitted jobs found in the workspace")
             else:
                 job = self.shell.user_ns["last_job"]["jid"]
@@ -518,7 +552,7 @@ class MagicAzure(Magics):
         else:
             raise Excepion("more than one job to look at:" + ",".join(job))
 
-        if len(nbline)==0:
+        if len(nbline) == 0:
             nbline = 20
             cont = True
         else:
@@ -536,18 +570,21 @@ class MagicAzure(Magics):
             out, err = cl.standard_outputs(job, bs, cl.account_name, ".")
 
             lines = err.split("\n")
-            show  = "\n".join( _.strip("\n\r") for _ in lines[-nbline:])
-            show  = show.replace("ERROR", '<b><font color="#DD0000">ERROR</font></b>')
+            show = "\n".join(_.strip("\n\r") for _ in lines[-nbline:])
+            show = show.replace(
+                "ERROR",
+                '<b><font color="#DD0000">ERROR</font></b>')
 
-            if len(out) > 0 :
+            if len(out) > 0:
                 lineo = out.split("\n")
-                shoo  = "\n".join( _.strip("\n\r") for _ in lineo[-nbline:])
-                return HTML("<pre>\n%s\n</pre><br /><b>OUT:</b><br /><pre>\n%s\n</pre>" % (show, shoo))
+                shoo = "\n".join(_.strip("\n\r") for _ in lineo[-nbline:])
+                return HTML(
+                    "<pre>\n%s\n</pre><br /><b>OUT:</b><br /><pre>\n%s\n</pre>" % (show, shoo))
             else:
                 return HTML("<pre>\n%s\n</pre><br />" % show)
 
     @cell_magic
-    def runjython(self, line, cell = None):
+    def runjython(self, line, cell=None):
         """
         defines command ``%%runjython``
 
@@ -562,7 +599,7 @@ class MagicAzure(Magics):
 
         .. versionadded:: 1.1
         """
-        if line in [None, ""] :
+        if line in [None, ""]:
             print("Usage:")
             print("     %%runjython <pythonfile.py> <function_name> <args>")
             print("     first row")
@@ -577,10 +614,10 @@ class MagicAzure(Magics):
                 func_name = filename[1]
                 filename = filename[0]
 
-                with open(filename,'r',encoding="utf8") as pyf :
+                with open(filename, 'r', encoding="utf8") as pyf:
                     content = pyf.read()
                 temp = filename.replace(".py", ".temp.py")
-                with open(temp, "w", encoding="utf8") as pyf :
+                with open(temp, "w", encoding="utf8") as pyf:
                     pyf.write("""
                             # -*- coding: utf8 -*-
                             if __name__ != '__lib__':
@@ -590,8 +627,11 @@ class MagicAzure(Magics):
                                             return func(*args, **kwargs)
                                         return inner
                                     return wrapper
-                            """.replace("                            ",""))
-                    pyf.write(content.replace("except Exception,", "except Exception as "))
+                            """.replace("                            ", ""))
+                    pyf.write(
+                        content.replace(
+                            "except Exception,",
+                            "except Exception as "))
                     pyf.write("""
                             if __name__ != '__lib__':
                                 import sys
@@ -601,18 +641,22 @@ class MagicAzure(Magics):
                                     sys.stdout.write(str(res))
                                     sys.stdout.write("\\n")
                                     sys.stdout.flush()
-                            """.format(func_name).replace("                            ",""))
+                            """.format(func_name).replace("                            ", ""))
 
-                cmd = sys.executable.replace("pythonw", "python") + " " + temp + " " + args
+                cmd = sys.executable.replace(
+                    "pythonw",
+                    "python") + " " + temp + " " + args
                 tosend = cell
-                out,err = run_cmd(cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
-                if len(err) > 0 :
-                    return HTML ('<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+                out, err = run_cmd(
+                    cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
+                if len(err) > 0:
+                    return HTML(
+                        '<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
                 else:
-                    return HTML ('<pre>\n%s\n</pre>' % out)
+                    return HTML('<pre>\n%s\n</pre>' % out)
 
     @cell_magic
-    def jython(self, line, cell = None):
+    def jython(self, line, cell=None):
         """
         defines command ``%%runjython``
 
@@ -627,7 +671,7 @@ class MagicAzure(Magics):
 
         .. versionadded:: 1.1
         """
-        if line in [None, ""] :
+        if line in [None, ""]:
             print("Usage:")
             print("     %%jython <pythonfile.py> <function_name> <args>")
             print("     first row")
@@ -642,10 +686,10 @@ class MagicAzure(Magics):
                 func_name = filename[1]
                 filename = filename[0]
 
-                with open(filename,'r',encoding="utf8") as pyf :
+                with open(filename, 'r', encoding="utf8") as pyf:
                     content = pyf.read()
                 temp = filename.replace(".py", ".temp.py")
-                with open(temp, "w", encoding="utf8") as pyf :
+                with open(temp, "w", encoding="utf8") as pyf:
                     pyf.write("""
                             # -*- coding: utf8 -*-
                             if __name__ != '__lib__':
@@ -655,7 +699,7 @@ class MagicAzure(Magics):
                                             return func(*args, **kwargs)
                                         return inner
                                     return wrapper
-                            """.replace("                            ",""))
+                            """.replace("                            ", ""))
                     pyf.write(content)
                     pyf.write("""
                             if __name__ != '__lib__':
@@ -666,15 +710,16 @@ class MagicAzure(Magics):
                                     sys.stdout.write(str(res))
                                     sys.stdout.write("\\n")
                                     sys.stdout.flush()
-                            """.format(func_name).replace("                            ",""))
+                            """.format(func_name).replace("                            ", ""))
 
                 download_java_standalone()
                 tosend = cell
-                out,err = run_jython(temp, sin = cell, timeout = 10)
-                if len(err) > 0 :
-                    return HTML ('<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+                out, err = run_jython(temp, sin=cell, timeout=10)
+                if len(err) > 0:
+                    return HTML(
+                        '<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
                 else:
-                    return HTML ('<pre>\n%s\n</pre>' % out)
+                    return HTML('<pre>\n%s\n</pre>' % out)
 
 
 def register_azure_magics():

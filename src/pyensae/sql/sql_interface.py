@@ -7,10 +7,13 @@ It will be used to implement magic functions
 
 import re
 
+
 class InterfaceSQLException(BaseException):
+
     """
     a specific exception
     """
+
     def __init__(self, message):
         """
         constructor
@@ -25,12 +28,15 @@ class InterfaceSQLException(BaseException):
         """
         return self.message
 
+
 class AutoCompletionSQLObject:
+
     """
     a simple class which allows auto completion
     for tables, columns...
     """
-    def __init__ (self, name):
+
+    def __init__(self, name):
         """
         creates an instance with a given name
         """
@@ -42,7 +48,7 @@ class AutoCompletionSQLObject:
         """
         removes unavailable characters
         """
-        return name.replace(".","_").replace(" ","_")
+        return name.replace(".", "_").replace(" ", "_")
 
     @property
     def _(self):
@@ -72,12 +78,15 @@ class AutoCompletionSQLObject:
         au = AutoCompletionSQLObject(name)
         af = au._f
         if af in self.__dict__:
-            raise KeyError("the object %s was already added to %s" % (af, self._f))
+            raise KeyError(
+                "the object %s was already added to %s" %
+                (af, self._f))
         self.__dict__[af] = au
         return au
 
 
 class InterfaceSQL:
+
     """
     Abstract class to connect to a SQL server using various way.
     It will be used to implement magic functions
@@ -97,7 +106,9 @@ class InterfaceSQL:
             from .sql_interface_database import InterfaceSQLDatabase
             return InterfaceSQLDatabase(obj)
         else:
-            raise NotImplementedError("nothing is implemented for type: %s" % str(type(obj)))
+            raise NotImplementedError(
+                "nothing is implemented for type: %s" % str(
+                    type(obj)))
 
     def populate_completion(self):
         """
@@ -118,7 +129,7 @@ class InterfaceSQL:
         for tb in tbls:
             compl = self.CC._add(tb)
             cols = self.get_table_columns(tb)
-            for k,v in cols.items():
+            for k, v in cols.items():
                 compl._add(v[0])
         return self.CC
 
@@ -202,9 +213,9 @@ class InterfaceSQL:
         # string replace
         fi = InterfaceSQL._exp.findall(sql_query)
         if len(fi) > 0:
-            only = [ _[0] for _ in fi ]
+            only = [_[0] for _ in fi]
             only.sort(reverse=True)
-            for o in only :
+            for o in only:
                 co = "self." + o[3:]
                 ev = eval(co)
                 sql_query = sql_query.replace(o, ev._)

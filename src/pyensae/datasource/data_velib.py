@@ -5,9 +5,23 @@
 
 """
 
-import os, os.path, datetime, urllib, json, time, re, pandas, numpy, math, random, urllib.error, urllib.request
+import os
+import os.path
+import datetime
+import urllib
+import json
+import time
+import re
+import pandas
+import numpy
+import math
+import random
+import urllib.error
+import urllib.request
 
-class DataVelibCollect :
+
+class DataVelibCollect:
+
     """
     This class automates data collecting from Velib website.
     The service is provided at `JCDecaux developer <https://developer.jcdecaux.com/#/home>`_.
@@ -21,18 +35,17 @@ class DataVelibCollect :
     """
 
     #: list of available cities = contract
-    _contracts_static = { k:1 for k in [ 'Arcueil',
-                       'Besancon',
-                       'Lyon',
-                       'Paris',
-                        ] }
+    _contracts_static = {k: 1 for k in ['Arcueil',
+                                        'Besancon',
+                                        'Lyon',
+                                        'Paris',
+                                        ]}
 
     # api: two substring to replace (contract, apiKey)
-    _url_api  = "https://api.jcdecaux.com/vls/v1/stations?contract=%s&apiKey=%s"
+    _url_api = "https://api.jcdecaux.com/vls/v1/stations?contract=%s&apiKey=%s"
     _url_apic = "https://api.jcdecaux.com/vls/v1/contracts?apiKey=%s"
 
-
-    def __init__ (self, apiKey, fetch_contracts = False) :
+    def __init__(self, apiKey, fetch_contracts=False):
         """
         constructor
 
@@ -43,8 +56,9 @@ class DataVelibCollect :
         self.apiKey = apiKey
         self.contracts = DataVelibCollect._contracts_static if not fetch_contracts else self.get_contracts()
 
-        # sometimes, lng and lat are null, check if some past retrieving returned non null coordinates
-        self.memoGeoStation = { }
+        # sometimes, lng and lat are null, check if some past retrieving
+        # returned non null coordinates
+        self.memoGeoStation = {}
 
     def get_contracts(self):
         """
@@ -53,47 +67,50 @@ class DataVelibCollect :
         @return     dictionary    { 'station':1 }
         """
         url = DataVelibCollect._url_apic % (self.apiKey)
-        try :
-            with urllib.request.urlopen(url) as u :
+        try:
+            with urllib.request.urlopen(url) as u:
                 js = u.read()
-        except (urllib.error.HTTPError, urllib.error.URLError) as exc :
+        except (urllib.error.HTTPError, urllib.error.URLError) as exc:
             # there was probably a mistake
             # We try again after a given amount of time
             time.sleep(0.5)
-            try :
-                with urllib.request.urlopen(url) as u :
+            try:
+                with urllib.request.urlopen(url) as u:
                     js = u.read()
-            except (urllib.error.HTTPError, urllib.error.URLError) as exc :
+            except (urllib.error.HTTPError, urllib.error.URLError) as exc:
                 # there was probably a mistake
                 # we stop
-                raise Exception("unable to access url: "+  url) from exc
+                raise Exception("unable to access url: " + url) from exc
 
         js = str(js, encoding="utf8")
         js = json.loads(js)
-        cont = { k["name"]:1 for k in js }
+        cont = {k["name"]: 1 for k in js}
         return cont
 
-    def get_json (self, contract) :
+    def get_json(self, contract):
         """
         return the data associated to a contract
         @param      contract        contract name, @see te _contracts
         @return                     json string
         """
-        if contract not in self.contracts :
-            raise Exception("unable to find contract in:\n" + "\n".join(self.contracts.keys()))
+        if contract not in self.contracts:
+            raise Exception(
+                "unable to find contract in:\n" +
+                "\n".join(
+                    self.contracts.keys()))
         url = DataVelibCollect._url_api % (contract, self.apiKey)
 
-        try :
-            with urllib.request.urlopen(url) as u :
+        try:
+            with urllib.request.urlopen(url) as u:
                 js = u.read()
-        except (urllib.error.HTTPError, urllib.error.URLError) as exc :
+        except (urllib.error.HTTPError, urllib.error.URLError) as exc:
             # there was probably a mistake
             # We try again after a given amount of time
             time.sleep(0.5)
-            try :
-                with urllib.request.urlopen(url) as u :
+            try:
+                with urllib.request.urlopen(url) as u:
                     js = u.read()
-            except (urllib.error.HTTPError, urllib.error.URLError) as exc :
+            except (urllib.error.HTTPError, urllib.error.URLError) as exc:
                 # there was probably a mistake
                 # we stop
                 return json.loads("[]")
@@ -101,49 +118,53 @@ class DataVelibCollect :
         js = str(js, encoding="utf8")
         js = json.loads(js)
         now = datetime.datetime.now()
-        for o in js :
-            o["number"]  = int(o["number"])
+        for o in js:
+            o["number"] = int(o["number"])
             o["banking"] = 1 if o["banking"] == "True" else 0
-            o["bonus"]   = 1 if o["bonus"] == "True" else 0
+            o["bonus"] = 1 if o["bonus"] == "True" else 0
 
-            o["bike_stands"]            = int(o["bike_stands"])
-            o["available_bike_stands"]  = int(o["available_bike_stands"])
-            o["available_bikes"]        = int(o["available_bikes"])
-            o["collect_date"]           = now
+            o["bike_stands"] = int(o["bike_stands"])
+            o["available_bike_stands"] = int(o["available_bike_stands"])
+            o["available_bikes"] = int(o["available_bikes"])
+            o["collect_date"] = now
 
             try:
                 ds = float(o["last_update"])
-                dt = datetime.datetime.fromtimestamp(ds/1000)
+                dt = datetime.datetime.fromtimestamp(ds / 1000)
             except ValueError:
                 dt = datetime.datetime.now()
             except TypeError:
                 dt = datetime.datetime.now()
             o["last_update"] = dt
 
-            try :
-                o["lat"] = float(o["position"]["lat"]) if o["position"]["lat"] is not None else None
-                o["lng"] = float(o["position"]["lng"]) if o["position"]["lng"] is not None else None
-            except TypeError as e :
-                raise TypeError ("unable to convert geocode for the following row: %s\n%s" % (str(o), str(e)))
+            try:
+                o["lat"] = float(
+                    o["position"]["lat"]) if o["position"]["lat"] is not None else None
+                o["lng"] = float(
+                    o["position"]["lng"]) if o["position"]["lng"] is not None else None
+            except TypeError as e:
+                raise TypeError(
+                    "unable to convert geocode for the following row: %s\n%s" %
+                    (str(o), str(e)))
 
-            key = contract,o["number"]
-            if key in self.memoGeoStation :
-                if o["lat"] == 0 or o["lng"] == 0 :
-                    o["lat"],o["lng"] = self.memoGeoStation [key]
-            elif o["lat"] != 0 and o["lng"] != 0 :
-                self.memoGeoStation [key] = o["lat"],o["lng"]
+            key = contract, o["number"]
+            if key in self.memoGeoStation:
+                if o["lat"] == 0 or o["lng"] == 0:
+                    o["lat"], o["lng"] = self.memoGeoStation[key]
+            elif o["lat"] != 0 and o["lng"] != 0:
+                self.memoGeoStation[key] = o["lat"], o["lng"]
 
             del o["position"]
 
         return js
 
-    def collecting_data (self, contract,
-                               delayms          = 1000,
-                               outfile          = "velib_data.txt",
-                               single_file      = True,
-                               stop_datetime    = None,
-                               log_every        = 10,
-                               fLOG             = print) :
+    def collecting_data(self, contract,
+                        delayms=1000,
+                        outfile="velib_data.txt",
+                        single_file=True,
+                        stop_datetime=None,
+                        log_every=10,
+                        fLOG=print):
         """
         collects data for a period of time
         @param      contract        contract name, @see te _contracts
@@ -155,44 +176,59 @@ class DataVelibCollect :
         @param      fLOG            logging function
         @return                     list of created file
         """
-        delay    = datetime.datetime.fromtimestamp(delayms/1000.0) - datetime.datetime.fromtimestamp(0.)
-        now      = datetime.datetime.now()
-        cloc     = now
+        delay = datetime.datetime.fromtimestamp(
+            delayms / 1000.0) - datetime.datetime.fromtimestamp(0.)
+        now = datetime.datetime.now()
+        cloc = now
         delayms /= 50
-        delays   = delayms / 1000.0
+        delays = delayms / 1000.0
 
         nb = 0
-        while stop_datetime is None or now < stop_datetime :
-            now   = datetime.datetime.now()
+        while stop_datetime is None or now < stop_datetime:
+            now = datetime.datetime.now()
             cloc += delay
-            js  = self.get_json(contract)
+            js = self.get_json(contract)
 
-            if single_file :
-                with open(outfile, "a", encoding="utf8") as f :
+            if single_file:
+                with open(outfile, "a", encoding="utf8") as f:
                     f.write("%s\t%s\n" % (str(now), str(js)))
-            else :
-                name = outfile + "." + str(now).replace (":","-").replace ("/","-").replace (" ","_") + ".txt"
-                with open(name, "w", encoding="utf8") as f :
+            else:
+                name = outfile + "." + \
+                    str(now).replace(":",
+                                     "-").replace("/",
+                                                  "-").replace(" ",
+                                                               "_") + ".txt"
+                with open(name, "w", encoding="utf8") as f:
                     f.write(str(js))
 
             nb += 1
-            if nb % log_every == 0 :
-                fLOG ( "DataVelib.collecting_data: ", nb, " times: ", now, " delay = ", delay, "next", cloc, " delays ", delays)
+            if nb % log_every == 0:
+                fLOG(
+                    "DataVelib.collecting_data: ",
+                    nb,
+                    " times: ",
+                    now,
+                    " delay = ",
+                    delay,
+                    "next",
+                    cloc,
+                    " delays ",
+                    delays)
 
-            while now < cloc :
+            while now < cloc:
                 now = datetime.datetime.now()
                 time.sleep(delays)
 
     @staticmethod
-    def run_collection (
-                                key             = None,
-                                contract        = "Paris",
-                                delayms         = 60000,
-                                folder_file     = "velib_data",
-                                stop_datetime   = None,
-                                single_file     = False,
-                                log_every       = 1,
-                                fLOG            = print) :
+    def run_collection(
+            key=None,
+            contract="Paris",
+            delayms=60000,
+            folder_file="velib_data",
+            stop_datetime=None,
+            single_file=False,
+            log_every=1,
+            fLOG=print):
         """
         run the collection of the data for velib, data are stored using Json format.
         The function creates a file every time a new status is downloaded.
@@ -222,19 +258,19 @@ class DataVelibCollect :
 
         @endexample
         """
-        if key is None :
+        if key is None:
             key = DataVelibCollect.velib_get_key()
         velib = DataVelibCollect(key, True)
-        velib.collecting_data ( contract,
-                                delayms,
-                                folder_file,
-                                stop_datetime = stop_datetime,
-                                single_file = single_file,
-                                log_every = log_every,
-                                fLOG = fLOG)
+        velib.collecting_data(contract,
+                              delayms,
+                              folder_file,
+                              stop_datetime=stop_datetime,
+                              single_file=single_file,
+                              log_every=log_every,
+                              fLOG=fLOG)
 
     @staticmethod
-    def velib_get_key() :
+    def velib_get_key():
         """
         open a windows to get a key (from a user) and a contract (city)
         the function is independent from the others
@@ -242,12 +278,15 @@ class DataVelibCollect :
         @return     key
         """
         from pyquickhelper import open_window_params
-        para =  { "velib_key": "" }
-        para = open_window_params (para, DataVelibCollect.__doc__, "Velib Study")
+        para = {"velib_key": ""}
+        para = open_window_params(
+            para,
+            DataVelibCollect.__doc__,
+            "Velib Study")
         return None if "__cancel__" in para else para["velib_key"]
 
     @staticmethod
-    def to_df(folder, regex = "velib_data.*[.]txt") :
+    def to_df(folder, regex="velib_data.*[.]txt"):
         """
         reads all file in a folder (assuming there were produced by this class) and
         returns a dataframe with it
@@ -275,24 +314,33 @@ class DataVelibCollect :
             - status
             - file
         """
-        if regex is None : regex = ".*"
+        if regex is None:
+            regex = ".*"
         reg = re.compile(regex)
 
         files_ = os.listdir(folder)
-        files  = [ _ for _ in files_ if reg.search(_) ]
+        files = [_ for _ in files_ if reg.search(_)]
 
         if len(files) == 0:
-            raise FileNotFoundError("no found files in directory: " + folder + "\nregex: " + regex)
+            raise FileNotFoundError(
+                "no found files in directory: " +
+                folder +
+                "\nregex: " +
+                regex)
 
-        rows = [ ]
-        for file_ in files :
-            file = os.path.join(folder,file_)
-            with open(file, "r", encoding="utf8") as f : lines = f.readlines()
-            for i,line in enumerate(lines) :
+        rows = []
+        for file_ in files:
+            file = os.path.join(folder, file_)
+            with open(file, "r", encoding="utf8") as f:
+                lines = f.readlines()
+            for i, line in enumerate(lines):
                 dl = eval(line.strip("\n\r\t "))
-                if not isinstance(dl,list):
-                    raise TypeError("we expect a list for line {0} in file {1}".format(i, file))
-                for d in dl :
+                if not isinstance(dl, list):
+                    raise TypeError(
+                        "we expect a list for line {0} in file {1}".format(
+                            i,
+                            file))
+                for d in dl:
                     d["file"] = file_
                 rows.extend(dl)
 
@@ -311,10 +359,12 @@ class DataVelibCollect :
 
         x = df["lng"]
         y = df["lat"]
-        areaf = df.apply( lambda r : numpy.pi * (r["available_bike_stands"])**2, axis=1)
-        areab = df.apply( lambda r : numpy.pi * (r["available_bikes"])**2, axis=1)
-        ax.scatter (x,y,areaf, alpha=0.5, label="place", color="r")
-        ax.scatter (x,y,areab, alpha=0.5, label="bike", color="g")
+        areaf = df.apply(
+            lambda r: numpy.pi * (r["available_bike_stands"])**2, axis=1)
+        areab = df.apply(
+            lambda r: numpy.pi * (r["available_bikes"])**2, axis=1)
+        ax.scatter(x, y, areaf, alpha=0.5, label="place", color="r")
+        ax.scatter(x, y, areab, alpha=0.5, label="bike", color="g")
         ax.grid(True)
         ax.legend()
         ax.set_xlabel("longitude")
@@ -323,7 +373,7 @@ class DataVelibCollect :
         return fig, ax, plt
 
     @staticmethod
-    def js_animation(df, interval = 20, **args):
+    def js_animation(df, interval=20, **args):
         """
         This function uses the module `JSAnimation <https://github.com/jakevdp/JSAnimation>`_.
         To install it, you can run:
@@ -352,34 +402,36 @@ class DataVelibCollect :
         #ylim = min(df["lat"]),max(df["lat"])
 
         dates = list(sorted(set(df["file"])))
-        datas = [ ]
-        for d in dates :
-            sub = df [ df["file"] == d ]
-            x    = sub["lng"]
-            y    = sub["lat"]
-            colp = df.apply( lambda r : numpy.pi * (r["available_bike_stands"])**2, axis=1)
-            colb = df.apply( lambda r : numpy.pi * (r["available_bikes"])**2, axis=1)
+        datas = []
+        for d in dates:
+            sub = df[df["file"] == d]
+            x = sub["lng"]
+            y = sub["lat"]
+            colp = df.apply(
+                lambda r: numpy.pi * (r["available_bike_stands"])**2, axis=1)
+            colb = df.apply(
+                lambda r: numpy.pi * (r["available_bikes"])**2, axis=1)
             x = tuple(x)
             y = tuple(y)
             colp = tuple(colp)
             colb = tuple(colb)
-            data = (x,y,colp,colb)
+            data = (x, y, colp, colb)
             datas.append(data)
 
         fig, ax = plt.subplots(**args)
-        x,y,c,d = datas[0]
+        x, y, c, d = datas[0]
 
-        scat1 = ax.scatter(x,y,c, alpha=0.5, color="r", label="place")
-        scat2 = ax.scatter(x,y,d, alpha=0.5, color="g", label="bike")
+        scat1 = ax.scatter(x, y, c, alpha=0.5, color="r", label="place")
+        scat2 = ax.scatter(x, y, d, alpha=0.5, color="g", label="bike")
         ax.grid(True)
         ax.legend()
         ax.set_xlabel("longitude")
         ax.set_ylabel("latitude")
 
         def animate(i, datas, scat1, scat2):
-            x,y,c,d = datas[i]
-            #scat1.set_array(numpy.array(c))
-            #scat2.set_array(numpy.array(d))
+            x, y, c, d = datas[i]
+            # scat1.set_array(numpy.array(c))
+            # scat2.set_array(numpy.array(d))
             #scat1.set_array(numpy.array(x + y))
             #scat2.set_array(numpy.array(x + y))
             scat1._sizes = c
@@ -387,7 +439,7 @@ class DataVelibCollect :
             return scat1, scat2
 
         anim = animation.FuncAnimation(fig, animate, frames=len(datas),
-                interval=interval, fargs=(datas, scat1, scat2), blit=True)
+                                       interval=interval, fargs=(datas, scat1, scat2), blit=True)
         plt.close('all')
         return anim
 
@@ -401,21 +453,21 @@ class DataVelibCollect :
         @return      double
         """
         radius = 6371
-        dlat = math.radians(lat2-lat1)
-        dlon = math.radians(lon2-lon1)
-        a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(lat1)) \
-        * math.cos(math.radians(lat2)) * math.sin(dlon/2) * math.sin(dlon/2)
-        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+        dlat = math.radians(lat2 - lat1)
+        dlon = math.radians(lon2 - lon1)
+        a = math.sin(dlat / 2) * math.sin(dlat / 2) + math.cos(math.radians(lat1)) \
+            * math.cos(math.radians(lat2)) * math.sin(dlon / 2) * math.sin(dlon / 2)
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
         d = radius * c
         return d
 
     @staticmethod
     def simulate(df, nbbike, speed,
-                    period = datetime.timedelta(minutes=1),
-                    iteration = 500,
-                    min_min  = 10,
-                    delta_speed = 2.5,
-                    fLOG = print):
+                 period=datetime.timedelta(minutes=1),
+                 iteration=500,
+                 min_min=10,
+                 delta_speed=2.5,
+                 fLOG=print):
         """
         simulate velibs on a set of stations given by df
 
@@ -428,53 +480,53 @@ class DataVelibCollect :
         @param      fLOG        logging function
         @return                 simulated paths, data (as DataFrame)
         """
-        cities = df [["lat","lng","name","number"]]
-        start  = cities.drop_duplicates()
+        cities = df[["lat", "lng", "name", "number"]]
+        start = cities.drop_duplicates()
         idvelo = 0
 
-        current = { }
-        for row in start.values :
+        current = {}
+        for row in start.values:
             r = []
-            for i in range(0,5):
+            for i in range(0, 5):
                 r.append(idvelo)
                 idvelo += 1
-            r.extend ( [-1,-1,-1,-1,-1] )
+            r.extend([-1, -1, -1, -1, -1])
             ids = tuple(row)
-            current [  ids ] = r
+            current[ids] = r
 
-        running = [ ]
+        running = []
 
         def free(v):
-            nb = [ _ for _ in v if _ == -1 ]
+            nb = [_ for _ in v if _ == -1]
             return len(nb) > 0
 
         def bike(v):
-            nb = [ _ for _ in v if _ == -1 ]
+            nb = [_ for _ in v if _ == -1]
             return len(nb) < len(v)
 
         def pop(v):
-            for i,_ in enumerate(v):
-                if _ != -1 :
+            for i, _ in enumerate(v):
+                if _ != -1:
                     r = v[i]
                     v[i] = -1
-                    fLOG("    pop",v)
+                    fLOG("    pop", v)
                     return r
             raise Exception("no free bike")
 
         def push(v, idv):
-            for i,_ in enumerate(v):
-                if _ == -1 :
+            for i, _ in enumerate(v):
+                if _ == -1:
                     v[i] = idv
-                    fLOG("    push",v)
+                    fLOG("    push", v)
                     return None
             raise Exception("no free spot: " + str(v))
 
         def give_status(conf, time):
-            rows = [ ]
-            for k,v in conf.items():
-                lat,lng,name,number=k
-                obs = { "lat":lat, "lng":lng, "name":name, "number":number }
-                nb = [ _ for _ in v if _ == -1 ]
+            rows = []
+            for k, v in conf.items():
+                lat, lng, name, number = k
+                obs = {"lat": lat, "lng": lng, "name": name, "number": number}
+                nb = [_ for _ in v if _ == -1]
                 obs["available_bike_stands"] = len(nb)
                 obs["available_bikes"] = len(v) - len(nb)
                 obs["collect_date"] = time
@@ -482,61 +534,93 @@ class DataVelibCollect :
                 rows.append(obs)
             return rows
 
-        simulation = [ ]
-        paths = [ ]
+        simulation = []
+        paths = []
         keys = list(current.keys())
         iter = 0
         time = datetime.datetime.now()
-        while iter < iteration :
+        while iter < iteration:
 
             status = give_status(current, time)
             simulation.extend(status)
 
             # a bike
-            if len(running) < nbbike :
-                rnd = random.randint(0,len(keys)-1)
+            if len(running) < nbbike:
+                rnd = random.randint(0, len(keys) - 1)
                 v = current[keys[rnd]]
-                if bike(v) :
-                    v = (time, pop(v), keys[rnd], "begin" )
-                    running.append( v )
-                    lat,lng,name,number = keys[rnd]
-                    dv = { "lat0":lat, "lng0":lng, "name0":name, "number0":number }
-                    dv.update ({ "time":v[0], "idvelo": v[1], "beginend":v[-1], "hours":0.0, "dist":0.0 })
-                    paths.append( dv )
+                if bike(v):
+                    v = (time, pop(v), keys[rnd], "begin")
+                    running.append(v)
+                    lat, lng, name, number = keys[rnd]
+                    dv = {
+                        "lat0": lat,
+                        "lng0": lng,
+                        "name0": name,
+                        "number0": number}
+                    dv.update({"time": v[0],
+                               "idvelo": v[1],
+                               "beginend": v[-1],
+                               "hours": 0.0,
+                               "dist": 0.0})
+                    paths.append(dv)
 
             # do we put the bike back
-            rem = [ ]
-            for i,r in enumerate(running) :
+            rem = []
+            for i, r in enumerate(running):
                 delta = time - r[0]
-                h     = delta.total_seconds() / 3600
-                if h*60 > min_min :
+                h = delta.total_seconds() / 3600
+                if h * 60 > min_min:
                     for rowi in cities.values:
-                        row = cities.values[ random.randint(0,len(cities)-1) ]
+                        row = cities.values[random.randint(0, len(cities) - 1)]
                         keycity = tuple(row)
                         station = current[keycity]
                         if free(station):
-                            vlat,vlng = r[2][0], r[2][1]
-                            clat,clng = row[0], row[1]
-                            dist = DataVelibCollect.distance_haversine(vlat,vlng,clat,clng)
-                            sp   = dist / h
+                            vlat, vlng = r[2][0], r[2][1]
+                            clat, clng = row[0], row[1]
+                            dist = DataVelibCollect.distance_haversine(
+                                vlat,
+                                vlng,
+                                clat,
+                                clng)
+                            sp = dist / h
                             dsp = abs(sp - speed)
                             if (dsp < delta_speed or (sp < speed and h >= 1)) \
-                                and random.randint(0,10) == 0 :
+                                    and random.randint(0, 10) == 0:
                                 # we put it back
                                 push(station, r[1])
                                 rem.append(i)
 
-                                lat,lng,name,number = r[2]
-                                dv = { "lat0":lat, "lng0":lng, "name0":name, "number0":number }
-                                lat,lng,name,number = keycity
-                                dv.update ({ "lat1":lat, "lng1":lng, "name1":name, "number1":number })
-                                dv.update ({ "time":time, "idvelo": r[1], "beginend":"end", "hours":h, "dist":dist })
-                                paths.append( dv )
+                                lat, lng, name, number = r[2]
+                                dv = {
+                                    "lat0": lat,
+                                    "lng0": lng,
+                                    "name0": name,
+                                    "number0": number}
+                                lat, lng, name, number = keycity
+                                dv.update({"lat1": lat,
+                                           "lng1": lng,
+                                           "name1": name,
+                                           "number1": number})
+                                dv.update({"time": time,
+                                           "idvelo": r[1],
+                                           "beginend": "end",
+                                           "hours": h,
+                                           "dist": dist})
+                                paths.append(dv)
                                 break
 
-            running = [ r for i,r in enumerate(running) if i not in rem ]
+            running = [r for i, r in enumerate(running) if i not in rem]
 
-            fLOG(iter, "time ", time, " - ", len(running), "/", nbbike, " paths ", len(paths) )
+            fLOG(
+                iter,
+                "time ",
+                time,
+                " - ",
+                len(running),
+                "/",
+                nbbike,
+                " paths ",
+                len(paths))
 
             # end of loop
             time += period

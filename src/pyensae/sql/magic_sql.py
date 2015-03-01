@@ -3,7 +3,9 @@
 @file
 @brief Magic command to communicate with an Hadoop cluster.
 """
-import sys, os, pandas
+import sys
+import os
+import pandas
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
@@ -11,8 +13,10 @@ from IPython.core.display import HTML
 
 from .sql_interface import InterfaceSQL, InterfaceSQLException
 
+
 @magics_class
 class MagicSQL(Magics):
+
     """
     Defines SQL commands to play with `sqlite3 <https://docs.python.org/3.4/library/sqlite3.html>`_
     """
@@ -63,12 +67,12 @@ class MagicSQL(Magics):
         return db.get_table_list()
 
     @line_magic
-    def SQL_drop_table(self,line):
+    def SQL_drop_table(self, line):
         """
         define ``%SQL_drop_table``
         """
         line = line.strip()
-        if len(line) == 0 :
+        if len(line) == 0:
             print("Usage:")
             print("    SQL_drop_table <table_name>")
         else:
@@ -96,7 +100,7 @@ class MagicSQL(Magics):
             return db.get_table_columns(line)
 
     @line_cell_magic
-    def SQL(self, line, cell = None):
+    def SQL(self, line, cell=None):
         """
         defines command ``%%SQL``
         """
@@ -119,21 +123,22 @@ class MagicSQL(Magics):
                 if self.shell is not None and query in self.shell.user_ns:
                     query = self.shell.user_ns[query]
 
-        elif len(cell) == 0 :
+        elif len(cell) == 0:
             usage()
             cont = False
         else:
             query = cell
             addv = line.strip()
-            if len(addv) == 0 : addv = None
+            if len(addv) == 0:
+                addv = None
 
         if cont:
             db = self.get_connection()
             try:
                 df = db.execute(query)
                 ok = True
-            except InterfaceSQLException as e :
-                print (str(e))
+            except InterfaceSQLException as e:
+                print(str(e))
                 ok = False
 
             if ok:
@@ -144,12 +149,12 @@ class MagicSQL(Magics):
                     return df
 
     @line_magic
-    def SQL_import_tsv(self,line):
+    def SQL_import_tsv(self, line):
         """
         define ``%SQL_import_tsv``
         """
         spl = line.strip().split()
-        if len(spl) != 2 :
+        if len(spl) != 2:
             print("Usage:")
             print("   SQL_import_tsv tablename filename")
         else:
@@ -164,13 +169,15 @@ class MagicSQL(Magics):
         define ``%SQL_add_function``
         """
         line.strip()
-        if len(line)==0:
+        if len(line) == 0:
             print("Usage:")
             print("   SQL_add_function function_name")
         else:
             if self.shell is not None:
                 if line not in self.shell.user_ns:
-                    raise KeyError("unable to find function %s in your workspace" % line)
+                    raise KeyError(
+                        "unable to find function %s in your workspace" %
+                        line)
                 fu = self.shell.user_ns[line]
             else:
                 raise Exception("unable to find IPython workspace")
@@ -183,7 +190,7 @@ class MagicSQL(Magics):
         define ``%SQL_import_dataframe``
         """
         spl = line.strip().split()
-        if len(spl) != 2 :
+        if len(spl) != 2:
             print("Usage:")
             print("   SQL_import_df tablename dataframe")
         else:
@@ -192,7 +199,9 @@ class MagicSQL(Magics):
             df = spl[1]
             if self.shell is not None:
                 if df not in self.shell.user_ns:
-                    raise KeyError("unable to find dataframe %s in your workspace" % df)
+                    raise KeyError(
+                        "unable to find dataframe %s in your workspace" %
+                        df)
                 odf = self.shell.user_ns[df]
             else:
                 raise Exception("unable to find IPython workspace")

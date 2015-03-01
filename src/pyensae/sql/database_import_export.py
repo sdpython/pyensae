@@ -4,30 +4,31 @@
 @brief @see cl Database
 """
 
-import os, collections
+import os
+import collections
 
 
-from .file_text_binary          import TextFile
-from .file_text_binary_columns  import TextFileColumns
-from .database_exception        import DBException
+from .file_text_binary import TextFile
+from .file_text_binary_columns import TextFileColumns
+from .database_exception import DBException
 
 
-class DatabaseImportExport :
+class DatabaseImportExport:
 
     """
     This class is not neant to be working alone.
     It contains import, export function for a database, in various formats.
     """
 
-    #############################################################################################
+    ##########################################################################
     # exporting functions
-    #############################################################################################
+    ##########################################################################
 
-    def export_table_into_flat_file (self,  table,
-                                            filename,
-                                            header          = False,
-                                            columns         = None,
-                                            post_process    = None) :
+    def export_table_into_flat_file(self, table,
+                                    filename,
+                                    header=False,
+                                    columns=None,
+                                    post_process=None):
         """
         export a table into a flat file
 
@@ -52,28 +53,30 @@ class DatabaseImportExport :
         @endcode
         @endexample
         """
-        if columns is None :    sql = "SELECT * FROM " + table + ";"
-        else :                  sql = "SELECT %s FROM %s ;" % (",".join (columns), table)
+        if columns is None:
+            sql = "SELECT * FROM " + table + ";"
+        else:
+            sql = "SELECT %s FROM %s ;" % (",".join(columns), table)
 
-        self.export_view_into_flat_file (sql, filename, header, post_process)
+        self.export_view_into_flat_file(sql, filename, header, post_process)
 
-    def _clean_string (self, s) :
+    def _clean_string(self, s):
         """
         @param      s       string
         @return             remove \\r\\t\\n
         """
-        rep = { "\t":"\\t",
-                "\n":"\\n",
-                "\r":"\\r",}
-        for k,v in rep.items() :
-            s = s.replace (k,v)
+        rep = {"\t": "\\t",
+               "\n": "\\n",
+               "\r": "\\r", }
+        for k, v in rep.items():
+            s = s.replace(k, v)
         return s
 
-    def export_view_into_flat_file (self,   view_sql,
-                                            filename,
-                                            header          = False,
-                                            post_process    = None,
-                                            encoding        = "utf8") :
+    def export_view_into_flat_file(self, view_sql,
+                                   filename,
+                                   header=False,
+                                   post_process=None,
+                                   encoding="utf8"):
         """export a table into a flat file
         @param      view_sql        SQL request
         @param      filename        filename
@@ -83,47 +86,50 @@ class DatabaseImportExport :
         """
         sepline = "\n"
 
-        self._check_connection ()
+        self._check_connection()
 
-        if header :
-            if isinstance (header, list) or isinstance (header, tuple) :
-                header_line = "\t".join (header) + sepline
-            elif isinstance (header, bool) :
-                col = self.get_sql_columns (view_sql)
-                header_line = "\t".join (col) + sepline
-            else :
+        if header:
+            if isinstance(header, list) or isinstance(header, tuple):
+                header_line = "\t".join(header) + sepline
+            elif isinstance(header, bool):
+                col = self.get_sql_columns(view_sql)
+                header_line = "\t".join(col) + sepline
+            else:
                 header_line = header + sepline
-        else :
+        else:
             header_line = ""
 
-        sql     = view_sql
-        cur     = self.execute (sql)
-        nbline  = 0
+        sql = view_sql
+        cur = self.execute(sql)
+        nbline = 0
 
-        f = open (filename, "w", encoding=encoding)
-        f.write (header_line)
-        memo = { }
+        f = open(filename, "w", encoding=encoding)
+        f.write(header_line)
+        memo = {}
 
-        for line_ in cur :
+        for line_ in cur:
 
-            if post_process is not None :   line = post_process (line_, memo)
-            else :                          line = line_
+            if post_process is not None:
+                line = post_process(line_, memo)
+            else:
+                line = line_
 
-            pr = "\t".join ([self._clean_string (str (x)) for x in line])
+            pr = "\t".join([self._clean_string(str(x)) for x in line])
 
-            f.write (pr + sepline)
+            f.write(pr + sepline)
             nbline += 1
-            if nbline % 100000 == 0 :
+            if nbline % 100000 == 0:
                 self.LOG("     exporting from view, line ", nbline)
 
-        f.close ()
-        cur.close ()
+        f.close()
+        cur.close()
 
-    #############################################################################################
+    ##########################################################################
     # importing functions
-    #############################################################################################
+    ##########################################################################
 
-    def append_values (self, values, tablename, schema, cursor = None, skip_exception = False) :
+    def append_values(
+            self, values, tablename, schema, cursor=None, skip_exception=False):
         """
         use @see me _append_table to fill a table will the values contained in values (as list)
 
@@ -136,24 +142,28 @@ class DatabaseImportExport :
         @param      skip_exception  skip exception while inserting an element
 
         """
-        self._append_table ( values, tablename, schema, cursor = cursor, skip_exception = skip_exception)
+        self._append_table(
+            values,
+            tablename,
+            schema,
+            cursor=cursor,
+            skip_exception=skip_exception)
 
-    def _append_table (self,    file,
-                                table,
-                                columns,
-                                format              = "tsv",
-                                header              = False,
-                                stop                = -1,
-                                lower_case          = False,
-                                cursor              = None,
-                                fill_missing        = 0,
-                                unique              = None,
-                                filter_case         = None,
-                                strict_separator    = False,
-                                skip_exception      = False,
-                                changes             = { },
-                                **params) :
-
+    def _append_table(self, file,
+                      table,
+                      columns,
+                      format="tsv",
+                      header=False,
+                      stop=-1,
+                      lower_case=False,
+                      cursor=None,
+                      fill_missing=0,
+                      unique=None,
+                      filter_case=None,
+                      strict_separator=False,
+                      skip_exception=False,
+                      changes={},
+                      **params):
         """
         append element to a database
 
@@ -191,130 +201,160 @@ class DatabaseImportExport :
             - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)
 
         """
-        if stop != -1 : self.LOG ("SQL append table stop is ", stop)
-        self._check_connection ()
+        if stop != -1:
+            self.LOG("SQL append table stop is ", stop)
+        self._check_connection()
         nbinsert = 0
-        unique_key = { }
-        if isinstance (file, list) or (isinstance (file, collections.Iterable) and not isinstance (file,str)) :
+        unique_key = {}
+        if isinstance(file, list) or (
+                isinstance(file, collections.Iterable) and not isinstance(file, str)):
             primarykey = None
-            for c,v in columns.items() :
-                if "PRIMARYKEY" in v : primarykey = v [0]
+            for c, v in columns.items():
+                if "PRIMARYKEY" in v:
+                    primarykey = v[0]
 
-            if table not in self.get_table_list () :
-                raise DBException ("unable to find table " + table)
+            if table not in self.get_table_list():
+                raise DBException("unable to find table " + table)
 
-            all         = 0
-            num_line    = 0
-            for line in file :
-                if stop != -1 and all >= stop : break
-                dic = self._process_text_line ( line,
-                                                columns,
-                                                format              = format,
-                                                lower_case          = lower_case,
-                                                num_line            = num_line,
-                                                filter_case         = filter_case,
-                                                strict_separator    = strict_separator)
+            all = 0
+            num_line = 0
+            for line in file:
+                if stop != -1 and all >= stop:
+                    break
+                dic = self._process_text_line(line,
+                                              columns,
+                                              format=format,
+                                              lower_case=lower_case,
+                                              num_line=num_line,
+                                              filter_case=filter_case,
+                                              strict_separator=strict_separator)
 
-                if unique is not None :
-                    if dic [unique] in unique_key : continue
-                    else : unique_key [dic [unique]] = 0
+                if unique is not None:
+                    if dic[unique] in unique_key:
+                        continue
+                    else:
+                        unique_key[dic[unique]] = 0
 
                 num_line += 1
-                if dic is not None :
-                    self._get_insert_request (  dic,
-                                                table,
-                                                True,
-                                                primarykey,
-                                                cursor = cursor,
-                                                skip_exception = skip_exception)
+                if dic is not None:
+                    self._get_insert_request(dic,
+                                             table,
+                                             True,
+                                             primarykey,
+                                             cursor=cursor,
+                                             skip_exception=skip_exception)
                     nbinsert += 1
                     #self._connection.execute (s)
                     all += 1
                     if all % 100000 == 0:
-                        self.LOG("adding %d lines into table %s" % (all, table))
-        else :
+                        self.LOG(
+                            "adding %d lines into table %s" %
+                            (all, table))
+        else:
             primarykey = None
-            for c,v in columns.items() :
-                if "PRIMARYKEY" in v : primarykey = v [0]
+            for c, v in columns.items():
+                if "PRIMARYKEY" in v:
+                    primarykey = v[0]
 
-            if table not in self.get_table_list () :
-                table_list  = self.get_table_list ()
-                message     = "unable to find table " + table + " in [" + ",".join (table_list) + "]"
-                raise DBException (message)
+            if table not in self.get_table_list():
+                table_list = self.get_table_list()
+                message = "unable to find table " + table + \
+                    " in [" + ",".join(table_list) + "]"
+                raise DBException(message)
 
-            column_has_space = len ( [ v[0] for k,v in columns.items() if ' ' in v[0] ] ) > 0
-            self.LOG("   column_has_space",column_has_space, [ v[0] for k,v in columns.items()] )
+            column_has_space = len(
+                [v[0] for k, v in columns.items() if ' ' in v[0]]) > 0
+            self.LOG(
+                "   column_has_space", column_has_space, [
+                    v[0] for k, v in columns.items()])
 
-            if strict_separator or column_has_space :
-                file = TextFile (file, utf8 = True, errors = 'ignore', fLOG = self.LOG)
+            if strict_separator or column_has_space:
+                file = TextFile(
+                    file,
+                    utf8=True,
+                    errors='ignore',
+                    fLOG=self.LOG)
                 skip = False
-            else :
-                self.LOG ("   changes",changes)
-                file = TextFileColumns(file, utf8 = True, errors = 'ignore', fLOG = self.LOG,
-                                        regex = columns, changes = changes)
+            else:
+                self.LOG("   changes", changes)
+                file = TextFileColumns(file, utf8=True, errors='ignore', fLOG=self.LOG,
+                                       regex=columns, changes=changes)
                 skip = True
 
-            file.open ()
-            all      = 0
+            file.open()
+            all = 0
             num_line = 0
-            every    = 100000
-            tsv      = format == "tsv"
+            every = 100000
+            tsv = format == "tsv"
 
-            for line in file :
-                if stop != -1 and all >= stop : break
+            for line in file:
+                if stop != -1 and all >= stop:
+                    break
                 num_line += 1
-                if skip :
+                if skip:
                     dic = line
-                else :
-                    if header and num_line == 1 : continue
-                    if len (line.strip ("\r\n")) == 0 : continue
-                    if tsv :
-                        dic = self._process_text_line ( line,
-                                                        columns,
-                                                        format,
-                                                        lower_case          = lower_case,
-                                                        num_line            = num_line-1,
-                                                        fill_missing        = fill_missing,
-                                                        filter_case         = filter_case,
-                                                        strict_separator    = strict_separator)
-                    else :
-                        dic = format (line, **params)
-                        if dic is None : continue
+                else:
+                    if header and num_line == 1:
+                        continue
+                    if len(line.strip("\r\n")) == 0:
+                        continue
+                    if tsv:
+                        dic = self._process_text_line(line,
+                                                      columns,
+                                                      format,
+                                                      lower_case=lower_case,
+                                                      num_line=num_line - 1,
+                                                      fill_missing=fill_missing,
+                                                      filter_case=filter_case,
+                                                      strict_separator=strict_separator)
+                    else:
+                        dic = format(line, **params)
+                        if dic is None:
+                            continue
 
-                if unique is not None :
-                    if dic [unique] in unique_key : continue
-                    else : unique_key [dic [unique]] = 0
+                if unique is not None:
+                    if dic[unique] in unique_key:
+                        continue
+                    else:
+                        unique_key[dic[unique]] = 0
 
-                if dic is not None :
-                    self._get_insert_request (dic, table, True, primarykey, cursor = cursor)
+                if dic is not None:
+                    self._get_insert_request(
+                        dic,
+                        table,
+                        True,
+                        primarykey,
+                        cursor=cursor)
                     nbinsert += 1
                     all += 1
                     if all % every == 0:
-                        self.LOG("adding %d lines into table %s" % (all, table))
-            file.close ()
+                        self.LOG(
+                            "adding %d lines into table %s" %
+                            (all, table))
+            file.close()
 
-        if cursor is not None : cursor.close ()
-        self.commit ()
+        if cursor is not None:
+            cursor.close()
+        self.commit()
         return nbinsert
 
-    def import_table_from_flat_file (   self,
-                                        file,
-                                        table,
-                                        columns,
-                                        format              = "tsv",
-                                        header              = False,
-                                        display             = False,
-                                        lower_case          = False,
-                                        table_exists        = False,
-                                        temporary           = False,
-                                        fill_missing        = False,
-                                        indexes             = [],
-                                        filter_case         = None,
-                                        change_to_text      = [],
-                                        strict_separator    = False,
-                                        add_key             = None,
-                                        **params) :
-
+    def import_table_from_flat_file(self,
+                                    file,
+                                    table,
+                                    columns,
+                                    format="tsv",
+                                    header=False,
+                                    display=False,
+                                    lower_case=False,
+                                    table_exists=False,
+                                    temporary=False,
+                                    fill_missing=False,
+                                    indexes=[],
+                                    filter_case=None,
+                                    change_to_text=[],
+                                    strict_separator=False,
+                                    add_key=None,
+                                    **params):
         """
         add a table to database from a file
 
@@ -356,58 +396,80 @@ class DatabaseImportExport :
         @warning The function does not react well when a column name includes a space.
         """
         if display:
-            if isinstance (file, list) : self.LOG ("processing file ", file [:min (len (file),10)])
-            else :                       self.LOG ("processing file ", file)
+            if isinstance(file, list):
+                self.LOG("processing file ", file[:min(len(file), 10)])
+            else:
+                self.LOG("processing file ", file)
 
-        self._check_connection ()
-        if columns is None :
-            # here, some spaces might have been replaced by "_", we need to get them back
-            columns, changes = self._guess_columns (file, format, columns, filter_case = filter_case, header = header)
+        self._check_connection()
+        if columns is None:
+            # here, some spaces might have been replaced by "_", we need to get
+            # them back
+            columns, changes = self._guess_columns(
+                file, format, columns, filter_case=filter_case, header=header)
         elif isinstance(columns, list):
-            columns_, changes = self._guess_columns (file, format, columns, filter_case = filter_case, header = header)
+            columns_, changes = self._guess_columns(
+                file, format, columns, filter_case=filter_case, header=header)
             if len(columns_) != len(columns):
-                raise DBException("different number of columns:\ncolumns={0}\nguessed={1}".format(str(columns), str(columns_)))
-            columns=columns_
+                raise DBException(
+                    "different number of columns:\ncolumns={0}\nguessed={1}".format(
+                        str(columns),
+                        str(columns_)))
+            columns = columns_
 
-        if add_key != None:
-            columns [len(columns)] = (add_key, int, "PRIMARYKEY", "AUTOINCREMENT")
+        if add_key is not None:
+            columns[
+                len(columns)] = (
+                add_key,
+                int,
+                "PRIMARYKEY",
+                "AUTOINCREMENT")
 
-        for i in columns :
-            v = columns [i]
-            if v [0] in change_to_text :
-                if len (v) <= 2 : v = ( v [0], (str, 1000000) )
-                else :            v = ( v [0], (str, 1000000) ) + v [2:]
-            columns [i] = v
+        for i in columns:
+            v = columns[i]
+            if v[0] in change_to_text:
+                if len(v) <= 2:
+                    v = (v[0], (str, 1000000))
+                else:
+                    v = (v[0], (str, 1000000)) + v[2:]
+            columns[i] = v
 
-        if display : self.LOG ("   columns ", columns)
+        if display:
+            self.LOG("   columns ", columns)
 
-        if not isinstance (file, list) and not os.path.exists (file) :
-            raise DBException ("unable to find file " + file)
+        if not isinstance(file, list) and not os.path.exists(file):
+            raise DBException("unable to find file " + file)
 
-        if not table_exists :                       cursor = self.create_table (table, columns, temporary = temporary)
-        elif table not in self.get_table_list () :  raise DBException ("unable to find table " + table + " (1)")
-        else :                                      cursor = None
+        if not table_exists:
+            cursor = self.create_table(table, columns, temporary=temporary)
+        elif table not in self.get_table_list():
+            raise DBException("unable to find table " + table + " (1)")
+        else:
+            cursor = None
 
-        if table not in self.get_table_list () : raise DBException ("unable to find table " + table + " (2)")
-        nb = self._append_table (   file,
-                                    table,
-                                    columns,
-                                    format              = format,
-                                    header              = header,
-                                    lower_case          = lower_case,
-                                    cursor              = cursor,
-                                    fill_missing        = fill_missing,
-                                    filter_case         = filter_case,
-                                    strict_separator    = strict_separator,
-                                    changes             = changes,
-                                    **params)
+        if table not in self.get_table_list():
+            raise DBException("unable to find table " + table + " (2)")
+        nb = self._append_table(file,
+                                table,
+                                columns,
+                                format=format,
+                                header=header,
+                                lower_case=lower_case,
+                                cursor=cursor,
+                                fill_missing=fill_missing,
+                                filter_case=filter_case,
+                                strict_separator=strict_separator,
+                                changes=changes,
+                                **params)
 
-        self.LOG (nb, " lines imported")
+        self.LOG(nb, " lines imported")
 
-        for ind in indexes :
-            if isinstance (ind, str) :  indexname = table + "_" + ind
-            else :                      indexname = table + "_" + "_".join (ind)
-            if not self.has_index (indexname) :
-                self.create_index (indexname, table, ind)
+        for ind in indexes:
+            if isinstance(ind, str):
+                indexname = table + "_" + ind
+            else:
+                indexname = table + "_" + "_".join(ind)
+            if not self.has_index(indexname):
+                self.create_index(indexname, table, ind)
 
         return nb

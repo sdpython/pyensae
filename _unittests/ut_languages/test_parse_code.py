@@ -6,17 +6,34 @@ will sort all test files by increasing time and run them.
 """
 
 
-import sys, os, unittest
+import sys
+import os
+import unittest
 
 
-try :
+try:
     import src
     import pyquickhelper
-except ImportError :
-    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..")))
-    if path not in sys.path : sys.path.append (path)
-    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..", "..", "pyquickhelper", "src")))
-    if path not in sys.path : sys.path.append (path)
+except ImportError:
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..")))
+    if path not in sys.path:
+        sys.path.append(path)
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..",
+                "..",
+                "pyquickhelper",
+                "src")))
+    if path not in sys.path:
+        sys.path.append(path)
     import src
     import pyquickhelper
 
@@ -25,10 +42,14 @@ from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_s
 from src.pyensae.languages.antlr_grammar_build import build_grammar
 import src.pyensae.languages.antlr_grammar_use as source_parser
 
+
 class TestParseCode (unittest.TestCase):
 
-    def test_r(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_r(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
 
         code = """
         a = 4 ;
@@ -36,17 +57,20 @@ class TestParseCode (unittest.TestCase):
         c = a + b ;
         """
 
-        clparser,cllexer = get_parser_lexer("R")
+        clparser, cllexer = get_parser_lexer("R")
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
         st = get_tree_string(tree, parser)
-        assert len(st)>0
+        assert len(st) > 0
         st = get_tree_string(tree, parser, None)
-        fLOG(st.replace("\\n","\n"))
-        assert len(st)>0
+        fLOG(st.replace("\\n", "\n"))
+        assert len(st) > 0
 
-    def test_sql(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_sql(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
 
         code = """
         SELECT a,tbl.b,nb FROM tbl
@@ -56,15 +80,18 @@ class TestParseCode (unittest.TestCase):
         ON tbl.b == tblG.b ;
         """
 
-        clparser,cllexer = get_parser_lexer("SQLite")
+        clparser, cllexer = get_parser_lexer("SQLite")
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
         st = get_tree_string(tree, parser, None)
-        fLOG(st.replace("\\n","\n"))
-        assert len(st)>0
+        fLOG(st.replace("\\n", "\n"))
+        assert len(st) > 0
 
-    def test_error(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_error(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
 
         code = """
         SELECT a,tbl.b,nb$ FROM tbl
@@ -74,19 +101,22 @@ class TestParseCode (unittest.TestCase):
         ON tbl.b == tblG.b ;
         """
 
-        clparser,cllexer = get_parser_lexer("SQLite")
+        clparser, cllexer = get_parser_lexer("SQLite")
         parser = parse_code(code, clparser, cllexer)
         try:
             tree = parser.parse()
-        except SyntaxError as e :
+        except SyntaxError as e:
             fLOG(e)
             return
 
         raise Exception("should not be here")
 
-    def test_pig(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        #does not work yet
+    def test_pig(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+        # does not work yet
         return
 
         code = """
@@ -94,20 +124,23 @@ class TestParseCode (unittest.TestCase):
         STORE A INTO 'samefile.txt' ;
         """
 
-        clparser,cllexer = get_parser_lexer("Pig")
+        clparser, cllexer = get_parser_lexer("Pig")
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
         st = get_tree_string(tree, parser, None)
-        fLOG(st.replace("\\n","\n"))
-        assert len(st)>0
+        fLOG(st.replace("\\n", "\n"))
+        assert len(st) > 0
 
     def test_build_parser(self):
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
 
         try:
-            clparser,cllexer = get_parser_lexer("SQLite")
+            clparser, cllexer = get_parser_lexer("SQLite")
             return
-        except ImportError :
+        except ImportError:
             pass
 
         folder = os.path.dirname(source_parser.__file__)
@@ -118,5 +151,5 @@ class TestParseCode (unittest.TestCase):
             final = build_grammar(lang, fLOG=fLOG)
 
 
-if __name__ == "__main__"  :
-    unittest.main ()
+if __name__ == "__main__":
+    unittest.main()

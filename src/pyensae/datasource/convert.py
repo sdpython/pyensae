@@ -8,6 +8,7 @@ import pandas
 from ..sql.database_main import Database
 from pyquickhelper import noLOG
 
+
 def dBase2df(file, encoding="cp437"):
     """
     converts a dBase file into a list of dataframe (one per table)
@@ -20,10 +21,12 @@ def dBase2df(file, encoding="cp437"):
     """
     import dbfread
     table = dbfread.DBF(file, load=False, encoding=encoding)
-    res = [ _ for _ in table ]
+    res = [_ for _ in table]
     return pandas.DataFrame(res)
 
-def dBase2sqllite(db, table, encoding="cp437", overwrite_table = None, fLOG = noLOG):
+
+def dBase2sqllite(
+        db, table, encoding="cp437", overwrite_table=None, fLOG=noLOG):
     """
     Put all rows from a dBase database into sqlite
 
@@ -50,10 +53,10 @@ def dBase2sqllite(db, table, encoding="cp437", overwrite_table = None, fLOG = no
         '0': 'INTEGER',
     }
 
-    if isinstance(db,str):
+    if isinstance(db, str):
         cursor = Database(db, LOG=fLOG)
         cursor.connect()
-    else :
+    else:
         cursor = db
 
     if isinstance(table, str):
@@ -79,9 +82,10 @@ def dBase2sqllite(db, table, encoding="cp437", overwrite_table = None, fLOG = no
     refs = ', '.join([':' + f for f in table.field_names])
     sql = 'insert into %s values (%s)' % (table_name, refs)
 
-    for i,rec in enumerate(table):
+    for i, rec in enumerate(table):
         cursor._connection.execute(sql, list(rec.values()))
-        if i % 20000 == 0 : fLOG("moving line ",i, " to table", table_name)
+        if i % 20000 == 0:
+            fLOG("moving line ", i, " to table", table_name)
 
     if isinstance(db, str):
         cursor.commit()

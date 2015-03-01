@@ -6,17 +6,35 @@ will sort all test files by increasing time and run them.
 """
 
 
-import sys, os, unittest, shlex
+import sys
+import os
+import unittest
+import shlex
 
 
-try :
+try:
     import src
     import pyquickhelper
-except ImportError :
-    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..")))
-    if path not in sys.path : sys.path.append (path)
-    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..", "..", "pyquickhelper", "src")))
-    if path not in sys.path : sys.path.append (path)
+except ImportError:
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..")))
+    if path not in sys.path:
+        sys.path.append(path)
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..",
+                "..",
+                "pyquickhelper",
+                "src")))
+    if path not in sys.path:
+        sys.path.append(path)
     import src
     import pyquickhelper
 
@@ -27,19 +45,25 @@ from src.pyensae import file_tail
 
 class TestFiles (unittest.TestCase):
 
-    def test_shlex(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_shlex(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         this = r"c:\rep1\rep2\frep\_urep.py rrr c:\rr\i.py"
         r = shlex.split(this, posix=False)
         fLOG(r)
         assert r[0] == r"c:\rep1\rep2\frep\_urep.py"
 
-    def test_files(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_files(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         path = os.path.abspath(os.path.dirname(__file__))
         mg = MagicFile()
         cmd = path + " -f .*[.]py"
-        fLOG("**",cmd)
+        fLOG("**", cmd)
         res = mg.lsr(cmd)
         fLOG(res)
         if len(res) == 0:
@@ -48,28 +72,38 @@ class TestFiles (unittest.TestCase):
         fLOG(res)
         assert len(res) > 0
 
-    def test_head(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_head(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         fp = os.path.abspath(__file__)
         mg = MagicFile()
-        fLOG("--",fp)
+        fLOG("--", fp)
         res = mg.head("{0} -n 3".format(fp))
-        fLOG("*****",res)
+        fLOG("*****", res)
         assert "test log" in res.data
         res = mg.head("{0} --n 3 -e ascii".format(fp))
         res = mg.head("{0} --n 3 -e utf8".format(fp))
 
-    def test_head2(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
-        fp = os.path.join(os.path.dirname(os.path.abspath(__file__)),"data","Exportutf8.txt")
+    def test_head2(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+        fp = os.path.join(
+            os.path.dirname(
+                os.path.abspath(__file__)),
+            "data",
+            "Exportutf8.txt")
         mg = MagicFile()
-        fLOG("--",fp)
+        fLOG("--", fp)
         res = mg.head("{0} -n 3".format(fp))
-        fLOG("*****",res)
+        fLOG("*****", res)
         res = mg.head("{0} -n=3".format(fp))
-        fLOG("*****",res)
+        fLOG("*****", res)
         res = mg.head("{0}".format(fp))
-        fLOG("*****",res)
+        fLOG("*****", res)
         assert "9.0" in res.data
         res = mg.head("{0} --n 3 -e utf8".format(fp))
 
@@ -78,26 +112,32 @@ class TestFiles (unittest.TestCase):
         except FileNotFoundError:
             pass
 
-    def test_tail(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_tail(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         fp = os.path.abspath(__file__)
         mg = MagicFile()
-        fLOG("--",fp)
+        fLOG("--", fp)
         res = mg.tail("{0} -n 3".format(fp))
-        fLOG("*****",res)
+        fLOG("*****", res)
         assert "unittest.main" in res.data
         res = mg.tail("{0} --n 3 -e ascii".format(fp))
         res = mg.tail("{0} --n 3 -e utf8".format(fp))
-        res = file_tail ( fp, threshold = 300, nbline = 3 )
-        fLOG("#####",res)
+        res = file_tail(fp, threshold=300, nbline=3)
+        fLOG("#####", res)
         assert "unittest.main" in res[-1]
 
-    def test_files_repo(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_files_repo(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         path = os.path.abspath(os.path.dirname(__file__))
         mg = MagicFile()
         cmd = path
-        fLOG("**",cmd)
+        fLOG("**", cmd)
         res = mg.lsrepo(cmd)
         fLOG(res)
         if len(res) == 0:
@@ -106,22 +146,25 @@ class TestFiles (unittest.TestCase):
         fLOG(res)
         assert len(res) > 0
 
-    def test_files_compress(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_files_compress(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         this = os.path.abspath(__file__)
         temp = get_temp_folder(__file__, "temp_compress")
         dest = os.path.join(temp, "temp_this.zip")
 
         mg = MagicFile()
         cmd = "dest [this]"
-        fLOG("**",cmd)
+        fLOG("**", cmd)
         assert not os.path.exists(dest)
-        mg.add_context ({"this":this,"dest":dest})
+        mg.add_context({"this": this, "dest": dest})
         res = mg.compress(cmd)
         fLOG(res)
         assert os.path.exists(dest)
         assert res == 1
 
 
-if __name__ == "__main__"  :
-    unittest.main ()
+if __name__ == "__main__":
+    unittest.main()

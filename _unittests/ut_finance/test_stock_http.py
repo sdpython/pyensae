@@ -3,17 +3,35 @@
 """
 
 
-import sys, os, unittest, datetime
+import sys
+import os
+import unittest
+import datetime
 
 
-try :
+try:
     import src
     import pyquickhelper
-except ImportError :
-    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..")))
-    if path not in sys.path : sys.path.append (path)
-    path = os.path.normpath(os.path.abspath( os.path.join( os.path.split(__file__)[0], "..", "..", "..", "pyquickhelper", "src")))
-    if path not in sys.path : sys.path.append (path)
+except ImportError:
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..")))
+    if path not in sys.path:
+        sys.path.append(path)
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..",
+                "..",
+                "pyquickhelper",
+                "src")))
+    if path not in sys.path:
+        sys.path.append(path)
     import src
     import pyquickhelper
 
@@ -23,78 +41,105 @@ from src.pyensae.finance.astock import StockPrices
 
 class TestStockHttp (unittest.TestCase):
 
-    def test_download_stock(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_download_stock(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache")
         name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-15.txt")
-        if os.path.exists(name) : os.remove(name)
-        stock = StockPrices ("BNP.PA", folder = cache, end=datetime.datetime(2014,1,15))
+        if os.path.exists(name):
+            os.remove(name)
+        stock = StockPrices(
+            "BNP.PA",
+            folder=cache,
+            end=datetime.datetime(
+                2014,
+                1,
+                15))
         assert os.path.exists(name)
         df = stock.dataframe
         assert len(df) > 0
 
-    def test_available_dates(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_available_dates(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache2")
-        stocks = [ StockPrices ("BNP.PA", folder = cache),
-                    StockPrices ("CA.PA", folder = cache),
-                    StockPrices ("SAF.PA", folder = cache),
-                    ]
+        stocks = [StockPrices("BNP.PA", folder=cache),
+                  StockPrices("CA.PA", folder=cache),
+                  StockPrices("SAF.PA", folder=cache),
+                  ]
         av = StockPrices.available_dates(stocks)
-        assert len(av)>0
+        assert len(av) > 0
 
         missing = stocks[-1].missing(av)
-        assert missing is None or len(missing)>0
+        assert missing is None or len(missing) > 0
 
-    def test_covariance(self) :
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+    def test_covariance(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache2")
-        stocks = [ StockPrices ("BNP.PA", folder = cache),
-                    StockPrices ("CA.PA", folder = cache),
-                    StockPrices ("SAF.PA", folder = cache),
-                    ]
+        stocks = [StockPrices("BNP.PA", folder=cache),
+                  StockPrices("CA.PA", folder=cache),
+                  StockPrices("SAF.PA", folder=cache),
+                  ]
 
-        dates = StockPrices.available_dates( stocks )
-        ok    = dates[ dates["missing"] == 0 ]
-        stocks= [ v.keep_dates(ok) for v in stocks ]
+        dates = StockPrices.available_dates(stocks)
+        ok = dates[dates["missing"] == 0]
+        stocks = [v.keep_dates(ok) for v in stocks]
 
         cov = StockPrices.covariance(stocks)
         assert len(cov) == 3
 
-        cor = StockPrices.covariance(stocks, cov = False)
+        cor = StockPrices.covariance(stocks, cov=False)
         assert len(cor) == 3
-        assert cor.ix["BNP.PA","BNP.PA"]==1
-        assert cor.ix[2,2]==1
+        assert cor.ix["BNP.PA", "BNP.PA"] == 1
+        assert cor.ix[2, 2] == 1
 
-        ret, mat = StockPrices.covariance(stocks, cov = False, ret = True)
+        ret, mat = StockPrices.covariance(stocks, cov=False, ret=True)
         assert len(ret) == 3
 
     def test_no_wifi(self):
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         data = os.path.abspath(os.path.split(__file__)[0])
-        data = os.path.join(data,"data")
+        data = os.path.join(data, "data")
         file = os.path.join(data, "BNP.PA.2000-01-03.2014-02-24.txt")
         fLOG(os.path.exists(file))
         fLOG(file)
         try:
             stock = StockPrices(file)
-        except Exception as e :
+        except Exception as e:
             assert "pandas cannot parse the file" in str(e)
 
     def test_index(self):
-        fLOG (__file__, self._testMethodName, OutputPrint = __name__ == "__main__")
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache")
         name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-16.txt")
-        stock = StockPrices ("BNP.PA", folder = cache, end=datetime.datetime(2014,1,15))
+        stock = StockPrices(
+            "BNP.PA",
+            folder=cache,
+            end=datetime.datetime(
+                2014,
+                1,
+                15))
         some = stock["2001-01-01":"2002-02-02"]
-        assert isinstance(some,StockPrices)
-        assert len(some)<1000
+        assert isinstance(some, StockPrices)
+        assert len(some) < 1000
 
 
-
-if __name__ == "__main__"  :
-    unittest.main ()
+if __name__ == "__main__":
+    unittest.main()

@@ -3,7 +3,9 @@
 @file
 @brief Magic command to handle files
 """
-import sys, os, pandas
+import sys
+import os
+import pandas
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
@@ -17,6 +19,7 @@ from .content_helper import file_head, file_tail
 
 @magics_class
 class MagicFile(MagicClassWithHelpers):
+
     """
     Defines magic commands to list the content of a folder
 
@@ -28,10 +31,20 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines the way to parse the magic command ``%head``
         """
-        parser = MagicCommandParser(description='display the first lines of a text file')
+        parser = MagicCommandParser(
+            description='display the first lines of a text file')
         parser.add_argument('f', type=str, help='filename')
-        parser.add_argument('-n', '--n', type=int, default=10, help='number of lines to display')
-        parser.add_argument('-e', '--encoding', default="utf8", help='file encoding')
+        parser.add_argument(
+            '-n',
+            '--n',
+            type=int,
+            default=10,
+            help='number of lines to display')
+        parser.add_argument(
+            '-e',
+            '--encoding',
+            default="utf8",
+            help='file encoding')
         return parser
     _parser_head = None
 
@@ -46,9 +59,9 @@ class MagicFile(MagicClassWithHelpers):
         parser = MagicFile._parser_head
 
         try:
-            args = parser.parse_cmd(line, context = self.Context)
+            args = parser.parse_cmd(line, context=self.Context)
         except SystemExit:
-            print( parser.print_help() )
+            print(parser.print_help())
             args = None
 
         if args is not None:
@@ -60,10 +73,20 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines the way to parse the magic command ``%tail``
         """
-        parser = MagicCommandParser(description='display the last lines of a text file')
+        parser = MagicCommandParser(
+            description='display the last lines of a text file')
         parser.add_argument('f', type=str, help='filename')
-        parser.add_argument('-n', '--n', type=int, default=10, help='number of lines to display')
-        parser.add_argument('-e', '--encoding', default="utf8", help='file encoding')
+        parser.add_argument(
+            '-n',
+            '--n',
+            type=int,
+            default=10,
+            help='number of lines to display')
+        parser.add_argument(
+            '-e',
+            '--encoding',
+            default="utf8",
+            help='file encoding')
         return parser
     _parser_tail = None
 
@@ -78,9 +101,9 @@ class MagicFile(MagicClassWithHelpers):
         parser = MagicFile._parser_tail
 
         try:
-            args = parser.parse_cmd(line, context = self.Context)
+            args = parser.parse_cmd(line, context=self.Context)
         except SystemExit:
-            print( parser.print_help() )
+            print(parser.print_help())
             args = None
 
         if args is not None:
@@ -92,9 +115,20 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines the way to parse the magic command ``%lsr``
         """
-        parser = MagicCommandParser(description='display the content of a folder as a dataframe')
-        parser.add_argument('path', type=str, nargs="?", help='path', default=".")
-        parser.add_argument('-f', '--filter', type=str, default=".*", help='filter, same syntax as a regular expression')
+        parser = MagicCommandParser(
+            description='display the content of a folder as a dataframe')
+        parser.add_argument(
+            'path',
+            type=str,
+            nargs="?",
+            help='path',
+            default=".")
+        parser.add_argument(
+            '-f',
+            '--filter',
+            type=str,
+            default=".*",
+            help='filter, same syntax as a regular expression')
         return parser
     _parser_lsr = None
 
@@ -109,13 +143,13 @@ class MagicFile(MagicClassWithHelpers):
         parser = MagicFile._parser_lsr
 
         try:
-            args = parser.parse_cmd(line, context = self.Context)
+            args = parser.parse_cmd(line, context=self.Context)
         except SystemExit:
-            print( parser.print_help() )
+            print(parser.print_help())
             args = None
 
         if args is not None:
-            if args.path is None or len(args.path) == 0 :
+            if args.path is None or len(args.path) == 0:
                 filename = "."
             else:
                 filename = args.path
@@ -126,38 +160,38 @@ class MagicFile(MagicClassWithHelpers):
                 filename = "."
 
             iter = explore_folder_iterfile(filename, pattern)
-            rows = [ ]
-            for r in iter :
+            rows = []
+            for r in iter:
                 d = os.path.isfile(r)
-                if d :
+                if d:
                     st = os.stat(r)
-                    r = {   "name":r,
-                            "size":format_file_size(st.st_size),
-                            "last_modified":format_file_mtime(st.st_mtime),
-                            "directory":False }
+                    r = {"name": r,
+                         "size": format_file_size(st.st_size),
+                         "last_modified": format_file_mtime(st.st_mtime),
+                         "directory": False}
                 else:
-                    r = { "name":r, "directory":True }
+                    r = {"name": r, "directory": True}
                 rows.append(r)
             return pandas.DataFrame(rows)
 
     @cell_magic
-    def PYTHON(self, line, cell = None):
+    def PYTHON(self, line, cell=None):
         """
         defines command ``%%PYTHON``
         """
-        if line in [None, ""] :
+        if line in [None, ""]:
             print("Usage:")
             print("     %%PYTHON <filename>")
             print("")
             print("The command store the content of the cell as a local file.")
         else:
             filename = line.strip()
-            with open(filename, "w", encoding="utf8") as f :
+            with open(filename, "w", encoding="utf8") as f:
                 f.write("# -*- coding: utf8 -*-\n")
-                f.write(cell.replace("\r",""))
+                f.write(cell.replace("\r", ""))
 
     @cell_magic
-    def runpy(self, line, cell = None):
+    def runpy(self, line, cell=None):
         """
         defines command ``%%runpy``
 
@@ -166,7 +200,7 @@ class MagicFile(MagicClassWithHelpers):
 
         .. versionadded:: 1.1
         """
-        if line in [None, ""] :
+        if line in [None, ""]:
             print("Usage:")
             print("     %%runpy <pythonfile.py> <args>")
             print("     first row")
@@ -179,21 +213,31 @@ class MagicFile(MagicClassWithHelpers):
             else:
                 args = " ".join(filename[1:])
                 filename = filename[0]
-                cmd = sys.executable.replace("pythonw", "python") + " " + filename + " " + args
+                cmd = sys.executable.replace(
+                    "pythonw",
+                    "python") + " " + filename + " " + args
                 tosend = cell
-                out,err = run_cmd(cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
-                if len(err) > 0 :
-                    return HTML ('<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+                out, err = run_cmd(
+                    cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
+                if len(err) > 0:
+                    return HTML(
+                        '<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
                 else:
-                    return HTML ('<pre>\n%s\n</pre>' % out)
+                    return HTML('<pre>\n%s\n</pre>' % out)
 
     @staticmethod
     def _lsrepo_parser():
         """
         defines the way to parse the magic command ``%lsrepo``
         """
-        parser = MagicCommandParser(description='display the content of a repository (GIT or SVN)')
-        parser.add_argument('path', type=str, nargs="?", help='path', default=".")
+        parser = MagicCommandParser(
+            description='display the content of a repository (GIT or SVN)')
+        parser.add_argument(
+            'path',
+            type=str,
+            nargs="?",
+            help='path',
+            default=".")
         return parser
     _parser_lsrepo = None
 
@@ -209,29 +253,29 @@ class MagicFile(MagicClassWithHelpers):
         parser = MagicFile._parser_lsrepo
 
         try:
-            args = parser.parse_cmd(line, context = self.Context)
+            args = parser.parse_cmd(line, context=self.Context)
         except SystemExit:
-            print( parser.print_help() )
+            print(parser.print_help())
             args = None
 
         if args is not None:
-            if args.path is None or len(args.path) == 0 :
+            if args.path is None or len(args.path) == 0:
                 filename = "."
             else:
                 filename = args.path
 
             iter = explore_folder_iterfile_repo(filename)
-            rows = [ ]
-            for r in iter :
+            rows = []
+            for r in iter:
                 d = os.path.isfile(r)
-                if d :
+                if d:
                     st = os.stat(r)
-                    r = {   "name":r,
-                            "size":format_file_size(st.st_size),
-                            "last_modified":format_file_mtime(st.st_mtime),
-                            "directory":False }
+                    r = {"name": r,
+                         "size": format_file_size(st.st_size),
+                         "last_modified": format_file_mtime(st.st_mtime),
+                         "directory": False}
                 else:
-                    r = { "name":r, "directory":True }
+                    r = {"name": r, "directory": True}
                 rows.append(r)
             return pandas.DataFrame(rows)
 
@@ -242,9 +286,17 @@ class MagicFile(MagicClassWithHelpers):
 
         .. versionadded:: 1.1
         """
-        parser = MagicCommandParser(description='display the content of a repository (GIT or SVN)')
-        parser.add_argument('dest', type=str, help='destination, the extension defines the compression format, zip, gzip 7z')
-        parser.add_argument('files', type=str, nargs="?", help='files to compress or a python list')
+        parser = MagicCommandParser(
+            description='display the content of a repository (GIT or SVN)')
+        parser.add_argument(
+            'dest',
+            type=str,
+            help='destination, the extension defines the compression format, zip, gzip 7z')
+        parser.add_argument(
+            'files',
+            type=str,
+            nargs="?",
+            help='files to compress or a python list')
         return parser
     _parser_compress = None
 
@@ -261,14 +313,14 @@ class MagicFile(MagicClassWithHelpers):
         parser = MagicFile._parser_compress
 
         try:
-            args = parser.parse_cmd(line, context = self.Context)
+            args = parser.parse_cmd(line, context=self.Context)
         except SystemExit:
-            print( parser.print_help() )
+            print(parser.print_help())
             args = None
 
         if args is not None:
-            dest   = args.dest
-            files  = args.files
+            dest = args.dest
+            files = args.files
             format = os.path.splitext(dest)[-1].strip(".").lower()
 
             if format == "zip":
@@ -279,6 +331,7 @@ class MagicFile(MagicClassWithHelpers):
                 return zip7_files(dest, files)
             else:
                 raise ValueError("unexpected format: " + format)
+
 
 def register_file_magics():
     """
