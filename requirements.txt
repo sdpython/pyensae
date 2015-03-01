@@ -70,7 +70,6 @@ python-linkedin>=4.1
 pytz>=2013b
 pyzmq>=14.3.1
 requests>=2.3.0
-scikit-image>=0.10.1
 scikit-learn>=0.15.1
 scipy>=0.14.0
 seaborn>=0.5.1
