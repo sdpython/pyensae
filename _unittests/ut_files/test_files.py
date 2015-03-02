@@ -178,20 +178,20 @@ class TestFiles (unittest.TestCase):
         mg.add_context(
             {"file_tail": file_tail, "Database": Database, "text": 3})
         cmd = "-np -f rawhtml file_tail"
-        res = mg.htmlhelp(cmd)
+        res = mg.hhelp(cmd)
         assert "<p>extracts the first nbline of a file " in res
-        res = mg.htmlhelp("-np -f rst file_tail")
+        res = mg.hhelp("-np -f rst file_tail")
         assert ":param      threshold:" in res
-        res = mg.htmlhelp("-np -f rawhtml Database")
+        res = mg.hhelp("-np -f rawhtml Database")
         assert "SQL file which can be empty or not," in res
         doc = docstring2html(Database.__init__, format="rawhtml")
         assert "it can also contain several files separated by" in doc
         fLOG("----------")
-        res = mg.htmlhelp("-np -f rst Database.__init__")
+        res = mg.hhelp("-np -f rst Database.__init__")
         assert "it can also contain several files separated by" in res
-        res = mg.htmlhelp("Database.__init__")
+        res = mg.hhelp("Database.__init__")
         assert res is not None
-        res = mg.htmlhelp("-np -f text Database.__init__")
+        res = mg.hhelp("-np -f text Database.__init__")
         assert "it can also contain several files separated by" in res
         assert "@param" in res
 

@@ -53,17 +53,20 @@ class TestDot (unittest.TestCase):
 
         temp = get_temp_folder(__file__, "temp_dot")
 
-        from sklearn.datasets import load_iris
-        from sklearn import tree
+        if "travis" not in sys.executable:
+            # still some issues with scipy and fortran compiler + graphviz
+            # dependency
+            from sklearn.datasets import load_iris
+            from sklearn import tree
 
-        clf = tree.DecisionTreeClassifier()
-        iris = load_iris()
-        clf = clf.fit(iris.data, iris.target)
-        outfile = os.path.join(temp, "out_tree.dot")
-        tree.export_graphviz(clf, out_file=outfile)
-        img = os.path.join(temp, "out_tree.png")
-        out, err = run_dot(outfile, img)
-        assert os.path.exists(img)
+            clf = tree.DecisionTreeClassifier()
+            iris = load_iris()
+            clf = clf.fit(iris.data, iris.target)
+            outfile = os.path.join(temp, "out_tree.dot")
+            tree.export_graphviz(clf, out_file=outfile)
+            img = os.path.join(temp, "out_tree.png")
+            out, err = run_dot(outfile, img)
+            assert os.path.exists(img)
 
 
 if __name__ == "__main__":

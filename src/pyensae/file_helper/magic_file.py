@@ -294,9 +294,9 @@ class MagicFile(MagicClassWithHelpers):
                 raise ValueError("unexpected format: " + format)
 
     @staticmethod
-    def htmlhelp_parser():
+    def hhelp_parser():
         """
-        defines the way to parse the magic command ``%helphelp``
+        defines the way to parse the magic command ``%hhelp``
 
         .. versionadded:: 1.1
         """
@@ -322,13 +322,13 @@ class MagicFile(MagicClassWithHelpers):
         return parser
 
     @line_magic
-    def htmlhelp(self, line):
+    def hhelp(self, line):
         """
-        define ``%htmlhelp``, it displays the help for an object in HTML
+        define ``%hhelp``, it displays the help for an object in HTML
 
         .. versionadded:: 1.1
         """
-        parser = self.get_parser(MagicFile.htmlhelp_parser, "htmlhelp")
+        parser = self.get_parser(MagicFile.hhelp_parser, "hhelp")
         args = self.get_args(line, parser)
 
         if args is not None:

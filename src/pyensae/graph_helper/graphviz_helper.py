@@ -17,7 +17,7 @@ def dot_exe():
     retrieve graphivz executable
 
     @return     filename
-    
+
     .. versionadded:: 1.1
     """
     r = get_graphviz_dot()
@@ -33,7 +33,7 @@ def run_dot(dot_file, outimg):
     @param      dot_file        file, format `DOT <http://www.graphviz.org/doc/info/lang.html>`_
     @param      outimg          output image
     @return                     out, err (stdout, stderr from graphviz)
-    
+
     .. versionadded:: 1.1
     """
     ext = os.path.splitext(outimg)[-1].strip(".")
