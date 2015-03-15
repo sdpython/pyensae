@@ -34,7 +34,7 @@ Functionalities
 * import a tsv file into a database (see :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>`)
 * retrieve stock prices from Yahoo Finance (see :class:`StockPrices <pyensae.finance.astock.StockPrices>`)
 * magic commands to easily use SQLite3 from a notebook (see :class:`MagicSQL <pyensae.sql.magic_sql.MagicSQL>`)
-* magic commands to access a Cloudera Cluster and run PIG jobs (see :class:`MagicRemote <pyensae.remote.magic_remote_ssh.MagicRemote>`)
+* magic commands to access a Cloudera Cluster and run PIG jobs (see :class:`MagicRemoteSSH <pyensae.remote.magic_remote_ssh.MagicRemoteSSH>`)
 * magic commands to access Azure Blob Storage and HDInsight (see :class:`MagicAzure <pyensae.remote.magic_azure.MagicAzure>`)
 * magic commands to display content of a folder in DataFrame (see :class:`MagicFile <pyensae.file_helper.magic_file.MagicFile>`)
 
