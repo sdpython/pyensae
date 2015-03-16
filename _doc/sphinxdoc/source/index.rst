@@ -5,6 +5,9 @@ pyensae documentation
     :target: https://travis-ci.org/sdpython/pyensae
     :alt: Build status
     
+.. image:: https://badge.fury.io/py/pyensae.svg
+    :target: http://badge.fury.io/py/pyensae
+            
    
 **Links:** `pypi <https://pypi.python.org/pypi/pyensae/>`_,
 `github <https://github.com/sdpython/pyensae/>`_,
