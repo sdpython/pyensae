@@ -3,6 +3,7 @@ IF EXIST dist del /Q dist\*.*
 
 if "%1"=="" goto default_value:
 set pythonexe="%1"
+%pythonexe% setup.py write_version
 goto custom_python:
 
 :default_value:
@@ -42,6 +43,7 @@ echo #######################################################
 :setup34:
 IF NOT EXIST c:\Python34 GOTO utpy34_64:
 set pythonexe="c:\Python34\python"
+%pythonexe% setup.py write_version
 %pythonexe% setup.py clean_pyd
 %pythonexe% setup.py build bdist_wininst --plat-name=win-amd64
 if %errorlevel% neq 0 exit /b %errorlevel%
@@ -49,6 +51,7 @@ echo #######################################################
 
 :utpy34_64:
 set pythonexe="c:\Python34_x64\python"
+%pythonexe% setup.py write_version
 %pythonexe% -u setup.py clean_space
 if %errorlevel% neq 0 exit /b %errorlevel%
 %pythonexe% -u setup.py unittests
