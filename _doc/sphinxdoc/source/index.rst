@@ -7,6 +7,11 @@ pyensae documentation
     
 .. image:: https://badge.fury.io/py/pyensae.svg
     :target: http://badge.fury.io/py/pyensae
+    
+.. image:: http://img.shields.io/pypi/dm/pyensae.png
+    :alt: PYPI Package
+    :target: https://pypi.python.org/pypi/pyensae
+       
             
    
 **Links:** `pypi <https://pypi.python.org/pypi/pyensae/>`_,
