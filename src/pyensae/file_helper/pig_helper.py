@@ -11,7 +11,7 @@ import sys
 import urllib
 import urllib.request
 import glob
-from pyquickhelper import run_cmd, noLOG
+from pyquickhelper import run_cmd, noLOG, change_file_status
 from .jython_helper import get_java_cmd, is_java_installed, get_jython_jar, get_java_path
 from .maven_helper import download_jar_from_maven
 from ..resources.http_retrieve import download_data
@@ -38,6 +38,7 @@ def download_pig_standalone(version="14.0", fLOG=noLOG):
                         website="xd",
                         fLOG=fLOG)
     fbs.append(exe)
+    change_file_status(d)
 
     # download hadoop
     fLOG("download hadoop 2.5.2")
@@ -49,6 +50,7 @@ def download_pig_standalone(version="14.0", fLOG=noLOG):
                        website="http://wwwftp.ciril.fr/pub/apache/hadoop/common/hadoop-2.5.2/",
                        fLOG=fLOG)
     fbs.append(fn)
+    change_file_status(d)
 
     # download pig
     fLOG("download pig 0.14.0")
@@ -60,6 +62,7 @@ def download_pig_standalone(version="14.0", fLOG=noLOG):
                        website="http://apache.crihan.fr/dist/pig/pig-0.14.0/",
                        fLOG=fLOG)
     fbs.append(fn)
+    change_file_status(d)
     return fbs
 
 
