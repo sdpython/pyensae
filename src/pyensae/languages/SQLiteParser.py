@@ -6297,7 +6297,6 @@ class SQLiteParser (Parser):
                 if _alt == 1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
-                    _prevctx = localctx
                     self.state = 1289
                     la_ = self._interp.adaptivePredict(
                         self._input,

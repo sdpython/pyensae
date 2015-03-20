@@ -103,14 +103,14 @@ class DataVelibCollect:
         try:
             with urllib.request.urlopen(url) as u:
                 js = u.read()
-        except (urllib.error.HTTPError, urllib.error.URLError) as exc:
+        except (urllib.error.HTTPError, urllib.error.URLError):
             # there was probably a mistake
             # We try again after a given amount of time
             time.sleep(0.5)
             try:
                 with urllib.request.urlopen(url) as u:
                     js = u.read()
-            except (urllib.error.HTTPError, urllib.error.URLError) as exc:
+            except (urllib.error.HTTPError, urllib.error.URLError):
                 # there was probably a mistake
                 # we stop
                 return json.loads("[]")
@@ -360,9 +360,9 @@ class DataVelibCollect:
         x = df["lng"]
         y = df["lat"]
         areaf = df.apply(
-            lambda r: numpy.pi * (r["available_bike_stands"])**2, axis=1)
+            lambda r: numpy.pi * (r["available_bike_stands"]) ** 2, axis=1)
         areab = df.apply(
-            lambda r: numpy.pi * (r["available_bikes"])**2, axis=1)
+            lambda r: numpy.pi * (r["available_bikes"]) ** 2, axis=1)
         ax.scatter(x, y, areaf, alpha=0.5, label="place", color="r")
         ax.scatter(x, y, areab, alpha=0.5, label="bike", color="g")
         ax.grid(True)
@@ -394,7 +394,7 @@ class DataVelibCollect:
         It does not work very well for the time being.
         """
 
-        from JSAnimation import IPython_display
+        #from JSAnimation import IPython_display
         import matplotlib.pyplot as plt
         from matplotlib import animation
 
@@ -408,9 +408,9 @@ class DataVelibCollect:
             x = sub["lng"]
             y = sub["lat"]
             colp = df.apply(
-                lambda r: numpy.pi * (r["available_bike_stands"])**2, axis=1)
+                lambda r: numpy.pi * (r["available_bike_stands"]) ** 2, axis=1)
             colb = df.apply(
-                lambda r: numpy.pi * (r["available_bikes"])**2, axis=1)
+                lambda r: numpy.pi * (r["available_bikes"]) ** 2, axis=1)
             x = tuple(x)
             y = tuple(y)
             colp = tuple(colp)

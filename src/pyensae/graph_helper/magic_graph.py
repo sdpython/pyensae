@@ -5,14 +5,8 @@
 
 .. versionadded:: 1.1
 """
-import sys
-import os
-import pandas
 
-from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
-from IPython.core.magic import line_cell_magic
-from IPython.core.display import HTML
-
+from IPython.core.magic import magics_class, line_magic
 from pyquickhelper import MagicCommandParser, MagicClassWithHelpers
 
 # do not import a module which imports matplotlib

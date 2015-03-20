@@ -597,7 +597,6 @@ class PigParser (Parser):
                 if _alt == 1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
-                    _prevctx = localctx
                     localctx = PigParser.QueryContext(
                         self,
                         _parentctx,

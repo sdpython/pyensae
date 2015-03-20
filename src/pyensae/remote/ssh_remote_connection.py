@@ -34,7 +34,6 @@ class ASSHClient():
         @param      username    username
         @param      password    password
         """
-        import paramiko
         self.server = server
         self.username = username
         self.password = password

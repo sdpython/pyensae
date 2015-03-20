@@ -122,7 +122,8 @@ class AzureClient():
         self.hadoop_user_name = hadoop_user_name
         self.pseudo = pseudo
         if fLOG is None:
-            def _log_(*l, **p): return
+            def _log_(*l, **p):
+                return
             self.LOG = _log_
         else:
             self.LOG = fLOG
@@ -130,7 +131,6 @@ class AzureClient():
         if pseudo is None:
             raise ValueError("pseudo cannot be None")
 
-        container = self.account_name
         self.default_parameters = dict(
             SCRIPTPIG=self.pseudo + "/scripts/pig",
             PSEUDO=self.pseudo,
@@ -292,7 +292,6 @@ class AzureClient():
                 while True:
                     data = f.read(AzureClient._chunk_size)
                     if data:
-                        length = len(data)
                         block_id = '{0:08d}'.format(index)
                         blob_service.put_block(
                             container_name,
@@ -798,9 +797,8 @@ class AzureClient():
         status_dir = status["userargs"]["statusdir"]
         spl = status_dir.split("core.windows.net/")  # to change
         path = spl[-1]
-        res = self.download(blob_service, container,
-                            [path + "/" + _ for _ in ["stderr", "stdout"]],
-                            folder)
+        self.download(
+            blob_service, container, [path + "/" + _ for _ in ["stderr", "stdout"]], folder)
 
         with open(os.path.join(folder, "stdout"), "r", encoding="utf8") as f:
             out = f.read()

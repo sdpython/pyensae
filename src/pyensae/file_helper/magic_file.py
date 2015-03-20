@@ -7,8 +7,7 @@ import sys
 import os
 import pandas
 
-from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
-from IPython.core.magic import line_cell_magic
+from IPython.core.magic import magics_class, line_magic, cell_magic
 from IPython.core.display import HTML
 
 from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore_folder_iterfile_repo
@@ -335,7 +334,6 @@ class MagicFile(MagicClassWithHelpers):
             obj = args.obj
             format = args.format
             nop = args.no_print
-            res = docstring2html(obj, format=format)
             if nop or format == "html":
                 return docstring2html(obj, format=format)
             else:

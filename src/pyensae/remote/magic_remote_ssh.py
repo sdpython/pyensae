@@ -4,7 +4,6 @@
 @brief Magic command to communicate with an Hadoop cluster.
 """
 import os
-import sys
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
@@ -169,7 +168,6 @@ class MagicRemoteSSH(Magics):
             if not os.path.exists(filename):
                 raise FileNotFoundError(filename)
 
-            dest = os.path.split(filename)[-1]
             ssh = self.get_connection()
             out, err = ssh.pig_submit(filename, check=True, no_exception=True)
             if len(err) > 0 and (

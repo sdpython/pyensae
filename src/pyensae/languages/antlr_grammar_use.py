@@ -4,7 +4,6 @@
 This module requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
 """
 import os
-import sys
 from antlr4 import *
 
 

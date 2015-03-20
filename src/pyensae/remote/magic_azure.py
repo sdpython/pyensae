@@ -5,15 +5,13 @@
 """
 import sys
 import os
-import pandas
 
 from pyquickhelper import run_cmd
 
 from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
-from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
 from .azure_connection import AzureClient, AzureException
-from ..file_helper.jython_helper import run_jython, get_jython_jar, is_java_installed, download_java_standalone
+from ..file_helper.jython_helper import run_jython, download_java_standalone
 
 
 @magics_class
@@ -550,7 +548,7 @@ class MagicAzure(Magics):
         elif len(job) == 1:
             job = job[0]
         else:
-            raise Excepion("more than one job to look at:" + ",".join(job))
+            raise Exception("more than one job to look at:" + ",".join(job))
 
         if len(nbline) == 0:
             nbline = 20
@@ -682,7 +680,6 @@ class MagicAzure(Magics):
             if len(filename) <= 1:
                 self.jython("")
             else:
-                args = " ".join(filename[2:])
                 func_name = filename[1]
                 filename = filename[0]
 
@@ -713,7 +710,6 @@ class MagicAzure(Magics):
                             """.format(func_name).replace("                            ", ""))
 
                 download_java_standalone()
-                tosend = cell
                 out, err = run_jython(temp, sin=cell, timeout=10)
                 if len(err) > 0:
                     return HTML(

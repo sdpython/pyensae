@@ -16,9 +16,6 @@ Existing Python libraries:
 You should install: `sdpython/python-linkedin <https://github.com/sdpython/python-linkedin>`_
 
 """
-import collections
-import datetime
-import urllib
 import copy
 from pyquickhelper import fLOG
 
@@ -135,8 +132,8 @@ class LinkedInAccess:
         @return                             client
         """
         from linkedin import linkedin
-        permissions = linkedin.PERMISSIONS.enums.values() if all_permissions \
-            else linkedin.PERMISSIONS.BASIC_PROFILE
+        # permissions = linkedin.PERMISSIONS.enums.values() if all_permissions \
+        #     else linkedin.PERMISSIONS.BASIC_PROFILE
         self.authentication = linkedin.LinkedInDeveloperAuthentication(
             self.api_key,
             self.secret_key,

@@ -44,7 +44,7 @@ class TextFile:
                  utf8=True,
                  errors=None,
                  fLOG=print,
-                 buffer_size=2**20,
+                 buffer_size=2 ** 20,
                  filter=None,
                  separated=False):
         """

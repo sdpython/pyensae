@@ -43,7 +43,7 @@ def file_head(filename, nbline=10, encoding="utf8"):
     return rows
 
 
-def file_tail(filename, nbline=10, encoding="utf8", threshold=2**14):
+def file_tail(filename, nbline=10, encoding="utf8", threshold=2 ** 14):
     """
     extracts the first nbline of a file (assuming it is text file)
 

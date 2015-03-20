@@ -111,7 +111,7 @@ class TextFileColumns (TextFile):
                 self._changes[forma_ % i] = c
 
             if self._regexfix is not None and \
-                    not isinstance (self._regexfix, dict) and \
+                    not isinstance(self._regexfix, dict) and \
                     "(?P<" not in self._regexfix:
                 reg = re.compile("[(](.+?)[)]")
                 fi = reg.findall(self._regexfix)
@@ -208,9 +208,11 @@ class TextFileColumns (TextFile):
         """
         class tempo__:
 
-            def __init__(self, r): self.res = r
+            def __init__(self, r):
+                self.res = r
 
-            def groupdict(self): return self.res
+            def groupdict(self):
+                return self.res
 
         if "_header" not in self.__dict__:
             raise Exception("file not open %s" % self.filename)
@@ -341,7 +343,7 @@ class TextFileColumns (TextFile):
         f.close()
     _store = staticmethod(_store)
 
-    def sort(self, output, key, maxmemory=2**28, folder=None, fLOG=print):
+    def sort(self, output, key, maxmemory=2 ** 28, folder=None, fLOG=print):
         """sort a text file, even a big one, one or several columns gives the order
         @param      output      output file result
         @param      key         lines sorted depending of these columns
@@ -461,7 +463,7 @@ class TextFileColumns (TextFile):
                 keys.sort()
                 res.write("\t".join(keys) + sepline)
 
-            val = [str(d[k]) for k in keys]
+            val = [str(d[k_]) for k_ in keys]
             s = "\t".join(val)
             res.write(s + sepline)
             nbline += 1
@@ -473,7 +475,7 @@ class TextFileColumns (TextFile):
                 d = None
 
             if d is not None:
-                k = tuple([d[k] for k in key])
+                k = tuple([d[k_] for k_ in key])
                 kline.append([k, d] + line[2:])
 
         # end

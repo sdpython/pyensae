@@ -488,9 +488,9 @@ class StockPrices:
         begin = dates[0]
         end = dates[-1]
 
-        def price(x): return '%1.2f' % x
+        def price(x):
+            return '%1.2f' % x
 
-        import matplotlib
         import matplotlib.pyplot as plt
         import matplotlib.dates as mdates
 

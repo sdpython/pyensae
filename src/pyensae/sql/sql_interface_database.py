@@ -4,13 +4,9 @@
 @brief Abstract class to connect to a SQL server using various way.
 It will be used to implement magic functions
 """
-import sys
-import os
 import pandas
-import sqlite3
 
 from .database_main import Database
-from .database_exception import ExceptionSQL
 from .sql_interface import InterfaceSQL, InterfaceSQLException
 from pyquickhelper import noLOG
 
@@ -70,7 +66,7 @@ class InterfaceSQLDatabase(InterfaceSQL):
         con = self.obj._connection
         try:
             return pandas.read_sql(sql_query, con)
-        except pandas.io.sql.DatabaseError as e:
+        except pandas.io.sql.DatabaseError:
             try:
                 self.obj.execute_view(sql_query)
             except Exception as ee:

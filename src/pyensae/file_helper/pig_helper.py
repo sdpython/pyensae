@@ -7,13 +7,9 @@ This provides provides helper around that.
 """
 
 import os
-import sys
-import urllib
-import urllib.request
 import glob
 from pyquickhelper import run_cmd, noLOG, change_file_status
-from .jython_helper import get_java_cmd, is_java_installed, get_jython_jar, get_java_path
-from .maven_helper import download_jar_from_maven
+from .jython_helper import get_java_cmd, get_java_path
 from ..resources.http_retrieve import download_data
 
 

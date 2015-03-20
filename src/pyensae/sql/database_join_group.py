@@ -92,7 +92,7 @@ class DatabaseJoinGroup:
             for n in self.successor:
                 r = str(n)
                 l = r.split("\n")
-                l = ["    " + s for s in l]
+                l = ["    " + s2 for s2 in l]
                 r = "\n".join(l)
                 mes.append("node %d" % i)
                 mes.append(r)
@@ -532,7 +532,7 @@ class DatabaseJoinGroup:
             str_sum = ", " + str_sum
 
         if values is None:
-            sql     = "SELECT %s AS %s, COUNT(%s) AS %s_nb%s%s\nFROM %s\nGROUP BY %s" % \
+            sql = "SELECT %s AS %s, COUNT(%s) AS %s_nb%s%s\nFROM %s\nGROUP BY %s" % \
                 (", ".join(columns),
                  new_column,
                  "*",
@@ -558,24 +558,20 @@ class DatabaseJoinGroup:
             for k in values_rev:
                 values_rev[k] = values_rev[k][0]
 
-            def filterfunctionhistogramdict1(
-                v): return values_rev.get(v, "none")
+            def filterfunctionhistogramdict1(v):
+                return values_rev.get(v, "none")
 
-            def filterfunctionhistogramdict2(
-                a, b): return values_rev.get(
-                (a, b), "none")
+            def filterfunctionhistogramdict2(a, b):
+                return values_rev.get((a, b), "none")
 
-            def filterfunctionhistogramdict3(
-                a, b, c): return values_rev.get(
-                (a, b, c), "none")
+            def filterfunctionhistogramdict3(a, b, c):
+                return values_rev.get((a, b, c), "none")
 
-            def filterfunctionhistogramdict4(
-                a, b, c, d): return values_rev.get(
-                (a, b, c, d), "none")
+            def filterfunctionhistogramdict4(a, b, c, d):
+                return values_rev.get((a, b, c, d), "none")
 
-            def filterfunctionhistogramdict5(
-                a, b, c, d, e): return values_rev.get(
-                (a, b, c, d, e), "none")
+            def filterfunctionhistogramdict5(a, b, c, d, e):
+                return values_rev.get((a, b, c, d, e), "none")
 
             self.add_function(
                 "filterfunctionhistogramdict1",
@@ -883,5 +879,5 @@ class DatabaseJoinGroup:
             select = "CREATE TABLE %s AS \n" % created_table + select
             self.execute(select, nolog=nolog)
 
-        fields = [(a.strip(), b) for a, b in fields]
+        fields = [(a_.strip(), b_) for a_, b_ in fields]
         return select, fields

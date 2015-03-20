@@ -146,7 +146,7 @@ def download_data(name,
             u.write(alls)
             u.close()
     else:
-        if name.endswith(".tar.gz") and os.stat(outfile).st_size > 2**20:
+        if name.endswith(".tar.gz") and os.stat(outfile).st_size > 2 ** 20:
             return [outfile]
 
     if name.endswith(".zip"):
