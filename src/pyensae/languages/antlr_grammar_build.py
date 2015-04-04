@@ -40,7 +40,7 @@ def _is_syntax_is_missing(language):
                     locations.keys())))
 
 
-def build_grammar(g4, version="4.5-rc-2", fLOG=noLOG):
+def build_grammar(g4, version="4.5", fLOG=noLOG):
     """
     compile the grammar for a specific file
 
