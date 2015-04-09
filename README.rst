@@ -99,6 +99,7 @@ Versions
     * **del:** delete class TransferFTP, moves it to module `pyquickhelper <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/index.html>`_
     * **add:** add magic command ``%hhelp`` to display the help for an object in HTML format
     * **new:** function :func:`run_dot <pyensae.graph_helper.graphviz_helper.run_dot>`
+    * **change:** update to antlr 4.5, add CSharp grammar
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
     * **add:** add magic commands for SQLite3 + a notebook
