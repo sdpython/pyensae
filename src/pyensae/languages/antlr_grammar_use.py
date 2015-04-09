@@ -4,7 +4,7 @@
 This module requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
 """
 import os
-from antlr4 import *
+from antlr4 import ParseTreeWalker, CommonTokenStream, InputStream, ParseTreeListener
 
 
 def get_parser_lexer(language):
@@ -15,10 +15,17 @@ def get_parser_lexer(language):
     @return                 Parser, Lexer
     """
     try:
+        if language == "C#" or language == "CSharp":
+            language = "CSharp4"
+
         if language == "R":
             from .RLexer import RLexer
             from .RParser import RParser
             return RParser, RLexer
+        elif language == "CSharp4":
+            from .CSharp4Lexer import CSharp4Lexer
+            from .CSharp4Parser import CSharp4Parser
+            return CSharp4Parser, CSharp4Lexer
         elif language == "SQLite":
             from .SQLiteLexer import SQLiteLexer
             from .SQLiteParser import SQLiteParser
@@ -73,8 +80,6 @@ def parse_code(code, class_parser, class_lexer):
     @endcode
     @endexample
     """
-    from antlr4 import CommonTokenStream, InputStream
-
     if isinstance(code, str):
         # we assume it is a string
         code = InputStream.InputStream(code)
@@ -124,7 +129,7 @@ class TreeStringListener(ParseTreeListener):
         if "ruleIndex" in ctx.__dict__:
             text = ("    " * self.level) + "+ " + \
                 self.parser.ruleNames[
-                ctx.ruleIndex] + ", LT(1)=" + parser._input.LT(1).text
+                ctx.ruleIndex] + ", LT(1)=" + self.parser._input.LT(1).text
         else:
             text = ("    " * self.level) + "+ " + \
                 ", LT(1)=" + self.parser._input.LT(1).text
@@ -138,8 +143,8 @@ class TreeStringListener(ParseTreeListener):
         self.level -= 1
         if "ruleIndex" in ctx.__dict__:
             text = ("    " * self.level) + "- " + \
-                self.parser.ruleNames[
-                ctx.ruleIndex] + ", LT(1)=" + parser._input.LT(1).text
+                self.parser.ruleNames[ctx.ruleIndex] + \
+                ", LT(1)=" + self.parser._input.LT(1).text
         else:
             text = ("    " * self.level) + "- " + \
                 ", LT(1)=" + self.parser._input.LT(1).text
@@ -165,6 +170,6 @@ def get_tree_string(tree, parser, format=TreeStringListener):
         return tree.toStringTree()
     else:
         walker = ParseTreeWalker()
-        listen = TreeStringListener(parser)
+        listen = format(parser)
         walker.walk(listen, tree)
         return str(listen)

@@ -225,16 +225,12 @@ class RParser (Parser):
         super().__init__(input)
         self.checkVersion("4.5")
         self._interp = ParserATNSimulator(
-            self,
-            self.atn,
-            self.decisionsToDFA,
-            self.sharedContextCache)
+            self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
     class ParseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None,
-                     invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -274,19 +270,18 @@ class RParser (Parser):
             self.state = 20
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__9) | (1 << RParser.T__10) | (1 << RParser.T__20) | (1 << RParser.T__25) | (1 << RParser.T__32) | (1 << RParser.T__33) | (1 << RParser.T__35) | (1 << RParser.T__37) | (1 << RParser.T__39) | (1 << RParser.T__41) | (1 << RParser.T__42) | (1 << RParser.T__43) | (
-                    1 << RParser.T__44) | (1 << RParser.T__45) | (1 << RParser.T__46) | (1 << RParser.T__47) | (1 << RParser.T__48) | (1 << RParser.T__49) | (1 << RParser.T__50) | (1 << RParser.T__51) | (1 << RParser.HEX) | (1 << RParser.INT) | (1 << RParser.FLOAT) | (1 << RParser.COMPLEX) | (1 << RParser.STRING) | (1 << RParser.ID) | (1 << RParser.NL))) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__9) | (1 << RParser.T__10) | (1 << RParser.T__20) | (1 << RParser.T__25) | (1 << RParser.T__32) | (1 << RParser.T__33) | (1 << RParser.T__35) | (1 << RParser.T__37) | (1 << RParser.T__39) | (1 << RParser.T__41) | (1 << RParser.T__42) | (1 << RParser.T__43) | (1 << RParser.T__44) | (1 << RParser.T__45) | (1 << RParser.T__46) | (1 << RParser.T__47) | (1 << RParser.T__48) | (1 << RParser.T__49) | (1 << RParser.T__50) | (1 << RParser.T__51) | (1 << RParser.HEX) | (1 << RParser.INT) | (1 << RParser.FLOAT) | (1 << RParser.COMPLEX) | (1 << RParser.STRING) | (1 << RParser.ID) | (1 << RParser.NL))) != 0):
                 self.state = 18
                 token = self._input.LA(1)
-                if token in [RParser.T__9, RParser.T__10, RParser.T__20, RParser.T__25, RParser.T__32, RParser.T__33, RParser.T__35, RParser.T__37, RParser.T__39, RParser.T__41, RParser.T__42, RParser.T__43, RParser.T__44,
-                             RParser.T__45, RParser.T__46, RParser.T__47, RParser.T__48, RParser.T__49, RParser.T__50, RParser.T__51, RParser.HEX, RParser.INT, RParser.FLOAT, RParser.COMPLEX, RParser.STRING, RParser.ID]:
+                if token in [RParser.T__9, RParser.T__10, RParser.T__20, RParser.T__25, RParser.T__32, RParser.T__33, RParser.T__35, RParser.T__37, RParser.T__39, RParser.T__41, RParser.T__42, RParser.T__43, RParser.T__44, RParser.T__45, RParser.T__46, RParser.T__47, RParser.T__48, RParser.T__49, RParser.T__50, RParser.T__51, RParser.HEX, RParser.INT, RParser.FLOAT, RParser.COMPLEX, RParser.STRING, RParser.ID]:
                     self.state = 14
                     self.expr(0)
                     self.state = 15
                     _la = self._input.LA(1)
                     if not(_la == RParser.T__0 or _la == RParser.NL):
                         self._errHandler.recoverInline(self)
-                    self.consume()
+                    else:
+                        self.consume()
 
                 elif token in [RParser.NL]:
                     self.state = 17
@@ -311,8 +306,7 @@ class RParser (Parser):
 
     class ExprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None,
-                     invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -380,7 +374,8 @@ class RParser (Parser):
                 _la = self._input.LA(1)
                 if not(_la == RParser.T__9 or _la == RParser.T__10):
                     self._errHandler.recoverInline(self)
-                self.consume()
+                else:
+                    self.consume()
                 self.state = 27
                 self.expr(36)
                 pass
@@ -586,74 +581,60 @@ class RParser (Parser):
                 if _alt == 1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
+                    _prevctx = localctx
                     self.state = 147
                     la_ = self._interp.adaptivePredict(
-                        self._input,
-                        4,
-                        self._ctx)
+                        self._input, 4, self._ctx)
                     if la_ == 1:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 95
                         if not self.precpred(self._ctx, 39):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 39)")
+                                self, "self.precpred(self._ctx, 39)")
                         self.state = 96
                         _la = self._input.LA(1)
                         if not(_la == RParser.T__4 or _la == RParser.T__5):
                             self._errHandler.recoverInline(self)
-                        self.consume()
+                        else:
+                            self.consume()
                         self.state = 97
                         self.expr(40)
                         pass
 
                     elif la_ == 2:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 98
                         if not self.precpred(self._ctx, 38):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 38)")
+                                self, "self.precpred(self._ctx, 38)")
                         self.state = 99
                         _la = self._input.LA(1)
                         if not(_la == RParser.T__6 or _la == RParser.T__7):
                             self._errHandler.recoverInline(self)
-                        self.consume()
+                        else:
+                            self.consume()
                         self.state = 100
                         self.expr(39)
                         pass
 
                     elif la_ == 3:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 101
                         if not self.precpred(self._ctx, 37):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 37)")
+                                self, "self.precpred(self._ctx, 37)")
                         self.state = 102
                         self.match(RParser.T__8)
                         self.state = 103
@@ -662,19 +643,14 @@ class RParser (Parser):
 
                     elif la_ == 4:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 104
                         if not self.precpred(self._ctx, 35):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 35)")
+                                self, "self.precpred(self._ctx, 35)")
                         self.state = 105
                         self.match(RParser.T__11)
                         self.state = 106
@@ -683,19 +659,14 @@ class RParser (Parser):
 
                     elif la_ == 5:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 107
                         if not self.precpred(self._ctx, 34):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 34)")
+                                self, "self.precpred(self._ctx, 34)")
                         self.state = 108
                         self.match(RParser.USER_OP)
                         self.state = 109
@@ -704,140 +675,114 @@ class RParser (Parser):
 
                     elif la_ == 6:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 110
                         if not self.precpred(self._ctx, 33):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 33)")
+                                self, "self.precpred(self._ctx, 33)")
                         self.state = 111
                         _la = self._input.LA(1)
                         if not(_la == RParser.T__12 or _la == RParser.T__13):
                             self._errHandler.recoverInline(self)
-                        self.consume()
+                        else:
+                            self.consume()
                         self.state = 112
                         self.expr(34)
                         pass
 
                     elif la_ == 7:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 113
                         if not self.precpred(self._ctx, 32):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 32)")
+                                self, "self.precpred(self._ctx, 32)")
                         self.state = 114
                         _la = self._input.LA(1)
                         if not(_la == RParser.T__9 or _la == RParser.T__10):
                             self._errHandler.recoverInline(self)
-                        self.consume()
+                        else:
+                            self.consume()
                         self.state = 115
                         self.expr(33)
                         pass
 
                     elif la_ == 8:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 116
                         if not self.precpred(self._ctx, 31):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 31)")
+                                self, "self.precpred(self._ctx, 31)")
                         self.state = 117
                         _la = self._input.LA(1)
-                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__14) | (1 << RParser.T__15) | (
-                                1 << RParser.T__16) | (1 << RParser.T__17) | (1 << RParser.T__18) | (1 << RParser.T__19))) != 0)):
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__14) | (1 << RParser.T__15) | (1 << RParser.T__16) | (1 << RParser.T__17) | (1 << RParser.T__18) | (1 << RParser.T__19))) != 0)):
                             self._errHandler.recoverInline(self)
-                        self.consume()
+                        else:
+                            self.consume()
                         self.state = 118
                         self.expr(32)
                         pass
 
                     elif la_ == 9:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 119
                         if not self.precpred(self._ctx, 29):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 29)")
+                                self, "self.precpred(self._ctx, 29)")
                         self.state = 120
                         _la = self._input.LA(1)
                         if not(_la == RParser.T__21 or _la == RParser.T__22):
                             self._errHandler.recoverInline(self)
-                        self.consume()
+                        else:
+                            self.consume()
                         self.state = 121
                         self.expr(30)
                         pass
 
                     elif la_ == 10:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 122
                         if not self.precpred(self._ctx, 28):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 28)")
+                                self, "self.precpred(self._ctx, 28)")
                         self.state = 123
                         _la = self._input.LA(1)
                         if not(_la == RParser.T__23 or _la == RParser.T__24):
                             self._errHandler.recoverInline(self)
-                        self.consume()
+                        else:
+                            self.consume()
                         self.state = 124
                         self.expr(29)
                         pass
 
                     elif la_ == 11:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 125
                         if not self.precpred(self._ctx, 26):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 26)")
+                                self, "self.precpred(self._ctx, 26)")
                         self.state = 126
                         self.match(RParser.T__25)
                         self.state = 127
@@ -846,44 +791,34 @@ class RParser (Parser):
 
                     elif la_ == 12:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 128
                         if not self.precpred(self._ctx, 25):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 25)")
+                                self, "self.precpred(self._ctx, 25)")
                         self.state = 129
                         _la = self._input.LA(1)
-                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__26) | (1 << RParser.T__27) | (
-                                1 << RParser.T__28) | (1 << RParser.T__29) | (1 << RParser.T__30) | (1 << RParser.T__31))) != 0)):
+                        if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__26) | (1 << RParser.T__27) | (1 << RParser.T__28) | (1 << RParser.T__29) | (1 << RParser.T__30) | (1 << RParser.T__31))) != 0)):
                             self._errHandler.recoverInline(self)
-                        self.consume()
+                        else:
+                            self.consume()
                         self.state = 130
                         self.expr(26)
                         pass
 
                     elif la_ == 13:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 131
                         if not self.precpred(self._ctx, 41):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 41)")
+                                self, "self.precpred(self._ctx, 41)")
                         self.state = 132
                         self.match(RParser.T__1)
                         self.state = 133
@@ -896,19 +831,14 @@ class RParser (Parser):
 
                     elif la_ == 14:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 137
                         if not self.precpred(self._ctx, 40):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 40)")
+                                self, "self.precpred(self._ctx, 40)")
                         self.state = 138
                         self.match(RParser.T__3)
                         self.state = 139
@@ -919,19 +849,14 @@ class RParser (Parser):
 
                     elif la_ == 15:
                         localctx = RParser.ExprContext(
-                            self,
-                            _parentctx,
-                            _parentState)
+                            self, _parentctx, _parentState)
                         self.pushNewRecursionContext(
-                            localctx,
-                            _startState,
-                            self.RULE_expr)
+                            localctx, _startState, self.RULE_expr)
                         self.state = 142
                         if not self.precpred(self._ctx, 23):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(
-                                self,
-                                "self.precpred(self._ctx, 23)")
+                                self, "self.precpred(self._ctx, 23)")
                         self.state = 143
                         self.match(RParser.T__33)
                         self.state = 144
@@ -954,8 +879,7 @@ class RParser (Parser):
 
     class ExprlistContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None,
-                     invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -990,8 +914,7 @@ class RParser (Parser):
         try:
             self.state = 163
             token = self._input.LA(1)
-            if token in [RParser.T__9, RParser.T__10, RParser.T__20, RParser.T__25, RParser.T__32, RParser.T__33, RParser.T__35, RParser.T__37, RParser.T__39, RParser.T__41, RParser.T__42, RParser.T__43, RParser.T__44,
-                         RParser.T__45, RParser.T__46, RParser.T__47, RParser.T__48, RParser.T__49, RParser.T__50, RParser.T__51, RParser.HEX, RParser.INT, RParser.FLOAT, RParser.COMPLEX, RParser.STRING, RParser.ID]:
+            if token in [RParser.T__9, RParser.T__10, RParser.T__20, RParser.T__25, RParser.T__32, RParser.T__33, RParser.T__35, RParser.T__37, RParser.T__39, RParser.T__41, RParser.T__42, RParser.T__43, RParser.T__44, RParser.T__45, RParser.T__46, RParser.T__47, RParser.T__48, RParser.T__49, RParser.T__50, RParser.T__51, RParser.HEX, RParser.INT, RParser.FLOAT, RParser.COMPLEX, RParser.STRING, RParser.ID]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 152
                 self.expr(0)
@@ -1003,11 +926,11 @@ class RParser (Parser):
                     _la = self._input.LA(1)
                     if not(_la == RParser.T__0 or _la == RParser.NL):
                         self._errHandler.recoverInline(self)
-                    self.consume()
+                    else:
+                        self.consume()
                     self.state = 155
                     _la = self._input.LA(1)
-                    if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__9) | (1 << RParser.T__10) | (1 << RParser.T__20) | (1 << RParser.T__25) | (1 << RParser.T__32) | (1 << RParser.T__33) | (1 << RParser.T__35) | (1 << RParser.T__37) | (1 << RParser.T__39) | (1 << RParser.T__41) | (1 << RParser.T__42) | (1 << RParser.T__43) | (
-                            1 << RParser.T__44) | (1 << RParser.T__45) | (1 << RParser.T__46) | (1 << RParser.T__47) | (1 << RParser.T__48) | (1 << RParser.T__49) | (1 << RParser.T__50) | (1 << RParser.T__51) | (1 << RParser.HEX) | (1 << RParser.INT) | (1 << RParser.FLOAT) | (1 << RParser.COMPLEX) | (1 << RParser.STRING) | (1 << RParser.ID))) != 0):
+                    if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__9) | (1 << RParser.T__10) | (1 << RParser.T__20) | (1 << RParser.T__25) | (1 << RParser.T__32) | (1 << RParser.T__33) | (1 << RParser.T__35) | (1 << RParser.T__37) | (1 << RParser.T__39) | (1 << RParser.T__41) | (1 << RParser.T__42) | (1 << RParser.T__43) | (1 << RParser.T__44) | (1 << RParser.T__45) | (1 << RParser.T__46) | (1 << RParser.T__47) | (1 << RParser.T__48) | (1 << RParser.T__49) | (1 << RParser.T__50) | (1 << RParser.T__51) | (1 << RParser.HEX) | (1 << RParser.INT) | (1 << RParser.FLOAT) | (1 << RParser.COMPLEX) | (1 << RParser.STRING) | (1 << RParser.ID))) != 0):
                         self.state = 154
                         self.expr(0)
 
@@ -1031,8 +954,7 @@ class RParser (Parser):
 
     class FormlistContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None,
-                     invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1084,8 +1006,7 @@ class RParser (Parser):
 
     class FormContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None,
-                     invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1145,8 +1066,7 @@ class RParser (Parser):
 
     class SublistContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None,
-                     invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1198,8 +1118,7 @@ class RParser (Parser):
 
     class SubContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None,
-                     invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1310,7 +1229,7 @@ class RParser (Parser):
         return localctx
 
     def sempred(self, localctx: RuleContext, ruleIndex: int, predIndex: int):
-        if self._predicates is None:
+        if self._predicates == None:
             self._predicates = dict()
         self._predicates[1] = self.expr_sempred
         pred = self._predicates.get(ruleIndex, None)

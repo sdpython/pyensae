@@ -45,6 +45,28 @@ import src.pyensae.languages.antlr_grammar_use as source_parser
 
 class TestParseCode (unittest.TestCase):
 
+    def test_build_parser(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        try:
+            for lang in ["CSharp4", "SQLite", "R", "Pig"]:
+                clparser, cllexer = get_parser_lexer(lang)
+            return
+        except ImportError as e:
+            pass
+
+        folder = os.path.dirname(source_parser.__file__)
+
+        for lang in ["CSharp4", "SQLite", "R", "Pig"]:
+            fLOG("generate for LANG", lang)
+            gr = os.path.join(folder, lang + ".g4")
+            assert os.path.exists(gr)
+            final = build_grammar(lang, fLOG=fLOG)
+            fLOG(final)
+
     def test_r(self):
         fLOG(
             __file__,
@@ -131,24 +153,31 @@ class TestParseCode (unittest.TestCase):
         fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
-    def test_build_parser(self):
+    def test_csharp(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        try:
-            clparser, cllexer = get_parser_lexer("SQLite")
-            return
-        except ImportError:
-            pass
+        code = """
+        namespace hello
+        {
+            public static class world
+            {
+                public static double function(double x, doubly y)
+                {
+                    return x+y ;
+                }
+            }
+        }
+        """
 
-        folder = os.path.dirname(source_parser.__file__)
-
-        for lang in ["R", "SQLite", "Pig"]:
-            gr = os.path.join(folder, lang + ".g4")
-            assert os.path.exists(gr)
-            final = build_grammar(lang, fLOG=fLOG)
+        clparser, cllexer = get_parser_lexer("C#")
+        parser = parse_code(code, clparser, cllexer)
+        tree = parser.parse()
+        st = get_tree_string(tree, parser)
+        fLOG(st.replace("\\n", "\n"))
+        assert len(st) > 0
 
 
 if __name__ == "__main__":

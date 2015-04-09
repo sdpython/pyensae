@@ -353,9 +353,6 @@ class RLexer(Lexer):
         super().__init__(input)
         self.checkVersion("4.5")
         self._interp = LexerATNSimulator(
-            self,
-            self.atn,
-            self.decisionsToDFA,
-            PredictionContextCache())
+            self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
         self._predicates = None

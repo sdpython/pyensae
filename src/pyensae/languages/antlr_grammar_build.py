@@ -21,6 +21,7 @@ def _is_syntax_is_missing(language):
         "R": "https://github.com/antlr/grammars-v4/tree/master/r/R.g4",
         "SQLite": "https://github.com/antlr/grammars-v4/blob/master/sqlite/SQLite.g4",
         "Pig": "http://wiki.apache.org/pig/PigLexer",
+        "CSharp4": "https://github.com/antlr/grammars-v4/tree/master/csharp",
     }
 
     folder = os.path.dirname(__file__)
