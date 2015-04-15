@@ -8,7 +8,8 @@ See `Generating the documention with pyquickhelper <http://www.xavierdupre.fr/ap
 
 
 Configuration:
-    * :ref:`l-confpy`
+
+.. literalinclude:: conf.py
  
  
 Extensions to install
