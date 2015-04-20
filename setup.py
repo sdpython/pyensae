@@ -47,7 +47,7 @@ if os.path.exists("version.txt"):
         lines = f.readlines()
     subversion = lines[0].strip("\r\n ")
 else:
-    subversion = 1
+    raise FileNotFoundError("version.txt")
 
 project_var_name = "pyensae"
 sversion = "1.1"
