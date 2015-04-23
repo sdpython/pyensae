@@ -65,3 +65,4 @@ dbfread
 goslate
 python-linkedin
 pyquickhelper
+pymyinstall
