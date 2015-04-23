@@ -8,13 +8,13 @@ import os
 import pandas
 
 from IPython.core.magic import magics_class, line_magic, cell_magic
-from IPython.core.display import HTML, display_html, display_javascript
+from IPython.core.display import HTML, display_javascript
 
 from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore_folder_iterfile_repo
 from pyquickhelper import MagicCommandParser, run_cmd, zip_files, gzip_files, zip7_files, MagicClassWithHelpers
 from .format_helper import format_file_size, format_file_mtime
 from .content_helper import file_head, file_tail
-from pyquickhelper import docstring2html, create_visual_diff_through_html_files, create_visual_diff_through_html
+from pyquickhelper import docstring2html, create_visual_diff_through_html_files
 
 
 @magics_class
@@ -338,7 +338,7 @@ class MagicFile(MagicClassWithHelpers):
                 return docstring2html(obj, format=format)
             else:
                 print(docstring2html(obj, format=format))
-                
+
     @staticmethod
     def filediff_parser():
         """
@@ -366,7 +366,7 @@ class MagicFile(MagicClassWithHelpers):
         args = self.get_args(line, parser)
 
         if args is not None:
-            html,js = create_visual_diff_through_html_files(args.f1, args.f2, encoding=args.encoding, notebook=True)
+            html, js = create_visual_diff_through_html_files(args.f1, args.f2, encoding=args.encoding, notebook=True)
             display_javascript(js)
             return html       
 
