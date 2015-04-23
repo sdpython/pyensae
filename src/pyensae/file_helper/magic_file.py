@@ -8,7 +8,7 @@ import os
 import pandas
 
 from IPython.core.magic import magics_class, line_magic, cell_magic
-from IPython.core.display import HTML, display_javascript
+from IPython.core.display import HTML, display_html
 
 from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore_folder_iterfile_repo
 from pyquickhelper import MagicCommandParser, run_cmd, zip_files, gzip_files, zip7_files, MagicClassWithHelpers
@@ -340,14 +340,25 @@ class MagicFile(MagicClassWithHelpers):
                 print(docstring2html(obj, format=format))
 
     @staticmethod
-    def filediff_parser():
+    def textdiff_parser():
         """
-        defines the way to parse the magic command ``%filediff``
+        defines the way to parse the magic command ``%textdiff``
         """
         parser = MagicCommandParser(
-            description='show the differences between two files')
-        parser.add_argument('f1', type=str, help='first file')
-        parser.add_argument('f2', type=str, help='second file')
+            description='show the differences between two files, two text')
+        parser.add_argument('f1', type=str, help='first file or text or url')
+        parser.add_argument('f2', type=str, help='second file or text or url')
+        parser.add_argument(
+            '-c',
+            '--context',
+            default="",
+            help='context view, empty to see everything, > 0 to see only a couple of lines around the changes')
+        parser.add_argument(
+            '-i',
+            '--inline',
+            action="store_true",
+            default=False,
+            help='True=one column (inline) or False=two columns')
         parser.add_argument(
             '-e',
             '--encoding',
@@ -356,19 +367,24 @@ class MagicFile(MagicClassWithHelpers):
         return parser
 
     @line_magic
-    def filediff(self, line):
+    def textdiff(self, line):
         """
-        defines ``%filediff``
-        which displays differences between two text files,
-        it based on `create_visual_diff_through_html_files <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/filehelper/visual_sync.html?highlight=create#pyquickhelper.filehelper.visual_sync.create_visual_diff_through_html_files>`_
+        defines ``%textdiff``
+        which displays differences between two text files, two strings, two urls,
+        it is based on `create_visual_diff_through_html_files <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/filehelper/visual_sync.html?highlight=create#pyquickhelper.filehelper.visual_sync.create_visual_diff_through_html_files>`_
+
+        Check blog post :ref:`b-textdiff` to see an example.
         """
-        parser = self.get_parser(MagicFile.filediff_parser, "filediff")
+        parser = self.get_parser(MagicFile.textdiff_parser, "textdiff")
         args = self.get_args(line, parser)
 
         if args is not None:
-            html, js = create_visual_diff_through_html_files(args.f1, args.f2, encoding=args.encoding, notebook=True)
-            display_javascript(js)
-            return html       
+            html, js = create_visual_diff_through_html_files(args.f1, args.f2, encoding=args.encoding, notebook=True,
+                                                             context_size=None if args.context in [
+                                                                 None, ""] else int(args.context),
+                                                             inline_view=args.inline)
+            display_html(html)
+            return js
 
 
 def register_file_magics():

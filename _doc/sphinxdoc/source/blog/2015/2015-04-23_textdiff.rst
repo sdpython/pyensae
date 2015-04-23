@@ -1,0 +1,15 @@
+
+
+.. _b-textdiff:
+
+.. blogpost::
+    :title: A magic command to visualize differences between two files in a notebook
+    :keywords: diffview, difflib.js, differences, textdiff
+    :date: 2015-04-23
+    :categories: javascript, notebook
+    
+    The magic command :meth:`textdiff <pyensae.file_helper.magic_file.MagicFile.textdiff>`
+    makes it easy to display the differences between two files or two strings.
+    
+    .. image:: diffviewm.png
+    

@@ -38,9 +38,9 @@ from pyquickhelper.ipythonhelper.notebook_helper import run_notebook
 from pyquickhelper import get_temp_folder, fLOG
 
 
-class TestNotebookRunner (unittest.TestCase):
+class TestNotebookRunnerFlat2Db3 (unittest.TestCase):
 
-    def test_notebook_runner(self):
+    def test_notebook_runner_flat2db3(self):
         fLOG(
             __file__,
             self._testMethodName,

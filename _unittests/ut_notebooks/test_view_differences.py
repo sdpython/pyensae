@@ -38,9 +38,9 @@ from pyquickhelper.ipythonhelper.notebook_helper import run_notebook
 from pyquickhelper import get_temp_folder, fLOG
 
 
-class TestNotebookRunnerStockPrices (unittest.TestCase):
+class TestNotebookRunner (unittest.TestCase):
 
-    def test_notebook_runner_stock_prices(self):
+    def test_notebook_runner(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -72,9 +72,6 @@ class TestNotebookRunnerStockPrices (unittest.TestCase):
         ]
         outfile = os.path.join(temp, "out_notebook.ipynb")
         assert not os.path.exists(outfile)
-
-        if "travis" in sys.executable:
-            return
 
         out = run_notebook(
             nbfile,

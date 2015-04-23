@@ -38,9 +38,9 @@ from pyquickhelper.ipythonhelper.notebook_helper import run_notebook
 from pyquickhelper import get_temp_folder, fLOG
 
 
-class TestNotebookRunner (unittest.TestCase):
+class TestNotebookRunnerSqlMagic (unittest.TestCase):
 
-    def test_notebook_runner(self):
+    def test_notebook_runner_sql_magic(self):
         fLOG(
             __file__,
             self._testMethodName,

@@ -195,6 +195,20 @@ class TestFiles (unittest.TestCase):
         assert "it can also contain several files separated by" in res
         assert "@param" in res
 
+    def test_textdiff(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        from IPython.core.display import Javascript
+        mg = MagicFile()
+        mg.add_context(
+            {"f1": "STRING1\nSTRING2", "f2": "STRING1\nSTRING3"})
+        cmd = "f1 f2"
+        res = mg.textdiff(cmd)
+        assert isinstance(res, Javascript)
+
 
 if __name__ == "__main__":
     unittest.main()
