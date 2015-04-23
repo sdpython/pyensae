@@ -55,11 +55,11 @@ Dependencies
 * `pandas <http://pandas.pydata.org/>`_
 * `pyquickhelper <https://pypi.python.org/pypi/pyquickhelper>`_
 
-For the class :class:`StockPrices <finance.astock.StockPrices>`:
+For the class :class:`StockPrices <pyensae.finance.astock.StockPrices>`:
     * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
     * `six <https://pypi.python.org/pypi/six>`_
     
-The :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` requires:
+The :class:`ASSHClient <pyensae.remote.ssh_remote_connection.ASSClient>` requires:
     * `paramiko <http://www.paramiko.org/>`_
     * `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_
     * `ecdsa <https://pypi.python.org/pypi/ecdsa>`_
@@ -67,12 +67,15 @@ The :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` requires:
 The :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>` requires:
     * `azure <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/index.html>`_
 
-The function :func:`register_magics <pyensae.remote.magic_remote_ssh.register_magics>` defines magic commands
+The function :func:`register_magics_ssh <pyensae.remote.magic_remote_ssh.register_magics_ssh>` defines magic commands
 to send commands to a remote commands through a SSH connection:
     * ``%remote_open``, ``%remote_close``
     * ``%remote_cmd``, ``%remote_up``, ``%remote_down``
     
 The magic commands will be automatically enabled if the module is imported from a notebook.
+It also proposes others magic commands such as ``%head``, ``%tail``, ``%textdiff``,
+``%hhelp``, ``%runpy``, ``%lsr``, ``%compress``. Type ``<magic_command> -h``
+to get their usage.
 
 
 Indices and tables

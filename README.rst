@@ -100,6 +100,7 @@ Versions
     * **add:** add magic command ``%hhelp`` to display the help for an object in HTML format
     * **new:** function :func:`run_dot <pyensae.graph_helper.graphviz_helper.run_dot>`
     * **change:** update to antlr 4.5, add CSharp grammar
+    * **new:** new magic command ``textdiff``
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
     * **add:** add magic commands for SQLite3 + a notebook
