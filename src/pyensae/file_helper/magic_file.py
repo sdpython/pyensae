@@ -8,13 +8,13 @@ import os
 import pandas
 
 from IPython.core.magic import magics_class, line_magic, cell_magic
-from IPython.core.display import HTML
+from IPython.core.display import HTML, display_html, display_javascript
 
 from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore_folder_iterfile_repo
 from pyquickhelper import MagicCommandParser, run_cmd, zip_files, gzip_files, zip7_files, MagicClassWithHelpers
 from .format_helper import format_file_size, format_file_mtime
 from .content_helper import file_head, file_tail
-from pyquickhelper import docstring2html
+from pyquickhelper import docstring2html, create_visual_diff_through_html_files, create_visual_diff_through_html
 
 
 @magics_class
@@ -338,6 +338,37 @@ class MagicFile(MagicClassWithHelpers):
                 return docstring2html(obj, format=format)
             else:
                 print(docstring2html(obj, format=format))
+                
+    @staticmethod
+    def filediff_parser():
+        """
+        defines the way to parse the magic command ``%filediff``
+        """
+        parser = MagicCommandParser(
+            description='show the differences between two files')
+        parser.add_argument('f1', type=str, help='first file')
+        parser.add_argument('f2', type=str, help='second file')
+        parser.add_argument(
+            '-e',
+            '--encoding',
+            default="utf8",
+            help='file encoding')
+        return parser
+
+    @line_magic
+    def filediff(self, line):
+        """
+        defines ``%filediff``
+        which displays differences between two text files,
+        it based on `create_visual_diff_through_html_files <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/filehelper/visual_sync.html?highlight=create#pyquickhelper.filehelper.visual_sync.create_visual_diff_through_html_files>`_
+        """
+        parser = self.get_parser(MagicFile.filediff_parser, "filediff")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            html,js = create_visual_diff_through_html_files(args.f1, args.f2, encoding=args.encoding, notebook=True)
+            display_javascript(js)
+            return html       
 
 
 def register_file_magics():
