@@ -186,4 +186,12 @@ if not r:
         package_dir=package_dir,
         package_data=package_data,
         install_requires=["pyquickhelper"],
+        extras_require={
+            'graph_helper': ['matplotlib'],
+            'languages': ['antlr4-python3-runtime'],
+            'datasource.linkedin_access': ['python-linkedin'],
+            'datasource.convert': ['dbread'],
+            'remote.ssh_remote_connection': ['paramiko', 'ansiconv', 'ansi2html'],
+            'remote.azure_connection': ['azure'],
+        }
     )

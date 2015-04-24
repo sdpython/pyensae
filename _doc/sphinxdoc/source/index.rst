@@ -78,6 +78,16 @@ It also proposes others magic commands such as ``%head``, ``%tail``, ``%textdiff
 to get their usage.
 
 
+Installation
+------------
+
+``pip install pyquickhelper``
+
+And to avoid installing the dependencies::
+
+``pip install pyquickhelper --no-deps``
+
+
 Indices and tables
 ------------------
 
