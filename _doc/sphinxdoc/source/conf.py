@@ -27,3 +27,5 @@ set_sphinx_variables(__file__,
                      None,
                      locals(),
                      add_extensions=None)
+
+blog_root = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/"
