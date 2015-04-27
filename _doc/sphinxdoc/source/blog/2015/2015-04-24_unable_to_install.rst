@@ -12,7 +12,7 @@
     on a student's machine today (however he installed almost 
     all the version including 3.5a). 
     
-    In that is the case, I recommend to install *pyensae* and 
+    If that is the case, I recommend to install *pyensae* and 
     *pyquickhelper* without their dependencies::
     
         pip install <module> --no-deps
