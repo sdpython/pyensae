@@ -22,6 +22,7 @@ README / Changes
     * `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_
     * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pyensae>`_
     * `Travis/pyensae <https://travis-ci.org/sdpython/pyensae>`_
+    * `Blog <http://www.xavierdupre.fr/app/pyensae/helpsphinx/blog/main_0000.html#ap-main-0>`_
 
 
 Description        
