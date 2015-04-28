@@ -4,11 +4,9 @@
 
 @brief @see cl Database
 """
+from pyquickhelper.loghelper.flog import fLOG
 
 module_odbc = None
-
-
-from pyquickhelper.loghelper.flog import fLOG
 
 
 class DatabaseObject:

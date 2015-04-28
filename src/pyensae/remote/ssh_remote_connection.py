@@ -233,7 +233,9 @@ class ASSHClient():
         func = ASSHClient._allowed_form[format]
         if func is None:
             if format is None:
-                func = lambda s: s
+                def idfunc(s):
+                    return s
+                func = idfunc
             elif format == "plain":
                 import ansiconv
 

@@ -3,7 +3,6 @@
 
 @brief @see cl Database
 """
-
 import os
 import sys
 import math
@@ -13,11 +12,11 @@ import decimal
 import sqlite3 as SQLite
 import datetime
 import numpy
+from .database_exception import ExceptionSQL, DBException
+from .database_core2 import DatabaseCore2
 
 module_odbc = None
 
-from .database_exception import ExceptionSQL, DBException
-from .database_core2 import DatabaseCore2
 
 
 class DatabaseCore (DatabaseCore2):
