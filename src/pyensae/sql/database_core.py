@@ -18,7 +18,6 @@ from .database_core2 import DatabaseCore2
 module_odbc = None
 
 
-
 class DatabaseCore (DatabaseCore2):
 
     """

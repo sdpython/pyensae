@@ -85,12 +85,13 @@ def is_local():
             "build_sphinx" in sys.argv or \
             "unittests" in sys.argv or \
             "copy27" in sys.argv or \
-            "build" in sys.argv or \
             "sdist" in sys.argv or \
             "register" in sys.argv or \
             "bdist_wininst" in sys.argv or \
             "bdist_msi" in sys.argv or \
             "bdist_wheel" in sys.argv or \
+            "build_script" in sys.argv or \
+            "copy_dist" in sys.argv or \
             "upload_docs" in sys.argv:
         return True
     else:
@@ -169,6 +170,9 @@ if is_local():
         sys.argv, __file__, project_var_name)
 else:
     r = False
+
+if len(sys.argv) == 1 and "--help" in sys.argv:
+    pyquickhelper.process_standard_options_for_setup_help()
 
 if not r:
     setup(
