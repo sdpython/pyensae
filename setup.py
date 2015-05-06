@@ -79,20 +79,31 @@ package_data = {project_var_name + ".subproject": ["*.tohelp"],
 
 
 def is_local():
-    if "clean_space" in sys.argv or \
-            "write_version" in sys.argv or \
-            "clean_pyd" in sys.argv or \
-            "build_sphinx" in sys.argv or \
-            "unittests" in sys.argv or \
-            "copy27" in sys.argv or \
-            "sdist" in sys.argv or \
-            "register" in sys.argv or \
-            "bdist_wininst" in sys.argv or \
-            "bdist_msi" in sys.argv or \
-            "bdist_wheel" in sys.argv or \
-            "build_script" in sys.argv or \
-            "copy_dist" in sys.argv or \
-            "upload_docs" in sys.argv:
+    if \
+       "bdist_msi" in sys.argv or \
+       "build27" in sys.argv or \
+       "build_script" in sys.argv or \
+       "build_sphinx" in sys.argv or \
+       "bdist_wheel" in sys.argv or \
+       "bdist_wininst" in sys.argv or \
+       "clean_pyd" in sys.argv or \
+       "clean_space" in sys.argv or \
+       "copy27" in sys.argv or \
+       "copy_dist" in sys.argv or \
+       "local_pypi" in sys.argv or \
+       "notebook" in sys.argv or \
+       "publish" in sys.argv or \
+       "publish_doc" in sys.argv or \
+       "register" in sys.argv or \
+       "unittests" in sys.argv or \
+       "unittests_LONG" in sys.argv or \
+       "unittests_SKIP" in sys.argv or \
+       "run27" in sys.argv or \
+       "sdist" in sys.argv or \
+       "setupdep" in sys.argv or \
+       "test_local_pypi" in sys.argv or \
+       "upload_docs" in sys.argv or \
+       "write_version" in sys.argv:
         return True
     else:
         return False
@@ -167,7 +178,9 @@ if "--verbose" in sys.argv:
 if is_local():
     pyquickhelper = import_pyquickhelper()
     r = pyquickhelper.process_standard_options_for_setup(
-        sys.argv, __file__, project_var_name)
+        sys.argv, __file__, project_var_name,
+        unittest_modules=["pyquickhelper"],
+        requirements=["pyquickhelper"])
 else:
     r = False
 
