@@ -36,6 +36,7 @@ except ImportError:
 
 from pyquickhelper import fLOG
 from src.pyensae.finance.astock import StockPrices
+from pyquickhelper.pycode import fix_tkinter_issues_virtualenv
 
 
 class TestStockGraph3 (unittest.TestCase):
@@ -48,6 +49,8 @@ class TestStockGraph3 (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+
+        fix_tkinter_issues_virtualenv()
 
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache3")

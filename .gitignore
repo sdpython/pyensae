@@ -249,4 +249,5 @@ _doc/sphinxdoc/source/phdoc_templates/*.html
 _doc/sphinxdoc/source/blog/feed-icon*.png
 _doc/notebooks/.ipynb_checkpoints/*
 auto_*.bat
-auto_setup_dep.py
+auto_*.py
+auto_*.xml
