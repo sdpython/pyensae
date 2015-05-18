@@ -102,6 +102,7 @@ Versions
     * **new:** function :func:`run_dot <pyensae.graph_helper.graphviz_helper.run_dot>`
     * **change:** update to antlr 4.5, add CSharp grammar
     * **new:** new magic command ``textdiff``
+    * **new:** new magic command ``nb_menu`` to display a menu from all available section in the notebook
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
     * **add:** add magic commands for SQLite3 + a notebook

@@ -56,6 +56,7 @@ try:
         from .sql.magic_sql import register_sql_magics
         from .file_helper.magic_file import register_file_magics
         from .graph_helper.magic_graph import register_graph_magics
+        from .notebook_helper.magic_notebook import register_notebook_magics
     except Exception as e:
         import warnings
         warnings.warn(str(e))
@@ -69,6 +70,7 @@ try:
         register_sql_magics()
         register_file_magics()
         register_graph_magics()
+        register_notebook_magics()
 except ImportError as e:
     # IPython is not installed
     pass

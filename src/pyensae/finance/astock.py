@@ -103,7 +103,7 @@ class StockPrices:
                     os.mkdir(folder)
                 except PermissionError as e:
                     raise Exception(
-                        "unable to create directory " +
+                        "PermissionError, unable to create directory " +
                         folder +
                         ", check you execute the program in a folder you have permission to modify (" +
                         os.getcwd() +
@@ -141,10 +141,12 @@ class StockPrices:
                     text = u.read()
                     u.close()
                 except urllib.error.HTTPError as e:
-                    raise Exception("unable to load tick " + tick) from e
+                    raise Exception(
+                        "HTTPError, unable to load tick " + tick + "\nURL: " + url) from e
 
                 if len(text) < 10:
-                    raise Exception("nothing to download for " + tick)
+                    raise Exception("nothing to download for " + tick +
+                                    " less than 10 downloaded bytes")
 
                 try:
                     f = open(name, "wb")
@@ -152,7 +154,7 @@ class StockPrices:
                     f.close()
                 except PermissionError as e:
                     raise Exception(
-                        "unable to create directory " +
+                        "PermissionError, unable to create directory " +
                         folder +
                         ", check you execute the program in a folder you have permission to modify (" +
                         os.getcwd() +

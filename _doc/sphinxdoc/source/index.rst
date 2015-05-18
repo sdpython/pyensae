@@ -47,6 +47,7 @@ Functionalities
 * magic commands to access a Cloudera Cluster and run PIG jobs (see :class:`MagicRemoteSSH <pyensae.remote.magic_remote_ssh.MagicRemoteSSH>`)
 * magic commands to access Azure Blob Storage and HDInsight (see :class:`MagicAzure <pyensae.remote.magic_azure.MagicAzure>`)
 * magic commands to display content of a folder in DataFrame (see :class:`MagicFile <pyensae.file_helper.magic_file.MagicFile>`)
+* magic commands to display an autamated menu in a notebook (see :class:`MagicFile <pyensae.notebook_helper.magic_notebook.MagicNotebook>`)
 
 Dependencies
 ------------

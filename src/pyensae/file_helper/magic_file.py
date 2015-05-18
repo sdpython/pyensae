@@ -21,7 +21,7 @@ from pyquickhelper import docstring2html, create_visual_diff_through_html_files
 class MagicFile(MagicClassWithHelpers):
 
     """
-    Defines magic commands to list the content of a folder
+    Defines magic commands to help with files
 
     .. versionadded:: 1.1
     """
