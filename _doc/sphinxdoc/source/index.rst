@@ -12,7 +12,13 @@ pyensae documentation
     :alt: PYPI Package
     :target: https://pypi.python.org/pypi/pyensae
        
-            
+.. image:: http://img.shields.io/github/issues/sdpython/pyensae.png
+    :alt: GitHub Issues
+    :target: https://github.com/sdpython/pyensae/issues
+    
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+    :alt: MIT License
+    :target: http://opensource.org/licenses/MIT            
    
 **Links:** `pypi <https://pypi.python.org/pypi/pyensae/>`_,
 `github <https://github.com/sdpython/pyensae/>`_,
