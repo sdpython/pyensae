@@ -3,12 +3,7 @@
 @file
 @brief Magic command to help within notebooks
 """
-import sys
-import os
-import pandas
-
-from IPython.core.magic import magics_class, line_magic, cell_magic
-from IPython.core.display import HTML, display_html
+from IPython.core.magic import magics_class, line_magic
 
 from pyquickhelper.ipythonhelper import add_notebook_menu
 from pyquickhelper import MagicCommandParser, MagicClassWithHelpers
