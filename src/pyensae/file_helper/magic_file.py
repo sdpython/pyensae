@@ -31,8 +31,8 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines the way to parse the magic command ``%head``
         """
-        parser = MagicCommandParser(
-            description='display the first lines of a text file')
+        parser = MagicCommandParser(prog="head",
+                                    description='display the first lines of a text file')
         parser.add_argument('f', type=str, help='filename')
         parser.add_argument(
             '-n',
@@ -65,8 +65,8 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines the way to parse the magic command ``%tail``
         """
-        parser = MagicCommandParser(
-            description='display the last lines of a text file')
+        parser = MagicCommandParser(prog="tail",
+                                    description='display the last lines of a text file')
         parser.add_argument('f', type=str, help='filename')
         parser.add_argument(
             '-n',
@@ -99,8 +99,8 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines the way to parse the magic command ``%lsr``
         """
-        parser = MagicCommandParser(
-            description='display the content of a folder as a dataframe')
+        parser = MagicCommandParser(prog="lsr",
+                                    description='display the content of a folder as a dataframe')
         parser.add_argument(
             'path',
             type=str,
@@ -206,8 +206,8 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines the way to parse the magic command ``%lsrepo``
         """
-        parser = MagicCommandParser(
-            description='display the content of a repository (GIT or SVN)')
+        parser = MagicCommandParser(prog="lsrepo",
+                                    description='display the content of a repository (GIT or SVN)')
         parser.add_argument(
             'path',
             type=str,
@@ -254,8 +254,8 @@ class MagicFile(MagicClassWithHelpers):
 
         .. versionadded:: 1.1
         """
-        parser = MagicCommandParser(
-            description='display the content of a repository (GIT or SVN)')
+        parser = MagicCommandParser(prog="compress",
+                                    description='display the content of a repository (GIT or SVN)')
         parser.add_argument(
             'dest',
             type=str,
@@ -299,8 +299,8 @@ class MagicFile(MagicClassWithHelpers):
 
         .. versionadded:: 1.1
         """
-        parser = MagicCommandParser(
-            description='display help for an object in HTML format')
+        parser = MagicCommandParser(prog="hhelp",
+                                    description='display help for an object in HTML format')
         parser.add_argument(
             'obj',
             type=str,
@@ -344,8 +344,8 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines the way to parse the magic command ``%textdiff``
         """
-        parser = MagicCommandParser(
-            description='show the differences between two files, two text')
+        parser = MagicCommandParser(prog="textdiff",
+                                    description='show the differences between two files, two text')
         parser.add_argument('f1', type=str, help='first file or text or url')
         parser.add_argument('f2', type=str, help='second file or text or url')
         parser.add_argument(
