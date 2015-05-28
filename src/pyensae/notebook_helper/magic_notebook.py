@@ -24,7 +24,7 @@ class MagicNotebook(MagicClassWithHelpers):
         defines the way to parse the magic command ``%nb_menu``
         """
         parser = MagicCommandParser(
-            description='display a menu in the notebook based on javascript')
+            description='display a menu in the notebook based on javascript', prog="nb_menu")
         parser.add_argument(
             '-t',
             '--title',

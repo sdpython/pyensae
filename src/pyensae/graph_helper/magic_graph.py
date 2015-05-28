@@ -29,7 +29,8 @@ class MagicGraph(MagicClassWithHelpers):
         """
         defines the way to parse the magic command ``%mpl_style``
         """
-        parser = MagicCommandParser(description='changes matplotlib style')
+        parser = MagicCommandParser(
+            description='changes matplotlib style', prog="mpl_style")
         parser.add_argument(
             'style',
             type=str,

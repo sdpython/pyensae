@@ -226,6 +226,7 @@ version.txt
 */sphinxdoc/source/all*.rst
 */sphinxdoc/source/notebooks/*
 */sphinxdoc/source/coverage/*
+*/sphinxdoc/source/phdoc_static/reveal.js
 
 _doc/notebooks/SQLite*.*
 _doc/notebooks/velib*.*
