@@ -386,6 +386,14 @@ class MagicFile(MagicClassWithHelpers):
             display_html(html)
             return js
 
+    @line_magic
+    def difftext(self, line):
+        """
+        defines ``%difftext`` which calls @see me textdiff
+        but should be easier to remember
+        """
+        return self.textdiff(line)
+
 
 def register_file_magics():
     """
