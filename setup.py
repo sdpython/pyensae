@@ -65,6 +65,7 @@ def is_local():
        "setupdep" in sys.argv or \
        "test_local_pypi" in sys.argv or \
        "upload_docs" in sys.argv or \
+       "setup_hook" in sys.argv or \
        "write_version" in sys.argv:
         try:
             import_pyquickhelper()
