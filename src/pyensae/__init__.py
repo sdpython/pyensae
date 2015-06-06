@@ -13,7 +13,7 @@ __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pyensae"
 __url__ = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html"
 __downloadUrl__ = "http://www.xavierdupre.fr/site2013/index_code.html#pyensae"
-__license__ = "BSD License"
+__license__ = "MIT License"
 
 
 def check(log=False):
