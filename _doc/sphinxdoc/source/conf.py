@@ -29,3 +29,4 @@ set_sphinx_variables(__file__,
                      add_extensions=None)
 
 blog_root = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/"
+blog_background = False
