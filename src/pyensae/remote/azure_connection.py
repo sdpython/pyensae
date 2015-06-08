@@ -27,6 +27,8 @@ class AzureClient():
         * list_containers, create_container, list_blobs, put_blob, put_block_blob_from_bytes
         * put_block_blob_from_text, put_page_blob_from_file, get_blob, get_blob
 
+    See `How to use Blob storage from Python <https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/>`_.
+
     @example(Azure___Get the list of containers and files from a blob storage?)
 
     The functionalities of a ``BlobService`` are described in
