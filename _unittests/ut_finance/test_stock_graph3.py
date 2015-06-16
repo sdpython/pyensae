@@ -52,13 +52,16 @@ class TestStockGraph3 (unittest.TestCase):
 
         fix_tkinter_issues_virtualenv()
 
+        from matplotlib import pyplot as plt
+
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache3")
         stock = StockPrices("BNP.PA", folder=cache)
         stock2 = StockPrices("CA.PA", folder=cache)
 
-        fig, ax, plt = stock.plot(figsize=(16, 8))
-        fig, ax, plt = stock2.plot(existing=(fig, ax), axis=2)
+        fig, ax = plt.subplots(figsize=(16, 8))
+        ax = stock.plot(ax=ax)
+        ax = stock2.plot(ax=ax, axis=2)
         img = os.path.abspath(
             os.path.join(
                 os.path.split(__file__)[0],
@@ -66,6 +69,7 @@ class TestStockGraph3 (unittest.TestCase):
         if os.path.exists(img):
             os.remove(img)
         fig.savefig(img)
+        plt.close('all')
         assert os.path.exists(img)
 
 

@@ -416,19 +416,19 @@ class StockPrices:
 
     def plot(self, begin=None, end=None,
              field="Close", date_format=None,
-             existing=None, axis=1,
+             existing=None, axis=1, ax=None,
              **args):
         """
         see :meth:`draw <pyensae.finance.astock.StockPrices.draw>`
         """
         return StockPrices.draw(self, begin=begin, end=end,
                                 field=field, date_format=date_format,
-                                existing=existing, axis=axis, **args)
+                                existing=existing, axis=axis, ax=ax, **args)
 
     @staticmethod
     def draw(listStockPrices, begin=None, end=None,
              field="Close", date_format=None,
-             existing=None, axis=1,
+             existing=None, axis=1, ax=None,
              **args):
         """
         Draw a graph showing one or several time series.
@@ -440,10 +440,10 @@ class StockPrices:
         @param      field               Open, High, Low, Close, Adj Close, Volume
         @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d`` or None if you prefer the function to choose
         @param      args                other arguments to send to ``plt.subplots``
-        @param      existing            to add this curve to an existing one (existing (fig, ax))
         @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curves on the second axis.
         @param      args                other parameters to give method ``plt.subplots``
-        @return                         fig, ax, plt, (fig,ax) comes ``plt.subplot``, ``plt`` is ``matplotlib.pyplot``
+        @param      ax                  use existing `axes <http://matplotlib.org/api/axes_api.html>`_
+        @return                         `axes <http://matplotlib.org/api/axes_api.html>`_
 
         The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
         can change the graph size (see the example below).
@@ -469,6 +469,12 @@ class StockPrices:
         plt.show()
         @endcode
         @endexample
+
+        .. versionchanged:: 1.1
+            Parameter *existing* was removed and parameter *ax* was added.
+            If the date overlaps, the method
+            `autofmt_xdate <http://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure.autofmt_xdate>`_
+            should be called.
         """
         if isinstance(listStockPrices, StockPrices):
             listStockPrices = [listStockPrices]
@@ -496,18 +502,13 @@ class StockPrices:
         import matplotlib.pyplot as plt
         import matplotlib.dates as mdates
 
-        if existing is not None:
-            if not isinstance(existing, list) and not isinstance(
-                    existing, tuple):
-                raise Exception("existing must be a list or a tuple")
-            if len(existing) != 2:
-                raise Exception("existing must contain two elements: fix,ax")
-            fig, ax = existing
+        if ax is not None:
             ex_h, ex_l = ax.get_legend_handles_labels()
             ex_l = tuple(ex_l)
             ex_h = tuple(ex_h)
             if axis == 2:
                 ax = ax.twinx()
+            fig = None
         else:
             fig, ax = plt.subplots(**args)
             ex_h, ex_l = tuple(), tuple()
@@ -566,7 +567,8 @@ class StockPrices:
 
         ax.set_xlim(begin, end)
         ax.format_ydata = price
-        fig.autofmt_xdate()
+        if fig is not None:
+            fig.autofmt_xdate()
 
         if axis == 2:
             if isinstance(curve, list):
@@ -576,9 +578,7 @@ class StockPrices:
             ax.grid(True)
             ax.legend(ex_l + tuple(data.columns))
 
-        # avoid matplotlib to crash later
-        plt.close('all')
-        return fig, ax, plt
+        return ax
 
     def to_csv(self, filename, sep="\t", index=False, **params):
         """

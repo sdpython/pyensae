@@ -227,6 +227,8 @@ version.txt
 */sphinxdoc/source/notebooks/*
 */sphinxdoc/source/coverage/*
 */sphinxdoc/source/phdoc_static/reveal.js
+_doc/notebooks/cache/*
+_doc/notebooks/donnees.txt
 
 _doc/notebooks/SQLite*.*
 _doc/notebooks/velib*.*

@@ -52,6 +52,8 @@ class TestStockGraph (unittest.TestCase):
 
         fix_tkinter_issues_virtualenv()
 
+        from matplotlib import pyplot as plt
+
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache2")
         stocks = [StockPrices("BNP.PA", folder=cache),
@@ -61,10 +63,12 @@ class TestStockGraph (unittest.TestCase):
 
         if True:
             fLOG("A", sys.executable)
-            fig, ax, plt = StockPrices.draw(
+            fig, ax = plt.subplots()
+            ax = StockPrices.draw(
                 stocks, figsize=(
                     16, 8), field=[
-                    "Adj Close", "Close"])
+                    "Adj Close", "Close"],
+                ax=ax)
             img = os.path.abspath(
                 os.path.join(
                     os.path.split(__file__)[0],
@@ -72,11 +76,13 @@ class TestStockGraph (unittest.TestCase):
             if os.path.exists(img):
                 os.remove(img)
             fig.savefig(img)
+            plt.close('all')
             assert os.path.exists(img)
 
         if True:
             fLOG("B")
-            fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01")
+            fig, ax = plt.subplots()
+            ax = StockPrices.draw(stocks, begin="2010-01-01", ax=ax)
             img = os.path.abspath(
                 os.path.join(
                     os.path.split(__file__)[0],
@@ -84,11 +90,13 @@ class TestStockGraph (unittest.TestCase):
             if os.path.exists(img):
                 os .remove(img)
             fig.savefig(img)
+            plt.close('all')
             assert os.path.exists(img)
 
         if True:
             fLOG("C")
-            fig, ax, plt = StockPrices.draw(stocks[:1], begin="2010-01-01")
+            fig, ax = plt.subplots()
+            ax = StockPrices.draw(stocks[:1], begin="2010-01-01", ax=ax)
             img = os.path.abspath(
                 os.path.join(
                     os.path.split(__file__)[0],
@@ -96,6 +104,7 @@ class TestStockGraph (unittest.TestCase):
             if os.path.exists(img):
                 os .remove(img)
             fig.savefig(img)
+            plt.close('all')
             assert os.path.exists(img)
 
         fLOG("thisend")

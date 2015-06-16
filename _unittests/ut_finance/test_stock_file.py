@@ -51,6 +51,7 @@ class TestStockFile (unittest.TestCase):
         name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-15.txt")
         if os.path.exists(name):
             os.remove(name)
+
         stock = StockPrices(
             "BNP.PA",
             folder=cache,
