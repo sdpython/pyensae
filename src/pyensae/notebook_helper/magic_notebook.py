@@ -4,9 +4,7 @@
 @brief Magic command to help within notebooks
 """
 from IPython.core.magic import magics_class, line_magic
-
-from pyquickhelper.ipythonhelper import add_notebook_menu
-from pyquickhelper import MagicCommandParser, MagicClassWithHelpers
+from pyquickhelper.ipythonhelper import add_notebook_menu, MagicCommandParser, MagicClassWithHelpers
 
 
 @magics_class

@@ -7,7 +7,7 @@
 """
 
 from IPython.core.magic import magics_class, line_magic
-from pyquickhelper import MagicCommandParser, MagicClassWithHelpers
+from pyquickhelper.ipythonhelper import MagicCommandParser, MagicClassWithHelpers
 
 # do not import a module which imports matplotlib
 # if this module is imported, this class is being tested and it affects sphinx

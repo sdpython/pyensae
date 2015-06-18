@@ -11,10 +11,11 @@ from IPython.core.magic import magics_class, line_magic, cell_magic
 from IPython.core.display import HTML, display_html
 
 from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore_folder_iterfile_repo
-from pyquickhelper import MagicCommandParser, run_cmd, zip_files, gzip_files, zip7_files, MagicClassWithHelpers
+from pyquickhelper import run_cmd, zip_files, gzip_files, zip7_files
+from pyquickhelper.ipythonhelper import MagicCommandParser, MagicClassWithHelpers
+from pyquickhelper import docstring2html, create_visual_diff_through_html_files
 from .format_helper import format_file_size, format_file_mtime
 from .content_helper import file_head, file_tail
-from pyquickhelper import docstring2html, create_visual_diff_through_html_files
 
 
 @magics_class
