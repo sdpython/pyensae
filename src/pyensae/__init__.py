@@ -23,6 +23,27 @@ def check(log=False):
 
     @param      log     if True, display information, otherwise
     @return             0 or exception
+
+    @FAQ(Installation issue)
+
+    If the installation fails because of a *SyntaxError*
+
+    ::
+
+        Collecting pyensae
+        Using cached pyensae-1.1.302.tar.gz
+        Complete output from command python setup.py egg_info:
+        Traceback (most recent call last):
+          File "<string>", line 20, in <module>
+          File "/private/var/folders/qv/something/T/pip-build-xxxx/pyensae/setup.py", line 98
+            raise ImportError(message) from e
+                                          ^
+        SyntaxError: invalid syntax
+
+    It probably means you are trying to install *pyensae* on Python 2.7
+    instead of using Python 3.
+
+    @endFAQ
     """
     return True
 
