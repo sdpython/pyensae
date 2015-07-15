@@ -35,19 +35,44 @@ class MagicNotebook(MagicClassWithHelpers):
             type=str,
             default="my_menu_id",
             help='menu id used to locate the corresponding HTML tag div')
+        parser.add_argument(
+            '-f',
+            '--format',
+            type=str,
+            default="html",
+            help='format to consider, html or rst')
+        parser.add_argument(
+            '-l1',
+            '--level1',
+            type=int,
+            default=2,
+            help='first level to consider in the menu')
+        parser.add_argument(
+            '-l2',
+            '--level2',
+            type=int,
+            default=4,
+            help='last level to consider in the menu')
+        parser.add_argument(
+            '-r',
+            '--raw',
+            type=bool,
+            default=False,
+            help='if true, displays the javascript, otherwise the html')
         return parser
 
     @line_magic
     def nb_menu(self, line):
         """
-        defines ``%head``
-        which displays the first lines of a file
+        defines ``%nb_menu``
+        which displays a menu
         """
         parser = self.get_parser(MagicNotebook.nb_menu_parser, "nb_menu")
         args = self.get_args(line, parser)
 
         if args is not None:
-            js = add_notebook_menu(menu_id=args.menu_id, header=args.title)
+            js = add_notebook_menu(menu_id=args.menu_id, header=args.title, format=args.format,
+                                   first_level=args.level1, last_level=args.level2, raw=args.raw)
             return js
 
 
