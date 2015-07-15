@@ -42,6 +42,17 @@ are available through function::
     download_data("td8_velib.zip", website = "xd")
     
 The data comes from `xavierdupre.fr <http://www.xavierdupre.fr/>`_.
+
+
+Tutorial
+--------
+
+.. toctree::
+    :max_depth: 1
+    
+    all_example
+    all_notebooks
+        
     
 Functionalities
 ---------------
