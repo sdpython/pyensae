@@ -82,7 +82,7 @@ def parse_code(code, class_parser, class_lexer):
     """
     if isinstance(code, str):
         # we assume it is a string
-        code = InputStream.InputStream(code)
+        code = InputStream(code)
 
     lexer = class_lexer(code)
     stream = CommonTokenStream(lexer)
