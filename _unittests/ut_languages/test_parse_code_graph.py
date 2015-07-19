@@ -67,11 +67,11 @@ class TestParseCodeGraph (unittest.TestCase):
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
         st = get_tree_graph(tree, parser)
-        
+
         if "travis" in sys.executable:
             # no networkx
             return
-            
+
         st.draw()
 
         import matplotlib.pyplot as plt

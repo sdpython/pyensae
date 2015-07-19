@@ -62,6 +62,7 @@ class TestFlake8(unittest.TestCase):
         lines = [_ for _ in lines if "E501" not in _ and "__init__.py" not in _ and "E265" not in _
                  and "W291" not in _ and "pigjar" not in _ and "from antlr4 import *" not in _
                  and "Parser.py" not in _
+                 and "Lexer.py" not in _
                  and "4Listener.py" not in _]
         lines = [_ for _ in lines if len(_) > 1]
         if __name__ == "__main__":
