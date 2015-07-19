@@ -51,7 +51,7 @@ class TestParseCode (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        langs = ["CSharp4", "SQLite", "R"]  # , "Python3", "Pig"]
+        langs = ["DOT", "CSharp4", "SQLite", "R"]  # , "Python3", "Pig"]
 
         try:
             for lang in langs:
@@ -197,6 +197,29 @@ class TestParseCode (unittest.TestCase):
         """
 
         clparser, cllexer = get_parser_lexer("Python3")
+        parser = parse_code(code, clparser, cllexer)
+        tree = parser.parse()
+        st = get_tree_string(tree, parser)
+        fLOG(st.replace("\\n", "\n"))
+        assert len(st) > 0
+
+    def test_DOT(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        # the grammar does not fully compile
+        return
+
+        code = """
+        digraph {
+            A [label="a"] ;
+            B [label="b"] ;
+            A -> B ;
+        """
+
+        clparser, cllexer = get_parser_lexer("DOT")
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
         st = get_tree_string(tree, parser)

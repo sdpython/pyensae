@@ -32,6 +32,11 @@ def get_parser_lexer(language):
             from .SQLiteLexer import SQLiteLexer
             from .SQLiteParser import SQLiteParser
             return SQLiteParser, SQLiteLexer
+        elif language == "DOT":
+            raise ImportError("Python3 is not available yet")
+            from .DOTLexer import DOTLexer
+            from .DOTParser import DOTParser
+            return DOTParser, DOTLexer
         elif language == "Pig":
             raise ImportError("Pig is not available yet")
             from .PigLexer import PigLexer
