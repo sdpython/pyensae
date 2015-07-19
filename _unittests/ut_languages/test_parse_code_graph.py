@@ -44,7 +44,7 @@ from src.pyensae.graph_helper import run_dot
 
 class TestParseCodeGraph (unittest.TestCase):
 
-    def _test_sql_graph_networkx(self):
+    def test_sql_graph_networkx(self):
         fLOG(
             __file__,
             self._testMethodName,
