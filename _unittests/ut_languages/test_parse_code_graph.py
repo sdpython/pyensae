@@ -69,8 +69,8 @@ class TestParseCodeGraph (unittest.TestCase):
         st = get_tree_graph(tree, parser)
         st.draw()
 
+        import matplotlib.pyplot as plt
         if __name__ == "__main__":
-            import matplotlib.pyplot as plt
             plt.show()
 
         plt.close('all')
