@@ -51,8 +51,10 @@ class TestParseCode (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
+        langs = ["CSharp4", "SQLite", "R"]  # , "Python3", "Pig"]
+
         try:
-            for lang in ["CSharp4", "SQLite", "R", "Pig"]:
+            for lang in langs:
                 clparser, cllexer = get_parser_lexer(lang)
             return
         except ImportError as e:
@@ -60,7 +62,7 @@ class TestParseCode (unittest.TestCase):
 
         folder = os.path.dirname(source_parser.__file__)
 
-        for lang in ["CSharp4", "SQLite", "R", "Pig"]:
+        for lang in langs:
             fLOG("generate for LANG", lang)
             gr = os.path.join(folder, lang + ".g4")
             assert os.path.exists(gr)
@@ -138,6 +140,7 @@ class TestParseCode (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+
         # does not work yet
         return
 
@@ -173,6 +176,27 @@ class TestParseCode (unittest.TestCase):
         """
 
         clparser, cllexer = get_parser_lexer("C#")
+        parser = parse_code(code, clparser, cllexer)
+        tree = parser.parse()
+        st = get_tree_string(tree, parser)
+        fLOG(st.replace("\\n", "\n"))
+        assert len(st) > 0
+
+    def test_python3(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        # the grammar does not fully compile
+        return
+
+        code = """
+        def addition(x, y):
+            return x + y
+        """
+
+        clparser, cllexer = get_parser_lexer("Python3")
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
         st = get_tree_string(tree, parser)

@@ -1,8 +1,8 @@
 """
 @file
-@brief Helpers around building language grammar.
-This module requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
-The grammar were compiled for the version 4.5.
+@brief Helpers to build grammars
+This module requires `antlr4 <http://www.antlr.org/>`_.
+and `antlr4-python3-runtime <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
 """
 import os
 import sys

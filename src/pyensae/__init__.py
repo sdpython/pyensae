@@ -47,19 +47,19 @@ def check(log=False):
     """
     return True
 
-from .resources.http_retrieve import download_data
-from .sql.database_helper import import_flatfile_into_database
-from .file_helper.content_helper import replace_comma_by_point
 from .finance.astock import StockPrices
-from .sql.database_main import Database
 from .datasource.data_velib import DataVelibCollect
 from .datasource.convert import dBase2df, dBase2sqllite
+from .file_helper.content_helper import replace_comma_by_point
 from .file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
-from .remote.ssh_remote_connection import ASSHClient
-from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
-from .remote.azure_connection import AzureClient
 from .file_helper.jython_helper import run_jython, get_jython_jar, is_java_installed, download_java_standalone
 from .file_helper.content_helper import file_head, file_tail
+from .resources.http_retrieve import download_data
+from .sql.database_helper import import_flatfile_into_database
+from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
+from .sql.database_main import Database
+from .remote.ssh_remote_connection import ASSHClient
+from .remote.azure_connection import AzureClient
 from .graph_helper.graphviz_helper import run_dot
 
 try:

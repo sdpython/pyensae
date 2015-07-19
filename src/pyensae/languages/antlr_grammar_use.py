@@ -1,10 +1,12 @@
 """
 @file
-@brief Helpers around language grammar.
-This module requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
+@brief Use grammar
+This module requires `antlr4-python3-runtime <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
 """
 import os
-from antlr4 import ParseTreeWalker, CommonTokenStream, InputStream, ParseTreeListener
+from antlr4 import ParseTreeWalker, CommonTokenStream, InputStream
+from .tree_string_listener import TreeStringListener
+from .tree_graph_listener import TreeGraphListener
 
 
 def get_parser_lexer(language):
@@ -31,9 +33,15 @@ def get_parser_lexer(language):
             from .SQLiteParser import SQLiteParser
             return SQLiteParser, SQLiteLexer
         elif language == "Pig":
+            raise ImportError("Pig is not available yet")
             from .PigLexer import PigLexer
             from .PigParser import PigParser
             return PigParser, PigLexer
+        elif language == "Python3":
+            raise ImportError("Python3 is not available yet")
+            from .Python3Lexer import Python3Lexer
+            from .Python3Parser import Python3Parser
+            return Python3Parser, Python3Lexer
         else:
             folder = os.path.dirname(__file__)
             if folder == "":
@@ -90,80 +98,13 @@ def parse_code(code, class_parser, class_lexer):
     return parser
 
 
-class TreeStringListener(ParseTreeListener):
-
-    """
-    this class is an attempt to run through the tree
-    but it is not complete
-    """
-
-    def __init__(self, parser):
-        """
-        constructor
-
-        @param      parser      parser used to parse the code
-        """
-        super()
-        self.buffer = []
-        self.level = 0
-        self.parser = parser
-
-    def visitTerminal(self, node):
-        """
-        event
-        """
-        text = ("    " * self.level) + "v " + str(node.symbol)
-        self.buffer.append(text)
-
-    def visitErrorNode(self, node):
-        """
-        event
-        """
-        text = ("    " * self.level) + "error: " + str(node)
-        self.buffer.append(text)
-
-    def enterEveryRule(self, ctx):
-        """
-        event
-        """
-        if "ruleIndex" in ctx.__dict__:
-            text = ("    " * self.level) + "+ " + \
-                self.parser.ruleNames[
-                ctx.ruleIndex] + ", LT(1)=" + self.parser._input.LT(1).text
-        else:
-            text = ("    " * self.level) + "+ " + \
-                ", LT(1)=" + self.parser._input.LT(1).text
-        self.buffer.append(text)
-        self.level += 1
-
-    def exitEveryRule(self, ctx):
-        """
-        event
-        """
-        self.level -= 1
-        if "ruleIndex" in ctx.__dict__:
-            text = ("    " * self.level) + "- " + \
-                self.parser.ruleNames[ctx.ruleIndex] + \
-                ", LT(1)=" + self.parser._input.LT(1).text
-        else:
-            text = ("    " * self.level) + "- " + \
-                ", LT(1)=" + self.parser._input.LT(1).text
-        self.buffer.append(text)
-
-    def __str__(self):
-        """
-        usual
-        """
-        return "\n".join(self.buffer)
-
-
 def get_tree_string(tree, parser, format=TreeStringListener):
     """
     returns a string which shows the parsed tree
 
     @param      tree        from @see fn parse_code
-    @param      parser      the parser used to build the tree
-    @param      format      None or a class ParseTreeListener
+    @param      parser      the parser used to build the tree, output of @see fn parse_code
+    @param      format      None or a class `ParseTreeListener <https://github.com/antlr/antlr4-python3/blob/master/src/antlr4/tree/Tree.py>`_
     @return                 string
     """
     if format is None:
@@ -173,3 +114,18 @@ def get_tree_string(tree, parser, format=TreeStringListener):
         listen = format(parser)
         walker.walk(listen, tree)
         return str(listen)
+
+
+def get_tree_graph(tree, parser, format=TreeGraphListener):
+    """
+    returns a graph with networkx
+
+    @param      tree        from @see fn parse_code
+    @param      parser      the parser used to build the tree, output of @see fn parse_code
+    @param      format      None or a class `ParseTreeListener <https://github.com/antlr/antlr4-python3/blob/master/src/antlr4/tree/Tree.py>`_
+    @return                 string
+    """
+    walker = ParseTreeWalker()
+    listen = format(parser)
+    walker.walk(listen, tree)
+    return listen
