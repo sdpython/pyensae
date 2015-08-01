@@ -100,19 +100,20 @@ Versions
 * **1.1 - 2015/??/??**
     * **change:** magic command ``%tail_stderr`` nows displays keyword ``ERROR`` in red.
     * **new:** magic command ``%blob_downmerge`` to download the content of a folder from a blob storage
-    * **add:** method :meth:`upload_cluster <pyensae.remote.remote_connection_ssh.ASSHClient.upload_cluster>`
-    * **add:** method :meth:`download_cluster <pyensae.remote.remote_connection_ssh.ASSHClient.download_cluster>`
+    * **add:** method pyensae.remote.remote_connection_ssh.ASSHClient.upload_cluster
+    * **add:** method pyensae.remote.remote_connection_ssh.ASSHClient.download_cluster
     * **add:** add magic command to test a streaming script for PIG
-    * **add:** function :func:`file_head <pyensae.file_helper.content_helper.file_head>`, :func:`file_tail <pyensae.file_helper.content_helper.file_tail>`,
+    * **add:** function pyensae.file_helper.content_helper.file_head, 
+      pyensae.file_helper.content_helper.file_tail
     * **add:** add magic command ``%lsrepo``, ``%compress``, ``%mpl_style``
     * **del:** delete class TransferFTP, moves it to module `pyquickhelper <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/index.html>`_
     * **add:** add magic command ``%hhelp`` to display the help for an object in HTML format
-    * **new:** function :func:`run_dot <pyensae.graph_helper.graphviz_helper.run_dot>`
+    * **new:** function pyensae.graph_helper.graphviz_helper.run_dot
     * **change:** update to antlr 4.5, add CSharp grammar
     * **new:** new magic command ``textdiff``
     * **new:** new magic command ``nb_menu`` to display a menu from all available section in the notebook
 * **1.0 - 2014/11/10**
-    * **add:** add magic command ``%tail_stderr`` for :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>`
+    * **add:** add magic command ``%tail_stderr`` for class AzureClient
     * **add:** add magic commands for SQLite3 + a notebook
     * **fix:** the setup does not need the file ``README.rst`` anymore
     * **new:** magic commands ``%lsr`` to retrieve the content of a folder
@@ -121,6 +122,8 @@ Versions
     * **add:** Python version is now checked, ImportError is raised if it used on Python 2
     * **add:** option -local to %jobsubmit    
     * **add:** add magic command and methods to enable a shell from a notebook (a kind of putty) (command ``%open_remove_shell``, ...)
-    * **new:** function :func:`parse_code <pyensae.languages.antlr_grammar_use.parse_code>` parses a script in R, PIG, SQLite syntax and checks if there is any mistake, it requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_
-    * **new:** new class :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>` to handle some basic needs with Azure
+    * **new:** function pyensae.languages.antlr_grammar_use.parse_code parses a script in 
+      R, PIG, SQLite syntax and checks if there is any mistake, 
+      it requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_
+    * **new:** new class AzureClient to handle some basic needs with Azure
     * **add:** add magic command and methods to handle Azure from a notebook

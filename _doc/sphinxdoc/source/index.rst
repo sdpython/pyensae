@@ -28,7 +28,7 @@ pyensae documentation
 :ref:`l-README`,
 :ref:`blog <ap-main-0>`
 
-Description        
+What is it?      
 -----------
 
 This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_ 
@@ -42,10 +42,14 @@ are available through function::
     download_data("td8_velib.zip", website = "xd")
     
 The data comes from `xavierdupre.fr <http://www.xavierdupre.fr/>`_.
+The module also implements magic commands to access an Hadoop cluster
+(Azure, Cloudera), to run SQL queries on `SQLite <https://sqlite.org/>`_,
+parsing financial data from `Yahoo Finance <https://fr.finance.yahoo.com/>`_.
 
 
-Tutorial
---------
+
+Quick start
+-----------
 
 .. toctree::
     :maxdepth: 1
