@@ -70,7 +70,7 @@ class TestParseCodeSimpleWorkflow (unittest.TestCase):
             final = build_grammar(lang, fLOG=fLOG)
             fLOG(final)
 
-    def _test_simple_workflow(self):
+    def test_simple_workflow(self):
         fLOG(
             __file__,
             self._testMethodName,
