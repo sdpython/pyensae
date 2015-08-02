@@ -47,6 +47,10 @@ def get_parser_lexer(language):
             from .Python3Lexer import Python3Lexer
             from .Python3Parser import Python3Parser
             return Python3Parser, Python3Lexer
+        elif language == "SimpleWorkflow":
+            from .SimpleWorkflowLexer import SimpleWorkflowLexer
+            from .SimpleWorkflowParser import SimpleWorkflowParser
+            return SimpleWorkflowParser, SimpleWorkflowLexer
         else:
             folder = os.path.dirname(__file__)
             if folder == "":
@@ -130,6 +134,8 @@ def get_tree_graph(tree, parser, format=TreeGraphListener):
     @param      format      None or a class `ParseTreeListener <https://github.com/antlr/antlr4-python3/blob/master/src/antlr4/tree/Tree.py>`_
     @return                 string
     """
+    if format is None:
+        raise TypeError("format cannot be None")
     walker = ParseTreeWalker()
     listen = format(parser)
     walker.walk(listen, tree)

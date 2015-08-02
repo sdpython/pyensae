@@ -73,6 +73,7 @@ def build_grammar(g4, version="4.5", fLOG=noLOG):
     domain, name = "/".join(spl[:-1]) + "/", spl[-1]
     folder = os.path.abspath(os.path.dirname(__file__))
     final = os.path.join(folder, name)
+
     if not os.path.exists(final):
         from ..resources.http_retrieve import download_data
         name = download_data(name, website=domain, whereTo=folder)
