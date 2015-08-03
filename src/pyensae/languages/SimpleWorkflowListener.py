@@ -41,36 +41,12 @@ class SimpleWorkflowListener(ParseTreeListener):
     def exitAffectation_stmt(self, ctx):
         pass
 
-    # Enter a parse tree produced by SimpleWorkflowParser#variable_name.
-    def enterVariable_name(self, ctx):
-        pass
-
-    # Exit a parse tree produced by SimpleWorkflowParser#variable_name.
-    def exitVariable_name(self, ctx):
-        pass
-
     # Enter a parse tree produced by SimpleWorkflowParser#for_stmt.
     def enterFor_stmt(self, ctx):
         pass
 
     # Exit a parse tree produced by SimpleWorkflowParser#for_stmt.
     def exitFor_stmt(self, ctx):
-        pass
-
-    # Enter a parse tree produced by SimpleWorkflowParser#range_function.
-    def enterRange_function(self, ctx):
-        pass
-
-    # Exit a parse tree produced by SimpleWorkflowParser#range_function.
-    def exitRange_function(self, ctx):
-        pass
-
-    # Enter a parse tree produced by SimpleWorkflowParser#loop_variable.
-    def enterLoop_variable(self, ctx):
-        pass
-
-    # Exit a parse tree produced by SimpleWorkflowParser#loop_variable.
-    def exitLoop_variable(self, ctx):
         pass
 
     # Enter a parse tree produced by SimpleWorkflowParser#if_stmt.
@@ -81,20 +57,60 @@ class SimpleWorkflowListener(ParseTreeListener):
     def exitIf_stmt(self, ctx):
         pass
 
-    # Enter a parse tree produced by SimpleWorkflowParser#condition.
-    def enterCondition(self, ctx):
-        pass
-
-    # Exit a parse tree produced by SimpleWorkflowParser#condition.
-    def exitCondition(self, ctx):
-        pass
-
     # Enter a parse tree produced by SimpleWorkflowParser#evaluation_function.
     def enterEvaluation_function(self, ctx):
         pass
 
     # Exit a parse tree produced by SimpleWorkflowParser#evaluation_function.
     def exitEvaluation_function(self, ctx):
+        pass
+
+    # Enter a parse tree produced by SimpleWorkflowParser#expression.
+    def enterExpression(self, ctx):
+        pass
+
+    # Exit a parse tree produced by SimpleWorkflowParser#expression.
+    def exitExpression(self, ctx):
+        pass
+
+    # Enter a parse tree produced by SimpleWorkflowParser#expression_no_binary.
+    def enterExpression_no_binary(self, ctx):
+        pass
+
+    # Exit a parse tree produced by SimpleWorkflowParser#expression_no_binary.
+    def exitExpression_no_binary(self, ctx):
+        pass
+
+    # Enter a parse tree produced by SimpleWorkflowParser#function_call.
+    def enterFunction_call(self, ctx):
+        pass
+
+    # Exit a parse tree produced by SimpleWorkflowParser#function_call.
+    def exitFunction_call(self, ctx):
+        pass
+
+    # Enter a parse tree produced by SimpleWorkflowParser#variable_name.
+    def enterVariable_name(self, ctx):
+        pass
+
+    # Exit a parse tree produced by SimpleWorkflowParser#variable_name.
+    def exitVariable_name(self, ctx):
+        pass
+
+    # Enter a parse tree produced by SimpleWorkflowParser#binary_operator.
+    def enterBinary_operator(self, ctx):
+        pass
+
+    # Exit a parse tree produced by SimpleWorkflowParser#binary_operator.
+    def exitBinary_operator(self, ctx):
+        pass
+
+    # Enter a parse tree produced by SimpleWorkflowParser#unary_operator.
+    def enterUnary_operator(self, ctx):
+        pass
+
+    # Exit a parse tree produced by SimpleWorkflowParser#unary_operator.
+    def exitUnary_operator(self, ctx):
         pass
 
     # Enter a parse tree produced by SimpleWorkflowParser#stmt_comma.
@@ -119,16 +135,6 @@ class SimpleWorkflowListener(ParseTreeListener):
 
     # Exit a parse tree produced by SimpleWorkflowParser#connect_stmt.
     def exitConnect_stmt(self, ctx):
-        pass
-
-    # Enter a parse tree produced by
-    # SimpleWorkflowParser#data_or_module_output_constant.
-    def enterData_or_module_output_constant(self, ctx):
-        pass
-
-    # Exit a parse tree produced by
-    # SimpleWorkflowParser#data_or_module_output_constant.
-    def exitData_or_module_output_constant(self, ctx):
         pass
 
     # Enter a parse tree produced by

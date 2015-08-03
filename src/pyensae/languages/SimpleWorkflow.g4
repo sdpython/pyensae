@@ -20,27 +20,15 @@ affectation_stmt_comma
     ;
 
 affectation_stmt
-    : 'set' variable_name '=' constant
+    : 'set' variable_name '=' expression
     ;
     
-variable_name
-    : Identifier
-    ;
-
 /////
 // for
 /////
 
 for_stmt
-    : 'for' '(' loop_variable 'in' range_function ')' '{' final_stmt+ '}' 
-    ;
-    
-range_function
-    : evaluation_function '(' data_or_module_output_constant? (',' data_or_module_output_constant)* ')'
-    ;
-    
-loop_variable
-    : Identifier
+    : 'for' '(' variable_name 'in' function_call ')' '{' final_stmt+ '}' 
     ;
     
 /////
@@ -48,15 +36,46 @@ loop_variable
 /////
 
 if_stmt
-    : 'if' '(' condition ')' '{' final_stmt+ '}' ('else' '{' final_stmt+ '}')?
-    ;
-    
-condition
-    : evaluation_function '(' data_or_module_output_constant? (',' data_or_module_output_constant)* ')'
+    : 'if' '(' expression ')' '{' final_stmt+ '}' ('else' '{' final_stmt+ '}')?
     ;
     
 evaluation_function
     : Identifier 
+    ;
+    
+/////////////
+// expression
+/////////////
+
+
+expression
+    : expression_no_binary
+    | (expression_no_binary binary_operator expression )
+    ;
+
+expression_no_binary
+    : constant 
+    | variable_name
+    | data_or_module_output
+    | ('(' expression ')')
+    | (unary_operator expression_no_binary )
+    | function_call
+    ;
+
+function_call
+    : evaluation_function '(' expression? (',' expression)* ')'
+    ;
+    
+variable_name
+    : Identifier
+    ;
+    
+binary_operator
+    : '+' | '-' | '*' | '/' | '%' | '&&' | '||' | '==' | '!=' | '<=' | '>=' | '>' | '<'
+    ;
+
+unary_operator
+    : '-' | '+' | '!'
     ;
 
 ////////
@@ -77,11 +96,6 @@ stmt
 connect_stmt
     : ('connect' data_or_module_output ('to' | '->') module_input )
     | ('connect' '(' data_or_module_output ',' module_input ')' )
-    ;
-    
-data_or_module_output_constant
-    : data_or_module_output
-    | constant 
     ;
     
 data_or_module_output
@@ -116,7 +130,7 @@ list_param_affectation
     ;
     
 param_affectation
-    : param_name '=' constant
+    : param_name '=' expression
     ;
     
 param_name
