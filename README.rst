@@ -36,17 +36,10 @@ README / Changes
 Description        
 -----------
 
-This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_ 
-for teaching purposes but not only.
-It requires `github/pyquickhelper <https://github.com/sdpython/pyquickhelper/>`_.
+This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_
+for teachings available at
+`ENSAE - Programmation - Xavier Dupré <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html>`_.
 
-Data used for teachings at the
-`ENSAE <http://www.xavierdupre.fr/site2013/enseignements/index.html>`_
-are available through function::
-
-    download_data("td8_velib.zip", website = "xd")
-    
-The data comes from `xavierdupre.fr <http://www.xavierdupre.fr/>`_.
     
 Functionalities
 ---------------
@@ -64,24 +57,28 @@ Dependencies
 
 * `numpy <http://www.numpy.org/>`_
 * `pandas <http://pandas.pydata.org/>`_
-* `pyquickhelper <https://pypi.python.org/pypi/pyquickhelper>`_
+* `pyquickhelper <https://pypi.python.org/pypi/pyquickhelper/>`_
 
-For the class :class:`StockPrices <finance.astock.StockPrices>`:
-    * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
-    * `six <https://pypi.python.org/pypi/six>`_
+Class *StockPrices* requires:
+
+* `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
+* `six <https://pypi.python.org/pypi/six>`_
     
-The :class:`ASSHClient <pyensae.remote.remote_connection.ASSClient>` requires:
-    * `paramiko <http://www.paramiko.org/>`_
-    * `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_
-    * `ecdsa <https://pypi.python.org/pypi/ecdsa>`_
+Class *ASSHClient* requires:
 
-The :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>` requires:
-    * `azure <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/index.html>`_
+* `paramiko <http://www.paramiko.org/>`_
+* `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_
+* `ecdsa <https://pypi.python.org/pypi/ecdsa>`_
 
-The function :func:`register_magics <pyensae.remote.magic_remote.register_magics>` defines magic commands
+Class *AzureClient* requires:
+
+* `azure <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/index.html>`_
+
+The function *register_magics* defines magic commands
 to send commands to a remote commands through a SSH connection:
-    * ``%remote_open``, ``%remote_close``
-    * ``%remote_cmd``, ``%remote_up``, ``%remote_down``
+
+* ``%remote_open``, ``%remote_close``
+* ``%remote_cmd``, ``%remote_up``, ``%remote_down``
     
 The magic commands will be automatically enabled if the module is imported from a notebook.
     
@@ -100,30 +97,23 @@ Versions
 * **1.1 - 2015/??/??**
     * **change:** magic command ``%tail_stderr`` nows displays keyword ``ERROR`` in red.
     * **new:** magic command ``%blob_downmerge`` to download the content of a folder from a blob storage
-    * **add:** method pyensae.remote.remote_connection_ssh.ASSHClient.upload_cluster
-    * **add:** method pyensae.remote.remote_connection_ssh.ASSHClient.download_cluster
+    * **add:** method *pyensae.remote.remote_connection_ssh.ASSHClient.upload_cluster*
+    * **add:** method *pyensae.remote.remote_connection_ssh.ASSHClient.download_cluster*
     * **add:** add magic command to test a streaming script for PIG
-    * **add:** function pyensae.file_helper.content_helper.file_head, 
-      pyensae.file_helper.content_helper.file_tail
+    * **add:** function *pyensae.file_helper.content_helper.file_head*, 
+      *pyensae.file_helper.content_helper.file_tail*
     * **add:** add magic command ``%lsrepo``, ``%compress``, ``%mpl_style``
-    * **del:** delete class TransferFTP, moves it to module `pyquickhelper <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/index.html>`_
+    * **del:** delete class *TransferFTP*, moves it to module pyquickhelper
     * **add:** add magic command ``%hhelp`` to display the help for an object in HTML format
     * **new:** function pyensae.graph_helper.graphviz_helper.run_dot
     * **change:** update to antlr 4.5, add CSharp grammar
     * **new:** new magic command ``textdiff``
     * **new:** new magic command ``nb_menu`` to display a menu from all available section in the notebook
+    
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for class AzureClient
     * **add:** add magic commands for SQLite3 + a notebook
     * **fix:** the setup does not need the file ``README.rst`` anymore
     * **new:** magic commands ``%lsr`` to retrieve the content of a folder
     * **new:** various function to format the size of a file
-* **0.9 - 2014/11/03**
-    * **add:** Python version is now checked, ImportError is raised if it used on Python 2
-    * **add:** option -local to %jobsubmit    
-    * **add:** add magic command and methods to enable a shell from a notebook (a kind of putty) (command ``%open_remove_shell``, ...)
-    * **new:** function pyensae.languages.antlr_grammar_use.parse_code parses a script in 
-      R, PIG, SQLite syntax and checks if there is any mistake, 
-      it requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_
-    * **new:** new class AzureClient to handle some basic needs with Azure
-    * **add:** add magic command and methods to handle Azure from a notebook
+    
