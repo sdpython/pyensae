@@ -50,8 +50,6 @@ except ImportError:
     import pyquickhelper
 
 from pyquickhelper import fLOG, get_temp_folder
-from pyquickhelper.pycode import check_readme_syntax
-from pyquickhelper.helpgen.markdown_helper import yield_sphinx_only_markup_for_pipy
 
 if sys.version_info[0] == 2:
     from codecs import open
@@ -76,6 +74,9 @@ class TestReadme(unittest.TestCase):
         if __name__ != "__main__":
             # does not work from a virtual environment
             return
+
+        from pyquickhelper.pycode import check_readme_syntax
+        from pyquickhelper.helpgen.markdown_helper import yield_sphinx_only_markup_for_pipy
 
         check_readme_syntax(readme, folder=temp, fLOG=fLOG)
 
