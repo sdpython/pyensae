@@ -34,7 +34,7 @@ except ImportError:
     import pyquickhelper
 
 
-from pyquickhelper.ipythonhelper.notebook_helper import run_notebook
+from pyquickhelper.ipythonhelper.notebook_helper import run_notebook, install_python_kernel_for_unittest
 from pyquickhelper import get_temp_folder, fLOG
 
 
@@ -70,13 +70,18 @@ class TestNotebookRunnerMagicCommand (unittest.TestCase):
                 "pyquickhelper",
                 "src")),
         ]
+
+        kernel_name = None if "travis" in sys.executable else install_python_kernel_for_unittest(
+            "pyensae")
+
         outfile = os.path.join(temp, "out_notebook.ipynb")
         assert not os.path.exists(outfile)
         out = run_notebook(
             nbfile,
             working_dir=temp,
             outfilename=outfile,
-            additional_path=addpath)
+            additional_path=addpath,
+            kernel_name=kernel_name)
         fLOG(out)
         assert os.path.exists(outfile)
 
