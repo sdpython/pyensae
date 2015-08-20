@@ -22,7 +22,7 @@ from pyquickhelper.helpgen.default_conf import set_sphinx_variables
 set_sphinx_variables(__file__,
                      "pyensae",
                      "Xavier Dupré",
-                     2014,
+                     2015,
                      "basicstrap",
                      None,
                      locals(),
