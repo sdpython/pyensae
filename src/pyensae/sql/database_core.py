@@ -37,6 +37,7 @@ class DatabaseCore (DatabaseCore2):
                              "text": str,
                              "INTEGER": int,
                              "FLOAT": float,
+                             "REAL": float,
                              "float": float,
                              "numeric": float,
                              "LONG": int,
