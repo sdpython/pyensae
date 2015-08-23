@@ -150,7 +150,8 @@ if is_local():
     r = pyquickhelper.process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
         unittest_modules=["pyquickhelper"],
-        requirements=["pyquickhelper"])
+        requirements=["pyquickhelper"],
+        coverage_options=dict(omit=["*Parser.py", "*Listener.py", "*Lexer.py"]))
 else:
     r = False
 
