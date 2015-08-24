@@ -19,6 +19,7 @@ cloud-sptheme
 coverage
 dateutils
 docutils
+folium
 hachibee-sphinx-theme
 ipykernel
 ipyparallel
