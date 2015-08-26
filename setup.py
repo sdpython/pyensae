@@ -151,6 +151,7 @@ if is_local():
         sys.argv, __file__, project_var_name,
         unittest_modules=["pyquickhelper"],
         requirements=["pyquickhelper"],
+        additional_notebook_path=["pyquickhelper"],
         coverage_options=dict(omit=["*Parser.py", "*Listener.py", "*Lexer.py"]))
 else:
     r = False
