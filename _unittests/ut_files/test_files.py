@@ -1,5 +1,5 @@
 """
-@brief      test log(time=1s)
+@brief      test log(time=12s)
 
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
@@ -85,7 +85,7 @@ class TestFiles (unittest.TestCase):
         fLOG("*****", res)
         assert "test log" in res.data
         res = mg.head("{0} --n 3 -e ascii".format(fp))
-        res = mg.head("{0} --n 3 -e utf8".format(fp))
+        res = mg.head("{0} --n 3 -e utf8 -r".format(fp))
 
     def test_head2(self):
         fLOG(
@@ -131,6 +131,15 @@ class TestFiles (unittest.TestCase):
         fLOG("#####", res)
         if "unittest.main" not in res[-1]:
             raise Exception("unittest.main not in " + str(res[-1]))
+
+    def test_tail_utf8(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+        fp = os.path.join(os.path.dirname(__file__), "data", "lines_utf8.txt")
+        lines = file_tail(fp, nbline=3, threshold=20)
+        fLOG(lines)
 
     def test_files_repo(self):
         fLOG(

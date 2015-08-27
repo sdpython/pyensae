@@ -53,6 +53,14 @@ def file_tail(filename, nbline=10, encoding="utf8", threshold=2 ** 14):
     @param      threshold       if the file size is above, it will not read the beginning
     @return                     list of lines
 
+    The line marked as *A* has an issue because the cursor
+    could fall on a character (= byte) in the middle of a character
+    if the file is encoded in utf-8 character.
+    The next line fails. That's why we try again
+    by moving the cursor by one character (see line B).
+
+    The first returned line may be incomplete.
+
     .. versionadded:: 1.1
     """
     if not os.path.exists(filename):
@@ -67,7 +75,12 @@ def file_tail(filename, nbline=10, encoding="utf8", threshold=2 ** 14):
         return rows[-nbline:] if len(rows) > nbline else rows
     else:
         with open(filename, "r", encoding=encoding) as f:
-            f.seek(size - threshold)
-            content = f.read()
+            f.seek(size - threshold)  # line A
+            try:
+                content = f.read()
+            except UnicodeDecodeError:
+                f.seek(size - threshold - 1)  # line B
+                content = f.read()
+
         rows = content.split("\n")
         return rows[-nbline:] if len(rows) > nbline else rows

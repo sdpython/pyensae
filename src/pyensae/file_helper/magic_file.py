@@ -42,6 +42,12 @@ class MagicFile(MagicClassWithHelpers):
             default=10,
             help='number of lines to display')
         parser.add_argument(
+            '-r',
+            '--raw',
+            type=bool,
+            default=False,
+            help='display raw text instead of HTML')
+        parser.add_argument(
             '-e',
             '--encoding',
             default="utf8",
@@ -59,7 +65,10 @@ class MagicFile(MagicClassWithHelpers):
 
         if args is not None:
             rows = file_head(args.f, args.n, args.encoding)
-            return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
+            if args.raw:
+                return "".join(rows)
+            else:
+                return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
 
     @staticmethod
     def tail_parser():
@@ -75,6 +84,12 @@ class MagicFile(MagicClassWithHelpers):
             type=int,
             default=10,
             help='number of lines to display')
+        parser.add_argument(
+            '-r',
+            '--raw',
+            type=bool,
+            default=False,
+            help='display raw text instead of HTML')
         parser.add_argument(
             '-e',
             '--encoding',
@@ -93,7 +108,10 @@ class MagicFile(MagicClassWithHelpers):
 
         if args is not None:
             rows = file_tail(args.f, args.n, args.encoding)
-            return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
+            if args.raw:
+                return "".join(rows)
+            else:
+                return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
 
     @staticmethod
     def lsr_parser():
