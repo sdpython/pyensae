@@ -85,7 +85,13 @@ class TestFiles (unittest.TestCase):
         fLOG("*****", res)
         assert "test log" in res.data
         res = mg.head("{0} --n 3 -e ascii".format(fp))
-        res = mg.head("{0} --n 3 -e utf8 -r".format(fp))
+        resr = mg.head("{0} --n 3 -e utf8 --raw".format(fp))
+        fLOG(resr)
+        assert resr != res
+        assert "<" not in resr
+        assert "@brief" in resr
+        assert "usage" not in resr
+        assert not isinstance(res, str)
 
     def test_head2(self):
         fLOG(

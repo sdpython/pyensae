@@ -44,8 +44,8 @@ class MagicFile(MagicClassWithHelpers):
         parser.add_argument(
             '-r',
             '--raw',
-            type=bool,
             default=False,
+            action='store_true',
             help='display raw text instead of HTML')
         parser.add_argument(
             '-e',
@@ -87,8 +87,8 @@ class MagicFile(MagicClassWithHelpers):
         parser.add_argument(
             '-r',
             '--raw',
-            type=bool,
             default=False,
+            action='store_true',
             help='display raw text instead of HTML')
         parser.add_argument(
             '-e',
