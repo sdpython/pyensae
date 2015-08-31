@@ -1,11 +1,11 @@
 #-*- coding: utf-8 -*-
 """
 @file
-@brief Module *folium* does not have any output to a notebook, addresses that issue
+@brief Module *folium* does not have any output to a notebook, addresses that issue. The module
+does not explicitely import *folium*.
 """
 
 from IPython.display import HTML
-import folium
 
 
 def folium_inline_map(map):
