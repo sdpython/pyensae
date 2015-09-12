@@ -165,12 +165,13 @@ class InterfaceSQL:
         """
         raise NotImplementedError()
 
-    def get_table_columns(self, table_name):
+    def get_table_columns(self, table_name, as_dict=True):
         """
         returns the list of columns in a table
 
         @param      table_name      table name
-        @return                     dictionary { "column": (position, type) }
+        @param      as_dict         True, as dictionary, as a list otherwise
+        @return                     dictionary { "column": (position, type) } or a list
         """
         raise NotImplementedError()
 

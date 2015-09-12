@@ -85,6 +85,7 @@ ipch/
 *.opensdf
 *.sdf
 *.cachefile
+*.pyproj
 
 # Visual Studio profiler
 *.psess

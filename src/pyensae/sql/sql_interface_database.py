@@ -47,14 +47,15 @@ class InterfaceSQLDatabase(InterfaceSQL):
         """
         return self.obj.get_table_list()
 
-    def get_table_columns(self, table_name):
+    def get_table_columns(self, table_name, as_dict=True):
         """
         returns the list of columns in a table
 
         @param      table_name      table name
+        @param      as_dict         True, as dictionary, as a list otherwise
         @return                     dictionary { "column": (position, type) }
         """
-        return self.obj.get_table_columns(table_name, True)
+        return self.obj.get_table_columns(table_name, dictionary=as_dict)
 
     def execute_clean_query(self, sql_query):
         """
