@@ -44,7 +44,8 @@ class MagicSQL(MagicClassWithHelpers):
         """
         parser = MagicCommandParser(prog="SQL_connect",
                                     description='connect to a SQL database')
-        parser.add_argument('filename', type=str, help='database filename')
+        parser.add_argument('filename', type=str,
+                            help='database filename', eval_type=str)
         parser.add_argument(
             '-v',
             '--variable',
@@ -127,7 +128,7 @@ class MagicSQL(MagicClassWithHelpers):
         """
         parser = MagicCommandParser(prog="SQL_drop_table",
                                     description='drop a table from a database')
-        parser.add_argument('table', type=str, help='table')
+        parser.add_argument('table', type=str, help='table', eval_type=str)
         parser.add_argument(
             '-v',
             '--variable',
@@ -182,7 +183,7 @@ class MagicSQL(MagicClassWithHelpers):
         """
         parser = MagicCommandParser(prog="SQL_schema",
                                     description='schema of a table')
-        parser.add_argument('table', type=str, help='table')
+        parser.add_argument('table', type=str, help='table', eval_type=str)
         parser.add_argument(
             '--as_list', help='as a dictionary (False) or as a list (True)', action="store_true")
         parser.add_argument(
@@ -211,9 +212,10 @@ class MagicSQL(MagicClassWithHelpers):
         """
         parser = MagicCommandParser(prog="SQL_import_tsv",
                                     description='import a tsv file into the database')
-        parser.add_argument('filename', type=str, help='tsv file name')
+        parser.add_argument('filename', type=str,
+                            help='tsv file name', eval_type=str)
         parser.add_argument('-t', '--table', type=str,
-                            help='table name', default="-")
+                            help='table name', default="-", eval_type=str)
         parser.add_argument(
             '--verbose', help='print progress', action="store_true")
         parser.add_argument(
@@ -288,7 +290,7 @@ class MagicSQL(MagicClassWithHelpers):
                                     description='import a dataframe into the database')
         parser.add_argument('df', type=str, help='dataframe', no_eval=True)
         parser.add_argument('-t', '--table', type=str,
-                            help='table name', default="-")
+                            help='table name', default="-", eval_type=str)
         parser.add_argument(
             '-v',
             '--variable',
@@ -332,9 +334,9 @@ class MagicSQL(MagicClassWithHelpers):
         parser.add_argument(
             '--df', type=str, help='output dataframe', default="temp_view", no_eval=True)
         parser.add_argument('-n', '--n', type=int,
-                            help='number of first lines to display', default=10)
+                            help='number of first lines to display', default=10, eval_type=int)
         parser.add_argument('-q', '--query', type=str,
-                            help='when used in a single line (no cell), query is the SQL query, the command returns the full dataframe', default="")
+                            help='when used in a single line (no cell), query is the SQL query, the command returns the full dataframe', default="", eval_type=str)
         parser.add_argument(
             '-v',
             '--variable',
