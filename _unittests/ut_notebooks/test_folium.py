@@ -50,7 +50,8 @@ class TestNotebookFolium (unittest.TestCase):
         temp = get_temp_folder(__file__, "temp_folium")
         outfile = os.path.join(temp, 'osm.html')
 
-        if sys.platform.startswith("win") and "anaconda" in sys.base_prefix:
+        if sys.platform.startswith("win") and ("anaconda" in sys.base_prefix or \
+                "_condavir" in sys.executable):
             # an expected error
             # jinja2.exceptions.TemplateNotFound: tiles\openstreetmap\tiles.txt
             warnings.warn("test_notebook_folium not run on Anaconda, it raises that error: jinja2.exceptions.TemplateNotFound: tiles/openstreetmap/tiles.txt")
