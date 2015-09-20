@@ -83,3 +83,4 @@ python-linkedin
 pyquickhelper
 pymyinstall
 colormap
+easydev
