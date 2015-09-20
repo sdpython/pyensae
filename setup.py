@@ -175,7 +175,7 @@ if not r:
         packages=packages,
         package_dir=package_dir,
         package_data=package_data,
-        install_requires=["pyquickhelper"],
+        install_requires=["pyquickhelper", "colormap"],
         extras_require={
             'graph_helper': ['matplotlib'],
             'languages': ['antlr4-python3-runtime'],
