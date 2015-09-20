@@ -10,11 +10,9 @@ See also `biokit license <https://github.com/biokit/biokit/blob/master/LICENSE>`
 :references: http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
 """
 from .linkage import Linkage
-import string
 from colormap import cmap_builder
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.cm as cm
 from matplotlib.patches import Ellipse, Circle, Rectangle, Wedge
 from matplotlib.collections import PatchCollection
 import pandas as pd
@@ -135,7 +133,7 @@ class Corrplot(Linkage):
              shrink=0.9, axisbg='white', colorbar=True, label_color='black',
              fontsize='small', edgecolor='black', method='ellipse',
              order_method='complete', order_metric='euclidean', cmap=None,
-             ax=None, binarise_color=False):
+             ax=None, binarise_color=False, figsize=None):
         """
         plot the correlation matrix from the content of :attr:`df`
         (dataframe)
@@ -170,6 +168,7 @@ class Corrplot(Linkage):
         :param cmap: a valid cmap from matplotlib or colormap package (e.g.,
             'jet', or 'copper'). Default is red/white/blue colors.
         :param ax: a matplotlib axes.
+        :param figsize: gives that parameter to the new created figure
         :return: ax (matplotlib axes)
 
         The colorbar can be tuned with the parameters stored in :attr:`params`.
@@ -183,7 +182,7 @@ class Corrplot(Linkage):
 
         """
         # default
-        if cmap != None:
+        if cmap is not None:
             try:
                 if isinstance(cmap, str):
                     self.cm = cmap_builder(cmap)
@@ -202,12 +201,16 @@ class Corrplot(Linkage):
         df = self.order(method=order_method, metric=order_metric)
 
         # figure can be a number or an instance; otherwise creates it
+        params = dict(facecolor=axisbg)
         if isinstance(fig, int):
-            fig = plt.figure(num=fig, facecolor=axisbg)
+            params["num"] = fig.number
         elif fig is not None:
-            fig = plt.figure(num=fig.number, facecolor=axisbg)
+            params["num"] = fig.number
         else:
-            fig = plt.figure(num=None, facecolor=axisbg)
+            params["num"] = None
+        if figsize is not None:
+            params["figsize"] = figsize
+        fig = plt.figure(**params)
 
         # do we have an axes to plot the data in ?
         if ax is None:
@@ -228,16 +231,12 @@ class Corrplot(Linkage):
 
         if upper is None and lower is None:
             mode = 'method'
-            diagonal = True
         elif upper and lower:
             mode = 'both'
-            diagonal = False
         elif lower is not None:
             mode = 'lower'
-            diagonal = True
         elif upper is not None:
             mode = 'upper'
-            diagonal = True
 
         self.binarise_color = binarise_color
         if mode == 'upper':
@@ -340,7 +339,6 @@ class Corrplot(Linkage):
 
     def _add_patches(self, df, method, fill, ax, diagonal=True):
         width, height = df.shape
-        labels = (df.columns)
 
         patches = []
         colors = []
