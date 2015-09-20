@@ -179,8 +179,8 @@ class AzureClient():
         """
         open a blob service
         """
-        import azure.storage
-        return azure.storage.BlobService(self.account_name, self.account_key)
+        from azure.storage.blob import BlobService
+        return BlobService(self.account_name, self.account_key)
 
     def exists(self, blob_service, container_name, path):
         """
