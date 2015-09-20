@@ -5,7 +5,7 @@
 """
 import os
 
-from IPython.core.magic import Magics, magics_class, line_magic
+from IPython.core.magic import magics_class, line_magic
 from IPython.core.magic import line_cell_magic
 from pyquickhelper.ipythonhelper import MagicCommandParser, MagicClassWithHelpers
 from .sql_interface import InterfaceSQL, InterfaceSQLException
