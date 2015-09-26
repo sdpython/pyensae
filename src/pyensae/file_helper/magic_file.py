@@ -169,21 +169,51 @@ class MagicFile(MagicClassWithHelpers):
                 rows.append(r)
             return pandas.DataFrame(rows)
 
+    @staticmethod
+    def PYTHON_parser():
+        """
+        defines the way to parse the magic command ``%%PYTHON``
+        """
+        parser = MagicCommandParser(prog="PYTHON",
+                                    description='the command stores the content of the cell as a local file.')
+        parser.add_argument(
+            'file',
+            type=str,
+            help='filename')
+        return parser
+
     @cell_magic
     def PYTHON(self, line, cell=None):
         """
         defines command ``%%PYTHON``
         """
-        if line in [None, ""]:
-            print("Usage:")
-            print("     %%PYTHON <filename>")
-            print("")
-            print("The command store the content of the cell as a local file.")
-        else:
-            filename = line.strip()
+        parser = self.get_parser(MagicFile.PYTHON_parser, "PYTHON")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            filename = args.file
             with open(filename, "w", encoding="utf8") as f:
                 f.write("# -*- coding: utf8 -*-\n")
                 f.write(cell.replace("\r", ""))
+
+    @staticmethod
+    def runpy_parser():
+        """
+        defines the way to parse the magic command ``%%runpy``
+        """
+        parser = MagicCommandParser(prog="runpy",
+                                    description='run a python script which accepts standards input and produces standard outputs, a timeout is set up at 10s')
+        parser.add_argument(
+            'file',
+            type=str,
+            help='python file')
+        parser.add_argument(
+            'args',
+            type=list,
+            nargs="*",
+            help='arguments for the scripts',
+            default=".")
+        return parser
 
     @cell_magic
     def runpy(self, line, cell=None):
@@ -195,19 +225,15 @@ class MagicFile(MagicClassWithHelpers):
 
         .. versionadded:: 1.1
         """
-        if line in [None, ""]:
-            print("Usage:")
-            print("     %%runpy <pythonfile.py> <args>")
-            print("     first row")
-            print("     second row")
-            print("     ...")
-        else:
-            filename = line.strip().split()
+        parser = self.get_parser(MagicFile.runpy_parser, "runpy")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            filename = args.file
             if len(filename) == 0:
                 self.runpy("")
             else:
-                args = " ".join(filename[1:])
-                filename = filename[0]
+                args = args.args
                 cmd = sys.executable.replace(
                     "pythonw",
                     "python") + " " + filename + " " + args

@@ -255,3 +255,4 @@ _doc/notebooks/.ipynb_checkpoints/*
 auto_*.bat
 auto_*.py
 auto_*.xml
+_doc/notebooks/random*.txt
