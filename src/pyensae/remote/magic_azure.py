@@ -410,7 +410,6 @@ class MagicAzure(MagicClassWithHelpers):
                 else:
                     raise Exception(
                         "file {0} cannot be overwritten".format(localfile))
-
             cl, bs = self.get_blob_connection()
             container, remotepath = self._interpret_path(remotepath, cl, bs)
             cl.download(bs, container, remotepath, localfile)
@@ -665,7 +664,7 @@ class MagicAzure(MagicClassWithHelpers):
     @staticmethod
     def PIG_azure_parser():
         """
-        defines the way to parse the magic command ``%PIG_azure``
+        defines the way to parse the magic command ``%%PIG_azure``
         """
         parser = MagicCommandParser(prog="PIG_azure",
                                     description='The command store the content of the cell as a local file.')
@@ -742,6 +741,8 @@ class MagicAzure(MagicClassWithHelpers):
         parser.add_argument(
             '-o',
             '--option',
+            nargs='*',
+            type=list,
             help='list of options for the job')
         return parser
 
@@ -756,13 +757,15 @@ class MagicAzure(MagicClassWithHelpers):
 
         if args is not None:
             pig = args.file
-            pys = [_ for _ in args.dependency if _.endswith(".py")]
+            pys = [_ for _ in args.dependency if _.endswith(
+                ".py")] if args.dependency is not None else []
 
             if not os.path.exists(pig):
                 raise FileNotFoundError(pig)
 
             options = {"stop_on_failure": False}
-            options.update({k: True for k in args.options})
+            if args.options is not None:
+                options.update({k: True for k in args.options})
 
             cl, bs = self.get_blob_connection()
             r = cl.pig_submit(bs, cl.account_name, pig, pys, **options)

@@ -1,18 +1,19 @@
 #-*- coding: utf-8 -*-
 """
 @file
-@brief Magic command to communicate with an Hadoop cluster.
+@brief Magic command to communicate with an Hadoop cluster (Linux).
 """
 import os
 
-from IPython.core.magic import Magics, magics_class, line_magic, cell_magic
+from IPython.core.magic import magics_class, line_magic, cell_magic
 from IPython.core.magic import line_cell_magic
 from IPython.core.display import HTML
+from pyquickhelper.ipythonhelper import MagicClassWithHelpers, MagicCommandParser
 from .ssh_remote_connection import ASSHClient
 
 
 @magics_class
-class MagicRemoteSSH(Magics):
+class MagicRemoteSSH(MagicClassWithHelpers):
 
     """
     Defines commands to access a remote machine (bridge) through SSH,
@@ -47,67 +48,92 @@ class MagicRemoteSSH(Magics):
 
         return self.shell.user_ns["remote_ssh"]
 
+    @staticmethod
+    def PIG_parser():
+        """
+        defines the way to parse the magic command ``%%PIG``
+        """
+        parser = MagicCommandParser(prog="PIG",
+                                    description='The command store the content of the cell as a local file.')
+        parser.add_argument(
+            'file',
+            type=str,
+            help='file name')
+        return parser
+
     @cell_magic
     def PIG(self, line, cell=None):
         """
         defines command ``%%PIG``
         """
-        if line in [None, ""]:
-            print("Usage:")
-            print("     %%PIG <filename>")
-            print("")
-            print("The command store the content of the cell as a local file.")
-        else:
-            filename = line.strip()
+        parser = self.get_parser(MagicRemoteSSH.PIG_parser, "PIG")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            filename = args.file
             with open(filename, "w", encoding="utf8") as f:
                 f.write(cell.replace("\r", ""))
 
-    @line_magic
-    def pigsubmit(self, line):
+    @staticmethod
+    def pig_submit_parser():
         """
-        @see me jobsubmit
+        defines the way to parse the magic command ``%pig_submit``
         """
-        return self.jobsubmit(line)
+        parser = MagicCommandParser(prog="pig_submit",
+                                    description='Submits a job to the cluster, the job is local, the job is first uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
+        parser.add_argument(
+            'file',
+            type=str,
+            help='file name')
+        parser.add_argument(
+            '-d',
+            '--dependency',
+            nargs="*",
+            type=list,
+            help='dependency of the job, the python script')
+        parser.add_argument(
+            '-l',
+            '--local',
+            action='store_true',
+            default=False,
+            help='run locally on the bridge or on the cluster (default)')
+        parser.add_argument(
+            '-r',
+            '--redirection',
+            type=str,
+            default="redirection",
+            help='list of options for the job')
+        parser.add_argument(
+            '-s',
+            '--stop_on_failure',
+            action='store_true',
+            default=False,
+            help='if true, the job stops on failure right away')
+        parser.add_argument(
+            '-o',
+            '--option',
+            nargs='*',
+            type=list,
+            help='list of options for the job')
+        return parser
 
     @line_magic
-    def jobsubmit(self, line):
+    def pig_submit(self, line):
         """
-        defines command ``%jobsubmit``
+        defines command ``%pig_submit``
         """
-        if line in [None, ""]:
-            print("Usage:")
-            print(
-                "  %jobsubmit <jobname.pig> [files.py] [redirection] [-local]")
-            print("")
-            print("The file <jobname.pig> is local.")
-            print(
-                "Some streaming files can be added such as stream.py. They must have the extension .py.")
-            print(
-                "If redirection is specified, the standard output and error are redirected to")
-            print(
-                "redirection.out, redirection.err and the function does not wait.")
-            print(
-                "If -local is added, the job runs locally (option -x local).")
-        else:
-            filename = line.strip()
-            spl = filename.split()
-            if "-local" in spl:
-                local = True
-                spl = [_ for _ in spl if _ != "-local"]
-            else:
-                local = False
+        parser = self.get_parser(
+            MagicRemoteSSH.pig_submit_parser, "pig_submit")
+        args = self.get_args(line, parser)
 
-            filename = spl[0]
-            pythons = [_ for _ in spl if _.endswith(".py")]
-            spl = [_ for _ in spl if not _.endswith(".py")]
-
-            redirection = None if len(spl) == 1 else spl[1]
-            if not os.path.exists(filename):
-                raise FileNotFoundError(filename)
+        if args is not None:
+            pig = args.file
+            pys = [_ for _ in args.dependency if _.endswith(
+                ".py")] if args.dependency is not None else []
 
             ssh = self.get_connection()
             out, err = ssh.pig_submit(
-                filename, dependencies=pythons, redirection=redirection, local=local)
+                pig, dependencies=pys, redirection=args.redirection, local=args.local, stop_on_failure=args.stop_on_failure)
 
             if len(err) > 0 and (
                     len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
@@ -115,31 +141,44 @@ class MagicRemoteSSH(Magics):
             else:
                 return HTML("<pre>\n%s\n</pre>" % out)
 
+    @staticmethod
+    def remote_py_parser():
+        """
+        defines the way to parse the magic command ``%remote_py``
+        """
+        parser = MagicCommandParser(prog="remote_py",
+                                    description='run a python script on the bridge')
+        parser.add_argument(
+            'file',
+            type=str,
+            help='file name')
+        parser.add_argument(
+            'args',
+            nargs='*',
+            type=list,
+            help='list of options for the job')
+        parser.add_argument(
+            '-i',
+            '--interpreter',
+            type=str,
+            default='python',
+            help='change the interpreter, python by default')
+        return parser
+
     @line_magic
     def remote_py(self, line):
         """
         defines command ``%remote_py``
         """
-        if line in [None, ""]:
-            print("Usage:")
-            print("  %remote_py <program.py> [args]")
-        else:
-            filename = line.strip()
-            spl = filename.split()
+        parser = self.get_parser(
+            MagicRemoteSSH.remote_py_parser, "remote_py")
+        args = self.get_args(line, parser)
 
-            filename = spl[0]
-
-            if filename.startswith("[") and filename.endswith("]"):
-                # the first parameter is the executable to use
-                exe = filename.strip("[]")
-                if len(spl) < 2:
-                    raise Exception(
-                        "the command expects a filename: %remote_py [interpreter] filename.py")
-                filename = spl[1]
-                args = " ".join(spl[2:])
-            else:
-                exe = "python"
-                args = " ".join(spl[1:])
+        if args is not None:
+            filename = args.file
+            exe = args.interpreter
+            args = " ".join('"{}"'.format(_)
+                            for _ in args.args) if args.args is not None else ""
 
             dest = os.path.split(filename)[-1]
             ssh = self.get_connection()
@@ -154,17 +193,30 @@ class MagicRemoteSSH(Magics):
             else:
                 return HTML("<pre>\n%s\n</pre>" % out)
 
+    @staticmethod
+    def job_syntax_parser():
+        """
+        defines the way to parse the magic command ``%job_syntax``
+        """
+        parser = MagicCommandParser(prog="remote_py",
+                                    description='check syntax of a pig job')
+        parser.add_argument(
+            'file',
+            type=str,
+            help='file name')
+        return parser
+
     @line_magic
-    def jobsyntax(self, line):
+    def job_syntax(self, line):
         """
-        defines command ``%jobsyntax``
+        defines command ``%job_syntax``
         """
-        if line in [None, ""]:
-            print("Usage:")
-            print("  %jobsyntax <jobname.pig>")
-            print("")
-        else:
-            filename = line.strip()
+        parser = self.get_parser(
+            MagicRemoteSSH.job_syntax_parser, "job_syntax")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            filename = args.file
             if not os.path.exists(filename):
                 raise FileNotFoundError(filename)
 
@@ -176,40 +228,48 @@ class MagicRemoteSSH(Magics):
             else:
                 return HTML("<pre>\n%s\n</pre>" % out)
 
+    @staticmethod
+    def remote_open_parser():
+        """
+        defines the way to parse the magic command ``%remote_open``
+        """
+        parser = MagicCommandParser(prog="remote_open",
+                                    description='open a remote SSH connection tp the bridge')
+        parser.add_argument(
+            '-s',
+            '--server',
+            type=str,
+            default='server',
+            help='server name')
+        parser.add_argument(
+            '-u',
+            '--username',
+            type=str,
+            default='username',
+            help='username')
+        parser.add_argument(
+            '-p',
+            '--password',
+            type=str,
+            default='password',
+            help='password')
+        return parser
+
     @line_magic
     def remote_open(self, line):
         """
         open a SSH connection and store the connection
         into the notebook workspace
         """
-        spl = line.strip().split()
-        if len(spl) != 3 and len(spl) != 0:
-            print("Usage:")
-            print("   remote_open <server> <username> <password>")
-            print("   remote_open")
-            print("")
-            print(
-                "No parameter means server, username, password will be found in the workspace")
-        else:
-            if len(spl) == 3:
-                server, username, password = spl
-            elif self.shell is not None:
-                server = self.shell.user_ns.get("server", None)
-                username = self.shell.user_ns.get("username", None)
-                password = self.shell.user_ns.get("password", None)
-                if server is None:
-                    raise KeyError("unable to find server")
-                if username is None:
-                    raise KeyError("unable to find username")
-                if password is None:
-                    raise KeyError("unable to find password")
-            else:
-                raise Exception("No detected workspace.")
+        parser = self.get_parser(
+            MagicRemoteSSH.remote_open_parser, "remote_open")
+        args = self.get_args(line, parser)
 
+        if args is not None:
             if self.shell is None:
                 raise Exception("No detected workspace.")
 
-            ssh = ASSHClient(server, username, password)
+            ssh = ASSHClient(args.server, args.username, args.password)
             ssh.connect()
 
             self.shell.user_ns["remote_ssh"] = ssh
@@ -254,6 +314,23 @@ class MagicRemoteSSH(Magics):
         else:
             return HTML("<pre>\n%s\n</pre>" % out)
 
+    @staticmethod
+    def remote_up_parser():
+        """
+        defines the way to parse the magic command ``%remote_up``
+        """
+        parser = MagicCommandParser(prog="remote_up",
+                                    description='upload a file to the remote machine')
+        parser.add_argument(
+            'localfile',
+            type=str,
+            help='local file to upload')
+        parser.add_argument(
+            'remotepath',
+            type=str,
+            help='remote path of the uploaded file')
+        return parser
+
     @line_magic
     def remote_up(self, line):
         """
@@ -265,19 +342,33 @@ class MagicRemoteSSH(Magics):
 
         the command does not allow spaces in files
         """
-        spl = line.strip().split()
-        if len(spl) != 2:
-            print("Usage:")
-            print("   remote_up <localfile> <remotepath>")
-            print("")
-            print("no space allowed in file names")
-        else:
-            ssh = self.get_connection()
-            localfile, remotepath = spl
+        parser = self.get_parser(MagicRemoteSSH.remote_up_parser, "remote_up")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            localfile, remotepath = args.localfile, args.remotepath
             if not os.path.exists(localfile):
                 raise FileNotFoundError(localfile)
+            ssh = self.get_connection()
             ssh.upload(localfile, remotepath)
             return remotepath
+
+    @staticmethod
+    def remote_up_cluster_parser():
+        """
+        defines the way to parse the magic command ``%remote_up_cluster``
+        """
+        parser = MagicCommandParser(prog="remote_up_cluster",
+                                    description='upload a file to the remote machine and then to the cluster')
+        parser.add_argument(
+            'localfile',
+            type=str,
+            help='local file to upload')
+        parser.add_argument(
+            'remotepath',
+            type=str,
+            help='remote path (HDFS) of the uploaded file')
+        return parser
 
     @line_magic
     def remote_up_cluster(self, line):
@@ -292,19 +383,40 @@ class MagicRemoteSSH(Magics):
 
         .. versionadded:: 1.1
         """
-        spl = line.strip().split()
-        if len(spl) != 2:
-            print("Usage:")
-            print("   remote_up_cluster <localfile> <remotepath>")
-            print("")
-            print("no space allowed in file names")
-        else:
-            ssh = self.get_connection()
-            localfile, remotepath = spl
+        parser = self.get_parser(
+            MagicRemoteSSH.remote_up_cluster_parser, "remote_up_cluster")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            localfile, remotepath = args.localfile, args.remotepath
             if not os.path.exists(localfile):
                 raise FileNotFoundError(localfile)
+            ssh = self.get_connection()
             ssh.upload_cluster(localfile, remotepath)
             return remotepath
+
+    @staticmethod
+    def remote_down_parser():
+        """
+        defines the way to parse the magic command ``%remote_down``
+        """
+        parser = MagicCommandParser(prog="remote_down",
+                                    description='download a file from the remote machine')
+        parser.add_argument(
+            'remotepath',
+            type=str,
+            help='remote path of the uploaded file')
+        parser.add_argument(
+            'localfile',
+            type=str,
+            help='local file to upload')
+        parser.add_argument(
+            '-o',
+            '--overwrite',
+            action='store_true',
+            default=False,
+            help='overwrite the local file')
+        return parser
 
     @line_magic
     def remote_down(self, line):
@@ -317,20 +429,50 @@ class MagicRemoteSSH(Magics):
 
         the command does not allow spaces in files
         """
-        spl = line.strip().split()
-        if len(spl) != 2:
-            print("Usage:")
-            print("   remote_down <remotepath> <localfile>")
-            print("")
-            print("no space allowed in file names")
-        else:
+        parser = self.get_parser(
+            MagicRemoteSSH.remote_down_parser, "remote_down")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            localfile, remotepath = args.localfile, args.remotepath
             ssh = self.get_connection()
-            remotepath, localfile = spl
             if os.path.exists(localfile):
-                raise Exception(
-                    "file {0} cannot be overwritten".format(localfile))
+                if args.overwrite:
+                    os.remove(localfile)
+                else:
+                    raise Exception(
+                        "file {0} cannot be overwritten".format(localfile))
             ssh.download(remotepath, localfile)
             return localfile
+
+    @staticmethod
+    def remote_down_cluster_parser():
+        """
+        defines the way to parse the magic command ``%remote_down_cluster``
+        """
+        parser = MagicCommandParser(prog="remote_down_cluster",
+                                    description='download a file from the cluster to the remote machine and then to your local machine')
+        parser.add_argument(
+            'remotepath',
+            type=str,
+            help='remote path (HDFS) of the uploaded file')
+        parser.add_argument(
+            'localfile',
+            type=str,
+            help='local file to upload')
+        parser.add_argument(
+            '-o',
+            '--overwrite',
+            action='store_true',
+            default=False,
+            help='overwrite the local file')
+        parser.add_argument(
+            '-m',
+            '--merge',
+            action='store_true',
+            default=False,
+            help='merges files in folder in a single file')
+        return parser
 
     @line_magic
     def remote_down_cluster(self, line):
@@ -345,57 +487,50 @@ class MagicRemoteSSH(Magics):
 
         .. versionadded:: 1.1
         """
-        spl = line.strip().split()
-        if len(spl) != 2:
-            print("Usage:")
-            print("   remote_down_cluster <remotepath> <localfile>")
-            print("")
-            print("no space allowed in file names")
-        else:
-            ssh = self.get_connection()
-            remotepath, localfile = spl
+        parser = self.get_parser(
+            MagicRemoteSSH.remote_down_cluster_parser, "remote_down_cluster")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            localfile, remotepath = args.localfile, args.remotepath
             if os.path.exists(localfile):
-                raise Exception(
-                    "file {0} cannot be overwritten".format(localfile))
-            ssh.download_cluster(remotepath, localfile)
+                if args.overwrite:
+                    os.remove(localfile)
+                else:
+                    raise Exception(
+                        "file {0} cannot be overwritten".format(localfile))
+            ssh = self.get_connection()
+            ssh.download_cluster(remotepath, localfile, merge=args.merge)
             return localfile
 
-    @line_magic
-    def remote_down_cluster_merge(self, line):
+    @staticmethod
+    def open_remote_shell_parser():
         """
-        download files from a cluster directory to local machine and merge them
-
-        Example::
-
-            %remote_down remotepath localfile
-
-        the command does not allow spaces in files
-
-        .. versionadded:: 1.1
+        defines the way to parse the magic command ``%open_remote_shell``
         """
-        spl = line.strip().split()
-        if len(spl) != 2:
-            print("Usage:")
-            print("   remote_down_cluster_merge <remotepath> <localfile>")
-            print("")
-            print("no space allowed in file names")
-        else:
-            ssh = self.get_connection()
-            remotepath, localfile = spl
-            if os.path.exists(localfile):
-                raise Exception(
-                    "file {0} cannot be overwritten".format(localfile))
-            ssh.download_cluster(remotepath, localfile, merge=True)
-            return localfile
+        parser = MagicCommandParser(prog="open_remote_shell",
+                                    description='command will execute as if they were in a shell')
+        parser.add_argument(
+            '-f',
+            '--format',
+            type=str,
+            default='html',
+            help='formart of this output, html or plain')
+        return parser
 
     @line_magic
     def open_remote_shell(self, line):
         """
         Defines ``%open_remote_shell``
         """
-        ssh = self.get_connection()
-        ssh.open_session(out_format="html")
-        return True
+        parser = self.get_parser(
+            MagicRemoteSSH.open_remote_shell_parser, "open_remote_shell")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            ssh = self.get_connection()
+            ssh.open_session(out_format=args.format)
+            return True
 
     @line_magic
     def close_remote_shell(self, line):
@@ -419,10 +554,23 @@ class MagicRemoteSSH(Magics):
 
         return HTML(out)
 
+    @staticmethod
+    def remote_ls_parser():
+        """
+        defines the way to parse the magic command ``%remote_ls``
+        """
+        parser = MagicCommandParser(prog="remote_ls",
+                                    description='returns the content of a folder as a dataframe')
+        parser.add_argument(
+            'path',
+            type=str,
+            help='path to look into')
+        return parser
+
     @line_magic
     def remote_ls(self, line):
         """
-        returns the content of a folder as a dataframe
+        returns the content of a folder on the remote machine as a dataframe
 
         Example::
 
@@ -430,9 +578,26 @@ class MagicRemoteSSH(Magics):
 
         .. versionadded:: 1.1
         """
-        ssh = self.get_connection()
-        df = ssh.ls(line)
-        return df
+        parser = self.get_parser(MagicRemoteSSH.remote_ls_parser, "remote_ls")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            ssh = self.get_connection()
+            df = ssh.ls(args.path)
+            return df
+
+    @staticmethod
+    def dfs_ls_parser():
+        """
+        defines the way to parse the magic command ``%dfs_ls``
+        """
+        parser = MagicCommandParser(prog="dfs_ls",
+                                    description='returns the content of a folder from the cluster as a dataframe')
+        parser.add_argument(
+            'path',
+            type=str,
+            help='path to look into')
+        return parser
 
     @line_magic
     def dfs_ls(self, line):
@@ -445,9 +610,32 @@ class MagicRemoteSSH(Magics):
 
         .. versionadded:: 1.1
         """
-        ssh = self.get_connection()
-        df = ssh.dfs_ls(line)
-        return df
+        parser = self.get_parser(MagicRemoteSSH.dfs_ls_parser, "dfs_ls")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            ssh = self.get_connection()
+            df = ssh.dfs_ls(args.path)
+            return df
+
+    @staticmethod
+    def dfs_rm_parser():
+        """
+        defines the way to parse the magic command ``%dfs_rm``
+        """
+        parser = MagicCommandParser(prog="dfs_rm",
+                                    description='remove a file on the cluster')
+        parser.add_argument(
+            'path',
+            type=str,
+            help='path to remove')
+        parser.add_argument(
+            '-r',
+            '--recursive',
+            action='store_true',
+            default=False,
+            help='to remove subfolders too')
+        return parser
 
     @line_magic
     def dfs_rm(self, line):
@@ -460,24 +648,26 @@ class MagicRemoteSSH(Magics):
 
         .. versionadded:: 1.1
         """
-        ssh = self.get_connection()
-        df = ssh.dfs_rm(line)
-        return df
+        parser = self.get_parser(MagicRemoteSSH.dfs_rm_parser, "dfs_rm")
+        args = self.get_args(line, parser)
 
-    @line_magic
-    def dfs_rmr(self, line):
+        if args is not None:
+            ssh = self.get_connection()
+            df = ssh.dfs_rm(args.path, recursive=args.recursive)
+            return df
+
+    @staticmethod
+    def dfs_mkdir_parser():
         """
-        remove a folder on the cluster
-
-        Example::
-
-            %dfs_rmr .
-
-        .. versionadded:: 1.1
+        defines the way to parse the magic command ``%dfs_mkdir``
         """
-        ssh = self.get_connection()
-        df = ssh.dfs_rm(line, recursive=True)
-        return df
+        parser = MagicCommandParser(prog="dfs_mkdir",
+                                    description='create a folder')
+        parser.add_argument(
+            'path',
+            type=str,
+            help='path to remove')
+        return parser
 
     @line_magic
     def dfs_mkdir(self, line):
@@ -490,9 +680,13 @@ class MagicRemoteSSH(Magics):
 
         .. versionadded:: 1.1
         """
-        ssh = self.get_connection()
-        df = ssh.dfs_mkdir(line)
-        return df
+        parser = self.get_parser(MagicRemoteSSH.dfs_mkdir_parser, "dfs_mkdir")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            ssh = self.get_connection()
+            df = ssh.dfs_mkdir(args.path)
+            return df
 
 
 def register_magics_ssh():

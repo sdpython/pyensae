@@ -397,6 +397,10 @@ class ASSHClient():
 
         try:
             out_ = [_.split() for _ in out]
+            if len(out_) > 0 and len(out_[0]) != len(names):
+                if names[5] == "date" and len(out_[0]) == len(names) + 1:
+                    # we merge 2 columns
+                    out_ = [_[:5] + [" ".join(_[5:7])] + _[7:] for _ in out_]
             df = pandas.DataFrame(data=out_, columns=names)
         except AssertionError as e:
             out = "\n".join(out)
@@ -405,7 +409,7 @@ class ASSHClient():
                 df = pandas.read_fwf(buf, names=names, index=False)
             except ValueError as e:
                 raise ValueError(
-                    "unable to parse output:\n{0}".format(kout)) from e
+                    "unable to parse output:\nSCHEMA:\n{1}\nOUT:\n{0}".format(kout, ",".join(names))) from e
 
         df["isdir"] = df.apply(lambda r: r["attributes"][0] == "d", axis=1)
         return df

@@ -253,8 +253,7 @@ class RLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
-    decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
-
+    decisionsToDFA = [DFA(ds, i) for i, ds in enumerate(atn.decisionToState)]
 
     T__0 = 1
     T__1 = 2
@@ -320,41 +319,40 @@ class RLexer(Lexer):
     NL = 62
     WS = 63
 
-    modeNames = [ u"DEFAULT_MODE" ]
+    modeNames = [u"DEFAULT_MODE"]
 
-    literalNames = [ u"<INVALID>",
-            "';'", "'[['", "']'", "'['", "'::'", "':::'", "'$'", "'@'", 
-            "'^'", "'-'", "'+'", "':'", "'*'", "'/'", "'>'", "'>='", "'<'", 
-            "'<='", "'=='", "'!='", "'!'", "'&'", "'&&'", "'|'", "'||'", 
-            "'~'", "'<-'", "'<<-'", "'='", "'->'", "'->>'", "':='", "'function'", 
-            "'('", "')'", "'{'", "'}'", "'if'", "'else'", "'for'", "'in'", 
-            "'while'", "'repeat'", "'?'", "'next'", "'break'", "'NULL'", 
-            "'NA'", "'Inf'", "'NaN'", "'TRUE'", "'FALSE'", "','", "'...'" ]
+    literalNames = [u"<INVALID>",
+                    "';'", "'[['", "']'", "'['", "'::'", "':::'", "'$'", "'@'",
+                    "'^'", "'-'", "'+'", "':'", "'*'", "'/'", "'>'", "'>='", "'<'",
+                    "'<='", "'=='", "'!='", "'!'", "'&'", "'&&'", "'|'", "'||'",
+                    "'~'", "'<-'", "'<<-'", "'='", "'->'", "'->>'", "':='", "'function'",
+                    "'('", "')'", "'{'", "'}'", "'if'", "'else'", "'for'", "'in'",
+                    "'while'", "'repeat'", "'?'", "'next'", "'break'", "'NULL'",
+                    "'NA'", "'Inf'", "'NaN'", "'TRUE'", "'FALSE'", "','", "'...'"]
 
-    symbolicNames = [ u"<INVALID>",
-            "HEX", "INT", "FLOAT", "COMPLEX", "STRING", "ID", "USER_OP", 
-            "NL", "WS" ]
+    symbolicNames = [u"<INVALID>",
+                     "HEX", "INT", "FLOAT", "COMPLEX", "STRING", "ID", "USER_OP",
+                     "NL", "WS"]
 
-    ruleNames = [ "T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", 
-                  "T__7", "T__8", "T__9", "T__10", "T__11", "T__12", "T__13", 
-                  "T__14", "T__15", "T__16", "T__17", "T__18", "T__19", 
-                  "T__20", "T__21", "T__22", "T__23", "T__24", "T__25", 
-                  "T__26", "T__27", "T__28", "T__29", "T__30", "T__31", 
-                  "T__32", "T__33", "T__34", "T__35", "T__36", "T__37", 
-                  "T__38", "T__39", "T__40", "T__41", "T__42", "T__43", 
-                  "T__44", "T__45", "T__46", "T__47", "T__48", "T__49", 
-                  "T__50", "T__51", "T__52", "T__53", "HEX", "INT", "HEXDIGIT", 
-                  "FLOAT", "DIGIT", "EXP", "COMPLEX", "STRING", "ESC", "UNICODE_ESCAPE", 
-                  "OCTAL_ESCAPE", "HEX_ESCAPE", "ID", "LETTER", "USER_OP", 
-                  "COMMENT", "NL", "WS" ]
+    ruleNames = ["T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6",
+                 "T__7", "T__8", "T__9", "T__10", "T__11", "T__12", "T__13",
+                 "T__14", "T__15", "T__16", "T__17", "T__18", "T__19",
+                 "T__20", "T__21", "T__22", "T__23", "T__24", "T__25",
+                 "T__26", "T__27", "T__28", "T__29", "T__30", "T__31",
+                 "T__32", "T__33", "T__34", "T__35", "T__36", "T__37",
+                 "T__38", "T__39", "T__40", "T__41", "T__42", "T__43",
+                 "T__44", "T__45", "T__46", "T__47", "T__48", "T__49",
+                 "T__50", "T__51", "T__52", "T__53", "HEX", "INT", "HEXDIGIT",
+                 "FLOAT", "DIGIT", "EXP", "COMPLEX", "STRING", "ESC", "UNICODE_ESCAPE",
+                 "OCTAL_ESCAPE", "HEX_ESCAPE", "ID", "LETTER", "USER_OP",
+                 "COMMENT", "NL", "WS"]
 
     grammarFileName = "R.g4"
 
     def __init__(self, input=None):
         super().__init__(input)
         self.checkVersion("4.5")
-        self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
+        self._interp = LexerATNSimulator(
+            self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
         self._predicates = None
-
-
