@@ -20,7 +20,7 @@ def folium_inline_map(map):
 
     Source: `folium_base.py <https://gist.github.com/psychemedia/f7385255f89137c503b5>`_
 
-    @exemple(Display an inline map with folium in a notebook)
+    @example(Display an inline map with folium in a notebook)
     @code
     import folium
     map_osm = folium.Map(location=[48.85, 2.34])

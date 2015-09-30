@@ -69,6 +69,7 @@ def is_local():
        "test_local_pypi" in sys.argv or \
        "upload_docs" in sys.argv or \
        "setup_hook" in sys.argv or \
+       "copy_sphinx" in sys.argv or \
        "write_version" in sys.argv:
         try:
             import_pyquickhelper()
