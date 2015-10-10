@@ -172,7 +172,10 @@ class StockPrices:
                     raise e
 
         if not intern:
-            self.datadf = self.datadf.sort("Date")
+            try:
+                self.datadf = self.datadf.sort_values("Date")
+            except AttributeError:
+                self.datadf = self.datadf.sort("Date")
             self.datadf.reset_index(drop=True, inplace=True)
             self.datadf.set_index("Date", drop=False, inplace=True)
 
@@ -243,7 +246,10 @@ class StockPrices:
         tbl = [{"Date": v} for v in se if v not in da2]
         if len(tbl) > 0:
             df = pandas.DataFrame(tbl)
-            return df.sort("Date")
+            try:
+                return df.sort_values("Date")
+            except AttributeError:
+                return df.sort("Date")
         else:
             return None
 
@@ -320,7 +326,10 @@ class StockPrices:
                 return n
             piv["missing"] = piv.apply(lambda row: count_nan(row), axis=1)
 
-        piv = piv.sort()
+        try:
+            piv = piv.sort_index()
+        except AttributeError:
+            piv = piv.sort()
         return piv
 
     def head(self):
