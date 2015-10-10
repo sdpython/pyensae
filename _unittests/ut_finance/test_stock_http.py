@@ -119,7 +119,8 @@ class TestStockHttp (unittest.TestCase):
         try:
             stock = StockPrices(file)
         except Exception as e:
-            assert "pandas cannot parse the file" in str(e)
+            if "pandas cannot parse the file" not in str(e):
+                raise Exception("unexpected error") from e
 
     def test_index(self):
         fLOG(
