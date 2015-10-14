@@ -39,7 +39,7 @@ except ImportError:
     import pyquickhelper
 
 from pyquickhelper import fLOG
-from src.pyensae import download_java_standalone, is_java_installed
+from src.pyensae.file_helper import download_java_standalone, is_java_installed
 from src.pyensae.file_helper.pig_helper import run_pig, download_pig_standalone
 
 

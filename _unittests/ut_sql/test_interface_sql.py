@@ -39,7 +39,7 @@ except ImportError:
 
 from pyquickhelper import fLOG
 from src.pyensae.sql.database_helper import import_flatfile_into_database
-from src.pyensae import Database, InterfaceSQL, InterfaceSQLException
+from src.pyensae.sql import Database, InterfaceSQL, InterfaceSQLException
 
 
 class TestInterfaceSQL (unittest.TestCase):

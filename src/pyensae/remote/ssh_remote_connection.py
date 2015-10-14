@@ -671,15 +671,15 @@ class ASSHClient():
 
         @code
         client = ASSHClient()
-        
+
         hive_sql = '''
             DROP TABLE IF EXISTS bikes20;
             CREATE TABLE bikes20 (sjson STRING);
             LOAD DATA INPATH "/user/__USERNAME__/unittest2/paris*.txt" INTO TABLE bikes20;
             SELECT * FROM bikes20 LIMIT 10;
             '''.replace("__USERNAME__", self.client.username)
-            
-        out,err = client.hive_submit(hive_sql, redirection=None)            
+
+        out,err = client.hive_submit(hive_sql, redirection=None)
         @endcode
 
         @endexample

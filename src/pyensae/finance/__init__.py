@@ -3,4 +3,4 @@
 @brief shortcuts to finance
 """
 
-from .finance.astock import StockPrices
+from .astock import StockPrices

@@ -39,7 +39,7 @@ except ImportError:
     import pyquickhelper
 
 from pyquickhelper import fLOG, run_cmd
-from src.pyensae import ASSHClient
+from src.pyensae.remote import ASSHClient
 
 
 class TestOutConnected (unittest.TestCase):

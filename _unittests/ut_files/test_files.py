@@ -40,8 +40,8 @@ except ImportError:
 
 from pyquickhelper import fLOG, get_temp_folder, docstring2html
 from src.pyensae.file_helper.magic_file import MagicFile
-from src.pyensae import file_tail
-from src.pyensae import Database
+from src.pyensae.file_helper import file_tail
+from src.pyensae.sql import Database
 
 
 class TestFiles (unittest.TestCase):

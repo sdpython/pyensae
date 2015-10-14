@@ -39,7 +39,7 @@ except ImportError:
     import pyquickhelper
 
 from pyquickhelper import fLOG
-from src.pyensae import run_jython, get_jython_jar, is_java_installed, download_java_standalone
+from src.pyensae.file_helper import run_jython, get_jython_jar, is_java_installed, download_java_standalone
 
 
 class TestJython (unittest.TestCase):

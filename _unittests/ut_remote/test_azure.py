@@ -41,7 +41,7 @@ except ImportError:
 
 from pyquickhelper import fLOG, run_cmd
 from src.pyensae.resources.http_retrieve import download_data
-from src.pyensae import AzureClient
+from src.pyensae.remote import AzureClient
 
 thisfold = os.path.abspath(os.path.split(__file__)[0])
 thiscomm = os.path.join(thisfold, "..")

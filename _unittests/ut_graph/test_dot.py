@@ -40,7 +40,7 @@ except ImportError:
 
 from pyquickhelper import fLOG, get_temp_folder
 from src.pyensae.graph_helper.magic_graph import MagicGraph
-from src.pyensae import run_dot
+from src.pyensae.graph_helper import run_dot
 
 
 class TestDot (unittest.TestCase):
