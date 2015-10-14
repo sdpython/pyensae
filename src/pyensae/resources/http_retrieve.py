@@ -7,7 +7,6 @@ import sys
 import importlib
 import re
 import urllib.request
-from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
 
 
 def remove_empty_line(file):
@@ -99,6 +98,8 @@ def download_data(name,
     If it does not work, I suggest to use standard python:
     `Download a file from Dropbox with Python <http://www.xavierdupre.fr/blog/2015-01-20_nojs.html>`_.
     """
+    from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
+
     if glo is None:
         glo = globals()
     if loc is None:

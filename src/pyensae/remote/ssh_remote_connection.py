@@ -524,10 +524,31 @@ class ASSHClient():
                 "\nERR:\n" +
                 err)
 
+    @staticmethod
+    def build_command_line_parameters(params, command_name="-param"):
+        """
+        builds a string for ``pig`` based on the parameters in params
+
+        @param      params          dictionary
+        @param      command_name    ``-param`` or ``-hiveconf``
+        @return                     string
+
+        .. versionadded:: 1.1
+        """
+        if params is None:
+            return ""
+        res = []
+        for k, v in sorted(params.items()):
+            if '"' in v:
+                v = v.replace('"', '\\"')
+            one = '{2} {0}="{1}"'.format(k, v, command_name)
+            res.append(one)
+        return " ".join(res)
+
     def pig_submit(self, pig_file,
                    dependencies=None,
                    params=None,
-                   redirection="redirection",
+                   redirection="redirection.pig",
                    local=False,
                    stop_on_failure=False,
                    check=False,
@@ -560,11 +581,11 @@ class ASSHClient():
 
         The function executes the command line::
 
-            pig  -execute -f <filename>
+            pig -execute -f <filename>
 
         With redirection::
 
-            pig -execute -f <filename> 2> redirection.err 1> redirection.out &
+            pig -execute -f <filename> 2> redirection.pig.err 1> redirection.pig.out &
 
         .. versionadded:: 1.1
         """
@@ -596,8 +617,13 @@ class ASSHClient():
                 dest,
                 sparams)
         else:
-            cmd = "pig{2}{3}{4} -execute -f {0}{5} 2> {1}.err 1> {1}.out &".format(dest,
-                                                                                   redirection, slocal, sstop_on_failure, scheck, sparams)
+            cmd = "pig{2}{3}{4} -execute -f {0}{5} 2> {1}.err 1> {1}.out &".format(
+                dest,
+                redirection,
+                slocal,
+                sstop_on_failure,
+                scheck,
+                sparams)
 
         if isinstance(cmd, list):
             raise TypeError("this should not happen:" + str(cmd))
@@ -606,22 +632,94 @@ class ASSHClient():
         out, err = self.execute_command(cmd, no_exception=no_exception)
         return out, err
 
-    @staticmethod
-    def build_command_line_parameters(params):
+    def hive_submit(self, hive_file_or_query,
+                    params=None,
+                    redirection="redirection.hive",
+                    no_exception=True,
+                    fLOG=noLOG):
         """
-        builds a string for ``pig`` based on the parameters in params
+        submits a PIG script, it first upload the script
+        to the default folder and submit it
 
-        @param      params      dictionary
-        @return                 string
+        @param      hive_file_or_query  pig script (local)
+        @param      params              parameters to send to the job
+        @param      redirection         string empty or not
+        @param      no_exception        sent to @see me execute_command
+        @param      fLOG                logging function
+        @return                         out, err from @see me execute_command
+
+        If *redirection* is not empty, the job is submitted but
+        the function returns after the standard output and error were
+        redirected to ``redirection.hive.out`` and ``redirection.hive.err``.
+
+        The function executes the command line::
+
+            hive -f <filename>
+
+        Or::
+
+            hive -e <query>
+
+        With redirection::
+
+            hive -execute -f <filename> 2> redirection.hive.err 1> redirection.hive.out &
+
+        If there is no redirection, the function
+        waits and return the output.
+
+        @example(Submit a HIVE query)
+
+        @code
+        client = ASSHClient()
+        
+        hive_sql = '''
+            DROP TABLE IF EXISTS bikes20;
+            CREATE TABLE bikes20 (sjson STRING);
+            LOAD DATA INPATH "/user/__USERNAME__/unittest2/paris*.txt" INTO TABLE bikes20;
+            SELECT * FROM bikes20 LIMIT 10;
+            '''.replace("__USERNAME__", self.client.username)
+            
+        out,err = client.hive_submit(hive_sql, redirection=None)            
+        @endcode
+
+        @endexample
 
         .. versionadded:: 1.1
         """
-        if params is None:
-            return ""
-        res = []
-        for k, v in sorted(params.items()):
-            if '"' in v:
-                v = v.replace('"', '\\"')
-            one = '-param {0}="{1}"'.format(k, v)
-            res.append(one)
-        return " ".join(res)
+        if len(hive_file_or_query) < 5000 and os.path.exists(hive_file_or_query):
+            dest = os.path.split(hive_file_or_query)[-1]
+            self.upload(hive_file_or_query, dest)
+            command = "-f"
+        else:
+            command = "-e"
+            dest = hive_file_or_query.replace(
+                "\n", " ").replace("\r", "").replace("\t", " ")
+            dest = dest.replace("'", "\\'")
+            dest = "'{}'".format(dest.strip())
+
+        if params is not None:
+            sparams = ASSHClient.build_command_line_parameters(
+                params, "-hiveconf")
+            if len(sparams) > 0:
+                sparams = " " + sparams
+        else:
+            sparams = ""
+
+        if redirection is None:
+            cmd = "hive {0} {1}{2}".format(
+                command,
+                dest,
+                sparams)
+        else:
+            cmd = "hive {0} {1}{2} 2> {3}.err 1> {3}.out &".format(
+                command,
+                dest,
+                sparams,
+                redirection)
+
+        if isinstance(cmd, list):
+            raise TypeError("this should not happen:" + str(cmd))
+
+        fLOG("[hive_submit]:", cmd)
+        out, err = self.execute_command(cmd, no_exception=no_exception)
+        return out, err

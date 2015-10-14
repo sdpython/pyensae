@@ -39,7 +39,7 @@ except ImportError:
     import pyquickhelper
 
 from pyquickhelper import fLOG, run_cmd
-from src.pyensae import ASSHClient
+from src.pyensae.remote import ASSHClient
 
 thisfold = os.path.abspath(os.path.split(__file__)[0])
 thiscomm = os.path.join(thisfold, "..")
@@ -146,6 +146,7 @@ class TestCloudera (unittest.TestCase):
                 os.path.split(__file__)[0]),
             "data")
 
+        fLOG("AA")
         # python script
 
         pyth = """
@@ -167,6 +168,8 @@ class TestCloudera (unittest.TestCase):
         if not os.path.exists(fold):
             os.mkdir(fold)
 
+        fLOG("BB")
+
         pyfile = os.path.join(fold, "pystream.py")
         with open(pyfile, "w", encoding="utf8") as f:
             f.write(pyth)
@@ -187,6 +190,7 @@ class TestCloudera (unittest.TestCase):
                     err,
                     len(out)))
 
+        fLOG("CC")
         # PIG script
 
         pig = """
@@ -215,9 +219,20 @@ class TestCloudera (unittest.TestCase):
                 STORE matrice INTO 'unittest2/results.txt' USING PigStorage('\t') ;
             """.replace("                ", "")
 
+        hive_sql = """
+            DROP TABLE IF EXISTS bikes20;
+            CREATE TABLE bikes20 (sjson STRING);
+            LOAD DATA INPATH "/user/__USERNAME__/unittest2/paris*.txt" INTO TABLE bikes20;
+            SELECT * FROM bikes20 LIMIT 10;
+            """.replace("__USERNAME__", self.client.username)
+        fLOG(hive_sql)
+        #${hiveconf:UTT}
+
         pigfile = os.path.join(fold, "pystream.pig")
         with open(pigfile, "w", encoding="utf8") as f:
             f.write(pig)
+
+        fLOG("DD upload")
 
         # we upload some files
 
@@ -235,6 +250,8 @@ class TestCloudera (unittest.TestCase):
         if self.client.dfs_exists("unittest2/results.txt"):
             self.client.dfs_rm("unittest2/results.txt", True)
 
+        fLOG("FF")
+
         # we test the syntax
         out, err = self.client.pig_submit(pigfile, dependencies=[pyfile], check=True,
                                           no_exception=True,
@@ -243,25 +260,48 @@ class TestCloudera (unittest.TestCase):
         if "pystream.pig syntax OK" not in err:
             raise Exception("OUT:\n{0}\nERR:\n{1}".format(out, err))
 
+        fLOG("II")
+
         # we submit the job
         out, err = self.client.pig_submit(pigfile, dependencies=[pyfile],
                                           stop_on_failure=True, no_exception=True,
                                           redirection=None,
                                           params=dict(UTT="unittest2"))
 
+        fLOG("JJ")
+
         if "Total records written : 4" not in err:
-            raise Exception("OUT:\n{0}\nERR:\n{1}".format(out, err))
+            raise Exception("PIG OUT:\n{0}\nPIG ERR:\n{1}".format(out, err))
 
         dest = os.path.join(fold, "out_merged.txt")
         fLOG("dest=", dest)
         if os.path.exists(dest):
             os.remove(dest)
+
+        fLOG("KK")
+
         self.client.download_cluster("unittest2/results.txt", dest, merge=True)
         assert os.path.exists(dest)
         with open(dest, "r", encoding="utf8") as f:
             content = f.read()
         fLOG("-----\n", content)
         assert len(content.strip(" \n\r\t")) > 0
+
+        fLOG("LL")
+
+        # we submit the job
+        out, err = self.client.hive_submit(hive_sql,
+                                     redirection=None,
+                                     params=dict(UTT="unittest2"),
+                                     fLOG=fLOG)
+
+        fLOG("HIVE OUT")
+        fLOG(out)
+        fLOG("HIVE ERR")
+        fLOG(err)
+        #assert "(0,1.0,32.0,48.8724200631,2.34839523628,10042" in out
+
+        fLOG("END")
 
 
 if __name__ == "__main__":

@@ -47,20 +47,8 @@ def check(log=False):
     """
     return True
 
-from .finance.astock import StockPrices
-from .datasource.data_velib import DataVelibCollect
-from .datasource.convert import dBase2df, dBase2sqllite
-from .file_helper.content_helper import replace_comma_by_point
-from .file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
-from .file_helper.jython_helper import run_jython, get_jython_jar, is_java_installed, download_java_standalone
-from .file_helper.content_helper import file_head, file_tail
 from .resources.http_retrieve import download_data
-from .sql.database_helper import import_flatfile_into_database
-from .sql.sql_interface import InterfaceSQL, InterfaceSQLException
-from .sql.database_main import Database
-from .remote.ssh_remote_connection import ASSHClient
-from .remote.azure_connection import AzureClient
-from .graph_helper.graphviz_helper import run_dot
+
 
 try:
     from IPython import get_ipython
@@ -79,9 +67,8 @@ try:
         from .graph_helper.magic_graph import register_graph_magics
         from .notebook_helper.magic_notebook import register_notebook_magics
     except Exception as e:
-        import warnings
-        warnings.warn(str(e))
         raise ImportError("ipython does not seem to be available") from e
+
     ip = get_ipython()
     if ip is not None:
         # the program is not run from a notebook
