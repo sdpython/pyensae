@@ -120,7 +120,7 @@ class TestStockHttp (unittest.TestCase):
             stock = StockPrices(file)
         except StockPricesException as e:
             if "schema: " not in str(e):
-                raise Exception("unexpected error (1)") from e                
+                raise Exception("unexpected error (1)") from e
         except Exception as e:
             if "pandas cannot parse the file" not in str(e):
                 raise Exception("unexpected error (2)") from e
