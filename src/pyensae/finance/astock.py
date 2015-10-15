@@ -10,6 +10,13 @@ import pandas
 import numpy
 
 
+class StockPricesException(Exception):
+    """
+    raised by StockPrices classes
+    """
+    pass
+
+
 class StockPrices:
 
     """
@@ -176,6 +183,8 @@ class StockPrices:
                 self.datadf = self.datadf.sort_values("Date")
             except AttributeError:
                 self.datadf = self.datadf.sort("Date")
+            except KeyError as e:
+                raise StockPricesException("schema: {}".format(",".join(self.datadf.columns))) from e
             self.datadf.reset_index(drop=True, inplace=True)
             self.datadf.set_index("Date", drop=False, inplace=True)
 
