@@ -75,6 +75,32 @@ class MagicRemoteSSH(MagicClassWithHelpers):
                 f.write(cell.replace("\r", ""))
 
     @staticmethod
+    def HIVE_parser():
+        """
+        defines the way to parse the magic command ``%%HIVE``
+        """
+        parser = MagicCommandParser(prog="HIVE",
+                                    description='The command store the content of the cell as a local file.')
+        parser.add_argument(
+            'file',
+            type=str,
+            help='file name')
+        return parser
+
+    @cell_magic
+    def HIVE(self, line, cell=None):
+        """
+        defines command ``%%HIVE``
+        """
+        parser = self.get_parser(MagicRemoteSSH.HIVE_parser, "HIVE")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            filename = args.file
+            with open(filename, "w", encoding="utf8") as f:
+                f.write(cell.replace("\r", ""))
+
+    @staticmethod
     def pig_submit_parser():
         """
         defines the way to parse the magic command ``%pig_submit``
@@ -134,6 +160,49 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             ssh = self.get_connection()
             out, err = ssh.pig_submit(
                 pig, dependencies=pys, redirection=args.redirection, local=args.local, stop_on_failure=args.stop_on_failure)
+
+            if len(err) > 0 and (
+                    len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                return HTML("<pre>\n%s\n</pre>" % err)
+            else:
+                return HTML("<pre>\n%s\n</pre>" % out)
+
+    @staticmethod
+    def hive_submit_parser():
+        """
+        defines the way to parse the magic command ``%hive_submit``
+        """
+        parser = MagicCommandParser(prog="hive_submit",
+                                    description='Submits a job to the cluster, the job is local, the job is first uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
+        parser.add_argument(
+            'file',
+            type=str,
+            help='file name')
+        parser.add_argument(
+            '-r',
+            '--redirection',
+            type=str,
+            default="redirection",
+            help='list of options for the job')
+        return parser
+
+    @line_magic
+    def hive_submit(self, line):
+        """
+        defines command ``%hive_submit``
+        """
+        parser = self.get_parser(
+            MagicRemoteSSH.hive_submit_parser, "hive_submit")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            pig = args.file
+            pys = [_ for _ in args.dependency if _.endswith(
+                ".py")] if args.dependency is not None else []
+
+            ssh = self.get_connection()
+            out, err = ssh.hive_submit(
+                pig, redirection=args.redirection, local=args.local)
 
             if len(err) > 0 and (
                     len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
