@@ -47,7 +47,7 @@ class TestStockHttp (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
-        cache = os.path.join(cache, "temp_cache")
+        cache = os.path.join(cache, "temp_cache_download_http")
         name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-15.txt")
         if os.path.exists(name):
             os.remove(name)
@@ -68,7 +68,7 @@ class TestStockHttp (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
-        cache = os.path.join(cache, "temp_cache2")
+        cache = os.path.join(cache, "temp_cache_dates")
         stocks = [StockPrices("BNP.PA", folder=cache),
                   StockPrices("CA.PA", folder=cache),
                   StockPrices("SAF.PA", folder=cache),
@@ -85,7 +85,7 @@ class TestStockHttp (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
-        cache = os.path.join(cache, "temp_cache2")
+        cache = os.path.join(cache, "temp_cache_cov")
         stocks = [StockPrices("BNP.PA", folder=cache),
                   StockPrices("CA.PA", folder=cache),
                   StockPrices("SAF.PA", folder=cache),
@@ -131,7 +131,7 @@ class TestStockHttp (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
-        cache = os.path.join(cache, "temp_cache")
+        cache = os.path.join(cache, "temp_cache_index")
         name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-16.txt")
         stock = StockPrices(
             "BNP.PA",
