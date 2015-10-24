@@ -7,6 +7,7 @@ import sys
 import importlib
 import re
 import urllib.request
+from pyquickhelper import noLOG
 
 
 def remove_empty_line(file):
@@ -62,7 +63,7 @@ def download_data(name,
                   whereTo=".",
                   website="xd",
                   timeout=None,
-                  fLOG=print):
+                  fLOG=noLOG):
     """
     retrieve a module given its name, a text file or a zip file,
     look for it on http://www.xavierdupre.fr/... (website),
