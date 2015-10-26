@@ -101,7 +101,7 @@ class StockPrices:
                     content = t.read()
                 if "Firewall Authentication" in content:
                     raise Exception(
-                        "pandas cannot parse the file, check your have access to internet") from e
+                        "pandas cannot parse the file, check your have access to internet: " + str(tick)) from e
                 else:
                     raise e
         else:
@@ -140,7 +140,7 @@ class StockPrices:
                     url = url % tick
                 else:
                     raise Exception(
-                        "unable to download data from the following website" +
+                        "unable to download data from the following website" + str(tick) + " - " +
                         url)
 
                 try:
@@ -174,7 +174,7 @@ class StockPrices:
                     content = t.read()
                 if "Firewall Authentication" in content:
                     raise Exception(
-                        "pandas cannot parse the file, check your have access to internet") from e
+                        "pandas cannot parse the file, check your have access to internet" + str(tick)) from e
                 else:
                     raise e
 
