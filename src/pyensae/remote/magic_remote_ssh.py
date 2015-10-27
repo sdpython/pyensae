@@ -197,9 +197,6 @@ class MagicRemoteSSH(MagicClassWithHelpers):
 
         if args is not None:
             pig = args.file
-            pys = [_ for _ in args.dependency if _.endswith(
-                ".py")] if args.dependency is not None else []
-
             ssh = self.get_connection()
             out, err = ssh.hive_submit(
                 pig, redirection=args.redirection, local=args.local)
