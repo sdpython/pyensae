@@ -124,6 +124,8 @@ class TestStockHttp (unittest.TestCase):
         except Exception as e:
             if "pandas cannot parse the file" not in str(e):
                 raise Exception("unexpected error (2)") from e
+            if "Error tokenizing data" in str(e):
+                raise Exception("unexpected error (3)") from e
 
     def test_index(self):
         fLOG(

@@ -93,7 +93,13 @@ class StockPrices:
                     "the dataframe does not contain any column 'Date': {0}".format(
                         ",".join(
                             _ for _ in url.columns)))
-        elif isinstance(tick, str) and os.path.exists(tick):
+        elif isinstance(tick, str) and len(tick) < 5000 and os.path.exists(tick):
+            with open(tick, "r") as f:
+                for line in f.readlines():
+                    if line.startswith('<!DOCTYPE html PUBLIC'):
+                        raise Exception(
+                            "pandas cannot parse the file, check your have access to internet: " + str(tick))
+                    break
             try:
                 self.datadf = pandas.read_csv(tick, sep=sep)
             except Exception as e:

@@ -3,11 +3,13 @@
 from antlr4 import *
 from io import StringIO
 package = globals().get("__package__", None)
-ischild = len(package)>0 if package is not None else False
+ischild = len(package) > 0 if package is not None else False
 if ischild:
     from .RListener import RListener
 else:
     from RListener import RListener
+
+
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3A")
@@ -105,43 +107,43 @@ def serializedATN():
         return buf.getvalue()
 
 
-class RParser ( Parser ):
+class RParser (Parser):
 
     grammarFileName = "java-escape"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
-    decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
+    decisionsToDFA = [DFA(ds, i) for i, ds in enumerate(atn.decisionToState)]
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"';'", u"'[['", u"']'", u"'['", u"'::'", 
-                     u"':::'", u"'$'", u"'@'", u"'^'", u"'-'", u"'+'", u"':'", 
-                     u"'*'", u"'/'", u"'>'", u"'>='", u"'<'", u"'<='", u"'=='", 
-                     u"'!='", u"'!'", u"'&'", u"'&&'", u"'|'", u"'||'", 
-                     u"'~'", u"'<-'", u"'<<-'", u"'='", u"'->'", u"'->>'", 
-                     u"':='", u"'function'", u"'('", u"')'", u"'{'", u"'}'", 
-                     u"'if'", u"'else'", u"'for'", u"'in'", u"'while'", 
-                     u"'repeat'", u"'?'", u"'next'", u"'break'", u"'NULL'", 
-                     u"'NA'", u"'Inf'", u"'NaN'", u"'TRUE'", u"'FALSE'", 
-                     u"','", u"'...'" ]
+    literalNames = [u"<INVALID>", u"';'", u"'[['", u"']'", u"'['", u"'::'",
+                    u"':::'", u"'$'", u"'@'", u"'^'", u"'-'", u"'+'", u"':'",
+                    u"'*'", u"'/'", u"'>'", u"'>='", u"'<'", u"'<='", u"'=='",
+                    u"'!='", u"'!'", u"'&'", u"'&&'", u"'|'", u"'||'",
+                    u"'~'", u"'<-'", u"'<<-'", u"'='", u"'->'", u"'->>'",
+                    u"':='", u"'function'", u"'('", u"')'", u"'{'", u"'}'",
+                    u"'if'", u"'else'", u"'for'", u"'in'", u"'while'",
+                    u"'repeat'", u"'?'", u"'next'", u"'break'", u"'NULL'",
+                    u"'NA'", u"'Inf'", u"'NaN'", u"'TRUE'", u"'FALSE'",
+                    u"','", u"'...'"]
 
-    symbolicNames = [ u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                      u"<INVALID>", u"<INVALID>", u"<INVALID>", u"HEX", 
-                      u"INT", u"FLOAT", u"COMPLEX", u"STRING", u"ID", u"USER_OP", 
-                      u"NL", u"WS" ]
+    symbolicNames = [u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
+                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"HEX",
+                     u"INT", u"FLOAT", u"COMPLEX", u"STRING", u"ID", u"USER_OP",
+                     u"NL", u"WS"]
 
     RULE_parse = 0
     RULE_expr = 1
@@ -151,99 +153,97 @@ class RParser ( Parser ):
     RULE_sublist = 5
     RULE_sub = 6
 
-    ruleNames =  [ "parse", "expr", "exprlist", "formlist", "form", "sublist", 
-                   "sub" ]
+    ruleNames = ["parse", "expr", "exprlist", "formlist", "form", "sublist",
+                 "sub"]
 
     EOF = Token.EOF
-    T__0=1
-    T__1=2
-    T__2=3
-    T__3=4
-    T__4=5
-    T__5=6
-    T__6=7
-    T__7=8
-    T__8=9
-    T__9=10
-    T__10=11
-    T__11=12
-    T__12=13
-    T__13=14
-    T__14=15
-    T__15=16
-    T__16=17
-    T__17=18
-    T__18=19
-    T__19=20
-    T__20=21
-    T__21=22
-    T__22=23
-    T__23=24
-    T__24=25
-    T__25=26
-    T__26=27
-    T__27=28
-    T__28=29
-    T__29=30
-    T__30=31
-    T__31=32
-    T__32=33
-    T__33=34
-    T__34=35
-    T__35=36
-    T__36=37
-    T__37=38
-    T__38=39
-    T__39=40
-    T__40=41
-    T__41=42
-    T__42=43
-    T__43=44
-    T__44=45
-    T__45=46
-    T__46=47
-    T__47=48
-    T__48=49
-    T__49=50
-    T__50=51
-    T__51=52
-    T__52=53
-    T__53=54
-    HEX=55
-    INT=56
-    FLOAT=57
-    COMPLEX=58
-    STRING=59
-    ID=60
-    USER_OP=61
-    NL=62
-    WS=63
+    T__0 = 1
+    T__1 = 2
+    T__2 = 3
+    T__3 = 4
+    T__4 = 5
+    T__5 = 6
+    T__6 = 7
+    T__7 = 8
+    T__8 = 9
+    T__9 = 10
+    T__10 = 11
+    T__11 = 12
+    T__12 = 13
+    T__13 = 14
+    T__14 = 15
+    T__15 = 16
+    T__16 = 17
+    T__17 = 18
+    T__18 = 19
+    T__19 = 20
+    T__20 = 21
+    T__21 = 22
+    T__22 = 23
+    T__23 = 24
+    T__24 = 25
+    T__25 = 26
+    T__26 = 27
+    T__27 = 28
+    T__28 = 29
+    T__29 = 30
+    T__30 = 31
+    T__31 = 32
+    T__32 = 33
+    T__33 = 34
+    T__34 = 35
+    T__35 = 36
+    T__36 = 37
+    T__37 = 38
+    T__38 = 39
+    T__39 = 40
+    T__40 = 41
+    T__41 = 42
+    T__42 = 43
+    T__43 = 44
+    T__44 = 45
+    T__45 = 46
+    T__46 = 47
+    T__47 = 48
+    T__48 = 49
+    T__49 = 50
+    T__50 = 51
+    T__51 = 52
+    T__52 = 53
+    T__53 = 54
+    HEX = 55
+    INT = 56
+    FLOAT = 57
+    COMPLEX = 58
+    STRING = 59
+    ID = 60
+    USER_OP = 61
+    NL = 62
+    WS = 63
 
-    def __init__(self, input:TokenStream):
+    def __init__(self, input: TokenStream):
         super().__init__(input)
         self.checkVersion("4.5")
-        self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
+        self._interp = ParserATNSimulator(
+            self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
-
-
 
     class ParseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def EOF(self):
             return self.getToken(RParser.EOF, 0)
 
-        def expr(self, i:int=None):
+        def expr(self, i: int=None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
-                return self.getTypedRuleContext(RParser.ExprContext,i)
+                return self.getTypedRuleContext(RParser.ExprContext, i)
 
-
-        def NL(self, i:int=None):
+        def NL(self, i: int=None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -252,22 +252,19 @@ class RParser ( Parser ):
         def getRuleIndex(self):
             return RParser.RULE_parse
 
-        def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def enterRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.enterParse(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def exitRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.exitParse(self)
-
-
-
 
     def parse(self):
 
         localctx = RParser.ParseContext(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_parse)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 20
@@ -281,7 +278,7 @@ class RParser ( Parser ):
                     self.expr(0)
                     self.state = 15
                     _la = self._input.LA(1)
-                    if not(_la==RParser.T__0 or _la==RParser.NL):
+                    if not(_la == RParser.T__0 or _la == RParser.NL):
                         self._errHandler.recoverInline(self)
                     else:
                         self.consume()
@@ -309,24 +306,21 @@ class RParser ( Parser ):
 
     class ExprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expr(self, i:int=None):
+        def expr(self, i: int=None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
-                return self.getTypedRuleContext(RParser.ExprContext,i)
-
+                return self.getTypedRuleContext(RParser.ExprContext, i)
 
         def formlist(self):
-            return self.getTypedRuleContext(RParser.FormlistContext,0)
-
+            return self.getTypedRuleContext(RParser.FormlistContext, 0)
 
         def exprlist(self):
-            return self.getTypedRuleContext(RParser.ExprlistContext,0)
-
+            return self.getTypedRuleContext(RParser.ExprlistContext, 0)
 
         def ID(self):
             return self.getToken(RParser.ID, 0)
@@ -350,38 +344,35 @@ class RParser ( Parser ):
             return self.getToken(RParser.USER_OP, 0)
 
         def sublist(self):
-            return self.getTypedRuleContext(RParser.SublistContext,0)
-
+            return self.getTypedRuleContext(RParser.SublistContext, 0)
 
         def getRuleIndex(self):
             return RParser.RULE_expr
 
-        def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def enterRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.enterExpr(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def exitRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.exitExpr(self)
 
-
-
-    def expr(self, _p:int=0):
+    def expr(self, _p: int=0):
         _parentctx = self._ctx
         _parentState = self.state
         localctx = RParser.ExprContext(self, self._ctx, _parentState)
         _prevctx = localctx
         _startState = 2
         self.enterRecursionRule(localctx, 2, self.RULE_expr, _p)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 93
-            la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 3, self._ctx)
             if la_ == 1:
                 self.state = 26
                 _la = self._input.LA(1)
-                if not(_la==RParser.T__9 or _la==RParser.T__10):
+                if not(_la == RParser.T__9 or _la == RParser.T__10):
                     self._errHandler.recoverInline(self)
                 else:
                     self.consume()
@@ -410,10 +401,9 @@ class RParser ( Parser ):
                 self.match(RParser.T__33)
                 self.state = 35
                 _la = self._input.LA(1)
-                if _la==RParser.T__53 or _la==RParser.ID:
+                if _la == RParser.T__53 or _la == RParser.ID:
                     self.state = 34
                     self.formlist()
-
 
                 self.state = 37
                 self.match(RParser.T__34)
@@ -583,28 +573,31 @@ class RParser ( Parser ):
                 self.match(RParser.T__51)
                 pass
 
-
             self._ctx.stop = self._input.LT(-1)
             self.state = 149
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,5,self._ctx)
-            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                if _alt==1:
+            _alt = self._interp.adaptivePredict(self._input, 5, self._ctx)
+            while _alt != 2 and _alt != ATN.INVALID_ALT_NUMBER:
+                if _alt == 1:
                     if self._parseListeners is not None:
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
                     self.state = 147
-                    la_ = self._interp.adaptivePredict(self._input,4,self._ctx)
+                    la_ = self._interp.adaptivePredict(
+                        self._input, 4, self._ctx)
                     if la_ == 1:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 95
                         if not self.precpred(self._ctx, 39):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 39)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 39)")
                         self.state = 96
                         _la = self._input.LA(1)
-                        if not(_la==RParser.T__4 or _la==RParser.T__5):
+                        if not(_la == RParser.T__4 or _la == RParser.T__5):
                             self._errHandler.recoverInline(self)
                         else:
                             self.consume()
@@ -613,15 +606,18 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 2:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 98
                         if not self.precpred(self._ctx, 38):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 38)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 38)")
                         self.state = 99
                         _la = self._input.LA(1)
-                        if not(_la==RParser.T__6 or _la==RParser.T__7):
+                        if not(_la == RParser.T__6 or _la == RParser.T__7):
                             self._errHandler.recoverInline(self)
                         else:
                             self.consume()
@@ -630,12 +626,15 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 3:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 101
                         if not self.precpred(self._ctx, 37):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 37)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 37)")
                         self.state = 102
                         self.match(RParser.T__8)
                         self.state = 103
@@ -643,12 +642,15 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 4:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 104
                         if not self.precpred(self._ctx, 35):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 35)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 35)")
                         self.state = 105
                         self.match(RParser.T__11)
                         self.state = 106
@@ -656,12 +658,15 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 5:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 107
                         if not self.precpred(self._ctx, 34):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 34)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 34)")
                         self.state = 108
                         self.match(RParser.USER_OP)
                         self.state = 109
@@ -669,15 +674,18 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 6:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 110
                         if not self.precpred(self._ctx, 33):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 33)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 33)")
                         self.state = 111
                         _la = self._input.LA(1)
-                        if not(_la==RParser.T__12 or _la==RParser.T__13):
+                        if not(_la == RParser.T__12 or _la == RParser.T__13):
                             self._errHandler.recoverInline(self)
                         else:
                             self.consume()
@@ -686,15 +694,18 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 7:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 113
                         if not self.precpred(self._ctx, 32):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 32)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 32)")
                         self.state = 114
                         _la = self._input.LA(1)
-                        if not(_la==RParser.T__9 or _la==RParser.T__10):
+                        if not(_la == RParser.T__9 or _la == RParser.T__10):
                             self._errHandler.recoverInline(self)
                         else:
                             self.consume()
@@ -703,12 +714,15 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 8:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 116
                         if not self.precpred(self._ctx, 31):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 31)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 31)")
                         self.state = 117
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__14) | (1 << RParser.T__15) | (1 << RParser.T__16) | (1 << RParser.T__17) | (1 << RParser.T__18) | (1 << RParser.T__19))) != 0)):
@@ -720,15 +734,18 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 9:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 119
                         if not self.precpred(self._ctx, 29):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 29)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 29)")
                         self.state = 120
                         _la = self._input.LA(1)
-                        if not(_la==RParser.T__21 or _la==RParser.T__22):
+                        if not(_la == RParser.T__21 or _la == RParser.T__22):
                             self._errHandler.recoverInline(self)
                         else:
                             self.consume()
@@ -737,15 +754,18 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 10:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 122
                         if not self.precpred(self._ctx, 28):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 28)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 28)")
                         self.state = 123
                         _la = self._input.LA(1)
-                        if not(_la==RParser.T__23 or _la==RParser.T__24):
+                        if not(_la == RParser.T__23 or _la == RParser.T__24):
                             self._errHandler.recoverInline(self)
                         else:
                             self.consume()
@@ -754,12 +774,15 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 11:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 125
                         if not self.precpred(self._ctx, 26):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 26)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 26)")
                         self.state = 126
                         self.match(RParser.T__25)
                         self.state = 127
@@ -767,12 +790,15 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 12:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 128
                         if not self.precpred(self._ctx, 25):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 25)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 25)")
                         self.state = 129
                         _la = self._input.LA(1)
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__26) | (1 << RParser.T__27) | (1 << RParser.T__28) | (1 << RParser.T__29) | (1 << RParser.T__30) | (1 << RParser.T__31))) != 0)):
@@ -784,12 +810,15 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 13:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 131
                         if not self.precpred(self._ctx, 41):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 41)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 41)")
                         self.state = 132
                         self.match(RParser.T__1)
                         self.state = 133
@@ -801,12 +830,15 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 14:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 137
                         if not self.precpred(self._ctx, 40):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 40)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 40)")
                         self.state = 138
                         self.match(RParser.T__3)
                         self.state = 139
@@ -816,12 +848,15 @@ class RParser ( Parser ):
                         pass
 
                     elif la_ == 15:
-                        localctx = RParser.ExprContext(self, _parentctx, _parentState)
-                        self.pushNewRecursionContext(localctx, _startState, self.RULE_expr)
+                        localctx = RParser.ExprContext(
+                            self, _parentctx, _parentState)
+                        self.pushNewRecursionContext(
+                            localctx, _startState, self.RULE_expr)
                         self.state = 142
                         if not self.precpred(self._ctx, 23):
                             from antlr4.error.Errors import FailedPredicateException
-                            raise FailedPredicateException(self, "self.precpred(self._ctx, 23)")
+                            raise FailedPredicateException(
+                                self, "self.precpred(self._ctx, 23)")
                         self.state = 143
                         self.match(RParser.T__33)
                         self.state = 144
@@ -830,10 +865,9 @@ class RParser ( Parser ):
                         self.match(RParser.T__34)
                         pass
 
-             
                 self.state = 151
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,5,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input, 5, self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -845,18 +879,17 @@ class RParser ( Parser ):
 
     class ExprlistContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expr(self, i:int=None):
+        def expr(self, i: int=None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
-                return self.getTypedRuleContext(RParser.ExprContext,i)
+                return self.getTypedRuleContext(RParser.ExprContext, i)
 
-
-        def NL(self, i:int=None):
+        def NL(self, i: int=None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -865,22 +898,19 @@ class RParser ( Parser ):
         def getRuleIndex(self):
             return RParser.RULE_exprlist
 
-        def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def enterRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.enterExprlist(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def exitRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.exitExprlist(self)
-
-
-
 
     def exprlist(self):
 
         localctx = RParser.ExprlistContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_exprlist)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.state = 163
             token = self._input.LA(1)
@@ -891,10 +921,10 @@ class RParser ( Parser ):
                 self.state = 159
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==RParser.T__0 or _la==RParser.NL:
+                while _la == RParser.T__0 or _la == RParser.NL:
                     self.state = 153
                     _la = self._input.LA(1)
-                    if not(_la==RParser.T__0 or _la==RParser.NL):
+                    if not(_la == RParser.T__0 or _la == RParser.NL):
                         self._errHandler.recoverInline(self)
                     else:
                         self.consume()
@@ -904,15 +934,12 @@ class RParser ( Parser ):
                         self.state = 154
                         self.expr(0)
 
-
                     self.state = 161
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-
             elif token in [RParser.T__36]:
                 self.enterOuterAlt(localctx, 2)
-
 
             else:
                 raise NoViableAltException(self)
@@ -927,36 +954,32 @@ class RParser ( Parser ):
 
     class FormlistContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def form(self, i:int=None):
+        def form(self, i: int=None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.FormContext)
             else:
-                return self.getTypedRuleContext(RParser.FormContext,i)
-
+                return self.getTypedRuleContext(RParser.FormContext, i)
 
         def getRuleIndex(self):
             return RParser.RULE_formlist
 
-        def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def enterRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.enterFormlist(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def exitRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.exitFormlist(self)
-
-
-
 
     def formlist(self):
 
         localctx = RParser.FormlistContext(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_formlist)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 165
@@ -964,7 +987,7 @@ class RParser ( Parser ):
             self.state = 170
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==RParser.T__52:
+            while _la == RParser.T__52:
                 self.state = 166
                 self.match(RParser.T__52)
                 self.state = 167
@@ -983,7 +1006,7 @@ class RParser ( Parser ):
 
     class FormContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -991,22 +1014,18 @@ class RParser ( Parser ):
             return self.getToken(RParser.ID, 0)
 
         def expr(self):
-            return self.getTypedRuleContext(RParser.ExprContext,0)
-
+            return self.getTypedRuleContext(RParser.ExprContext, 0)
 
         def getRuleIndex(self):
             return RParser.RULE_form
 
-        def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def enterRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.enterForm(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def exitRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.exitForm(self)
-
-
-
 
     def form(self):
 
@@ -1014,7 +1033,7 @@ class RParser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_form)
         try:
             self.state = 178
-            la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 10, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 173
@@ -1037,7 +1056,6 @@ class RParser ( Parser ):
                 self.match(RParser.T__53)
                 pass
 
-
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1048,36 +1066,32 @@ class RParser ( Parser ):
 
     class SublistContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def sub(self, i:int=None):
+        def sub(self, i: int=None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.SubContext)
             else:
-                return self.getTypedRuleContext(RParser.SubContext,i)
-
+                return self.getTypedRuleContext(RParser.SubContext, i)
 
         def getRuleIndex(self):
             return RParser.RULE_sublist
 
-        def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def enterRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.enterSublist(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def exitRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.exitSublist(self)
-
-
-
 
     def sublist(self):
 
         localctx = RParser.SublistContext(self, self._ctx, self.state)
         self.enterRule(localctx, 10, self.RULE_sublist)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 180
@@ -1085,7 +1099,7 @@ class RParser ( Parser ):
             self.state = 185
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==RParser.T__52:
+            while _la == RParser.T__52:
                 self.state = 181
                 self.match(RParser.T__52)
                 self.state = 182
@@ -1104,13 +1118,12 @@ class RParser ( Parser ):
 
     class SubContext(ParserRuleContext):
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def expr(self):
-            return self.getTypedRuleContext(RParser.ExprContext,0)
-
+            return self.getTypedRuleContext(RParser.ExprContext, 0)
 
         def ID(self):
             return self.getToken(RParser.ID, 0)
@@ -1121,16 +1134,13 @@ class RParser ( Parser ):
         def getRuleIndex(self):
             return RParser.RULE_sub
 
-        def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def enterRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.enterSub(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, RListener ):
+        def exitRule(self, listener: ParseTreeListener):
+            if isinstance(listener, RListener):
                 listener.exitSub(self)
-
-
-
 
     def sub(self):
 
@@ -1138,7 +1148,7 @@ class RParser ( Parser ):
         self.enterRule(localctx, 12, self.RULE_sub)
         try:
             self.state = 206
-            la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 12, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 188
@@ -1210,7 +1220,6 @@ class RParser ( Parser ):
 
                 pass
 
-
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1219,9 +1228,7 @@ class RParser ( Parser ):
             self.exitRule()
         return localctx
 
-
-
-    def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
+    def sempred(self, localctx: RuleContext, ruleIndex: int, predIndex: int):
         if self._predicates == None:
             self._predicates = dict()
         self._predicates[1] = self.expr_sempred
@@ -1231,66 +1238,48 @@ class RParser ( Parser ):
         else:
             return pred(localctx, predIndex)
 
-    def expr_sempred(self, localctx:ExprContext, predIndex:int):
-            if predIndex == 0:
-                return self.precpred(self._ctx, 39)
-         
+    def expr_sempred(self, localctx: ExprContext, predIndex: int):
+        if predIndex == 0:
+            return self.precpred(self._ctx, 39)
 
-            if predIndex == 1:
-                return self.precpred(self._ctx, 38)
-         
+        if predIndex == 1:
+            return self.precpred(self._ctx, 38)
 
-            if predIndex == 2:
-                return self.precpred(self._ctx, 37)
-         
+        if predIndex == 2:
+            return self.precpred(self._ctx, 37)
 
-            if predIndex == 3:
-                return self.precpred(self._ctx, 35)
-         
+        if predIndex == 3:
+            return self.precpred(self._ctx, 35)
 
-            if predIndex == 4:
-                return self.precpred(self._ctx, 34)
-         
+        if predIndex == 4:
+            return self.precpred(self._ctx, 34)
 
-            if predIndex == 5:
-                return self.precpred(self._ctx, 33)
-         
+        if predIndex == 5:
+            return self.precpred(self._ctx, 33)
 
-            if predIndex == 6:
-                return self.precpred(self._ctx, 32)
-         
+        if predIndex == 6:
+            return self.precpred(self._ctx, 32)
 
-            if predIndex == 7:
-                return self.precpred(self._ctx, 31)
-         
+        if predIndex == 7:
+            return self.precpred(self._ctx, 31)
 
-            if predIndex == 8:
-                return self.precpred(self._ctx, 29)
-         
+        if predIndex == 8:
+            return self.precpred(self._ctx, 29)
 
-            if predIndex == 9:
-                return self.precpred(self._ctx, 28)
-         
+        if predIndex == 9:
+            return self.precpred(self._ctx, 28)
 
-            if predIndex == 10:
-                return self.precpred(self._ctx, 26)
-         
+        if predIndex == 10:
+            return self.precpred(self._ctx, 26)
 
-            if predIndex == 11:
-                return self.precpred(self._ctx, 25)
-         
+        if predIndex == 11:
+            return self.precpred(self._ctx, 25)
 
-            if predIndex == 12:
-                return self.precpred(self._ctx, 41)
-         
+        if predIndex == 12:
+            return self.precpred(self._ctx, 41)
 
-            if predIndex == 13:
-                return self.precpred(self._ctx, 40)
-         
+        if predIndex == 13:
+            return self.precpred(self._ctx, 40)
 
-            if predIndex == 14:
-                return self.precpred(self._ctx, 23)
-         
-
-
-
+        if predIndex == 14:
+            return self.precpred(self._ctx, 23)
