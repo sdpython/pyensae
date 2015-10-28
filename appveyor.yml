@@ -31,6 +31,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyquickhelper"
   - "%PYTHON%\\Scripts\\pip install pyquickhelper"
+  - "%PYTHON%\\Scripts\\pip install colormap"
 
 build: off
 
