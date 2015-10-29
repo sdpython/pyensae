@@ -614,11 +614,11 @@ class AzureClient():
                          hadoop_password,
                          username)
         script = '''
-            myinput = LOAD '$CONTAINER/<input.csv>'
+            myinput = LOAD '$CONTAINER/input.csv'
                       using PigStorage(',')
                       AS (index:long, sequence, tag, timestamp:long, dateformat, x:double,y:double, z:double, activity) ;
             filt = FILTER myinput BY activity == 'walking' ;
-            STORE filt INTO '$PSEUDO/<output.csv>' USING PigStorage() ;
+            STORE filt INTO '$PSEUDO/output.csv' USING PigStorage() ;
             '''
 
         with open("script_walking.pig","w") as f :

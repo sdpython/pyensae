@@ -127,7 +127,7 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             '-r',
             '--redirection',
             type=str,
-            default="redirection",
+            default="redirection.pig",
             help='list of options for the job')
         parser.add_argument(
             '-s',
@@ -156,10 +156,11 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             pig = args.file
             pys = [_ for _ in args.dependency if _.endswith(
                 ".py")] if args.dependency is not None else []
+            redirection = None if args.redirection in [None, "None", "", "-"] else args.redirection
 
             ssh = self.get_connection()
             out, err = ssh.pig_submit(
-                pig, dependencies=pys, redirection=args.redirection, local=args.local, stop_on_failure=args.stop_on_failure)
+                pig, dependencies=pys, redirection=redirection, local=args.local, stop_on_failure=args.stop_on_failure)
 
             if len(err) > 0 and (
                     len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):

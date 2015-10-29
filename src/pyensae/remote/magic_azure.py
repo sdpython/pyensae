@@ -145,7 +145,7 @@ class MagicAzure(MagicClassWithHelpers):
             default='blobpassword',
             help='blob password')
         parser.add_argument(
-            '-h',
+            '-s',
             '--hadoop_server',
             type=str,
             default='hadoop_server',
@@ -740,7 +740,7 @@ class MagicAzure(MagicClassWithHelpers):
             help='if true, the job stops on failure right away')
         parser.add_argument(
             '-o',
-            '--option',
+            '--options',
             nargs='*',
             type=list,
             help='list of options for the job')
@@ -803,7 +803,7 @@ class MagicAzure(MagicClassWithHelpers):
                  the output of multiples jobs.
         """
         parser = self.get_parser(
-            MagicAzure.hd_pig_submit_parser, "hd_pig_submit")
+            MagicAzure.hd_tail_stderr_parser, "hd_tail_stderr")
         args = self.get_args(line, parser)
 
         if args is not None:
