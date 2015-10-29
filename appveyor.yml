@@ -33,6 +33,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install pyquickhelper"
   - "%PYTHON%\\Scripts\\pip install easydev"
   - "%PYTHON%\\Scripts\\pip install colormap"
+  - "%PYTHON%\\Scripts\\pip install antlr4-python3-runtime"
 
 build: off
 
