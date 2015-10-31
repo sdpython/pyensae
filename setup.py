@@ -154,6 +154,10 @@ if is_local():
         requirements=["pyquickhelper"],
         additional_notebook_path=["pyquickhelper"],
         coverage_options=dict(omit=["*Parser.py", "*Listener.py", "*Lexer.py"]))
+    if not r and not ({"bdist_msi", "sdist",
+                       "bdist_wheel", "publish", "publish_doc", "register",
+                       "upload_docs", "bdist_wininst"} & set(sys.argv)):
+        raise Exception("unable to interpret command line: " + str(sys.argv))
 else:
     r = False
 
