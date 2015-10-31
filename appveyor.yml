@@ -29,11 +29,7 @@ init:
 install:
   - "%PYTHON%\\python -m pip install --upgrade pip"
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
-  - "%PYTHON%\\Scripts\\pymy_install3 --set=pyquickhelper"
-  - "%PYTHON%\\Scripts\\pip install pyquickhelper"
-  - "%PYTHON%\\Scripts\\pip install easydev"
-  - "%PYTHON%\\Scripts\\pip install colormap"
-  - "%PYTHON%\\Scripts\\pip install antlr4-python3-runtime"
+  - "%PYTHON%\\Scripts\\pymy_install3 --set=pyensae"
 
 build: off
 

@@ -5,6 +5,10 @@ pyensae documentation
     :target: https://travis-ci.org/sdpython/pyensae
     :alt: Build status
     
+.. image:: https://ci.appveyor.com/api/projects/status/hw3ixda4622h34qb?svg=true
+    :target: https://ci.appveyor.com/project/sdpython/pyensae
+    :alt: Build Status Windows
+    
 .. image:: https://badge.fury.io/py/pyensae.svg
     :target: http://badge.fury.io/py/pyensae
     

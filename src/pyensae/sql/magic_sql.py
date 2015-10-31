@@ -386,10 +386,13 @@ class MagicSQL(MagicClassWithHelpers):
                     return df.head(n=args.n)
 
 
-def register_sql_magics():
+def register_sql_magics(ip=None):
     """
     register magics function, can be called from a notebook
+
+    @param      ip      from ``get_ipython()``
     """
-    from IPython import get_ipython
-    ip = get_ipython()
+    if ip is None:
+        from IPython import get_ipython
+        ip = get_ipython()
     ip.register_magics(MagicSQL)

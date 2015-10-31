@@ -989,10 +989,13 @@ class MagicAzure(MagicClassWithHelpers):
                 return HTML('<pre>\n%s\n</pre>' % out)
 
 
-def register_azure_magics():
+def register_azure_magics(ip=None):
     """
     register magics function, can be called from a notebook
+
+    @param      ip      from ``get_ipython()``
     """
-    from IPython import get_ipython
-    ip = get_ipython()
+    if ip is None:
+        from IPython import get_ipython
+        ip = get_ipython()
     ip.register_magics(MagicAzure)

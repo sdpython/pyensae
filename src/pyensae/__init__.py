@@ -50,8 +50,12 @@ def check(log=False):
 from .resources.http_retrieve import download_data
 
 
-try:
-    from IPython import get_ipython
+def load_ipython_extension(ip):
+    """
+    to allow the call ``%load_ext pyensae``
+
+    @param      ip      from ``get_ipython()``
+    """
     from .remote.magic_remote_ssh import register_magics_ssh
     try:
         from .remote.magic_azure import register_azure_magics
@@ -61,24 +65,27 @@ try:
             az = False
         else:
             raise e
-    try:
-        from .sql.magic_sql import register_sql_magics
-        from .file_helper.magic_file import register_file_magics
-        from .graph_helper.magic_graph import register_graph_magics
-        from .notebook_helper.magic_notebook import register_notebook_magics
-    except Exception as e:
-        raise ImportError("ipython does not seem to be available") from e
 
+    from .sql.magic_sql import register_sql_magics
+    from .file_helper.magic_file import register_file_magics
+    from .graph_helper.magic_graph import register_graph_magics
+    from .notebook_helper.magic_notebook import register_notebook_magics
+
+    register_magics_ssh(ip)
+    if az:
+        register_azure_magics(ip)
+    register_sql_magics(ip)
+    register_file_magics(ip)
+    register_graph_magics(ip)
+    register_notebook_magics(ip)
+
+
+try:
+    from IPython import get_ipython
     ip = get_ipython()
     if ip is not None:
-        # the program is not run from a notebook
-        register_magics_ssh()
-        if az:
-            register_azure_magics()
-        register_sql_magics()
-        register_file_magics()
-        register_graph_magics()
-        register_notebook_magics()
+        load_ipython_extension(ip)
+
 except ImportError as e:
     # IPython is not installed
     pass

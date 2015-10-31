@@ -156,7 +156,8 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             pig = args.file
             pys = [_ for _ in args.dependency if _.endswith(
                 ".py")] if args.dependency is not None else []
-            redirection = None if args.redirection in [None, "None", "", "-"] else args.redirection
+            redirection = None if args.redirection in [
+                None, "None", "", "-"] else args.redirection
 
             ssh = self.get_connection()
             out, err = ssh.pig_submit(
@@ -756,10 +757,13 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             return df
 
 
-def register_magics_ssh():
+def register_magics_ssh(ip=None):
     """
     register magics function, can be called from a notebook
+
+    @param      ip      from ``get_ipython()``
     """
-    from IPython import get_ipython
-    ip = get_ipython()
+    if ip is None:
+        from IPython import get_ipython
+        ip = get_ipython()
     ip.register_magics(MagicRemoteSSH)

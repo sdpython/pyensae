@@ -76,10 +76,13 @@ class MagicNotebook(MagicClassWithHelpers):
             return js
 
 
-def register_notebook_magics():
+def register_notebook_magics(ip=None):
     """
     register magics function, can be called from a notebook
+
+    @param      ip      from ``get_ipython()``
     """
-    from IPython import get_ipython
-    ip = get_ipython()
+    if ip is None:
+        from IPython import get_ipython
+        ip = get_ipython()
     ip.register_magics(MagicNotebook)
