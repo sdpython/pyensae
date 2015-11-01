@@ -5,7 +5,6 @@
 """
 from IPython.core.magic import magics_class, line_magic
 from pyquickhelper.ipythonhelper import add_notebook_menu, MagicCommandParser, MagicClassWithHelpers
-import pandas
 import qgrid
 
 
