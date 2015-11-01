@@ -84,3 +84,4 @@ pyquickhelper
 pymyinstall
 colormap
 easydev
+qgrid
