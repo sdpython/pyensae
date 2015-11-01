@@ -790,6 +790,11 @@ class MagicAzure(MagicClassWithHelpers):
             type=int,
             default=20,
             help='number of lines to display')
+        parser.add_argument(
+            '--raw-output',
+            default=False,
+            action='store_true',
+            help='display raw text instead of HTML')
         return parser
 
     @line_magic
@@ -824,13 +829,21 @@ class MagicAzure(MagicClassWithHelpers):
                 "ERROR",
                 '<b><font color="#DD0000">ERROR</font></b>')
 
-            if len(out) > 0:
-                lineo = out.split("\n")
-                shoo = "\n".join(_.strip("\n\r") for _ in lineo[-nbline:])
-                return HTML(
-                    "<pre>\n%s\n</pre><br /><b>OUT:</b><br /><pre>\n%s\n</pre>" % (show, shoo))
+            if args.raw_output:
+                if len(out) > 0:
+                    lieno = out.split("\n")
+                    shoo = "\n".join(_.strip("\n\r") for _ in lineo[-nbline:])
+                    return shoo
+                else:
+                    return show
             else:
-                return HTML("<pre>\n%s\n</pre><br />" % show)
+                if len(out) > 0:
+                    lineo = out.split("\n")
+                    shoo = "\n".join(_.strip("\n\r") for _ in lineo[-nbline:])
+                    return HTML(
+                        "<pre>\n%s\n</pre><br /><b>OUT:</b><br /><pre>\n%s\n</pre>" % (show, shoo))
+                else:
+                    return HTML("<pre>\n%s\n</pre><br />" % show)
 
     def _run_jython(self, cell, filename, func_name, args, true_jython=None):
         """
@@ -900,6 +913,11 @@ class MagicAzure(MagicClassWithHelpers):
             type=str,
             help='function name')
         parser.add_argument(
+            '--raw-output',
+            default=False,
+            action='store_true',
+            help='display raw text instead of HTML')
+        parser.add_argument(
             'args',
             type=list,
             nargs="*",
@@ -930,11 +948,17 @@ class MagicAzure(MagicClassWithHelpers):
             func_name = args.function_name
             args = args.args
             out, err = self._run_jython(cell, filename, func_name, args, False)
-            if len(err) > 0:
-                return HTML(
-                    '<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+            if args.raw_output:
+                if len(err) > 0:
+                    return err
+                else:
+                    return out
             else:
-                return HTML('<pre>\n%s\n</pre>' % out)
+                if len(err) > 0:
+                    return HTML(
+                        '<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+                else:
+                    return HTML('<pre>\n%s\n</pre>' % out)
 
     @staticmethod
     def jython_parser():
@@ -951,6 +975,11 @@ class MagicAzure(MagicClassWithHelpers):
             'function_name',
             type=str,
             help='function name')
+        parser.add_argument(
+            '--raw-output',
+            default=False,
+            action='store_true',
+            help='display raw text instead of HTML')
         parser.add_argument(
             'args',
             type=list,
@@ -982,11 +1011,17 @@ class MagicAzure(MagicClassWithHelpers):
             func_name = args.function_name
             args = args.args
             out, err = self._run_jython(cell, filename, func_name, args, True)
-            if len(err) > 0:
-                return HTML(
-                    '<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+            if args.raw_output:
+                if len(err) > 0:
+                    return err
+                else:
+                    return out
             else:
-                return HTML('<pre>\n%s\n</pre>' % out)
+                if len(err) > 0:
+                    return HTML(
+                        '<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
+                else:
+                    return HTML('<pre>\n%s\n</pre>' % out)
 
 
 def register_azure_magics(ip=None):

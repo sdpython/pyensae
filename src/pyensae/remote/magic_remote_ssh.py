@@ -130,6 +130,11 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             default="redirection.pig",
             help='list of options for the job')
         parser.add_argument(
+            '--raw-output',
+            default=False,
+            action='store_true',
+            help='display raw text instead of HTML')
+        parser.add_argument(
             '-s',
             '--stop_on_failure',
             action='store_true',
@@ -163,11 +168,18 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             out, err = ssh.pig_submit(
                 pig, dependencies=pys, redirection=redirection, local=args.local, stop_on_failure=args.stop_on_failure)
 
-            if len(err) > 0 and (
-                    len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
-                return HTML("<pre>\n%s\n</pre>" % err)
+            if args.raw_output:
+                if len(err) > 0 and (
+                        len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                    return err
+                else:
+                    return out
             else:
-                return HTML("<pre>\n%s\n</pre>" % out)
+                if len(err) > 0 and (
+                        len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                    return HTML("<pre>\n%s\n</pre>" % err)
+                else:
+                    return HTML("<pre>\n%s\n</pre>" % out)
 
     @staticmethod
     def hive_submit_parser():
@@ -186,6 +198,11 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             type=str,
             default="redirection",
             help='list of options for the job')
+        parser.add_argument(
+            '--raw-output',
+            default=False,
+            action='store_true',
+            help='display raw text instead of HTML')
         return parser
 
     @line_magic
@@ -203,11 +220,18 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             out, err = ssh.hive_submit(
                 pig, redirection=args.redirection, local=args.local)
 
-            if len(err) > 0 and (
-                    len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
-                return HTML("<pre>\n%s\n</pre>" % err)
+            if args.raw_output:
+                if len(err) > 0 and (
+                        len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                    return err
+                else:
+                    return out
             else:
-                return HTML("<pre>\n%s\n</pre>" % out)
+                if len(err) > 0 and (
+                        len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                    return HTML("<pre>\n%s\n</pre>" % err)
+                else:
+                    return HTML("<pre>\n%s\n</pre>" % out)
 
     @staticmethod
     def remote_py_parser():
@@ -231,6 +255,11 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             type=str,
             default='python',
             help='change the interpreter, python by default')
+        parser.add_argument(
+            '--raw-output',
+            default=False,
+            action='store_true',
+            help='display raw text instead of HTML')
         return parser
 
     @line_magic
@@ -255,11 +284,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             cmd = exe + " " + dest + " " + args
 
             out, err = ssh.execute_command(cmd, no_exception=True)
-            if len(err) > 0:
-                return HTML(
-                    "<b>ERR:</b><br /><pre>\n%s\n</pre><b>OUT:</b><br /><pre>\n%s\n</pre>" % (err, out))
+            if args.raw_output:
+                if len(err) > 0:
+                    return err
+                else:
+                    return out
             else:
-                return HTML("<pre>\n%s\n</pre>" % out)
+                if len(err) > 0:
+                    return HTML(
+                        "<b>ERR:</b><br /><pre>\n%s\n</pre><b>OUT:</b><br /><pre>\n%s\n</pre>" % (err, out))
+                else:
+                    return HTML("<pre>\n%s\n</pre>" % out)
 
     @staticmethod
     def job_syntax_parser():
@@ -272,6 +307,11 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             'file',
             type=str,
             help='file name')
+        parser.add_argument(
+            '--raw-output',
+            default=False,
+            action='store_true',
+            help='display raw text instead of HTML')
         return parser
 
     @line_magic
@@ -290,11 +330,18 @@ class MagicRemoteSSH(MagicClassWithHelpers):
 
             ssh = self.get_connection()
             out, err = ssh.pig_submit(filename, check=True, no_exception=True)
-            if len(err) > 0 and (
-                    len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
-                return HTML("<pre>\n%s\n</pre>" % err)
+            if args.raw_output:
+                if len(err) > 0 and (
+                        len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                    return err
+                else:
+                    return out
             else:
-                return HTML("<pre>\n%s\n</pre>" % out)
+                if len(err) > 0 and (
+                        len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                    return HTML("<pre>\n%s\n</pre>" % err)
+                else:
+                    return HTML("<pre>\n%s\n</pre>" % out)
 
     @staticmethod
     def remote_open_parser():
@@ -384,6 +431,39 @@ class MagicRemoteSSH(MagicClassWithHelpers):
                 return HTML("<pre>\n%s\n</pre>" % err)
             else:
                 return HTML("<pre>\n%s\n</pre>" % out)
+
+    @line_cell_magic
+    def remote_cmd_text(self, line, cell=None):
+        """
+        run a command on the remote machine and returns raw text (not HTML)
+
+        Example::
+
+            %remote_cmd_text ls
+
+        Or::
+
+            %%remote_cmd_text  <something>
+            anything going to stdin
+
+        In the second case, if __PASSWORD__ is found, it will be replaced by the password stored in
+        workspace.
+        """
+        if "--help" in line:
+            print("Usage: %remote_cmd_text <cmd>")
+        else:
+            ssh = self.get_connection()
+
+            if isinstance(cell, str):
+                cell = self._replace_params(cell)
+
+            out, err = ssh.execute_command(
+                line, no_exception=True, fill_stdin=cell)
+            if len(err) > 0 and (
+                    len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                return err
+            else:
+                return out
 
     @staticmethod
     def remote_up_parser():
@@ -617,13 +697,20 @@ class MagicRemoteSSH(MagicClassWithHelpers):
         """
         Defines ``%shell_remote`` and ``%%shell_remote``
         """
+        return HTML(self.shell_remote_text(line, cell))
+
+    @line_cell_magic
+    def shell_remote_text(self, line, cell=None):
+        """
+        Defines ``%shell_remote_text`` and ``%%shell_remote_text``
+        """
         ssh = self.get_connection()
         if cell is None:
             out = ssh.send_recv_session(line)
         else:
             out = ssh.send_recv_session(cell)
 
-        return HTML(out)
+        return out
 
     @staticmethod
     def remote_ls_parser():
