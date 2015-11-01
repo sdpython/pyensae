@@ -831,7 +831,7 @@ class MagicAzure(MagicClassWithHelpers):
 
             if args.raw_output:
                 if len(out) > 0:
-                    lieno = out.split("\n")
+                    lineo = out.split("\n")
                     shoo = "\n".join(_.strip("\n\r") for _ in lineo[-nbline:])
                     return shoo
                 else:
