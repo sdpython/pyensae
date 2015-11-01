@@ -369,18 +369,21 @@ class MagicRemoteSSH(MagicClassWithHelpers):
         In the second case, if __PASSWORD__ is found, it will be replaced by the password stored in
         workspace.
         """
-        ssh = self.get_connection()
-
-        if isinstance(cell, str):
-            cell = self._replace_params(cell)
-
-        out, err = ssh.execute_command(
-            line, no_exception=True, fill_stdin=cell)
-        if len(err) > 0 and (
-                len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
-            return HTML("<pre>\n%s\n</pre>" % err)
+        if "--help" in line:
+            print("Usage: %remote_cmd <cmd>")
         else:
-            return HTML("<pre>\n%s\n</pre>" % out)
+            ssh = self.get_connection()
+
+            if isinstance(cell, str):
+                cell = self._replace_params(cell)
+
+            out, err = ssh.execute_command(
+                line, no_exception=True, fill_stdin=cell)
+            if len(err) > 0 and (
+                    len(out) == 0 or "ERROR" in err or "FATAL" in err or "Exception" in err):
+                return HTML("<pre>\n%s\n</pre>" % err)
+            else:
+                return HTML("<pre>\n%s\n</pre>" % out)
 
     @staticmethod
     def remote_up_parser():

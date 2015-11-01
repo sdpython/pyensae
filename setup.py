@@ -180,7 +180,7 @@ if not r:
         packages=packages,
         package_dir=package_dir,
         package_data=package_data,
-        install_requires=["pyquickhelper", "colormap", "qgrid"],
+        install_requires=["pyquickhelper", "colormap", "qgrid", "easydev"],
         extras_require={
             'graph_helper': ['matplotlib'],
             'languages': ['antlr4-python3-runtime'],
