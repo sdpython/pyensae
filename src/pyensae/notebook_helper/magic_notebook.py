@@ -126,6 +126,16 @@ class MagicNotebook(MagicClassWithHelpers):
             type=bool,
             default=True,
             help='see https://github.com/mleibman/SlickGrid/wiki/Grid-Options')
+        parser.add_argument(
+            '--remote_slick',
+            type=bool,
+            default=False,
+            help='use remote link for the javascript library or local')
+        parser.add_argument(
+            '--precision',
+            type=int,
+            default=4,
+            help='see function qgrid.set_defaults')
         return parser
 
     @line_magic
@@ -139,7 +149,7 @@ class MagicNotebook(MagicClassWithHelpers):
 
         if not hasattr(self, "first_jsdf_call") or self.first_jsdf_call:
             qgrid.nbinstall(overwrite=False)
-            qgrid.set_defaults(remote_js=False, precision=4)
+            qgrid.set_defaults(remote_js=args.remote_slick, precision=args.precision)
             self.first_jsdf_call = False
 
         if args is not None:
