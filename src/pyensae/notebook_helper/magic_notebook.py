@@ -5,6 +5,8 @@
 """
 from IPython.core.magic import magics_class, line_magic
 from pyquickhelper.ipythonhelper import add_notebook_menu, MagicCommandParser, MagicClassWithHelpers
+import pandas
+import qgrid
 
 
 @magics_class
@@ -74,6 +76,84 @@ class MagicNotebook(MagicClassWithHelpers):
             js = add_notebook_menu(menu_id=args.menu_id, header=args.title, format=args.format,
                                    first_level=args.level1, last_level=args.level2, raw=args.raw)
             return js
+
+    @staticmethod
+    def jsdf_parser():
+        """
+        defines the way to parse the magic command ``%jsdf``
+        """
+        parser = MagicCommandParser(
+            description='display a pandas DataFrame based on module qgrid', prog="jsdf")
+        parser.add_argument(
+            'df',
+            help='dataframe to display')
+        parser.add_argument(
+            '--defaultColumnWidth',
+            type=int,
+            default=80,
+            help='see https://github.com/mleibman/SlickGrid/wiki/Grid-Options')
+        parser.add_argument(
+            '--enableColumnReorder',
+            type=bool,
+            default=True,
+            help='see https://github.com/mleibman/SlickGrid/wiki/Grid-Options')
+        parser.add_argument(
+            '--multiColumnSort',
+            type=bool,
+            default=False,
+            help='see https://github.com/mleibman/SlickGrid/wiki/Grid-Options')
+        parser.add_argument(
+            '--rowHeight',
+            type=int,
+            default=25,
+            help='see https://github.com/mleibman/SlickGrid/wiki/Grid-Options')
+        parser.add_argument(
+            '--showHeaderRow',
+            type=bool,
+            default=False,
+            help='see https://github.com/mleibman/SlickGrid/wiki/Grid-Options')
+        parser.add_argument(
+            '--forceFitColumns',
+            type=bool,
+            default=False,
+            help='see https://github.com/mleibman/SlickGrid/wiki/Grid-Options')
+        parser.add_argument(
+            '--autoHeight',
+            type=bool,
+            default=False,
+            help='see https://github.com/mleibman/SlickGrid/wiki/Grid-Options')
+        parser.add_argument(
+            '--enableCellNavigation',
+            type=bool,
+            default=True,
+            help='see https://github.com/mleibman/SlickGrid/wiki/Grid-Options')
+        return parser
+
+    @line_magic
+    def jsdf(self, line):
+        """
+        defines ``%jsdf``
+        which displays a pandas dataframe into a notebook using qgrid (javascript)
+        """
+        parser = self.get_parser(MagicNotebook.jsdf_parser, "jsdf")
+        args = self.get_args(line, parser)
+
+        if not hasattr(self, "first_jsdf_call") or self.first_jsdf_call:
+            qgrid.nbinstall(overwrite=False)
+            qgrid.set_defaults(remote_js=False, precision=4)
+            self.first_jsdf_call = False
+
+        if args is not None:
+            df = args.df
+            grid_options = dict(defaultColumnWidth=args.defaultColumnWidth,
+                                enableColumnReorder=args.enableColumnReorder,
+                                multiColumnSort=args.multiColumnSort,
+                                rowHeight=args.rowHeight,
+                                showHeaderRow=args.showHeaderRow,
+                                forceFitColumns=args.forceFitColumns,
+                                autoHeight=args.autoHeight,
+                                enableCellNavigation=args.enableCellNavigation)
+            return qgrid.show_grid(df, grid_options=grid_options)
 
 
 def register_notebook_magics(ip=None):

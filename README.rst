@@ -114,6 +114,7 @@ Versions
     * **new:** new magic command ``textdiff``
     * **new:** new magic command ``nb_menu`` to display a menu from all available section in the notebook
     * **new:** function Corrplot copied from module biokit (works in python 3)
+    * **new:** magic command ``%jsdf`` which runs module qgrid on a DataFrame
     
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for class AzureClient
