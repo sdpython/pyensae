@@ -99,7 +99,7 @@ def download_data(name,
     If it does not work, I suggest to use standard python:
     `Download a file from Dropbox with Python <http://www.xavierdupre.fr/blog/2015-01-20_nojs.html>`_.
     """
-    from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz
+    from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz, decompress_bz2
 
     if glo is None:
         glo = globals()
@@ -159,6 +159,9 @@ def download_data(name,
 
     elif name.endswith(".gz"):
         return decompress_gz(outfile, whereTo, fLOG)
+
+    elif name.endswith(".bz2"):
+        return decompress_bz2(outfile, whereTo, fLOG)
 
     elif "." not in name:
         path, filename = os.path.split(outfile)

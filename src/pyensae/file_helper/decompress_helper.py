@@ -6,6 +6,7 @@ import zipfile
 import tarfile
 import os
 import gzip
+import bz2
 from pyquickhelper import noLOG
 
 
@@ -71,6 +72,24 @@ def decompress_gz(filename, whereTo=".", fLOG=noLOG):
         raise NameError("the file should end with .gz: " + filename)
     dest = os.path.join(whereTo, filename[:-3])
     with gzip.open(filename, 'rb') as f:
+        with open(dest, "wb") as g:
+            g.write(f.read())
+    return [dest]
+
+
+def decompress_bz2(filename, whereTo=".", fLOG=noLOG):
+    """
+    decompress a bz2 file
+
+    @param      filename        file to process
+    @param      folder          location of the result
+    @param      fLOG            logging function
+    @return                     return the list of decompressed files (only one)
+    """
+    if not filename.endswith(".bz2"):
+        raise NameError("the file should end with .bz2: " + filename)
+    dest = os.path.join(whereTo, filename[:-3])
+    with bz2.open(filename, 'rb') as f:
         with open(dest, "wb") as g:
             g.write(f.read())
     return [dest]
