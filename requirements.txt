@@ -4,7 +4,6 @@ Flask-SQLAlchemy
 Jinja2
 Markdown
 MarkupSafe
-PyContracts
 PyYAML
 Pygments
 Sphinx
