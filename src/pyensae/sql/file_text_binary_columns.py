@@ -11,6 +11,7 @@ import re
 import os
 import decimal
 
+from pyquickhelper import noLOG
 from pyquickhelper.loghelper.flog import GetPath
 from .file_text_binary import TextFile
 
@@ -47,7 +48,7 @@ class TextFileColumns (TextFile):
 
     def __init__(self, filename, utf8=True,
                  errors=None,
-                 fLOG=print,
+                 fLOG=noLOG,
                  force_header=False,
                  changes={},
                  force_noheader=False,

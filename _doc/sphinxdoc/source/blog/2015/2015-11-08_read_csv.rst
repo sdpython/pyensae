@@ -1,0 +1,27 @@
+
+
+.. blogpost::
+    :title: What to do when read_csv fails?
+    :keywords: pandas, read_csv, text file
+    :date: 2015-11-08
+    :categories: pandas
+
+    I recently faced some issues with
+    method `read_csv <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html>`_
+    which could not read my text file. There was an issue with a null
+    character. So I revisited some old code I wrote long time
+    ago about guessing the schema of a text file:
+    :func:`TextFileColumns <pyensae.sql.file_text_binary_columns.TextFileColumns>`::
+    
+        f = TextFileColumns(filename)
+        f.open()
+        for row in f:
+            print(row)
+        f.close()    
+        
+    Each row is given as a dictionary::
+    
+        {'Adj_Close': 5.95, 'High': 6.04, 'Open': 5.99, 'Low': 5.92, 'Volume': 5426200, 'Close': 5.95, 'Date': '2012-12-14'}
+        
+    The function guess the column types based on the first rows. It also
+    guesses the column separator.
