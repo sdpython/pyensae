@@ -16,6 +16,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+dist_module27/
 
 # External tool builders
 .externalToolBuilders/

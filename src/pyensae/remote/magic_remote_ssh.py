@@ -65,6 +65,15 @@ class MagicRemoteSSH(MagicClassWithHelpers):
     def PIG(self, line, cell=None):
         """
         defines command ``%%PIG``
+
+        @NB(PIG)
+
+        The code for magic command ``%PIG`` is equivalent to::
+
+            with open(filename, "w", encoding="utf8") as f:
+                f.write(script)
+
+        @endNB
         """
         parser = self.get_parser(MagicRemoteSSH.PIG_parser, "PIG")
         args = self.get_args(line, parser)
@@ -91,6 +100,15 @@ class MagicRemoteSSH(MagicClassWithHelpers):
     def HIVE(self, line, cell=None):
         """
         defines command ``%%HIVE``
+
+        @NB(HIVE)
+
+        The code for magic command ``%HIVE`` is equivalent to::
+
+            with open(filename, "w", encoding="utf8") as f:
+                f.write(script)
+
+        @endNB
         """
         parser = self.get_parser(MagicRemoteSSH.HIVE_parser, "HIVE")
         args = self.get_args(line, parser)
@@ -152,6 +170,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
     def pig_submit(self, line):
         """
         defines command ``%pig_submit``
+
+        @NB(pig_submit)
+
+        The code for magic command ``%pig_submit`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            out, err = ssh.pig_submit(
+                pig, dependencies=dependencies, redirection=redirection, local=local, stop_on_failure=stop_on_failure)
+            ssh.close()
+        @endNB
         """
         parser = self.get_parser(
             MagicRemoteSSH.pig_submit_parser, "pig_submit")
@@ -209,6 +238,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
     def hive_submit(self, line):
         """
         defines command ``%hive_submit``
+
+        @NB(hive_submit)
+
+        The code for magic command ``%hive_submit`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            out, err = ssh.hive_submit(
+                pig, redirection=redirection, local=local)
+            ssh.close()
+        @endNB
         """
         parser = self.get_parser(
             MagicRemoteSSH.hive_submit_parser, "hive_submit")
@@ -266,6 +306,20 @@ class MagicRemoteSSH(MagicClassWithHelpers):
     def remote_py(self, line):
         """
         defines command ``%remote_py``
+
+        @NB(remote_py)
+
+        The code for magic command ``%remote_py`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            ssh.upload(filename, dest)
+            args = " ".join('"{}"'.format(_)
+                            for _ in args.args) if args.args is not None else ""
+            out, err = ssh.execute_command(exe + " " + dest + " " + args, no_exception=True)
+            ssh.close()
+
+        @endNB
         """
         parser = self.get_parser(
             MagicRemoteSSH.remote_py_parser, "remote_py")
@@ -375,6 +429,15 @@ class MagicRemoteSSH(MagicClassWithHelpers):
         """
         open a SSH connection and store the connection
         into the notebook workspace
+
+        @NB(remote_open)
+
+        The code for magic command ``%remote_open`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+
+        @endNB
         """
         parser = self.get_parser(
             MagicRemoteSSH.remote_open_parser, "remote_open")
@@ -395,6 +458,16 @@ class MagicRemoteSSH(MagicClassWithHelpers):
         """
         close a SSH connection and store the connection
         into the notebook workspace
+
+        @NB(remote_close)
+
+        The code for magic command ``%remote_close`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            # ... ssh.connect()
+            ssh.close()
+
+        @endNB
         """
         self.get_connection().close()
         return True
@@ -415,6 +488,18 @@ class MagicRemoteSSH(MagicClassWithHelpers):
 
         In the second case, if __PASSWORD__ is found, it will be replaced by the password stored in
         workspace.
+
+        @NB(remote_cmd)
+
+        The code for magic command ``%remote_cmd`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            out, err = ssh.execute_command(
+                line, no_exception=True, fill_stdin=cell)
+            ssh.close()
+
+        @endNB
         """
         if "--help" in line:
             print("Usage: %remote_cmd <cmd>")
@@ -492,6 +577,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             %remote_up localfile remotepath
 
         the command does not allow spaces in files
+
+        @NB(remote_up)
+
+        The code for magic command ``%remote_up`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            ssh.upload(localfile, remotepath)
+            ssh.close()
+
+        @endNB
         """
         parser = self.get_parser(MagicRemoteSSH.remote_up_parser, "remote_up")
         args = self.get_args(line, parser)
@@ -531,6 +627,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             %remote_up_cluster localfile remotepath
 
         the command does not allow spaces in files
+
+        @NB(remote_up_cluster)
+
+        The code for magic command ``%remote_up_cluster`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            ssh.upload_cluster(localfile, remotepath)
+            ssh.close()
+
+        @endNB
 
         .. versionadded:: 1.1
         """
@@ -579,6 +686,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             %remote_down remotepath localfile
 
         the command does not allow spaces in files
+
+        @NB(remote_down)
+
+        The code for magic command ``%remote_down`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            ssh.download(remotepath, localfile)
+            ssh.close()
+
+        @endNB
         """
         parser = self.get_parser(
             MagicRemoteSSH.remote_down_parser, "remote_down")
@@ -632,9 +750,20 @@ class MagicRemoteSSH(MagicClassWithHelpers):
 
         Example::
 
-            %remote_down remotepath localfile
+            %remote_down_cluster remotepath localfile
 
         the command does not allow spaces in files
+
+        @NB(remote_down_cluster)
+
+        The code for magic command ``%remote_down_cluster`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            ssh.download_cluster(remotepath, localfile, merge=merge)
+            ssh.close()
+
+        @endNB
 
         .. versionadded:: 1.1
         """
@@ -673,6 +802,18 @@ class MagicRemoteSSH(MagicClassWithHelpers):
     def open_remote_shell(self, line):
         """
         Defines ``%open_remote_shell``
+
+        @NB(open_remote_shell)
+
+        The code for magic command ``%open_remote_shell`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            ssh.open_session(out_format=format)
+            ssh.close()
+
+        @endNB
+
         """
         parser = self.get_parser(
             MagicRemoteSSH.open_remote_shell_parser, "open_remote_shell")
@@ -734,6 +875,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
 
             %remote_ls .
 
+        @NB(remote_ls)
+
+        The code for magic command ``%remote_ls`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            df = ssh.ls(path)
+            ssh.close()
+
+        @endNB
+
         .. versionadded:: 1.1
         """
         parser = self.get_parser(MagicRemoteSSH.remote_ls_parser, "remote_ls")
@@ -765,6 +917,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
         Example::
 
             %dfs_ls .
+
+        @NB(dfs_ls)
+
+        The code for magic command ``%dfs_ls`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            df = ssh.dfs_ls(args.path)
+            ssh.close()
+
+        @endNB
 
         .. versionadded:: 1.1
         """
@@ -804,6 +967,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
 
             %dfs_rm .
 
+        @NB(dfs_rm)
+
+        The code for magic command ``%dfs_rm`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            df = ssh.dfs_rm(path, recursive=recursive)
+            ssh.close()
+
+        @endNB
+
         .. versionadded:: 1.1
         """
         parser = self.get_parser(MagicRemoteSSH.dfs_rm_parser, "dfs_rm")
@@ -835,6 +1009,17 @@ class MagicRemoteSSH(MagicClassWithHelpers):
         Example::
 
             %dfs_mkdir afolder
+
+        @NB(dfs_mkdir)
+
+        The code for magic command ``%dfs_mkdir`` is equivalent to::
+
+            ssh = ASSHClient(server, username, password)
+            ssh.connect()
+            df = ssh.dfs_mkdir(path)
+            ssh.close()
+
+        @endNB
 
         .. versionadded:: 1.1
         """

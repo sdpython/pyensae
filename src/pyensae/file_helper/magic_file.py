@@ -59,6 +59,15 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines ``%head``
         which displays the first lines of a file
+
+        @NB(head)
+
+        The magic command ``%heal`` is equivalent to::
+
+            from pyensae.file_helper import file_head
+            file_head(<filename>, <n>, <encoding>)
+
+        @endNB
         """
         parser = self.get_parser(MagicFile.head_parser, "head")
         args = self.get_args(line, parser)
@@ -102,6 +111,15 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines ``%tail``
         which displays the last lines of a file
+
+        @NB(tail)
+
+        The magic command ``%tail`` is equivalent to::
+
+            from pyensae.file_helper import file_tail
+            file_tail(<filename>, <n>, <encoding>)
+
+        @endNB
         """
         parser = self.get_parser(MagicFile.tail_parser, "tail")
         args = self.get_args(line, parser)
@@ -139,6 +157,17 @@ class MagicFile(MagicClassWithHelpers):
         """
         define ``%lsr`` which returns the content of a folder,
         the method stops after around 10000 files --> you should precise the filter.
+
+        @NB(lsr)
+
+        The magic command ``%lsr`` is almost equivalent to::
+
+            from pyquickhelper.file_helper import explore_folder_iterfile
+            res = explore_folder_iterfile(<filename>, <pattern>)
+            for f in res:
+                print(f)
+
+        @endNB
         """
         parser = self.get_parser(MagicFile.lsr_parser, "lsr")
         args = self.get_args(line, parser)
@@ -186,6 +215,16 @@ class MagicFile(MagicClassWithHelpers):
     def PYTHON(self, line, cell=None):
         """
         defines command ``%%PYTHON``
+
+        @NB(PYTHON)
+
+        The magic command ``%%PYTHON`` is almost to::
+
+            with open(<filename>, "w", encoding="utf8") as f:
+                f.write("# -*- coding: utf8 -*-\n")
+                f.write(cell.replace("\r", ""))
+
+        @endNB
         """
         parser = self.get_parser(MagicFile.PYTHON_parser, "PYTHON")
         args = self.get_args(line, parser)
@@ -220,8 +259,21 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines command ``%%runpy``
 
-        run a python script which accepts standards input and produces standard outputs,
-        a timeout is set up at 10s
+        @NB(runpy)
+
+        ``%%runpy`` runs  a python script which accepts
+        standards input and produces standard outputs,
+        a timeout is set up at 10s. It is almost equivalent to::
+
+            from pyquickhelper import run_cmd
+            import sys
+            cmd = sys.executable.replace(
+                "pythonw",
+                "python") + " " + filename + " " + args
+            out, err = run_cmd(
+                cmd, wait=True, sin=cell, communicate=True, timeout=10, shell=False)
+
+        @endNB
 
         .. versionadded:: 1.1
         """
@@ -264,7 +316,19 @@ class MagicFile(MagicClassWithHelpers):
     @line_magic
     def lsrepo(self, line):
         """
-        define ``%lsrepo``, the method returns the files present in a repository (GIT or SVN)
+        define ``%lsrepo``
+
+        @NB(lsrepo)
+
+        The method returns the files present in a repository (GIT or SVN).
+        The code is equivalent to::
+
+            from pyquickhelper.filehelper import explore_folder_iterfile_repo
+            res = explore_folder_iterfile_repo(<filename>, <pattern>)
+            for f in res:
+                print(f)
+
+        @endNB
 
         .. versionadded:: 1.1
         """
@@ -315,8 +379,24 @@ class MagicFile(MagicClassWithHelpers):
     @line_magic
     def compress(self, line):
         """
-        define ``%compress``, it compress a list of files,
-        it returns the number of compressed files
+        define ``%compress``
+
+        @NB(compress)
+
+        It compress a list of files,
+        it returns the number of compressed files::
+
+            from pyquickhelper import zip_files, gzip_files, zip7_files
+            if format == "zip":
+                zip_files(dest, files)
+            elif format == "gzip":
+                gzip_files(dest, files)
+            elif format == "7z":
+                zip7_files(dest, files)
+            else:
+                raise ValueError("unexpected format: " + format)
+
+        @endNB
 
         .. versionadded:: 1.1
         """
@@ -370,6 +450,15 @@ class MagicFile(MagicClassWithHelpers):
         """
         define ``%hhelp``, it displays the help for an object in HTML
 
+        @NB(hhelp)
+
+        The magic command is equivalent to::
+
+            from pyquickhelper import docstring2html
+            docstring2html(obj, format=format)
+
+        @endNB
+
         .. versionadded:: 1.1
         """
         parser = self.get_parser(MagicFile.hhelp_parser, "hhelp")
@@ -419,6 +508,21 @@ class MagicFile(MagicClassWithHelpers):
         it is based on `create_visual_diff_through_html_files <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/filehelper/visual_sync.html?highlight=create#pyquickhelper.filehelper.visual_sync.create_visual_diff_through_html_files>`_
 
         Check blog post :ref:`b-textdiff` to see an example.
+
+        @NB(textdiff)
+
+        The magic command is equivalent to::
+
+            from IPython.core.display import display_html, display_javascript
+            from pyquickhelper import docstring2html, create_visual_diff_through_html_files
+            html, js = create_visual_diff_through_html_files(<f1>, <f2>, encoding=<encoding>, notebook=True,
+                                                             context_size=None if <context> in [None, ""] else int(<context>),
+                                                             inline_view=<inline>)
+            display_html(html)
+            display_javascript(js)
+
+        @endNB
+
         """
         parser = self.get_parser(MagicFile.textdiff_parser, "textdiff")
         args = self.get_args(line, parser)

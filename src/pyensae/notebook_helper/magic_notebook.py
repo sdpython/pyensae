@@ -67,6 +67,19 @@ class MagicNotebook(MagicClassWithHelpers):
         """
         defines ``%nb_menu``
         which displays a menu
+
+        @NB(nb_menu)
+
+        The magic command ``%nb_menu`` displays a menu in a notebook.
+        It parses a notebook and displays a menu gathering all sections
+        within that notebook. The code is the following::
+
+            from pyquickhelper.ipythonhelper import add_notebook_menu
+            js = add_notebook_menu(menu_id=<menu_id>, header=<title>, format=<format>,
+                                   first_level=<level1>, last_level=<level2>,
+                                   raw=<raw>)
+
+        @endNB
         """
         parser = self.get_parser(MagicNotebook.nb_menu_parser, "nb_menu")
         args = self.get_args(line, parser)
@@ -143,6 +156,32 @@ class MagicNotebook(MagicClassWithHelpers):
         """
         defines ``%jsdf``
         which displays a pandas dataframe into a notebook using qgrid (javascript)
+
+        @NB(jsdf)
+
+        The magic command ``%jsdf`` displays a dataframe using
+        `qgrid <https://github.com/quantopian/qgrid>`_ module.
+        The code is the following::
+
+            import qgrid
+            if firt_call:
+                qgrid.nbinstall(overwrite=False)
+                qgrid.set_defaults(remote_js=<remote_slick>,
+                                   precision=<precision>)
+                self.first_jsdf_call = False
+
+            df = args.df
+            grid_options = dict(defaultColumnWidth=<defaultColumnWidth>,
+                                enableColumnReorder=<enableColumnReorder>,
+                                multiColumnSort=<multiColumnSort>,
+                                rowHeight=<rowHeight>,
+                                showHeaderRow=<showHeaderRow>,
+                                forceFitColumns=<forceFitColumns>,
+                                autoHeight=<autoHeight>,
+                                enableCellNavigation=<enableCellNavigation>)
+            qgrid.show_grid(df, grid_options=grid_options)
+
+        @endNB
         """
         parser = self.get_parser(MagicNotebook.jsdf_parser, "jsdf")
         args = self.get_args(line, parser)
