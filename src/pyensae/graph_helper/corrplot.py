@@ -10,7 +10,6 @@ See also `biokit license <https://github.com/biokit/biokit/blob/master/LICENSE>`
 :references: http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
 """
 from .linkage import Linkage
-from colormap import cmap_builder
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse, Circle, Rectangle, Wedge
@@ -44,6 +43,7 @@ class Corrplot(Linkage):
         c.plot()
         plt.show()
 
+    This class requires module `colormap <https://pypi.python.org/pypi/colormap>`_.
     """
 
     def __init__(self, data, na=0):
@@ -69,8 +69,11 @@ class Corrplot(Linkage):
 
         """
         super(Corrplot, self).__init__()
-        #: The input data is stored in a dataframe and must therefore be
-        #: compatible (list of lists, dictionary, matrices...)
+
+        # we delay import in case this is not needed
+        from colormap import cmap_builder
+        self.cmap_builder = cmap_builder
+
         self.df = pd.DataFrame(data, copy=True)
 
         compute_correlation = False
@@ -98,7 +101,7 @@ class Corrplot(Linkage):
             'colorbar.orientation': 'vertical'}
 
     def _set_default_cmap(self):
-        self.cm = cmap_builder('#AA0000', 'white', 'darkblue')
+        self.cm = self.cmap_builder('#AA0000', 'white', 'darkblue')
 
     def order(self, method='complete', metric='euclidean', inplace=False):
         """
@@ -185,9 +188,9 @@ class Corrplot(Linkage):
         if cmap is not None:
             try:
                 if isinstance(cmap, str):
-                    self.cm = cmap_builder(cmap)
+                    self.cm = self.cmap_builder(cmap)
                 else:
-                    self.cm = cmap_builder(*cmap)
+                    self.cm = self.cmap_builder(*cmap)
             except:
                 print("incorrect cmap. Use default one")
                 self._set_default_cmap()
