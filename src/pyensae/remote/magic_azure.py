@@ -264,9 +264,12 @@ class MagicAzure(MagicClassWithHelpers):
         """
         returns the list of containers
         """
-        cl, bs = self.get_blob_connection()
-        res = bs.list_containers()
-        return [r.name for r in res]
+        if "-h" in line or "--help" in line:
+            print("Usage: %blob_containers")
+        else:
+            cl, bs = self.get_blob_connection()
+            res = bs.list_containers()
+            return [r.name for r in res]
 
     def _interpret_path(self, line, cl, bs, empty_is_value=False):
         """
