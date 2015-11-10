@@ -7,6 +7,7 @@
 import requests
 import os
 import time
+import io
 from .azure_exception import AzureException
 from pyquickhelper import noLOG
 
@@ -313,8 +314,10 @@ class AzureClient():
                  blob_service,
                  container_name,
                  blob_name,
-                 file_path,
-                 append=False):
+                 file_path=None,
+                 append=False,
+                 chunk_size=None,
+                 stop_at=None):
         """
         Downloads data from a blob storage to a file.
         No more than 64Mb can be downloaded  at the same, it needs to be split into
@@ -325,12 +328,16 @@ class AzureClient():
         @param      blob_name           blob name (or list of blob names) (remote file name)
         @param      file_path           local file path
         @param      append              if True, append the content to an existing file
-        @return                         local file
+        @param      chunk_size          download by chunck
+        @param      stop_at             stop at a given size (None to avoid stopping)
+        @return                         local file or bytes if *file_path* is None
 
         The code comes from `Utilisation du service de stockage d'objets blob à partir de Python <http://azure.microsoft.com/fr-fr/documentation/articles/storage-python-how-to-use-blob-storage/>`_.
 
         .. versionchanged:: 1.1
-            Parameter *append* was added.
+            Parameters *append*, *chunk_size* were added.
+            If *file_path* is None (default value now), the function
+            returns bytes.
         """
         if not isinstance(blob_name, str):
             res = []
@@ -341,21 +348,40 @@ class AzureClient():
                     container_name,
                     blob,
                     dest,
-                    append)
+                    append=append,
+                    chunk_size=chunk_size,
+                    stop_at=stop_at)
                 res.append(r)
-            return res
+                if stop_at is not None:
+                    if file_path is None:
+                        stop_at -= len(r)
+                    else:
+                        stop_at -= os.stat(r).st_size
+                        if stop_at <= 0:
+                            break
+            if file_path is None:
+                st = io.BytesIO()
+                for r in res:
+                    st.write(r)
+                return st.getvalue()
+            else:
+                return res
         else:
             blob_name = self._interpret_path(blob_name)
             props = blob_service.get_blob_properties(container_name, blob_name)
             blob_size = int(props['content-length'])
+            if chunk_size is None:
+                chunk_size = AzureClient._chunk_size
+            if stop_at is not None and stop_at < chunk_size:
+                chunk_size = max(stop_at, 0)
 
-            index = 0
+            def iterations(f, chunk_size,
+                           container_name, blob_name, file_path, stop_at):
+                index = 0
 
-            mode = 'ab' if append else 'wb'
-            with open(file_path, mode) as f:
                 while index < blob_size:
                     chunk_range = 'bytes={}-{}'.format(index,
-                                                       index + AzureClient._chunk_size - 1)
+                                                       index + chunk_size - 1)
                     data = blob_service.get_blob(
                         container_name,
                         blob_name,
@@ -365,17 +391,79 @@ class AzureClient():
                     self.LOG("downloaded ", index, "bytes from ", file_path)
                     if length > 0:
                         f.write(data)
-                        if length < AzureClient._chunk_size:
-                            break
+                        if length < chunk_size:
+                            return False
                     else:
-                        break
-            return file_path
+                        return False
+                    if stop_at is not None and stop_at <= index:
+                        return False
+                return True
+
+            if file_path is None:
+                f = io.BytesIO()
+                iterations(f, chunk_size,
+                           container_name, blob_name, file_path, stop_at)
+                return f.getvalue()
+            else:
+                mode = 'ab' if append else 'wb'
+                with open(file_path, mode) as f:
+                    iterations(f, chunk_size,
+                               container_name, blob_name, file_path, stop_at)
+                return file_path
+
+    def df_head(self,
+                blob_service,
+                container_name,
+                blob_name,
+                stop_at=2 ** 20,
+                encoding="utf-8",
+                as_df=True,
+                merge=False,
+                **options):
+        """
+        Download the beginning of a stream and displays as a DataFrame
+
+        @param      blob_service        returns by @see me open_blob_service
+        @param      container_name      container name
+        @param      blob_name           blob name (or list of blob names) (remote file name)
+        @param      stop_at             stop at a given size (None to avoid stopping)
+        @param      encoding            encoding
+        @param      as_df               result as a dataframe or a string
+        @param      merge               if True, *blob_name* is a folder, method @see me download_merge is called
+        @param      options             see  `read_csv <http://pandas.pydata.org/pandas-docs/version/0.17.0/generated/pandas.read_csv.html?highlight=read_csv#pandas.read_csv>`_
+        @return                         local file or bytes if *file_path* is None
+
+        .. versionadded:: 1.1
+        """
+        if merge:
+            do = self.download_merge(blob_service=blob_service,
+                                     container_name=container_name,
+                                     blob_folder=blob_name,
+                                     stop_at=stop_at)
+        else:
+            do = self.download(blob_service=blob_service,
+                               container_name=container_name,
+                               blob_name=blob_name,
+                               stop_at=stop_at)
+        text = do.decode(encoding)
+        if as_df:
+            pos = text.rfind("\n")
+            if pos > 0:
+                st = io.StringIO(text[:pos])
+            else:
+                st = io.StringIO(text)
+            import pandas
+            return pandas.read_csv(st, **options)
+        else:
+            return text
 
     def download_merge(self,
                        blob_service,
                        container_name,
                        blob_folder,
-                       file_path):
+                       file_path=None,
+                       chunk_size=None,
+                       stop_at=None):
         """
         Downloads all files from a folder in a blob storage to a single local file.
         Files will be merged.
@@ -386,9 +474,14 @@ class AzureClient():
         @param      container_name      container name
         @param      blob_folder         blob folder(remote file name)
         @param      file_path           local file path
+        @param      chunk_size          download by chunck
+        @param      stop_at             stop at a given size (None to avoid stopping)
         @return                         local file
 
-        .. versionadded:: 1.1
+        .. versionchanged:: 1.1
+            Parameters *append*, *chunk_size* were added.
+            If *file_path* is None (default value now), the function
+            returns bytes.
         """
         blob_folder = self._interpret_path(blob_folder)
         content = self.ls(
@@ -397,24 +490,33 @@ class AzureClient():
             blob_folder,
             as_df=False)
         first = True
+        store = io.BytesIO()
         for cont in content:
             if cont["content_length"] > 0:
+                by = self.download(
+                    blob_service,
+                    container_name,
+                    cont["name"],
+                    file_path=file_path,
+                    chunk_size=chunk_size,
+                    stop_at=stop_at,
+                    append=not first)
                 if first:
-                    self.download(
-                        blob_service,
-                        container_name,
-                        cont["name"],
-                        file_path,
-                        append=False)
                     first = False
+                if file_path is None:
+                    store.write(by)
+                    if stop_at is not None:
+                        stop_at -= len(by)
                 else:
-                    self.download(
-                        blob_service,
-                        container_name,
-                        cont["name"],
-                        file_path,
-                        append=True)
-        return file_path
+                    if stop_at is not None:
+                        stop_at -= os.stat(file_path).st_size
+            if stop_at is not None and stop_at <= 0:
+                break
+
+        if file_path is None:
+            return store.getvalue()
+        else:
+            return file_path
 
     def delete_blob(self, blob_service, container_name, blob_name):
         """

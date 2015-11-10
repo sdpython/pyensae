@@ -116,6 +116,7 @@ Versions
     * **new:** function Corrplot copied from module biokit (works in python 3)
     * **new:** magic command ``%jsdf`` which runs module qgrid on a DataFrame
     * **new:** function ``decompress_bz2``
+    * **add:** add method ``df_head`` to class ``AzureClient``, the function download can return the content instead of a file
     
 * **1.0 - 2014/11/10**
     * **add:** add magic command ``%tail_stderr`` for class AzureClient

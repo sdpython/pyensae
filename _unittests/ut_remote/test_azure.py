@@ -266,12 +266,18 @@ class TestAzure (unittest.TestCase):
             self.container,
             "$PSEUDO/unittest2/results.txt",
             dest)
+
         if not os.path.exists(dest):
             raise FileNotFoundError(dest)
         with open(dest, "r", encoding="utf8") as f:
             content = f.read()
         fLOG("-----\n", content)
         assert len(content.strip(" \n\r\t")) > 0
+
+        df = self.client.df_head(self.blob_serv, self.container,
+                                 "$PSEUDO/unittest2/results.txt", sep=",", merge=True)
+        fLOG(df)
+        assert len(df) > 0
 
 
 if __name__ == "__main__":
