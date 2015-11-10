@@ -28,6 +28,9 @@ init:
 
 install:
   - cinst graphviz.portable
+  - set
+  - dir
+  - dir C:\ProgramData\chocolatey\lib\graphviz.portable\tools
   - "%PYTHON%\\python -m pip install --upgrade pip"
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyensae"
