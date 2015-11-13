@@ -135,8 +135,8 @@ class TestFiles (unittest.TestCase):
         res = file_tail(fp, threshold=300, nbline=3)
         res = [_ for _ in res if len(_) > 0]
         fLOG("#####", res)
-        if "unittest.main" not in res[-1]:
-            raise Exception("unittest.main not in " + str(res[-1]))
+        if "unittest.main" not in res[-2]:
+            raise Exception("unittest.main not in " + str(res[-2]))
 
     def test_tail_utf8(self):
         fLOG(
