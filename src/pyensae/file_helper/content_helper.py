@@ -83,4 +83,5 @@ def file_tail(filename, nbline=10, encoding="utf8", threshold=2 ** 14):
                 content = f.read()
 
         rows = content.split("\n")
-        return rows[-nbline:] if len(rows) > nbline else rows
+        res = rows[-nbline:] if len(rows) > nbline else rows
+        return [_ + "\n" for _ in res]
