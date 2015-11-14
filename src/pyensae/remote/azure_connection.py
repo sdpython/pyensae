@@ -310,6 +310,53 @@ class AzureClient():
             blob_service.put_block_list(container_name, blob_name, block_ids)
             return blob_name
 
+    def upload_data(self,
+                    blob_service,
+                    container_name,
+                    blob_name,
+                    data):
+        """
+        Uploads data (bytes) to a blob storage.
+        No more than 64Mb can be uploaded at the same, it needs to be split into
+        pieces.
+
+        @param      blob_service        returns by @see me open_blob_service
+        @param      container_name      container name
+        @param      blob_name           blob name (remote file name)
+        @param      data                bytes
+        @return                         list of uploaded blob names
+
+        The code comes from `Utilisation du service de stockage d'objets blob à partir de Python <http://azure.microsoft.com/fr-fr/documentation/articles/storage-python-how-to-use-blob-storage/>`_.
+
+        .. versionadded:: 1.1
+        """
+        blob_name = self._interpret_path(blob_name)
+        blob_service.create_container(container_name, None, None, False)
+        blob_service.put_blob(container_name, blob_name, None, 'BlockBlob')
+
+        block_ids = []
+        index = 0
+        while True:
+            if len(data) > AzureClient._chunk_size:
+                da = data[:AzureClient._chunk_size]
+                data = data[AzureClient._chunk_size:]
+            else:
+                da = data
+                data = None
+            block_id = '{0:08d}'.format(index)
+            blob_service.put_block(
+                container_name,
+                blob_name,
+                da,
+                block_id)
+            block_ids.append(block_id)
+            index += 1
+            if not data:
+                break
+
+        blob_service.put_block_list(container_name, blob_name, block_ids)
+        return blob_name
+
     def download(self,
                  blob_service,
                  container_name,
@@ -328,7 +375,7 @@ class AzureClient():
         @param      blob_name           blob name (or list of blob names) (remote file name)
         @param      file_path           local file path
         @param      append              if True, append the content to an existing file
-        @param      chunk_size          download by chunck
+        @param      chunk_size          download by chunk
         @param      stop_at             stop at a given size (None to avoid stopping)
         @return                         local file or bytes if *file_path* is None
 
@@ -411,6 +458,29 @@ class AzureClient():
                                container_name, blob_name, file_path, stop_at)
                 return file_path
 
+    def download_data(self,
+                      blob_service,
+                      container_name,
+                      blob_name,
+                      chunk_size=None,
+                      stop_at=None):
+        """
+        Downloads data from a blob storage and return bytes.
+        No more than 64Mb can be downloaded  at the same, it needs to be split into
+        pieces.
+
+        @param      blob_service        returns by @see me open_blob_service
+        @param      container_name      container name
+        @param      blob_name           blob name (or list of blob names) (remote file name)
+        @param      chunk_size          download by chunk
+        @param      stop_at             stop at a given size (None to avoid stopping)
+        @return                         local file or bytes if *file_path* is None
+
+        .. versionadded:: 1.1
+        """
+        return self.download(blob_service=blob_service, container_name=container_name,
+                             blob_name=blob_name, chunk_size=chunk_size, stop_at=stop_at)
+
     def df_head(self,
                 blob_service,
                 container_name,
@@ -474,7 +544,7 @@ class AzureClient():
         @param      container_name      container name
         @param      blob_folder         blob folder(remote file name)
         @param      file_path           local file path
-        @param      chunk_size          download by chunck
+        @param      chunk_size          download by chunk
         @param      stop_at             stop at a given size (None to avoid stopping)
         @return                         local file
 
