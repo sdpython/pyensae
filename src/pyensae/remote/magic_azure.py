@@ -1077,7 +1077,8 @@ class MagicAzure(MagicClassWithHelpers):
                 content.replace(
                     "except Exception,",
                     "except Exception as "))
-            s_func_name = func_name if isinstance(func_name, str) else func_name.__name__.split(".")[-1]
+            s_func_name = func_name if isinstance(
+                func_name, str) else func_name.__name__.split(".")[-1]
             pyf.write("""
                             if __name__ != '__lib__':
                                 import sys

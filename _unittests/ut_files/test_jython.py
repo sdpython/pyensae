@@ -1,5 +1,5 @@
 """
-@brief      test log(time=1s)
+@brief      test log(time=5s)
 
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
@@ -38,8 +38,10 @@ except ImportError:
     import src
     import pyquickhelper
 
-from pyquickhelper import fLOG
+from pyquickhelper import fLOG, get_temp_folder
 from src.pyensae.file_helper import run_jython, get_jython_jar, is_java_installed, download_java_standalone
+from src.pyensae.remote.magic_azure import MagicAzure
+from src.pyensae.file_helper.magic_file import MagicFile
 
 
 class TestJython (unittest.TestCase):
@@ -129,6 +131,58 @@ class TestJython (unittest.TestCase):
         exp = "[('49', '1', '48.864527821',"
         if exp not in out:
             raise Exception("OUT:\n{0}\nERR:\n{1}\n".format(out, err))
+
+    def test_magic_command_jython(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        if "travis" in sys.executable:
+            return
+
+        temp = get_temp_folder(__file__, "temp_magic_command_jython")
+
+        download_java_standalone()
+        assert is_java_installed()
+
+        script = """
+                    import random
+
+                    @schemaFunction("rsSchema")
+                    def rsSchema(input):
+                        return input
+
+                    @outputSchemaFunction("rsSchema")
+                    def reservoir_sampling(ensemble):
+                        ensemble = eval(ensemble)
+                        k = 10
+                        N = len(ensemble)
+                        echantillon = []
+                        for i, e in enumerate(ensemble):
+                            if len(echantillon) < k:
+                                echantillon.append(e)
+                            else:
+                                j = random.randint(0, i)
+                                if j < k:
+                                    echantillon[j] = e
+                        return echantillon
+                    """.replace("                    ", "")
+
+        dest = os.path.join(temp, "script.py")
+        mg = MagicFile()
+        cmd = dest
+        fLOG("**", cmd)
+        res = mg.PYTHON(cmd, cell=script)
+        fLOG(res)
+        assert os.path.exists(dest)
+
+        mg = MagicAzure()
+        cmd = dest + " reservoir_sampling"
+        cell = '{(100001,"AAAAAA"),(99999,"D99999"),(99998,"C99998")}\n'
+        res = mg.jython(cmd, cell=cell)
+        fLOG(res)
+        assert res
 
 
 if __name__ == "__main__":
