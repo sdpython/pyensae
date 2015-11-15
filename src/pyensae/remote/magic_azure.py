@@ -1054,29 +1054,40 @@ class MagicAzure(MagicClassWithHelpers):
         temp = filename.replace(".py", ".temp.py")
         with open(temp, "w", encoding="utf8") as pyf:
             pyf.write("""
-                    # -*- coding: utf8 -*-
-                    if __name__ != '__lib__':
-                        def outputSchema(dont_care):
-                            def wrapper(func):
-                                def inner(*args, **kwargs):
-                                    return func(*args, **kwargs)
-                                return inner
-                            return wrapper
-                    """.replace("                            ", ""))
+                            # -*- coding: utf8 -*-
+                            if __name__ != '__lib__':
+                                def outputSchema(dont_care):
+                                    def wrapper(func):
+                                        def inner(*args, **kwargs):
+                                            return func(*args, **kwargs)
+                                        return inner
+                                    return wrapper
+                                def outputSchemaFunction(schema_def):
+                                    def decorator(func):
+                                        func.outputSchemaFunction = schema_def
+                                        return func
+                                    return decorator
+                                def schemaFunction(schema_def):
+                                    def decorator(func):
+                                        func.schemaFunction = schema_def
+                                        return func
+                                    return decorator
+                        """.replace("                            ", ""))
             pyf.write(
                 content.replace(
                     "except Exception,",
                     "except Exception as "))
+            s_func_name = func_name if isinstance(func_name, str) else func_name.__name__.split(".")[-1]
             pyf.write("""
-                    if __name__ != '__lib__':
-                        import sys
-                        for row in sys.stdin:
-                            row = row.strip()
-                            res = {0}(row)
-                            sys.stdout.write(str(res))
-                            sys.stdout.write("\\n")
-                            sys.stdout.flush()
-                    """.format(func_name).replace("                            ", ""))
+                            if __name__ != '__lib__':
+                                import sys
+                                for row in sys.stdin:
+                                    row = row.strip()
+                                    res = {0}(row)
+                                    sys.stdout.write(str(res))
+                                    sys.stdout.write("\\n")
+                                    sys.stdout.flush()
+                    """.format(s_func_name).replace("                            ", ""))
 
         cmd = sys.executable.replace(
             "pythonw",
@@ -1089,6 +1100,7 @@ class MagicAzure(MagicClassWithHelpers):
         else:
             out, err = run_cmd(
                 cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
+        return out, err
 
     @staticmethod
     def runjython_parser():
@@ -1202,15 +1214,16 @@ class MagicAzure(MagicClassWithHelpers):
 
         .. versionadded:: 1.1
         """
-        parser = self.get_parser(MagicAzure.jpython_parser, "jpython")
+        parser = self.get_parser(MagicAzure.jython_parser, "jpython")
         args = self.get_args(line, parser)
 
         if args is not None:
             filename = args.file
             func_name = args.function_name
+            raw_output = args.raw_output
             args = args.args
             out, err = self._run_jython(cell, filename, func_name, args, True)
-            if args.raw_output:
+            if raw_output:
                 if len(err) > 0:
                     return err
                 else:
