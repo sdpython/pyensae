@@ -248,7 +248,7 @@ class MagicFile(MagicClassWithHelpers):
             help='python file')
         parser.add_argument(
             'args',
-            type=list,
+            type=str,
             nargs="*",
             help='arguments for the scripts',
             default=".")

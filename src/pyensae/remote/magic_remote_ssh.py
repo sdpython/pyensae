@@ -133,7 +133,7 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             '-d',
             '--dependency',
             nargs="*",
-            type=list,
+            type=str,
             help='dependency of the job, the python script')
         parser.add_argument(
             '-l',
@@ -162,7 +162,7 @@ class MagicRemoteSSH(MagicClassWithHelpers):
             '-o',
             '--option',
             nargs='*',
-            type=list,
+            type=str,
             help='list of options for the job')
         return parser
 
@@ -287,7 +287,7 @@ class MagicRemoteSSH(MagicClassWithHelpers):
         parser.add_argument(
             'args',
             nargs='*',
-            type=list,
+            type=str,
             help='list of options for the job')
         parser.add_argument(
             '-i',

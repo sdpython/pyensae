@@ -901,11 +901,11 @@ class MagicAzure(MagicClassWithHelpers):
             '-d',
             '--dependency',
             nargs="*",
-            type=list,
+            type=str,
             help='dependency of the job, the python script')
         parser.add_argument(
             '-s',
-            '--stop_on_failure',
+            '--stop-on-failure',
             action='store_true',
             default=False,
             help='if true, the job stops on failure right away')
@@ -913,7 +913,7 @@ class MagicAzure(MagicClassWithHelpers):
             '-o',
             '--options',
             nargs='*',
-            type=list,
+            type=str,
             help='list of options for the job')
         return parser
 
@@ -1125,7 +1125,7 @@ class MagicAzure(MagicClassWithHelpers):
             help='display raw text instead of HTML')
         parser.add_argument(
             'args',
-            type=list,
+            type=str,
             nargs="*",
             help='arguments')
         return parser
@@ -1194,7 +1194,7 @@ class MagicAzure(MagicClassWithHelpers):
             help='display raw text instead of HTML')
         parser.add_argument(
             'args',
-            type=list,
+            type=str,
             nargs="*",
             help='arguments')
         return parser
