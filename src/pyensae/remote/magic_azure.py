@@ -1236,6 +1236,82 @@ class MagicAzure(MagicClassWithHelpers):
                 else:
                     return HTML('<pre>\n%s\n</pre>' % out)
 
+    @staticmethod
+    def blob_head_parser():
+        """
+        defines the way to parse the magic command ``%blob_head``
+        """
+        parser = MagicCommandParser(prog="blob_head",
+                                    description='get the head of stream in a dataframe')
+        parser.add_argument(
+            'remotepath',
+            type=str,
+            help='remote path of the file to download')
+        parser.add_argument(
+            '-m',
+            '--merge',
+            action='store_true',
+            default=False,
+            help='merges files in a folder')
+        parser.add_argument(
+            '-d',
+            '--df',
+            action='store_true',
+            default=True,
+            help='results as a dataframe')
+        parser.add_argument(
+            '-s',
+            '--size',
+            type=int,
+            default=2 ** 20,
+            help='size of data to get')
+        parser.add_argument(
+            '-e',
+            '--encoding',
+            type=str,
+            default="utf8",
+            help='encoding')
+        parser.add_argument(
+            '--sep',
+            type=str,
+            default="\t",
+            help='column separator')
+        return parser
+
+    @line_magic
+    def blob_head(self, line):
+        """
+        download a file from the blob storage
+        and display its head
+
+        Example::
+
+            %blob_head remotepath
+
+        the command does not allow spaces in file names
+
+        @NB(blob_head)
+
+        The code for magic command ``%blob_head`` is equivalent to::
+
+            from pyensae.remote import AzureClient
+            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+            bs = cl.open_blob_service()
+            df = cl.df_head(bs, container, remotepath, localfile)
+        @endNB
+        """
+        parser = self.get_parser(MagicAzure.blob_head_parser, "blob_head")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            remotepath = args.remotepath
+            cl, bs = self.get_blob_connection()
+            container, remotepath = self._interpret_path(remotepath, cl, bs)
+            res = cl.df_head(bs, container, remotepath,
+                             stop_at=args.size, encoding=args.encoding,
+                             as_df=args.df, merge=args.merge, sep=args.sep)
+            return res
+
 
 def register_azure_magics(ip=None):
     """
