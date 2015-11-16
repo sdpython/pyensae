@@ -6,7 +6,7 @@
 """
 import azure
 from pyquickhelper.filehelper import TransferAPI
-from pyquickhelper.loghelper import fLOG, noLOG
+import pyquickhelper.loghelper as pyqlog
 from .azure_drive import AzureDrive
 
 
@@ -26,8 +26,8 @@ class AzureTransferAPI(TransferAPI):
         @param      container   container name
         @param      fLOG        logging function
         """
-        self.fLOG = fLOG if fLOG else noLOG
-        self._azure = AzureDrive(blob, key, fLOG=fLOG, container=container)
+        self.fLOG = fLOG if fLOG else pyqlog.noLOG
+        self._azure = AzureDrive(blob, key, fLOG=self.fLOG, container=container)
         self._azure.connect()
 
     def transfer(self, path, data):
