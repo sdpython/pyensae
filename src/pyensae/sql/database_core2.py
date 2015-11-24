@@ -129,7 +129,7 @@ class DatabaseCore2:
         return res, "\n".join(lines)
 
     def _guess_columns(
-            self, file, format, columns_name=None, filter_case=None, header=True):
+            self, file, format, columns_name=None, filter_case=None, header=True, encoding="utf-8"):
         """
 
         Guess the columns types from a file (the method assumes there is a header),
@@ -142,9 +142,10 @@ class DatabaseCore2:
         @param      columns_name    if None, the first line contains the columns, otherwise it is the columns name
         @param      filter_case     process every case information (used to replace space for example)
         @param      header          by default, the function is expected a header
+        @param      encoding        encoding
         @return                     columns, changes
         """
-        f = TextFile(file, utf8=True, fLOG=self.LOG)
+        f = TextFile(file, fLOG=self.LOG, encoding=encoding)
         f.open()
 
         if header:

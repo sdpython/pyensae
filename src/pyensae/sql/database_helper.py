@@ -16,6 +16,7 @@ def import_flatfile_into_database(
         engine='SQLite',
         host='localhost',
         add_key=None,
+        encoding="utf-8",
         fLOG=print):
     """
 
@@ -31,6 +32,7 @@ def import_flatfile_into_database(
     @param  host        host (server)
     @param  fLOG        logging function (will display information through the command line)
     @param  add_key     name of a key to add (or None if nothing to add)
+    @param  encoding    encoding
 
     @example(Import a flat file into a SQLite database)
     @code
@@ -60,6 +62,7 @@ def import_flatfile_into_database(
         columns = None
 
     db.import_table_from_flat_file(filetext, table, columns=columns,
-                                   header=header, add_key=add_key)
+                                   header=header, add_key=add_key,
+                                   encoding=encoding)
 
     db.close()

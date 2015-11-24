@@ -46,7 +46,7 @@ class TextFileColumns (TextFile):
     @var _fields            name of the columns (if there is no header)
     """
 
-    def __init__(self, filename, utf8=True,
+    def __init__(self, filename,
                  errors=None,
                  fLOG=noLOG,
                  force_header=False,
@@ -61,11 +61,11 @@ class TextFileColumns (TextFile):
                  force_sep=None,
                  nb_line_guess=100,
                  mistake=3,
+                 encoding="utf-8",
                  strict_separator=False):
         """
         construction
         @param      filename                    filename
-        @param      utf8                        True or False
         @param      errors                      see str (errors = ...)
         @param      fLOG                        LOG function, see `fLOG <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/loghelper/flog.html#pyquickhelper.loghelper.flog.fLOG>`_
         @param      force_header                defines the first line as columns header whatever is it relevant or not
@@ -83,9 +83,10 @@ class TextFileColumns (TextFile):
         @param      force_sep                   if != None, impose a column separator
         @param      nb_line_guess               number of lines used to guess types
         @param      mistake                     not more than mistake conversion in numbers are allowed
+        @param      encoding                    encoding
         @param      strict_separator            strict number of columns, it assumes there is no separator in the content of every column
         """
-        TextFile.__init__(self, filename, utf8, errors, fLOG=fLOG)
+        TextFile.__init__(self, filename, errors, fLOG=fLOG, encoding=encoding)
 
         self._force_header = force_header
         self._force_noheader = force_noheader
@@ -100,6 +101,7 @@ class TextFileColumns (TextFile):
         self._nb_guess_line = nb_line_guess
         self._mistake = mistake
         self._strict_separator = strict_separator
+        self._encoding = encoding
 
         if isinstance(changes, list):
             hhhh, _ = 0, len(changes)
@@ -319,16 +321,18 @@ class TextFileColumns (TextFile):
             if self._break_at != -1 and nb > self._break_at:
                 break
 
-    def _store(output, l):
+    @staticmethod
+    def _store(output, l, encoding="utf-8"):
         """
         store a list of dictionaries into a file (add a header)
 
         @param      output      filename
         @param      l           list of dictionary key:value
+        @param      encoding    encoding
         @warning                format is utf-8
         """
         sepline = "\n"  # GetSepLine ()
-        f = open(output, "w", encoding="utf-8")
+        f = open(output, "w", encoding=encoding)
         nbline = 0
         for d in l:
             if nbline == 0:
@@ -342,7 +346,6 @@ class TextFileColumns (TextFile):
 
             nbline += 1
         f.close()
-    _store = staticmethod(_store)
 
     def sort(self, output, key, maxmemory=2 ** 28, folder=None, fLOG=print):
         """sort a text file, even a big one, one or several columns gives the order
@@ -364,7 +367,7 @@ class TextFileColumns (TextFile):
             raise Exception("unable to find folder %s" % folder)
 
         try:
-            file = open(output, "w")
+            file = open(output, "w", encoding=self._encoding)
             file.close()
         except Exception as e:
             raise Exception(
@@ -409,23 +412,26 @@ class TextFileColumns (TextFile):
             self.LOG("removing ", m)
             os.remove(m)
 
-    def fusion(key, files, output, force_header=False, fLOG=print):
+    @staticmethod
+    def fusion(key, files, output, force_header=False, encoding="utf-8", fLOG=print):
         """
         does a fusion between several files with the same columns (different order is allowed)
         @param      key             columns to be compared
         @param      files           list of files
         @param      output          output file
         @param      force_header    impose the first line as a header
+        @param      encoding        encoding
         @param      fLOG            logging function
         @warning We assume all files are sorted depending on columns in key
         """
         fh = []
         for f in files:
-            h = TextFileColumns(f, force_header=force_header, fLOG=fLOG)
+            h = TextFileColumns(f, force_header=force_header,
+                                encoding=encoding, fLOG=fLOG)
             h.open()
             fh.append([h, iter(h)])
 
-        res = open(output, "w", encoding="utf-8")
+        res = open(output, "w", encoding=encoding)
         nbline = 0
         sepline = "\n"  # GetSepLine ()
 
@@ -483,5 +489,3 @@ class TextFileColumns (TextFile):
         for li in fh:
             li[0].close()
         res.close()
-
-    fusion = staticmethod(fusion)

@@ -2,8 +2,6 @@
 from antlr4 import *
 
 # This class defines a complete listener for a parse tree produced by RParser.
-
-
 class RListener(ParseTreeListener):
 
     # Enter a parse tree produced by RParser#parse.
@@ -14,6 +12,7 @@ class RListener(ParseTreeListener):
     def exitParse(self, ctx):
         pass
 
+
     # Enter a parse tree produced by RParser#expr.
     def enterExpr(self, ctx):
         pass
@@ -21,6 +20,7 @@ class RListener(ParseTreeListener):
     # Exit a parse tree produced by RParser#expr.
     def exitExpr(self, ctx):
         pass
+
 
     # Enter a parse tree produced by RParser#exprlist.
     def enterExprlist(self, ctx):
@@ -30,6 +30,7 @@ class RListener(ParseTreeListener):
     def exitExprlist(self, ctx):
         pass
 
+
     # Enter a parse tree produced by RParser#formlist.
     def enterFormlist(self, ctx):
         pass
@@ -37,6 +38,7 @@ class RListener(ParseTreeListener):
     # Exit a parse tree produced by RParser#formlist.
     def exitFormlist(self, ctx):
         pass
+
 
     # Enter a parse tree produced by RParser#form.
     def enterForm(self, ctx):
@@ -46,6 +48,7 @@ class RListener(ParseTreeListener):
     def exitForm(self, ctx):
         pass
 
+
     # Enter a parse tree produced by RParser#sublist.
     def enterSublist(self, ctx):
         pass
@@ -54,6 +57,7 @@ class RListener(ParseTreeListener):
     def exitSublist(self, ctx):
         pass
 
+
     # Enter a parse tree produced by RParser#sub.
     def enterSub(self, ctx):
         pass
@@ -61,3 +65,5 @@ class RListener(ParseTreeListener):
     # Exit a parse tree produced by RParser#sub.
     def exitSub(self, ctx):
         pass
+
+

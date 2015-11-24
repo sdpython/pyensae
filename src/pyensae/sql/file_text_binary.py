@@ -1,4 +1,3 @@
-# coding: latin-1
 """
 @file
 
@@ -21,15 +20,15 @@ class TextFile:
     This class opens a text file as if it were a binary file. It can deal with null characters which are missed by open function.
 
     @var    filename        file name
-    @var    utf8            decode in utf8?
     @var    errors          decoding in utf8 can raise some errors, see `str <https://docs.python.org/3.4/library/stdtypes.html?highlight=str#str>`_ to understand the meaning of this parameter
     @var    LOG             logging function
     @var    _buffer_size    read a text file _buffer_size bytes each time
     @var    _filter         function filter, None or return True or False whether a line should considered or not
+    @var    _encoding       encoding
 
     Example:
     @code
-    f = TextFile (filename)
+    f = TextFile(filename)
     f.open ()
     for line in f :
         print line
@@ -41,16 +40,15 @@ class TextFile:
     _sep_available = "\t;,| "
 
     def __init__(self, filename,
-                 utf8=True,
                  errors=None,
                  fLOG=print,
                  buffer_size=2 ** 20,
                  filter=None,
-                 separated=False):
+                 separated=False,
+                 encoding="utf-8"):
         """
         construction
         @param      filename        filename
-        @param      utf8            True or False
         @param      errors          see str (errors = ...)
         @param      fLOG            LOG function, see `fLOG <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/loghelper/flog.html#pyquickhelper.loghelper.flog.fLOG>`_
         @param      buffer_size     buffer_size (mostly use to test the reading function)
@@ -59,7 +57,7 @@ class TextFile:
         @param      separated       if True, the line returned by the iterator are splitted by the most probable separator
         """
         self.filename = filename
-        self.utf8 = utf8
+        self._encoding = encoding
         self.errors = errors
         self.LOG = fLOG
         self._buffer_size = buffer_size
@@ -76,12 +74,7 @@ class TextFile:
             sep = res[2]
             self._separated_value = sep
 
-        self._f = open(
-            self.filename,
-            "r",
-            encoding="utf8") if self.utf8 else open(
-            self.filename,
-            "r")
+        self._f = open(self.filename, "r", encoding=self._encoding)
         self._nbline = 0
         self._read = 0
 
@@ -187,37 +180,14 @@ class TextFile:
                     ratio,
                     "%")
 
-            if self.utf8:
-                r = line
-                # if self.errors != None :
-                #    try :
-                #        r = line.encode("utf8")
-                #    except UnicodeDecodeError :
-                #        self.LOG ("  Unicode error with line ", self._nbline, repr (line))
-                #        r = line.encode("utf8", errors = self.errors)
-                # else :
-                #    try :
-                #        r = line.encode("utf8")
-                #    except UnicodeDecodeError as e :
-                #        try :
-                #            r = line.encode("latin-1")
-                #        except UnicodeDecodeError as ee :
-                #            message = str (e)
-                #            temp = ("-----------nbline %d in file %s\n" % (self._nbline,self.filename)) + repr (line) + "\n" + message + "\n"
-                #            self.LOG (temp)
-                #            raise Exception (temp)
+            r = line
+            if self._encoding == "utf-8":
                 r = r.rstrip(endchar)
-                if self._filter is None or self._filter(r):
-                    if self._separated:
-                        yield r.split(self._separated_value)
-                    else:
-                        yield r
-            else:
-                if self._filter is None or self._filter(line):
-                    if self._separated:
-                        yield line.split(self._separated_value)
-                    else:
-                        yield line
+            if self._filter is None or self._filter(r):
+                if self._separated:
+                    yield r.split(self._separated_value)
+                else:
+                    yield r
 
             self._nbline += 1
 
@@ -225,7 +195,7 @@ class TextFile:
         """
         load...
         """
-        f = TextFile(filename, fLOG=self.LOG, **param)
+        f = TextFile(filename, fLOG=self.LOG, encoding=self._encoding, **param)
         f.open()
         cont = {}
         for line in f:
@@ -276,7 +246,7 @@ class TextFile:
         We also assumes values in file_column are unique.
         """
         if output is not None:
-            output = open(output, "w", encoding="utf-8")
+            output = open(output, "w", encoding=self._encoding)
 
         files = []
         for a, b, c, d in definition:
@@ -421,7 +391,7 @@ class TextFile:
         endlinechar = "\n "
 
         # n lines
-        temp = TextFile(self.filename, fLOG=self.LOG)
+        temp = TextFile(self.filename, encoding=self._encoding, fLOG=self.LOG)
         lines = []
 
         temp.open()
@@ -655,7 +625,7 @@ class TextFile:
         if isinstance(exp, str):
             exp = re.compile(exp, re.U)
         acc, rej = 0., 0.
-        temp = TextFile(self.filename, fLOG=self.LOG)
+        temp = TextFile(self.filename, fLOG=self.LOG, encoding=self._encoding)
         temp.open()
         nb = 0
         for line in temp:
@@ -685,7 +655,7 @@ class TextFile:
                      columns,
                      exp=_build_regex_default_value_types,
                      nomore=False,
-                     regex={}):
+                     regex=None):
         """
         Build a regular expression.
 
@@ -708,6 +678,8 @@ class TextFile:
         @endcode
 
         """
+        if regex is None:
+            regex = {}
         mx = max(columns.keys()) + 1
         res = [None for i in range(mx)]
         for k, v in columns.items():

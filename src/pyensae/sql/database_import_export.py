@@ -28,7 +28,8 @@ class DatabaseImportExport:
                                     filename,
                                     header=False,
                                     columns=None,
-                                    post_process=None):
+                                    post_process=None,
+                                    encoding="utf8"):
         """
         export a table into a flat file
 
@@ -39,6 +40,7 @@ class DatabaseImportExport:
         @param      post_process    post_process a line:
                                         - input:  list, dictionary (for your own use, same one all the time)
                                         - output: list
+        @param      encoding        encoding
 
         @example(Export the results of a SQL query into a flat file)
         @code
@@ -58,7 +60,8 @@ class DatabaseImportExport:
         else:
             sql = "SELECT %s FROM %s ;" % (",".join(columns), table)
 
-        self.export_view_into_flat_file(sql, filename, header, post_process)
+        self.export_view_into_flat_file(
+            sql, filename, header, post_process, encoding=encoding)
 
     def _clean_string(self, s):
         """
@@ -129,7 +132,7 @@ class DatabaseImportExport:
     ##########################################################################
 
     def append_values(
-            self, values, tablename, schema, cursor=None, skip_exception=False):
+            self, values, tablename, schema, cursor=None, skip_exception=False, encoding="utf-8"):
         """
         use @see me _append_table to fill a table will the values contained in values (as list)
 
@@ -140,6 +143,7 @@ class DatabaseImportExport:
                                     will be automatically set up.
         @param      cursor          if None, create a new one
         @param      skip_exception  skip exception while inserting an element
+        @param      encoding        encoding
 
         """
         self._append_table(
@@ -147,7 +151,8 @@ class DatabaseImportExport:
             tablename,
             schema,
             cursor=cursor,
-            skip_exception=skip_exception)
+            skip_exception=skip_exception,
+            encoding=encoding)
 
     def _append_table(self, file,
                       table,
@@ -162,7 +167,8 @@ class DatabaseImportExport:
                       filter_case=None,
                       strict_separator=False,
                       skip_exception=False,
-                      changes={},
+                      changes=None,
+                      encoding="utf-8",
                       **params):
         """
         append element to a database
@@ -183,6 +189,7 @@ class DatabaseImportExport:
         @param      params              see format
         @param      skip_exception      skip exception while inserting an element
         @param      changes             to rewrite column names
+        @param      encoding            encoding
         @return                         number of inserted elements
 
         The columns definition must follow the schema:
@@ -201,6 +208,8 @@ class DatabaseImportExport:
             - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)
 
         """
+        if changes is None:
+            changes = {}
         if stop != -1:
             self.LOG("SQL append table stop is ", stop)
         self._check_connection()
@@ -271,14 +280,14 @@ class DatabaseImportExport:
             if strict_separator or column_has_space:
                 file = TextFile(
                     file,
-                    utf8=True,
                     errors='ignore',
-                    fLOG=self.LOG)
+                    fLOG=self.LOG,
+                    encoding=encoding)
                 skip = False
             else:
                 self.LOG("   changes", changes)
-                file = TextFileColumns(file, utf8=True, errors='ignore', fLOG=self.LOG,
-                                       regex=columns, changes=changes)
+                file = TextFileColumns(file, errors='ignore', fLOG=self.LOG,
+                                       regex=columns, changes=changes, encoding=encoding)
                 skip = True
 
             file.open()
@@ -354,6 +363,7 @@ class DatabaseImportExport:
                                     change_to_text=[],
                                     strict_separator=False,
                                     add_key=None,
+                                    encoding="utf-8",
                                     **params):
         """
         add a table to database from a file
@@ -370,6 +380,7 @@ class DatabaseImportExport:
         @param      fill_missing        fill the missing values
         @param      indexes             add indexes before appending all the available observations
         @param      filter_case         process every case information (used to replace space for example)
+        @param      encoding            encoding
         @param      params              see format
         @param      change_to_text      changes the format from any to TEXT
         @param      display             if True, print more information on stdout
@@ -406,10 +417,10 @@ class DatabaseImportExport:
             # here, some spaces might have been replaced by "_", we need to get
             # them back
             columns, changes = self._guess_columns(
-                file, format, columns, filter_case=filter_case, header=header)
+                file, format, columns, filter_case=filter_case, header=header, encoding=encoding)
         elif isinstance(columns, list):
             columns_, changes = self._guess_columns(
-                file, format, columns, filter_case=filter_case, header=header)
+                file, format, columns, filter_case=filter_case, header=header, encoding=encoding)
             if len(columns_) != len(columns):
                 raise DBException(
                     "different number of columns:\ncolumns={0}\nguessed={1}".format(
@@ -460,6 +471,7 @@ class DatabaseImportExport:
                                 filter_case=filter_case,
                                 strict_separator=strict_separator,
                                 changes=changes,
+                                encoding=encoding,
                                 **params)
 
         self.LOG(nb, " lines imported")
