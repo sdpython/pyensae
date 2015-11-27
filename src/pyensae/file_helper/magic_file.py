@@ -15,7 +15,7 @@ from pyquickhelper import run_cmd, zip_files, gzip_files, zip7_files
 from pyquickhelper.ipythonhelper import MagicCommandParser, MagicClassWithHelpers
 from pyquickhelper import docstring2html, create_visual_diff_through_html_files
 from .format_helper import format_file_size, format_file_mtime
-from .content_helper import file_head, file_tail
+from .content_helper import file_head, file_tail, enumerate_grep
 
 
 @magics_class
@@ -74,6 +74,68 @@ class MagicFile(MagicClassWithHelpers):
 
         if args is not None:
             rows = file_head(args.f, args.n, args.encoding)
+            if args.raw:
+                return "".join(rows)
+            else:
+                return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
+
+    @staticmethod
+    def grep_parser():
+        """
+        defines the way to parse the magic command ``%grep``
+        """
+        parser = MagicCommandParser(prog="grep",
+                                    description='display the first lines of a text file')
+        parser.add_argument('f', type=str, help='filename')
+        parser.add_argument('regex', type=str, help='regular expression')
+        parser.add_argument(
+            '-n',
+            '--n',
+            type=int,
+            default=-1,
+            help='number of lines to display, -1 for all')
+        parser.add_argument(
+            '-r',
+            '--raw',
+            default=False,
+            action='store_true',
+            help='display raw text instead of HTML')
+        parser.add_argument(
+            '-e',
+            '--encoding',
+            default="utf8",
+            help='file encoding')
+        return parser
+
+    @line_magic
+    def grep(self, line):
+        """
+        defines ``%grep``
+        which displays the first lines of a file
+
+        @NB(grep)
+
+        The magic command ``%grep`` is equivalent to::
+
+            from pyensae.file_helper import enumerate_grep
+            list(enumerate_grep(<filename>, <regex>, <encoding>))
+
+        @endNB
+        """
+        parser = self.get_parser(MagicFile.grep_parser, "grep")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            iter = enumerate_grep(args.f, args.regex, args.encoding)
+            if args.n != -1:
+                rows = []
+                for r in iter:
+                    if len(rows) >= args.n:
+                        break
+                    rows.append(r)
+            else:
+                rows = list(iter)
+
             if args.raw:
                 return "".join(rows)
             else:

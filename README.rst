@@ -105,7 +105,7 @@ Versions
     * **add:** method *pyensae.remote.remote_connection_ssh.ASSHClient.download_cluster*
     * **add:** add magic command to test a streaming script for PIG
     * **add:** function *pyensae.file_helper.content_helper.file_head*, 
-      *pyensae.file_helper.content_helper.file_tail*
+      *pyensae.file_helper.content_helper.file_tail*, *pyensae.file_helper.content_helper.enumerate_grep*
     * **add:** add magic command ``%lsrepo``, ``%compress``, ``%mpl_style``
     * **del:** delete class *TransferFTP*, moves it to module pyquickhelper
     * **add:** add magic command ``%hhelp`` to display the help for an object in HTML format

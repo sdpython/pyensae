@@ -119,6 +119,22 @@ class TestFiles (unittest.TestCase):
         except FileNotFoundError:
             pass
 
+    def test_grep(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+        fp = os.path.join(
+            os.path.dirname(
+                os.path.abspath(__file__)),
+            "data",
+            "Exportutf8.txt")
+        mg = MagicFile()
+        fLOG("--", fp)
+        res = mg.grep("{0} .*6.* -n 3 -r".format(fp))
+        fLOG("*****", res)
+        self.assertEqual(res.strip("\n"), "1.2	3.4	5.6".strip("\n"))
+
     def test_tail(self):
         fLOG(
             __file__,

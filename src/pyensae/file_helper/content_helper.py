@@ -4,6 +4,7 @@
 """
 
 import os
+import re
 
 
 def replace_comma_by_point(file):
@@ -30,17 +31,20 @@ def file_head(filename, nbline=10, encoding="utf8"):
 
     .. versionadded:: 1.1
     """
-    if not os.path.exists(filename):
-        raise FileNotFoundError(filename)
-    if not os.path.isfile(filename):
-        raise FileNotFoundError("{0} is not a file".format(filename))
-    rows = []
-    with open(filename, "r", encoding=encoding) as f:
-        for line in f:
+    if isinstance(filename, str):
+        if not os.path.exists(filename):
+            raise FileNotFoundError(filename)
+        if not os.path.isfile(filename):
+            raise FileNotFoundError("{0} is not a file".format(filename))
+        with open(filename, "r", encoding=encoding) as f:
+            return file_head(f, nbline=nbline, encoding=encoding)
+    else:
+        rows = []
+        for line in filename:
             rows.append(line)
             if len(rows) >= nbline:
                 break
-    return rows
+        return rows
 
 
 def file_tail(filename, nbline=10, encoding="utf8", threshold=2 ** 14):
@@ -85,3 +89,29 @@ def file_tail(filename, nbline=10, encoding="utf8", threshold=2 ** 14):
         rows = content.split("\n")
         res = rows[-nbline:] if len(rows) > nbline else rows
         return [_ + "\n" for _ in res]
+
+
+def enumerate_grep(filename, regex, encoding="utf8"):
+    """
+    extract lines matching a regular expression
+
+    @param      filename        filename
+    @param      regex           regular expression
+    @param      encoding        encoding
+    @return                     iterator in lines
+
+    .. versionadded:: 1.1
+    """
+    if isinstance(filename, str):
+        if not os.path.exists(filename):
+            raise FileNotFoundError(filename)
+        if not os.path.isfile(filename):
+            raise FileNotFoundError("{0} is not a file".format(filename))
+        with open(filename, "r", encoding=encoding) as f:
+            for _ in enumerate_grep(f, regex, encoding):
+                yield _
+    else:
+        reg = re.compile(regex)
+        for line in filename:
+            if reg.search(line):
+                yield line
