@@ -34,6 +34,7 @@ install:
   - "%PYTHON%\\python -m pip install --upgrade pip"
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyensae"
+  - "%PYTHON%\\Scripts\\pip install azure"
 build: off
 
 test_script:
