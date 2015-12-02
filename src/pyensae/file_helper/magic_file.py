@@ -24,6 +24,21 @@ class MagicFile(MagicClassWithHelpers):
     """
     Defines magic commands to help with files
 
+    @FAQ(Magic command not found)
+
+    Magic commands are automatically added when importing the module ::
+
+        import pyensae
+
+    This instruction does not raise any exception.
+    To understand what went wrong, the following instruction must be run::
+
+        %load_ext pyensae
+
+    Usually, one necessary module is missing.
+
+    @endFAQ
+
     .. versionadded:: 1.1
     """
 
