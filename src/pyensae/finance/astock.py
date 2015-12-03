@@ -83,6 +83,9 @@ class StockPrices:
         @endexample
 
         You should also look at `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_.
+        If you use Google Finance as a provider, the tick name is usually
+        prefixed by the market places (NASDAQ for example). The export
+        does not work for all markets places.
 
         """
         if isinstance(url, pandas.DataFrame):
@@ -133,7 +136,7 @@ class StockPrices:
             send = end.strftime("%Y-%m-%d")
             name = os.path.join(
                 folder,
-                tick +
+                tick.replace(":", "_") +
                 ".{0}.{1}.txt".format(
                     sbeg,
                     send))
@@ -144,34 +147,42 @@ class StockPrices:
                         end.month - 1, end.day, end.year,
                         begin.month - 1, begin.day, begin.year)
                     url = url % tick
+                    use_url = True
+                elif url in("yahoo", "google", "fred", "famafrench"):
+                    import pandas_datareader.data as web
+                    df = web.DataReader(self.tickname, url,
+                                        begin, end).reset_index(drop=False)
+                    df.to_csv(name, sep=sep, index=False)
+                    use_url = False
                 else:
                     raise Exception(
                         "unable to download data from the following website" + str(tick) + " - " +
                         url)
 
-                try:
-                    u = urllib.request.urlopen(url)
-                    text = u.read()
-                    u.close()
-                except urllib.error.HTTPError as e:
-                    raise Exception(
-                        "HTTPError, unable to load tick " + tick + "\nURL: " + url) from e
+                if use_url:
+                    try:
+                        u = urllib.request.urlopen(url)
+                        text = u.read()
+                        u.close()
+                    except urllib.error.HTTPError as e:
+                        raise Exception(
+                            "HTTPError, unable to load tick " + tick + "\nURL: " + url) from e
 
-                if len(text) < 10:
-                    raise Exception("nothing to download for " + tick +
-                                    " less than 10 downloaded bytes")
+                    if len(text) < 10:
+                        raise Exception("nothing to download for " + tick +
+                                        " less than 10 downloaded bytes")
 
-                try:
-                    f = open(name, "wb")
-                    f.write(text)
-                    f.close()
-                except PermissionError as e:
-                    raise Exception(
-                        "PermissionError, unable to create directory " +
-                        folder +
-                        ", check you execute the program in a folder you have permission to modify (" +
-                        os.getcwd() +
-                        ")") from e
+                    try:
+                        f = open(name, "wb")
+                        f.write(text)
+                        f.close()
+                    except PermissionError as e:
+                        raise Exception(
+                            "PermissionError, unable to create directory " +
+                            folder +
+                            ", check you execute the program in a folder you have permission to modify (" +
+                            os.getcwd() +
+                            ")") from e
 
             try:
                 self.datadf = pandas.read_csv(name, sep=sep)
