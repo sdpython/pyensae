@@ -34,7 +34,7 @@ except ImportError:
     import src
     import pyquickhelper
 
-from pyquickhelper import fLOG
+from pyquickhelper import fLOG, is_travis_or_appveyor
 from src.pyensae.finance.astock import StockPrices
 from pyquickhelper.pycode import fix_tkinter_issues_virtualenv
 
@@ -49,6 +49,9 @@ class TestStockGraph3 (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+
+        if is_travis_or_appveyor() == "appveyor":
+            return
 
         fix_tkinter_issues_virtualenv()
 
