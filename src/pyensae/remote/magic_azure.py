@@ -23,46 +23,46 @@ class MagicAzure(MagicClassWithHelpers):
     and `HDInsight <http://azure.microsoft.com/fr-fr/services/hdinsight/>`_.
 
     When the container is not specified, it will take the default one.
-    
+
     @FAQ(Magic command %blob_open does not work)
-    
+
     Try this::
-    
+
         %load_ext pyensae
-        
+
     The exception tells more about what goes wrong.
     Usually a module is missing.
-    
+
     @endFAQ
-    
+
     @FAQ(Incorrect padding)
-    
+
     The following crypted message happens sometimes::
-    
+
         Error: Incorrect padding
-        
-    It is usually due to an incorrect password. 
+
+    It is usually due to an incorrect password.
     Some notebooks uses::
-    
+
         import pyquickhelper.ipythonhelper as ipy
         params={"blob_storage":"hdblobstorage", "password":""}
-        ipy.open_html_form(params=params,title="credentials",key_save="blobservice")        
-        
+        ipy.open_html_form(params=params,title="credentials",key_save="blobservice")
+
         blobstorage = blobservice["blob_storage"]
-        blobpassword = blobservice["password"]        
-        
+        blobpassword = blobservice["password"]
+
         import pyensae
         %blob_open
-        
+
     This code avoids the author letting password in a notebook
     but you can just replace everything by::
 
         blobstorage = "<username>"
         blobpassword = "****long*key*******=="
-        
+
         import pyensae
         %blob_open
-    
+
     @endFAQ
     """
 
