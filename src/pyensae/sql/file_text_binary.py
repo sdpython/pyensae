@@ -219,7 +219,7 @@ class TextFile:
         return res
 
     def _interpret(self, line):
-        """split a line into a list, separator \\t
+        """split a line into a list, separator ``\\t``
         @param      line        string
         @return                 list
         """

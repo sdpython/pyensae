@@ -32,7 +32,7 @@ class DatabaseCore2:
     complementary methods for class Database
     """
 
-    _split_expr = re.compile("\\r?[\\t,;|]")
+    _split_expr = "\\r?\\t"
 
     def _check_connection(self):
         """check the SQL connection"""
@@ -150,12 +150,11 @@ class DatabaseCore2:
 
         if header:
             _aa, _bb, _cc, _dd = f.guess_columns(fields=columns_name)
-            # if _cc != "\t":
-            #    f.close()
-            #    raise Exception(
-            #        "unexpected separator, it should be \\t instead of: " +
-            #        _cc)
+            reg_exp = re.compile(DatabaseCore2._split_expr.replace(
+                "\\t", _cc.replace("|", "[|]")))
         else:
+            # tabulation by default
+            reg_exp = re.compile(DatabaseCore2._split_expr)
             f.close()
             raise NoHeaderException("a header is expected for that function")
 
@@ -167,9 +166,8 @@ class DatabaseCore2:
                 break
             if len(lines) > 900 and random.randint(0, 10) > 0:
                 continue
-            lines.append(
-                DatabaseCore2._split_expr.split(
-                    line.strip(" \r\n").strip('\ufeff')))
+            lines.append(reg_exp.split(
+                line.strip(" \r\n").strip('\ufeff')))
         f.close()
 
         if len(lines) <= 1:
