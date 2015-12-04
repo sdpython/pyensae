@@ -686,10 +686,11 @@ class TextFile:
             t = v[1]
             if t not in exp:
                 raise Exception("unknown type %s" % str(t))
-            if v[0] in regex:
-                res[k] = (v[0], regex[v[0]])
+            nv0 = v[0].strip()
+            if nv0 in regex:
+                res[k] = (nv0, regex[nv0])
             else:
-                res[k] = (v[0], exp[t])
+                res[k] = (nv0, exp[t])
         res = ["(?P<%s>%s)" % c for c in res]
         if sep == "\t":
             sep = "\\t"

@@ -32,7 +32,7 @@ class DatabaseCore2:
     complementary methods for class Database
     """
 
-    _split_expr = re.compile("\\r?\\t")
+    _split_expr = re.compile("\\r?[\\t,;|]")
 
     def _check_connection(self):
         """check the SQL connection"""
@@ -150,14 +150,16 @@ class DatabaseCore2:
 
         if header:
             _aa, _bb, _cc, _dd = f.guess_columns(fields=columns_name)
-            if _cc != "\t":
-                f.close()
-                raise Exception(
-                    "unexpected separator, it should be \\t instead of: " +
-                    _cc)
+            # if _cc != "\t":
+            #    f.close()
+            #    raise Exception(
+            #        "unexpected separator, it should be \\t instead of: " +
+            #        _cc)
         else:
             f.close()
             raise NoHeaderException("a header is expected for that function")
+
+        self.LOG("  [_guess_columns] sep={0}".format([_cc]))
 
         lines = []
         for line in f:
@@ -212,6 +214,8 @@ class DatabaseCore2:
             if origin != name:
                 changes[origin] = name
 
+        self.LOG("  [_guess_columns] columns_name={0}".format(columns_name))
+
         length = {}
         nbline = 0
         count_types = {}
@@ -237,7 +241,6 @@ class DatabaseCore2:
 
                 try:
                     if done[i]:
-
                         continue
                 except KeyError as e:
                     str_columns = ""
