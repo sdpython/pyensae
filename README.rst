@@ -28,6 +28,10 @@ README / Changes
     :alt: MIT License
     :target: http://opensource.org/licenses/MIT
    
+.. image:: https://landscape.io/github/sdpython/pyensae/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/sdpython/pyensae/master
+   :alt: Code Health         
+   
 **Links:**
     * `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_
     * `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
