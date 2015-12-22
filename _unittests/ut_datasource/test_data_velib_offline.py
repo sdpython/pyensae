@@ -95,11 +95,18 @@ class TestDataVelibOffline (unittest.TestCase):
             from JSAnimation import IPython_display
         except ImportError:
             import pymyinstall
-            pymyinstall.ModuleInstall(
-                "JSAnimation",
-                "github",
-                "jakevdp").install(
-                temp_folder="c:\\temp")
+            try:
+                pymyinstall.ModuleInstall(
+                    "JSAnimation",
+                    "github",
+                    "jakevdp").install(
+                    temp_folder="c:\\temp")
+            except Exception as e:
+                fLOG("---------------------")
+                fLOG(e)
+                fLOG("---------------------")
+            # still trying
+            from JSAnimation import IPython_display
 
         df = DataVelibCollect.to_df(data)
         anime = DataVelibCollect.js_animation(df)

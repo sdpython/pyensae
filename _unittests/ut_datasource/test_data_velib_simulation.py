@@ -54,7 +54,7 @@ from pyquickhelper import fLOG
 from src.pyensae.datasource.data_velib import DataVelibCollect
 
 
-class TestDataVelibOffline (unittest.TestCase):
+class TestDataVelibSimulation (unittest.TestCase):
 
     def test_data_velib_simulation(self):
         fLOG(
