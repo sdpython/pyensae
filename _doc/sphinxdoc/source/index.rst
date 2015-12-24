@@ -28,7 +28,11 @@ pyensae documentation
    :target: https://landscape.io/github/sdpython/pyensae/master
    :alt: Code Health         
    
-   
+.. image:: https://requires.io/github/sdpython/pyensae/requirements.svg?branch=master
+     :target: https://requires.io/github/sdpython/pyensae/requirements/?branch=master
+     :alt: Requirements Status   
+
+
 **Links:** `pypi <https://pypi.python.org/pypi/pyensae/>`_,
 `github <https://github.com/sdpython/pyensae/>`_,
 `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_,

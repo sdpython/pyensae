@@ -30,7 +30,13 @@ README / Changes
    
 .. image:: https://landscape.io/github/sdpython/pyensae/master/landscape.svg?style=flat
    :target: https://landscape.io/github/sdpython/pyensae/master
-   :alt: Code Health         
+   :alt: Code Health
+
+.. image:: https://requires.io/github/sdpython/pyensae/requirements.svg?branch=master
+     :target: https://requires.io/github/sdpython/pyensae/requirements/?branch=master
+     :alt: Requirements Status   
+    
+
    
 **Links:**
     * `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_
