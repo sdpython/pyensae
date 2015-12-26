@@ -97,6 +97,7 @@ class TestDataVelibOffline (unittest.TestCase):
             from JSAnimation import IPython_display
         except ImportError:
             import pymyinstall
+            try:
                 pymyinstall.ModuleInstall(
                     "JSAnimation",
                     "github",
