@@ -50,7 +50,7 @@ except ImportError:
     import pyquickhelper
     import pymyinstall
 
-from pyquickhelper import fLOG
+from pyquickhelper import fLOG, get_temp_folder
 from src.pyensae.datasource.data_velib import DataVelibCollect
 
 
@@ -91,20 +91,21 @@ class TestDataVelibOffline (unittest.TestCase):
         if "travis" in sys.executable:
             return
 
+        temp_folder = get_temp_folder(__file__, "temp_data_velib_animation")
+        
         try:
             from JSAnimation import IPython_display
         except ImportError:
             import pymyinstall
-            try:
                 pymyinstall.ModuleInstall(
                     "JSAnimation",
                     "github",
                     "jakevdp").install(
-                    temp_folder="c:\\temp")
+                    temp_folder=temp_folder)
             except Exception as e:
-                fLOG("---------------------")
-                fLOG(e)
-                fLOG("---------------------")
+                print("---------------------")
+                print(e)
+                print("---------------------")
             # still trying
             from JSAnimation import IPython_display
 
@@ -113,7 +114,7 @@ class TestDataVelibOffline (unittest.TestCase):
 
         from JSAnimation import HTMLWriter
         wr = HTMLWriter(embed_frames=False)
-        anime.save(os.path.join(fold, "out_animation.html"), writer=wr)
+        anime.save(os.path.join(temp_folder, "out_animation.html"), writer=wr)
 
 if __name__ == "__main__":
     unittest.main()
