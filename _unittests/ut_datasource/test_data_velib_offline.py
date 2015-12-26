@@ -91,6 +91,11 @@ class TestDataVelibOffline (unittest.TestCase):
         if "travis" in sys.executable:
             return
 
+        from pymyinstall.installhelper.install_cmd_helper import is_conda_distribution
+        if is_conda_distribution():
+            # not tested on anaconda
+            return
+
         temp_folder = get_temp_folder(__file__, "temp_data_velib_animation")
         
         try:
