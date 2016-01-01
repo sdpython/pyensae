@@ -180,25 +180,6 @@ class TestFiles (unittest.TestCase):
         fLOG(res)
         assert len(res) > 0
 
-    def test_files_compress(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-        this = os.path.abspath(__file__)
-        temp = get_temp_folder(__file__, "temp_compress")
-        dest = os.path.join(temp, "temp_this.zip")
-
-        mg = MagicFile()
-        cmd = "dest [this]"
-        fLOG("**", cmd)
-        assert not os.path.exists(dest)
-        mg.add_context({"this": this, "dest": dest})
-        res = mg.compress(cmd)
-        fLOG(res)
-        assert os.path.exists(dest)
-        assert res == 1
-
     def test_htmlhelp(self):
         fLOG(
             __file__,
@@ -225,20 +206,6 @@ class TestFiles (unittest.TestCase):
         res = mg.hhelp("-np -f text Database.__init__")
         assert "it can also contain several files separated by" in res
         assert "@param" in res
-
-    def test_textdiff(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
-        from IPython.core.display import Javascript
-        mg = MagicFile()
-        mg.add_context(
-            {"f1": "STRING1\nSTRING2", "f2": "STRING1\nSTRING3"})
-        cmd = "f1 f2"
-        res = mg.textdiff(cmd)
-        assert isinstance(res, Javascript)
 
 
 if __name__ == "__main__":

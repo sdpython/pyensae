@@ -84,6 +84,8 @@ try:
     from IPython import get_ipython
     ip = get_ipython()
     if ip is not None:
+        import pyquickhelper
+        pyquickhelper.load_ipython_extension(ip)
         load_ipython_extension(ip)
 
 except ImportError as e:

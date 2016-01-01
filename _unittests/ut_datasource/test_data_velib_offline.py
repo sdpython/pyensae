@@ -97,7 +97,7 @@ class TestDataVelibOffline (unittest.TestCase):
             return
 
         temp_folder = get_temp_folder(__file__, "temp_data_velib_animation")
-        
+
         try:
             from JSAnimation import IPython_display
         except ImportError:
