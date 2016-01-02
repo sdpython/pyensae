@@ -32,6 +32,8 @@ pyensae documentation
      :target: https://requires.io/github/sdpython/pyensae/requirements/?branch=master
      :alt: Requirements Status   
 
+.. image:: https://codecov.io/github/codecov/pyensae/coverage.svg?branch=master
+    :target: https://codecov.io/github/codecov/pyensae?branch=master
 
 **Links:** `pypi <https://pypi.python.org/pypi/pyensae/>`_,
 `github <https://github.com/sdpython/pyensae/>`_,

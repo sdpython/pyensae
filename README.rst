@@ -36,6 +36,8 @@ README / Changes
      :target: https://requires.io/github/sdpython/pyensae/requirements/?branch=master
      :alt: Requirements Status   
     
+.. image:: https://codecov.io/github/codecov/pyensae/coverage.svg?branch=master
+    :target: https://codecov.io/github/codecov/pyensae?branch=master
 
    
 **Links:**
@@ -108,7 +110,7 @@ Started in 2013/08.
 Versions
 --------
 
-* **1.1 - 2015/??/??**
+* **1.1 - 2016/??/??**
     * **change:** magic command ``%tail_stderr`` nows displays keyword ``ERROR`` in red.
     * **new:** magic command ``%blob_downmerge`` to download the content of a folder from a blob storage
     * **add:** method *pyensae.remote.remote_connection_ssh.ASSHClient.upload_cluster*
