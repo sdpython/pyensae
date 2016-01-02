@@ -34,9 +34,9 @@ except ImportError:
     import src
     import pyquickhelper
 
-from pyquickhelper import fLOG, is_travis_or_appveyor
+from pyquickhelper import fLOG
 from src.pyensae.finance.astock import StockPrices
-from pyquickhelper.pycode import fix_tkinter_issues_virtualenv
+from pyquickhelper.pycode import fix_tkinter_issues_virtualenv, is_travis_or_appveyor
 
 
 class TestStockGraph3 (unittest.TestCase):
