@@ -157,7 +157,7 @@ if is_local():
         additional_notebook_path=["pyquickhelper"],
         coverage_options=dict(
             omit=["*Parser.py", "*Listener.py", "*Lexer.py"]),
-        fLOG=logging_function, covtoken="f929c9b3-bf00-4928-906a-b1dc54d5a5d9")
+        fLOG=logging_function, covtoken=("f929c9b3-bf00-4928-906a-b1dc54d5a5d9", "'jenkins' in outfile"))
     if not r and not ({"bdist_msi", "sdist",
                        "bdist_wheel", "publish", "publish_doc", "register",
                        "upload_docs", "bdist_wininst"} & set(sys.argv)):

@@ -36,8 +36,8 @@ README / Changes
      :target: https://requires.io/github/sdpython/pyensae/requirements/?branch=master
      :alt: Requirements Status   
     
-.. image:: https://codecov.io/github/codecov/pyensae/coverage.svg?branch=master
-    :target: https://codecov.io/github/codecov/pyensae?branch=master
+.. image:: https://codecov.io/github/sdpython/pyensae/coverage.svg?branch=master
+    :target: https://codecov.io/github/sdpython/pyensae?branch=master
 
    
 **Links:**
