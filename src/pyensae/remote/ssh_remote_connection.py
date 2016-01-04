@@ -9,6 +9,7 @@ import os
 import io
 
 from pyquickhelper import noLOG
+from pyquickhelper.filehelper import is_file_string
 
 
 class ASSHClient():
@@ -686,7 +687,7 @@ class ASSHClient():
 
         .. versionadded:: 1.1
         """
-        if len(hive_file_or_query) < 5000 and os.path.exists(hive_file_or_query):
+        if is_file_string(hive_file_or_query) and os.path.exists(hive_file_or_query):
             dest = os.path.split(hive_file_or_query)[-1]
             self.upload(hive_file_or_query, dest)
             command = "-f"

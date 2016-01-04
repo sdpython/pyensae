@@ -8,6 +8,7 @@ import urllib.error
 import datetime
 import pandas
 import numpy
+from pyquickhelper.filehelper import is_file_string
 
 
 class StockPricesException(Exception):
@@ -96,7 +97,7 @@ class StockPrices:
                     "the dataframe does not contain any column 'Date': {0}".format(
                         ",".join(
                             _ for _ in url.columns)))
-        elif isinstance(tick, str) and len(tick) < 5000 and os.path.exists(tick):
+        elif isinstance(tick, str) and is_file_string(tick) and os.path.exists(tick):
             with open(tick, "r") as f:
                 for line in f.readlines():
                     if line.startswith('<!DOCTYPE html PUBLIC'):
