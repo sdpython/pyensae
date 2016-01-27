@@ -27,7 +27,7 @@ class AzureException(Exception):
             except Exception as e:
                 js = str(e) + "\n" + str(ret)
 
-            self.ret = (code, js)
+            self.ret = (code, js, ret)
         else:
             self.ret = (None, None)
 
@@ -36,5 +36,5 @@ class AzureException(Exception):
         usual
         """
         s = Exception.__str__(self)
-        f = "STATUS: {0}, JSON: {1}\n{2}".format(self.ret[0], self.ret[1], s)
+        f = "STATUS: {0}, JSON: {1}\n{2}\nREQUEST:\n{3}".format(self.ret[0], self.ret[1], s, self.ret[2])
         return f
