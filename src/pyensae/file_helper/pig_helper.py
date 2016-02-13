@@ -23,6 +23,10 @@ def download_pig_standalone(pig_version="0.15.0", hadoop_version="2.7.2", fLOG=n
     @param      hadoop_version      hadoop_version
     @param      fLOG                logging function
     @return                         location
+
+    This function might need to be run twice if the first try
+    fails, it might to due to very long path when unzipping the 
+    downloaded file.
     """
     fbs = []
 
@@ -50,7 +54,7 @@ def download_pig_standalone(pig_version="0.15.0", hadoop_version="2.7.2", fLOG=n
     change_file_status(d)
 
     # download pig
-    fLOG("download pig", version)
+    fLOG("download pig", pig_version)
     d = os.path.join(os.path.abspath(os.path.dirname(__file__)), "pigjar")
     if not os.path.exists(d):
         os.mkdir(d)
