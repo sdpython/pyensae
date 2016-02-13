@@ -13,15 +13,16 @@ from .jython_helper import get_java_cmd, get_java_path
 from ..resources.http_retrieve import download_data
 
 
-def download_pig_standalone(version="14.0", fLOG=noLOG):
+def download_pig_standalone(pig_version="0.15.0", hadoop_version="2.7.2", fLOG=noLOG):
     """
     download the standalone jython
     if it does not exists, we should version 2.5.3 by default
     in order to fit the cluster's version
 
-    @param      version     0.14.0 by default
-    @param      fLOG        logging function
-    @return                 location
+    @param      pig_version         pig_version
+    @param      hadoop_version      hadoop_version
+    @param      fLOG                logging function
+    @return                         location
     """
     fbs = []
 
@@ -37,25 +38,25 @@ def download_pig_standalone(version="14.0", fLOG=noLOG):
     change_file_status(d)
 
     # download hadoop
-    fLOG("download hadoop 2.5.2")
+    fLOG("download hadoop", hadoop_version)
     d = os.path.join(os.path.abspath(os.path.dirname(__file__)), "hadoopjar")
     if not os.path.exists(d):
         os.mkdir(d)
-    fn = download_data(name="hadoop-2.5.2.tar.gz",
+    fn = download_data(name="hadoop-%s.tar.gz" % hadoop_version,
                        whereTo=d,
-                       website="http://wwwftp.ciril.fr/pub/apache/hadoop/common/hadoop-2.5.2/",
+                       website="http://wwwftp.ciril.fr/pub/apache/hadoop/common/hadoop-%s/" % hadoop_version,
                        fLOG=fLOG)
     fbs.append(fn)
     change_file_status(d)
 
     # download pig
-    fLOG("download pig 0.14.0")
+    fLOG("download pig", version)
     d = os.path.join(os.path.abspath(os.path.dirname(__file__)), "pigjar")
     if not os.path.exists(d):
         os.mkdir(d)
-    fn = download_data(name="pig-0.14.0.tar.gz",
+    fn = download_data(name="pig-%s.tar.gz" % pig_version,
                        whereTo=d,
-                       website="http://apache.crihan.fr/dist/pig/pig-0.14.0/",
+                       website="http://apache.crihan.fr/dist/pig/pig-%s/" % pig_version,
                        fLOG=fLOG)
     fbs.append(fn)
     change_file_status(d)
@@ -120,7 +121,7 @@ def get_pig_jars():
                         and "hadoop1-runtime" not in root \
                         and "test" not in root \
                         and "h2" not in name \
-                        and "pig-0.14.0-withouthadoop-h2" not in name:
+                        and "pig-0.15.0-withouthadoop-h2" not in name:
                     res.append(os.path.join(root, name))
     return res
 
@@ -149,6 +150,8 @@ def run_pig(pigfile,
             jython_path=None,
             timeout=None,
             logpath="logs",
+            pig_version="0.15.0",
+            hadoop_version="2.7.2",
             fLOG=noLOG):
     """
     runs a pig script and returns the standard output and error
@@ -156,16 +159,18 @@ def run_pig(pigfile,
     @param      pigfile         pig file
     @param      argv            arguments to sned to the command line
     @param      pig_path        path to pig 0.XX.0
-    @param      hadoop_path     path to hadoop 2.5.2
+    @param      hadoop_path     path to hadoop
     @param      timeout         timeout
     @param      logpath         path to the logs
+    @param      pig_version     PIG version (if *pig_path* is not defined)
+    @param      hadoop_version  Hadoop version (if *hadoop_path* is not defined)
     @param      fLOG            logging function
     @return                     out, err
 
     If *pig_path* is None, the function looks into this directory.
     """
     if pig_path is None:
-        pig_path = os.path.join(get_pig_path(), "pig-0.14.0")
+        pig_path = os.path.join(get_pig_path(), "pig-%s" % pig_version)
 
     if hadoop_path is None:
         hadoop_path = get_hadoop_path()
@@ -211,7 +216,7 @@ def run_pig(pigfile,
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "common",
@@ -220,7 +225,7 @@ def run_pig(pigfile,
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "hdfs",
@@ -229,7 +234,7 @@ def run_pig(pigfile,
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "mapreduce",
@@ -238,7 +243,7 @@ def run_pig(pigfile,
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "httpfs",
@@ -248,7 +253,7 @@ def run_pig(pigfile,
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "tools",
@@ -257,7 +262,7 @@ def run_pig(pigfile,
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "yarn",
@@ -267,19 +272,27 @@ def run_pig(pigfile,
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "common",
-                "hadoop-common-2.5.2.jar"))
+                "hadoop-common-%s.jar" % hadoop_version))
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "common",
-                "hadoop-nfs-2.5.2"))
+                "hadoop-nfs-%s" % hadoop_version))
+        jars.append(
+            os.path.join(
+                hadoop_path,
+                "hadoop-%s" % hadoop_version,
+                "share",
+                "hadoop",
+                "hdfs",
+                "hadoop-hdfs-%s.jar" % hadoop_version))
         jars.append(
             os.path.join(
                 hadoop_path,
@@ -287,19 +300,11 @@ def run_pig(pigfile,
                 "share",
                 "hadoop",
                 "hdfs",
-                "hadoop-hdfs-2.5.2.jar"))
+                "hadoop-hdfs-nfs-%s.jar" % hadoop_version))
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
-                "share",
-                "hadoop",
-                "hdfs",
-                "hadoop-hdfs-nfs-2.5.2.jar"))
-        jars.append(
-            os.path.join(
-                hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "mapreduce",
@@ -307,20 +312,20 @@ def run_pig(pigfile,
         jars.append(
             os.path.join(
                 hadoop_path,
-                "hadoop-2.5.2",
+                "hadoop-%s" % hadoop_version,
                 "share",
                 "hadoop",
                 "yarn",
                 "*.jar"))
 
-        jars.append(os.path.join(pig_path, "pig-0.14.0-core-h1.jar"))
+        jars.append(os.path.join(pig_path, "pig-%s-core-h1.jar" % pig_version))
     else:
         jars.append(
             os.path.join(
                 pig_path,
-                "pig-0.14",
+                "pig-%s" % pig_version,
                 "legacy",
-                "pig-0.14.0-withouthadoop-h2.jar"))
+                "pig-%s-withouthadoop-h2.jar" % pig_version))
 
     jarsall = []
     for j in jars:

@@ -36,5 +36,6 @@ class AzureException(Exception):
         usual
         """
         s = Exception.__str__(self)
-        f = "STATUS: {0}, JSON: {1}\n{2}\nREQUEST:\n{3}".format(self.ret[0], self.ret[1], s, self.ret[2])
+        f = "STATUS: {0}, JSON: {1}\n{2}\nREQUEST:\n{3}".format(
+            self.ret[0], self.ret[1], s, self.ret[2])
         return f
