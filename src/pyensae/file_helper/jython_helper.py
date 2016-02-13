@@ -11,7 +11,7 @@ import urllib.request
 from pyquickhelper import run_cmd, noLOG
 
 
-def download_java_standalone(version="2.7.1b2"):
+def download_java_standalone(version="2.7.1b3"):
     """
     download the standalone jython
     if it does not exists, we should version 2.5.3 by default
@@ -22,7 +22,7 @@ def download_java_standalone(version="2.7.1b2"):
     """
 
     dest = "jython-standalone-%s.jar" % version
-    if version in ("2.5.3", "2.7.1b2", "2.7.0"):
+    if version in ("2.5.3", "2.7.1b2", "2.7.0", "2.7.1b3"):
         url = "http://repo1.maven.org/maven2/org/python/jython-standalone/{1}/{0}".format(
             dest,
             version)
