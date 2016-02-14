@@ -41,12 +41,10 @@ README / Changes
 
    
 **Links:**
-    * `pypi/pyensae <https://pypi.python.org/pypi/pyensae/>`_
-    * `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
-    * `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_
-    * `Windows Setup <http://www.xavierdupre.fr/site2013/index_code.html#pyensae>`_
-    * `Travis <https://travis-ci.org/sdpython/pyensae>`_
-    * `Blog <http://www.xavierdupre.fr/app/pyensae/helpsphinx/blog/main_0000.html#ap-main-0>`_
+
+* `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
+* `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_
+* `Blog <http://www.xavierdupre.fr/app/pyensae/helpsphinx/blog/main_0000.html#ap-main-0>`_
 
 
 Description        
