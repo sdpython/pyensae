@@ -149,6 +149,11 @@ class MagicNotebook(MagicClassWithHelpers):
             type=int,
             default=4,
             help='see function qgrid.set_defaults')
+        parser.add_argument(
+            '--editable',
+            type=bool,
+            default=True,
+            help='make the output editable')
         return parser
 
     @line_magic
@@ -201,7 +206,8 @@ class MagicNotebook(MagicClassWithHelpers):
                                 showHeaderRow=args.showHeaderRow,
                                 forceFitColumns=args.forceFitColumns,
                                 autoHeight=args.autoHeight,
-                                enableCellNavigation=args.enableCellNavigation)
+                                enableCellNavigation=args.enableCellNavigation,
+                                editable=args.editable)
             return qgrid.show_grid(df, grid_options=grid_options)
 
 
