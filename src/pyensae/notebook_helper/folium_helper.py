@@ -8,7 +8,7 @@ does not explicitely import *folium*.
 from IPython.display import HTML
 
 
-def folium_inline_map(map):
+def folium_html_map(map):
     """
     Embeds the HTML source of the map directly into the IPython notebook.
 
@@ -29,10 +29,21 @@ def folium_inline_map(map):
                            fill_color='#132b5e', num_sides=3, radius=10)
     folium_inline_map(map_osm)
     @endcode
+
+    With folium version 0.2, this becomes easier:
+
+    @code
+    import folium
+    map_osm = folium.Map(location=[48.85, 2.34])
+    from pyensae.notebook_helper import folium_inline_map
+    map_osm.polygon_marker(location=[48.824338, 2.302641], popup='ENSAE',
+                           fill_color='#132b5e', num_sides=3, radius=10)
+    map_osm
+    @endcode
+
     @endexample
     """
-    map._build_map()
-    return HTML('<iframe srcdoc="{srcdoc}" style="width: 100%; height: 510px; border: none"></iframe>'.format(srcdoc=map.HTML.replace('"', '&quot;')))
+    return map._repr_html_()
 
 
 def folium_embed_map(map, path="map.html"):
@@ -48,5 +59,5 @@ def folium_embed_map(map, path="map.html"):
 
     Source: `folium_base.py <https://gist.github.com/psychemedia/f7385255f89137c503b5>`_
     """
-    map.create_map(path=path)
+    map.save(path)
     return HTML('<iframe src="files/{path}" style="width: 100%; height: 510px; border: none"></iframe>'.format(path=path))

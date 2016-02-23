@@ -36,7 +36,7 @@ except ImportError:
 
 
 from pyquickhelper import get_temp_folder, fLOG
-from src.pyensae.notebook_helper import folium_inline_map
+from src.pyensae.notebook_helper import folium_html_map, folium_embed_map
 
 
 class TestNotebookFolium (unittest.TestCase):
@@ -60,10 +60,13 @@ class TestNotebookFolium (unittest.TestCase):
 
         import folium
         map_osm = folium.Map(location=[48.85, 2.34])
-        map_osm.create_map(path=outfile)
+        map_osm.save(outfile)
         assert os.path.exists(outfile)
-        folium_inline_map(map_osm)
+        folium_embed_map(map_osm, path=outfile.replace(".html", "2.html"))
+        ht = folium_html_map(map_osm)
         fLOG("done")
+        assert len(ht) > 0
+        assert "<div" in ht
 
 
 if __name__ == "__main__":

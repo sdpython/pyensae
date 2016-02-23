@@ -61,7 +61,8 @@ class TestPig (unittest.TestCase):
             download_pig_standalone(fLOG=fLOG)
         except FileNotFoundError:
             # for some unknown reason, it requires to be done twice
-            # due to FileNotFoundError: [Errno 2] No such file or directory: 'pyensae\\src\\pyensae\\file_helper\\pigjar\\pig-0.15.0\\contrib\\piggybank\\java\\build\\classes\\org\\apache\\pig\\piggybank\\storage\\IndexedStorage$IndexedStorageInputFormat$IndexedStorageRecordReader$IndexedStorageRecordReaderComparator.class'
+            # due to FileNotFoundError: [Errno 2] No such file or directory:
+            # 'pyensae\\src\\pyensae\\file_helper\\pigjar\\pig-0.15.0\\contrib\\piggybank\\java\\build\\classes\\org\\apache\\pig\\piggybank\\storage\\IndexedStorage$IndexedStorageInputFormat$IndexedStorageRecordReader$IndexedStorageRecordReaderComparator.class'
             download_pig_standalone(fLOG=fLOG)
 
         # it does not work for the time being

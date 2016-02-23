@@ -25,7 +25,7 @@ def download_pig_standalone(pig_version="0.15.0", hadoop_version="2.7.2", fLOG=n
     @return                         location
 
     This function might need to be run twice if the first try
-    fails, it might to due to very long path when unzipping the 
+    fails, it might to due to very long path when unzipping the
     downloaded file.
     """
     fbs = []

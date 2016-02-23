@@ -347,30 +347,52 @@ class DataVelibCollect:
         return pandas.DataFrame(rows)
 
     @staticmethod
-    def draw(df, **args):
+    def draw(df, use_folium=False, **args):
         """
         draw a graph using four columns: lng, lat, available_bike_stands, available_bikes
 
         @param      args                other parameters to give method ``plt.subplots``
+        @param      use_folium          use folium to create the map
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
+
+        .. versionchanged:: 1.1
+            Parameter *use_folium* was added. It relies on module
+            `folium <https://github.com/python-visualization/folium>`_.
         """
-        import matplotlib.pyplot as plt
-        fig, ax = plt.subplots(**args)
+        if not use_folium:
+            import matplotlib.pyplot as plt
+            fig, ax = plt.subplots(**args)
 
-        x = df["lng"]
-        y = df["lat"]
-        areaf = df.apply(
-            lambda r: numpy.pi * (r["available_bike_stands"]) ** 2, axis=1)
-        areab = df.apply(
-            lambda r: numpy.pi * (r["available_bikes"]) ** 2, axis=1)
-        ax.scatter(x, y, areaf, alpha=0.5, label="place", color="r")
-        ax.scatter(x, y, areab, alpha=0.5, label="bike", color="g")
-        ax.grid(True)
-        ax.legend()
-        ax.set_xlabel("longitude")
-        ax.set_ylabel("latitude")
+            x = df["lng"]
+            y = df["lat"]
+            areaf = df.apply(
+                lambda r: numpy.pi * (r["available_bike_stands"]) ** 2, axis=1)
+            areab = df.apply(
+                lambda r: numpy.pi * (r["available_bikes"]) ** 2, axis=1)
+            ax.scatter(x, y, areaf, alpha=0.5, label="place", color="r")
+            ax.scatter(x, y, areab, alpha=0.5, label="bike", color="g")
+            ax.grid(True)
+            ax.legend()
+            ax.set_xlabel("longitude")
+            ax.set_ylabel("latitude")
 
-        return fig, ax, plt
+            return fig, ax, plt
+        else:
+            import folium
+            x = df["lat"].mean()
+            y = df["lng"].mean()
+            map_osm = folium.Map(location=[x, y], zoom_start=13)
+
+            def add_marker(row):
+                t = "+ {0} o {1}".format(row["available_bikes"],
+                                         row["available_bike_stands"])
+                folium.CircleMarker([row["lat"], row["lng"]], color='#3186cc', fill_color='#3186cc',
+                                    popup=t, radius=(row["available_bikes"] / numpy.pi) ** 0.5 * 30).add_to(map_osm)
+                folium.CircleMarker([row["lat"], row["lng"]], color='#cc8631', fill_color='#cc8631',
+                                    popup=t, radius=(row["available_bike_stands"] / numpy.pi) ** 0.5 * 30).add_to(map_osm)
+
+            df.apply(lambda row: add_marker(row), axis=1)
+            return map_osm
 
     @staticmethod
     def js_animation(df, interval=20, **args):
