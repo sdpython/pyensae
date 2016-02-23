@@ -83,5 +83,4 @@ pyquickhelper
 pymyinstall
 colormap
 easydev
-qgrid
 pandas_datareader
