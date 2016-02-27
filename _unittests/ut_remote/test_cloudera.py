@@ -55,6 +55,7 @@ class TestCloudera (unittest.TestCase):
         if res is None:
             self.client = None
         else:
+            res = [bytes(_, encoding="ascii") for _ in res]
             codes = [res[0], res[2], res[1]]
             if len(codes) >= 7 or len(codes) == 3:
                 cl = ASSHClient(*codes)
@@ -128,7 +129,9 @@ class TestCloudera (unittest.TestCase):
         self.client.upload_cluster(files, "unittest")
 
         fLOG("after\n", df["name"])
-        assert len(df) >= 3
+        if len(df) < 3:
+            fLOG(df)
+            assert False
 
         self.client.download_cluster(df["name"], fold)
         l = os.listdir(fold)
@@ -220,13 +223,14 @@ class TestCloudera (unittest.TestCase):
                 STORE matrice INTO 'unittest2/results.txt' USING PigStorage('\t') ;
             """.replace("                ", "")
 
+        fLOG(self.client.username)
         hive_sql = """
             DROP TABLE IF EXISTS bikes20;
             CREATE TABLE bikes20 (sjson STRING);
             LOAD DATA INPATH "/user/__USERNAME__/unittest2/paris*.txt"
                 INTO TABLE bikes20;
             SELECT * FROM bikes20 LIMIT 10;
-            """.replace("__USERNAME__", self.client.username)
+            """.replace("__USERNAME__", self.client.username.decode("ascii"))
         fLOG(hive_sql)
         #${hiveconf:UTT}
 
