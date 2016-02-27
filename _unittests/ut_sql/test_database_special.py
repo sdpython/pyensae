@@ -56,10 +56,10 @@ class TestDatabaseSpecial (unittest.TestCase):
         cur = db.execute(sql)
         mat = [line for line in cur]
         view = db.execute_view(sql, add_column_name=True)
-        assert len(view) == len(mat) + 1
-        assert view[0] == ['1;nb_click', '1;url', '2;nb_click', '2;url', '3;nb_click', '3;url', '4;nb_click', '4;url', '5;nb_click', '5;url', '6;nb_click', '6;url', '7;nb_click', '7;url', '8;nb_click', '8;url', '9;nb_click',
-                           '9;url', '10;nb_click', '10;url', '11;nb_click', '11;url', '12;nb_click', '12;url', '13;nb_click', '13;url', '14;nb_click', '14;url', '15;nb_click', '15;url', '16;nb_click', '16;url', '18;nb_click', '18;url']
-        assert len(view[0]) == len(view[1])
+        self.assertEqual(len(view), len(mat) + 1)
+        self.assertEqual(view[0], ['1;nb_click', '1;url', '2;nb_click', '2;url', '3;nb_click', '3;url', '4;nb_click', '4;url', '5;nb_click', '5;url', '6;nb_click', '6;url', '7;nb_click', '7;url', '8;nb_click', '8;url', '9;nb_click',
+                                   '9;url', '10;nb_click', '10;url', '11;nb_click', '11;url', '12;nb_click', '12;url', '13;nb_click', '13;url', '14;nb_click', '14;url', '15;nb_click', '15;url', '16;nb_click', '16;url', '18;nb_click', '18;url'])
+        self.assertEqual(len(view[0]), len(view[1]))
 
         exp = {
             1: [268.0, 'www.facebook.com/login.php', 97.0, 'www.friendster.com/login.php', 29.0, 'https://login.facebook.com/login.php', 15.0, 'https://login.yahoo.com/', 10.0, 'https://login.facebook.com/login.php', 10.0, 'lite.facebook.com/login/?next=http%3A%2F%2Flite.facebook.com%2Ftheamloong%2Fvideo%2Fof%2FTNT-sanshou', 13.0, 'lite.facebook.com/login/?next=http%3A%2F%2Flite.facebook.com%2Ftheamloong%2Fvideo%2Fof%2FTNT-sanshou', 5.0, 'https://login.verizonwireless.com/amserver/UI/Login', 6.0, 'https://login.facebook.com/login.php', 2.0, 'https://login.comcast.net/', 0.0, 'HottieMatchUp.com/matchcomlogin', 0.0, 'FreshPCFix.com/loginscreen', 0.0, 'FreshPCFix.com/loginscreen', 0.0, 'login.marketingblacksmith.com', 0.0, 'sites.managerslogin.com', 0.0, 'sites.managerslogin.com', 0.0, 'sites.managerslogin.com'],
@@ -76,23 +76,23 @@ class TestDatabaseSpecial (unittest.TestCase):
                         raise Exception(
                             "k=%d, different values\nexp %s\n != %s" % (k, str(a), str(b)))
 
-        assert len(view[0]) == len(view[-1])
+        self.assertEqual(len(view[0]), len(view[-1]))
 
         sql = """CROSS pos PLACE nb_click FROM url_QSSH ORDER BY nb_click -- comment
                     DESC LIMIT 100"""
         cur = db.execute(sql)
         mat = [line for line in cur]
         view = db.execute_view(sql, add_column_name=True)
-        assert len(view) == len(mat) + 1
-        assert len(view[0]) == len(view[1])
+        self.assertEqual(len(view), len(mat) + 1)
+        self.assertEqual(len(view[0]), len(view[1]))
 
         sql = """CROSS pos,pos PLACE nb_click FROM url_QSSH ORDER BY nb_click -- comment
                     DESC LIMIT 100"""
         cur = db.execute(sql)
         mat = [line for line in cur]
         view = db.execute_view(sql, add_column_name=True)
-        assert len(view) == len(mat) + 1
-        assert len(view[0]) == len(view[1])
+        self.assertEqual(len(view), len(mat) + 1)
+        self.assertEqual(len(view[0]), len(view[1]))
 
         db.close()
 
@@ -180,7 +180,7 @@ class TestDatabaseSpecial (unittest.TestCase):
 
         sql = "SELECT COUNT(*) FROM seco.word_QSSH"
         vie = db.execute_view(sql)
-        assert len(vie) == 1
+        self.assertEqual(len(vie), 1)
         db.close()
 
         # method 2
@@ -191,11 +191,11 @@ class TestDatabaseSpecial (unittest.TestCase):
 
         sql = "SELECT COUNT(*) FROM seco.word_QSSH"
         vi2 = db.execute_view(sql)
-        assert len(vi2) == 1
-        assert vi2 == vie
+        self.assertEqual(len(vi2), 1)
+        self.assertEqual(vi2, vie)
 
         att = db.get_attached_database_list()
-        assert att == ['seco']
+        self.assertEqual(att, ['seco'])
         ts = db.get_table_list(True)
         self.assertEqual(ts, ['seco.query',
                               'seco.idx_query_query', 'seco.qtok', 'seco.idx_qtok_qtok',

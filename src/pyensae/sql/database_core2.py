@@ -516,19 +516,7 @@ class DatabaseCore2:
         @param      varname     name of the variable
         @return                 2-uple: simp, scode (import part, code part)
         """
-
-        path = os.path.realpath(os.path.split(__file__)[0])
-        pos = path.find("pyensae")
-        if pos == -1:
-            raise Exception(
-                "the installation of module pyensae went wrong: %s dot not contain pyensae" %
-                path)
-        path = path[:pos - 1]
-        if not os.path.exists(path):
-            raise Exception("unable to find path " + path)
-        simp = ["import sys"]
-        simp += ["sys.path.append (r'%s')" % path]
-        simp += ["from pyensae import Database"]
+        simp = ["from pyensae import Database"]
 
         code = ["tblname = r'%s'" % self.get_file()]
 
