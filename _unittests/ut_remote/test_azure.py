@@ -52,10 +52,11 @@ from common import get_codes
 class TestAzure (unittest.TestCase):
 
     def setUp(self):
-        if get_codes() is None:
+        res = get_codes("CRAZURE")
+        if res is None:
             self.client = None
         else:
-            codes = get_codes()[:4]
+            codes = res
             cl = AzureClient(
                 codes[0],
                 codes[1],

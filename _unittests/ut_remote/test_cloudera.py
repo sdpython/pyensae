@@ -50,12 +50,12 @@ from common import get_codes
 class TestCloudera (unittest.TestCase):
 
     def setUp(self):
-        if get_codes() is None:
+        res = get_codes("CRTERALAB")
+        if res is None:
             self.client = None
         else:
-            codes = get_codes()
+            codes = [res[0], res[2], res[1]]
             if len(codes) >= 7 or len(codes) == 3:
-                codes = codes[-3:]
                 cl = ASSHClient(*codes)
                 cl.connect()
                 self.client = cl
@@ -222,7 +222,8 @@ class TestCloudera (unittest.TestCase):
         hive_sql = """
             DROP TABLE IF EXISTS bikes20;
             CREATE TABLE bikes20 (sjson STRING);
-            LOAD DATA INPATH "/user/__USERNAME__/unittest2/paris*.txt" INTO TABLE bikes20;
+            LOAD DATA INPATH "/user/__USERNAME__/unittest2/paris*.txt"
+                INTO TABLE bikes20;
             SELECT * FROM bikes20 LIMIT 10;
             """.replace("__USERNAME__", self.client.username)
         fLOG(hive_sql)
@@ -290,6 +291,7 @@ class TestCloudera (unittest.TestCase):
         fLOG("LL")
 
         # we submit the job
+        # disable HIVE for the time being (broken)
         out, err = self.client.hive_submit(hive_sql,
                                            redirection=None,
                                            params=dict(UTT="unittest2"),
