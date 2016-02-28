@@ -85,3 +85,4 @@ colormap
 easydev
 pandas_datareader
 pycrypto
+pycryptodomex
