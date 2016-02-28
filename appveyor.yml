@@ -34,8 +34,8 @@ install:
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyensae"
   - "%PYTHON%\\Scripts\\pip install cryptography"
-  - "%PYTHON%\\Scripts\\pip install pycryptodome"
   - "%PYTHON%\\Scripts\\pip install azure"
+  - "%PYTHON%\\Scripts\\pip install http://www.xavierdupre.fr/enseignement/setup/pycrypto-2.7a2-cp35-none-win_amd64.whl"
 build: off
 
 test_script:
