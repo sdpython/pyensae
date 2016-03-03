@@ -6,7 +6,6 @@
 
 import re
 import copy
-import os
 import random
 import sqlite3 as SQLite
 import datetime
