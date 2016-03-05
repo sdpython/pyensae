@@ -33,7 +33,7 @@ class AzureClient():
     @example(Azure___Get the list of containers and files from a blob storage?)
 
     The functionalities of a ``BlobService`` are described in
-    `blobservice.py <https://github.com/Azure/azure-sdk-for-python/blob/master/azure/storage/blobservice.py>`_.
+    `blockblobservice.py <https://github.com/Azure/azure-storage-python/blob/master/azure/storage/blob/blockblobservice.py>`_.
 
     @code
     from pyensae.remote.azure_connection import AzureClient
@@ -180,7 +180,10 @@ class AzureClient():
         """
         open a blob service
         """
-        from azure.storage.blob import BlobService
+        try:
+            from azure.storage.blob import BlobService
+        except ImportError:
+            from azure.storage.blob import BlockBlobService as BlobService
         return BlobService(self.account_name, self.account_key)
 
     def exists(self, blob_service, container_name, path):
