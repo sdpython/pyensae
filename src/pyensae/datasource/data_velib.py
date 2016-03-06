@@ -397,26 +397,13 @@ class DataVelibCollect:
     @staticmethod
     def js_animation(df, interval=20, **args):
         """
-        This function uses the module `JSAnimation <https://github.com/jakevdp/JSAnimation>`_.
-        To install it, you can run:
-
-        @code
-        try :
-            from JSAnimation import IPython_display
-        except ImportError:
-            import pymyinstall
-            pymyinstall.ModuleInstall("JSAnimation", "github", "jakevdp").install(temp_folder="c:\\temp")
-            # an error does not mean necessarily the installation failed
-        @endcode
-
+        Displays a javascript animation, 
+        see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_.
+        
         @param      interval            see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_
         @param      args                other parameters to give method ``plt.figure``
         @return                         animation
-
-        It does not work very well for the time being.
         """
-
-        #from JSAnimation import IPython_display
         import matplotlib.pyplot as plt
         from matplotlib import animation
 

@@ -98,23 +98,6 @@ class TestDataVelibOffline (unittest.TestCase):
 
         temp_folder = get_temp_folder(__file__, "temp_data_velib_animation")
 
-        try:
-            from JSAnimation import IPython_display
-        except ImportError:
-            import pymyinstall
-            try:
-                pymyinstall.ModuleInstall(
-                    "JSAnimation",
-                    "github",
-                    "jakevdp").install(
-                    temp_folder=temp_folder)
-            except Exception as e:
-                print("---------------------")
-                print(e)
-                print("---------------------")
-            # still trying
-            from JSAnimation import IPython_display
-
         df = DataVelibCollect.to_df(data)
         anime = DataVelibCollect.js_animation(df)
 
