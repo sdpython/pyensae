@@ -246,7 +246,10 @@ class AzureClient():
                 else:
                     obs["url"] = blob_service.make_blob_url(container_name, b.name)
                 for p in AzureClient._blob_properties:
-                    obs[p] = b.properties.__dict__[p]
+                    if hasattr(b.properties, p):
+                        obs[p] = getattr(b.properties, p)
+                    else:
+                        obs[p] = None
 
                 if b.metadata is not None:
                     for k, v in b.metadata.items():
