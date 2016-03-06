@@ -59,7 +59,12 @@ class TestCloudera (unittest.TestCase):
             codes = [res[0], res[2], res[1]]
             if len(codes) >= 7 or len(codes) == 3:
                 cl = ASSHClient(*codes)
-                cl.connect()
+                try:
+                    cl.connect()
+                except TimeoutError:
+                    # the cluster is not connected
+                    self.client = None
+                    return None
                 self.client = cl
             else:
                 self.client = None

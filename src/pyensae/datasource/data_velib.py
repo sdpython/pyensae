@@ -399,7 +399,7 @@ class DataVelibCollect:
         """
         Displays a javascript animation, 
         see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_.
-        
+
         @param      interval            see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_
         @param      args                other parameters to give method ``plt.figure``
         @return                         animation
