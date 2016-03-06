@@ -241,7 +241,7 @@ class AzureClient():
                                              include="metadata" if add_metadata else None):
                 obs = {}
                 obs["name"] = b.name
-                if hasttr(b, "url"):
+                if hasattr(b, "url"):
                     obs["url"] = b.url
                 else:
                     obs["url"] = blob_service.make_blob_url(container_name, b.name)
