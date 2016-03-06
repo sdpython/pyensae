@@ -241,7 +241,11 @@ class AzureClient():
                                              include="metadata" if add_metadata else None):
                 obs = {}
                 obs["name"] = b.name
-                obs["url"] = b.url
+                try:
+                    obs["url"] = b.url
+                except AttributeError as e:
+                    raise AttributeError("no url in blob {0}\ndict:\n    {1}\nproperties\n    {2}".format(
+                        b.name, list(sorted(b.__dict__.keys())), AzureClient._blob_properties)) from e
                 for p in AzureClient._blob_properties:
                     obs[p] = b.properties.__dict__[p]
 
