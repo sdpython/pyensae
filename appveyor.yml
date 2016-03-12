@@ -38,6 +38,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install azure"
   - "%PYTHON%\\Scripts\\pip install http://www.xavierdupre.fr/enseignement/setup/pycrypto-2.7a2-cp35-none-win_amd64.whl"
   - "%PYTHON%\\Scripts\\pip install pycryptodomex"
+  - "%PYTHON%\\Scripts\\pip install urllib3"
 build: off
 
 test_script:

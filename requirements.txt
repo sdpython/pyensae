@@ -86,3 +86,4 @@ easydev
 pandas_datareader
 pycrypto
 pycryptodomex
+urllib3
