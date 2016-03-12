@@ -11,6 +11,9 @@ import os
 import unittest
 import pandas
 import time
+import warnings
+from urllib3.exceptions import NewConnectionError
+from requests.exceptions import ConnectionError
 
 
 try:
@@ -243,9 +246,14 @@ class TestAzure (unittest.TestCase):
         # we submit the job
         recall = None
         if recall is None:
-            job = self.client.pig_submit(self.blob_serv, self.container,
-                                         pigfile, dependencies=[pyfile],
-                                         params=dict(UTT="unittest2"))
+            try:
+                job = self.client.pig_submit(self.blob_serv, self.container,
+                                             pigfile, dependencies=[pyfile],
+                                             params=dict(UTT="unittest2"))
+            except (ConnectionError, NewConnectionError) as e:
+                # the cluster is probably not set up
+                warnings.warn("hadoop cluster is not set up")
+                return
             job_id = job["id"]
         else:
             job_id = recall

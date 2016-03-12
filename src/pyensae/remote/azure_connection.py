@@ -244,7 +244,8 @@ class AzureClient():
                 if hasattr(b, "url"):
                     obs["url"] = b.url
                 else:
-                    obs["url"] = blob_service.make_blob_url(container_name, b.name)
+                    obs["url"] = blob_service.make_blob_url(
+                        container_name, b.name)
                 for p in AzureClient._blob_properties:
                     if hasattr(b.properties, p):
                         obs[p] = getattr(b.properties, p)
@@ -295,28 +296,39 @@ class AzureClient():
             return res
         else:
             blob_name = self._interpret_path(blob_name)
-            blob_service.create_container(container_name, None, None, False)
-            blob_service.put_blob(container_name, blob_name, None, 'BlockBlob')
+            if hasattr(blob_service, "put_blob"):
+                # this code should disappear as it relies on an old version of
+                # the module azure
+                blob_service.create_container(
+                    container_name, None, None, False)
+                blob_service.put_blob(
+                    container_name, blob_name, None, 'BlockBlob')
 
-            block_ids = []
-            index = 0
-            with open(file_path, 'rb') as f:
-                while True:
-                    data = f.read(AzureClient._chunk_size)
-                    if data:
-                        block_id = '{0:08d}'.format(index)
-                        blob_service.put_block(
-                            container_name,
-                            blob_name,
-                            data,
-                            block_id)
-                        block_ids.append(block_id)
-                        index += 1
-                        self.LOG("uploaded", index, " bytes from ", file_path)
-                    else:
-                        break
+                block_ids = []
+                index = 0
+                with open(file_path, 'rb') as f:
+                    while True:
+                        data = f.read(AzureClient._chunk_size)
+                        if data:
+                            block_id = '{0:08d}'.format(index)
+                            blob_service.put_block(
+                                container_name,
+                                blob_name,
+                                data,
+                                block_id)
+                            block_ids.append(block_id)
+                            index += 1
+                            self.LOG("uploaded", index,
+                                     " bytes from ", file_path)
+                        else:
+                            break
 
-            blob_service.put_block_list(container_name, blob_name, block_ids)
+                blob_service.put_block_list(
+                    container_name, blob_name, block_ids)
+            else:
+                blob_service.create_blob_from_path(
+                    container_name, blob_name, file_path)
+
             return blob_name
 
     def upload_data(self,
@@ -341,29 +353,34 @@ class AzureClient():
         """
         blob_name = self._interpret_path(blob_name)
         blob_service.create_container(container_name, None, None, False)
-        blob_service.put_blob(container_name, blob_name, None, 'BlockBlob')
+        if hasattr(blob_service, "put_blob"):
+            # this code should disappear as it relies on an old version of the
+            # module azure
+            blob_service.put_blob(container_name, blob_name, None, 'BlockBlob')
 
-        block_ids = []
-        index = 0
-        while True:
-            if len(data) > AzureClient._chunk_size:
-                da = data[:AzureClient._chunk_size]
-                data = data[AzureClient._chunk_size:]
-            else:
-                da = data
-                data = None
-            block_id = '{0:08d}'.format(index)
-            blob_service.put_block(
-                container_name,
-                blob_name,
-                da,
-                block_id)
-            block_ids.append(block_id)
-            index += 1
-            if not data:
-                break
+            block_ids = []
+            index = 0
+            while True:
+                if len(data) > AzureClient._chunk_size:
+                    da = data[:AzureClient._chunk_size]
+                    data = data[AzureClient._chunk_size:]
+                else:
+                    da = data
+                    data = None
+                block_id = '{0:08d}'.format(index)
+                blob_service.put_block(
+                    container_name,
+                    blob_name,
+                    da,
+                    block_id)
+                block_ids.append(block_id)
+                index += 1
+                if not data:
+                    break
 
-        blob_service.put_block_list(container_name, blob_name, block_ids)
+            blob_service.put_block_list(container_name, blob_name, block_ids)
+        else:
+            blob_service.create_blob_from_bytes(container_name, blob_name, data)
         return blob_name
 
     def download(self,
@@ -424,48 +441,65 @@ class AzureClient():
                 return res
         else:
             blob_name = self._interpret_path(blob_name)
-            props = blob_service.get_blob_properties(container_name, blob_name)
-            blob_size = int(props['content-length'])
-            if chunk_size is None:
-                chunk_size = AzureClient._chunk_size
-            if stop_at is not None and stop_at < chunk_size:
-                chunk_size = max(stop_at, 0)
 
-            def iterations(f, chunk_size,
-                           container_name, blob_name, file_path, stop_at):
-                index = 0
+            if hasattr(blob_service, "get_blob"):
+                # this code should disappear as it relies on an old version of
+                # the module azure
+                props = blob_service.get_blob_properties(
+                    container_name, blob_name)
+                if hasattr(props, "properties"):
+                    blob_size = props.properties.content_length
+                else:
+                    blob_size = int(props['content-length'])
+                if chunk_size is None:
+                    chunk_size = AzureClient._chunk_size
+                if stop_at is not None and stop_at < chunk_size:
+                    chunk_size = max(stop_at, 0)
 
-                while index < blob_size:
-                    chunk_range = 'bytes={}-{}'.format(index,
-                                                       index + chunk_size - 1)
-                    data = blob_service.get_blob(
-                        container_name,
-                        blob_name,
-                        x_ms_range=chunk_range)
-                    length = len(data)
-                    index += length
-                    self.LOG("downloaded ", index, "bytes from ", file_path)
-                    if length > 0:
-                        f.write(data)
-                        if length < chunk_size:
+                def iterations(f, chunk_size,
+                               container_name, blob_name, file_path, stop_at):
+                    index = 0
+
+                    while index < blob_size:
+                        chunk_range = 'bytes={}-{}'.format(index,
+                                                           index + chunk_size - 1)
+                        data = blob_service.get_blob(
+                            container_name,
+                            blob_name,
+                            x_ms_range=chunk_range)
+                        length = len(data)
+                        index += length
+                        self.LOG("downloaded ", index,
+                                 "bytes from ", file_path)
+                        if length > 0:
+                            f.write(data)
+                            if length < chunk_size:
+                                return False
+                        else:
                             return False
-                    else:
-                        return False
-                    if stop_at is not None and stop_at <= index:
-                        return False
-                return True
+                        if stop_at is not None and stop_at <= index:
+                            return False
+                    return True
 
-            if file_path is None:
-                f = io.BytesIO()
-                iterations(f, chunk_size,
-                           container_name, blob_name, file_path, stop_at)
-                return f.getvalue()
-            else:
-                mode = 'ab' if append else 'wb'
-                with open(file_path, mode) as f:
+                if file_path is None:
+                    f = io.BytesIO()
                     iterations(f, chunk_size,
                                container_name, blob_name, file_path, stop_at)
-                return file_path
+                    return f.getvalue()
+                else:
+                    mode = 'ab' if append else 'wb'
+                    with open(file_path, mode) as f:
+                        iterations(f, chunk_size,
+                                   container_name, blob_name, file_path, stop_at)
+                    return file_path
+            else:
+                bl = blob_service.get_blob_to_bytes(container_name, blob_name)
+                if file_path is None:
+                    return bl.content
+                else:
+                    with open(file_path, "wb") as f:
+                        f.write(bl.content)
+                    return file_path
 
     def download_data(self,
                       blob_service,

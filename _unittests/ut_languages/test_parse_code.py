@@ -1,5 +1,5 @@
 """
-@brief      test log(time=2s)
+@brief      test log(time=3s)
 
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.

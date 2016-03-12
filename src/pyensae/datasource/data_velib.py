@@ -397,7 +397,7 @@ class DataVelibCollect:
     @staticmethod
     def js_animation(df, interval=20, **args):
         """
-        Displays a javascript animation, 
+        Displays a javascript animation,
         see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_.
 
         @param      interval            see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_
