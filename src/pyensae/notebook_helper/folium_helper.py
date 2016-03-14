@@ -24,10 +24,10 @@ def folium_html_map(map):
     @code
     import folium
     map_osm = folium.Map(location=[48.85, 2.34])
-    from pyensae.notebook_helper import folium_inline_map
+    from pyensae.notebook_helper import folium_html_map
     map_osm.polygon_marker(location=[48.824338, 2.302641], popup='ENSAE',
                            fill_color='#132b5e', num_sides=3, radius=10)
-    folium_inline_map(map_osm)
+    folium_html_map(map_osm)
     @endcode
 
     With folium version 0.2, this becomes easier:
@@ -35,7 +35,7 @@ def folium_html_map(map):
     @code
     import folium
     map_osm = folium.Map(location=[48.85, 2.34])
-    from pyensae.notebook_helper import folium_inline_map
+    from pyensae.notebook_helper import folium_html_map
     map_osm.polygon_marker(location=[48.824338, 2.302641], popup='ENSAE',
                            fill_color='#132b5e', num_sides=3, radius=10)
     map_osm
