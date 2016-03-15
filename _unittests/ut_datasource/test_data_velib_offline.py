@@ -101,9 +101,5 @@ class TestDataVelibOffline (unittest.TestCase):
         df = DataVelibCollect.to_df(data)
         anime = DataVelibCollect.js_animation(df)
 
-        from JSAnimation import HTMLWriter
-        wr = HTMLWriter(embed_frames=False)
-        anime.save(os.path.join(temp_folder, "out_animation.html"), writer=wr)
-
 if __name__ == "__main__":
     unittest.main()
