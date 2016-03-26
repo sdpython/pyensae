@@ -14,7 +14,7 @@ import random
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,9 +36,10 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.sql.magic_sql import MagicSQL
 
 
@@ -57,12 +58,12 @@ class TestMagicCommand(unittest.TestCase):
         # connect
         magic = MagicSQL()
         magic.add_context({"unittest": None})
-        db = magic.SQL_connect(dbfile)
+        magic.SQL_connect(dbfile)
         assert "DB" in magic.Context
 
         # import
         fLOG("import")
-        r = magic.SQL_import_tsv(data)
+        magic.SQL_import_tsv(data)
         tables = magic.SQL_tables()
         assert "velib_vanves" in tables
 

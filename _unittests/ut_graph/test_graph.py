@@ -9,12 +9,11 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
-import shlex
 
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,9 +35,9 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.graph_helper.magic_graph import MagicGraph
 
 
@@ -49,7 +48,6 @@ class TestGraph (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        path = os.path.abspath(os.path.dirname(__file__))
         mg = MagicGraph()
         cmd = "ggplot"
         res = mg.mpl_style(cmd)

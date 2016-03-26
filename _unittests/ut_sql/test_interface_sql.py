@@ -13,7 +13,7 @@ import unittest
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -35,11 +35,11 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.sql.database_helper import import_flatfile_into_database
-from src.pyensae.sql import Database, InterfaceSQL, InterfaceSQLException
+from src.pyensae.sql import InterfaceSQL, InterfaceSQLException
 
 
 class TestInterfaceSQL (unittest.TestCase):
@@ -90,7 +90,7 @@ class TestInterfaceSQL (unittest.TestCase):
         assert df.values[0][0] == 2333
 
         sql = "SELECT COUNT(*) FROM DB.CC.ACAPA"
-        df2 = face.execute(sql)
+        face.execute(sql)
         fLOG(df)
         assert df.columns == ["COUNT(*)"]
         assert len(df) == 1
@@ -113,7 +113,7 @@ class TestInterfaceSQL (unittest.TestCase):
         sql = "SELECT blblable"
         try:
             df = face.execute(sql)
-        except InterfaceSQLException as e:
+        except InterfaceSQLException:
             pass
 
         face.close()

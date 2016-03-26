@@ -8,7 +8,7 @@ import unittest
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -30,10 +30,11 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from pyquickhelper import fLOG, get_temp_folder, unzip
+from pyquickhelper.loghelper import fLOG, unzip
+from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.sql import Database
 
 
@@ -62,8 +63,14 @@ class TestDatabaseSpecial (unittest.TestCase):
         self.assertEqual(len(view[0]), len(view[1]))
 
         exp = {
-            1: [268.0, 'www.facebook.com/login.php', 97.0, 'www.friendster.com/login.php', 29.0, 'https://login.facebook.com/login.php', 15.0, 'https://login.yahoo.com/', 10.0, 'https://login.facebook.com/login.php', 10.0, 'lite.facebook.com/login/?next=http%3A%2F%2Flite.facebook.com%2Ftheamloong%2Fvideo%2Fof%2FTNT-sanshou', 13.0, 'lite.facebook.com/login/?next=http%3A%2F%2Flite.facebook.com%2Ftheamloong%2Fvideo%2Fof%2FTNT-sanshou', 5.0, 'https://login.verizonwireless.com/amserver/UI/Login', 6.0, 'https://login.facebook.com/login.php', 2.0, 'https://login.comcast.net/', 0.0, 'HottieMatchUp.com/matchcomlogin', 0.0, 'FreshPCFix.com/loginscreen', 0.0, 'FreshPCFix.com/loginscreen', 0.0, 'login.marketingblacksmith.com', 0.0, 'sites.managerslogin.com', 0.0, 'sites.managerslogin.com', 0.0, 'sites.managerslogin.com'],
-            -1: [3.0, 'https://sso.uboc.com/obc/forms/login.fcc?user_type=R', 3.0, 'https://www.atitesting.com/login.aspx', 1.0, 'askabouttech.com/how-to-bypass-login-password-on-windows-vista/', 1.0, 'homegrownfreaks.net/forums/login.html', 1.0, 'https://trade.htsc.com.cn/webtrade/login/loginAction1.do?method=preLogin2&opType=TD', 1.0, 'moodle.dist113.org/login/in/in.php?p=addicting+games+the+impossible+quiz', 1.0, 'www.edweek.org/login.html?source=http://www.edweek.org/ew/articles/2009/08/25/02sat.h29.html&destina', 1.0, 'www.gifs.net/image/Holidays/Birthday/Cake/9451?n=login.php3', 1.0, 'www.grazeit.com/pages/blackplanet-com-login-1814/', 1.0, 'www.myspace-login.us/', None, None, None, None, None, None, None, None, None, None, None, None, None, None],
+            1: [268.0, 'www.facebook.com/login.php', 97.0, 'www.friendster.com/login.php', 29.0, 'https://login.facebook.com/login.php', 15.0,
+                'https://login.yahoo.com/', 10.0, 'https://login.facebook.com/login.php', 10.0, 'lite.facebook.com/login/?next=http%3A%2F%2Flite.facebook.com%2Ftheamloong%2Fvideo%2Fof%2FTNT-sanshou',
+                13.0, 'lite.facebook.com/login/?next=http%3A%2F%2Flite.facebook.com%2Ftheamloong%2Fvideo%2Fof%2FTNT-sanshou',
+                5.0, 'https://login.verizonwireless.com/amserver/UI/Login', 6.0, 'https://login.facebook.com/login.php', 2.0,
+                'https://login.comcast.net/', 0.0, 'HottieMatchUp.com/matchcomlogin', 0.0, 'FreshPCFix.com/loginscreen', 0.0, 'FreshPCFix.com/loginscreen', 0.0,
+                'login.marketingblacksmith.com', 0.0, 'sites.managerslogin.com', 0.0, 'sites.managerslogin.com', 0.0, 'sites.managerslogin.com'],
+            -1: [3.0, 'https://sso.uboc.com/obc/forms/login.fcc?user_type=R', 3.0, 'https://www.atitesting.com/login.aspx', 1.0, 'askabouttech.com/how-to-bypass-login-password-on-windows-vista/', 1.0, 'homegrownfreaks.net/forums/login.html', 1.0, 'https://trade.htsc.com.cn/webtrade/login/loginAction1.do?method=preLogin2&opType=TD', 1.0, 'moodle.dist113.org/login/in/in.php?p=addicting+games+the+impossible+quiz', 1.0, 'www.edweek.org/login.html?source=http://www.edweek.org/ew/articles/2009/08/25/02sat.h29.html&destina', 1.0, 'www.gifs.net/image/Holidays/Birthday/Cake/9451?n=login.php3', 1.0, 'www.grazeit.com/pages/blackplanet-com-login-1814/', 1.0, 'www.myspace-login.us/',
+                 None, None, None, None, None, None, None, None, None, None, None, None, None, None],
         }
 
         for k, v in exp.items():

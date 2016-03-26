@@ -8,7 +8,7 @@ import socket
 import os
 import io
 
-from pyquickhelper import noLOG
+from pyquickhelper.loghelper import noLOG
 from pyquickhelper.filehelper import is_file_string
 
 

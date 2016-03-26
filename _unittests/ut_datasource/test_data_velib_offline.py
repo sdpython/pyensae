@@ -7,14 +7,12 @@ import sys
 import os
 import unittest
 import datetime
-import pandas
-import datetime
 
 
 try:
     import src
-    import pyquickhelper
-    import pymyinstall
+    import pyquickhelper as skip_
+    import pymyinstall as skip__
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -47,10 +45,10 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
-    import pymyinstall
+    import pyquickhelper as skip_
+    import pymyinstall as skip__
 
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.datasource.data_velib import DataVelibCollect
 
 
@@ -96,10 +94,8 @@ class TestDataVelibOffline (unittest.TestCase):
             # not tested on anaconda
             return
 
-        temp_folder = get_temp_folder(__file__, "temp_data_velib_animation")
-
         df = DataVelibCollect.to_df(data)
-        anime = DataVelibCollect.js_animation(df)
+        DataVelibCollect.js_animation(df)
 
 if __name__ == "__main__":
     unittest.main()

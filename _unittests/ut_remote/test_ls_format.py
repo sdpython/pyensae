@@ -9,12 +9,11 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
-import pandas
 
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,15 +35,14 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, run_cmd
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.remote import ASSHClient
 
 thisfold = os.path.abspath(os.path.split(__file__)[0])
 thiscomm = os.path.join(thisfold, "..")
 sys.path.append(thiscomm)
-from common import get_codes
 
 
 class TestLsFormat(unittest.TestCase):

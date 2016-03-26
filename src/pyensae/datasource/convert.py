@@ -6,7 +6,7 @@
 import pandas
 
 from ..sql.database_main import Database
-from pyquickhelper import noLOG
+from pyquickhelper.loghelper import noLOG
 
 
 def dBase2df(file, encoding="cp437"):

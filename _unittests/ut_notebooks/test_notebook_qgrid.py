@@ -14,7 +14,7 @@ import traitlets
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,9 +36,9 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, get_temp_folder, docstring2html
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.notebook_helper.magic_notebook import MagicNotebook
 
 
@@ -50,7 +50,6 @@ class TestNotebookQGrid(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         df = pandas.DataFrame([{"x": 2, "y": 3}, {"x": 4, "y": 5}])
-        fp = os.path.abspath(__file__)
         mg = MagicNotebook()
         mg.add_context({"df": df})
         try:

@@ -14,7 +14,7 @@ import random
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,9 +36,9 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.file_helper import download_java_standalone, is_java_installed
 from src.pyensae.file_helper.pig_helper import run_pig, download_pig_standalone
 

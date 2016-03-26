@@ -6,15 +6,12 @@
 import sys
 import os
 import unittest
-import datetime
-import pandas
-import datetime
 
 
 try:
     import src
-    import pyquickhelper
-    import pymyinstall
+    import pyquickhelper as skip_
+    import pymyinstall as skip__
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -47,10 +44,10 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
-    import pymyinstall
+    import pyquickhelper as skip_
+    import pymyinstall as skip__
 
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.datasource.data_velib import DataVelibCollect
 
 

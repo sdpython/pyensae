@@ -11,9 +11,9 @@ from IPython.core.magic import magics_class, line_magic, cell_magic
 from IPython.core.display import HTML
 
 from pyquickhelper.filehelper.synchelper import explore_folder_iterfile, explore_folder_iterfile_repo
-from pyquickhelper import run_cmd
+from pyquickhelper.loghelper import run_cmd
 from pyquickhelper.ipythonhelper import MagicCommandParser, MagicClassWithHelpers
-from pyquickhelper import docstring2html
+from pyquickhelper.helpgen import docstring2html
 from .format_helper import format_file_size, format_file_mtime
 from .content_helper import file_head, file_tail, enumerate_grep
 
@@ -342,7 +342,7 @@ class MagicFile(MagicClassWithHelpers):
         standards input and produces standard outputs,
         a timeout is set up at 10s. It is almost equivalent to::
 
-            from pyquickhelper import run_cmd
+            from pyquickhelper.loghelper import run_cmd
             import sys
             cmd = sys.executable.replace(
                 "pythonw",

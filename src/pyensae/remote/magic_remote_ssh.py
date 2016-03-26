@@ -124,7 +124,8 @@ class MagicRemoteSSH(MagicClassWithHelpers):
         defines the way to parse the magic command ``%pig_submit``
         """
         parser = MagicCommandParser(prog="pig_submit",
-                                    description='Submits a job to the cluster, the job is local, the job is first uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
+                                    description='Submits a job to the cluster, the job is local, the job ' +
+                                    'is first uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
         parser.add_argument(
             'file',
             type=str,
@@ -216,7 +217,8 @@ class MagicRemoteSSH(MagicClassWithHelpers):
         defines the way to parse the magic command ``%hive_submit``
         """
         parser = MagicCommandParser(prog="hive_submit",
-                                    description='Submits a job to the cluster, the job is local, the job is first uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
+                                    description='Submits a job to the cluster, the job is local, the job is first uploaded to the cluster. The magic ' +
+                                    'command populates the local variable last_job with the submitted job id.')
         parser.add_argument(
             'file',
             type=str,

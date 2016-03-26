@@ -6,7 +6,7 @@
 import sys
 import os
 
-from pyquickhelper import run_cmd
+from pyquickhelper.loghelper import run_cmd
 from pyquickhelper.ipythonhelper import MagicClassWithHelpers, MagicCommandParser
 
 from IPython.core.magic import magics_class, line_magic, cell_magic
@@ -147,7 +147,8 @@ class MagicAzure(MagicClassWithHelpers):
         defines the way to parse the magic command ``%blob_open``
         """
         parser = MagicCommandParser(prog="blob_open",
-                                    description='open a connection to an Azure blob storage, by default, the magic command takes blobstorage and blobpassword local variables as default values')
+                                    description='open a connection to an Azure blob storage, by default, ' +
+                                    'the magic command takes blobstorage and blobpassword local variables as default values')
         parser.add_argument(
             '-b',
             '--blobstorage',
@@ -204,7 +205,9 @@ class MagicAzure(MagicClassWithHelpers):
         defines the way to parse the magic command ``%hd_open``
         """
         parser = MagicCommandParser(prog="hd_open",
-                                    description='open a connection to an Azure blob storage and a HD Insight cluster, by default, the magic command takes blobstorage, blobpassword, hadoop_server, hadoop_password local variables as default values')
+                                    description='open a connection to an Azure blob storage and a HD Insight cluster, ' +
+                                    'by default, the magic command takes blobstorage, blobpassword, hadoop_server, ' +
+                                    'hadoop_password local variables as default values')
         parser.add_argument(
             '-b',
             '--blobstorage',
@@ -538,7 +541,8 @@ class MagicAzure(MagicClassWithHelpers):
         defines the way to parse the magic command ``%blob_downmerge``
         """
         parser = MagicCommandParser(prog="blob_downmerge",
-                                    description='download a set of files from a blob storage folder, files will be merged, we assume the container is the first element to the remote path')
+                                    description='download a set of files from a blob storage folder, files will ' +
+                                    'be merged, we assume the container is the first element to the remote path')
         parser.add_argument(
             'remotepath',
             type=str,
@@ -933,7 +937,8 @@ class MagicAzure(MagicClassWithHelpers):
         defines the way to parse the magic command ``%hd_pig_submit``
         """
         parser = MagicCommandParser(prog="hd_pig_submit",
-                                    description='Submits a job to the cluster, the job is local, the job is first uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
+                                    description='Submits a job to the cluster, the job is local, the job is ' +
+                                    'first uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
         parser.add_argument(
             'file',
             type=str,
@@ -1002,7 +1007,8 @@ class MagicAzure(MagicClassWithHelpers):
         defines the way to parse the magic command ``%hd_tail_stderr``
         """
         parser = MagicCommandParser(prog="hd_tail_stderr",
-                                    description='Submits a job to the cluster, the job is local, the job is first uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
+                                    description='Submits a job to the cluster, the job is local, the job is first ' +
+                                    'uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
         parser.add_argument(
             'jobid',
             type=str,
@@ -1150,7 +1156,8 @@ class MagicAzure(MagicClassWithHelpers):
         defines the way to parse the magic command ``%%runjython``
         """
         parser = MagicCommandParser(prog="runjython",
-                                    description='run a jython script used for streaming in HDInsight, the function appends fake decorator a timeout is set up at 10s')
+                                    description='run a jython script used for streaming in HDInsight, ' +
+                                    'the function appends fake decorator a timeout is set up at 10s')
         parser.add_argument(
             'file',
             type=str,

@@ -5,12 +5,11 @@
 import sys
 import os
 import unittest
-import re
 import warnings
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -32,10 +31,11 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from pyquickhelper import get_temp_folder, fLOG
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.notebook_helper import folium_html_map, folium_embed_map
 
 

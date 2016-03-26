@@ -9,7 +9,7 @@ import os
 import time
 import io
 from .azure_exception import AzureException
-from pyquickhelper import noLOG
+from pyquickhelper.loghelper import noLOG
 
 
 class AzureClient():

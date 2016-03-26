@@ -14,7 +14,7 @@ import shlex
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,9 +36,10 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, get_temp_folder, docstring2html
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.helpgen import docstring2html
 from src.pyensae.file_helper.magic_file import MagicFile
 from src.pyensae.file_helper import file_tail
 from src.pyensae.sql import Database

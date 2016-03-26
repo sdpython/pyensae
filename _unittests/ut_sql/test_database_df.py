@@ -14,7 +14,7 @@ import pandas
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,9 +36,9 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.sql.database_main import Database
 
 
@@ -60,7 +60,7 @@ class TestDatabaseDF (unittest.TestCase):
                   {"name": "B", "age": 20, "score": -34.5}, ]
         df = pandas.DataFrame(values)
         db = Database.fill_sql_table(df, dbf, "newtable")
-        vie = db.execute_view("SELECT * FROM newtable")
+        db.execute_view("SELECT * FROM newtable")
         df2 = db.to_df("SELECT * FROM newtable")
         df3 = df2[["age", "name", "score"]]
         assert len(df) > 0

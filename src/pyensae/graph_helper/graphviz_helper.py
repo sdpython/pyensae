@@ -8,7 +8,7 @@
 
 import os
 from pyquickhelper.helpgen.default_conf import get_graphviz_dot
-from pyquickhelper import run_cmd
+from pyquickhelper.loghelper import run_cmd
 
 
 def dot_exe():

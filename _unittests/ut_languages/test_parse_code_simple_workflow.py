@@ -13,7 +13,7 @@ import unittest
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -35,9 +35,10 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code, get_tree_graph
 from src.pyensae.languages.antlr_grammar_build import build_grammar
 from src.pyensae.graph_helper import run_dot
@@ -58,7 +59,7 @@ class TestParseCodeSimpleWorkflow (unittest.TestCase):
             for lang in langs:
                 clparser, cllexer = get_parser_lexer(lang)
             return
-        except ImportError as e:
+        except ImportError:
             pass
 
         folder = os.path.dirname(source_parser.__file__)

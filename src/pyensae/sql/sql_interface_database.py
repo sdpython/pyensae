@@ -8,7 +8,7 @@ import pandas
 
 from .database_main import Database
 from .sql_interface import InterfaceSQL, InterfaceSQLException
-from pyquickhelper import noLOG
+from pyquickhelper.loghelper import noLOG
 
 
 class InterfaceSQLDatabase(InterfaceSQL):

@@ -5,11 +5,11 @@
 import sys
 import os
 import unittest
-import re
+
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -31,11 +31,12 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
 from pyquickhelper.ipythonhelper.notebook_helper import run_notebook, install_python_kernel_for_unittest
-from pyquickhelper import get_temp_folder, fLOG
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 
 
 class TestNotebookRunnerFlat2Db3 (unittest.TestCase):
@@ -81,7 +82,9 @@ class TestNotebookRunnerFlat2Db3 (unittest.TestCase):
         ]
         outfile = os.path.join(temp, "out_notebook.ipynb")
         assert not os.path.exists(outfile)
-        valid = lambda code: 'run_cmd("SQLiteSpy.exe velib_vanves.db3")' not in code
+
+        def valid(code):
+            return 'run_cmd("SQLiteSpy.exe velib_vanves.db3")' not in code
 
         if "travis" in sys.executable:
             return

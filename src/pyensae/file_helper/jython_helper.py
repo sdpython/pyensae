@@ -8,7 +8,7 @@ import os
 import sys
 import urllib
 import urllib.request
-from pyquickhelper import run_cmd, noLOG
+from pyquickhelper.loghelper import run_cmd, noLOG
 
 
 def download_java_standalone(version="2.7.1b3"):
@@ -58,11 +58,13 @@ def get_java_path():
             location = r'C:\Program Files\Java'
             if not os.path.exists(location):
                 raise FileNotFoundError(
-                    "path {0} does not exists, you need to install java.\nGo to http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
+                    "path {0} does not exists, you need to install java.\nGo to " +
+                    "http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
             pa = os.listdir(location)
             if len(pa) == 0:
                 raise FileNotFoundError(
-                    "path {0} does not exists, you need to install java.\nGo to http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
+                    "path {0} does not exists, you need to install java.\nGo to " +
+                    "http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html")
             pa = [os.path.join(location, _) for _ in pa]
             for p in pa:
                 if os.path.isdir(p) and os.path.exists(p):

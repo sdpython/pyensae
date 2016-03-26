@@ -8,7 +8,7 @@ import unittest
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -30,10 +30,11 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
-from pyquickhelper import fLOG, get_temp_folder, unzip
+from pyquickhelper.loghelper import fLOG, unzip
+from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.sql import Database
 
 

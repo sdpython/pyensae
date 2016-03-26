@@ -17,7 +17,7 @@ You should install: `sdpython/python-linkedin <https://github.com/sdpython/pytho
 
 """
 import copy
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 
 
 class LinkedInAccess:

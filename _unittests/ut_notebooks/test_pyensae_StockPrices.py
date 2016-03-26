@@ -5,11 +5,11 @@
 import sys
 import os
 import unittest
-import re
+
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -31,11 +31,12 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
 
 from pyquickhelper.ipythonhelper.notebook_helper import run_notebook, install_python_kernel_for_unittest
-from pyquickhelper import get_temp_folder, fLOG
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 
 
 class TestNotebookRunnerStockPrices (unittest.TestCase):

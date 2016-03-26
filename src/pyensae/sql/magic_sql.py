@@ -402,7 +402,8 @@ class MagicSQL(MagicClassWithHelpers):
         parser.add_argument('-n', '--n', type=int,
                             help='number of first lines to display', default=10, eval_type=int)
         parser.add_argument('-q', '--query', type=str,
-                            help='when used in a single line (no cell), query is the SQL query, the command returns the full dataframe', default="", eval_type=str)
+                            help='when used in a single line (no cell), query is the SQL query, the command ' +
+                            'returns the full dataframe', default="", eval_type=str)
         parser.add_argument(
             '-v',
             '--variable',

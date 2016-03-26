@@ -118,7 +118,7 @@ def verbose():
 if is_local():
     def write_version():
         pyquickhelper = import_pyquickhelper()
-        from pyquickhelper import write_version_for_setup
+        from pyquickhelper.pycode import write_version_for_setup
         return write_version_for_setup(__file__)
 
     write_version()
@@ -148,9 +148,10 @@ if "--verbose" in sys.argv:
 
 if is_local():
     pyquickhelper = import_pyquickhelper()
-    logging_function = pyquickhelper.fLOG
+    from pyquickhelper.loghelper import fLOG as logging_function
     logging_function(OutputPrint=True)
-    r = pyquickhelper.process_standard_options_for_setup(
+    from pyquickhelper.pycode import process_standard_options_for_setup
+    r = process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
         unittest_modules=["pyquickhelper", "pymyinstall"],
         requirements=["pyquickhelper", "pymyinstall"],
@@ -167,7 +168,8 @@ else:
 
 if len(sys.argv) == 1 and "--help" in sys.argv:
     pyquickhelper = import_pyquickhelper()
-    pyquickhelper.process_standard_options_for_setup_help()
+    from pyquickhelper.pycode import process_standard_options_for_setup_help
+    process_standard_options_for_setup_help()
 
 if not r:
     setup(

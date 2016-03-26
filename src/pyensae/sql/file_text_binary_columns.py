@@ -11,7 +11,7 @@ import re
 import os
 import decimal
 
-from pyquickhelper import noLOG
+from pyquickhelper.loghelper import noLOG
 from pyquickhelper.loghelper.flog import GetPath
 from .file_text_binary import TextFile
 

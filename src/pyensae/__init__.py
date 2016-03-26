@@ -3,8 +3,10 @@
 @file
 @brief Main file
 """
-
 import sys
+from .resources.http_retrieve import download_data
+
+
 if sys.version_info[0] < 3:
     raise ImportError("pyensae only works with Python 3")
 
@@ -62,8 +64,6 @@ def check(log=False):
     @endFAQ
     """
     return True
-
-from .resources.http_retrieve import download_data
 
 
 def load_ipython_extension(ip):

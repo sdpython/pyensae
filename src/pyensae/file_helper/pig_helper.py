@@ -8,7 +8,8 @@ This provides provides helper around that.
 
 import os
 import glob
-from pyquickhelper import run_cmd, noLOG, change_file_status
+from pyquickhelper.loghelper import run_cmd, noLOG
+from pyquickhelper.filehelper import change_file_status
 from .jython_helper import get_java_cmd, get_java_path
 from ..resources.http_retrieve import download_data
 

@@ -243,14 +243,14 @@ class Corrplot(Linkage):
 
         self.binarise_color = binarise_color
         if mode == 'upper':
-            self._add_patches(df, upper, 'upper',  ax, diagonal=True)
+            self._add_patches(df, upper, 'upper', ax, diagonal=True)
         elif mode == 'lower':
-            self._add_patches(df, lower, 'lower',  ax, diagonal=True)
+            self._add_patches(df, lower, 'lower', ax, diagonal=True)
         elif mode == 'method':
-            self._add_patches(df, method, 'both',  ax, diagonal=True)
+            self._add_patches(df, method, 'both', ax, diagonal=True)
         elif mode == 'both':
-            self._add_patches(df, upper, 'upper',  ax, diagonal=False)
-            self._add_patches(df, lower, 'lower',  ax, diagonal=False)
+            self._add_patches(df, upper, 'upper', ax, diagonal=False)
+            self._add_patches(df, lower, 'lower', ax, diagonal=False)
 
         # shift the limits to englobe the patches correctly
         ax.set_xlim(-0.5, width - .5)

@@ -7,7 +7,7 @@ import sys
 import importlib
 import re
 import urllib.request
-from pyquickhelper import noLOG
+from pyquickhelper.loghelper import noLOG
 
 
 def remove_empty_line(file):

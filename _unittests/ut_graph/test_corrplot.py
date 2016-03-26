@@ -10,13 +10,12 @@ import sys
 import os
 import unittest
 import pandas
-import string
 import numpy
 
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -38,9 +37,10 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, get_temp_folder
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.graph_helper import Corrplot
 from pyquickhelper.pycode import fix_tkinter_issues_virtualenv
 

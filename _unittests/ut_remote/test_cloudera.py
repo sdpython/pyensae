@@ -4,18 +4,19 @@
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
 """
-
-
 import sys
 import os
 import unittest
 import pandas
 import warnings
-
+thisfold = os.path.abspath(os.path.split(__file__)[0])
+thiscomm = os.path.join(thisfold, "..")
+sys.path.append(thiscomm)
+from common import get_codes
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -37,15 +38,10 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG, run_cmd
+from pyquickhelper.loghelper import fLOG, run_cmd
 from src.pyensae.remote import ASSHClient
-
-thisfold = os.path.abspath(os.path.split(__file__)[0])
-thiscomm = os.path.join(thisfold, "..")
-sys.path.append(thiscomm)
-from common import get_codes
 
 
 class TestCloudera (unittest.TestCase):
@@ -183,7 +179,15 @@ class TestCloudera (unittest.TestCase):
         with open(pyfile, "w", encoding="utf8") as f:
             f.write(pyth)
 
-        tosend = """[{'address': "52 RUE D'ENGHIEN / ANGLE RUE DU FAUBOURG POISSONIERE - 75010 PARIS", 'collect_date': datetime.datetime(2014, 11, 11, 22, 1, 18, 331070), 'lng': 2.348395236282807, 'contract_name': 'Paris', 'name': '10042 - POISSONNIÈRE - ENGHIEN', 'banking': 0, 'lat': 48.87242006305313, 'bonus': 0, 'status': 'OPEN', 'available_bikes': 32, 'last_update': datetime.datetime(2014, 11, 11, 21, 59, 5), 'number': 10042, 'available_bike_stands': 1, 'bike_stands': 33},{'address': "52 RUE D'ENGHIEN / ANGLE RUE DU FAUBOURG POISSONIERE - 75010 PARIS", 'collect_date': datetime.datetime(2014, 11, 11, 22, 1, 18, 331070), 'lng': 2.348395236282807, 'contract_name': 'Paris', 'name': '10042 - POISSONNIÈRE - ENGHIEN', 'banking': 0, 'lat': 48.87242006305313, 'bonus': 0, 'status': 'OPEN', 'available_bikes': 32, 'last_update': datetime.datetime(2014, 11, 11, 21, 59, 5), 'number': 10042, 'available_bike_stands': 1, 'bike_stands': 33}]"""
+        tosend = """[{'address': "52 RUE D'ENGHIEN / ANGLE RUE DU FAUBOURG POISSONIERE - 75010 PARIS", 'collect_date': """ + \
+                 """datetime.datetime(2014, 11, 11, 22, 1, 18, 331070), 'lng': 2.348395236282807, 'contract_name': 'Paris', 'name': """ + \
+                 """'10042 - POISSONNIÈRE - ENGHIEN', 'banking': 0, 'lat': 48.87242006305313, 'bonus': 0, 'status': 'OPEN', """ + \
+                 """'available_bikes': 32, 'last_update': datetime.datetime(2014, 11, 11, 21, 59, 5), 'number': 10042, """ + \
+                 """'available_bike_stands': 1, 'bike_stands': 33},{'address': "52 RUE D'ENGHIEN / ANGLE RUE DU FAUBOURG POISSONIERE - """ + \
+                 """75010 PARIS", 'collect_date': datetime.datetime(2014, 11, 11, 22, 1, 18, 331070), 'lng': 2.348395236282807, """ + \
+                 """'contract_name': 'Paris', 'name': '10042 - POISSONNIÈRE - ENGHIEN', 'banking': 0, 'lat': 48.87242006305313, """ + \
+                 """'bonus': 0, 'status': 'OPEN', 'available_bikes': 32, 'last_update': datetime.datetime(2014, 11, 11, 21, 59, 5), """ + \
+                 """'number': 10042, 'available_bike_stands': 1, 'bike_stands': 33}]"""
 
         cmd = sys.executable.replace(
             "pythonw",

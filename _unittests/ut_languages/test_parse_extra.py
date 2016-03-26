@@ -13,7 +13,7 @@ import unittest
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -35,9 +35,9 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
 from src.pyensae.languages.antlr_grammar_build import build_grammar
 import src.pyensae.languages.antlr_grammar_use as source_parser
@@ -63,7 +63,7 @@ class TestParseCode (unittest.TestCase):
         for lang in ["language"]:
             gr = os.path.join(folder, lang + ".g4")
             assert os.path.exists(gr)
-            final = build_grammar(lang, fLOG=fLOG)
+            build_grammar(lang, fLOG=fLOG)
 
     def test_extra(self):
         fLOG(

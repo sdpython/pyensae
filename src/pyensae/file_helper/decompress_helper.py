@@ -7,7 +7,7 @@ import tarfile
 import os
 import gzip
 import bz2
-from pyquickhelper import noLOG
+from pyquickhelper.loghelper import noLOG
 
 
 def decompress_zip(filename, whereTo=".", fLOG=noLOG):

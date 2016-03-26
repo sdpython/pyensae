@@ -6,7 +6,7 @@ and `antlr4-python3-runtime <https://pypi.python.org/pypi/antlr4-python3-runtime
 """
 import os
 import sys
-from pyquickhelper import noLOG
+from pyquickhelper.loghelper import noLOG
 
 
 def _is_syntax_is_missing(language):
@@ -96,7 +96,7 @@ def build_grammar(g4, version="4.5", fLOG=noLOG):
     version = version.split("-")[0]
 
     cmd = "org.antlr.v4.Tool -Dlanguage=Python3 " + g4
-    from pyquickhelper import run_cmd
+    from pyquickhelper.loghelper import run_cmd
     out, err = run_cmd("java " + cmd, wait=True, fLOG=fLOG)
 
     def compiled():

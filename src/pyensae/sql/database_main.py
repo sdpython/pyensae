@@ -7,7 +7,7 @@ from .database_core import DatabaseCore
 from .database_import_export import DatabaseImportExport
 from .database_object import DatabaseObject
 from .database_join_group import DatabaseJoinGroup
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 
 
 class Database (

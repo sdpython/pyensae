@@ -7,14 +7,11 @@
 import sys
 import os
 import unittest
-import re
-import datetime
-import time
-from http.server import BaseHTTPRequestHandler, HTTPServer
+
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -36,9 +33,9 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.datasource.linkedin_access import LinkedInAccess
 
 
@@ -72,7 +69,7 @@ class TestLinkedIn (unittest.TestCase):
 
     def start(self):
         try:
-            import linkedin
+            import linkedin as skip__
         except ImportError:
             path = os.path.normpath(
                 os.path.abspath(
@@ -84,7 +81,7 @@ class TestLinkedIn (unittest.TestCase):
                         "python-linkedin")))
             if path not in sys.path:
                 sys.path.append(path)
-            import linkedin
+            import linkedin as skip__
 
     def test_linkedin(self):
         self.start()

@@ -11,7 +11,7 @@ import datetime
 
 try:
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -33,9 +33,9 @@ except ImportError:
     if path not in sys.path:
         sys.path.append(path)
     import src
-    import pyquickhelper
+    import pyquickhelper as skip_
 
-from pyquickhelper import fLOG
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.finance.astock import StockPrices, StockPricesException
 
 
@@ -99,12 +99,12 @@ class TestStockHttp (unittest.TestCase):
         assert len(cov) == 3
 
         cor = StockPrices.covariance(stocks, cov=False)
-        assert len(cor) == 3
-        assert cor.ix["BNP.PA", "BNP.PA"] == 1
-        assert cor.ix[2, 2] == 1
+        self.assertEqual(len(cor), 3)
+        assert abs(cor.ix["BNP.PA", "BNP.PA"] - 1) < 1e-5
+        assert abs(cor.ix[2, 2] - 1) < 1e-5
 
         ret, mat = StockPrices.covariance(stocks, cov=False, ret=True)
-        assert len(ret) == 3
+        self.assertEqual(len(ret), 3)
 
     def test_no_wifi(self):
         fLOG(
@@ -117,7 +117,7 @@ class TestStockHttp (unittest.TestCase):
         fLOG(os.path.exists(file))
         fLOG(file)
         try:
-            stock = StockPrices(file)
+            StockPrices(file)
         except StockPricesException as e:
             if "schema: " not in str(e):
                 raise Exception("unexpected error (1)") from e
@@ -134,7 +134,6 @@ class TestStockHttp (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache_index")
-        name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-16.txt")
         stock = StockPrices(
             "BNP.PA",
             folder=cache,
