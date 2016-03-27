@@ -75,7 +75,7 @@ def build_grammar(g4, version="4.5", fLOG=noLOG):
     final = os.path.join(folder, name)
 
     if not os.path.exists(final):
-        from ..resources.http_retrieve import download_data
+        from ..datasource.http_retrieve import download_data
         name = download_data(name, website=domain, whereTo=folder)
         if not os.path.exists(name):
             raise FileNotFoundError("unable to download: " + url)
