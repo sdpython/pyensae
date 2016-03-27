@@ -11,7 +11,7 @@ import glob
 from pyquickhelper.loghelper import run_cmd, noLOG
 from pyquickhelper.filehelper import change_file_status
 from .jython_helper import get_java_cmd, get_java_path
-from ..resources.http_retrieve import download_data
+from ..datasource.http_retrieve import download_data
 
 
 def download_pig_standalone(pig_version="0.15.0", hadoop_version="2.7.2", fLOG=noLOG):

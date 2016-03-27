@@ -242,6 +242,7 @@ _doc/notebooks/Conf*.txt
 _doc/notebooks/*.db3
 
 _unittests/ut_resources/facebook*
+_unittests/ut_datasource/facebook*
 README
 *.jar
 

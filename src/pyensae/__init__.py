@@ -4,7 +4,7 @@
 @brief Main file
 """
 import sys
-from .resources.http_retrieve import download_data
+from .datasource.http_retrieve import download_data
 
 
 if sys.version_info[0] < 3:
