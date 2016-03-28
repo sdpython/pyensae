@@ -36,7 +36,7 @@ install:
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyensae"
   - "%PYTHON%\\Scripts\\pip install cryptography"
   - "%PYTHON%\\Scripts\\pip install azure"
-  - "%PYTHON%\\Scripts\\pip install http://www.xavierdupre.fr/enseignement/setup/pycrypto-2.7a2-cp35-none-win_amd64.whl"
+  - "%PYTHON%\\Scripts\\pymy_install3 pycrypto"
   - "%PYTHON%\\Scripts\\pip install pycryptodomex"
   - "%PYTHON%\\Scripts\\pip install urllib3"
 build: off

@@ -39,6 +39,7 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import is_travis_or_appveyor
 from src.pyensae.file_helper import download_java_standalone, is_java_installed
 from src.pyensae.file_helper.pig_helper import run_pig, download_pig_standalone
 
@@ -51,7 +52,7 @@ class TestPig (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if "travis" in sys.executable:
+        if is_travis_or_appveyor():
             return
 
         download_java_standalone()
