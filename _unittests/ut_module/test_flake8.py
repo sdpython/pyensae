@@ -45,7 +45,7 @@ class TestFlake8(unittest.TestCase):
 
         thi = os.path.abspath(os.path.dirname(__file__))
         src_ = os.path.normpath(os.path.join(thi, "..", "..", "src"))
-        check_pep8(src_, fLOG=fLOG, extended=[("fLOG", _extended_refectoring)],
+        check_pep8(src_, fLOG=fLOG, extended=[("fLOG", _extended_refactoring)],
                    neg_filter="((.*Listener[.]py)|(.*Parser[.]py)|(.*Lexer[.]py))$")
 
     def test_flake8_test(self):
@@ -69,7 +69,7 @@ class TestFlake8(unittest.TestCase):
                          "'skip___' imported but unused",
                          "E402 module level",
                          ],
-                   extended=[("fLOG", _extended_refectoring)],
+                   extended=[("fLOG", _extended_refactoring)],
                    max_line_length=1000)
 
 
