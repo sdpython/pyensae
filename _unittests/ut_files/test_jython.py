@@ -77,7 +77,8 @@ class TestJython (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if "travis" in sys.executable:
+        if is_travis_or_appveyor():
+            # to avoid timeout on appveyor
             return
 
         download_java_standalone()
