@@ -7,7 +7,7 @@
 """
 
 import os
-from pyquickhelper.helpgen.default_conf import get_graphviz_dot
+from pyquickhelper.helpgen.conf_path_tools import get_graphviz_dot
 from pyquickhelper.loghelper import run_cmd
 
 
