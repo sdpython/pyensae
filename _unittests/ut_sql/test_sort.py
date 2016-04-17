@@ -73,7 +73,7 @@ class TestSeveralFiles(unittest.TestCase):
         fLOG("sort")
         text_file = TextFileColumns(out, force_header=True)
         outs = os.path.join(temp, "output_sort.txt")
-        text_file.sort(outs, "nomdudepartement", maxmemory=2**10, fLOG=fLOG,
+        text_file.sort(outs, "nomdudepartement", maxmemory=2 ** 10, fLOG=fLOG,
                        folder=temp)
         assert os.path.exists(outs)
 

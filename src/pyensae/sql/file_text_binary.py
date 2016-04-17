@@ -10,6 +10,7 @@ import os
 import math
 import time
 import decimal
+from pyquickhelper.loghelper import noLOG
 
 from .type_helpers import guess_type_value
 
@@ -39,7 +40,7 @@ class TextFile:
     _split_expr = re.compile("\\r?\\t", re.U)
     _sep_available = "\t;,| "
 
-    def __init__(self, filename, errors=None, fLOG=print, buffer_size=2 ** 20,
+    def __init__(self, filename, errors=None, fLOG=noLOG, buffer_size=2 ** 20,
                  filter=None, separated=False, encoding="utf-8"):
         """
         construction
@@ -218,14 +219,10 @@ class TextFile:
         @param      line        string
         @return                 list
         """
-        col = TextFile._split_expr.split(line.strip(" \r\n"), fLOG=self.LOG)
+        col = TextFile._split_expr.split(line.strip(" \r\n"))
         return col
 
-    def join(self, definition,
-             output,
-             missing_value="",
-             unique=None,
-             **param):
+    def join(self, definition, output, missing_value="", unique=None, **param):
         """join several files together
 
         @param  definition      list of triplets:
@@ -237,14 +234,27 @@ class TextFile:
         @return                 columns, matrix or number of of missing values
 
         We assume that every file starts with header giving columns names.
-        The functions associates this_column value to file_column and append all the columns from filename with a prefix.
+        The function associates *this_column* value to *file_column* and
+        appends all the columns from filename with a prefix.
         We also assumes values in file_column are unique.
         """
         if output is not None:
             output = open(output, "w", encoding=self._encoding)
 
         files = []
-        for a, b, c, d in definition:
+        for i, tu in enumerate(definition):
+            if len(tu) == 2:
+                a, b = tu
+                c = b
+                d = "f%d_" % (i + 1)
+            elif len(tu) == 3:
+                a, b, c = tu
+                d = "f%d_" % (i + 1)
+            elif len(tu) == 4:
+                a, b, c, d = tu
+            else:
+                raise ValueError(
+                    "definition must contain tuple (size, 2, 3 ,4), not {0}".format(tu))
             files.append(self._load(a, b, c, d, **param))
 
         res = []
@@ -307,9 +317,13 @@ class TextFile:
                     this_key = col[columns[file[2]]]
                     if this_key in cont:
                         val = cont[this_key]
+                        if len(val) == 0 or (len(val) == 1 and len(val[0]) == 0):
+                            # empty line
+                            continue
                         if len(val) != len(c):
-                            mes = "line %d: problem len(val) = %d and len (c) = %d" % (
-                                self.get_nb_readlines(), len(val), len(c))
+                            ll = self.get_nb_readlines()
+                            mes = "line %d: problem len(val) = %d and len (c) = %d\n\"%s\"" % (
+                                ll, len(val), len(c), file)
                             raise Exception(mes)
                     else:
                         val = [missing_value for k in c]
@@ -317,6 +331,9 @@ class TextFile:
                     col.extend(val)
 
                 if len(col) != len(columns):
+                    vals = list(set(col))
+                    if vals == ['']:
+                        continue
                     mes = "problem 1 with line %d\n" % self.get_nb_readlines()
                     mes += "len (col) = %d len (columns) = %d" % (len(col),
                                                                   len(columns))
@@ -355,14 +372,8 @@ class TextFile:
         """
         return guess_type_value(s)
 
-    def guess_columns(self, nb=100,
-                      force_header=False,
-                      changes={},
-                      force_noheader=False,
-                      fields=None,
-                      regex={},
-                      force_sep=None,
-                      mistake=3):
+    def guess_columns(self, nb=100, force_header=False, changes=None, force_noheader=False,
+                      fields=None, regex=None, force_sep=None, mistake=3):
         """guess the columns type
         @param      nb              number of lines to have a look to in order to find all the necessary elements
         @param      force_header    impose a header whether it is detect or not
@@ -381,6 +392,10 @@ class TextFile:
         The column separator is looked into ``, | ; \\t``
         @warning The file must not be opened, it will be several times.
         """
+        if changes is None:
+            changes = {}
+        if regex is None:
+            regex = {}
         self.LOG("  TextFile.guess_columns: processing file ", self.filename)
 
         endlinechar = "\n "
@@ -645,12 +660,8 @@ class TextFile:
                                         float: "[-]?[0-9]*?([.][0-9]*?)?([eE][-]?[0-9]{0,4})?",
                                         str: ".*"}
 
-    def _build_regex(self,
-                     sep,
-                     columns,
-                     exp=_build_regex_default_value_types,
-                     nomore=False,
-                     regex=None):
+    def _build_regex(self, sep, columns, exp=_build_regex_default_value_types,
+                     nomore=False, regex=None):
         """
         Build a regular expression.
 
