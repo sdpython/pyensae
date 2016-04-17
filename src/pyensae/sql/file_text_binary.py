@@ -39,13 +39,8 @@ class TextFile:
     _split_expr = re.compile("\\r?\\t", re.U)
     _sep_available = "\t;,| "
 
-    def __init__(self, filename,
-                 errors=None,
-                 fLOG=print,
-                 buffer_size=2 ** 20,
-                 filter=None,
-                 separated=False,
-                 encoding="utf-8"):
+    def __init__(self, filename, errors=None, fLOG=print, buffer_size=2 ** 20,
+                 filter=None, separated=False, encoding="utf-8"):
         """
         construction
         @param      filename        filename
@@ -691,6 +686,10 @@ class TextFile:
                 res[k] = (nv0, regex[nv0])
             else:
                 res[k] = (nv0, exp[t])
+        for c in res:
+            if " " in c[0]:
+                raise ValueError(
+                    "Accents are not allowed for column names: {0}".format(c))
         res = ["(?P<%s>%s)" % c for c in res]
         if sep == "\t":
             sep = "\\t"

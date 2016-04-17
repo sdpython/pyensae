@@ -44,24 +44,15 @@ class TextFileColumns (TextFile):
     @var _regexfix          impose a regular expression to interpret a line instead of the automatically built one
     @var _filter_dict       it is a function which takes a dictionary and returns a boolean which tells if the line must considered or not
     @var _fields            name of the columns (if there is no header)
+
+    Spaces and non-ascii characters cannot be used to name a column.
+    This name must be a named group for a regular expression.
     """
 
-    def __init__(self, filename,
-                 errors=None,
-                 fLOG=noLOG,
-                 force_header=False,
-                 changes={},
-                 force_noheader=False,
-                 regex=None,
-                 filter=None,
-                 fields=None,
-                 keep_text_when_bad_type=False,
-                 break_at=-1,
-                 strip_space=True,
-                 force_sep=None,
-                 nb_line_guess=100,
-                 mistake=3,
-                 encoding="utf-8",
+    def __init__(self, filename, errors=None, fLOG=noLOG, force_header=False, changes=None,
+                 force_noheader=False, regex=None, filter=None, fields=None,
+                 keep_text_when_bad_type=False, break_at=-1, strip_space=True,
+                 force_sep=None, nb_line_guess=100, mistake=3, encoding="utf-8",
                  strict_separator=False):
         """
         construction
@@ -86,6 +77,9 @@ class TextFileColumns (TextFile):
         @param      encoding                    encoding
         @param      strict_separator            strict number of columns, it assumes there is no separator in the content of every column
         """
+        if changes is None:
+            changes = {}
+
         TextFile.__init__(self, filename, errors, fLOG=fLOG, encoding=encoding)
 
         self._force_header = force_header
@@ -347,7 +341,7 @@ class TextFileColumns (TextFile):
             nbline += 1
         f.close()
 
-    def sort(self, output, key, maxmemory=2 ** 28, folder=None, fLOG=print):
+    def sort(self, output, key, maxmemory=2 ** 28, folder=None, fLOG=noLOG):
         """sort a text file, even a big one, one or several columns gives the order
         @param      output      output file result
         @param      key         lines sorted depending of these columns
@@ -380,7 +374,11 @@ class TextFileColumns (TextFile):
         memo = []
         self.open()
         for line in self:
-            k = tuple([line[k] for k in key])
+            try:
+                k = tuple([line[k] for k in key])
+            except KeyError as e:
+                raise Exception("unable to find one column in\n{0}".format(
+                    self.get_columns())) from e
             memo.append((k, line))
             if len(memo) > maxmemory:
                 memo.sort(key=lambda el: el[0])
@@ -413,7 +411,7 @@ class TextFileColumns (TextFile):
             os.remove(m)
 
     @staticmethod
-    def fusion(key, files, output, force_header=False, encoding="utf-8", fLOG=print):
+    def fusion(key, files, output, force_header=False, encoding="utf-8", fLOG=noLOG):
         """
         does a fusion between several files with the same columns (different order is allowed)
         @param      key             columns to be compared
@@ -434,6 +432,8 @@ class TextFileColumns (TextFile):
         res = open(output, "w", encoding=encoding)
         nbline = 0
         sepline = "\n"  # GetSepLine ()
+        if isinstance(key, str):
+            key = [key]
 
         # start
         kline = []
@@ -446,7 +446,11 @@ class TextFileColumns (TextFile):
             except StopIteration:
                 d = None
             if d is not None:
-                k = tuple([d[k] for k in key])
+                try:
+                    k = tuple([d[k] for k in key])
+                except KeyError as e:
+                    raise Exception("unable to find one column in\n{0}".format(
+                        li[0].get_columns())) from e
                 kline.append([k, d] + li)
 
         # loop

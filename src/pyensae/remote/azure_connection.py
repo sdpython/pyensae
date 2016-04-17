@@ -380,7 +380,8 @@ class AzureClient():
 
             blob_service.put_block_list(container_name, blob_name, block_ids)
         else:
-            blob_service.create_blob_from_bytes(container_name, blob_name, data)
+            blob_service.create_blob_from_bytes(
+                container_name, blob_name, data)
         return blob_name
 
     def download(self,

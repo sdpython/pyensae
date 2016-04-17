@@ -1,0 +1,2 @@
+﻿nomdudepartement	inscrits	votants	Sarkozy	Royal
+INCONNU	372 951	319 523	185 174	120 679
