@@ -25,7 +25,7 @@ install:
   - "%PYTHON%\\Scripts\\pymy_install3 pycrypto"
   - "%PYTHON%\\Scripts\\pip install pycryptodomex"
   - "%PYTHON%\\Scripts\\pip install urllib3"
-  - "%PYTHON%\\Scripts\\pymy_install3 graphviz"
+  - "%PYTHON%\\Scripts\\pymy_install3 tool graphviz"
 build: off
 
 test_script:
