@@ -26,7 +26,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install pycryptodomex"
   - "%PYTHON%\\Scripts\\pip install urllib3"
   - "%PYTHON%\\Scripts\\pymy_install3 --task=tool --source=zip graphviz"
-  - "set PATH=%PATH%;%PYTHON%\\build\\update_modules\\Graphviz\\bin"
+  - "set PATH=%PATH%;%PYTHON%\\Scripts\\build\\update_modules\\Graphviz\\bin"
 build: off
 
 test_script:
