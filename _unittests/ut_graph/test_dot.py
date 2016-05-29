@@ -67,7 +67,7 @@ class TestDot (unittest.TestCase):
             try:
                 out, err = run_dot(outfile, img)
             except FileNotFoundError as e:
-                p = os.envrion.get("PATH", None)
+                p = os.environ.get("PATH", None)
                 raise Exception("PATH={0}".format(p)) from e
             assert os.path.exists(img)
 
