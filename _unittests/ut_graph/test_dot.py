@@ -64,7 +64,11 @@ class TestDot (unittest.TestCase):
             outfile = os.path.join(temp, "out_tree.dot")
             tree.export_graphviz(clf, out_file=outfile)
             img = os.path.join(temp, "out_tree.png")
-            out, err = run_dot(outfile, img)
+            try:
+                out, err = run_dot(outfile, img)
+            except FileNotFoundError as e:
+                p = os.envrion.get("PATH", None)
+                raise Exception("PATH={0}".format(p)) from e
             assert os.path.exists(img)
 
 
