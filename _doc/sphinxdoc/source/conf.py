@@ -20,14 +20,9 @@ sys.path.insert(
 
 from pyquickhelper.helpgen.default_conf import set_sphinx_variables
 
-set_sphinx_variables(__file__,
-                     "pyensae",
-                     "Xavier Dupré",
-                     2015,
-                     "basicstrap",
-                     None,
-                     locals(),
-                     add_extensions=None)
+set_sphinx_variables(__file__, "pyensae", "Xavier Dupré", 2016,
+                     "basicstrap", None, locals(), add_extensions=None,
+                     extlinks=dict(issue=('https://github.com/sdpython/pyensae/issues/%d', 'issue')))
 
 blog_root = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/"
 blog_background = False
