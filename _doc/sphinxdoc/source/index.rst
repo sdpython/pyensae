@@ -45,7 +45,8 @@ pyensae documentation
 `wheel <http://www.xavierdupre.fr/site2013/index_code.html#pyensae>`_,
 `travis <https://travis-ci.org/sdpython/pyensae>`_,
 :ref:`l-README`,
-:ref:`blog <ap-main-0>`
+:ref:`blog <ap-main-0>`,
+:ref:`l-issues-todolist`
 
 What is it?      
 -----------
