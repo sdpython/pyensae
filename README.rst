@@ -20,10 +20,6 @@ README / Changes
     :alt: PYPI Package
     :target: https://pypi.python.org/pypi/pyensae    
 
-.. image:: http://img.shields.io/github/issues/sdpython/pyensae.png
-    :alt: GitHub Issues
-    :target: https://github.com/sdpython/pyensae/issues
-    
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
     :alt: MIT License
     :target: http://opensource.org/licenses/MIT
@@ -39,6 +35,13 @@ README / Changes
 .. image:: https://codecov.io/github/sdpython/pyensae/coverage.svg?branch=master
     :target: https://codecov.io/github/sdpython/pyensae?branch=master
 
+.. image:: http://img.shields.io/github/issues/sdpython/pyensae.png
+    :alt: GitHub Issues
+    :target: https://github.com/sdpython/pyensae/issues
+    
+.. image:: https://badge.waffle.io/sdpython/pyensae.png?label=ready&title=Ready
+    :alt: Waffle
+    :target: https://waffle.io/sdpython/pyensae    
    
 **Links:**
 
