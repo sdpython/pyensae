@@ -10,6 +10,13 @@ import urllib.request
 from pyquickhelper.loghelper import noLOG
 
 
+class DownloadDataException(Exception):
+    """
+    raised when data cannot be downloaded
+    """
+    pass
+
+
 def remove_empty_line(file):
     """
     remove empty line in an imported file
@@ -142,7 +149,7 @@ def download_data(name,
                 alls = u.read()
                 u.close()
             except Exception as e:
-                raise Exception(
+                raise DownloadDataException(
                     "unable to retrieve data from {0}".format(url)) from e
             u = open(outfile, "wb")
             u.write(alls)
