@@ -721,6 +721,8 @@ class ASSHClient():
         if isinstance(cmd, list):
             raise TypeError("this should not happen:" + str(cmd))
 
+        warnings.warn("Hive submission is not tested. It will probably fail.")
+
         fLOG("[hive_submit]:", cmd)
         out, err = self.execute_command(cmd, no_exception=no_exception)
         return out, err

@@ -64,6 +64,16 @@ class MagicAzure(MagicClassWithHelpers):
         %blob_open
 
     @endFAQ
+
+    .. _l-magic-path-container:
+
+    About path
+    ++++++++++
+
+    For all the magic commands associated to Azure, the path ``/part1/part2``
+    is converted into ``container/part1/part2``. For path ``part1/part2``,
+    ``path1`` is the container.
+
     """
 
     def create_client(self, account_name, account_key,
@@ -319,7 +329,7 @@ class MagicAzure(MagicClassWithHelpers):
         """
         interpret a path
 
-        @param      line                line
+        @param      line                line (see :ref:`l-magic-path-container`)
         @param      cl                  @see cl AzureClient
         @param      bs                  blob service
         @param      empty_is_value      if True, do not raise an exception
@@ -335,7 +345,7 @@ class MagicAzure(MagicClassWithHelpers):
             container = spl[0]
             remotepath = None if len(spl) == 1 else "/".join(spl[1:])
 
-        if not empty_is_value and len(remotepath) == 0:
+        if not empty_is_value and (remotepath is None or len(remotepath) == 0):
             raise FileNotFoundError("path should not be empty: " + line)
 
         return container, remotepath
@@ -356,7 +366,7 @@ class MagicAzure(MagicClassWithHelpers):
     @line_magic
     def blob_ls(self, line):
         """
-        defines command %blob_ls
+        defines command %blob_ls, see :ref:`l-magic-path-container`
 
         @NB(blob_ls)
 
@@ -399,7 +409,8 @@ class MagicAzure(MagicClassWithHelpers):
     @line_magic
     def blob_lsl(self, line):
         """
-        defines command %blob_lsl (extended version of blob_lsl)
+        defines command %blob_lsl (extended version of blob_lsl),
+        see :ref:`l-magic-path-container`
 
         @NB(blob_lsl)
 
@@ -442,7 +453,8 @@ class MagicAzure(MagicClassWithHelpers):
     def blob_up(self, line):
         """
         upload a file to the blob storage,
-        we assume the container is the first element of the path
+        we assume the container is the first element of the path,
+        see :ref:`l-magic-path-container`
 
         Example::
 
@@ -500,7 +512,8 @@ class MagicAzure(MagicClassWithHelpers):
     @line_magic
     def blob_down(self, line):
         """
-        download a file from the blob storage
+        download a file from the blob storage,
+        see :ref:`l-magic-path-container`
 
         Example::
 
@@ -562,7 +575,8 @@ class MagicAzure(MagicClassWithHelpers):
     @line_magic
     def blob_downmerge(self, line):
         """
-        download all files from a folder
+        download all files from a folder,
+        see :ref:`l-magic-path-container`
 
         Example::
 
@@ -626,7 +640,8 @@ class MagicAzure(MagicClassWithHelpers):
     @line_magic
     def blob_delete(self, line):
         """
-        deletes a blob
+        deletes a blob,
+        see :ref:`l-magic-path-container`
 
         @NB(blob_delete)
 
@@ -665,7 +680,8 @@ class MagicAzure(MagicClassWithHelpers):
     @line_magic
     def blob_rmr(self, line):
         """
-        deletes a folder
+        deletes a folder,
+        see :ref:`l-magic-path-container`
 
         @NB(blob_rmr)
 
@@ -707,7 +723,8 @@ class MagicAzure(MagicClassWithHelpers):
     @line_magic
     def blob_copy(self, line):
         """
-        copy a blob storage
+        copy a blob storage,
+        see :ref:`l-magic-path-container`
 
         @NB(blob_copy)
 
@@ -805,7 +822,8 @@ class MagicAzure(MagicClassWithHelpers):
 
         @endNB
         """
-        parser = self.get_parser(MagicAzure.hd_job_status_parser, "hd_queue")
+        parser = self.get_parser(
+            MagicAzure.hd_job_status_parser, "hd_job_status")
         args = self.get_args(line, parser)
 
         if args is not None:
@@ -930,6 +948,76 @@ class MagicAzure(MagicClassWithHelpers):
             script = cell.replace("\r", "")
             with open(filename, "w", encoding="utf8") as f:
                 f.write(script)
+
+    @staticmethod
+    def HIVE_azure_submit_parser():
+        """
+        defines the way to parse the magic command ``%HIVE_azure_submit``
+        """
+        parser = MagicCommandParser(prog="HIVE_azure_submit",
+                                    description='Submits a job to the cluster, the job is local, the job is ' +
+                                    'first uploaded to the cluster. The magic command populates the local variable last_job with the submitted job id.')
+        parser.add_argument(
+            'file',
+            type=str,
+            help='file name')
+        parser.add_argument(
+            '-d',
+            '--dependency',
+            nargs="*",
+            type=str,
+            help='dependency of the job, the python script')
+        parser.add_argument(
+            '-s',
+            '--stop-on-failure',
+            action='store_true',
+            default=False,
+            help='if true, the job stops on failure right away')
+        parser.add_argument(
+            '-o',
+            '--options',
+            nargs='*',
+            type=str,
+            help='list of options for the job')
+        return parser
+
+    @line_magic
+    def HIVE_azure_submit(self, line):
+        """
+        defines command ``%HIVE_azure_submit``
+
+        @NB(HIVE_azure_submit)
+
+        The code for magic command ``%HIVE_azure_submit`` is equivalent to::
+
+            from pyensae.remote import AzureClient
+            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+            bs = cl.open_blob_service()
+            cl.hive_submit(bs, cl.account_name, hive_file_name, dependencies, **options)
+
+        @endNB
+        """
+        parser = self.get_parser(
+            MagicAzure.HIVE_azure_submit_parser, "HIVE_azure_submit")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            pig = args.file
+            pys = [_ for _ in args.dependency if _.endswith(
+                ".py")] if args.dependency is not None else []
+
+            if not os.path.exists(pig):
+                raise FileNotFoundError(pig)
+
+            options = {"stop_on_failure": False}
+            if args.options is not None:
+                options.update({k: True for k in args.options})
+
+            cl, bs = self.get_blob_connection()
+            r = cl.HIVE_submit(bs, cl.account_name, pig, pys, **options)
+
+            self.shell.user_ns["last_job"] = r
+            return r
 
     @staticmethod
     def hd_pig_submit_parser():
@@ -1324,13 +1412,17 @@ class MagicAzure(MagicClassWithHelpers):
             type=str,
             default="\t",
             help='column separator')
+        parser.add_argument(
+            '--header',
+            default='infer',
+            help='results as a dataframe')
         return parser
 
     @line_magic
     def blob_head(self, line):
         """
         download a file from the blob storage
-        and display its head
+        and display its head, see :ref:`l-magic-path-container`
 
         Example::
 
@@ -1357,8 +1449,54 @@ class MagicAzure(MagicClassWithHelpers):
             container, remotepath = self._interpret_path(remotepath, cl, bs)
             res = cl.df_head(bs, container, remotepath,
                              stop_at=args.size, encoding=args.encoding,
-                             as_df=args.df, merge=args.merge, sep=args.sep)
+                             as_df=args.df, merge=args.merge, sep=args.sep,
+                             header=args.header)
             return res
+
+    @staticmethod
+    def blob_path_parser():
+        """
+        defines the magic command ``%blob_path``,
+        checks the path used in commands ``blob_down``, ``blob_up``
+        """
+        parser = MagicCommandParser(prog="blob_path",
+                                    description='remove a remote path')
+        parser.add_argument(
+            'remotepath',
+            type=str,
+            help='remote path to interpret')
+        return parser
+
+    @line_magic
+    def blob_path(self, line):
+        """
+        checks the path used in commands ``blob_down``, ``blob_up``,
+        see @see me _interpret_path, :ref:`l-magic-path-container`
+
+        @NB(blob_path)
+
+        The code for magic command ``%blob_path`` is equivalent to::
+
+            if line.startswith("/"):
+                container = account_name
+                remotepath = remotepath.lstrip("/")
+            else:
+                spl = line.split("/")
+                container = spl[0]
+                remotepath = None if len(spl) == 1 else "/".join(spl[1:])
+
+            result = container, remotepath
+
+        @endNB
+        """
+        parser = self.get_parser(MagicAzure.blob_delete_parser, "blob_delete")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            cl, bs = self.get_blob_connection()
+            container, remotepath = self._interpret_path(
+                args.remotepath, cl, bs)
+            return container, remotepath
 
 
 def register_azure_magics(ip=None):

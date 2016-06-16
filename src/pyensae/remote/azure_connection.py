@@ -136,6 +136,7 @@ class AzureClient():
 
         self.default_parameters = dict(
             SCRIPTPIG=self.pseudo + "/scripts/pig",
+            SCRIPTHIVE=self.pseudo + "/scripts/hive",
             PSEUDO=self.pseudo,
             CONTAINER="")
 
@@ -918,6 +919,99 @@ class AzureClient():
         if r.status_code != 200:
             raise AzureException(
                 "unable to submit job: {0}\n---\nWITH PARAMS\n---\n{1}".format(pig_file, params), r)
+        return r.json()
+
+    def hive_submit(self, blob_service, container_name, hive_file, dependencies=None,
+                    status_dir=None, stop_on_failure=True, params=None):
+        """
+        Submit a HIVE job, the function uploads it to the cluster
+        as well as the dependencies.
+
+        The code comes from `How to use HDInsight from Linux <http://blogs.msdn.com/b/benjguin/archive/2014/02/18/how-to-use-hdinsight-from-linux.aspx>`_
+        and `start a Pig + Jython job in HDInsight thru WebHCat <http://blogs.msdn.com/b/benjguin/archive/2014/03/21/start-a-pig-jython-job-in-hdinsight-thru-webhcat.aspx>`_.
+        The API is described at `Pig Job — POST pig <https://cwiki.apache.org/confluence/display/Hive/WebHCat+Reference+Pig>`_.
+
+        @param      blob_service    returns by @see me open_blob_service
+        @param      container_name  name of a container
+        @param      hive_file       path to the job in the blob storage
+        @param      dependencies    dependencies
+        @param      status_dir      folder used by Hadoop to store job's progress, it should contain
+                                    your alias if you want to avoid collision with others' jobs
+        @param      stop_on_failure stop on failure, do not wait as long as possible
+        @param      params          to
+        @return                     json
+
+        .. versionadded:: 1.1
+        """
+        if self.hadoop_user_name is None:
+            raise AttributeError(
+                "no hadoop user name was given to the constructor")
+        if self.hadoop_key is None:
+            raise AttributeError(
+                "no hadoop password was given to the constructor")
+
+        # upload
+        scripts = self.default_parameters["SCRIPTHIVE"]
+        toup = [hive_file]
+        if dependencies is not None:
+            toup.extend(dependencies)
+        res = self.upload(blob_service, container_name, scripts, toup)
+
+        # path modification
+        wasb = self.wasb_to_file(container_name, res[0])
+        if dependencies is not None:
+            wasbdep = ",".join(
+                self.wasb_to_file(
+                    container_name,
+                    _) for _ in res[
+                    1:])
+        else:
+            wasbdep = None
+
+        # parameter
+        args = ['-v']
+        for k, v in sorted(self.default_parameters.items()):
+            if k == "CONTAINER":
+                args.extend(["-param", '%s=%s' %
+                             (k, self.wasb_to_file(container_name, v))])
+            else:
+                args.extend(["-param", '%s=%s' % (k, v.replace('"', '\\"'))])
+        if params is not None:
+            for k, v in sorted(params.items()):
+                args.extend(["-param", '%s=%s' % (k, v.replace('"', '\\"'))])
+
+        if stop_on_failure:
+            args.append("-stop_on_failure")
+
+        # params
+        params = {'user.name': self.hadoop_user_name,
+                  'file': wasb,
+                  'arg': args}
+
+        if wasbdep is not None:
+            params["files"] = wasbdep
+
+        if status_dir is not None:
+            status_dir = self._interpret_path(status_dir)
+            params['statusdir'] = self.wasb_to_file(
+                container_name, status_dir + "/" + os.path.split(hive_file)[-1] + ".log")
+        else:
+            status_dir = self.default_parameters["SCRIPTHIVE"]
+            params['statusdir'] = self.wasb_to_file(container_name, self.default_parameters[
+                                                    "SCRIPTHIVE"] + "/" + os.path.split(hive_file)[-1] + ".log")
+
+        webHCatUrl = self.url_webHCatUrl("hive")
+
+        warnings.warn("Hive submission is not tested. It will probably fail.")
+
+        # submit the job
+        r = requests.post(webHCatUrl,
+                          auth=(self.hadoop_user_name, self.hadoop_key),
+                          data=params)
+
+        if r.status_code != 200:
+            raise AzureException(
+                "unable to submit job: {0}\n---\nWITH PARAMS\n---\n{1}".format(hive_file, params), r)
         return r.json()
 
     def job_queue(self, showall=False, fields=None):

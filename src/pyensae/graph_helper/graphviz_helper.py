@@ -7,7 +7,7 @@
 """
 
 import os
-from pyquickhelper.helpgen.conf_path_tools import get_graphviz_dot
+from pyquickhelper.helpgen.conf_path_tools import find_graphviz_dot
 from pyquickhelper.loghelper import run_cmd
 
 
@@ -19,7 +19,7 @@ def dot_exe():
 
     .. versionadded:: 1.1
     """
-    r = get_graphviz_dot()
+    r = find_graphviz_dot()
     if r is None:
         raise FileNotFoundError("unable to find graphviz")
     return r
