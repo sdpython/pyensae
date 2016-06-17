@@ -7,10 +7,6 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
-import pandas
-import warnings
-from urllib3.exceptions import NewConnectionError
-from requests.exceptions import ConnectionError
 thisfold = os.path.abspath(os.path.split(__file__)[0])
 thiscomm = os.path.join(thisfold, "..")
 sys.path.append(thiscomm)
@@ -42,7 +38,7 @@ except ImportError:
     import src
     import pyquickhelper as skip_
 
-from pyquickhelper.loghelper import fLOG, run_cmd
+from pyquickhelper.loghelper import fLOG
 from src.pyensae.remote import AzureClient
 
 

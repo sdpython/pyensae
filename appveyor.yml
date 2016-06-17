@@ -26,6 +26,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install pycryptodomex"
   - "%PYTHON%\\Scripts\\pip install urllib3"
   - "%PYTHON%\\Scripts\\pymy_install3 --task=tool --source=zip graphviz"
+  - "%PYTHON%\\Scripts\\pip install pycodestyle"
   - "set PATH=%PATH%;C:\\projects\\pyensae\\build\\update_modules\\Graphviz\\bin"
   - "dir C:\\projects\\pyensae\\build\\update_modules\\Graphviz\\bin"
 build: off

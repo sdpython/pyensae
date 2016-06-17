@@ -7,6 +7,7 @@ import time
 import socket
 import os
 import io
+import warnings
 
 from pyquickhelper.loghelper import noLOG
 from pyquickhelper.filehelper import is_file_string

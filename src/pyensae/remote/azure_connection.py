@@ -8,6 +8,8 @@ import requests
 import os
 import time
 import io
+import warnings
+
 from .azure_exception import AzureException
 from pyquickhelper.loghelper import noLOG
 
