@@ -7,6 +7,7 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
+import requests
 thisfold = os.path.abspath(os.path.split(__file__)[0])
 thiscomm = os.path.join(thisfold, "..")
 sys.path.append(thiscomm)
@@ -98,8 +99,12 @@ class TestAzureHive(unittest.TestCase):
             f.write(hive)
 
         fLOG("submit")
-        job = self.client.hive_submit(self.blob_serv, self.container,
-                                      hivefile, params=dict(UTT="unittest3"))
+        try:
+            job = self.client.hive_submit(self.blob_serv, self.container,
+                                          hivefile, params=dict(UTT="unittest3"))
+        except requests.exceptions.ConnectionError:
+            # cluster not available
+            return
         fLOG(job)
         #not working
 
