@@ -9,6 +9,7 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
+import pandas
 
 
 try:
@@ -38,7 +39,7 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG
-from src.pyensae.sql.database_helper import import_flatfile_into_database
+from src.pyensae.sql import import_flatfile_into_database, import_flatfile_into_database_pandas
 from src.pyensae.sql.database_main import Database
 
 
@@ -60,7 +61,22 @@ class TestDatabaseInsert (unittest.TestCase):
             "temp_database_index.db3")
         if os.path.exists(dbf):
             os.remove(dbf)
-        import_flatfile_into_database(dbf, file, fLOG=fLOG)
+
+        fLOG("import flat file")
+        ntbl2 = import_flatfile_into_database(dbf, file, fLOG=fLOG)
+        fLOG("import flat file pandas")
+        ntbl3 = import_flatfile_into_database_pandas(dbf, file, fLOG=fLOG, table="pandas_table",
+                                                     chunksize=500, sep="\t")
+        fLOG("-----------------")
+        db = Database(dbf, LOG=fLOG)
+        db.connect()
+        tbl1 = pandas.read_sql("SELECT * FROM " + ntbl2, db._connection)
+        tbl2 = pandas.read_sql("SELECT * FROM " + ntbl3, db._connection)
+        db.close()
+        self.assertEqual(tbl1.shape, tbl2.shape)
+        self.assertEqual(list(tbl1.columns), list(tbl2.columns))
+        self.assertEqual(list(tbl1.dtypes), list(tbl2.dtypes))
+
         assert os.path.exists(dbf)
         db = Database(dbf, LOG=fLOG)
         db.connect()

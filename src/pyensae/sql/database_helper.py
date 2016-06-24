@@ -7,17 +7,9 @@ import os
 from .database_main import Database
 
 
-def import_flatfile_into_database(
-        filedb,
-        filetext,
-        table=None,
-        header=True,
-        columns=None,
-        engine='SQLite',
-        host='localhost',
-        add_key=None,
-        encoding="utf-8",
-        fLOG=print):
+def import_flatfile_into_database(filedb, filetext, table=None, header=True,
+                                  columns=None, engine='SQLite', host='localhost', add_key=None,
+                                  encoding="utf-8", fLOG=print):
     """
 
     Function which imports a file into a database.
@@ -33,6 +25,7 @@ def import_flatfile_into_database(
     @param  fLOG        logging function (will display information through the command line)
     @param  add_key     name of a key to add (or None if nothing to add)
     @param  encoding    encoding
+    @return             table name
 
     @example(Import a flat file into a SQLite database)
     @code
@@ -66,3 +59,4 @@ def import_flatfile_into_database(
                                    encoding=encoding)
 
     db.close()
+    return table

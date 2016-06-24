@@ -16,9 +16,7 @@
         datapath = "<somewhere>"
         
         from pyensae.sql import import_flatfile_into_database, Database
-        from pyquickhelper.loghelper import fLOG
         import os
-        fLOG(OutputPrint=True)
 
         # get the list of files
         csv = [_ for _ in os.listdir(datapath) if ".csv" in _]
@@ -43,4 +41,47 @@
             print("import", f)
             name = table_name(f)
             if name not in tables:
-                import_flatfile_into_database(file_db, os.path.join(datapath, f),table_name(f), fLOG=fLOG)
+                import_flatfile_into_database(file_db, os.path.join(datapath, f),table_name(f))
+
+    The other option is to use `pandas.to_sql <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_sql.html>`_.
+    It is implemented in function
+    :func:`import_flatfile_into_database_pandas <pyensae.sql.pandas_sql_helper.import_flatfile_into_database_pandas>`.
+    It would look like this:
+    
+    ::
+    
+        import os
+        import sqlite3
+        import pandas
+        from pyensae.sql import Database
+
+        datapath = "<somepath>"
+        csv = [_ for _ in os.listdir(datapath) if ".csv" in _]
+        
+        file_db = os.path.join(datapath, "database.db3")
+
+        db = Database(file_db)
+        db.connect()
+        tables = db.get_table_list()
+        db.close()
+
+        def table_name(s):
+            return os.path.split(s)[-1].split(".")[0].replace("-", "_")
+
+        with sqlite3.connect(file_db) as con:
+
+            for f in csv:
+                print("import", f)
+                name = table_name(f)
+                if name not in tables:
+                    
+                    params = {'filepath_or_buffer': os.path.join(datapath, f), 
+                              'encoding': "utf-8", 'sep':"," , 
+                              'iterator': True, 'chunksize':1000000}
+                    nb = 0
+                    for part in pandas.read_csv(**params):
+                        nb += part.shape[0]
+                        print("number of added lines", nb)
+                        part.to_sql(con=con, name=name, if_exists="append", index=False)
+                                    
+                    con.commit()    
