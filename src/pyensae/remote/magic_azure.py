@@ -64,16 +64,6 @@ class MagicAzure(MagicClassWithHelpers):
         %blob_open
 
     @endFAQ
-
-    .. _l-magic-path-container:
-
-    About path
-    ++++++++++
-
-    For all the magic commands associated to Azure, the path ``/part1/part2``
-    is converted into ``container/part1/part2``. For path ``part1/part2``,
-    ``path1`` is the container.
-
     """
 
     def create_client(self, account_name, account_key,
