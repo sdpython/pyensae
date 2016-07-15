@@ -4,7 +4,7 @@
 
 .. versionadded:: 1.3
 """
-from ..loghelper import noLOG
+from pyquickhelper.loghelper import noLOG
 
 
 class CloudTransfer:
