@@ -4,11 +4,11 @@
 
 .. versionadded:: 1.1
 """
-from pyquickhelper.remotedrive import CloudDrive
+from .cloud_transfer import CloudTransfer
 from .azure_connection import AzureClient
 
 
-class AzureDrive(CloudDrive):
+class AzureDrive(CloudTransfer):
     """
     defines a common API for a remote storage
 
@@ -24,7 +24,7 @@ class AzureDrive(CloudDrive):
         @param      container   container name
         @param      fLOG        logging function
         """
-        CloudDrive.__init__(self, blob, key, fLOG)
+        CloudTransfer.__init__(self, blob, key, fLOG)
         self._client = AzureClient(blob, key)
         self._container = container
 
