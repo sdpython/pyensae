@@ -26,9 +26,11 @@ CLASSIFIERS = [
     'Development Status :: 5 - Production/Stable'
 ]
 
+
 #######
 # data
 #######
+
 
 packages = find_packages('src', exclude='src')
 package_dir = {k: "src/" + k.replace(".", "/") for k in packages}
@@ -91,7 +93,8 @@ def import_pyquickhelper():
                     os.path.join(
                         os.path.dirname(__file__),
                         "..",
-                        "pyquickhelper",
+                        "pyquickhelper" if sys.version_info[
+                            0] >= 3 else "py27_pyquickhelper_27",
                         "src"))))
         try:
             import pyquickhelper
@@ -155,8 +158,8 @@ if "--verbose" in sys.argv:
 if is_local():
     pyquickhelper = import_pyquickhelper()
     logging_function = pyquickhelper.get_fLOG()
-    logging_function(OutputPrint=True)
     from pyquickhelper.pycode import process_standard_options_for_setup
+    logging_function(OutputPrint=True)
     r = process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
         unittest_modules=["pyquickhelper", "pymyinstall"],
