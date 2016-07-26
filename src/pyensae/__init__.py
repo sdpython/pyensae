@@ -94,16 +94,3 @@ def load_ipython_extension(ip):
     register_file_magics(ip)
     register_graph_magics(ip)
     register_notebook_magics(ip)
-
-
-try:
-    from IPython import get_ipython
-    ip = get_ipython()
-    if ip is not None:
-        import pyquickhelper
-        pyquickhelper.load_ipython_extension(ip)
-        load_ipython_extension(ip)
-
-except ImportError as e:
-    # IPython is not installed
-    pass
