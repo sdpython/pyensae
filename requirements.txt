@@ -11,7 +11,6 @@ Werkzeug
 XlsxWriter
 ansi2html
 ansiconv
-argparse
 autopep8
 brewer2mpl
 cloud-sptheme

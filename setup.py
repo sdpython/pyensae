@@ -186,12 +186,14 @@ if not r:
         packages=packages,
         package_dir=package_dir,
         package_data=package_data,
-        install_requires=["pyquickhelper", "qgrid"],
+        install_requires=["pyquickhelper"],
         extras_require={
             'graph_helper': ['matplotlib'],
             'languages': ['antlr4-python3-runtime'],
             'datasource.linkedin_access': ['python-linkedin'],
             'datasource.convert': ['dbread'],
+            'notebook_helper.folium_helper': ['folium'],
+            'notebook_helper.magic_notebook': ['qgrid'],
             'remote.ssh_remote_connection': ['paramiko', 'ansiconv', 'ansi2html'],
             'remote.azure_connection': ['azure'],
         }
