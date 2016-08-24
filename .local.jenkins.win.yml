@@ -1,0 +1,18 @@
+language: python
+python:
+  - { PATH: "{{replace(Python34, '\\', '\\\\')}}", VERSION: 3.4, DIST: std }
+  - { PATH: "{{replace(Python35, '\\', '\\\\')}}", VERSION: 3.5, DIST: std }
+  - { PATH: "{{replace(Anaconda3, '\\', '\\\\')}}", VERSION: 3.5, DIST: conda }
+  - { PATH: "{{replace(WinPython35, '\\', '\\\\')}}", VERSION: 3.5, DIST: winpython }
+virtualenv:
+  - path: {{ospathjoin(root_path, pickname("%NAME_JENKINS%", project_name + "_%VERSION%_%DIST%_%NAME%"), "_venv")}}
+install:
+  - pip install --no-cache-dir --index http://localhost:8067/simple/ pyquickhelper
+  - pip install -r requirements.txt
+  - pip freeze
+script:
+  - { CMD: "python setup.py unittests", NAME: "UT" }
+documentation:
+  - if [ ${PYTHON} == "{{Python35}}" ] then
+    python setup.py build_sphinx
+    fi
