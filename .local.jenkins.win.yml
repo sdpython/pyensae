@@ -14,7 +14,7 @@ script:
   - { CMD: "python setup.py unittests", NAME: "UT" }
 after_script:
   - python setup.py bdist_wheel
-  - copy dist\*.whl ..\..\local_pypi\local_pypi_server
+  - if [ ${DIST} != "conda" and ${VERSION} != "3.4" ] then copy dist\*.whl ..\..\local_pypi\local_pypi_server fi
 documentation:
   - if [ ${PYTHON} == "{{Python35}}" ] then
     python setup.py build_sphinx
