@@ -14,10 +14,10 @@ script:
   - { CMD: "python setup.py unittests", NAME: "UT" }
 after_script:
   - python setup.py bdist_wheel
-  - if [ ${DIST} != "conda" and ${VERSION} != "3.4" ] then copy dist\*.whl ..\..\local_pypi\local_pypi_server fi
+  - if [ ${DIST} != "conda" and ${VERSION} != "3.4" and ${NAME} == "UT" ] then copy dist\*.whl ..\..\local_pypi\local_pypi_server fi
 documentation:
-  - if [ ${PYTHON} == "{{Python35}}" ] then python setup.py build_sphinx fi
-  - if [ ${PYTHON} == "{{Python35}}" ] then xcopy /E /C /I /Y _doc\sphinxdoc\build\html dist\html fi
-  - if [ ${PYTHON} == "{{Python35}}" ] then xcopy /E /C /I /Y _doc\sphinxdoc\build\epub dist\epub fi
-  - if [ ${PYTHON} == "{{Python35}}" ] then copy _doc\sphinxdoc\build\htmlhelp\*.chm dist\html fi
-  - if [ ${PYTHON} == "{{Python35}}" ] then xcopy /E /C /I /Y _doc\sphinxdoc\build\latex\*.pdf dist\html fi
+  - if [ ${PYTHON} == "{{Python35}}" and ${NAME} == "UT" ] then python setup.py build_sphinx fi
+  - if [ ${PYTHON} == "{{Python35}}" and ${NAME} == "UT" ] then xcopy /E /C /I /Y _doc\sphinxdoc\build\html dist\html fi
+  - if [ ${PYTHON} == "{{Python35}}" and ${NAME} == "UT" ] then xcopy /E /C /I /Y _doc\sphinxdoc\build\epub dist\epub fi
+  - if [ ${PYTHON} == "{{Python35}}" and ${NAME} == "UT" ] then copy _doc\sphinxdoc\build\htmlhelp\*.chm dist\html fi
+  - if [ ${PYTHON} == "{{Python35}}" and ${NAME} == "UT" ] then xcopy /E /C /I /Y _doc\sphinxdoc\build\latex\*.pdf dist\html fi
