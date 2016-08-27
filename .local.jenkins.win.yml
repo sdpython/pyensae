@@ -7,7 +7,7 @@ python:
 virtualenv:
   - path: {{ospathjoin(root_path, pickname("%NAME_JENKINS%", project_name + "_%VERSION%_%DIST%_%NAME%"), "_venv")}}
 install:
-  - pip install --no-cache-dir --index http://localhost:8067/simple/ pyquickhelper
+  - pip install --no-cache-dir --no-deps --index http://localhost:8067/simple/ pyquickhelper
   - pip install -r requirements.txt
   - pip freeze
 script:
