@@ -18,5 +18,3 @@ after_script:
 documentation:
   - if [ ${PYTHON} == "{{Python35}}" and ${NAME} == "UT" ] then python setup.py build_sphinx fi
   - if [ ${PYTHON} == "{{Python35}}" and ${NAME} == "UT" ] then xcopy /E /C /I /Y _doc\sphinxdoc\build\html dist\html fi
-  - if [ ${PYTHON} == "{{Python35}}" and ${NAME} == "UT" ] then xcopy /E /C /I /Y _doc\sphinxdoc\build\epub dist\epub fi
-  - if [ ${PYTHON} == "{{Python35}}" and ${NAME} == "UT" ] then xcopy /E /C /I /Y _doc\sphinxdoc\build\latex\*.pdf dist\html fi
