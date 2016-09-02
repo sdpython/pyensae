@@ -363,9 +363,10 @@ class MagicFile(MagicClassWithHelpers):
                 self.runpy("")
             else:
                 args = args.args
-                cmd = sys.executable.replace(
-                    "pythonw",
-                    "python") + " " + filename + " " + args
+                cmd = sys.executable.replace("pythonw", "python")
+                cmd += " " + filename + " "
+                cmd += " ".join('"{0}"'.format(_)
+                                for _ in args) if isinstance(args, list) else args
                 tosend = cell
                 out, err = run_cmd(
                     cmd, wait=True, sin=tosend, communicate=True, timeout=10, shell=False)
