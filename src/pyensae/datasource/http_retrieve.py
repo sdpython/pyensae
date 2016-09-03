@@ -151,7 +151,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
                     u.close()
                     break
                 except Exception as e:
-                    if retry <= 0:
+                    if retry <= 1:
                         raise DownloadDataException(
                             "unable to retrieve data from {0}".format(url)) from e
                     else:
