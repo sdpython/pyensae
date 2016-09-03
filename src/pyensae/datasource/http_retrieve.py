@@ -62,15 +62,9 @@ def remove_empty_line(file):
             f.write("\n".join(lines))
 
 
-def download_data(name,
-                  moduleName=None,
-                  url=None,
-                  glo=None,
-                  loc=None,
-                  whereTo=".",
-                  website="xd",
-                  timeout=None,
-                  fLOG=noLOG):
+def download_data(name, moduleName=None, url=None, glo=None,
+                  loc=None, whereTo=".", website="xd", timeout=None,
+                  retry=2, fLOG=noLOG):
     """
     retrieve a module given its name, a text file or a zip file,
     look for it on http://www.xavierdupre.fr/... (website),
@@ -84,27 +78,33 @@ def download_data(name,
     @param      whereTo     specify a folder where downloaded files will be placed
     @param      website     website to look for
     @param      timeout     timeout (seconds) when establishing the connection (see `urlopen <https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen>`_)
+    @param      retry       number of retries in case of failure when downloading the data
     @param      fLOG        logging function
     @return                 modules or list of files
 
     By extension, this function also download various zip files and decompresses it.
     If the file was already downloaded, the function will not do it again.
 
-    @example(Download data for a practical lesson)
-    @code
-    from pyensae import download_data
-    download_data('voeux.zip', website = 'xd')
-    @endcode
-    @endexample
+    .. exref::
+        :title: Download data for a practical lesson
 
-    @example(Download data from a website)
-    @code
-    download_data("facebook.tar.gz",website="http://snap.stanford.edu/data/")
-    @endcode
-    @endexample
+        ::
+
+            from pyensae import download_data
+            download_data('voeux.zip', website = 'xd')
+
+    .. exref::
+        :title: Download data from a website
+
+        ::
+
+            download_data("facebook.tar.gz",website="http://snap.stanford.edu/data/")
 
     If it does not work, I suggest to use standard python:
     `Download a file from Dropbox with Python <http://www.xavierdupre.fr/blog/2015-01-20_nojs.html>`_.
+
+    .. versionchanged:: 1.1
+        Parameter *retry* was added.
     """
     from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz, decompress_bz2
 
@@ -143,14 +143,28 @@ def download_data(name,
                 url = website
             url += file
             fLOG("    downloading of ", url, " to ", outfile)
-            try:
-                u = urllib.request.urlopen(
-                    url) if timeout is None else urllib.request.urlopen(url, timeout=timeout)
-                alls = u.read()
-                u.close()
-            except Exception as e:
-                raise DownloadDataException(
-                    "unable to retrieve data from {0}".format(url)) from e
+            while retry > 0:
+                try:
+                    u = urllib.request.urlopen(
+                        url) if timeout is None else urllib.request.urlopen(url, timeout=timeout)
+                    alls = u.read()
+                    u.close()
+                    break
+                except Exception as e:
+                    if retry <= 0:
+                        raise DownloadDataException(
+                            "unable to retrieve data from {0}".format(url)) from e
+                    else:
+                        fLOG("    fail and retry to download of ",
+                             url, " to ", outfile)
+                except ConnectionResetError as ee:
+                    if retry <= 0:
+                        raise DownloadDataException(
+                            "unable to retrieve data from {0}".format(url)) from ee
+                    else:
+                        fLOG("    fail and retry to download of ",
+                             url, " to ", outfile)
+                retry -= 1
             u = open(outfile, "wb")
             u.write(alls)
             u.close()

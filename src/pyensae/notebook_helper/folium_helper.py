@@ -20,28 +20,28 @@ def folium_html_map(map):
 
     Source: `folium_base.py <https://gist.github.com/psychemedia/f7385255f89137c503b5>`_
 
-    @example(Display an inline map with folium in a notebook)
-    @code
-    import folium
-    map_osm = folium.Map(location=[48.85, 2.34])
-    from pyensae.notebook_helper import folium_html_map
-    map_osm.polygon_marker(location=[48.824338, 2.302641], popup='ENSAE',
-                           fill_color='#132b5e', num_sides=3, radius=10)
-    folium_html_map(map_osm)
-    @endcode
+    .. exref::
+        :title: Display an inline map with folium in a notebook
 
-    With folium version 0.2, this becomes easier:
+        ::
 
-    @code
-    import folium
-    map_osm = folium.Map(location=[48.85, 2.34])
-    from pyensae.notebook_helper import folium_html_map
-    map_osm.polygon_marker(location=[48.824338, 2.302641], popup='ENSAE',
-                           fill_color='#132b5e', num_sides=3, radius=10)
-    map_osm
-    @endcode
+            import folium
+            map_osm = folium.Map(location=[48.85, 2.34])
+            from pyensae.notebook_helper import folium_html_map
+            map_osm.polygon_marker(location=[48.824338, 2.302641], popup='ENSAE',
+                                fill_color='#132b5e', num_sides=3, radius=10)
+            folium_html_map(map_osm)
 
-    @endexample
+        With folium version 0.2, this becomes easier:
+
+        ::
+
+            import folium
+            map_osm = folium.Map(location=[48.85, 2.34])
+            from pyensae.notebook_helper import folium_html_map
+            map_osm.polygon_marker(location=[48.824338, 2.302641], popup='ENSAE',
+                                fill_color='#132b5e', num_sides=3, radius=10)
+            map_osm
     """
     return map._repr_html_()
 

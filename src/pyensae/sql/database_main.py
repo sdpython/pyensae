@@ -94,28 +94,30 @@ class Database (
         @return                             Database object (new or the one from the parameters),
                                             in both case, the database is not disconnected
 
-        @example(import a DataFrame into a SQL table)
-        @code
-        values = [  {"name":"A", "age":10, "score":34.5 },
-                    {"name":"B", "age":20, "score":-34.5 }, ]
-        df  = pandas.DataFrame(values)
-        dbf = "something.db3"
-        db  = Database.fill_sql_table(df, dbf, "mytable")
-        @endcode
+        .. exref::
+            :title: import a DataFrame into a SQL table
+            :tag: SQL
 
-        This example could be replaced by:
+            ::
 
-        @code
-        values = [  {"name":"A", "age":10, "score":34.5 },
-                    {"name":"B", "age":20, "score":-34.5 }, ]
-        df  = pandas.DataFrame(values)
-        dbf = "something.db3"
-        db  = Database(dbf)
-        db.connect()
-        db.import_dataframe(df, "mytable)
-        db.close()
-        @endcode
-        @endexample
+                values = [  {"name":"A", "age":10, "score":34.5 },
+                            {"name":"B", "age":20, "score":-34.5 }, ]
+                df  = pandas.DataFrame(values)
+                dbf = "something.db3"
+                db  = Database.fill_sql_table(df, dbf, "mytable")
+
+            This example could be replaced by:
+
+            ::
+
+                values = [  {"name":"A", "age":10, "score":34.5 },
+                            {"name":"B", "age":20, "score":-34.5 }, ]
+                df  = pandas.DataFrame(values)
+                dbf = "something.db3"
+                db  = Database(dbf)
+                db.connect()
+                db.import_dataframe(df, "mytable)
+                db.close()
         """
 
         schema = Database.schema_database(df, add_id)

@@ -82,20 +82,21 @@ def parse_code(code, class_parser, class_lexer):
     @param      class_lexer         lexer
     @return                         parsed code
 
-    @example(Check the syntax of a script PIG)
-    @code
-    code = '''
-    A = LOAD 'filename.txt' USING PigStorage('\t');
-    STORE A INTO 'samefile.txt' ;
-    '''
+    .. exref::
+        :title: Check the syntax of a script PIG
 
-    clparser,cllexer = get_parser_lexer("Pig")
-    parser = parse_code(code, clparser, cllexer)
-    tree = parser.parse()
-    st = get_tree_string(tree, parser, None)
-    print(st)
-    @endcode
-    @endexample
+        ::
+
+            code = '''
+            A = LOAD 'filename.txt' USING PigStorage('\t');
+            STORE A INTO 'samefile.txt' ;
+            '''
+
+            clparser,cllexer = get_parser_lexer("Pig")
+            parser = parse_code(code, clparser, cllexer)
+            tree = parser.parse()
+            st = get_tree_string(tree, parser, None)
+            print(st)
     """
     if isinstance(code, str):
         # we assume it is a string

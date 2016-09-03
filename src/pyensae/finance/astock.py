@@ -24,12 +24,13 @@ class StockPrices:
     defines a class containing stock prices, provides basic functions,
     the class uses `pandas <http://pandas.pydata.org/>`_ to load the data.
 
-    @example(retrieve stock prices from the Yahoo source)
-    @code
-    prices = StockPrices(tick = "BNP.PA")
-    print (prices.dataframe.head())
-    @endcode
-    @endexample
+    .. exref::
+        :title: retrieve stock prices from the Yahoo source
+
+        ::
+
+            prices = StockPrices(tick = "BNP.PA")
+            print (prices.dataframe.head())
     """
 
     def __init__(self, tick, url="yahoo", folder="cache",
@@ -55,33 +56,34 @@ class StockPrices:
         prices for a date before this one).
         If end is None, the date will the date of yesterday.
 
-        @example(Compute the average returns and correlation matrix)
-        @code
-        import pyensae, pandas
-        from pyensae import StockPrices
+        .. exref::
+            :title: Compute the average returns and correlation matrix
 
-        # download the CAC 40 composition from my website
-        pyensae.download_data('cac40_2013_11_11.txt', website = 'xd')
+            ::
 
-        # download all the prices (if not already done) and store them into files
-        actions = pandas.read_csv("cac40_2013_11_11.txt", sep = "\t")
+                import pyensae, pandas
+                from pyensae import StockPrices
 
-        # we remove stocks with not enough historical data
-        stocks = { k:StockPrices(tick = k) for k,v in actions.values  if k != "SOLB.PA"}
-        dates = StockPrices.available_dates( stocks.values() )
-        stocks = { k:v for k,v in stocks.items() if len(v.missing(dates)) <= 10 }
-        print ("nb left", len(stocks))
+                # download the CAC 40 composition from my website
+                pyensae.download_data('cac40_2013_11_11.txt', website = 'xd')
 
-        # we remove dates with missing prices
-        dates = StockPrices.available_dates( stocks.values() )
-        ok    = dates[ dates["missing"] == 0 ]
-        print ("all dates before", len(dates), " after:" , len(ok))
-        for k in stocks : stocks[k] = stocks[k].keep_dates(ok)
+                # download all the prices (if not already done) and store them into files
+                actions = pandas.read_csv("cac40_2013_11_11.txt", sep = "\t")
 
-        # we compute correlation matrix and returns
-        ret, cor = StockPrices.covariance(stocks.values(), cov = False, ret = True)
-        @endcode
-        @endexample
+                # we remove stocks with not enough historical data
+                stocks = { k:StockPrices(tick = k) for k,v in actions.values  if k != "SOLB.PA"}
+                dates = StockPrices.available_dates( stocks.values() )
+                stocks = { k:v for k,v in stocks.items() if len(v.missing(dates)) <= 10 }
+                print ("nb left", len(stocks))
+
+                # we remove dates with missing prices
+                dates = StockPrices.available_dates( stocks.values() )
+                ok    = dates[ dates["missing"] == 0 ]
+                print ("all dates before", len(dates), " after:" , len(ok))
+                for k in stocks : stocks[k] = stocks[k].keep_dates(ok)
+
+                # we compute correlation matrix and returns
+                ret, cor = StockPrices.covariance(stocks.values(), cov = False, ret = True)
 
         You should also look at `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_.
         If you use Google Finance as a provider, the tick name is usually
@@ -485,27 +487,29 @@ class StockPrices:
         The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
         can change the graph size (see the example below).
 
-        @example(graph of a financial series)
-        @code
-        stocks = [ StockPrices ("BNP.PA", folder = cache),
-                    StockPrices ("CA.PA", folder = cache),
-                    StockPrices ("SAN.PA", folder = cache),
-                    ]
-        fig, ax, plt = StockPrices.draw(stocks)
-        fig.savefig("image.png")
-        fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01", figsize=(16,8))
-        plt.show()
-        @endcode
+        .. exref::
+            :title: graph of a financial series
 
-        You can also chain the graphs and add a series on a second graph:
-        @code
-        stock = StockPrices ("BNP.PA", folder = cache)
-        stock2 = StockPrices ("CA.PA", folder = cache)
-        fig, ax, plt = stock.plot(figsize=(16,8))
-        fig, ax, plt = stock2.plot(existing=(fig,ax), axis=2)
-        plt.show()
-        @endcode
-        @endexample
+            ::
+
+                stocks = [ StockPrices ("BNP.PA", folder = cache),
+                            StockPrices ("CA.PA", folder = cache),
+                            StockPrices ("SAN.PA", folder = cache),
+                            ]
+                fig, ax, plt = StockPrices.draw(stocks)
+                fig.savefig("image.png")
+                fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01", figsize=(16,8))
+                plt.show()
+
+            You can also chain the graphs and add a series on a second graph:
+
+            ::
+
+                stock = StockPrices ("BNP.PA", folder = cache)
+                stock2 = StockPrices ("CA.PA", folder = cache)
+                fig, ax, plt = stock.plot(figsize=(16,8))
+                fig, ax, plt = stock2.plot(existing=(fig,ax), axis=2)
+                plt.show()
 
         .. versionchanged:: 1.1
             Parameter *existing* was removed and parameter *ax* was added.

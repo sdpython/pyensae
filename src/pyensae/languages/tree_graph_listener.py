@@ -12,38 +12,37 @@ class TreeGraphListener(ParseTreeListener):
     this class is an attempt to run through the tree
     but it is not complete
 
-    @example(Draw a grammar graph for a small code)
+    .. exref::
+        :title: Draw a grammar graph for a small code
 
-    ::
+        ::
 
-        from pyensae.languages import get_parser_lexer, parse_code, get_tree_graph
-        from pyensae.graph_helper import run_dot
+            from pyensae.languages import get_parser_lexer, parse_code, get_tree_graph
+            from pyensae.graph_helper import run_dot
 
-        code = '''
-        namespace hello
-        {
-            public static class world
+            code = '''
+            namespace hello
             {
-                public static double function(double x, doubly y)
+                public static class world
                 {
-                    return x+y ;
+                    public static double function(double x, doubly y)
+                    {
+                        return x+y ;
+                    }
                 }
             }
-        }
-        '''
+            '''
 
-        clparser, cllexer = get_parser_lexer("C#")
-        parser = parse_code(code, clparser, cllexer)
-        tree = parser.parse()
-        st = get_tree_graph(tree, parser)
-        dot = st.to_dot()
+            clparser, cllexer = get_parser_lexer("C#")
+            parser = parse_code(code, clparser, cllexer)
+            tree = parser.parse()
+            st = get_tree_graph(tree, parser)
+            dot = st.to_dot()
 
-        with open(name, "w") as f:
-            f.write(dot)
-        img = os.path.join(temp, "graph.png")
-        run_dot(name, img)
-
-    @endexample
+            with open(name, "w") as f:
+                f.write(dot)
+            img = os.path.join(temp, "graph.png")
+            run_dot(name, img)
     """
 
     def __init__(self, parser, verbose=False, fLOG=None):

@@ -27,17 +27,19 @@ def import_flatfile_into_database(filedb, filetext, table=None, header=True,
     @param  encoding    encoding
     @return             table name
 
-    @example(Import a flat file into a SQLite database)
-    @code
-    from pyensae import import_flatfile_into_database
-    dbf = "database.db3"
-    file = "textfile.txt"
-    import_flatfile_into_database(dbf, file)
-    @endcode
+    .. exref::
+        :title: Import a flat file into a SQLite database
+        :tag: SQL
 
-    On Windows, `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_ is a free tool
-    very useful to run SQL queries against a sqlite3 database.
-    @endexample
+        ::
+
+            from pyensae import import_flatfile_into_database
+            dbf = "database.db3"
+            file = "textfile.txt"
+            import_flatfile_into_database(dbf, file)
+
+        On Windows, `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_ is a free tool
+        very useful to run SQL queries against a sqlite3 database.
     """
     # connection
     db = Database(filedb, engine=engine, host=host, LOG=fLOG)

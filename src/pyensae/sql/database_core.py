@@ -773,24 +773,28 @@ class DatabaseCore (DatabaseCore2):
         @param      nolog           if True, do not log anything
         @return                     cursor
 
-        @example(run a select command on a table)
-        @code
-        t   = Database (file)
-        cur = t.execute ("SELECT * FROM table1 ;")
-        for f in cur :
-            print(f)
-        cur.close ()
-        @endcode
-        @endexample
+        .. exref::
+            :title: run a select command on a table
+            :tag: SQL
+
+            ::
+
+                t   = Database (file)
+                cur = t.execute ("SELECT * FROM table1 ;")
+                for f in cur :
+                    print(f)
+                cur.close ()
 
         There is another case outside SQL syntax to build cross product. Syntax:
-        @code
-        CROSS f1,f2,f3
-        FROM table
-        PLACE a,b,c
-        ORDER BY f8
-        WHERE f9 == ' '  -- optional
-        @endcode
+
+        ::
+
+            CROSS f1,f2,f3
+            FROM table
+            PLACE a,b,c
+            ORDER BY f8
+            WHERE f9 == ' '  -- optional
+
         The request must begin by CROSS
         """
         res = self._analyse(request)

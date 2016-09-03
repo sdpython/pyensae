@@ -9,9 +9,6 @@ through documentation
     generatedoc
     generatesetup
     installation
-    all_example
-    all_example_Azure
-    all_FAQ
     all_notebooks
     glossary
     index_module

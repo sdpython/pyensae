@@ -42,18 +42,20 @@ class DatabaseImportExport:
                                         - output: list
         @param      encoding        encoding
 
-        @example(Export the results of a SQL query into a flat file)
-        @code
-        from pyensae.sql.database_main import Database
-        dbfile = "filename.db3"
-        filetxt = "fileview.txt"
-        sql = "..."
-        db = Database(dbfile)
-        db.connect()
-        db.export_view_into_flat_file (sql, fileview, header = True)
-        db.close()
-        @endcode
-        @endexample
+        .. exref::
+            :title: Export the results of a SQL query into a flat file
+            :tag: SQL
+
+            ::
+
+                from pyensae.sql.database_main import Database
+                dbfile = "filename.db3"
+                filetxt = "fileview.txt"
+                sql = "..."
+                db = Database(dbfile)
+                db.connect()
+                db.export_view_into_flat_file (sql, fileview, header = True)
+                db.close()
         """
         if columns is None:
             sql = "SELECT * FROM " + table + ";"

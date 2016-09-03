@@ -269,26 +269,27 @@ class ASSHClient():
         @param      prompts         if function terminates if the output ends by one of those strings.
         @param      out_format      None, plain, html
 
-        @example(How to open a remote shell?)
-        @code
-        ssh = ASSHClient(   "<server>",
-                            "<login>",
-                            "<password>")
-        ssh.connect()
-        out = ssh.send_recv_session("ls")
-        print( ssh.send_recv_session("python") )
-        print( ssh.send_recv_session("print('3')") )
-        print( ssh.send_recv_session("import sys\\nsys.executable") )
-        print( ssh.send_recv_session("sys.exit()") )
-        print( ssh.send_recv_session(None) )
-        ssh.close_session()
-        ssh.close()
-        @endcode
+        .. exref::
+            :title: How to open a remote shell?
+            :tag: Hadoop
 
-        The notebook :ref:`exampleofsshclientcommunicationrst` illustrates
-        the output of these instructions.
+            ::
 
-        @endexample
+                ssh = ASSHClient(   "<server>",
+                                    "<login>",
+                                    "<password>")
+                ssh.connect()
+                out = ssh.send_recv_session("ls")
+                print( ssh.send_recv_session("python") )
+                print( ssh.send_recv_session("print('3')") )
+                print( ssh.send_recv_session("import sys\\nsys.executable") )
+                print( ssh.send_recv_session("sys.exit()") )
+                print( ssh.send_recv_session(None) )
+                ssh.close_session()
+                ssh.close()
+
+            The notebook :ref:`exampleofsshclientcommunicationrst` illustrates
+            the output of these instructions.
         """
         if self.connection is None:
             raise Exception("No open connection.")
@@ -669,22 +670,22 @@ class ASSHClient():
         If there is no redirection, the function
         waits and return the output.
 
-        @example(Submit a HIVE query)
+        .. exref::
+            :title: Submit a HIVE query
+            :tag: Hadoop
 
-        @code
-        client = ASSHClient()
+            ::
 
-        hive_sql = '''
-            DROP TABLE IF EXISTS bikes20;
-            CREATE TABLE bikes20 (sjson STRING);
-            LOAD DATA INPATH "/user/__USERNAME__/unittest2/paris*.txt" INTO TABLE bikes20;
-            SELECT * FROM bikes20 LIMIT 10;
-            '''.replace("__USERNAME__", self.client.username)
+                client = ASSHClient()
 
-        out,err = client.hive_submit(hive_sql, redirection=None)
-        @endcode
+                hive_sql = '''
+                    DROP TABLE IF EXISTS bikes20;
+                    CREATE TABLE bikes20 (sjson STRING);
+                    LOAD DATA INPATH "/user/__USERNAME__/unittest2/paris*.txt" INTO TABLE bikes20;
+                    SELECT * FROM bikes20 LIMIT 10;
+                    '''.replace("__USERNAME__", self.client.username)
 
-        @endexample
+                out,err = client.hive_submit(hive_sql, redirection=None)
 
         .. versionadded:: 1.1
         """

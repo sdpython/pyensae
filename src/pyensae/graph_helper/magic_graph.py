@@ -44,16 +44,15 @@ class MagicGraph(MagicClassWithHelpers):
         defines ``%mpl_style``
         which changes the style of matplotlib graphs, example: ``%mpl_style ggplot``
 
-        @NB(mpl_style)
+        .. nbref::
+            :title: mpl_style
 
-        This magic just does::
+            This magic just does::
 
-            import matplotlib.pyplot as plt
-            plt.style.use('ggplot')
+                import matplotlib.pyplot as plt
+                plt.style.use('ggplot')
 
-        It should take place at the beginning of the notebook.
-
-        @endNB
+            It should take place at the beginning of the notebook.
         """
         parser = self.get_parser(MagicGraph.mpl_style_parser, "mpl_style")
         args = self.get_args(line, parser)

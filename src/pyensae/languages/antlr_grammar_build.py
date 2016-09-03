@@ -54,14 +54,14 @@ def build_grammar(g4, version="4.5", fLOG=noLOG):
     It generates a lexer and a parser which can be imported in Python.
     The options for the command line are described at: `antlr4 options <https://theantlrguy.atlassian.net/wiki/display/ANTLR4/Options>`_.
 
-    @example(Build a Antlr4 grammer)
+    .. exref::
+        :title: Build a Antlr4 grammer
 
-    See `grammars-v4 <https://github.com/antlr/grammars-v4>`_
+        See `grammars-v4 <https://github.com/antlr/grammars-v4>`_
 
-    @code
-    build_grammar("R.g4")
-    @endcode
-    @endexample
+        ::
+
+            build_grammar("R.g4")
     """
     if not g4.endswith(".g4"):
         fold = os.path.abspath(os.path.dirname(__file__))

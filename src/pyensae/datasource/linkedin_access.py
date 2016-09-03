@@ -45,41 +45,40 @@ class LinkedInAccess:
 
         https://api.linkedin.com/v1/company-search:(companies:(id,name,logo_url))?keywords=keyword?oauth2_access_token={accesstoken}&format=json
 
-    @example(How to Get data from your linkedin profile?)
+    .. exref::
+        :title: How to Get data from your linkedin profile?
 
-    Search and get profiles:
+        Search and get profiles:
 
-    @code
-    accessToken = [ "w....",
-                "n....",
-                "3....",
-                "2..." ]
+        ::
 
-    linkedin = LinkedInAccess (*TestLinkedIn.accessToken)
-    linkedin.connect()
-    se = linkedin.search_profile ( params = {"last-name":"dupre", "first-name":"xavier"} )
-    for _ in se["people"]["values"] :
-        print(_)
-    @endcode
+            accessToken = [ "w....",
+                        "n....",
+                        "3....",
+                        "2..." ]
 
-    Same results in a DataFrame:
+            linkedin = LinkedInAccess (*TestLinkedIn.accessToken)
+            linkedin.connect()
+            se = linkedin.search_profile ( params = {"last-name":"dupre", "first-name":"xavier"} )
+            for _ in se["people"]["values"] :
+                print(_)
 
-    @code
-    accessToken = [ "w....",
-                "n....",
-                "3....",
-                "2..." ]
+        Same results in a DataFrame:
 
-    linkedin = LinkedInAccess (*TestLinkedIn.accessToken)
-    linkedin.connect()
+        ::
 
-    df = linkedin.search_profile (
-                    params = {"keywords":"ensae"},
-                    count = 500,
-                    as_df = True )
-    @endcode
-    @endexample
+            accessToken = [ "w....",
+                        "n....",
+                        "3....",
+                        "2..." ]
 
+            linkedin = LinkedInAccess (*TestLinkedIn.accessToken)
+            linkedin.connect()
+
+            df = linkedin.search_profile (
+                            params = {"keywords":"ensae"},
+                            count = 500,
+                            as_df = True )
     """
 
     default_selectors_profile = ['id',

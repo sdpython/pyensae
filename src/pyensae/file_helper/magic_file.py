@@ -24,20 +24,19 @@ class MagicFile(MagicClassWithHelpers):
     """
     Defines magic commands to help with files
 
-    @FAQ(Magic command not found)
+    .. faqref::
+        :title: Magic command not found
 
-    Magic commands are automatically added when importing the module ::
+        Magic commands are automatically added when importing the module ::
 
-        import pyensae
+            import pyensae
 
-    This instruction does not raise any exception.
-    To understand what went wrong, the following instruction must be run::
+        This instruction does not raise any exception.
+        To understand what went wrong, the following instruction must be run::
 
-        %load_ext pyensae
+            %load_ext pyensae
 
-    Usually, one necessary module is missing.
-
-    @endFAQ
+        Usually, one necessary module is missing.
 
     .. versionadded:: 1.1
     """
@@ -75,14 +74,14 @@ class MagicFile(MagicClassWithHelpers):
         defines ``%head``
         which displays the first lines of a file
 
-        @NB(head)
+        .. nbref::
+            :tag: file
+            :title: head
 
-        The magic command ``%heal`` is equivalent to::
+            The magic command ``%heal`` is equivalent to::
 
-            from pyensae.file_helper import file_head
-            file_head(<filename>, <n>, <encoding>)
-
-        @endNB
+                from pyensae.file_helper import file_head
+                file_head(<filename>, <n>, <encoding>)
         """
         parser = self.get_parser(MagicFile.head_parser, "head")
         args = self.get_args(line, parser)
@@ -128,14 +127,14 @@ class MagicFile(MagicClassWithHelpers):
         defines ``%grep``
         which displays the first lines of a file
 
-        @NB(grep)
+        .. nbref::
+            :tag: file
+            :title: grep
 
-        The magic command ``%grep`` is equivalent to::
+            The magic command ``%grep`` is equivalent to::
 
-            from pyensae.file_helper import enumerate_grep
-            list(enumerate_grep(<filename>, <regex>, <encoding>))
-
-        @endNB
+                from pyensae.file_helper import enumerate_grep
+                list(enumerate_grep(<filename>, <regex>, <encoding>))
         """
         parser = self.get_parser(MagicFile.grep_parser, "grep")
         args = self.get_args(line, parser)
@@ -189,14 +188,14 @@ class MagicFile(MagicClassWithHelpers):
         defines ``%tail``
         which displays the last lines of a file
 
-        @NB(tail)
+        .. nbref::
+            :tag: file
+            :title: tail
 
-        The magic command ``%tail`` is equivalent to::
+            The magic command ``%tail`` is equivalent to::
 
-            from pyensae.file_helper import file_tail
-            file_tail(<filename>, <n>, <encoding>)
-
-        @endNB
+                from pyensae.file_helper import file_tail
+                file_tail(<filename>, <n>, <encoding>)
         """
         parser = self.get_parser(MagicFile.tail_parser, "tail")
         args = self.get_args(line, parser)
@@ -235,16 +234,16 @@ class MagicFile(MagicClassWithHelpers):
         define ``%lsr`` which returns the content of a folder,
         the method stops after around 10000 files --> you should precise the filter.
 
-        @NB(lsr)
+        .. nbref::
+            :tag: file
+            :title: lsr
 
-        The magic command ``%lsr`` is almost equivalent to::
+            The magic command ``%lsr`` is almost equivalent to::
 
-            from pyquickhelper.file_helper import explore_folder_iterfile
-            res = explore_folder_iterfile(<filename>, <pattern>)
-            for f in res:
-                print(f)
-
-        @endNB
+                from pyquickhelper.file_helper import explore_folder_iterfile
+                res = explore_folder_iterfile(<filename>, <pattern>)
+                for f in res:
+                    print(f)
         """
         parser = self.get_parser(MagicFile.lsr_parser, "lsr")
         args = self.get_args(line, parser)
@@ -293,15 +292,14 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines command ``%%PYTHON``
 
-        @NB(PYTHON)
+        .. nbref::
+            :title: PYTHON
 
-        The magic command ``%%PYTHON`` is almost to::
+            The magic command ``%%PYTHON`` is almost to::
 
-            with open(<filename>, "w", encoding="utf8") as f:
-                f.write("# -*- coding: utf8 -*-\n")
-                f.write(cell.replace("\r", ""))
-
-        @endNB
+                with open(<filename>, "w", encoding="utf8") as f:
+                    f.write("# -*- coding: utf8 -*-\n")
+                    f.write(cell.replace("\r", ""))
         """
         parser = self.get_parser(MagicFile.PYTHON_parser, "PYTHON")
         args = self.get_args(line, parser)
@@ -336,21 +334,20 @@ class MagicFile(MagicClassWithHelpers):
         """
         defines command ``%%runpy``
 
-        @NB(runpy)
+        .. nbref::
+            :title: runpy
 
-        ``%%runpy`` runs  a python script which accepts
-        standards input and produces standard outputs,
-        a timeout is set up at 10s. It is almost equivalent to::
+            ``%%runpy`` runs  a python script which accepts
+            standards input and produces standard outputs,
+            a timeout is set up at 10s. It is almost equivalent to::
 
-            from pyquickhelper.loghelper import run_cmd
-            import sys
-            cmd = sys.executable.replace(
-                "pythonw",
-                "python") + " " + filename + " " + args
-            out, err = run_cmd(
-                cmd, wait=True, sin=cell, communicate=True, timeout=10, shell=False)
-
-        @endNB
+                from pyquickhelper.loghelper import run_cmd
+                import sys
+                cmd = sys.executable.replace(
+                    "pythonw",
+                    "python") + " " + filename + " " + args
+                out, err = run_cmd(
+                    cmd, wait=True, sin=cell, communicate=True, timeout=10, shell=False)
 
         .. versionadded:: 1.1
         """
@@ -396,17 +393,17 @@ class MagicFile(MagicClassWithHelpers):
         """
         define ``%lsrepo``
 
-        @NB(lsrepo)
+        .. nbref::
+            :tag: file
+            :title: lsrepo
 
-        The method returns the files present in a repository (GIT or SVN).
-        The code is equivalent to::
+            The method returns the files present in a repository (GIT or SVN).
+            The code is equivalent to::
 
-            from pyquickhelper.filehelper import explore_folder_iterfile_repo
-            res = explore_folder_iterfile_repo(<filename>, <pattern>)
-            for f in res:
-                print(f)
-
-        @endNB
+                from pyquickhelper.filehelper import explore_folder_iterfile_repo
+                res = explore_folder_iterfile_repo(<filename>, <pattern>)
+                for f in res:
+                    print(f)
 
         .. versionadded:: 1.1
         """
@@ -467,14 +464,13 @@ class MagicFile(MagicClassWithHelpers):
         """
         define ``%hhelp``, it displays the help for an object in HTML
 
-        @NB(hhelp)
+        .. nbref::
+            :title: hhelp
 
-        The magic command is equivalent to::
+            The magic command is equivalent to::
 
-            from pyquickhelper import docstring2html
-            docstring2html(obj, format=format)
-
-        @endNB
+                from pyquickhelper import docstring2html
+                docstring2html(obj, format=format)
 
         .. versionadded:: 1.1
         """

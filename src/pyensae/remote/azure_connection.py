@@ -32,44 +32,45 @@ class AzureClient():
 
     See `How to use Blob storage from Python <https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/>`_.
 
-    @example(Azure___Get the list of containers and files from a blob storage?)
+    .. exref::
+        :title: Get the list of containers and files from a blob storage?
+        :tag: Azure
 
-    The functionalities of a ``BlobService`` are described in
-    `blockblobservice.py <https://github.com/Azure/azure-storage-python/blob/master/azure/storage/blob/blockblobservice.py>`_.
+        The functionalities of a ``BlobService`` are described in
+        `blockblobservice.py <https://github.com/Azure/azure-storage-python/blob/master/azure/storage/blob/blockblobservice.py>`_.
 
-    @code
-    from pyensae.remote.azure_connection import AzureClient
-    cl = AzureClient("<blob_storage_service>",
-                     "<primary_key>")
-    bs = cl.open_blob_service()
-    res = cl.ls(bs)
-    for r in res:
-        print(r["name"])
-    @endcode
-    @endexample
+        ::
 
-    @example(Azure___Upload, download, to a blob storage)
-    The following example uploads and downloads a file on a Blob Storage.
+            from pyensae.remote.azure_connection import AzureClient
+            cl = AzureClient("<blob_storage_service>",
+                            "<primary_key>")
+            bs = cl.open_blob_service()
+            res = cl.ls(bs)
+            for r in res:
+                print(r["name"])
 
-    @code
-    from pyensae.remote.azure_connection import AzureClient
-    cl = AzureClient("<blob_storage_service>",
-                     "<primary_key>")
-    bs = cl.open_blob_service()
-    cl.upload(bs, "<container>", "myremotefolder/remotename.txt",
-                                 "local_filename.txt")
+    .. exref::
+        :title: Upload, download, to a blob storage
+        :tag: Azure
 
-    res = cl.ls(bs,"<container>")
-    for r in res:
-        if "local_filename" in r["name"]:
-            print(r)
+        The following example uploads and downloads a file on a Blob Storage.
 
-    cl.download(bs, "<container>", "myremotefolder/remotename.txt",
-                                   "another_local_filename.txt")
+        ::
 
-    @endcode
+            from pyensae.remote.azure_connection import AzureClient
+            cl = AzureClient("<blob_storage_service>",
+                            "<primary_key>")
+            bs = cl.open_blob_service()
+            cl.upload(bs, "<container>", "myremotefolder/remotename.txt",
+                                        "local_filename.txt")
 
-    @endexample
+            res = cl.ls(bs,"<container>")
+            for r in res:
+                if "local_filename" in r["name"]:
+                    print(r)
+
+            cl.download(bs, "<container>", "myremotefolder/remotename.txt",
+                                        "another_local_filename.txt")
 
     Many function uses WebHCat API.
     The error code can be found here:
@@ -801,55 +802,56 @@ class AzureClient():
         @param      params          to
         @return                     json
 
-        @example(Azure___Submit a job PIG)
+        .. exref::
+            :title: Submit a job PIG
+            :tag: Azure
 
-        The script PIG must include an instruction ``LOAD``.
-        This instruction use file name defined with the `wasb syntax <http://azure.microsoft.com/en-us/documentation/articles/hdinsight-use-blob-storage/>`_.
+            The script PIG must include an instruction ``LOAD``.
+            This instruction use file name defined with the `wasb syntax <http://azure.microsoft.com/en-us/documentation/articles/hdinsight-use-blob-storage/>`_.
 
-        If you place the string ``$CONTAINER`` before a stream name,
-        it should be replaced by the corresponding wasb syntax associated
-        to the container name defined by ``container_name``.
-        The function will then load your script,
-        modify it and save another one with the by adding
-        ``.wasb.pig``.
+            If you place the string ``$CONTAINER`` before a stream name,
+            it should be replaced by the corresponding wasb syntax associated
+            to the container name defined by ``container_name``.
+            The function will then load your script,
+            modify it and save another one with the by adding
+            ``.wasb.pig``.
 
-        Others constants you could use:
-            * ``$PSEUDO``
-            * ``$CONTAINER``
-            * ``$SCRIPTSPIG``
+            Others constants you could use:
+                * ``$PSEUDO``
+                * ``$CONTAINER``
+                * ``$SCRIPTSPIG``
 
-        However, this replacement is not done by this class, but your code could
-        be such as:
+            However, this replacement is not done by this class, but your code could
+            be such as:
 
-        @code
-        blobstorage = "****"
-        blobpassword = "*********************"
-        hadoop_name = "*********"
-        hadoop_password = "********"
-        username = "********"
-        cl = AzureClient(blobstorage,
-                         blobpassword,
-                         hadoop_name,
-                         hadoop_password,
-                         username)
-        script = '''
-            myinput = LOAD '$CONTAINER/input.csv'
-                      using PigStorage(',')
-                      AS (index:long, sequence, tag, timestamp:long, dateformat, x:double,y:double, z:double, activity) ;
-            filt = FILTER myinput BY activity == 'walking' ;
-            STORE filt INTO '$PSEUDO/output.csv' USING PigStorage() ;
-            '''
+            ::
 
-        with open("script_walking.pig","w") as f :
-            f.write(script)
+                blobstorage = "****"
+                blobpassword = "*********************"
+                hadoop_name = "*********"
+                hadoop_password = "********"
+                username = "********"
+                cl = AzureClient(blobstorage,
+                                blobpassword,
+                                hadoop_name,
+                                hadoop_password,
+                                username)
+                script = '''
+                    myinput = LOAD '$CONTAINER/input.csv'
+                            using PigStorage(',')
+                            AS (index:long, sequence, tag, timestamp:long, dateformat, x:double,y:double, z:double, activity) ;
+                    filt = FILTER myinput BY activity == 'walking' ;
+                    STORE filt INTO '$PSEUDO/output.csv' USING PigStorage() ;
+                    '''
 
-        bs = cl.open_blob_service()
-        js = cl.pig_submit(bs, blobstorage, "testensae/script_walking.pig")
-        print(js)
+                with open("script_walking.pig","w") as f :
+                    f.write(script)
 
-        js = cl.job_status('job_1414863995725_0013')
-        @endcode
-        @endexample
+                bs = cl.open_blob_service()
+                js = cl.pig_submit(bs, blobstorage, "testensae/script_walking.pig")
+                print(js)
+
+                js = cl.job_status('job_1414863995725_0013')
 
         .. versionadded:: 1.1
             parameter *stop_on_failure*
@@ -1026,57 +1028,57 @@ class AzureClient():
         @param      fields      to add fields in the requests
         @return                 list of jobs
 
-        @example(List job queue)
+        .. exref::
+            :title: List job queue
+            :tag: Azure
 
-        Most of the time, a job remains stuck in the job queue because
-        it is full. Here is a code to check that is the case on
-        a Azure cluster. It should be executed from a notebook.
+            Most of the time, a job remains stuck in the job queue because
+            it is full. Here is a code to check that is the case on
+            a Azure cluster. It should be executed from a notebook.
 
-        Connection ::
+            Connection ::
 
-            blobstorage = "..."
-            blobpassword = "..."
-            hadoop_server = "..."
-            hadoop_password = "..."
-            username = "..."
+                blobstorage = "..."
+                blobpassword = "..."
+                hadoop_server = "..."
+                hadoop_password = "..."
+                username = "..."
 
-            import pyensae
-            client, bs = %hd_open
+                import pyensae
+                client, bs = %hd_open
 
-        Job queue ::
+            Job queue ::
 
-            res = client.job_queue()
-            res.reverse()   # last submitted jobs first
+                res = client.job_queue()
+                res.reverse()   # last submitted jobs first
 
-        Displays the first 20 jobs::
+            Displays the first 20 jobs::
 
-            for i, r in enumerate(res[:20]):
-                st = client.job_status(r["id"])
-                print(i, r, st["status"]["state"],datetime.fromtimestamp(float(st["status"]["startTime"])/1000), st["status"]["jobName"])
-                print(st["userargs"].get("file", None), st["profile"].get("jobName", None))
+                for i, r in enumerate(res[:20]):
+                    st = client.job_status(r["id"])
+                    print(i, r, st["status"]["state"],datetime.fromtimestamp(float(st["status"]["startTime"])/1000), st["status"]["jobName"])
+                    print(st["userargs"].get("file", None), st["profile"].get("jobName", None))
 
-        It gives::
+            It gives::
 
-            0 {'detail': None, 'id': 'job_1451961118663_3126'} PREP 2016-01-26 21:57:28.756000 TempletonControllerJob
-            wasb://..../scripts/pig/titi.pig TempletonControllerJob
-            1 {'detail': None, 'id': 'job_1451961118663_3125'} PREP 2016-01-26 21:57:28.517999 TempletonControllerJob
-            wasb://..../scripts/pig/pre_processing.pig TempletonControllerJob
-            2 {'detail': None, 'id': 'job_1451961118663_3124'} PREP 2016-01-26 21:50:32.742000 TempletonControllerJob
-            wasb://..../scripts/pig/titi.pig TempletonControllerJob
-            3 {'detail': None, 'id': 'job_1451961118663_3123'} RUNNING 2016-01-26 21:46:57.219000 TempletonControllerJob
-            wasb://..../scripts/pig/alg1.pig TempletonControllerJob
-            4 {'detail': None, 'id': 'job_1451961118663_3122'} SUCCEEDED 2016-01-26 21:40:34.687999 PigLatin:pre_processing.pig
-            None PigLatin:pre_processing.pig
-            5 {'detail': None, 'id': 'job_1451961118663_3121'} RUNNING 2016-01-26 21:41:29.657000 TempletonControllerJob
-            wasb://..../scripts/pig/Algo_LDA2.pig TempletonControllerJob
-            6 {'detail': None, 'id': 'job_1451961118663_3120'} SUCCEEDED 2016-01-26 21:40:06.859999 TempletonControllerJob
-            wasb://..../scripts/pig/alg1.pig TempletonControllerJob
+                0 {'detail': None, 'id': 'job_1451961118663_3126'} PREP 2016-01-26 21:57:28.756000 TempletonControllerJob
+                wasb://..../scripts/pig/titi.pig TempletonControllerJob
+                1 {'detail': None, 'id': 'job_1451961118663_3125'} PREP 2016-01-26 21:57:28.517999 TempletonControllerJob
+                wasb://..../scripts/pig/pre_processing.pig TempletonControllerJob
+                2 {'detail': None, 'id': 'job_1451961118663_3124'} PREP 2016-01-26 21:50:32.742000 TempletonControllerJob
+                wasb://..../scripts/pig/titi.pig TempletonControllerJob
+                3 {'detail': None, 'id': 'job_1451961118663_3123'} RUNNING 2016-01-26 21:46:57.219000 TempletonControllerJob
+                wasb://..../scripts/pig/alg1.pig TempletonControllerJob
+                4 {'detail': None, 'id': 'job_1451961118663_3122'} SUCCEEDED 2016-01-26 21:40:34.687999 PigLatin:pre_processing.pig
+                None PigLatin:pre_processing.pig
+                5 {'detail': None, 'id': 'job_1451961118663_3121'} RUNNING 2016-01-26 21:41:29.657000 TempletonControllerJob
+                wasb://..../scripts/pig/Algo_LDA2.pig TempletonControllerJob
+                6 {'detail': None, 'id': 'job_1451961118663_3120'} SUCCEEDED 2016-01-26 21:40:06.859999 TempletonControllerJob
+                wasb://..../scripts/pig/alg1.pig TempletonControllerJob
 
-        To kill a job::
+            To kill a job::
 
-            client.job_kill("id")
-
-        @endexample
+                client.job_kill("id")
         """
         if self.hadoop_user_name is None:
             raise AttributeError(

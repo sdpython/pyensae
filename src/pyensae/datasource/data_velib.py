@@ -243,20 +243,20 @@ class DataVelibCollect:
         @param      log_every       log some information every 1 (minutes)
         @param      fLOG            logging function
 
-        @example(collect Velib data)
-        The following example produces a file every minute in json format about the status of all
-        Velib stations in Paris. They will be put in a folder call ``velib_data``.
+        .. exref::
+            :title: collect Velib data
 
-        @code
-        DataVelibCollect.run_collection (private_key,
-                    contract = "Paris",
-                    delayms = 60000,
-                    single_file = False,
-                    stop_datetime = None,
-                    log_every = 1)
-        @endcode
+            The following example produces a file every minute in json format about the status of all
+            Velib stations in Paris. They will be put in a folder call ``velib_data``.
 
-        @endexample
+            ::
+
+                DataVelibCollect.run_collection (private_key,
+                            contract = "Paris",
+                            delayms = 60000,
+                            single_file = False,
+                            stop_datetime = None,
+                            log_every = 1)
         """
         if key is None:
             key = DataVelibCollect.velib_get_key()

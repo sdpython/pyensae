@@ -24,46 +24,44 @@ class MagicAzure(MagicClassWithHelpers):
 
     When the container is not specified, it will take the default one.
 
-    @FAQ(Magic command %blob_open does not work)
+    .. faqref::
+        :title: Magic command %blob_open does not work
 
-    Try this::
+        Try this::
 
-        %load_ext pyensae
+            %load_ext pyensae
 
-    The exception tells more about what goes wrong.
-    Usually a module is missing.
+        The exception tells more about what goes wrong.
+        Usually a module is missing.
 
-    @endFAQ
+    .. faqref::
+        :title: Incorrect padding
 
-    @FAQ(Incorrect padding)
+        The following crypted message happens sometimes::
 
-    The following crypted message happens sometimes::
+            Error: Incorrect padding
 
-        Error: Incorrect padding
+        It is usually due to an incorrect password.
+        Some notebooks uses::
 
-    It is usually due to an incorrect password.
-    Some notebooks uses::
+            import pyquickhelper.ipythonhelper as ipy
+            params={"blob_storage":"hdblobstorage", "password":""}
+            ipy.open_html_form(params=params,title="credentials",key_save="blobservice")
 
-        import pyquickhelper.ipythonhelper as ipy
-        params={"blob_storage":"hdblobstorage", "password":""}
-        ipy.open_html_form(params=params,title="credentials",key_save="blobservice")
+            blobstorage = blobservice["blob_storage"]
+            blobpassword = blobservice["password"]
 
-        blobstorage = blobservice["blob_storage"]
-        blobpassword = blobservice["password"]
+            import pyensae
+            %blob_open
 
-        import pyensae
-        %blob_open
+        This code avoids the author letting password in a notebook
+        but you can just replace everything by::
 
-    This code avoids the author letting password in a notebook
-    but you can just replace everything by::
+            blobstorage = "<username>"
+            blobpassword = "****long*key*******=="
 
-        blobstorage = "<username>"
-        blobpassword = "****long*key*******=="
-
-        import pyensae
-        %blob_open
-
-    @endFAQ
+            import pyensae
+            %blob_open
     """
 
     def create_client(self, account_name, account_key,
@@ -166,19 +164,20 @@ class MagicAzure(MagicClassWithHelpers):
     @line_magic
     def blob_open(self, line):
         """
-        @NB(blob_open)
+        .. nbref::
+            :tag: Azure
+            :title: blob_open
 
-        Open a connection to blob service.
-        It returns objects @see cl AzureClient and
-        `BlobService <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/storage/blobservice.html?highlight=blobservice#azure.storage.blobservice.BlobService>`_.
+            Open a connection to blob service.
+            It returns objects @see cl AzureClient and
+            `BlobService <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/storage/blobservice.html?highlight=blobservice#azure.storage.blobservice.BlobService>`_.
 
-        The code for magic command ``%blob_open`` is equivalent to::
+            The code for magic command ``%blob_open`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
 
-        @endNB
         .. versionchanged:: 1.1
         """
         parser = self.get_parser(MagicAzure.blob_open_parser, "blob_open")
@@ -245,19 +244,21 @@ class MagicAzure(MagicClassWithHelpers):
         """
         open a connection to blob service
 
-        @NB(hd_open)
+        .. nbref::
+            :tag: Azure
+            :title: hd_open
 
-        Open a connection to blob service.
-        It returns objects @see cl AzureClient and
-        `BlobService <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/storage/blobservice.html?highlight=blobservice#azure.storage.blobservice.BlobService>`_.
+            Open a connection to blob service.
+            It returns objects @see cl AzureClient and
+            `BlobService <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/storage/blobservice.html?highlight=blobservice#azure.storage.blobservice.BlobService>`_.
 
-        The code for magic command ``%hd_open`` is equivalent to::
+            The code for magic command ``%hd_open`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.hd_open_parser, "hd_open")
         args = self.get_args(line, parser)
@@ -292,11 +293,13 @@ class MagicAzure(MagicClassWithHelpers):
         close the connection and remove the connection
         from the notebook workspace
 
-        @NB(blob_close)
+        .. nbref::
+            :tag: Azure
+            :title: blob_close
 
-        Does nothing.
+            Does nothing.
 
-        @endNB
+
         """
         cl, bs = self.get_blob_connection()
         # bs.close()
@@ -358,16 +361,18 @@ class MagicAzure(MagicClassWithHelpers):
         """
         defines command %blob_ls, see :ref:`l-magic-path-container`
 
-        @NB(blob_ls)
+        .. nbref::
+            :tag: Azure
+            :title: blob_ls
 
-        The code for magic command ``%blob_ls`` is equivalent to::
+            The code for magic command ``%blob_ls`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            df = cl.ls(bs, container, remotepath)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                df = cl.ls(bs, container, remotepath)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.blob_ls_parser, "blob_ls")
         args = self.get_args(line, parser)
@@ -402,16 +407,18 @@ class MagicAzure(MagicClassWithHelpers):
         defines command %blob_lsl (extended version of blob_lsl),
         see :ref:`l-magic-path-container`
 
-        @NB(blob_lsl)
+        .. nbref::
+            :tag: Azure
+            :title: blob_lsl
 
-        The code for magic command ``%blob_lsl`` is equivalent to::
+            The code for magic command ``%blob_lsl`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            df = cl.ls(bs, container, remotepath, add_metadata=True)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                df = cl.ls(bs, container, remotepath, add_metadata=True)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.blob_lsl_parser, "blob_lsl")
         args = self.get_args(line, parser)
@@ -452,16 +459,18 @@ class MagicAzure(MagicClassWithHelpers):
 
         the command does not allow spaces in files
 
-        @NB(blob_up)
+        .. nbref::
+            :tag: Azure
+            :title: blob_up
 
-        The code for magic command ``%blob_up`` is equivalent to::
+            The code for magic command ``%blob_up`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.upload(bs, container, remotepath, localfile)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.upload(bs, container, remotepath, localfile)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.blob_up_parser, "blob_up")
         args = self.get_args(line, parser)
@@ -511,16 +520,18 @@ class MagicAzure(MagicClassWithHelpers):
 
         the command does not allow spaces in file names
 
-        @NB(blob_down)
+        .. nbref::
+            :tag: Azure
+            :title: blob_down
 
-        The code for magic command ``%blob_down`` is equivalent to::
+            The code for magic command ``%blob_down`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.download(bs, container, remotepath, localfile)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.download(bs, container, remotepath, localfile)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.blob_down_parser, "blob_down")
         args = self.get_args(line, parser)
@@ -574,16 +585,18 @@ class MagicAzure(MagicClassWithHelpers):
 
         the command does not allow spaces in file names
 
-        @NB(blob_downmerge)
+        .. nbref::
+            :tag: Azure
+            :title: blob_downmerge
 
-        The code for magic command ``%blob_downmerge`` is equivalent to::
+            The code for magic command ``%blob_downmerge`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.download_merge(bs, container, remotepath, localfile)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.download_merge(bs, container, remotepath, localfile)
 
-        @endNB
+
 
         .. versionadded:: 1.1
         """
@@ -633,16 +646,18 @@ class MagicAzure(MagicClassWithHelpers):
         deletes a blob,
         see :ref:`l-magic-path-container`
 
-        @NB(blob_delete)
+        .. nbref::
+            :tag: Azure
+            :title: blob_delete
 
-        The code for magic command ``%blob_delete`` is equivalent to::
+            The code for magic command ``%blob_delete`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.delete_blob(bs, container, remotepath)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.delete_blob(bs, container, remotepath)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.blob_delete_parser, "blob_delete")
         args = self.get_args(line, parser)
@@ -673,16 +688,18 @@ class MagicAzure(MagicClassWithHelpers):
         deletes a folder,
         see :ref:`l-magic-path-container`
 
-        @NB(blob_rmr)
+        .. nbref::
+            :tag: Azure
+            :title: blob_rmr
 
-        The code for magic command ``%blob_rmr`` is equivalent to::
+            The code for magic command ``%blob_rmr`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.delete_folder(bs, container, remotepath)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.delete_folder(bs, container, remotepath)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.blob_rmr_parser, "blob_rmr")
         args = self.get_args(line, parser)
@@ -716,16 +733,18 @@ class MagicAzure(MagicClassWithHelpers):
         copy a blob storage,
         see :ref:`l-magic-path-container`
 
-        @NB(blob_copy)
+        .. nbref::
+            :tag: Azure
+            :title: blob_copy
 
-        The code for magic command ``%blob_copy`` is equivalent to::
+            The code for magic command ``%blob_copy`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.copy_blob(bs, container, dest, src)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.copy_blob(bs, container, dest, src)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.blob_copy_parser, "blob_copy")
         args = self.get_args(line, parser)
@@ -764,16 +783,18 @@ class MagicAzure(MagicClassWithHelpers):
         """
         defines ``%hd_queue``
 
-        @NB(hd_queue)
+        .. nbref::
+            :tag: Azure
+            :title: hd_queue
 
-        The code for magic command ``%hd_queue`` is equivalent to::
+            The code for magic command ``%hd_queue`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.job_queue(showall=showall)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.job_queue(showall=showall)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.hd_queue_parser, "hd_queue")
         args = self.get_args(line, parser)
@@ -801,16 +822,18 @@ class MagicAzure(MagicClassWithHelpers):
         """
         defines ``%hd_job_status``
 
-        @NB(hd_job_status)
+        .. nbref::
+            :tag: Azure
+            :title: hd_job_status
 
-        The code for magic command ``%hd_job_status`` is equivalent to::
+            The code for magic command ``%hd_job_status`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.job_status(jobid)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.job_status(jobid)
 
-        @endNB
+
         """
         parser = self.get_parser(
             MagicAzure.hd_job_status_parser, "hd_job_status")
@@ -839,16 +862,18 @@ class MagicAzure(MagicClassWithHelpers):
         """
         defines ``%hd_job_kill``
 
-        @NB(hd_job_kill)
+        .. nbref::
+            :tag: Azure
+            :title: hd_job_kill
 
-        The code for magic command ``%hd_job_kill`` is equivalent to::
+            The code for magic command ``%hd_job_kill`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.job_kill(jobid)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.job_kill(jobid)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.hd_job_kill_parser, "hd_job_kill")
         args = self.get_args(line, parser)
@@ -885,14 +910,16 @@ class MagicAzure(MagicClassWithHelpers):
         """
         defines command ``%%PIG_azure``
 
-        @NB(PIG_azure)
+        .. nbref::
+            :tag: Azure
+            :title: PIG_azure
 
-        The code for magic command ``%PIG_azure`` is equivalent to::
+            The code for magic command ``%PIG_azure`` is equivalent to::
 
-            with open(filename, "w", encoding="utf8") as f:
-                f.write(script)
+                with open(filename, "w", encoding="utf8") as f:
+                    f.write(script)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.PIG_azure_parser, "PIG_azure")
         args = self.get_args(line, parser)
@@ -921,14 +948,16 @@ class MagicAzure(MagicClassWithHelpers):
         """
         defines command ``%%HIVE_azure``
 
-        @NB(HIVE_azure)
+        .. nbref::
+            :tag: Azure
+            :title: HIVE_azure
 
-        The code for magic command ``%HIVE_azure`` is equivalent to::
+            The code for magic command ``%HIVE_azure`` is equivalent to::
 
-            with open(filename, "w", encoding="utf8") as f:
-                f.write(script)
+                with open(filename, "w", encoding="utf8") as f:
+                    f.write(script)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.HIVE_azure_parser, "HIVE_azure")
         args = self.get_args(line, parser)
@@ -976,16 +1005,18 @@ class MagicAzure(MagicClassWithHelpers):
         """
         defines command ``%HIVE_azure_submit``
 
-        @NB(HIVE_azure_submit)
+        .. nbref::
+            :tag: Azure
+            :title: HIVE_azure_submit
 
-        The code for magic command ``%HIVE_azure_submit`` is equivalent to::
+            The code for magic command ``%HIVE_azure_submit`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.hive_submit(bs, cl.account_name, hive_file_name, dependencies, **options)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.hive_submit(bs, cl.account_name, hive_file_name, dependencies, **options)
 
-        @endNB
+
         """
         parser = self.get_parser(
             MagicAzure.HIVE_azure_submit_parser, "HIVE_azure_submit")
@@ -1046,16 +1077,18 @@ class MagicAzure(MagicClassWithHelpers):
         """
         defines command ``%hd_pig_submit``
 
-        @NB(hd_pig_submit)
+        .. nbref::
+            :tag: Azure
+            :title: hd_pig_submit
 
-        The code for magic command ``%hd_pig_submit`` is equivalent to::
+            The code for magic command ``%hd_pig_submit`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.pig_submit(bs, cl.account_name, pig_file_name, dependencies, **options)
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.pig_submit(bs, cl.account_name, pig_file_name, dependencies, **options)
 
-        @endNB
+
         """
         parser = self.get_parser(
             MagicAzure.hd_pig_submit_parser, "hd_pig_submit")
@@ -1114,16 +1147,18 @@ class MagicAzure(MagicClassWithHelpers):
                  if the same script name is run multiple times, the redirection will contain
                  the output of multiples jobs.
 
-        @NB(hd_tail_stderr)
+        .. nbref::
+            :tag: Azure
+            :title: hd_tail_stderr
 
-        The code for magic command ``%hd_tail_stderr`` is equivalent to::
+            The code for magic command ``%hd_tail_stderr`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            cl.standard_outputs(job_id, bs, cl.account_name, ".")
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                cl.standard_outputs(job_id, bs, cl.account_name, ".")
 
-        @endNB
+
         """
         parser = self.get_parser(
             MagicAzure.hd_tail_stderr_parser, "hd_tail_stderr")
@@ -1261,20 +1296,22 @@ class MagicAzure(MagicClassWithHelpers):
         """
         defines command ``%%runjython``
 
-        @NB(runjpython)
+        .. nbref::
+            :tag: Azure
+            :title: runjpython
 
-        Run a jython script used for streaming in HDInsight,
-        the function appends fake decorator
-        a timeout is set up at 10s
+            Run a jython script used for streaming in HDInsight,
+            the function appends fake decorator
+            a timeout is set up at 10s
 
-        The magic function create another file included the decoration.
-        It runs the script with this version of Python.
+            The magic function create another file included the decoration.
+            It runs the script with this version of Python.
 
-        See `In a python script how can I ignore Apache Pig's Python Decorators for standalone unit testing <http://stackoverflow.com/questions/18223898/in-a-python-script-how-can-i-ignore-apache-pigs-python-decorators-for-standalon>`_
+            See `In a python script how can I ignore Apache Pig's Python Decorators for standalone unit testing <http://stackoverflow.com/questions/18223898/in-a-python-script-how-can-i-ignore-apache-pigs-python-decorators-for-standalon>`_
 
-        See @see me _run_jython to see the code.
+            See @see me _run_jython to see the code.
 
-        @endNB
+
 
         .. versionadded:: 1.1
         """
@@ -1420,15 +1457,17 @@ class MagicAzure(MagicClassWithHelpers):
 
         the command does not allow spaces in file names
 
-        @NB(blob_head)
+        .. nbref::
+            :tag: Azure
+            :title: blob_head
 
-        The code for magic command ``%blob_head`` is equivalent to::
+            The code for magic command ``%blob_head`` is equivalent to::
 
-            from pyensae.remote import AzureClient
-            cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
-            bs = cl.open_blob_service()
-            df = cl.df_head(bs, container, remotepath, localfile)
-        @endNB
+                from pyensae.remote import AzureClient
+                cl = AzureClient(account_name, account_key, hadoop_server, hadoop_password, pseudo=username)
+                bs = cl.open_blob_service()
+                df = cl.df_head(bs, container, remotepath, localfile)
+
         """
         parser = self.get_parser(MagicAzure.blob_head_parser, "blob_head")
         args = self.get_args(line, parser)
@@ -1463,21 +1502,23 @@ class MagicAzure(MagicClassWithHelpers):
         checks the path used in commands ``blob_down``, ``blob_up``,
         see @see me _interpret_path, :ref:`l-magic-path-container`
 
-        @NB(blob_path)
+        .. nbref::
+            :tag: Azure
+            :title: blob_path
 
-        The code for magic command ``%blob_path`` is equivalent to::
+            The code for magic command ``%blob_path`` is equivalent to::
 
-            if line.startswith("/"):
-                container = account_name
-                remotepath = remotepath.lstrip("/")
-            else:
-                spl = line.split("/")
-                container = spl[0]
-                remotepath = None if len(spl) == 1 else "/".join(spl[1:])
+                if line.startswith("/"):
+                    container = account_name
+                    remotepath = remotepath.lstrip("/")
+                else:
+                    spl = line.split("/")
+                    container = spl[0]
+                    remotepath = None if len(spl) == 1 else "/".join(spl[1:])
 
-            result = container, remotepath
+                result = container, remotepath
 
-        @endNB
+
         """
         parser = self.get_parser(MagicAzure.blob_delete_parser, "blob_delete")
         args = self.get_args(line, parser)

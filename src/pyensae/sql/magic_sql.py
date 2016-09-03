@@ -59,15 +59,15 @@ class MagicSQL(MagicClassWithHelpers):
         define ``SQL_connect`` which connects to a SQL database,
         it stores the database object in variable DB by default
 
-        @NB(SQL_connect_parser)
+        .. nbref::
+            :tag: SQL
+            :title: SQL_connect_parser
 
-        The code for magic command ``%SQL_connect_parser`` is equivalent to::
+            The code for magic command ``%SQL_connect_parser`` is equivalent to::
 
-            from pyense.sql import InterfaceSQL
-            obj = InterfaceSQL.create(args.filename)
-            obj.connect()
-
-        @endNB
+                from pyense.sql import InterfaceSQL
+                obj = InterfaceSQL.create(args.filename)
+                obj.connect()
         """
         parser = self.get_parser(MagicSQL.SQL_connect_parser, "SQL_connect")
         args = self.get_args(line, parser)
@@ -97,13 +97,15 @@ class MagicSQL(MagicClassWithHelpers):
         """
         define ``SQL_close`` which closes a database
 
-        @NB(SQL_close)
+        .. nbref::
+            :tag: SQL
+            :title: SQL_close
 
-        The code for magic command ``%SQL_close`` is equivalent to::
+            The code for magic command ``%SQL_close`` is equivalent to::
 
-            db.close()
+                db.close()
 
-        @endNB
+
         """
         parser = self.get_parser(MagicSQL.SQL_close_parser, "SQL_close")
         args = self.get_args(line, parser)
@@ -132,13 +134,15 @@ class MagicSQL(MagicClassWithHelpers):
         """
         define ``%SQL_tables`` whichs lists the tables in a database
 
-        @NB(SQL_tables)
+        .. nbref::
+            :tag: SQL
+            :title: SQL_tables
 
-        The code for magic command ``%SQL_tables`` is equivalent to::
+            The code for magic command ``%SQL_tables`` is equivalent to::
 
-            db.get_table_list()
+                db.get_table_list()
 
-        @endNB
+
         """
         parser = self.get_parser(MagicSQL.SQL_tables_parser, "SQL_tables")
         args = self.get_args(line, parser)
@@ -167,13 +171,15 @@ class MagicSQL(MagicClassWithHelpers):
         """
         defines ``%SQL_drop_table`` which drops a table from a database
 
-        @NB(SQL_drop_table)
+        .. nbref::
+            :tag: SQL
+            :title: SQL_drop_table
 
-        The code for magic command ``%SQL_drop_table`` is equivalent to::
+            The code for magic command ``%SQL_drop_table`` is equivalent to::
 
-            db.drop_table()
+                db.drop_table()
 
-        @endNB
+
         """
         parser = self.get_parser(
             MagicSQL.SQL_drop_table_parser, "SQL_drop_table")
@@ -232,13 +238,15 @@ class MagicSQL(MagicClassWithHelpers):
         """
         define ``SQL_schema``
 
-        @NB(SQL_schema)
+        .. nbref::
+            :tag: SQL
+            :title: SQL_schema
 
-        The code for magic command ``%SQL_schema`` is equivalent to::
+            The code for magic command ``%SQL_schema`` is equivalent to::
 
-            db.get_table_columns(<table>, as_dict=not <as_list>)
+                db.get_table_columns(<table>, as_dict=not <as_list>)
 
-        @endNB
+
         """
         parser = self.get_parser(MagicSQL.SQL_schema_parser, "SQL_schema")
         args = self.get_args(line, parser)
@@ -272,13 +280,15 @@ class MagicSQL(MagicClassWithHelpers):
         """
         defines ``%SQL_import_tsv`` whichs import a TSV file into a database
 
-        @NB(SQL_import_tsv)
+        .. nbref::
+            :tag: SQL
+            :title: SQL_import_tsv
 
-        The code for magic command ``%SQL_import_tsv`` is equivalent to::
+            The code for magic command ``%SQL_import_tsv`` is equivalent to::
 
-           db.import_flat_file(<filename>, <table>)
+            db.import_flat_file(<filename>, <table>)
 
-        @endNB
+
         """
         parser = self.get_parser(
             MagicSQL.SQL_import_tsv_parser, "SQL_import_tsv")
@@ -312,13 +322,15 @@ class MagicSQL(MagicClassWithHelpers):
         """
         defines ``%SQL_add_function`` which adds a function to the database
 
-        @NB(SQL_add_function)
+        .. nbref::
+            :tag: SQL
+            :title: SQL_add_function
 
-        The code for magic command ``%SQL_add_function`` is equivalent to::
+            The code for magic command ``%SQL_add_function`` is equivalent to::
 
-           db.add_function(fu)
+            db.add_function(fu)
 
-        @endNB
+
         """
         parser = self.get_parser(
             MagicSQL.SQL_add_function_parser, "SQL_add_function")
@@ -361,13 +373,14 @@ class MagicSQL(MagicClassWithHelpers):
         """
         defines ``%SQL_import_df`` which imports a dataframe into a database
 
-        @NB(SQL_import_df)
+        .. nbref::
+            :tag: SQL
+            :title: SQL_import_df
 
-        The code for magic command ``%SQL_import_df`` is equivalent to::
+            The code for magic command ``%SQL_import_df`` is equivalent to::
 
-           db.import_dataframe(<table>, <df>)
+            db.import_dataframe(<table>, <df>)
 
-        @endNB
         """
         parser = self.get_parser(
             MagicSQL.SQL_import_df_parser, "SQL_import_df")
@@ -416,13 +429,14 @@ class MagicSQL(MagicClassWithHelpers):
         """
         defines command ``%%SQL``
 
-        @NB(SQL)
+        .. nbref::
+            :tag: SQL
+            :title: SQL
 
-        The code for magic command ``%%SQL`` is equivalent to::
+            The code for magic command ``%%SQL`` is equivalent to::
 
-            <variable> = db.execute(<cell>)
+                <variable> = db.execute(<cell>)
 
-        @endNB
         """
         parser = self.get_parser(MagicSQL.SQL_parser, "SQL")
         args = self.get_args(line, parser)
