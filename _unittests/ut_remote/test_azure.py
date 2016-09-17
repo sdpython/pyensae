@@ -75,7 +75,12 @@ class TestAzure (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
         if self.client is None:
             return
-        df = self.client.ls(self.blob_serv, None)
+        import azure.common
+        try:
+            df = self.client.ls(self.blob_serv, None)
+        except azure.common.AzureException as e:
+            warnings.warn("Unable to test azure, storage is still up?\n" + str(e))
+            return
         fLOG(df)
         assert isinstance(df, pandas.DataFrame)
 
@@ -102,13 +107,18 @@ class TestAzure (unittest.TestCase):
         files = [os.path.join(data, _) for _ in files]
         files = [_ for _ in files if os.path.isfile(_) and "paris" in _]
 
-        if not self.client.exists(self.blob_serv, self.container, "unittest"):
-            # no folder creation
-            pass
-        else:
-            df = self.client.ls(self.blob_serv, self.container, "unittest")
-            for name in df["name"]:
-                self.client.delete_blob(self.blob_serv, self.container, name)
+        import azure.common
+        try:
+            if not self.client.exists(self.blob_serv, self.container, "unittest"):
+                # no folder creation
+                pass
+            else:
+                df = self.client.ls(self.blob_serv, self.container, "unittest")
+                for name in df["name"]:
+                    self.client.delete_blob(self.blob_serv, self.container, name)
+        except azure.common.AzureException as e:
+            warnings.warn("Unable to test azure, storage is still up?\n" + str(e))
+            return
 
         content = self.client.ls(self.blob_serv, self.container, "unittest")
         fLOG(content.columns)
@@ -227,7 +237,13 @@ class TestAzure (unittest.TestCase):
         files = [os.path.join(data, _) for _ in files]
         files = [_ for _ in files if os.path.isfile(_) and "paris" in _]
 
-        content = self.client.ls(self.blob_serv, self.container, "unittest2")
+        import azure.common
+        try:
+            content = self.client.ls(self.blob_serv, self.container, "unittest2")
+        except azure.common.AzureException as e:
+            warnings.warn("Unable to test azure, storage is still up?\n" + str(e))
+            return
+
         if len(content) == 0:
             self.client.upload(
                 self.blob_serv,
