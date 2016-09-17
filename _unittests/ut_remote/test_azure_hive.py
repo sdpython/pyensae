@@ -8,6 +8,7 @@ import sys
 import os
 import unittest
 import requests
+import warnings
 thisfold = os.path.abspath(os.path.split(__file__)[0])
 thiscomm = os.path.join(thisfold, "..")
 sys.path.append(thiscomm)
@@ -99,11 +100,12 @@ class TestAzureHive(unittest.TestCase):
             f.write(hive)
 
         fLOG("submit")
+        import azure.common
         try:
             job = self.client.hive_submit(self.blob_serv, self.container,
                                           hivefile, params=dict(UTT="unittest3"))
-        except requests.exceptions.ConnectionError:
-            # cluster not available
+        except (requests.exceptions.ConnectionError, azure.common.AzureException) as e:
+            warnings.warn("Cluster not available\n{0}".format(e))
             return
         fLOG(job)
         #not working

@@ -79,7 +79,8 @@ class TestAzure (unittest.TestCase):
         try:
             df = self.client.ls(self.blob_serv, None)
         except azure.common.AzureException as e:
-            warnings.warn("Unable to test azure, storage is still up?\n" + str(e))
+            warnings.warn(
+                "Unable to test azure, storage is still up?\n" + str(e))
             return
         fLOG(df)
         assert isinstance(df, pandas.DataFrame)
@@ -115,9 +116,11 @@ class TestAzure (unittest.TestCase):
             else:
                 df = self.client.ls(self.blob_serv, self.container, "unittest")
                 for name in df["name"]:
-                    self.client.delete_blob(self.blob_serv, self.container, name)
+                    self.client.delete_blob(
+                        self.blob_serv, self.container, name)
         except azure.common.AzureException as e:
-            warnings.warn("Unable to test azure, storage is still up?\n" + str(e))
+            warnings.warn(
+                "Unable to test azure, storage is still up?\n" + str(e))
             return
 
         content = self.client.ls(self.blob_serv, self.container, "unittest")
@@ -239,9 +242,11 @@ class TestAzure (unittest.TestCase):
 
         import azure.common
         try:
-            content = self.client.ls(self.blob_serv, self.container, "unittest2")
+            content = self.client.ls(
+                self.blob_serv, self.container, "unittest2")
         except azure.common.AzureException as e:
-            warnings.warn("Unable to test azure, storage is still up?\n" + str(e))
+            warnings.warn(
+                "Unable to test azure, storage is still up?\n" + str(e))
             return
 
         if len(content) == 0:
