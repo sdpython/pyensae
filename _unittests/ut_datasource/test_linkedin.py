@@ -82,14 +82,13 @@ class TestLinkedIn (unittest.TestCase):
     my_id = "9nsW-6OsQF"
 
     def start(self):
-        import linkedin
+        import linkedin as skip___
 
     def get_access_token(self):
         import keyring
         res = []
         for k in ["APIKey", "SecretKey", "User", "Secret"]:
-            res.append(keyring.get_password(
-                "linkedin", os.environ["COMPUTERNAME"] + k))
+            res.append(keyring.get_password("linkedin", os.environ["COMPUTERNAME"] + k))
         if not is_travis_or_appveyor() and res[0] is None:
             raise ValueError("cannot retrieve credentials for Linkedin")
         return res
