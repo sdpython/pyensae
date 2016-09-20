@@ -12,7 +12,6 @@ import pandas
 
 try:
     import src
-    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -22,6 +21,11 @@ except ImportError:
                 "..")))
     if path not in sys.path:
         sys.path.append(path)
+    import src
+
+try:
+    import pyquickhelper as skip_
+except ImportError:
     path = os.path.normpath(
         os.path.abspath(
             os.path.join(
@@ -33,10 +37,11 @@ except ImportError:
                 "src")))
     if path not in sys.path:
         sys.path.append(path)
-    import src
     import pyquickhelper as skip_
 
+
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import is_travis_or_appveyor
 from src.pyensae.datasource.data_velib import DataVelibCollect
 
 
@@ -48,22 +53,11 @@ class TestDataVelib (unittest.TestCase):
 
         look at the code to see where I chose to put this key not shared in this file
         """
-        file = os.path.abspath(os.path.split(__file__)[0])
-        file = os.path.join(
-            file,
-            "..",
-            "..",
-            "..",
-            "..",
-            "_perso",
-            "velib_password.txt")
-        file = os.path.normpath(file)
-        if not os.path.exists(file):
-            fLOG("unable to find password at: " + file)
-            return None
-        with open(file, "r") as f:
-            row = f.readlines()
-        return row[0].strip(" \n\r\t")
+        import keyring
+        key = keyring.get_password("velib", os.environ["COMPUTERNAME"])
+        if not is_travis_or_appveyor() and key is None:
+            raise ValueError("unable to retrieve API key")
+        return key
 
     def test_datetime(self):
         fLOG(

@@ -7,11 +7,11 @@
 import sys
 import os
 import unittest
+import warnings
 
 
 try:
     import src
-    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -21,6 +21,11 @@ except ImportError:
                 "..")))
     if path not in sys.path:
         sys.path.append(path)
+    import src
+
+try:
+    import pyquickhelper as skip_
+except ImportError:
     path = os.path.normpath(
         os.path.abspath(
             os.path.join(
@@ -32,10 +37,26 @@ except ImportError:
                 "src")))
     if path not in sys.path:
         sys.path.append(path)
-    import src
     import pyquickhelper as skip_
 
+
+try:
+    import linkedin as skip__
+except ImportError:
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..",
+                "..",
+                "python-linkedin")))
+    if path not in sys.path:
+        sys.path.append(path)
+    import linkedin as skip__
+
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import is_travis_or_appveyor
 from src.pyensae.datasource.linkedin_access import LinkedInAccess
 
 
@@ -57,46 +78,36 @@ class TestLinkedIn (unittest.TestCase):
         ????????-????-????-????-????????????
     """
 
-    accessToken = ["????????????",  # API Key
-                   "????????????????",  # Secret Key
-                   "????????-????-????-????-????????????",  # Oauth User Token
-                   "????????-????-????-????-????????????",
-                   # OAuth User Secret ]
-                   ]
-
     my_url = "http://www.linkedin.com/profile/view?id=2288976"
     my_id = "9nsW-6OsQF"
 
     def start(self):
-        try:
-            import linkedin as skip__
-        except ImportError:
-            path = os.path.normpath(
-                os.path.abspath(
-                    os.path.join(
-                        os.path.split(__file__)[0],
-                        "..",
-                        "..",
-                        "..",
-                        "python-linkedin")))
-            if path not in sys.path:
-                sys.path.append(path)
-            import linkedin as skip__
+        import linkedin
+
+    def get_access_token(self):
+        import keyring
+        res = []
+        for k in ["APIKey", "SecretKey", "User", "Secret"]:
+            res.append(keyring.get_password(
+                "linkedin", os.environ["COMPUTERNAME"] + k))
+        if not is_travis_or_appveyor() and res[0] is None:
+            raise ValueError("cannot retrieve credentials for Linkedin")
+        return res
 
     def test_linkedin(self):
         self.start()
-        return
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        linkedin = LinkedInAccess(*TestLinkedIn.accessToken)
+        linkedin = LinkedInAccess(*self.get_access_token())
         res = linkedin.connect()
         fLOG("***", res)
         try:
             prof = linkedin.get_profile()
         except Exception as e:
             if "Expired access token." in str(e):
+                warnings.warn(str(e))
                 return
             else:
                 raise e
@@ -124,18 +135,18 @@ class TestLinkedIn (unittest.TestCase):
 
     def test_linkedin_basic(self):
         self.start()
-        return
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        linkedin = LinkedInAccess(*TestLinkedIn.accessToken)
+        linkedin = LinkedInAccess(*self.get_access_token())
         res = linkedin.connect(False)
         fLOG("***", res)
         try:
             prof = linkedin.get_profile()
         except Exception as e:
             if "Expired access token." in str(e):
+                warnings.warn(str(e))
                 return
             else:
                 raise e
@@ -163,13 +174,12 @@ class TestLinkedIn (unittest.TestCase):
 
     def test_linkedin_search_key(self):
         self.start()
-        return
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        linkedin = LinkedInAccess(*TestLinkedIn.accessToken)
+        linkedin = LinkedInAccess(*self.get_access_token())
         res = linkedin.connect()
         if __name__ == "__main__":
             if False:
@@ -239,19 +249,19 @@ class TestLinkedIn (unittest.TestCase):
 
     def test_linkedin_connection(self):
         self.start()
-        return
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        linkedin = LinkedInAccess(*TestLinkedIn.accessToken)
+        linkedin = LinkedInAccess(*self.get_access_token())
         res = linkedin.connect()
         fLOG("***", res)
         try:
             prof = linkedin.get_connections(member_id=TestLinkedIn.my_id)
         except Exception as e:
             if "Expired access token." in str(e):
+                warnings.warn(str(e))
                 return
             else:
                 raise e
