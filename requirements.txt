@@ -28,6 +28,7 @@ jsonschema
 jupyter
 jupyter_client
 jupyter_core
+keyring
 lxml
 matplotlib
 mechanize
