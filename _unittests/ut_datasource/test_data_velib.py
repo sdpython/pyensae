@@ -55,7 +55,10 @@ class TestDataVelib (unittest.TestCase):
         """
         import keyring
         machine = os.environ.get("COMPUTERNAME", os.environ.get("HOSTNAME", "CI"))
-        key = keyring.get_password("velib", machine)
+        try:
+            key = keyring.get_password("velib", machine)
+        except RuntimeError:
+            key = None
         if not is_travis_or_appveyor() and key is None:
             raise ValueError("unable to retrieve API key")
         return key
