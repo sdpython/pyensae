@@ -103,7 +103,11 @@ class TestLinkedIn (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        linkedin = LinkedInAccess(*self.get_access_token())
+        token = self.get_access_token()
+        if token is None:
+            warnings.warn("no credential, unable to test linkedin")
+            return
+        linkedin = LinkedInAccess(*token)
         res = linkedin.connect()
         fLOG("***", res)
         try:
@@ -142,7 +146,11 @@ class TestLinkedIn (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        linkedin = LinkedInAccess(*self.get_access_token())
+        token = self.get_access_token()
+        if token is None:
+            warnings.warn("no credential, unable to test linkedin")
+            return
+        linkedin = LinkedInAccess(*token)
         res = linkedin.connect(False)
         fLOG("***", res)
         try:
@@ -181,8 +189,11 @@ class TestLinkedIn (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-
-        linkedin = LinkedInAccess(*self.get_access_token())
+        token = self.get_access_token()
+        if token is None:
+            warnings.warn("no credential, unable to test linkedin")
+            return
+        linkedin = LinkedInAccess(*token)
         res = linkedin.connect()
         if __name__ == "__main__":
             if False:
@@ -256,8 +267,11 @@ class TestLinkedIn (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-
-        linkedin = LinkedInAccess(*self.get_access_token())
+        token = self.get_access_token()
+        if token is None:
+            warnings.warn("no credential, unable to test linkedin")
+            return
+        linkedin = LinkedInAccess(*token)
         res = linkedin.connect()
         fLOG("***", res)
         try:
