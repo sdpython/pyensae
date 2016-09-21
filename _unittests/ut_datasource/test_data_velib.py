@@ -54,7 +54,8 @@ class TestDataVelib (unittest.TestCase):
         look at the code to see where I chose to put this key not shared in this file
         """
         import keyring
-        key = keyring.get_password("velib", os.environ["COMPUTERNAME"])
+        machine = os.environ.get("COMPUTERNAME", os.environ.get("HOSTNAME", "CI"))
+        key = keyring.get_password("velib", machine)
         if not is_travis_or_appveyor() and key is None:
             raise ValueError("unable to retrieve API key")
         return key
