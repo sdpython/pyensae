@@ -95,7 +95,7 @@ class TestLinkedIn (unittest.TestCase):
                 res.append(None)
         if not is_travis_or_appveyor() and res[0] is None:
             raise ValueError("cannot retrieve credentials for Linkedin")
-        if token[0] is None:
+        if res[0] is None:
             return None
         return res
 
