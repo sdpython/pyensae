@@ -20,7 +20,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
   - "%PYTHON%\\Scripts\\pip install -U git+https://github.com/quantopian/qgrid --no-deps"
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyensae"
-  - "%PYTHON%\\Scripts\\pip install cryptography keyring"
+  - "%PYTHON%\\Scripts\\pip install cryptography keyring jyquickhelper"
   - "%PYTHON%\\Scripts\\pip install azure"
   - "%PYTHON%\\Scripts\\pymy_install3 pycrypto"
   - "%PYTHON%\\Scripts\\pip install pycryptodomex"
