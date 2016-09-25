@@ -28,6 +28,7 @@ jsonschema
 jupyter
 jupyter_client
 jupyter_core
+jyquickhelper
 keyring
 lxml
 Markdown
