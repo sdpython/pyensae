@@ -482,7 +482,7 @@ class StockPrices:
         @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curves on the second axis.
         @param      args                other parameters to give method ``plt.subplots``
         @param      ax                  use existing `axes <http://matplotlib.org/api/axes_api.html>`_
-        @return                         `axes <http://matplotlib.org/api/axes_api.html>`_
+        @return     fig, ax, plt        `axes <http://matplotlib.org/api/axes_api.html>`_
 
         The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
         can change the graph size (see the example below).
