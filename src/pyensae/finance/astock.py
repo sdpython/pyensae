@@ -619,7 +619,7 @@ class StockPrices:
             ax.grid(True)
             ax.legend(ex_l + tuple(data.columns))
 
-        return ax
+        return fig, ax, plt
 
     def to_csv(self, filename, sep="\t", index=False, **params):
         """
