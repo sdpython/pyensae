@@ -62,7 +62,7 @@ class StockPrices:
             ::
 
                 import pyensae, pandas
-                from pyensae import StockPrices
+                from pyensae.finance.astock import StockPrices
 
                 # download the CAC 40 composition from my website
                 pyensae.download_data('cac40_2013_11_11.txt', website = 'xd')
