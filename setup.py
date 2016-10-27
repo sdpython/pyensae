@@ -37,6 +37,7 @@ package_dir = {k: "src/" + k.replace(".", "/") for k in packages}
 package_data = {project_var_name + ".subproject": ["*.tohelp"],
                 project_var_name + ".languages": ["*.g4", "*.tokens"], }
 
+
 ############
 # functions
 ############
