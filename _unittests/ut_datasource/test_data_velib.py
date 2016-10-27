@@ -54,7 +54,8 @@ class TestDataVelib (unittest.TestCase):
         look at the code to see where I chose to put this key not shared in this file
         """
         import keyring
-        machine = os.environ.get("COMPUTERNAME", os.environ.get("HOSTNAME", "CI"))
+        machine = os.environ.get(
+            "COMPUTERNAME", os.environ.get("HOSTNAME", "CI"))
         try:
             key = keyring.get_password("velib", machine)
         except RuntimeError:

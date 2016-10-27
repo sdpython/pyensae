@@ -63,10 +63,15 @@ class TestNotebookFolium (unittest.TestCase):
         map_osm.save(outfile)
         assert os.path.exists(outfile)
         folium_embed_map(map_osm, path=outfile.replace(".html", "2.html"))
-        ht = folium_html_map(map_osm)
+        ht = folium_html_map(map_osm, asobj=False)
         fLOG("done")
         assert len(ht) > 0
         assert "<div" in ht
+
+        ht = folium_html_map(map_osm, width="50%", asobj=True)
+        fLOG("done")
+        assert len(ht.res) > 0
+        assert "<div" in ht.res
 
 
 if __name__ == "__main__":

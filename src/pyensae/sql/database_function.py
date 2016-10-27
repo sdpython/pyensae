@@ -21,7 +21,8 @@ def get_list_server():
     line = [_ for _ in line if len(_) > 0]
 
     # we place all server containing the machine name in the first place
-    machine = os.environ.get("COMPUTERNAME", os.environ.get("HOSTNAME", "--------"))
+    machine = os.environ.get(
+        "COMPUTERNAME", os.environ.get("HOSTNAME", "--------"))
     line = sorted([(-1 if _.startswith(machine) else 0, _) for _ in line])
     line = [_[1] for _ in line]
     return line

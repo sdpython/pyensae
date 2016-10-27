@@ -86,7 +86,8 @@ class TestLinkedIn (unittest.TestCase):
 
     def get_access_token(self):
         import keyring
-        machine = os.environ.get("COMPUTERNAME", os.environ.get("HOSTNAME", "CI"))
+        machine = os.environ.get(
+            "COMPUTERNAME", os.environ.get("HOSTNAME", "CI"))
         res = []
         for k in ["APIKey", "SecretKey", "User", "Secret"]:
             try:

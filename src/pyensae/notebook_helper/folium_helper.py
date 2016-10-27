@@ -8,11 +8,14 @@ does not explicitely import *folium*.
 from IPython.display import HTML
 
 
-def folium_html_map(map):
+def folium_html_map(map, width=None, height=None, asobj=True):
     """
     Embeds the HTML source of the map directly into the IPython notebook.
 
     @param      map     folium map
+    @param      width   width
+    @param      height  heigth
+    @param      asobj   return an object which implements ``_repr_html_``
     @return             HTML (IPython)
 
     This method will not work if the map depends on any files (json data). Also this uses
@@ -42,11 +45,39 @@ def folium_html_map(map):
             map_osm.polygon_marker(location=[48.824338, 2.302641], popup='ENSAE',
                                 fill_color='#132b5e', num_sides=3, radius=10)
             map_osm
+
+    .. versionchanged:: 1.1
+        Add parameters *width* and *height* to change the size of the map within a notebook.
+        Hopefully, they will be added in folium.
     """
-    return map._repr_html_()
+    res = map._repr_html_()
+    if width or height:
+        look = '<div style="width:100%;">'
+        if not res.startswith(look):
+            raise ValueError(
+                "Folium has changed its HTML form, it used to start with: '{0}'.\n{1}".format(look, res))
+        size = ""
+        if width:
+            size += "width:" + width + ";"
+        if height:
+            size += "height:" + height + ";"
+        newlook = '<div style="{size}">'.format(size=size)
+        res = newlook + res[len(look):]
+    if asobj:
+        class CustomFoliumMap:
+
+            def __init__(self, res, map):
+                self.res = res
+                self.map = map
+
+            def _repr_html_(self):
+                return self.res
+        return CustomFoliumMap(res, map)
+    else:
+        return res
 
 
-def folium_embed_map(map, path="map.html"):
+def folium_embed_map(map, path="map.html", width="100%", height="510px"):
     """
     @param      map     folium map
     @param      path    where to store the temporary map
@@ -60,4 +91,4 @@ def folium_embed_map(map, path="map.html"):
     Source: `folium_base.py <https://gist.github.com/psychemedia/f7385255f89137c503b5>`_
     """
     map.save(path)
-    return HTML('<iframe src="files/{path}" style="width: 100%; height: 510px; border: none"></iframe>'.format(path=path))
+    return HTML('<iframe src="files/{path}" style="width: {width}; height: {height}; border: none"></iframe>'.format(path=path, width=width, height=height))

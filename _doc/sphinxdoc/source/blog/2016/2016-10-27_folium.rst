@@ -1,0 +1,23 @@
+
+
+.. blogpost::
+    :title: Change size for folium maps
+    :keywords: folium
+    :date: 2016-10-27
+    :categories: graphs
+    
+    There is no option to change the size of a 
+    `folium <https://github.com/python-visualization/folium>`_ map embedded in a notebook.
+    I updated function 
+    :func:`folium_html_map <pyensae.notebook_helper.folium_helper.folium_html_map>` 
+    to do so.
+    
+    ::
+    
+        import folium
+        map_osm = folium.Map(location=[48.85, 2.34])
+        from pyensae.notebook_helper import folium_html_map
+        map_osm.polygon_marker(location=[48.824338, 2.302641], popup='ENSAE', fill_color='#132b5e', num_sides=3, radius=10)
+        folium_html_map(map_osm, width="50%")
+        
+    
