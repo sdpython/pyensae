@@ -14,7 +14,7 @@ def folium_html_map(map, width=None, height=None, asobj=True):
 
     @param      map     folium map
     @param      width   width
-    @param      height  heigth
+    @param      height  height
     @param      asobj   return an object which implements ``_repr_html_``
     @return             HTML (IPython)
 
@@ -72,6 +72,7 @@ def folium_html_map(map, width=None, height=None, asobj=True):
 
             def _repr_html_(self):
                 return self.res
+
         return CustomFoliumMap(res, map)
     else:
         return res
