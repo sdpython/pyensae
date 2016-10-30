@@ -82,7 +82,7 @@ Quick start
 Functionalities
 ---------------
 
-* retrieve data for practical lessons (see :func:`download_data <pyensae.resources.http_retrieve.download_data>`)
+* retrieve data for practical lessons (see :func:`download_data <pyensae.datasource.http_retrieve.download_data>`)
 * import a tsv file into a database (see :func:`import_flatfile_into_database <pyensae.sql.database_helper.import_flatfile_into_database>`)
 * retrieve stock prices from Yahoo Finance (see :class:`StockPrices <pyensae.finance.astock.StockPrices>`)
 * magic commands to easily use SQLite3 from a notebook (see :class:`MagicSQL <pyensae.sql.magic_sql.MagicSQL>`)
