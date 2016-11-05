@@ -68,5 +68,6 @@ class TestDatabase (unittest.TestCase):
         assert len(view) > 0
         assert len(view[0]) == 7
 
+
 if __name__ == "__main__":
     unittest.main()

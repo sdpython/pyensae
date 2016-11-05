@@ -97,5 +97,6 @@ class TestDataVelibOffline (unittest.TestCase):
         df = DataVelibCollect.to_df(data)
         DataVelibCollect.js_animation(df)
 
+
 if __name__ == "__main__":
     unittest.main()

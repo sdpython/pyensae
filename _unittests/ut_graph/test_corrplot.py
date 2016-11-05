@@ -81,5 +81,6 @@ class TestGraph (unittest.TestCase):
         fLOG("end")
         assert os.path.exists(img)
 
+
 if __name__ == "__main__":
     unittest.main()

@@ -135,9 +135,9 @@ class TestCloudera (unittest.TestCase):
             assert False
 
         self.client.download_cluster(df["name"], fold)
-        l = os.listdir(fold)
-        fLOG(l)
-        assert len(l) >= 3
+        ld = os.listdir(fold)
+        fLOG(ld)
+        assert len(ld) >= 3
 
     def test_script_pig(self):
         fLOG(

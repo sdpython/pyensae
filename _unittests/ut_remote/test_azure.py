@@ -140,9 +140,9 @@ class TestAzure (unittest.TestCase):
         assert len(df) >= 3
 
         self.client.download(self.blob_serv, self.container, df["name"], fold)
-        l = os.listdir(fold)
-        fLOG(l)
-        assert len(l) >= 3
+        ld = os.listdir(fold)
+        fLOG(ld)
+        assert len(ld) >= 3
 
     def test_script_pig(self):
         fLOG(

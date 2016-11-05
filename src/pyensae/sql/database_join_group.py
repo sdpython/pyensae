@@ -91,9 +91,9 @@ class DatabaseJoinGroup:
             i = 0
             for n in self.successor:
                 r = str(n)
-                l = r.split("\n")
-                l = ["    " + s2 for s2 in l]
-                r = "\n".join(l)
+                li = r.split("\n")
+                li = ["    " + s2 for s2 in li]
+                r = "\n".join(li)
                 mes.append("node %d" % i)
                 mes.append(r)
                 i += 1

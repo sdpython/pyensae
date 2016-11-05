@@ -207,17 +207,17 @@ def download_data(name, moduleName=None, url=None, glo=None,
                     r1 = reg1.search(l)
                     r2 = reg2.search(l)
                     if r2:
-                        l = ""
+                        ls = ""
                         if fir:
-                            l = "fLOG = print"
+                            ls = "fLOG = print"
                             fir = False
                     elif r1:
                         st = r1.groups()[0]
-                        l = l.replace(st, "from ")
+                        ls = ls.replace(st, "from ")
                         if fir:
-                            l += "\nfLOG = print"
+                            ls += "\nfLOG = print"
                             fir = False
-                    fil.append(l.strip("\n\r"))
+                    fil.append(ls.strip("\n\r"))
                 if not fir:
                     fLOG("end removing relative import for ", name)
                     with open(outfile, "w") as f:

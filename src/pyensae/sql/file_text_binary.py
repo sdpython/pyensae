@@ -99,8 +99,8 @@ class TextFile:
         self.open()
         res = []
         for line in self:
-            l = line.strip("\r\n")
-            res.append(l)
+            li = line.strip("\r\n")
+            res.append(li)
         self.close()
         return res
 

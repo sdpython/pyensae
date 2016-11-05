@@ -641,11 +641,11 @@ class DatabaseCore (DatabaseCore2):
             com = re.compile("^(.*)(--.*)$")
             lines = request.split("\n")
             clean = []
-            for l in lines:
-                r = com.match(l)
+            for li in lines:
+                r = com.match(li)
                 if r is not None:
-                    l = l[:r.span(1)[1]]
-                clean.append(l.strip())
+                    li = li[:r.span(1)[1]]
+                clean.append(li.strip())
             req = " ".join(clean)
             cross = re.compile(" *CROSS +([ a-zA-Z_0-9,]+?) +"
                                "PLACE +([,a-zA-Z_0-9()]+?) +"
@@ -957,14 +957,14 @@ class DatabaseCore (DatabaseCore2):
         for c, val in columns.items():
             if self.isMSSQL():
                 if isinstance(val[1], tuple):
-                    v, l = val[1]
+                    v, li = val[1]
                 else:
-                    v, l = val[1], 2048
+                    v, li = val[1], 2048
 
-                if l > 8000:
+                if li > 8000:
                     col.append(val[0] + " TEXT")
                 elif v is str:
-                    col.append(val[0] + " VARCHAR(%d)" % l)
+                    col.append(val[0] + " VARCHAR(%d)" % li)
                 elif v is int:
                     col.append(val[0] + " INTEGER")
                 elif v is float:
@@ -987,9 +987,9 @@ class DatabaseCore (DatabaseCore2):
                         str(v))
             else:
                 if isinstance(val[1], tuple):
-                    v, l = val[1]
+                    v, li = val[1]
                 else:
-                    v, l = val[1], 2048
+                    v, li = val[1], 2048
 
                 if v is str:
                     col.append(val[0] + " TEXT")

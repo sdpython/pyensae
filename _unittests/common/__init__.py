@@ -14,5 +14,6 @@ def get_codes(envvar):
     else:
         return val.split("**")
 
+
 if __name__ == "__main__":
     print(get_codes())

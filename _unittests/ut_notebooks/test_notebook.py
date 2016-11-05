@@ -53,5 +53,6 @@ class TestNotebook(unittest.TestCase):
         fLOG(res)
         assert res is not None
 
+
 if __name__ == "__main__":
     unittest.main()
