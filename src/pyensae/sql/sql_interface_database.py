@@ -22,9 +22,18 @@ class InterfaceSQLDatabase(InterfaceSQL):
         """
         initialize the object
 
-        @param      filename        str
+        @param      filename        str or :class:`Database <pyensae.sql.database_main.Database>`
+
+        If *filename* is a :class:`Database <pyensae.sql.database_main.Database>`, the
+        object is kept as is.
+
+        .. versionchanged:: 1.1
+            Parameter *filename* can be a database.
         """
-        self.obj = Database(filename, LOG=noLOG)
+        if isinstance(filename, Database):
+            self.obj = filename
+        else:
+            self.obj = Database(filename, LOG=noLOG)
 
     def connect(self):
         """

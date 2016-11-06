@@ -20,15 +20,13 @@ class Database (
 
     Under Windows, you can use SQLiteSpy to have a graphical overview of the database.
     http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index
+
+    .. versionchanged:: 1.1
+        Parameter *dbfile* can be of type `sqlite3.Connection <https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection>`_.
     """
 
-    def __init__(self, dbfile,
-                 engine="SQLite",
-                 user=None,
-                 password=None,
-                 host="localhost",
-                 LOG=print,
-                 attach=None):
+    def __init__(self, dbfile, engine="SQLite", user=None, password=None,
+                 host="localhost", LOG=print, attach=None):
         """
         constructor
 
@@ -43,16 +41,12 @@ class Database (
         @param      host            to connect to a MSSQL database
         @param      LOG             LOG function
         @param      attach          dictionary: { nickname: filename }, list of database to attach
+
         @warning If the folder does not exist, it will be created
         """
         DatabaseJoinGroup.__init__(self)
-        DatabaseCore.__init__(self, sql_file=dbfile,
-                              engine=engine,
-                              user=user,
-                              password=password,
-                              host=host,
-                              LOG=LOG,
-                              attach=attach)
+        DatabaseCore.__init__(self, sql_file=dbfile, engine=engine, user=user, password=password,
+                              host=host, LOG=LOG, attach=attach)
 
     @staticmethod
     def schema_database(df, add_id=True):

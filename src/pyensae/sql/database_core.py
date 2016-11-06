@@ -52,13 +52,8 @@ class DatabaseCore (DatabaseCore2):
     _engines = ["SQLite", "MySQL", "ODBCMSSQL"]
     _field_option = ["PRIMARYKEY", "AUTOINCREMENT", "AUTOFILL"]
 
-    def __init__(self, sql_file,
-                 engine="SQLite",
-                 user=None,
-                 password=None,
-                 host="localhost",
-                 LOG=None,
-                 attach=None):
+    def __init__(self, sql_file, engine="SQLite", user=None, password=None,
+                 host="localhost", LOG=None, attach=None):
         """constructor
         @param      sql_file        database file database file (use ``:memory:`` to avoid creating a file and using only memory)
                                     it can also contain several files separated by ;
@@ -71,7 +66,11 @@ class DatabaseCore (DatabaseCore2):
         @param      password        password if needed
         @param      LOG             LOG function, if None, choose ``print``
         @param      attach          dictionary ``{ nickname: filename }``, list of database to attach
+
         @warning If the folder does not exist, it will be created
+
+        .. versionchanged:: 1.1
+            Parameter *dbfile* can be of type `sqlite3.Connection <https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection>`_.
         """
 
         # attach cases
@@ -138,7 +137,7 @@ class DatabaseCore (DatabaseCore2):
                     DatabaseCore._engines)))
 
         # write a file able to build a database summary
-        if not self.isMemory():
+        if isinstance(sql_file, str) and not self.isMemory():
             folder = os.path.split(sql_file)[0]
             if len(folder) > 0 and not os.path.exists(folder):
                 os.makedirs(folder)
@@ -174,8 +173,11 @@ class DatabaseCore (DatabaseCore2):
         self._buffer_insert = []
         self._buffer_insert_s = 0
 
-        if self.isMemory():
+        if isinstance(sql_file, str) and self.isMemory():
             self._connection = SQLite.connect(self._sql_file)
+        elif isinstance(sql_file, SQLite.Connection):
+            self._connection = sql_file
+            self._sql_file = ":memory:"
 
     def isMSSQL(self):
         """says if the syntax is MS SQL Server

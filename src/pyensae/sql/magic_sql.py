@@ -1,7 +1,8 @@
 #-*- coding: utf-8 -*-
 """
 @file
-@brief Magic command to communicate with an Hadoop cluster.
+@brief Defines SQL commands to play with `sqlite3 <https://docs.python.org/3/library/sqlite3.html>`_.
+See notebook :ref:`pyensaesqlmagicrst`.
 """
 import os
 
@@ -16,6 +17,7 @@ class MagicSQL(MagicClassWithHelpers):
 
     """
     Defines SQL commands to play with `sqlite3 <https://docs.python.org/3.4/library/sqlite3.html>`_
+    See notebook :ref:`pyensaesqlmagicrst`.
     """
 
     def get_connection(self, name):
@@ -33,9 +35,12 @@ class MagicSQL(MagicClassWithHelpers):
                 raise KeyError(
                     "No opened sqlite3 database called: " + str(name))
 
-            return self.shell.user_ns[name]
+            res = self.shell.user_ns[name]
         else:
-            return name
+            res = name
+        if not isinstance(res, InterfaceSQL):
+            res = InterfaceSQL.create(res)
+        return res
 
     @staticmethod
     def SQL_connect_parser():
@@ -68,6 +73,8 @@ class MagicSQL(MagicClassWithHelpers):
                 from pyense.sql import InterfaceSQL
                 obj = InterfaceSQL.create(args.filename)
                 obj.connect()
+
+            See notebook :ref:`pyensaesqlmagicrst`.
         """
         parser = self.get_parser(MagicSQL.SQL_connect_parser, "SQL_connect")
         args = self.get_args(line, parser)
@@ -105,7 +112,7 @@ class MagicSQL(MagicClassWithHelpers):
 
                 db.close()
 
-
+            See notebook :ref:`pyensaesqlmagicrst`.
         """
         parser = self.get_parser(MagicSQL.SQL_close_parser, "SQL_close")
         args = self.get_args(line, parser)
@@ -142,7 +149,7 @@ class MagicSQL(MagicClassWithHelpers):
 
                 db.get_table_list()
 
-
+            See notebook :ref:`pyensaesqlmagicrst`.
         """
         parser = self.get_parser(MagicSQL.SQL_tables_parser, "SQL_tables")
         args = self.get_args(line, parser)
@@ -179,7 +186,7 @@ class MagicSQL(MagicClassWithHelpers):
 
                 db.drop_table()
 
-
+            See notebook :ref:`pyensaesqlmagicrst`.
         """
         parser = self.get_parser(
             MagicSQL.SQL_drop_table_parser, "SQL_drop_table")
@@ -246,7 +253,7 @@ class MagicSQL(MagicClassWithHelpers):
 
                 db.get_table_columns(<table>, as_dict=not <as_list>)
 
-
+            See notebook :ref:`pyensaesqlmagicrst`.
         """
         parser = self.get_parser(MagicSQL.SQL_schema_parser, "SQL_schema")
         args = self.get_args(line, parser)
@@ -286,9 +293,9 @@ class MagicSQL(MagicClassWithHelpers):
 
             The code for magic command ``%SQL_import_tsv`` is equivalent to::
 
-            db.import_flat_file(<filename>, <table>)
+                db.import_flat_file(<filename>, <table>)
 
-
+            See notebook :ref:`pyensaesqlmagicrst`.
         """
         parser = self.get_parser(
             MagicSQL.SQL_import_tsv_parser, "SQL_import_tsv")
@@ -328,9 +335,9 @@ class MagicSQL(MagicClassWithHelpers):
 
             The code for magic command ``%SQL_add_function`` is equivalent to::
 
-            db.add_function(fu)
+                db.add_function(fu)
 
-
+            See notebook :ref:`pyensaesqlmagicrst`.
         """
         parser = self.get_parser(
             MagicSQL.SQL_add_function_parser, "SQL_add_function")
@@ -379,8 +386,9 @@ class MagicSQL(MagicClassWithHelpers):
 
             The code for magic command ``%SQL_import_df`` is equivalent to::
 
-            db.import_dataframe(<table>, <df>)
+                db.import_dataframe(<table>, <df>)
 
+            See notebook :ref:`pyensaesqlmagicrst`.
         """
         parser = self.get_parser(
             MagicSQL.SQL_import_df_parser, "SQL_import_df")
@@ -437,14 +445,13 @@ class MagicSQL(MagicClassWithHelpers):
 
                 <variable> = db.execute(<cell>)
 
+            See notebook :ref:`pyensaesqlmagicrst`.
         """
         parser = self.get_parser(MagicSQL.SQL_parser, "SQL")
         args = self.get_args(line, parser)
 
         if args is not None:
             full = False
-            db = self.get_connection(args.variable)
-
             if cell is None or len(cell) == 0:
                 cell = args.query
                 if cell is None or len(cell) == 0:

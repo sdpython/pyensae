@@ -6,6 +6,7 @@ It will be used to implement magic functions
 """
 
 import re
+import sqlite3
 
 
 class InterfaceSQLException(BaseException):
@@ -99,12 +100,23 @@ class InterfaceSQL:
         @param      obj     a filename, a connection string, ...
 
         ``obj`` can be a:
-            * file -->  the class :class:`Database <pyensae.sql.database_main.Database>` will be used, we assume this file
-                        is sqlite database, the file does not have to exist, in that case, it will created
+
+        * file -->  the class :class:`Database <pyensae.sql.database_main.Database>` will be used, we assume this file
+                    is sqlite database, the file does not have to exist, in that case, it will created
+        * sqlite3.Connection --> the object will be wrapped into a :class:`Database <pyensae.sql.database_main.Database>`
+        * InterfaceSQL --> returns the object itself
+
+        .. versionchanged:: 1.1
+            Parameter *dbfile* can be of type `sqlite3.Connection <https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection>`_.
         """
         if isinstance(obj, str):
             from .sql_interface_database import InterfaceSQLDatabase
             return InterfaceSQLDatabase(obj)
+        elif isinstance(obj, sqlite3.Connection):
+            from .sql_interface_database import InterfaceSQLDatabase
+            return InterfaceSQLDatabase(obj)
+        elif isinstance(obj, InterfaceSQL):
+            return obj
         else:
             raise NotImplementedError(
                 "nothing is implemented for type: %s" % str(

@@ -10,6 +10,8 @@ import sys
 import os
 import unittest
 import random
+import sqlite3
+import pandas
 
 
 try:
@@ -113,6 +115,22 @@ class TestMagicCommand(unittest.TestCase):
         if "velib_vanves" in tables:
             raise Exception(tables)
         magic.SQL_close()
+
+    def test_command_magic_sqlite3(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        df = pandas.DataFrame([{"x": 0.5, "y": 0.4}])
+        con = sqlite3.connect(":memory:")
+        df.to_sql("xy", con)
+
+        # connect
+        magic = MagicSQL()
+        magic.add_context({"con": con})
+        res = magic.SQL(cell="SELECT * FROM xy", line="-v con")
+        self.assertEqual(res.shape, (1, 3))
 
 
 if __name__ == "__main__":
