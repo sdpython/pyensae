@@ -808,16 +808,18 @@ class DatabaseCore (DatabaseCore2):
             cur = self._connection.cursor()
             dat = time.clock()
             try:
-                # if 1 :
                 if not nolog:
-                    self.LOG("SQL ",
-                             "\n".join([repr(x) for x in request.split("\n")]))
+                    lines = request.split("\n")
+                    if len(lines) > 20:
+                        self.LOG("SQL ", "\n".join(
+                            [repr(x) for x in lines[:20]]))
+                    else:
+                        self.LOG("SQL ", "\n".join([repr(x) for x in lines]))
                 cur.execute(request)
                 dat2 = time.clock()
                 if dat2 - dat > 10:
                     self.LOG("SQL end")
             except Exception as e:
-                # else :
                 raise ExceptionSQL(
                     "unable to execute a SQL request (1)(file %s)" %
                     self.get_file(),
@@ -825,7 +827,7 @@ class DatabaseCore (DatabaseCore2):
                     request) from e
             return cur
 
-    def execute_view(self, request, add_column_name=False, nolog=False):
+    def execute_view(self, request, add_column_name=False, nolog=True):
         """open a cursor with a query and returns the result into a list
         @param      request             SQL request
         @param      add_column_name     add the column name before the first line
@@ -849,7 +851,7 @@ class DatabaseCore (DatabaseCore2):
             self.LOG("execute_view ", len(res), "results")
         return res
 
-    def execute_script(self, script, nolog=False):
+    def execute_script(self, script, nolog=True):
         """open a cursor and run a script
         @param      script              SQL script
         @param      nolog               if True, do not log anything
@@ -857,8 +859,13 @@ class DatabaseCore (DatabaseCore2):
         """
         self._check_connection()
         if not nolog:
-            self.LOG("SQL start + ",
-                     "\n".join([repr(x) for x in script.split("\n")]))
+            lines = script.split("\n")
+            if len(lines) > 20:
+                self.LOG("SQL start + ",
+                         "\n".join([repr(x) for x in lines[:20]]))
+            else:
+                self.LOG("SQL start + ",
+                         "\n".join([repr(x) for x in lines]))
         cur = self._connection.cursor()
         cur.executescript(script)
         cur.close()
@@ -1127,7 +1134,10 @@ class DatabaseCore (DatabaseCore2):
                 sql = sql.replace("'", "")
                 try:
                     if not nolog:
-                        self.LOG("SQLs", sql)
+                        if len(sql) > 1000:
+                            self.LOG("SQLs", sql[:1000])
+                        else:
+                            self.LOG("SQLs", sql)
                     self._connection.executemany(sql, insert_values)
                     return ""
                 except Exception as e:
@@ -1140,7 +1150,10 @@ class DatabaseCore (DatabaseCore2):
 
             try:
                 if not nolog:
-                    self.LOG("SQL", sql)
+                    if len(sql) > 1000:
+                        self.LOG("SQLs", sql[:1000])
+                    else:
+                        self.LOG("SQLs", sql)
                 if cursor is not None:
                     cursor.execute(sql)
                 else:

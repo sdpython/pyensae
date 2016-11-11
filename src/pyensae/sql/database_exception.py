@@ -37,5 +37,5 @@ class ExceptionSQL (DBException):
         mes += "\n" + str(self.ex)
         mes += "\n" + "\n".join(repr(self.sql).split("\\n"))
         if len(mes) > 10000:
-            mes = mes[10000:] + "\n..."
+            mes = mes[:10000] + "\n..."
         return mes
