@@ -58,6 +58,9 @@ class TestNotebookQGrid(unittest.TestCase):
         except traitlets.traitlets.TraitError:
             # qgrid needs a true notebook as the grid is editable
             pass
+        except AttributeError as e:
+            if "'NoneType' object has no attribute 'session'" not in str(e):
+                raise e
         try:
             res = mg.jsdf("df --editable=False")
             fLOG(res)
@@ -65,6 +68,9 @@ class TestNotebookQGrid(unittest.TestCase):
         except traitlets.traitlets.TraitError:
             # qgrid needs a true notebook as the grid is editable
             pass
+        except AttributeError as e:
+            if "'NoneType' object has no attribute 'session'" not in str(e):
+                raise e
 
 
 if __name__ == "__main__":
