@@ -151,7 +151,7 @@ def pandas_groupby_nan(df, by, axis=0, as_index=False, suffix=None, nanback=True
                         break
                 return res
             raise NotImplementedError(
-                "Not yet implemented. Replacing pseudo nan values by real nan values is not as easy as it looks.")
+                "Not yet implemented. Replacing pseudo nan values by real nan values is not as easy as it looks. Use nanback=False")
 
             # keys = list(res.grouper.groups.keys())
             # didit = False
