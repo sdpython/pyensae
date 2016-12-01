@@ -41,7 +41,7 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import is_travis_or_appveyor
+from pyquickhelper.pycode import is_travis_or_appveyor, get_temp_folder
 from src.pyensae.datasource.data_velib import DataVelibCollect
 
 
@@ -84,11 +84,7 @@ class TestDataVelib (unittest.TestCase):
             OutputPrint=__name__ == "__main__",
             LogFile="temp_hal_log2.txt")
 
-        fold = os.path.abspath(os.path.split(__file__)[0])
-        tempfold = os.path.join(fold, "temp_data_i")
-        if not os.path.exists(tempfold):
-            os.mkdir(tempfold)
-
+        tempfold = get_temp_folder(__file__, "temp_data_i")
         temp_file = os.path.join(tempfold, "data_velib.txt")
         if os.path.exists(temp_file):
             os.remove(temp_file)
@@ -124,14 +120,7 @@ class TestDataVelib (unittest.TestCase):
             OutputPrint=__name__ == "__main__",
             LogFile="temp_hal_log2.txt")
 
-        fold = os.path.abspath(os.path.split(__file__)[0])
-        tempfold = os.path.join(fold, "temp_data_i2")
-        if not os.path.exists(tempfold):
-            os.mkdir(tempfold)
-
-        for _ in os.listdir(tempfold):
-            os.remove(os.path.join(tempfold, _))
-
+        tempfold = get_temp_folder(__file__, "temp_data_i2")
         temp_file = os.path.join(tempfold, "data_velib.txt")
 
         delay = datetime.datetime.fromtimestamp(
@@ -143,15 +132,11 @@ class TestDataVelib (unittest.TestCase):
             return
 
         velib = DataVelibCollect(key)
-        velib.collecting_data(
-            "Paris",
-            1000,
-            temp_file,
-            stop_datetime=dt,
-            log_every=1,
-            fLOG=fLOG)
+        velib.collecting_data("Paris", 1000, temp_file, stop_datetime=dt,
+                              log_every=1, fLOG=fLOG)
 
-        assert os.path.exists(temp_file)
+        if not os.path.exists(temp_file):
+            raise FileNotFoundError(temp_file)
         with open(temp_file, "r", encoding="utf8") as f:
             lines = f.readlines()
         if len(lines) < 1:
@@ -175,14 +160,7 @@ class TestDataVelib (unittest.TestCase):
             OutputPrint=__name__ == "__main__",
             LogFile="temp_hal_log2.txt")
 
-        fold = os.path.abspath(os.path.split(__file__)[0])
-        tempfold = os.path.join(fold, "temp_data_func")
-        if not os.path.exists(tempfold):
-            os.mkdir(tempfold)
-
-        for _ in os.listdir(tempfold):
-            os.remove(os.path.join(tempfold, _))
-
+        tempfold = get_temp_folder(__file__, "temp_data_func")
         temp_file = os.path.join(tempfold, "data_velib.txt")
 
         delay = datetime.datetime.fromtimestamp(
@@ -193,16 +171,12 @@ class TestDataVelib (unittest.TestCase):
         if key is None:
             return
 
-        DataVelibCollect.run_collection(key,
-                                        contract="Paris",
-                                        delayms=1000,
-                                        folder_file=temp_file,
-                                        single_file=True,
-                                        stop_datetime=dt,
-                                        log_every=1,
-                                        fLOG=fLOG)
+        DataVelibCollect.run_collection(key, contract="Paris", delayms=1000,
+                                        folder_file=temp_file, single_file=True,
+                                        stop_datetime=dt, log_every=1, fLOG=fLOG)
 
-        assert os.path.exists(temp_file)
+        if not os.path.exists(temp_file):
+            raise FileNotFoundError(temp_file)
         with open(temp_file, "r", encoding="utf8") as f:
             lines = f.readlines()
         if len(lines) < 1:
@@ -219,14 +193,7 @@ class TestDataVelib (unittest.TestCase):
             OutputPrint=__name__ == "__main__",
             LogFile="temp_hal_log2.txt")
 
-        fold = os.path.abspath(os.path.split(__file__)[0])
-        tempfold = os.path.join(fold, "temp_data_func_bes")
-        if not os.path.exists(tempfold):
-            os.mkdir(tempfold)
-
-        for _ in os.listdir(tempfold):
-            os.remove(os.path.join(tempfold, _))
-
+        tempfold = get_temp_folder(__file__, "temp_data_func_bes")
         temp_file = os.path.join(tempfold, "data_velib.txt")
 
         delay = datetime.datetime.fromtimestamp(
@@ -237,16 +204,12 @@ class TestDataVelib (unittest.TestCase):
         if key is None:
             return
 
-        DataVelibCollect.run_collection(key,
-                                        contract="Besancon",
-                                        delayms=1000,
-                                        folder_file=temp_file,
-                                        single_file=True,
-                                        stop_datetime=dt,
-                                        log_every=1,
-                                        fLOG=fLOG)
+        DataVelibCollect.run_collection(key, contract="Besancon", delayms=1000,
+                                        folder_file=temp_file, single_file=True,
+                                        stop_datetime=dt, log_every=1, fLOG=fLOG)
 
-        assert os.path.exists(temp_file)
+        if not os.path.exists(temp_file):
+            raise FileNotFoundError(temp_file)
         with open(temp_file, "r", encoding="utf8") as f:
             lines = f.readlines()
         if len(lines) < 1:
