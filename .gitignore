@@ -227,9 +227,12 @@ out_*
 version.txt
 */sphinxdoc/source/pyensae/*
 */sphinxdoc/source/all*.rst
-*/sphinxdoc/source/notebooks/*
+_doc/sphinxdoc/source/notebooks/*
+*/sphinxdoc/source/gynotebooks/*
+_doc/sphinxdoc/source/gyexamples/*
 _doc/sphinxdoc/source/examples/*
 _doc/sphinxdoc/source/gallery/*
+_doc/sphinxdoc/source/gallerynb/*
 */sphinxdoc/source/coverage/*
 */sphinxdoc/source/phdoc_static/reveal.js
 _doc/notebooks/cache/*
