@@ -62,27 +62,6 @@ The module also implements magic commands to access an Hadoop cluster
 (Azure, Cloudera), to run SQL queries on `SQLite <https://sqlite.org/>`_,
 parsing financial data from `Yahoo Finance <https://fr.finance.yahoo.com/>`_.
 
-
-
-Quick start
------------
-
-.. toctree::
-    :maxdepth: 1
-    
-    i_ex
-    i_nb
-    i_faq        
-    
-Galleries
----------
-
-.. toctree::
-    :maxdepth: 2
-    
-    gyexamples/index
-    gynotebooks/index         
-    
 Functionalities
 ---------------
 
@@ -94,6 +73,20 @@ Functionalities
 * magic commands to access Azure Blob Storage and HDInsight (see :class:`MagicAzure <pyensae.remote.magic_azure.MagicAzure>`)
 * magic commands to display content of a folder in DataFrame (see :class:`MagicFile <pyensae.file_helper.magic_file.MagicFile>`)
 * magic commands to display an autamated menu in a notebook (see :class:`MagicFile <pyensae.notebook_helper.magic_notebook.MagicNotebook>`)
+
+    
+Galleries and examples
+----------------------
+
+.. toctree::
+    :maxdepth: 2
+    
+    i_ex
+    i_nb
+    i_faq        
+    gyexamples/index
+    all_notebooks       
+    
 
 Dependencies
 ------------
