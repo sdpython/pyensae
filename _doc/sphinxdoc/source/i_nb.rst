@@ -20,7 +20,6 @@ Azure
     :contents:
     :tag: Azure
 
-
 Hadoop
 ------
 
@@ -28,11 +27,9 @@ Hadoop
     :contents:
     :tag: Hadoop
 
-
 SQL
 ---
 
 .. nbreflist::
     :contents:
     :tag: SQL
-

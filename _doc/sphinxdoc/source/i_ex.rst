@@ -6,13 +6,12 @@ Examples
 
 .. contents::
     :local:
-    
+
 Python
 ------
 
 .. exreflist::
     :contents:
-
 
 Azure
 -----
@@ -21,7 +20,6 @@ Azure
     :contents:
     :tag: Azure
 
-
 Hadoop
 ------
 
@@ -29,11 +27,9 @@ Hadoop
     :contents:
     :tag: Hadoop
 
-
 SQL
 ---
 
 .. exreflist::
     :contents:
     :tag: SQL
-

@@ -1,5 +1,4 @@
 
-
 .. blogpost::
     :title: What to do when read_csv fails?
     :keywords: pandas, read_csv, text file
@@ -12,16 +11,16 @@
     character. So I revisited some old code I wrote long time
     ago about guessing the schema of a text file:
     :func:`TextFileColumns <pyensae.sql.file_text_binary_columns.TextFileColumns>`::
-    
+
         f = TextFileColumns(filename)
         f.open()
         for row in f:
             print(row)
-        f.close()    
-        
+        f.close()
+
     Each row is given as a dictionary::
-    
+
         {'Adj_Close': 5.95, 'High': 6.04, 'Open': 5.99, 'Low': 5.92, 'Volume': 5426200, 'Close': 5.95, 'Date': '2012-12-14'}
-        
+
     The function guess the column types based on the first rows. It also
     guesses the column separator.

@@ -1,5 +1,4 @@
 
-
 .. blogpost::
     :title: New page about magic commands
     :keywords: magic commands, magic, notebooks, jupyter

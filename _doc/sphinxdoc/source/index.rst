@@ -4,37 +4,37 @@ pyensae documentation
 .. image:: https://travis-ci.org/sdpython/pyensae.svg?branch=master
     :target: https://travis-ci.org/sdpython/pyensae
     :alt: Build status
-    
+
 .. image:: https://ci.appveyor.com/api/projects/status/hw3ixda4622h34qb?svg=true
     :target: https://ci.appveyor.com/project/sdpython/pyensae
     :alt: Build Status Windows
-    
+
 .. image:: https://badge.fury.io/py/pyensae.svg
     :target: http://badge.fury.io/py/pyensae
-    
+
 .. image:: http://img.shields.io/github/issues/sdpython/pyensae.png
     :alt: GitHub Issues
     :target: https://github.com/sdpython/pyensae/issues
-    
+
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
     :alt: MIT License
-    :target: http://opensource.org/licenses/MIT   
+    :target: http://opensource.org/licenses/MIT
 
 .. image:: https://landscape.io/github/sdpython/pyensae/master/landscape.svg?style=flat
    :target: https://landscape.io/github/sdpython/pyensae/master
-   :alt: Code Health         
-   
+   :alt: Code Health
+
 .. image:: https://requires.io/github/sdpython/pyensae/requirements.svg?branch=master
      :target: https://requires.io/github/sdpython/pyensae/requirements/?branch=master
-     :alt: Requirements Status   
+     :alt: Requirements Status
 
 .. image:: https://codecov.io/github/sdpython/pyensae/coverage.svg?branch=master
     :target: https://codecov.io/github/sdpython/pyensae?branch=master
 
 .. image:: https://badge.waffle.io/sdpython/pyensae.png?label=ready&title=Ready
     :alt: Waffle
-    :target: https://waffle.io/sdpython/pyensae    
-   
+    :target: https://waffle.io/sdpython/pyensae
+
 **Links:** `pypi <https://pypi.python.org/pypi/pyensae/>`_,
 `github <https://github.com/sdpython/pyensae/>`_,
 `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_,
@@ -44,10 +44,10 @@ pyensae documentation
 :ref:`blog <ap-main-0>`,
 :ref:`l-issues-todolist`
 
-What is it?      
+What is it?
 -----------
 
-This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_ 
+This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_
 for teaching purposes but not only.
 It requires `github/pyquickhelper <https://github.com/sdpython/pyquickhelper/>`_.
 
@@ -56,7 +56,7 @@ Data used for teachings at the
 are available through function::
 
     download_data("td8_velib.zip", website = "xd")
-    
+
 The data comes from `xavierdupre.fr <http://www.xavierdupre.fr/>`_.
 The module also implements magic commands to access an Hadoop cluster
 (Azure, Cloudera), to run SQL queries on `SQLite <https://sqlite.org/>`_,
@@ -74,19 +74,17 @@ Functionalities
 * magic commands to display content of a folder in DataFrame (see :class:`MagicFile <pyensae.file_helper.magic_file.MagicFile>`)
 * magic commands to display an autamated menu in a notebook (see :class:`MagicFile <pyensae.notebook_helper.magic_notebook.MagicNotebook>`)
 
-    
 Galleries and examples
 ----------------------
 
 .. toctree::
     :maxdepth: 2
-    
+
     i_ex
     i_nb
-    i_faq        
+    i_faq
     gyexamples/index
-    all_notebooks       
-    
+    all_notebooks
 
 Dependencies
 ------------
@@ -98,7 +96,7 @@ Dependencies
 For the class :class:`StockPrices <pyensae.finance.astock.StockPrices>`:
     * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
     * `six <https://pypi.python.org/pypi/six>`_
-    
+
 The :class:`ASSHClient <pyensae.remote.ssh_remote_connection.ASSClient>` requires:
     * `paramiko <http://www.paramiko.org/>`_
     * `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_
@@ -111,27 +109,24 @@ The function :func:`register_magics_ssh <pyensae.remote.magic_remote_ssh.registe
 to send commands to a remote commands through a SSH connection:
     * ``%remote_open``, ``%remote_close``
     * ``%remote_cmd``, ``%remote_up``, ``%remote_down``
-    
+
 The magic commands will be automatically enabled if the module is imported from a notebook.
 It also proposes others magic commands such as ``%head``, ``%tail``, ``%textdiff``,
 ``%hhelp``, ``%runpy``, ``%lsr``, ``%compress``. Type ``<magic_command> -h``
 to get their usage.
-
 
 Installation
 ------------
 
 ``pip install pyquickhelper`` or to avoid installing the dependencies ``pip install pyquickhelper --no-deps``.
 
-
 Navigation
 ----------
 
 .. toctree::
     :maxdepth: 1
-    
+
     indexmenu
-    
 
 +----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
 | :ref:`l-modules`     |  :ref:`l-functions` | :ref:`l-classes`    | :ref:`l-methods`   | :ref:`l-staticmethods` | :ref:`l-properties`                            |
@@ -140,4 +135,3 @@ Navigation
 +----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
 | :ref:`genindex`      |  :ref:`l-FAQ2`      | :ref:`l-notebooks`  | :ref:`l-NB2`       | :ref:`l-statcode`      | `Unit Test Coverage <coverage/index.html>`_    |
 +----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
-    

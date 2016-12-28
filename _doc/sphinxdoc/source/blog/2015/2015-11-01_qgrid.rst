@@ -1,16 +1,15 @@
 
-
 .. blogpost::
     :title: qgrid in a magic command
     :keywords: qgrid, javascript, dataframe
     :date: 2015-11-01
     :categories: dataframe, notebook
-    
+
     Module `qgrid <https://github.com/quantopian/qgrid>`_ proposes a nice view of a dataframe
     inside a notebook: :ref:`usingqgridwithjsdfrst`. The javascript
     object allow sorting and scrolling in a much nicer way than
     the regular output of a dataframe in a notebook.
-    
+
     The javascript can be used remotely or locally. In the first case,
     the javascript must be taken care of while converting
     the notebook into a HTML page.

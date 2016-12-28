@@ -1,5 +1,4 @@
 
-
 .. _l-README:
 
 README
@@ -8,52 +7,50 @@ README
 .. image:: https://travis-ci.org/sdpython/pyensae.svg?branch=master
     :target: https://travis-ci.org/sdpython/pyensae
     :alt: Build status
-   
+
 .. image:: https://ci.appveyor.com/api/projects/status/hw3ixda4622h34qb?svg=true
     :target: https://ci.appveyor.com/project/sdpython/pyensae
     :alt: Build Status Windows
-    
+
 .. image:: https://badge.fury.io/py/pyensae.svg
     :target: http://badge.fury.io/py/pyensae
-      
+
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
     :alt: MIT License
     :target: http://opensource.org/licenses/MIT
-   
+
 .. image:: https://landscape.io/github/sdpython/pyensae/master/landscape.svg?style=flat
    :target: https://landscape.io/github/sdpython/pyensae/master
    :alt: Code Health
 
 .. image:: https://requires.io/github/sdpython/pyensae/requirements.svg?branch=master
      :target: https://requires.io/github/sdpython/pyensae/requirements/?branch=master
-     :alt: Requirements Status   
-    
+     :alt: Requirements Status
+
 .. image:: https://codecov.io/github/sdpython/pyensae/coverage.svg?branch=master
     :target: https://codecov.io/github/sdpython/pyensae?branch=master
 
 .. image:: http://img.shields.io/github/issues/sdpython/pyensae.png
     :alt: GitHub Issues
     :target: https://github.com/sdpython/pyensae/issues
-    
+
 .. image:: https://badge.waffle.io/sdpython/pyensae.png?label=ready&title=Ready
     :alt: Waffle
-    :target: https://waffle.io/sdpython/pyensae    
-   
+    :target: https://waffle.io/sdpython/pyensae
+
 **Links:**
 
 * `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
 * `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_
 * `Blog <http://www.xavierdupre.fr/app/pyensae/helpsphinx/blog/main_0000.html#ap-main-0>`_
 
-
-Description        
+Description
 -----------
 
 This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_
 for teachings available at
 `ENSAE - Programmation - Xavier Dupré <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html>`_.
 
-    
 Functionalities
 ---------------
 
@@ -76,7 +73,7 @@ Class *StockPrices* requires:
 
 * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
 * `six <https://pypi.python.org/pypi/six>`_
-    
+
 Class *ASSHClient* requires:
 
 * `paramiko <http://www.paramiko.org/>`_
@@ -92,9 +89,8 @@ to send commands to a remote commands through a SSH connection:
 
 * ``%remote_open``, ``%remote_close``
 * ``%remote_cmd``, ``%remote_up``, ``%remote_down``
-    
+
 The magic commands will be automatically enabled if the module is imported from a notebook.
-    
 
 Contributions
 -------------

@@ -1,20 +1,19 @@
 
-
 .. blogpost::
     :title: Tail of a text file encoded in utf-8
     :keywords: text file, encoding, utf-8
     :date: 2015-08-27
     :categories: bug, encoding
-    
-    Funny thing I went through when I wanted to get the tail of 
+
+    Funny thing I went through when I wanted to get the tail of
     a text file::
-    
+
         with open(filename, "r", encoding="utf8") as f:
             rows = f.readlines()
         tail = rows[-10:] if len(rows) > 10 else rows
-    
+
     When the file is too big, it is really tempting to do::
-    
+
         with open(filename, "r", encoding="utf8") as f:
             f.seek(size - threshold)  # added line
             rows = f.readlines()

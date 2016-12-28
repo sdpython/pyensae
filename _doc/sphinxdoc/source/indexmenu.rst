@@ -17,5 +17,3 @@ through documentation
     README
     all_indexes
     all_report
-
-    
