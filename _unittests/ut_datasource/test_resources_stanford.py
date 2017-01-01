@@ -59,7 +59,7 @@ class TestResourcesStanford (unittest.TestCase):
                 os.remove(os.path.join(fold, f))
         files = download_data(
             "facebook.tar.gz",
-            website="http://snap.stanford.edu/data/",
+            website="xd",
             fLOG=fLOG,
             whereTo=fold)
         fLOG(files)
@@ -83,7 +83,7 @@ class TestResourcesStanford (unittest.TestCase):
                 os.remove(os.path.join(fold, f))
         files = download_data(
             "facebook_combined.txt.gz",
-            website="http://snap.stanford.edu/data/",
+            website="xd",
             fLOG=fLOG,
             whereTo=fold)
         fLOG(files)
