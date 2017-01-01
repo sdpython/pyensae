@@ -74,6 +74,7 @@ def is_local():
        "upload_docs" in sys.argv or \
        "setup_hook" in sys.argv or \
        "copy_sphinx" in sys.argv or \
+       "update_grammars" in sys.argv or \
        "write_version" in sys.argv:
         try:
             import_pyquickhelper()
@@ -180,6 +181,21 @@ if is_local():
         coverage_options=dict(
             omit=["*Parser.py", "*Listener.py", "*Lexer.py"]),
         fLOG=logging_function, covtoken=("f929c9b3-bf00-4928-906a-b1dc54d5a5d9", "'_UT_35_std' in outfile"))
+    if not r and "update_grammars" in sys.argv:
+        # expecting python setup.py update_grammars file
+        ind = sys.argv.index("update_grammars")
+        if len(sys.argv) <= ind:
+            raise Exception(
+                "expecting a grammar file: python setup.py update_grammars R.g4")
+        grammar = sys.argv[ind + 1]
+        if not os.path.exists(grammar):
+            g2 = os.path.join("src", "pyensae", "languages", grammar)
+            if not os.path.exists(g2):
+                raise FileNotFoundError(grammar)
+            grammar = g2
+        from pyensae.languages import build_grammar
+        build_grammar(grammar)
+        r = True
     if not r and not ({"bdist_msi", "sdist",
                        "bdist_wheel", "publish", "publish_doc", "register",
                        "upload_docs", "bdist_wininst"} & set(sys.argv)):

@@ -561,12 +561,12 @@ power
 ///        '{' [dictorsetmaker] '}' |
 ///        NAME | NUMBER | STRING+ | '...' | 'None' | 'True' | 'False')
 atom
- : '(' ( yield_expr | testlist_comp )? ')' 
- | '[' testlist_comp? ']'  
- | '{' dictorsetmaker? '}' 
+ : ( '(' ( yield_expr | testlist_comp )? ')' )
+ | ( '[' testlist_comp? ']' )
+ | ( '{' dictorsetmaker? '}' )
  | NAME 
  | number 
- | string+ 
+ | ( str_+ )
  | '...' 
  | NONE
  | TRUE
@@ -674,7 +674,7 @@ yield_arg
  | testlist
  ;
 
-string
+str_
  : STRING_LITERAL
  | BYTES_LITERAL
  ;
@@ -867,7 +867,7 @@ RIGHT_SHIFT_ASSIGN : '>>=';
 POWER_ASSIGN : '**=';
 IDIV_ASSIGN : '//=';
 
-SKIP
+SKIP_
  : ( SPACES | COMMENT | LINE_JOINING ) -> skip
  ;
 

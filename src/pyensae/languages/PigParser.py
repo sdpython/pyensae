@@ -1,13 +1,7 @@
-# Generated from java-escape by ANTLR 4.5
+# Generated from src\pyensae\languages\Pig.g4 by ANTLR 4.6
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-package = globals().get("__package__", None)
-ischild = len(package) > 0 if package is not None else False
-if ischild:
-    from .PigListener import PigListener
-else:
-    from PigListener import PigListener
 
 
 def serializedATN():
@@ -256,7 +250,7 @@ def serializedATN():
 
 class PigParser (Parser):
 
-    grammarFileName = "java-escape"
+    grammarFileName = "Pig.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -264,47 +258,44 @@ class PigParser (Parser):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [u"<INVALID>", u"'define'", u"'load'", u"'filter'",
-                    u"'foreach'", u"'order'", u"'arrange'", u"'distinct'",
-                    u"'cogroup'", u"'join'", u"'cross'", u"'union'", u"'split'",
-                    u"'into'", u"'if'", u"'all'", u"'any'", u"'as'", u"'by'",
-                    u"'using'", u"'inner'", u"'outer'", u"'ONSCHEMA'",
-                    u"'*'", u"'parallel'", u"'partition'", u"'group'",
-                    u"'and'", u"'or'", u"'not'", u"'generate'", u"'flatten'",
-                    u"'eval'", u"'asc'", u"'desc'", u"'int'", u"'long'",
-                    u"'float'", u"'double'", u"'chararray'", u"'bytearray'",
-                    u"'bag'", u"'tuple'", u"'map'", u"'is'", u"'null'",
-                    u"'stream'", u"'through'", u"'store'", u"'mapreduce'",
-                    u"'ship'", u"'cache'", u"'input'", u"'output'", u"'stderr'",
-                    u"'stdin'", u"'stdout'", u"'limit'", u"'sample'", u"'left'",
-                    u"'right'", u"'full'", u"<INVALID>", u"<INVALID>",
-                    u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                    u"<INVALID>", u"'$'", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                    u"<INVALID>", u"':'", u"';'", u"'('", u"')'", u"'{'",
-                    u"'}'", u"'['", u"']'", u"'#'", u"'='", u"','", u"'.'",
-                    u"'/'", u"'%'", u"'+'", u"'-'", u"'?'"]
+    literalNames = ["<INVALID>", "'define'", "'load'", "'filter'", "'foreach'",
+                    "'order'", "'arrange'", "'distinct'", "'cogroup'",
+                    "'join'", "'cross'", "'union'", "'split'", "'into'",
+                    "'if'", "'all'", "'any'", "'as'", "'by'", "'using'",
+                    "'inner'", "'outer'", "'ONSCHEMA'", "'*'", "'parallel'",
+                    "'partition'", "'group'", "'and'", "'or'", "'not'",
+                    "'generate'", "'flatten'", "'eval'", "'asc'", "'desc'",
+                    "'int'", "'long'", "'float'", "'double'", "'chararray'",
+                    "'bytearray'", "'bag'", "'tuple'", "'map'", "'is'",
+                    "'null'", "'stream'", "'through'", "'store'", "'mapreduce'",
+                    "'ship'", "'cache'", "'input'", "'output'", "'stderr'",
+                    "'stdin'", "'stdout'", "'limit'", "'sample'", "'left'",
+                    "'right'", "'full'", "<INVALID>", "<INVALID>", "<INVALID>",
+                    "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                    "'$'", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                    "':'", "';'", "'('", "')'", "'{'", "'}'", "'['", "']'",
+                    "'#'", "'='", "','", "'.'", "'/'", "'%'", "'+'", "'-'",
+                    "'?'"]
 
-    symbolicNames = [u"<INVALID>", u"DEFINE", u"LOAD", u"FILTER", u"FOREACH",
-                     u"ORDER", u"ARRANGE", u"DISTINCT", u"COGROUP", u"JOIN",
-                     u"CROSS", u"UNION", u"SPLIT", u"INTO", u"IF", u"ALL",
-                     u"ANY", u"AS", u"BY", u"USING", u"INNER", u"OUTER",
-                     u"ONSCHEMA", u"STAR", u"PARALLEL", u"PARTITION", u"GROUP",
-                     u"AND", u"OR", u"NOT", u"GENERATE", u"FLATTEN", u"EVAL",
-                     u"ASC", u"DESC", u"INT", u"LONG", u"FLOAT", u"DOUBLE",
-                     u"CHARARRAY", u"BYTEARRAY", u"BAG", u"TUPLE", u"MAP",
-                     u"IS", u"NULL", u"STREAM", u"THROUGH", u"STORE", u"MAPREDUCE",
-                     u"SHIP", u"CACHE", u"INPUT", u"OUTPUT", u"ERROR",
-                     u"STDIN", u"STDOUT", u"LIMIT", u"SAMPLE", u"LEFT",
-                     u"RIGHT", u"FULL", u"IDENTIFIER", u"INTEGER", u"LONGINTEGER",
-                     u"DOUBLENUMBER", u"FLOATNUMBER", u"QUOTEDSTRING",
-                     u"EXECCOMMAND", u"DOLLAR", u"WS", u"SL_COMMENT", u"ML_COMMENT",
-                     u"FILTEROP", u"COLON", u"SEMI_COLON", u"LEFT_PAREN",
-                     u"RIGHT_PAREN", u"LEFT_CURLYP", u"RIGHT_CURLYP", u"LEFT_BRACKET",
-                     u"RIGHT_BRACKET", u"POUND", u"EQUAL", u"COMMA", u"PERIOD",
-                     u"DIV", u"PERCENT", u"PLUS", u"MINUS", u"QMARK", u"FUNC",
-                     u"START", u"CAST_EXPR", u"BIN_EXPR", u"LONGINEGER",
-                     u"MAP_VAL", u"KEY_VAL_PAIR", u"LEFT_CURLY", u"RIGHT_CURLY",
-                     u"BAG_VAL"]
+    symbolicNames = ["<INVALID>", "DEFINE", "LOAD", "FILTER", "FOREACH",
+                     "ORDER", "ARRANGE", "DISTINCT", "COGROUP", "JOIN",
+                     "CROSS", "UNION", "SPLIT", "INTO", "IF", "ALL", "ANY",
+                     "AS", "BY", "USING", "INNER", "OUTER", "ONSCHEMA",
+                     "STAR", "PARALLEL", "PARTITION", "GROUP", "AND", "OR",
+                     "NOT", "GENERATE", "FLATTEN", "EVAL", "ASC", "DESC",
+                     "INT", "LONG", "FLOAT", "DOUBLE", "CHARARRAY", "BYTEARRAY",
+                     "BAG", "TUPLE", "MAP", "IS", "NULL", "STREAM", "THROUGH",
+                     "STORE", "MAPREDUCE", "SHIP", "CACHE", "INPUT", "OUTPUT",
+                     "ERROR", "STDIN", "STDOUT", "LIMIT", "SAMPLE", "LEFT",
+                     "RIGHT", "FULL", "IDENTIFIER", "INTEGER", "LONGINTEGER",
+                     "DOUBLENUMBER", "FLOATNUMBER", "QUOTEDSTRING", "EXECCOMMAND",
+                     "DOLLAR", "WS", "SL_COMMENT", "ML_COMMENT", "FILTEROP",
+                     "COLON", "SEMI_COLON", "LEFT_PAREN", "RIGHT_PAREN",
+                     "LEFT_CURLYP", "RIGHT_CURLYP", "LEFT_BRACKET", "RIGHT_BRACKET",
+                     "POUND", "EQUAL", "COMMA", "PERIOD", "DIV", "PERCENT",
+                     "PLUS", "MINUS", "QMARK", "FUNC", "START", "CAST_EXPR",
+                     "BIN_EXPR", "LONGINEGER", "MAP_VAL", "KEY_VAL_PAIR",
+                     "LEFT_CURLY", "RIGHT_CURLY", "BAG_VAL"]
 
     RULE_parse = 0
     RULE_query = 1
@@ -316,7 +307,7 @@ class PigParser (Parser):
     RULE_as_clause = 7
     RULE_tuple_def = 8
     RULE_field = 9
-    RULE_type = 10
+    RULE_type_ = 10
     RULE_simple_type = 11
     RULE_tuple_type = 12
     RULE_bag_type = 13
@@ -351,15 +342,15 @@ class PigParser (Parser):
     RULE_infix_expr = 42
     RULE_const_expr = 43
     RULE_scalar = 44
-    RULE_map = 45
+    RULE_map_ = 45
     RULE_keyvalue = 46
     RULE_string_val = 47
     RULE_bag = 48
-    RULE_tuple = 49
+    RULE_tuple_ = 49
 
     ruleNames = ["parse", "query", "statement", "alias", "op_clause",
                  "load_clause", "filename", "as_clause", "tuple_def",
-                 "field", "type", "simple_type", "tuple_type", "bag_type",
+                 "field", "type_", "simple_type", "tuple_type", "bag_type",
                  "map_type", "func_clause", "func_name", "func_args",
                  "store_clause", "filter_clause", "cond", "or_cond", "and_cond",
                  "unary_cond", "not_cond", "null_check_cond", "expr",
@@ -367,8 +358,8 @@ class PigParser (Parser):
                  "eval_expr", "var_expr", "projectable_expr", "dot_proj",
                  "pound_proj", "bin_expr", "neg_expr", "distinct_clause",
                  "col_ref", "alias_col_ref", "dollar_col_ref", "infix_expr",
-                 "const_expr", "scalar", "map", "keyvalue", "string_val",
-                 "bag", "tuple"]
+                 "const_expr", "scalar", "map_", "keyvalue", "string_val",
+                 "bag", "tuple_"]
 
     EOF = Token.EOF
     DEFINE = 1
@@ -474,7 +465,7 @@ class PigParser (Parser):
 
     def __init__(self, input: TokenStream):
         super().__init__(input)
-        self.checkVersion("4.5")
+        self.checkVersion("4.6")
         self._interp = ParserATNSimulator(
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
@@ -495,11 +486,11 @@ class PigParser (Parser):
             return PigParser.RULE_parse
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterParse"):
                 listener.enterParse(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitParse"):
                 listener.exitParse(self)
 
     def parse(self):
@@ -542,11 +533,11 @@ class PigParser (Parser):
             return PigParser.RULE_query
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterQuery"):
                 listener.enterQuery(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitQuery"):
                 listener.exitQuery(self)
 
     def query(self, _p: int=0):
@@ -559,6 +550,7 @@ class PigParser (Parser):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 112
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 1, self._ctx)
             if la_ == 1:
                 self.state = 107
@@ -642,11 +634,11 @@ class PigParser (Parser):
             return PigParser.RULE_statement
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterStatement"):
                 listener.enterStatement(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitStatement"):
                 listener.exitStatement(self)
 
     def statement(self):
@@ -656,10 +648,12 @@ class PigParser (Parser):
         self._la = 0  # Token type
         try:
             self.state = 136
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.LOAD, PigParser.FILTER, PigParser.DISTINCT, PigParser.STORE, PigParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 124
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == PigParser.IDENTIFIER:
                     self.state = 121
@@ -671,7 +665,7 @@ class PigParser (Parser):
                 self.op_clause()
                 self.state = 127
                 self.match(PigParser.SEMI_COLON)
-
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 129
@@ -680,6 +674,7 @@ class PigParser (Parser):
                 self.state = 130
                 self.statement()
                 self.state = 132
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == PigParser.IDENTIFIER:
                     self.state = 131
@@ -687,7 +682,7 @@ class PigParser (Parser):
 
                 self.state = 134
                 self.op_clause()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -712,11 +707,11 @@ class PigParser (Parser):
             return PigParser.RULE_alias
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterAlias"):
                 listener.enterAlias(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitAlias"):
                 listener.exitAlias(self)
 
     def alias(self):
@@ -757,11 +752,11 @@ class PigParser (Parser):
             return PigParser.RULE_op_clause
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterOp_clause"):
                 listener.enterOp_clause(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitOp_clause"):
                 listener.exitOp_clause(self)
 
     def op_clause(self):
@@ -770,27 +765,28 @@ class PigParser (Parser):
         self.enterRule(localctx, 8, self.RULE_op_clause)
         try:
             self.state = 144
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.LOAD]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 140
                 self.load_clause()
-
+                pass
             elif token in [PigParser.STORE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 141
                 self.store_clause()
-
+                pass
             elif token in [PigParser.FILTER]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 142
                 self.filter_clause()
-
+                pass
             elif token in [PigParser.DISTINCT]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 143
                 self.distinct_clause()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -827,11 +823,11 @@ class PigParser (Parser):
             return PigParser.RULE_load_clause
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterLoad_clause"):
                 listener.enterLoad_clause(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitLoad_clause"):
                 listener.exitLoad_clause(self)
 
     def load_clause(self):
@@ -845,6 +841,7 @@ class PigParser (Parser):
             self.state = 147
             self.filename()
             self.state = 150
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 7, self._ctx)
             if la_ == 1:
                 self.state = 148
@@ -853,6 +850,7 @@ class PigParser (Parser):
                 self.func_clause()
 
             self.state = 153
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 8, self._ctx)
             if la_ == 1:
                 self.state = 152
@@ -879,11 +877,11 @@ class PigParser (Parser):
             return PigParser.RULE_filename
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterFilename"):
                 listener.enterFilename(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitFilename"):
                 listener.exitFilename(self)
 
     def filename(self):
@@ -918,11 +916,11 @@ class PigParser (Parser):
             return PigParser.RULE_as_clause
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterAs_clause"):
                 listener.enterAs_clause(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitAs_clause"):
                 listener.exitAs_clause(self)
 
     def as_clause(self):
@@ -977,11 +975,11 @@ class PigParser (Parser):
             return PigParser.RULE_tuple_def
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterTuple_def"):
                 listener.enterTuple_def(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitTuple_def"):
                 listener.exitTuple_def(self)
 
     def tuple_def(self):
@@ -991,6 +989,7 @@ class PigParser (Parser):
         self._la = 0  # Token type
         try:
             self.state = 178
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.LEFT_PAREN]:
                 self.enterOuterAlt(localctx, 1)
@@ -1012,7 +1011,7 @@ class PigParser (Parser):
 
                 self.state = 169
                 self.match(PigParser.RIGHT_PAREN)
-
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 171
@@ -1035,6 +1034,7 @@ class PigParser (Parser):
                     _alt = self._interp.adaptivePredict(
                         self._input, 10, self._ctx)
 
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1058,8 +1058,8 @@ class PigParser (Parser):
         def COLON(self):
             return self.getToken(PigParser.COLON, 0)
 
-        def type(self):
-            return self.getTypedRuleContext(PigParser.TypeContext, 0)
+        def type_(self):
+            return self.getTypedRuleContext(PigParser.Type_Context, 0)
 
         def NOT(self):
             return self.getToken(PigParser.NOT, 0)
@@ -1071,11 +1071,11 @@ class PigParser (Parser):
             return PigParser.RULE_field
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterField"):
                 listener.enterField(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitField"):
                 listener.exitField(self)
 
     def field(self):
@@ -1084,19 +1084,22 @@ class PigParser (Parser):
         self.enterRule(localctx, 18, self.RULE_field)
         try:
             self.state = 191
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 180
                 self.match(PigParser.IDENTIFIER)
                 self.state = 183
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input, 12, self._ctx)
                 if la_ == 1:
                     self.state = 181
                     self.match(PigParser.COLON)
                     self.state = 182
-                    self.type()
+                    self.type_()
 
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 185
@@ -1107,11 +1110,13 @@ class PigParser (Parser):
                 self.state = 187
                 self.match(PigParser.IDENTIFIER)
                 self.state = 189
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input, 13, self._ctx)
                 if la_ == 1:
                     self.state = 188
-                    self.type()
+                    self.type_()
 
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1123,7 +1128,7 @@ class PigParser (Parser):
             self.exitRule()
         return localctx
 
-    class TypeContext(ParserRuleContext):
+    class Type_Context(ParserRuleContext):
 
         def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
@@ -1142,43 +1147,44 @@ class PigParser (Parser):
             return self.getTypedRuleContext(PigParser.Map_typeContext, 0)
 
         def getRuleIndex(self):
-            return PigParser.RULE_type
+            return PigParser.RULE_type_
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
-                listener.enterType(self)
+            if hasattr(listener, "enterType_"):
+                listener.enterType_(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
-                listener.exitType(self)
+            if hasattr(listener, "exitType_"):
+                listener.exitType_(self)
 
-    def type(self):
+    def type_(self):
 
-        localctx = PigParser.TypeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_type)
+        localctx = PigParser.Type_Context(self, self._ctx, self.state)
+        self.enterRule(localctx, 20, self.RULE_type_)
         try:
             self.state = 197
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.INT, PigParser.LONG, PigParser.FLOAT, PigParser.DOUBLE, PigParser.CHARARRAY, PigParser.BYTEARRAY]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 193
                 self.simple_type()
-
+                pass
             elif token in [PigParser.NOT, PigParser.LEFT_PAREN]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 194
                 self.tuple_type()
-
+                pass
             elif token in [PigParser.BAG]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 195
                 self.bag_type()
-
+                pass
             elif token in [PigParser.MAP]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 196
                 self.map_type()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1218,11 +1224,11 @@ class PigParser (Parser):
             return PigParser.RULE_simple_type
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterSimple_type"):
                 listener.enterSimple_type(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitSimple_type"):
                 listener.exitSimple_type(self)
 
     def simple_type(self):
@@ -1237,6 +1243,7 @@ class PigParser (Parser):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PigParser.INT) | (1 << PigParser.LONG) | (1 << PigParser.FLOAT) | (1 << PigParser.DOUBLE) | (1 << PigParser.CHARARRAY) | (1 << PigParser.BYTEARRAY))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -1252,8 +1259,8 @@ class PigParser (Parser):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def tuple(self):
-            return self.getTypedRuleContext(PigParser.TupleContext, 0)
+        def tuple_(self):
+            return self.getTypedRuleContext(PigParser.Tuple_Context, 0)
 
         def tuple_def(self):
             return self.getTypedRuleContext(PigParser.Tuple_defContext, 0)
@@ -1262,11 +1269,11 @@ class PigParser (Parser):
             return PigParser.RULE_tuple_type
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterTuple_type"):
                 listener.enterTuple_type(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitTuple_type"):
                 listener.exitTuple_type(self)
 
     def tuple_type(self):
@@ -1276,7 +1283,7 @@ class PigParser (Parser):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 201
-            self.tuple()
+            self.tuple_()
             self.state = 202
             self.tuple_def()
         except RecognitionException as re:
@@ -1303,11 +1310,11 @@ class PigParser (Parser):
             return PigParser.RULE_bag_type
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterBag_type"):
                 listener.enterBag_type(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitBag_type"):
                 listener.exitBag_type(self)
 
     def bag_type(self):
@@ -1347,11 +1354,11 @@ class PigParser (Parser):
             return PigParser.RULE_map_type
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterMap_type"):
                 listener.enterMap_type(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitMap_type"):
                 listener.exitMap_type(self)
 
     def map_type(self):
@@ -1402,11 +1409,11 @@ class PigParser (Parser):
             return PigParser.RULE_func_clause
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterFunc_clause"):
                 listener.enterFunc_clause(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitFunc_clause"):
                 listener.exitFunc_clause(self)
 
     def func_clause(self):
@@ -1416,6 +1423,7 @@ class PigParser (Parser):
         self._la = 0  # Token type
         try:
             self.state = 224
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
@@ -1424,6 +1432,7 @@ class PigParser (Parser):
                 self.state = 212
                 self.match(PigParser.LEFT_PAREN)
                 self.state = 214
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == PigParser.QUOTEDSTRING:
                     self.state = 213
@@ -1431,7 +1440,7 @@ class PigParser (Parser):
 
                 self.state = 216
                 self.match(PigParser.RIGHT_PAREN)
-
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 218
@@ -1442,11 +1451,13 @@ class PigParser (Parser):
                 self.state = 220
                 self.func_name()
                 self.state = 222
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input, 17, self._ctx)
                 if la_ == 1:
                     self.state = 221
                     self.func_args()
 
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1480,11 +1491,11 @@ class PigParser (Parser):
             return PigParser.RULE_func_name
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterFunc_name"):
                 listener.enterFunc_name(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitFunc_name"):
                 listener.exitFunc_name(self)
 
     def func_name(self):
@@ -1493,6 +1504,7 @@ class PigParser (Parser):
         self.enterRule(localctx, 32, self.RULE_func_name)
         try:
             self.state = 239
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 21, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -1563,11 +1575,11 @@ class PigParser (Parser):
             return PigParser.RULE_func_args
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterFunc_args"):
                 listener.enterFunc_args(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitFunc_args"):
                 listener.exitFunc_args(self)
 
     def func_args(self):
@@ -1576,6 +1588,7 @@ class PigParser (Parser):
         self.enterRule(localctx, 34, self.RULE_func_args)
         try:
             self.state = 254
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 24, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -1652,11 +1665,11 @@ class PigParser (Parser):
             return PigParser.RULE_store_clause
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterStore_clause"):
                 listener.enterStore_clause(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitStore_clause"):
                 listener.exitStore_clause(self)
 
     def store_clause(self):
@@ -1674,6 +1687,7 @@ class PigParser (Parser):
             self.state = 259
             self.filename()
             self.state = 262
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 25, self._ctx)
             if la_ == 1:
                 self.state = 260
@@ -1711,11 +1725,11 @@ class PigParser (Parser):
             return PigParser.RULE_filter_clause
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterFilter_clause"):
                 listener.enterFilter_clause(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitFilter_clause"):
                 listener.exitFilter_clause(self)
 
     def filter_clause(self):
@@ -1753,11 +1767,11 @@ class PigParser (Parser):
             return PigParser.RULE_cond
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterCond"):
                 listener.enterCond(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitCond"):
                 listener.exitCond(self)
 
     def cond(self):
@@ -1798,11 +1812,11 @@ class PigParser (Parser):
             return PigParser.RULE_or_cond
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterOr_cond"):
                 listener.enterOr_cond(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitOr_cond"):
                 listener.exitOr_cond(self)
 
     def or_cond(self):
@@ -1856,11 +1870,11 @@ class PigParser (Parser):
             return PigParser.RULE_and_cond
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterAnd_cond"):
                 listener.enterAnd_cond(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitAnd_cond"):
                 listener.exitAnd_cond(self)
 
     def and_cond(self):
@@ -1929,11 +1943,11 @@ class PigParser (Parser):
             return PigParser.RULE_unary_cond
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterUnary_cond"):
                 listener.enterUnary_cond(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitUnary_cond"):
                 listener.exitUnary_cond(self)
 
     def unary_cond(self):
@@ -1942,6 +1956,7 @@ class PigParser (Parser):
         self.enterRule(localctx, 46, self.RULE_unary_cond)
         try:
             self.state = 298
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 28, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -2005,11 +2020,11 @@ class PigParser (Parser):
             return PigParser.RULE_not_cond
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterNot_cond"):
                 listener.enterNot_cond(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitNot_cond"):
                 listener.exitNot_cond(self)
 
     def not_cond(self):
@@ -2052,11 +2067,11 @@ class PigParser (Parser):
             return PigParser.RULE_null_check_cond
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterNull_check_cond"):
                 listener.enterNull_check_cond(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitNull_check_cond"):
                 listener.exitNull_check_cond(self)
 
     def null_check_cond(self):
@@ -2072,6 +2087,7 @@ class PigParser (Parser):
             self.state = 304
             self.match(PigParser.IS)
             self.state = 306
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == PigParser.NOT:
                 self.state = 305
@@ -2100,11 +2116,11 @@ class PigParser (Parser):
             return PigParser.RULE_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterExpr"):
                 listener.enterExpr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitExpr"):
                 listener.exitExpr(self)
 
     def expr(self):
@@ -2151,11 +2167,11 @@ class PigParser (Parser):
             return PigParser.RULE_add_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterAdd_expr"):
                 listener.enterAdd_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitAdd_expr"):
                 listener.exitAdd_expr(self)
 
     def add_expr(self):
@@ -2177,6 +2193,7 @@ class PigParser (Parser):
                     if not(_la == PigParser.PLUS or _la == PigParser.MINUS):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 314
                     self.multi_expr()
@@ -2226,11 +2243,11 @@ class PigParser (Parser):
             return PigParser.RULE_multi_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterMulti_expr"):
                 listener.enterMulti_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitMulti_expr"):
                 listener.exitMulti_expr(self)
 
     def multi_expr(self):
@@ -2252,6 +2269,7 @@ class PigParser (Parser):
                     if not(((((_la - 86)) & ~0x3f) == 0 and ((1 << (_la - 86)) & ((1 << (PigParser.DIV - 86)) | (1 << (PigParser.PERCENT - 86)) | (1 << (PigParser.START - 86)))) != 0)):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 322
                     self.cast_expr()
@@ -2279,8 +2297,8 @@ class PigParser (Parser):
         def LEFT_PAREN(self):
             return self.getToken(PigParser.LEFT_PAREN, 0)
 
-        def type(self):
-            return self.getTypedRuleContext(PigParser.TypeContext, 0)
+        def type_(self):
+            return self.getTypedRuleContext(PigParser.Type_Context, 0)
 
         def RIGHT_PAREN(self):
             return self.getToken(PigParser.RIGHT_PAREN, 0)
@@ -2295,11 +2313,11 @@ class PigParser (Parser):
             return PigParser.RULE_cast_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterCast_expr"):
                 listener.enterCast_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitCast_expr"):
                 listener.exitCast_expr(self)
 
     def cast_expr(self):
@@ -2308,13 +2326,14 @@ class PigParser (Parser):
         self.enterRule(localctx, 58, self.RULE_cast_expr)
         try:
             self.state = 340
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 32, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 328
                 self.match(PigParser.LEFT_PAREN)
                 self.state = 329
-                self.type()
+                self.type_()
                 self.state = 330
                 self.match(PigParser.RIGHT_PAREN)
                 self.state = 332
@@ -2329,7 +2348,7 @@ class PigParser (Parser):
                 self.state = 335
                 self.match(PigParser.CAST_EXPR)
                 self.state = 336
-                self.type()
+                self.type_()
                 self.state = 337
                 self.unary_expr()
                 pass
@@ -2373,11 +2392,11 @@ class PigParser (Parser):
             return PigParser.RULE_unary_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterUnary_expr"):
                 listener.enterUnary_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitUnary_expr"):
                 listener.exitUnary_expr(self)
 
     def unary_expr(self):
@@ -2386,6 +2405,7 @@ class PigParser (Parser):
         self.enterRule(localctx, 60, self.RULE_unary_expr)
         try:
             self.state = 348
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 33, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -2433,11 +2453,11 @@ class PigParser (Parser):
             return PigParser.RULE_eval_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterEval_expr"):
                 listener.enterEval_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitEval_expr"):
                 listener.exitEval_expr(self)
 
     def eval_expr(self):
@@ -2446,6 +2466,7 @@ class PigParser (Parser):
         self.enterRule(localctx, 62, self.RULE_eval_expr)
         try:
             self.state = 352
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 34, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -2492,11 +2513,11 @@ class PigParser (Parser):
             return PigParser.RULE_var_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterVar_expr"):
                 listener.enterVar_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitVar_expr"):
                 listener.exitVar_expr(self)
 
     def var_expr(self):
@@ -2513,15 +2534,16 @@ class PigParser (Parser):
             while _alt != 2 and _alt != ATN.INVALID_ALT_NUMBER:
                 if _alt == 1:
                     self.state = 357
+                    self._errHandler.sync(self)
                     token = self._input.LA(1)
                     if token in [PigParser.NOT, PigParser.PERIOD]:
                         self.state = 355
                         self.dot_proj()
-
+                        pass
                     elif token in [PigParser.POUND]:
                         self.state = 356
                         self.pound_proj()
-
+                        pass
                     else:
                         raise NoViableAltException(self)
 
@@ -2556,11 +2578,11 @@ class PigParser (Parser):
             return PigParser.RULE_projectable_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterProjectable_expr"):
                 listener.enterProjectable_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitProjectable_expr"):
                 listener.exitProjectable_expr(self)
 
     def projectable_expr(self):
@@ -2570,6 +2592,7 @@ class PigParser (Parser):
         self.enterRule(localctx, 66, self.RULE_projectable_expr)
         try:
             self.state = 365
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 37, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -2631,11 +2654,11 @@ class PigParser (Parser):
             return PigParser.RULE_dot_proj
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterDot_proj"):
                 listener.enterDot_proj(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitDot_proj"):
                 listener.exitDot_proj(self)
 
     def dot_proj(self):
@@ -2645,17 +2668,19 @@ class PigParser (Parser):
         self._la = 0  # Token type
         try:
             self.state = 389
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.PERIOD]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 367
                 self.match(PigParser.PERIOD)
                 self.state = 380
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [PigParser.GROUP, PigParser.IDENTIFIER, PigParser.DOLLAR]:
                     self.state = 368
                     self.col_ref()
-
+                    pass
                 elif token in [PigParser.LEFT_PAREN]:
                     self.state = 369
                     self.match(PigParser.LEFT_PAREN)
@@ -2675,10 +2700,11 @@ class PigParser (Parser):
 
                     self.state = 378
                     self.match(PigParser.RIGHT_PAREN)
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 382
@@ -2701,6 +2727,7 @@ class PigParser (Parser):
                     _alt = self._interp.adaptivePredict(
                         self._input, 40, self._ctx)
 
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -2731,11 +2758,11 @@ class PigParser (Parser):
             return PigParser.RULE_pound_proj
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterPound_proj"):
                 listener.enterPound_proj(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitPound_proj"):
                 listener.exitPound_proj(self)
 
     def pound_proj(self):
@@ -2752,6 +2779,7 @@ class PigParser (Parser):
             if not(_la == PigParser.NULL or _la == PigParser.QUOTEDSTRING):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -2798,11 +2826,11 @@ class PigParser (Parser):
             return PigParser.RULE_bin_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterBin_expr"):
                 listener.enterBin_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitBin_expr"):
                 listener.exitBin_expr(self)
 
     def bin_expr(self):
@@ -2811,6 +2839,7 @@ class PigParser (Parser):
         self.enterRule(localctx, 72, self.RULE_bin_expr)
         try:
             self.state = 408
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.LEFT_PAREN]:
                 self.enterOuterAlt(localctx, 1)
@@ -2828,7 +2857,7 @@ class PigParser (Parser):
                 self.infix_expr()
                 self.state = 400
                 self.match(PigParser.RIGHT_PAREN)
-
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 402
@@ -2842,7 +2871,7 @@ class PigParser (Parser):
                 self.infix_expr()
                 self.state = 406
                 self.infix_expr()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -2870,11 +2899,11 @@ class PigParser (Parser):
             return PigParser.RULE_neg_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterNeg_expr"):
                 listener.enterNeg_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitNeg_expr"):
                 listener.exitNeg_expr(self)
 
     def neg_expr(self):
@@ -2911,11 +2940,11 @@ class PigParser (Parser):
             return PigParser.RULE_distinct_clause
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterDistinct_clause"):
                 listener.enterDistinct_clause(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitDistinct_clause"):
                 listener.exitDistinct_clause(self)
 
     def distinct_clause(self):
@@ -2953,11 +2982,11 @@ class PigParser (Parser):
             return PigParser.RULE_col_ref
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterCol_ref"):
                 listener.enterCol_ref(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitCol_ref"):
                 listener.exitCol_ref(self)
 
     def col_ref(self):
@@ -2966,17 +2995,18 @@ class PigParser (Parser):
         self.enterRule(localctx, 78, self.RULE_col_ref)
         try:
             self.state = 418
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.GROUP, PigParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 416
                 self.alias_col_ref()
-
+                pass
             elif token in [PigParser.DOLLAR]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 417
                 self.dollar_col_ref()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -3004,11 +3034,11 @@ class PigParser (Parser):
             return PigParser.RULE_alias_col_ref
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterAlias_col_ref"):
                 listener.enterAlias_col_ref(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitAlias_col_ref"):
                 listener.exitAlias_col_ref(self)
 
     def alias_col_ref(self):
@@ -3023,6 +3053,7 @@ class PigParser (Parser):
             if not(_la == PigParser.GROUP or _la == PigParser.IDENTIFIER):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -3048,11 +3079,11 @@ class PigParser (Parser):
             return PigParser.RULE_dollar_col_ref
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterDollar_col_ref"):
                 listener.enterDollar_col_ref(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitDollar_col_ref"):
                 listener.exitDollar_col_ref(self)
 
     def dollar_col_ref(self):
@@ -3086,11 +3117,11 @@ class PigParser (Parser):
             return PigParser.RULE_infix_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterInfix_expr"):
                 listener.enterInfix_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitInfix_expr"):
                 listener.exitInfix_expr(self)
 
     def infix_expr(self):
@@ -3118,24 +3149,24 @@ class PigParser (Parser):
         def scalar(self):
             return self.getTypedRuleContext(PigParser.ScalarContext, 0)
 
-        def map(self):
-            return self.getTypedRuleContext(PigParser.MapContext, 0)
+        def map_(self):
+            return self.getTypedRuleContext(PigParser.Map_Context, 0)
 
         def bag(self):
             return self.getTypedRuleContext(PigParser.BagContext, 0)
 
-        def tuple(self):
-            return self.getTypedRuleContext(PigParser.TupleContext, 0)
+        def tuple_(self):
+            return self.getTypedRuleContext(PigParser.Tuple_Context, 0)
 
         def getRuleIndex(self):
             return PigParser.RULE_const_expr
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterConst_expr"):
                 listener.enterConst_expr(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitConst_expr"):
                 listener.exitConst_expr(self)
 
     def const_expr(self):
@@ -3144,6 +3175,7 @@ class PigParser (Parser):
         self.enterRule(localctx, 86, self.RULE_const_expr)
         try:
             self.state = 431
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 44, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -3154,7 +3186,7 @@ class PigParser (Parser):
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 428
-                self.map()
+                self.map_()
                 pass
 
             elif la_ == 3:
@@ -3166,7 +3198,7 @@ class PigParser (Parser):
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 430
-                self.tuple()
+                self.tuple_()
                 pass
 
         except RecognitionException as re:
@@ -3205,11 +3237,11 @@ class PigParser (Parser):
             return PigParser.RULE_scalar
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterScalar"):
                 listener.enterScalar(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitScalar"):
                 listener.exitScalar(self)
 
     def scalar(self):
@@ -3224,6 +3256,7 @@ class PigParser (Parser):
             if not(((((_la - 45)) & ~0x3f) == 0 and ((1 << (_la - 45)) & ((1 << (PigParser.NULL - 45)) | (1 << (PigParser.INTEGER - 45)) | (1 << (PigParser.DOUBLENUMBER - 45)) | (1 << (PigParser.FLOATNUMBER - 45)) | (1 << (PigParser.QUOTEDSTRING - 45)) | (1 << (PigParser.LONGINEGER - 45)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -3233,7 +3266,7 @@ class PigParser (Parser):
             self.exitRule()
         return localctx
 
-    class MapContext(ParserRuleContext):
+    class Map_Context(ParserRuleContext):
 
         def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
@@ -3264,29 +3297,31 @@ class PigParser (Parser):
             return self.getToken(PigParser.MAP_VAL, 0)
 
         def getRuleIndex(self):
-            return PigParser.RULE_map
+            return PigParser.RULE_map_
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
-                listener.enterMap(self)
+            if hasattr(listener, "enterMap_"):
+                listener.enterMap_(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
-                listener.exitMap(self)
+            if hasattr(listener, "exitMap_"):
+                listener.exitMap_(self)
 
-    def map(self):
+    def map_(self):
 
-        localctx = PigParser.MapContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 90, self.RULE_map)
+        localctx = PigParser.Map_Context(self, self._ctx, self.state)
+        self.enterRule(localctx, 90, self.RULE_map_)
         self._la = 0  # Token type
         try:
             self.state = 454
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.LEFT_BRACKET]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 435
                 self.match(PigParser.LEFT_BRACKET)
                 self.state = 444
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if ((((_la - 29)) & ~0x3f) == 0 and ((1 << (_la - 29)) & ((1 << (PigParser.NOT - 29)) | (1 << (PigParser.NULL - 29)) | (1 << (PigParser.QUOTEDSTRING - 29)))) != 0):
                     self.state = 436
@@ -3305,7 +3340,7 @@ class PigParser (Parser):
 
                 self.state = 446
                 self.match(PigParser.RIGHT_BRACKET)
-
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 447
@@ -3328,6 +3363,7 @@ class PigParser (Parser):
                     _alt = self._interp.adaptivePredict(
                         self._input, 47, self._ctx)
 
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -3364,11 +3400,11 @@ class PigParser (Parser):
             return PigParser.RULE_keyvalue
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterKeyvalue"):
                 listener.enterKeyvalue(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitKeyvalue"):
                 listener.exitKeyvalue(self)
 
     def keyvalue(self):
@@ -3377,6 +3413,7 @@ class PigParser (Parser):
         self.enterRule(localctx, 92, self.RULE_keyvalue)
         try:
             self.state = 465
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.NULL, PigParser.QUOTEDSTRING]:
                 self.enterOuterAlt(localctx, 1)
@@ -3386,7 +3423,7 @@ class PigParser (Parser):
                 self.match(PigParser.POUND)
                 self.state = 458
                 self.const_expr()
-
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 460
@@ -3398,7 +3435,7 @@ class PigParser (Parser):
                 self.string_val()
                 self.state = 463
                 self.const_expr()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -3426,11 +3463,11 @@ class PigParser (Parser):
             return PigParser.RULE_string_val
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterString_val"):
                 listener.enterString_val(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitString_val"):
                 listener.exitString_val(self)
 
     def string_val(self):
@@ -3445,6 +3482,7 @@ class PigParser (Parser):
             if not(_la == PigParser.NULL or _la == PigParser.QUOTEDSTRING):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -3466,11 +3504,11 @@ class PigParser (Parser):
         def RIGHT_CURLY(self):
             return self.getToken(PigParser.RIGHT_CURLY, 0)
 
-        def tuple(self, i: int=None):
+        def tuple_(self, i: int=None):
             if i is None:
-                return self.getTypedRuleContexts(PigParser.TupleContext)
+                return self.getTypedRuleContexts(PigParser.Tuple_Context)
             else:
-                return self.getTypedRuleContext(PigParser.TupleContext, i)
+                return self.getTypedRuleContext(PigParser.Tuple_Context, i)
 
         def COMMA(self, i: int=None):
             if i is None:
@@ -3488,11 +3526,11 @@ class PigParser (Parser):
             return PigParser.RULE_bag
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "enterBag"):
                 listener.enterBag(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
+            if hasattr(listener, "exitBag"):
                 listener.exitBag(self)
 
     def bag(self):
@@ -3502,16 +3540,18 @@ class PigParser (Parser):
         self._la = 0  # Token type
         try:
             self.state = 488
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.LEFT_CURLY]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 469
                 self.match(PigParser.LEFT_CURLY)
                 self.state = 478
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == PigParser.NOT or _la == PigParser.LEFT_PAREN:
                     self.state = 470
-                    self.tuple()
+                    self.tuple_()
                     self.state = 475
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
@@ -3519,14 +3559,14 @@ class PigParser (Parser):
                         self.state = 471
                         self.match(PigParser.COMMA)
                         self.state = 472
-                        self.tuple()
+                        self.tuple_()
                         self.state = 477
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
 
                 self.state = 480
                 self.match(PigParser.RIGHT_CURLY)
-
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 481
@@ -3540,7 +3580,7 @@ class PigParser (Parser):
                 while _alt != 2 and _alt != ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
                         self.state = 483
-                        self.tuple()
+                        self.tuple_()
 
                     else:
                         raise NoViableAltException(self)
@@ -3549,6 +3589,7 @@ class PigParser (Parser):
                     _alt = self._interp.adaptivePredict(
                         self._input, 52, self._ctx)
 
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -3560,7 +3601,7 @@ class PigParser (Parser):
             self.exitRule()
         return localctx
 
-    class TupleContext(ParserRuleContext):
+    class Tuple_Context(ParserRuleContext):
 
         def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
             super().__init__(parent, invokingState)
@@ -3587,33 +3628,35 @@ class PigParser (Parser):
         def NOT(self):
             return self.getToken(PigParser.NOT, 0)
 
-        def tuple(self):
-            return self.getTypedRuleContext(PigParser.TupleContext, 0)
+        def tuple_(self):
+            return self.getTypedRuleContext(PigParser.Tuple_Context, 0)
 
         def getRuleIndex(self):
-            return PigParser.RULE_tuple
+            return PigParser.RULE_tuple_
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
-                listener.enterTuple(self)
+            if hasattr(listener, "enterTuple_"):
+                listener.enterTuple_(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, PigListener):
-                listener.exitTuple(self)
+            if hasattr(listener, "exitTuple_"):
+                listener.exitTuple_(self)
 
-    def tuple(self):
+    def tuple_(self):
 
-        localctx = PigParser.TupleContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 98, self.RULE_tuple)
+        localctx = PigParser.Tuple_Context(self, self._ctx, self.state)
+        self.enterRule(localctx, 98, self.RULE_tuple_)
         self._la = 0  # Token type
         try:
             self.state = 509
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [PigParser.LEFT_PAREN]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 490
                 self.match(PigParser.LEFT_PAREN)
                 self.state = 499
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << PigParser.NOT) | (1 << PigParser.NULL) | (1 << PigParser.INTEGER))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (PigParser.DOUBLENUMBER - 65)) | (1 << (PigParser.FLOATNUMBER - 65)) | (1 << (PigParser.QUOTEDSTRING - 65)) | (1 << (PigParser.LEFT_PAREN - 65)) | (1 << (PigParser.LEFT_BRACKET - 65)) | (1 << (PigParser.LONGINEGER - 65)) | (1 << (PigParser.LEFT_CURLY - 65)))) != 0):
                     self.state = 491
@@ -3632,14 +3675,14 @@ class PigParser (Parser):
 
                 self.state = 501
                 self.match(PigParser.RIGHT_PAREN)
-
+                pass
             elif token in [PigParser.NOT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 502
                 self.match(PigParser.NOT)
 
                 self.state = 503
-                self.tuple()
+                self.tuple_()
                 self.state = 505
                 self._errHandler.sync(self)
                 _alt = 1
@@ -3655,6 +3698,7 @@ class PigParser (Parser):
                     _alt = self._interp.adaptivePredict(
                         self._input, 56, self._ctx)
 
+                pass
             else:
                 raise NoViableAltException(self)
 

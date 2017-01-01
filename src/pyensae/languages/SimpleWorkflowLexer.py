@@ -1,4 +1,4 @@
-# Generated from java-escape by ANTLR 4.5
+# Generated from src\pyensae\languages\SimpleWorkflow.g4 by ANTLR 4.6
 from antlr4 import *
 from io import StringIO
 
@@ -164,16 +164,16 @@ class SimpleWorkflowLexer(Lexer):
     LINE_COMMENT = 40
     WS = 41
 
-    modeNames = [u"DEFAULT_MODE"]
+    modeNames = ["DEFAULT_MODE"]
 
-    literalNames = [u"<INVALID>",
+    literalNames = ["<INVALID>",
                     "';'", "'set'", "'='", "'for'", "'('", "'in'", "')'", "'{'",
                     "'}'", "'if'", "'else'", "','", "'+'", "'-'", "'*'", "'/'",
                     "'%'", "'&&'", "'||'", "'=='", "'!='", "'<='", "'>='", "'>'",
                     "'<'", "'!'", "'connect'", "'to'", "'->'", "'.'", "'flowmodule'",
                     "'flowdata'", "'e'"]
 
-    symbolicNames = [u"<INVALID>",
+    symbolicNames = ["<INVALID>",
                      "Digits", "Identifier", "Sign", "STRING", "STRING_DOUBLE_QUOTE",
                      "STRING_QUOTE", "LINE_COMMENT", "WS"]
 
@@ -190,7 +190,7 @@ class SimpleWorkflowLexer(Lexer):
 
     def __init__(self, input=None):
         super().__init__(input)
-        self.checkVersion("4.5")
+        self.checkVersion("4.6")
         self._interp = LexerATNSimulator(
             self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None

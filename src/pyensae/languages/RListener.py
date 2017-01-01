@@ -1,63 +1,73 @@
-# Generated from java-escape by ANTLR 4.5
+# Generated from C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\R.g4 by ANTLR 4.6
 from antlr4 import *
+if __name__ is not None and "." in __name__:
+    from .RParser import RParser
+else:
+    from RParser import RParser
 
 # This class defines a complete listener for a parse tree produced by RParser.
-
-
 class RListener(ParseTreeListener):
 
     # Enter a parse tree produced by RParser#parse.
-    def enterParse(self, ctx):
+    def enterParse(self, ctx:RParser.ParseContext):
         pass
 
     # Exit a parse tree produced by RParser#parse.
-    def exitParse(self, ctx):
+    def exitParse(self, ctx:RParser.ParseContext):
         pass
 
+
     # Enter a parse tree produced by RParser#expr.
-    def enterExpr(self, ctx):
+    def enterExpr(self, ctx:RParser.ExprContext):
         pass
 
     # Exit a parse tree produced by RParser#expr.
-    def exitExpr(self, ctx):
+    def exitExpr(self, ctx:RParser.ExprContext):
         pass
 
+
     # Enter a parse tree produced by RParser#exprlist.
-    def enterExprlist(self, ctx):
+    def enterExprlist(self, ctx:RParser.ExprlistContext):
         pass
 
     # Exit a parse tree produced by RParser#exprlist.
-    def exitExprlist(self, ctx):
+    def exitExprlist(self, ctx:RParser.ExprlistContext):
         pass
 
+
     # Enter a parse tree produced by RParser#formlist.
-    def enterFormlist(self, ctx):
+    def enterFormlist(self, ctx:RParser.FormlistContext):
         pass
 
     # Exit a parse tree produced by RParser#formlist.
-    def exitFormlist(self, ctx):
+    def exitFormlist(self, ctx:RParser.FormlistContext):
         pass
 
+
     # Enter a parse tree produced by RParser#form.
-    def enterForm(self, ctx):
+    def enterForm(self, ctx:RParser.FormContext):
         pass
 
     # Exit a parse tree produced by RParser#form.
-    def exitForm(self, ctx):
+    def exitForm(self, ctx:RParser.FormContext):
         pass
 
+
     # Enter a parse tree produced by RParser#sublist.
-    def enterSublist(self, ctx):
+    def enterSublist(self, ctx:RParser.SublistContext):
         pass
 
     # Exit a parse tree produced by RParser#sublist.
-    def exitSublist(self, ctx):
+    def exitSublist(self, ctx:RParser.SublistContext):
         pass
 
+
     # Enter a parse tree produced by RParser#sub.
-    def enterSub(self, ctx):
+    def enterSub(self, ctx:RParser.SubContext):
         pass
 
     # Exit a parse tree produced by RParser#sub.
-    def exitSub(self, ctx):
+    def exitSub(self, ctx:RParser.SubContext):
         pass
+
+

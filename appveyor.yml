@@ -28,7 +28,7 @@ install:
   - "%PYTHON%\\Scripts\\pymy_install3 pycrypto"
   - "%PYTHON%\\Scripts\\pip install pycryptodomex"
   - "%PYTHON%\\Scripts\\pip install urllib3"
-  - "%PYTHON%\\Scripts\\pip install pycodestyle prompt_toolkit"
+  - "%PYTHON%\\Scripts\\pip install pycodestyle prompt_toolkit ipykernel"
   - "%PYTHON%\\Scripts\\pymy_install3 --task=tool --source=zip graphviz"
   - "set PATH=%PATH%;C:\\projects\\pyensae\\build\\update_modules\\Graphviz\\bin"
   - "dir C:\\projects\\pyensae\\build\\update_modules\\Graphviz\\bin"

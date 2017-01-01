@@ -1,13 +1,8 @@
-# Generated from java-escape by ANTLR 4.5
+# Generated from C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\SQLite.g4 by ANTLR 4.6
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-package = globals().get("__package__", None)
-ischild = len(package)>0 if package is not None else False
-if ischild:
-    from .SQLiteListener import SQLiteListener
-else:
-    from SQLiteListener import SQLiteListener
+
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\u009f")
@@ -120,8 +115,8 @@ def serializedATN():
         buf.write("\'\3\'\5\'\u043b\n\'\3\'\5\'\u043e\n\'\3\'\3\'\3\'\3\'")
         buf.write("\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\5\'\u0450")
         buf.write("\n\'\3\'\3\'\3\'\5\'\u0455\n\'\3(\3(\3(\5(\u045a\n(\3")
-        buf.write(")\3)\3)\3)\3)\3)\3)\3)\3)\5)\u0465\n)\3)\3)\3)\5)\u046a")
-        buf.write("\n)\3)\3)\3)\3)\5)\u0470\n)\3)\3)\3)\7)\u0475\n)\f)\16")
+        buf.write(")\3)\3)\3)\3)\3)\5)\u0462\n)\3)\3)\3)\5)\u0467\n)\3)\3")
+        buf.write(")\3)\3)\3)\3)\3)\5)\u0470\n)\3)\3)\3)\7)\u0475\n)\f)\16")
         buf.write(")\u0478\13)\3)\5)\u047b\n)\3)\3)\3)\3)\3)\3)\3)\3)\3)")
         buf.write("\3)\3)\3)\3)\3)\5)\u048b\n)\3)\5)\u048e\n)\3)\3)\3)\3")
         buf.write(")\3)\3)\5)\u0496\n)\3)\3)\3)\3)\3)\6)\u049d\n)\r)\16)")
@@ -629,13 +624,13 @@ def serializedATN():
         buf.write("\u0453\3\2\2\2\u0455M\3\2\2\2\u0456\u0457\7m\2\2\u0457")
         buf.write("\u0458\7\62\2\2\u0458\u045a\t\b\2\2\u0459\u0456\3\2\2")
         buf.write("\2\u0459\u045a\3\2\2\2\u045aO\3\2\2\2\u045b\u045c\b)\1")
-        buf.write("\2\u045c\u045d\5x=\2\u045d\u045e\5P)\27\u045e\u04a8\3")
-        buf.write("\2\2\2\u045f\u04a8\5v<\2\u0460\u04a8\7\u0099\2\2\u0461")
-        buf.write("\u0462\5\u0086D\2\u0462\u0463\7\4\2\2\u0463\u0465\3\2")
-        buf.write("\2\2\u0464\u0461\3\2\2\2\u0464\u0465\3\2\2\2\u0465\u0466")
-        buf.write("\3\2\2\2\u0466\u0467\5\u0088E\2\u0467\u0468\7\4\2\2\u0468")
-        buf.write("\u046a\3\2\2\2\u0469\u0464\3\2\2\2\u0469\u046a\3\2\2\2")
-        buf.write("\u046a\u046b\3\2\2\2\u046b\u04a8\5\u008eH\2\u046c\u046d")
+        buf.write("\2\u045c\u04a8\5v<\2\u045d\u04a8\7\u0099\2\2\u045e\u045f")
+        buf.write("\5\u0086D\2\u045f\u0460\7\4\2\2\u0460\u0462\3\2\2\2\u0461")
+        buf.write("\u045e\3\2\2\2\u0461\u0462\3\2\2\2\u0462\u0463\3\2\2\2")
+        buf.write("\u0463\u0464\5\u0088E\2\u0464\u0465\7\4\2\2\u0465\u0467")
+        buf.write("\3\2\2\2\u0466\u0461\3\2\2\2\u0466\u0467\3\2\2\2\u0467")
+        buf.write("\u0468\3\2\2\2\u0468\u04a8\5\u008eH\2\u0469\u046a\5x=")
+        buf.write("\2\u046a\u046b\5P)\27\u046b\u04a8\3\2\2\2\u046c\u046d")
         buf.write("\5\u0084C\2\u046d\u047a\7\5\2\2\u046e\u0470\7@\2\2\u046f")
         buf.write("\u046e\3\2\2\2\u046f\u0470\3\2\2\2\u0470\u0471\3\2\2\2")
         buf.write("\u0471\u0476\5P)\2\u0472\u0473\7\7\2\2\u0473\u0475\5P")
@@ -660,7 +655,7 @@ def serializedATN():
         buf.write("\u04a2\3\2\2\2\u04a0\u04a1\7C\2\2\u04a1\u04a3\5P)\2\u04a2")
         buf.write("\u04a0\3\2\2\2\u04a2\u04a3\3\2\2\2\u04a3\u04a4\3\2\2\2")
         buf.write("\u04a4\u04a5\7D\2\2\u04a5\u04a8\3\2\2\2\u04a6\u04a8\5")
-        buf.write("T+\2\u04a7\u045b\3\2\2\2\u04a7\u045f\3\2\2\2\u04a7\u0460")
+        buf.write("T+\2\u04a7\u045b\3\2\2\2\u04a7\u045d\3\2\2\2\u04a7\u0466")
         buf.write("\3\2\2\2\u04a7\u0469\3\2\2\2\u04a7\u046c\3\2\2\2\u04a7")
         buf.write("\u047e\3\2\2\2\u04a7\u0482\3\2\2\2\u04a7\u048d\3\2\2\2")
         buf.write("\u04a7\u0493\3\2\2\2\u04a7\u04a6\3\2\2\2\u04a8\u050d\3")
@@ -920,7 +915,7 @@ def serializedATN():
         buf.write("\u0388\u0391\u0396\u0398\u03a1\u03ac\u03b3\u03b6\u03b9")
         buf.write("\u03c6\u03d4\u03d9\u03dc\u03e9\u03f7\u03fc\u0405\u0408")
         buf.write("\u040e\u0410\u0416\u041b\u0421\u042d\u0431\u0436\u043a")
-        buf.write("\u043d\u044f\u0454\u0459\u0464\u0469\u046f\u0476\u047a")
+        buf.write("\u043d\u044f\u0454\u0459\u0461\u0466\u046f\u0476\u047a")
         buf.write("\u048a\u048d\u0495\u049e\u04a2\u04a7\u04c5\u04d1\u04d6")
         buf.write("\u04e2\u04e8\u04ef\u04f3\u04fd\u0500\u0506\u0509\u050b")
         buf.write("\u050d\u0518\u051d\u0529\u052d\u0531\u0535\u053c\u053e")
@@ -936,7 +931,7 @@ def serializedATN():
 
 class SQLiteParser ( Parser ):
 
-    grammarFileName = "java-escape"
+    grammarFileName = "SQLite.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -944,47 +939,44 @@ class SQLiteParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"';'", u"'.'", u"'('", u"')'", u"','", 
-                     u"'='", u"'*'", u"'+'", u"'-'", u"'~'", u"'||'", u"'/'", 
-                     u"'%'", u"'<<'", u"'>>'", u"'&'", u"'|'", u"'<'", u"'<='", 
-                     u"'>'", u"'>='", u"'=='", u"'!='", u"'<>'" ]
+    literalNames = [ "<INVALID>", "';'", "'.'", "'('", "')'", "','", "'='", 
+                     "'*'", "'+'", "'-'", "'~'", "'||'", "'/'", "'%'", "'<<'", 
+                     "'>>'", "'&'", "'|'", "'<'", "'<='", "'>'", "'>='", 
+                     "'=='", "'!='", "'<>'" ]
 
-    symbolicNames = [ u"<INVALID>", u"SCOL", u"DOT", u"OPEN_PAR", u"CLOSE_PAR", 
-                      u"COMMA", u"ASSIGN", u"STAR", u"PLUS", u"MINUS", u"TILDE", 
-                      u"PIPE2", u"DIV", u"MOD", u"LT2", u"GT2", u"AMP", 
-                      u"PIPE", u"LT", u"LT_EQ", u"GT", u"GT_EQ", u"EQ", 
-                      u"NOT_EQ1", u"NOT_EQ2", u"K_ABORT", u"K_ACTION", u"K_ADD", 
-                      u"K_AFTER", u"K_ALL", u"K_ALTER", u"K_ANALYZE", u"K_AND", 
-                      u"K_AS", u"K_ASC", u"K_ATTACH", u"K_AUTOINCREMENT", 
-                      u"K_BEFORE", u"K_BEGIN", u"K_BETWEEN", u"K_BY", u"K_CASCADE", 
-                      u"K_CASE", u"K_CAST", u"K_CHECK", u"K_COLLATE", u"K_COLUMN", 
-                      u"K_COMMIT", u"K_CONFLICT", u"K_CONSTRAINT", u"K_CREATE", 
-                      u"K_CROSS", u"K_CURRENT_DATE", u"K_CURRENT_TIME", 
-                      u"K_CURRENT_TIMESTAMP", u"K_DATABASE", u"K_DEFAULT", 
-                      u"K_DEFERRABLE", u"K_DEFERRED", u"K_DELETE", u"K_DESC", 
-                      u"K_DETACH", u"K_DISTINCT", u"K_DROP", u"K_EACH", 
-                      u"K_ELSE", u"K_END", u"K_ESCAPE", u"K_EXCEPT", u"K_EXCLUSIVE", 
-                      u"K_EXISTS", u"K_EXPLAIN", u"K_FAIL", u"K_FOR", u"K_FOREIGN", 
-                      u"K_FROM", u"K_FULL", u"K_GLOB", u"K_GROUP", u"K_HAVING", 
-                      u"K_IF", u"K_IGNORE", u"K_IMMEDIATE", u"K_IN", u"K_INDEX", 
-                      u"K_INDEXED", u"K_INITIALLY", u"K_INNER", u"K_INSERT", 
-                      u"K_INSTEAD", u"K_INTERSECT", u"K_INTO", u"K_IS", 
-                      u"K_ISNULL", u"K_JOIN", u"K_KEY", u"K_LEFT", u"K_LIKE", 
-                      u"K_LIMIT", u"K_MATCH", u"K_NATURAL", u"K_NO", u"K_NOT", 
-                      u"K_NOTNULL", u"K_NULL", u"K_OF", u"K_OFFSET", u"K_ON", 
-                      u"K_OR", u"K_ORDER", u"K_OUTER", u"K_PLAN", u"K_PRAGMA", 
-                      u"K_PRIMARY", u"K_QUERY", u"K_RAISE", u"K_RECURSIVE", 
-                      u"K_REFERENCES", u"K_REGEXP", u"K_REINDEX", u"K_RELEASE", 
-                      u"K_RENAME", u"K_REPLACE", u"K_RESTRICT", u"K_RIGHT", 
-                      u"K_ROLLBACK", u"K_ROW", u"K_SAVEPOINT", u"K_SELECT", 
-                      u"K_SET", u"K_TABLE", u"K_TEMP", u"K_TEMPORARY", u"K_THEN", 
-                      u"K_TO", u"K_TRANSACTION", u"K_TRIGGER", u"K_UNION", 
-                      u"K_UNIQUE", u"K_UPDATE", u"K_USING", u"K_VACUUM", 
-                      u"K_VALUES", u"K_VIEW", u"K_VIRTUAL", u"K_WHEN", u"K_WHERE", 
-                      u"K_WITH", u"K_WITHOUT", u"IDENTIFIER", u"NUMERIC_LITERAL", 
-                      u"BIND_PARAMETER", u"STRING_LITERAL", u"BLOB_LITERAL", 
-                      u"SINGLE_LINE_COMMENT", u"MULTILINE_COMMENT", u"SPACES", 
-                      u"UNEXPECTED_CHAR" ]
+    symbolicNames = [ "<INVALID>", "SCOL", "DOT", "OPEN_PAR", "CLOSE_PAR", 
+                      "COMMA", "ASSIGN", "STAR", "PLUS", "MINUS", "TILDE", 
+                      "PIPE2", "DIV", "MOD", "LT2", "GT2", "AMP", "PIPE", 
+                      "LT", "LT_EQ", "GT", "GT_EQ", "EQ", "NOT_EQ1", "NOT_EQ2", 
+                      "K_ABORT", "K_ACTION", "K_ADD", "K_AFTER", "K_ALL", 
+                      "K_ALTER", "K_ANALYZE", "K_AND", "K_AS", "K_ASC", 
+                      "K_ATTACH", "K_AUTOINCREMENT", "K_BEFORE", "K_BEGIN", 
+                      "K_BETWEEN", "K_BY", "K_CASCADE", "K_CASE", "K_CAST", 
+                      "K_CHECK", "K_COLLATE", "K_COLUMN", "K_COMMIT", "K_CONFLICT", 
+                      "K_CONSTRAINT", "K_CREATE", "K_CROSS", "K_CURRENT_DATE", 
+                      "K_CURRENT_TIME", "K_CURRENT_TIMESTAMP", "K_DATABASE", 
+                      "K_DEFAULT", "K_DEFERRABLE", "K_DEFERRED", "K_DELETE", 
+                      "K_DESC", "K_DETACH", "K_DISTINCT", "K_DROP", "K_EACH", 
+                      "K_ELSE", "K_END", "K_ESCAPE", "K_EXCEPT", "K_EXCLUSIVE", 
+                      "K_EXISTS", "K_EXPLAIN", "K_FAIL", "K_FOR", "K_FOREIGN", 
+                      "K_FROM", "K_FULL", "K_GLOB", "K_GROUP", "K_HAVING", 
+                      "K_IF", "K_IGNORE", "K_IMMEDIATE", "K_IN", "K_INDEX", 
+                      "K_INDEXED", "K_INITIALLY", "K_INNER", "K_INSERT", 
+                      "K_INSTEAD", "K_INTERSECT", "K_INTO", "K_IS", "K_ISNULL", 
+                      "K_JOIN", "K_KEY", "K_LEFT", "K_LIKE", "K_LIMIT", 
+                      "K_MATCH", "K_NATURAL", "K_NO", "K_NOT", "K_NOTNULL", 
+                      "K_NULL", "K_OF", "K_OFFSET", "K_ON", "K_OR", "K_ORDER", 
+                      "K_OUTER", "K_PLAN", "K_PRAGMA", "K_PRIMARY", "K_QUERY", 
+                      "K_RAISE", "K_RECURSIVE", "K_REFERENCES", "K_REGEXP", 
+                      "K_REINDEX", "K_RELEASE", "K_RENAME", "K_REPLACE", 
+                      "K_RESTRICT", "K_RIGHT", "K_ROLLBACK", "K_ROW", "K_SAVEPOINT", 
+                      "K_SELECT", "K_SET", "K_TABLE", "K_TEMP", "K_TEMPORARY", 
+                      "K_THEN", "K_TO", "K_TRANSACTION", "K_TRIGGER", "K_UNION", 
+                      "K_UNIQUE", "K_UPDATE", "K_USING", "K_VACUUM", "K_VALUES", 
+                      "K_VIEW", "K_VIRTUAL", "K_WHEN", "K_WHERE", "K_WITH", 
+                      "K_WITHOUT", "IDENTIFIER", "NUMERIC_LITERAL", "BIND_PARAMETER", 
+                      "STRING_LITERAL", "BLOB_LITERAL", "SINGLE_LINE_COMMENT", 
+                      "MULTILINE_COMMENT", "SPACES", "UNEXPECTED_CHAR" ]
 
     RULE_parse = 0
     RULE_error = 1
@@ -1255,7 +1247,7 @@ class SQLiteParser ( Parser ):
 
     def __init__(self, input:TokenStream):
         super().__init__(input)
-        self.checkVersion("4.5")
+        self.checkVersion("4.6")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -1288,11 +1280,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_parse
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterParse" ):
                 listener.enterParse(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitParse" ):
                 listener.exitParse(self)
 
 
@@ -1310,15 +1302,16 @@ class SQLiteParser ( Parser ):
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SQLiteParser.SCOL) | (1 << SQLiteParser.K_ALTER) | (1 << SQLiteParser.K_ANALYZE) | (1 << SQLiteParser.K_ATTACH) | (1 << SQLiteParser.K_BEGIN) | (1 << SQLiteParser.K_COMMIT) | (1 << SQLiteParser.K_CREATE) | (1 << SQLiteParser.K_DELETE) | (1 << SQLiteParser.K_DETACH) | (1 << SQLiteParser.K_DROP))) != 0) or ((((_la - 66)) & ~0x3f) == 0 and ((1 << (_la - 66)) & ((1 << (SQLiteParser.K_END - 66)) | (1 << (SQLiteParser.K_EXPLAIN - 66)) | (1 << (SQLiteParser.K_INSERT - 66)) | (1 << (SQLiteParser.K_PRAGMA - 66)) | (1 << (SQLiteParser.K_REINDEX - 66)) | (1 << (SQLiteParser.K_RELEASE - 66)) | (1 << (SQLiteParser.K_REPLACE - 66)) | (1 << (SQLiteParser.K_ROLLBACK - 66)) | (1 << (SQLiteParser.K_SAVEPOINT - 66)) | (1 << (SQLiteParser.K_SELECT - 66)))) != 0) or ((((_la - 139)) & ~0x3f) == 0 and ((1 << (_la - 139)) & ((1 << (SQLiteParser.K_UPDATE - 139)) | (1 << (SQLiteParser.K_VACUUM - 139)) | (1 << (SQLiteParser.K_VALUES - 139)) | (1 << (SQLiteParser.K_WITH - 139)) | (1 << (SQLiteParser.UNEXPECTED_CHAR - 139)))) != 0):
                 self.state = 166
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [SQLiteParser.SCOL, SQLiteParser.K_ALTER, SQLiteParser.K_ANALYZE, SQLiteParser.K_ATTACH, SQLiteParser.K_BEGIN, SQLiteParser.K_COMMIT, SQLiteParser.K_CREATE, SQLiteParser.K_DELETE, SQLiteParser.K_DETACH, SQLiteParser.K_DROP, SQLiteParser.K_END, SQLiteParser.K_EXPLAIN, SQLiteParser.K_INSERT, SQLiteParser.K_PRAGMA, SQLiteParser.K_REINDEX, SQLiteParser.K_RELEASE, SQLiteParser.K_REPLACE, SQLiteParser.K_ROLLBACK, SQLiteParser.K_SAVEPOINT, SQLiteParser.K_SELECT, SQLiteParser.K_UPDATE, SQLiteParser.K_VACUUM, SQLiteParser.K_VALUES, SQLiteParser.K_WITH]:
                     self.state = 164
                     self.sql_stmt_list()
-
+                    pass
                 elif token in [SQLiteParser.UNEXPECTED_CHAR]:
                     self.state = 165
                     self.error()
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -1350,11 +1343,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_error
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterError" ):
                 listener.enterError(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitError" ):
                 listener.exitError(self)
 
 
@@ -1396,11 +1389,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_sql_stmt_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterSql_stmt_list" ):
                 listener.enterSql_stmt_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitSql_stmt_list" ):
                 listener.exitSql_stmt_list(self)
 
 
@@ -1606,11 +1599,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_sql_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterSql_stmt" ):
                 listener.enterSql_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitSql_stmt" ):
                 listener.exitSql_stmt(self)
 
 
@@ -1624,11 +1617,13 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 205
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_EXPLAIN:
                 self.state = 200
                 self.match(SQLiteParser.K_EXPLAIN)
                 self.state = 203
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_QUERY:
                     self.state = 201
@@ -1640,6 +1635,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 237
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,8,self._ctx)
             if la_ == 1:
                 self.state = 207
@@ -1844,11 +1840,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_alter_table_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterAlter_table_stmt" ):
                 listener.enterAlter_table_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitAlter_table_stmt" ):
                 listener.exitAlter_table_stmt(self)
 
 
@@ -1865,6 +1861,7 @@ class SQLiteParser ( Parser ):
             self.state = 240
             self.match(SQLiteParser.K_TABLE)
             self.state = 244
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
             if la_ == 1:
                 self.state = 241
@@ -1876,6 +1873,7 @@ class SQLiteParser ( Parser ):
             self.state = 246
             self.table_name()
             self.state = 255
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_RENAME]:
                 self.state = 247
@@ -1884,11 +1882,12 @@ class SQLiteParser ( Parser ):
                 self.match(SQLiteParser.K_TO)
                 self.state = 249
                 self.new_table_name()
-
+                pass
             elif token in [SQLiteParser.K_ADD]:
                 self.state = 250
                 self.match(SQLiteParser.K_ADD)
                 self.state = 252
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
                 if la_ == 1:
                     self.state = 251
@@ -1897,7 +1896,7 @@ class SQLiteParser ( Parser ):
 
                 self.state = 254
                 self.column_def()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -1930,11 +1929,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_analyze_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterAnalyze_stmt" ):
                 listener.enterAnalyze_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitAnalyze_stmt" ):
                 listener.exitAnalyze_stmt(self)
 
 
@@ -1949,6 +1948,7 @@ class SQLiteParser ( Parser ):
             self.state = 257
             self.match(SQLiteParser.K_ANALYZE)
             self.state = 264
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,12,self._ctx)
             if la_ == 1:
                 self.state = 258
@@ -2002,11 +2002,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_attach_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterAttach_stmt" ):
                 listener.enterAttach_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitAttach_stmt" ):
                 listener.exitAttach_stmt(self)
 
 
@@ -2021,6 +2021,7 @@ class SQLiteParser ( Parser ):
             self.state = 266
             self.match(SQLiteParser.K_ATTACH)
             self.state = 268
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
             if la_ == 1:
                 self.state = 267
@@ -2070,11 +2071,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_begin_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterBegin_stmt" ):
                 listener.enterBegin_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitBegin_stmt" ):
                 listener.exitBegin_stmt(self)
 
 
@@ -2090,6 +2091,7 @@ class SQLiteParser ( Parser ):
             self.state = 274
             self.match(SQLiteParser.K_BEGIN)
             self.state = 276
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 58)) & ~0x3f) == 0 and ((1 << (_la - 58)) & ((1 << (SQLiteParser.K_DEFERRED - 58)) | (1 << (SQLiteParser.K_EXCLUSIVE - 58)) | (1 << (SQLiteParser.K_IMMEDIATE - 58)))) != 0):
                 self.state = 275
@@ -2097,15 +2099,18 @@ class SQLiteParser ( Parser ):
                 if not(((((_la - 58)) & ~0x3f) == 0 and ((1 << (_la - 58)) & ((1 << (SQLiteParser.K_DEFERRED - 58)) | (1 << (SQLiteParser.K_EXCLUSIVE - 58)) | (1 << (SQLiteParser.K_IMMEDIATE - 58)))) != 0)):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
 
 
             self.state = 282
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_TRANSACTION:
                 self.state = 278
                 self.match(SQLiteParser.K_TRANSACTION)
                 self.state = 280
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,15,self._ctx)
                 if la_ == 1:
                     self.state = 279
@@ -2145,11 +2150,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_commit_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCommit_stmt" ):
                 listener.enterCommit_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCommit_stmt" ):
                 listener.exitCommit_stmt(self)
 
 
@@ -2167,13 +2172,16 @@ class SQLiteParser ( Parser ):
             if not(_la==SQLiteParser.K_COMMIT or _la==SQLiteParser.K_END):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
             self.state = 289
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_TRANSACTION:
                 self.state = 285
                 self.match(SQLiteParser.K_TRANSACTION)
                 self.state = 287
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
                 if la_ == 1:
                     self.state = 286
@@ -2270,11 +2278,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_compound_select_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCompound_select_stmt" ):
                 listener.enterCompound_select_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCompound_select_stmt" ):
                 listener.exitCompound_select_stmt(self)
 
 
@@ -2288,11 +2296,13 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 303
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
                 self.state = 291
                 self.match(SQLiteParser.K_WITH)
                 self.state = 293
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
                 if la_ == 1:
                     self.state = 292
@@ -2322,26 +2332,28 @@ class SQLiteParser ( Parser ):
             _la = self._input.LA(1)
             while True:
                 self.state = 312
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [SQLiteParser.K_UNION]:
                     self.state = 306
                     self.match(SQLiteParser.K_UNION)
                     self.state = 308
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==SQLiteParser.K_ALL:
                         self.state = 307
                         self.match(SQLiteParser.K_ALL)
 
 
-
+                    pass
                 elif token in [SQLiteParser.K_INTERSECT]:
                     self.state = 310
                     self.match(SQLiteParser.K_INTERSECT)
-
+                    pass
                 elif token in [SQLiteParser.K_EXCEPT]:
                     self.state = 311
                     self.match(SQLiteParser.K_EXCEPT)
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -2354,6 +2366,7 @@ class SQLiteParser ( Parser ):
                     break
 
             self.state = 329
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_ORDER:
                 self.state = 319
@@ -2377,6 +2390,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 337
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_LIMIT:
                 self.state = 331
@@ -2384,6 +2398,7 @@ class SQLiteParser ( Parser ):
                 self.state = 332
                 self.expr(0)
                 self.state = 335
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET:
                     self.state = 333
@@ -2391,6 +2406,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 334
                     self.expr(0)
@@ -2463,11 +2479,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_create_index_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCreate_index_stmt" ):
                 listener.enterCreate_index_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCreate_index_stmt" ):
                 listener.exitCreate_index_stmt(self)
 
 
@@ -2483,6 +2499,7 @@ class SQLiteParser ( Parser ):
             self.state = 339
             self.match(SQLiteParser.K_CREATE)
             self.state = 341
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_UNIQUE:
                 self.state = 340
@@ -2492,6 +2509,7 @@ class SQLiteParser ( Parser ):
             self.state = 343
             self.match(SQLiteParser.K_INDEX)
             self.state = 347
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,30,self._ctx)
             if la_ == 1:
                 self.state = 344
@@ -2503,6 +2521,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 352
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,31,self._ctx)
             if la_ == 1:
                 self.state = 349
@@ -2536,6 +2555,7 @@ class SQLiteParser ( Parser ):
             self.state = 366
             self.match(SQLiteParser.CLOSE_PAR)
             self.state = 369
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WHERE:
                 self.state = 367
@@ -2618,11 +2638,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_create_table_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCreate_table_stmt" ):
                 listener.enterCreate_table_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCreate_table_stmt" ):
                 listener.exitCreate_table_stmt(self)
 
 
@@ -2638,6 +2658,7 @@ class SQLiteParser ( Parser ):
             self.state = 371
             self.match(SQLiteParser.K_CREATE)
             self.state = 373
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_TEMP or _la==SQLiteParser.K_TEMPORARY:
                 self.state = 372
@@ -2645,12 +2666,14 @@ class SQLiteParser ( Parser ):
                 if not(_la==SQLiteParser.K_TEMP or _la==SQLiteParser.K_TEMPORARY):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
 
 
             self.state = 375
             self.match(SQLiteParser.K_TABLE)
             self.state = 379
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,35,self._ctx)
             if la_ == 1:
                 self.state = 376
@@ -2662,6 +2685,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 384
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,36,self._ctx)
             if la_ == 1:
                 self.state = 381
@@ -2673,6 +2697,7 @@ class SQLiteParser ( Parser ):
             self.state = 386
             self.table_name()
             self.state = 410
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.OPEN_PAR]:
                 self.state = 387
@@ -2707,6 +2732,7 @@ class SQLiteParser ( Parser ):
                 self.state = 403
                 self.match(SQLiteParser.CLOSE_PAR)
                 self.state = 406
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_WITHOUT:
                     self.state = 404
@@ -2715,13 +2741,13 @@ class SQLiteParser ( Parser ):
                     self.match(SQLiteParser.IDENTIFIER)
 
 
-
+                pass
             elif token in [SQLiteParser.K_AS]:
                 self.state = 408
                 self.match(SQLiteParser.K_AS)
                 self.state = 409
                 self.select_stmt()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -2863,11 +2889,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_create_trigger_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCreate_trigger_stmt" ):
                 listener.enterCreate_trigger_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCreate_trigger_stmt" ):
                 listener.exitCreate_trigger_stmt(self)
 
 
@@ -2883,6 +2909,7 @@ class SQLiteParser ( Parser ):
             self.state = 412
             self.match(SQLiteParser.K_CREATE)
             self.state = 414
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_TEMP or _la==SQLiteParser.K_TEMPORARY:
                 self.state = 413
@@ -2890,12 +2917,14 @@ class SQLiteParser ( Parser ):
                 if not(_la==SQLiteParser.K_TEMP or _la==SQLiteParser.K_TEMPORARY):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
 
 
             self.state = 416
             self.match(SQLiteParser.K_TRIGGER)
             self.state = 420
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,42,self._ctx)
             if la_ == 1:
                 self.state = 417
@@ -2907,6 +2936,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 425
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,43,self._ctx)
             if la_ == 1:
                 self.state = 422
@@ -2918,6 +2948,7 @@ class SQLiteParser ( Parser ):
             self.state = 427
             self.trigger_name()
             self.state = 432
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_BEFORE]:
                 self.state = 428
@@ -2938,19 +2969,21 @@ class SQLiteParser ( Parser ):
             else:
                 raise NoViableAltException(self)
             self.state = 448
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_DELETE]:
                 self.state = 434
                 self.match(SQLiteParser.K_DELETE)
-
+                pass
             elif token in [SQLiteParser.K_INSERT]:
                 self.state = 435
                 self.match(SQLiteParser.K_INSERT)
-
+                pass
             elif token in [SQLiteParser.K_UPDATE]:
                 self.state = 436
                 self.match(SQLiteParser.K_UPDATE)
                 self.state = 446
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_OF:
                     self.state = 437
@@ -2971,13 +3004,14 @@ class SQLiteParser ( Parser ):
 
 
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
             self.state = 450
             self.match(SQLiteParser.K_ON)
             self.state = 454
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,48,self._ctx)
             if la_ == 1:
                 self.state = 451
@@ -2989,6 +3023,7 @@ class SQLiteParser ( Parser ):
             self.state = 456
             self.table_name()
             self.state = 460
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_FOR:
                 self.state = 457
@@ -3000,6 +3035,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 464
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WHEN:
                 self.state = 462
@@ -3015,6 +3051,7 @@ class SQLiteParser ( Parser ):
             _la = self._input.LA(1)
             while True:
                 self.state = 471
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,51,self._ctx)
                 if la_ == 1:
                     self.state = 467
@@ -3101,11 +3138,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_create_view_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCreate_view_stmt" ):
                 listener.enterCreate_view_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCreate_view_stmt" ):
                 listener.exitCreate_view_stmt(self)
 
 
@@ -3121,6 +3158,7 @@ class SQLiteParser ( Parser ):
             self.state = 481
             self.match(SQLiteParser.K_CREATE)
             self.state = 483
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_TEMP or _la==SQLiteParser.K_TEMPORARY:
                 self.state = 482
@@ -3128,12 +3166,14 @@ class SQLiteParser ( Parser ):
                 if not(_la==SQLiteParser.K_TEMP or _la==SQLiteParser.K_TEMPORARY):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
 
 
             self.state = 485
             self.match(SQLiteParser.K_VIEW)
             self.state = 489
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,54,self._ctx)
             if la_ == 1:
                 self.state = 486
@@ -3145,6 +3185,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 494
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,55,self._ctx)
             if la_ == 1:
                 self.state = 491
@@ -3217,11 +3258,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_create_virtual_table_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCreate_virtual_table_stmt" ):
                 listener.enterCreate_virtual_table_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCreate_virtual_table_stmt" ):
                 listener.exitCreate_virtual_table_stmt(self)
 
 
@@ -3241,6 +3282,7 @@ class SQLiteParser ( Parser ):
             self.state = 502
             self.match(SQLiteParser.K_TABLE)
             self.state = 506
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,56,self._ctx)
             if la_ == 1:
                 self.state = 503
@@ -3252,6 +3294,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 511
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,57,self._ctx)
             if la_ == 1:
                 self.state = 508
@@ -3267,6 +3310,7 @@ class SQLiteParser ( Parser ):
             self.state = 515
             self.module_name()
             self.state = 527
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 516
@@ -3328,11 +3372,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_delete_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterDelete_stmt" ):
                 listener.enterDelete_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitDelete_stmt" ):
                 listener.exitDelete_stmt(self)
 
 
@@ -3346,6 +3390,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 530
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
                 self.state = 529
@@ -3359,6 +3404,7 @@ class SQLiteParser ( Parser ):
             self.state = 534
             self.qualified_table_name()
             self.state = 537
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WHERE:
                 self.state = 535
@@ -3428,11 +3474,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_delete_stmt_limited
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterDelete_stmt_limited" ):
                 listener.enterDelete_stmt_limited(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitDelete_stmt_limited" ):
                 listener.exitDelete_stmt_limited(self)
 
 
@@ -3446,6 +3492,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 540
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
                 self.state = 539
@@ -3459,6 +3506,7 @@ class SQLiteParser ( Parser ):
             self.state = 544
             self.qualified_table_name()
             self.state = 547
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WHERE:
                 self.state = 545
@@ -3468,9 +3516,11 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 567
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_LIMIT or _la==SQLiteParser.K_ORDER:
                 self.state = 559
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_ORDER:
                     self.state = 549
@@ -3498,6 +3548,7 @@ class SQLiteParser ( Parser ):
                 self.state = 562
                 self.expr(0)
                 self.state = 565
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET:
                     self.state = 563
@@ -3505,6 +3556,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 564
                     self.expr(0)
@@ -3540,11 +3592,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_detach_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterDetach_stmt" ):
                 listener.enterDetach_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitDetach_stmt" ):
                 listener.exitDetach_stmt(self)
 
 
@@ -3559,6 +3611,7 @@ class SQLiteParser ( Parser ):
             self.state = 569
             self.match(SQLiteParser.K_DETACH)
             self.state = 571
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,68,self._ctx)
             if la_ == 1:
                 self.state = 570
@@ -3605,11 +3658,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_drop_index_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterDrop_index_stmt" ):
                 listener.enterDrop_index_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitDrop_index_stmt" ):
                 listener.exitDrop_index_stmt(self)
 
 
@@ -3626,6 +3679,7 @@ class SQLiteParser ( Parser ):
             self.state = 576
             self.match(SQLiteParser.K_INDEX)
             self.state = 579
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,69,self._ctx)
             if la_ == 1:
                 self.state = 577
@@ -3635,6 +3689,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 584
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,70,self._ctx)
             if la_ == 1:
                 self.state = 581
@@ -3683,11 +3738,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_drop_table_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterDrop_table_stmt" ):
                 listener.enterDrop_table_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitDrop_table_stmt" ):
                 listener.exitDrop_table_stmt(self)
 
 
@@ -3704,6 +3759,7 @@ class SQLiteParser ( Parser ):
             self.state = 589
             self.match(SQLiteParser.K_TABLE)
             self.state = 592
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,71,self._ctx)
             if la_ == 1:
                 self.state = 590
@@ -3713,6 +3769,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 597
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,72,self._ctx)
             if la_ == 1:
                 self.state = 594
@@ -3761,11 +3818,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_drop_trigger_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterDrop_trigger_stmt" ):
                 listener.enterDrop_trigger_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitDrop_trigger_stmt" ):
                 listener.exitDrop_trigger_stmt(self)
 
 
@@ -3782,6 +3839,7 @@ class SQLiteParser ( Parser ):
             self.state = 602
             self.match(SQLiteParser.K_TRIGGER)
             self.state = 605
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,73,self._ctx)
             if la_ == 1:
                 self.state = 603
@@ -3791,6 +3849,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 610
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,74,self._ctx)
             if la_ == 1:
                 self.state = 607
@@ -3839,11 +3898,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_drop_view_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterDrop_view_stmt" ):
                 listener.enterDrop_view_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitDrop_view_stmt" ):
                 listener.exitDrop_view_stmt(self)
 
 
@@ -3860,6 +3919,7 @@ class SQLiteParser ( Parser ):
             self.state = 615
             self.match(SQLiteParser.K_VIEW)
             self.state = 618
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,75,self._ctx)
             if la_ == 1:
                 self.state = 616
@@ -3869,6 +3929,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 623
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,76,self._ctx)
             if la_ == 1:
                 self.state = 620
@@ -3950,11 +4011,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_factored_select_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterFactored_select_stmt" ):
                 listener.enterFactored_select_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitFactored_select_stmt" ):
                 listener.exitFactored_select_stmt(self)
 
 
@@ -3968,11 +4029,13 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 639
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
                 self.state = 627
                 self.match(SQLiteParser.K_WITH)
                 self.state = 629
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,77,self._ctx)
                 if la_ == 1:
                     self.state = 628
@@ -4010,6 +4073,7 @@ class SQLiteParser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 660
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_ORDER:
                 self.state = 650
@@ -4033,6 +4097,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 668
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_LIMIT:
                 self.state = 662
@@ -4040,6 +4105,7 @@ class SQLiteParser ( Parser ):
                 self.state = 663
                 self.expr(0)
                 self.state = 666
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET:
                     self.state = 664
@@ -4047,6 +4113,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 665
                     self.expr(0)
@@ -4132,11 +4199,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_insert_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterInsert_stmt" ):
                 listener.enterInsert_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitInsert_stmt" ):
                 listener.exitInsert_stmt(self)
 
 
@@ -4150,6 +4217,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 671
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
                 self.state = 670
@@ -4157,6 +4225,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 690
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,86,self._ctx)
             if la_ == 1:
                 self.state = 673
@@ -4217,6 +4286,7 @@ class SQLiteParser ( Parser ):
             self.state = 692
             self.match(SQLiteParser.K_INTO)
             self.state = 696
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,87,self._ctx)
             if la_ == 1:
                 self.state = 693
@@ -4228,6 +4298,7 @@ class SQLiteParser ( Parser ):
             self.state = 698
             self.table_name()
             self.state = 710
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 699
@@ -4251,6 +4322,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 743
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,93,self._ctx)
             if la_ == 1:
                 self.state = 712
@@ -4349,11 +4421,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_pragma_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterPragma_stmt" ):
                 listener.enterPragma_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitPragma_stmt" ):
                 listener.exitPragma_stmt(self)
 
 
@@ -4368,6 +4440,7 @@ class SQLiteParser ( Parser ):
             self.state = 745
             self.match(SQLiteParser.K_PRAGMA)
             self.state = 749
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,94,self._ctx)
             if la_ == 1:
                 self.state = 746
@@ -4379,6 +4452,7 @@ class SQLiteParser ( Parser ):
             self.state = 751
             self.pragma_name()
             self.state = 758
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.ASSIGN]:
                 self.state = 752
@@ -4435,11 +4509,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_reindex_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterReindex_stmt" ):
                 listener.enterReindex_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitReindex_stmt" ):
                 listener.exitReindex_stmt(self)
 
 
@@ -4454,6 +4528,7 @@ class SQLiteParser ( Parser ):
             self.state = 760
             self.match(SQLiteParser.K_REINDEX)
             self.state = 771
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,98,self._ctx)
             if la_ == 1:
                 self.state = 761
@@ -4461,6 +4536,7 @@ class SQLiteParser ( Parser ):
 
             elif la_ == 2:
                 self.state = 765
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,96,self._ctx)
                 if la_ == 1:
                     self.state = 762
@@ -4470,6 +4546,7 @@ class SQLiteParser ( Parser ):
 
 
                 self.state = 769
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,97,self._ctx)
                 if la_ == 1:
                     self.state = 767
@@ -4512,11 +4589,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_release_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterRelease_stmt" ):
                 listener.enterRelease_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitRelease_stmt" ):
                 listener.exitRelease_stmt(self)
 
 
@@ -4531,6 +4608,7 @@ class SQLiteParser ( Parser ):
             self.state = 773
             self.match(SQLiteParser.K_RELEASE)
             self.state = 775
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,99,self._ctx)
             if la_ == 1:
                 self.state = 774
@@ -4577,11 +4655,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_rollback_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterRollback_stmt" ):
                 listener.enterRollback_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitRollback_stmt" ):
                 listener.exitRollback_stmt(self)
 
 
@@ -4597,11 +4675,13 @@ class SQLiteParser ( Parser ):
             self.state = 779
             self.match(SQLiteParser.K_ROLLBACK)
             self.state = 784
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_TRANSACTION:
                 self.state = 780
                 self.match(SQLiteParser.K_TRANSACTION)
                 self.state = 782
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,100,self._ctx)
                 if la_ == 1:
                     self.state = 781
@@ -4611,11 +4691,13 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 791
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_TO:
                 self.state = 786
                 self.match(SQLiteParser.K_TO)
                 self.state = 788
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,102,self._ctx)
                 if la_ == 1:
                     self.state = 787
@@ -4651,11 +4733,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_savepoint_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterSavepoint_stmt" ):
                 listener.enterSavepoint_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitSavepoint_stmt" ):
                 listener.exitSavepoint_stmt(self)
 
 
@@ -4732,11 +4814,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_simple_select_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterSimple_select_stmt" ):
                 listener.enterSimple_select_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitSimple_select_stmt" ):
                 listener.exitSimple_select_stmt(self)
 
 
@@ -4750,11 +4832,13 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 808
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
                 self.state = 796
                 self.match(SQLiteParser.K_WITH)
                 self.state = 798
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,104,self._ctx)
                 if la_ == 1:
                     self.state = 797
@@ -4780,6 +4864,7 @@ class SQLiteParser ( Parser ):
             self.state = 810
             self.select_core()
             self.state = 821
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_ORDER:
                 self.state = 811
@@ -4803,6 +4888,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 829
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_LIMIT:
                 self.state = 823
@@ -4810,6 +4896,7 @@ class SQLiteParser ( Parser ):
                 self.state = 824
                 self.expr(0)
                 self.state = 827
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET:
                     self.state = 825
@@ -4817,6 +4904,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 826
                     self.expr(0)
@@ -4895,11 +4983,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_select_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterSelect_stmt" ):
                 listener.enterSelect_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitSelect_stmt" ):
                 listener.exitSelect_stmt(self)
 
 
@@ -4913,11 +5001,13 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 843
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
                 self.state = 831
                 self.match(SQLiteParser.K_WITH)
                 self.state = 833
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,111,self._ctx)
                 if la_ == 1:
                     self.state = 832
@@ -4955,6 +5045,7 @@ class SQLiteParser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 864
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_ORDER:
                 self.state = 854
@@ -4978,6 +5069,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 872
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_LIMIT:
                 self.state = 866
@@ -4985,6 +5077,7 @@ class SQLiteParser ( Parser ):
                 self.state = 867
                 self.expr(0)
                 self.state = 870
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET:
                     self.state = 868
@@ -4992,6 +5085,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 869
                     self.expr(0)
@@ -5069,11 +5163,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_select_or_values
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterSelect_or_values" ):
                 listener.enterSelect_or_values(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitSelect_or_values" ):
                 listener.exitSelect_or_values(self)
 
 
@@ -5086,12 +5180,14 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 948
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_SELECT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 874
                 self.match(SQLiteParser.K_SELECT)
                 self.state = 876
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,119,self._ctx)
                 if la_ == 1:
                     self.state = 875
@@ -5099,6 +5195,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.K_ALL or _la==SQLiteParser.K_DISTINCT):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
 
 
@@ -5117,11 +5214,13 @@ class SQLiteParser ( Parser ):
                     _la = self._input.LA(1)
 
                 self.state = 898
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_FROM:
                     self.state = 886
                     self.match(SQLiteParser.K_FROM)
                     self.state = 896
+                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,122,self._ctx)
                     if la_ == 1:
                         self.state = 887
@@ -5149,6 +5248,7 @@ class SQLiteParser ( Parser ):
 
 
                 self.state = 902
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_WHERE:
                     self.state = 900
@@ -5158,6 +5258,7 @@ class SQLiteParser ( Parser ):
 
 
                 self.state = 918
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_GROUP:
                     self.state = 904
@@ -5179,6 +5280,7 @@ class SQLiteParser ( Parser ):
                         _la = self._input.LA(1)
 
                     self.state = 916
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==SQLiteParser.K_HAVING:
                         self.state = 914
@@ -5189,7 +5291,7 @@ class SQLiteParser ( Parser ):
 
 
 
-
+                pass
             elif token in [SQLiteParser.K_VALUES]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 920
@@ -5240,7 +5342,7 @@ class SQLiteParser ( Parser ):
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -5311,11 +5413,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_update_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterUpdate_stmt" ):
                 listener.enterUpdate_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitUpdate_stmt" ):
                 listener.exitUpdate_stmt(self)
 
 
@@ -5329,6 +5431,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 951
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
                 self.state = 950
@@ -5338,6 +5441,7 @@ class SQLiteParser ( Parser ):
             self.state = 953
             self.match(SQLiteParser.K_UPDATE)
             self.state = 964
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,133,self._ctx)
             if la_ == 1:
                 self.state = 954
@@ -5397,6 +5501,7 @@ class SQLiteParser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 983
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WHERE:
                 self.state = 981
@@ -5491,11 +5596,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_update_stmt_limited
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterUpdate_stmt_limited" ):
                 listener.enterUpdate_stmt_limited(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitUpdate_stmt_limited" ):
                 listener.exitUpdate_stmt_limited(self)
 
 
@@ -5509,6 +5614,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 986
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WITH:
                 self.state = 985
@@ -5518,6 +5624,7 @@ class SQLiteParser ( Parser ):
             self.state = 988
             self.match(SQLiteParser.K_UPDATE)
             self.state = 999
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,137,self._ctx)
             if la_ == 1:
                 self.state = 989
@@ -5577,6 +5684,7 @@ class SQLiteParser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 1018
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_WHERE:
                 self.state = 1016
@@ -5586,9 +5694,11 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 1038
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_LIMIT or _la==SQLiteParser.K_ORDER:
                 self.state = 1030
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_ORDER:
                     self.state = 1020
@@ -5616,6 +5726,7 @@ class SQLiteParser ( Parser ):
                 self.state = 1033
                 self.expr(0)
                 self.state = 1036
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET:
                     self.state = 1034
@@ -5623,6 +5734,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.COMMA or _la==SQLiteParser.K_OFFSET):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 1035
                     self.expr(0)
@@ -5651,11 +5763,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_vacuum_stmt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterVacuum_stmt" ):
                 listener.enterVacuum_stmt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitVacuum_stmt" ):
                 listener.exitVacuum_stmt(self)
 
 
@@ -5702,11 +5814,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_column_def
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterColumn_def" ):
                 listener.enterColumn_def(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitColumn_def" ):
                 listener.exitColumn_def(self)
 
 
@@ -5722,6 +5834,7 @@ class SQLiteParser ( Parser ):
             self.state = 1042
             self.column_name()
             self.state = 1044
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,144,self._ctx)
             if la_ == 1:
                 self.state = 1043
@@ -5770,11 +5883,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_type_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterType_name" ):
                 listener.enterType_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitType_name" ):
                 listener.exitType_name(self)
 
 
@@ -5801,6 +5914,7 @@ class SQLiteParser ( Parser ):
                 _alt = self._interp.adaptivePredict(self._input,146,self._ctx)
 
             self.state = 1067
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,147,self._ctx)
             if la_ == 1:
                 self.state = 1057
@@ -5905,11 +6019,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_column_constraint
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterColumn_constraint" ):
                 listener.enterColumn_constraint(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitColumn_constraint" ):
                 listener.exitColumn_constraint(self)
 
 
@@ -5923,6 +6037,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1071
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_CONSTRAINT:
                 self.state = 1069
@@ -5932,6 +6047,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 1106
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_PRIMARY]:
                 self.state = 1073
@@ -5939,6 +6055,7 @@ class SQLiteParser ( Parser ):
                 self.state = 1074
                 self.match(SQLiteParser.K_KEY)
                 self.state = 1076
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_ASC or _la==SQLiteParser.K_DESC:
                     self.state = 1075
@@ -5946,21 +6063,24 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.K_ASC or _la==SQLiteParser.K_DESC):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
 
 
                 self.state = 1078
                 self.conflict_clause()
                 self.state = 1080
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_AUTOINCREMENT:
                     self.state = 1079
                     self.match(SQLiteParser.K_AUTOINCREMENT)
 
 
-
+                pass
             elif token in [SQLiteParser.K_NOT, SQLiteParser.K_NULL]:
                 self.state = 1083
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_NOT:
                     self.state = 1082
@@ -5971,13 +6091,13 @@ class SQLiteParser ( Parser ):
                 self.match(SQLiteParser.K_NULL)
                 self.state = 1086
                 self.conflict_clause()
-
+                pass
             elif token in [SQLiteParser.K_UNIQUE]:
                 self.state = 1087
                 self.match(SQLiteParser.K_UNIQUE)
                 self.state = 1088
                 self.conflict_clause()
-
+                pass
             elif token in [SQLiteParser.K_CHECK]:
                 self.state = 1089
                 self.match(SQLiteParser.K_CHECK)
@@ -5987,11 +6107,12 @@ class SQLiteParser ( Parser ):
                 self.expr(0)
                 self.state = 1092
                 self.match(SQLiteParser.CLOSE_PAR)
-
+                pass
             elif token in [SQLiteParser.K_DEFAULT]:
                 self.state = 1094
                 self.match(SQLiteParser.K_DEFAULT)
                 self.state = 1101
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,152,self._ctx)
                 if la_ == 1:
                     self.state = 1095
@@ -6013,17 +6134,17 @@ class SQLiteParser ( Parser ):
                     pass
 
 
-
+                pass
             elif token in [SQLiteParser.K_COLLATE]:
                 self.state = 1103
                 self.match(SQLiteParser.K_COLLATE)
                 self.state = 1104
                 self.collation_name()
-
+                pass
             elif token in [SQLiteParser.K_REFERENCES]:
                 self.state = 1105
                 self.foreign_key_clause()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -6066,11 +6187,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_conflict_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterConflict_clause" ):
                 listener.enterConflict_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitConflict_clause" ):
                 listener.exitConflict_clause(self)
 
 
@@ -6084,6 +6205,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1111
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_ON:
                 self.state = 1108
@@ -6095,6 +6217,7 @@ class SQLiteParser ( Parser ):
                 if not(_la==SQLiteParser.K_ABORT or ((((_la - 72)) & ~0x3f) == 0 and ((1 << (_la - 72)) & ((1 << (SQLiteParser.K_FAIL - 72)) | (1 << (SQLiteParser.K_IGNORE - 72)) | (1 << (SQLiteParser.K_REPLACE - 72)) | (1 << (SQLiteParser.K_ROLLBACK - 72)))) != 0)):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
 
 
@@ -6111,17 +6234,6 @@ class SQLiteParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
-
-        def unary_operator(self):
-            return self.getTypedRuleContext(SQLiteParser.Unary_operatorContext,0)
-
-
-        def expr(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(SQLiteParser.ExprContext)
-            else:
-                return self.getTypedRuleContext(SQLiteParser.ExprContext,i)
-
 
         def literal_value(self):
             return self.getTypedRuleContext(SQLiteParser.Literal_valueContext,0)
@@ -6140,6 +6252,17 @@ class SQLiteParser ( Parser ):
 
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
+
+
+        def unary_operator(self):
+            return self.getTypedRuleContext(SQLiteParser.Unary_operatorContext,0)
+
+
+        def expr(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(SQLiteParser.ExprContext)
+            else:
+                return self.getTypedRuleContext(SQLiteParser.ExprContext,i)
 
 
         def function_name(self):
@@ -6244,11 +6367,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_expr
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterExpr" ):
                 listener.enterExpr(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitExpr" ):
                 listener.exitExpr(self)
 
 
@@ -6264,45 +6387,48 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1189
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,165,self._ctx)
             if la_ == 1:
                 self.state = 1114
-                self.unary_operator()
-                self.state = 1115
-                self.expr(21)
-                pass
-
-            elif la_ == 2:
-                self.state = 1117
                 self.literal_value()
                 pass
 
-            elif la_ == 3:
-                self.state = 1118
+            elif la_ == 2:
+                self.state = 1115
                 self.match(SQLiteParser.BIND_PARAMETER)
+                pass
+
+            elif la_ == 3:
+                self.state = 1124
+                self._errHandler.sync(self)
+                la_ = self._interp.adaptivePredict(self._input,156,self._ctx)
+                if la_ == 1:
+                    self.state = 1119
+                    self._errHandler.sync(self)
+                    la_ = self._interp.adaptivePredict(self._input,155,self._ctx)
+                    if la_ == 1:
+                        self.state = 1116
+                        self.database_name()
+                        self.state = 1117
+                        self.match(SQLiteParser.DOT)
+
+
+                    self.state = 1121
+                    self.table_name()
+                    self.state = 1122
+                    self.match(SQLiteParser.DOT)
+
+
+                self.state = 1126
+                self.column_name()
                 pass
 
             elif la_ == 4:
                 self.state = 1127
-                la_ = self._interp.adaptivePredict(self._input,156,self._ctx)
-                if la_ == 1:
-                    self.state = 1122
-                    la_ = self._interp.adaptivePredict(self._input,155,self._ctx)
-                    if la_ == 1:
-                        self.state = 1119
-                        self.database_name()
-                        self.state = 1120
-                        self.match(SQLiteParser.DOT)
-
-
-                    self.state = 1124
-                    self.table_name()
-                    self.state = 1125
-                    self.match(SQLiteParser.DOT)
-
-
-                self.state = 1129
-                self.column_name()
+                self.unary_operator()
+                self.state = 1128
+                self.expr(21)
                 pass
 
             elif la_ == 5:
@@ -6311,9 +6437,11 @@ class SQLiteParser ( Parser ):
                 self.state = 1131
                 self.match(SQLiteParser.OPEN_PAR)
                 self.state = 1144
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [SQLiteParser.OPEN_PAR, SQLiteParser.PLUS, SQLiteParser.MINUS, SQLiteParser.TILDE, SQLiteParser.K_ABORT, SQLiteParser.K_ACTION, SQLiteParser.K_ADD, SQLiteParser.K_AFTER, SQLiteParser.K_ALL, SQLiteParser.K_ALTER, SQLiteParser.K_ANALYZE, SQLiteParser.K_AND, SQLiteParser.K_AS, SQLiteParser.K_ASC, SQLiteParser.K_ATTACH, SQLiteParser.K_AUTOINCREMENT, SQLiteParser.K_BEFORE, SQLiteParser.K_BEGIN, SQLiteParser.K_BETWEEN, SQLiteParser.K_BY, SQLiteParser.K_CASCADE, SQLiteParser.K_CASE, SQLiteParser.K_CAST, SQLiteParser.K_CHECK, SQLiteParser.K_COLLATE, SQLiteParser.K_COLUMN, SQLiteParser.K_COMMIT, SQLiteParser.K_CONFLICT, SQLiteParser.K_CONSTRAINT, SQLiteParser.K_CREATE, SQLiteParser.K_CROSS, SQLiteParser.K_CURRENT_DATE, SQLiteParser.K_CURRENT_TIME, SQLiteParser.K_CURRENT_TIMESTAMP, SQLiteParser.K_DATABASE, SQLiteParser.K_DEFAULT, SQLiteParser.K_DEFERRABLE, SQLiteParser.K_DEFERRED, SQLiteParser.K_DELETE, SQLiteParser.K_DESC, SQLiteParser.K_DETACH, SQLiteParser.K_DISTINCT, SQLiteParser.K_DROP, SQLiteParser.K_EACH, SQLiteParser.K_ELSE, SQLiteParser.K_END, SQLiteParser.K_ESCAPE, SQLiteParser.K_EXCEPT, SQLiteParser.K_EXCLUSIVE, SQLiteParser.K_EXISTS, SQLiteParser.K_EXPLAIN, SQLiteParser.K_FAIL, SQLiteParser.K_FOR, SQLiteParser.K_FOREIGN, SQLiteParser.K_FROM, SQLiteParser.K_FULL, SQLiteParser.K_GLOB, SQLiteParser.K_GROUP, SQLiteParser.K_HAVING, SQLiteParser.K_IF, SQLiteParser.K_IGNORE, SQLiteParser.K_IMMEDIATE, SQLiteParser.K_IN, SQLiteParser.K_INDEX, SQLiteParser.K_INDEXED, SQLiteParser.K_INITIALLY, SQLiteParser.K_INNER, SQLiteParser.K_INSERT, SQLiteParser.K_INSTEAD, SQLiteParser.K_INTERSECT, SQLiteParser.K_INTO, SQLiteParser.K_IS, SQLiteParser.K_ISNULL, SQLiteParser.K_JOIN, SQLiteParser.K_KEY, SQLiteParser.K_LEFT, SQLiteParser.K_LIKE, SQLiteParser.K_LIMIT, SQLiteParser.K_MATCH, SQLiteParser.K_NATURAL, SQLiteParser.K_NO, SQLiteParser.K_NOT, SQLiteParser.K_NOTNULL, SQLiteParser.K_NULL, SQLiteParser.K_OF, SQLiteParser.K_OFFSET, SQLiteParser.K_ON, SQLiteParser.K_OR, SQLiteParser.K_ORDER, SQLiteParser.K_OUTER, SQLiteParser.K_PLAN, SQLiteParser.K_PRAGMA, SQLiteParser.K_PRIMARY, SQLiteParser.K_QUERY, SQLiteParser.K_RAISE, SQLiteParser.K_RECURSIVE, SQLiteParser.K_REFERENCES, SQLiteParser.K_REGEXP, SQLiteParser.K_REINDEX, SQLiteParser.K_RELEASE, SQLiteParser.K_RENAME, SQLiteParser.K_REPLACE, SQLiteParser.K_RESTRICT, SQLiteParser.K_RIGHT, SQLiteParser.K_ROLLBACK, SQLiteParser.K_ROW, SQLiteParser.K_SAVEPOINT, SQLiteParser.K_SELECT, SQLiteParser.K_SET, SQLiteParser.K_TABLE, SQLiteParser.K_TEMP, SQLiteParser.K_TEMPORARY, SQLiteParser.K_THEN, SQLiteParser.K_TO, SQLiteParser.K_TRANSACTION, SQLiteParser.K_TRIGGER, SQLiteParser.K_UNION, SQLiteParser.K_UNIQUE, SQLiteParser.K_UPDATE, SQLiteParser.K_USING, SQLiteParser.K_VACUUM, SQLiteParser.K_VALUES, SQLiteParser.K_VIEW, SQLiteParser.K_VIRTUAL, SQLiteParser.K_WHEN, SQLiteParser.K_WHERE, SQLiteParser.K_WITH, SQLiteParser.K_WITHOUT, SQLiteParser.IDENTIFIER, SQLiteParser.NUMERIC_LITERAL, SQLiteParser.BIND_PARAMETER, SQLiteParser.STRING_LITERAL, SQLiteParser.BLOB_LITERAL]:
                     self.state = 1133
+                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,157,self._ctx)
                     if la_ == 1:
                         self.state = 1132
@@ -6373,9 +6501,11 @@ class SQLiteParser ( Parser ):
 
             elif la_ == 8:
                 self.state = 1163
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_EXISTS or _la==SQLiteParser.K_NOT:
                     self.state = 1160
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==SQLiteParser.K_NOT:
                         self.state = 1159
@@ -6398,6 +6528,7 @@ class SQLiteParser ( Parser ):
                 self.state = 1169
                 self.match(SQLiteParser.K_CASE)
                 self.state = 1171
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,162,self._ctx)
                 if la_ == 1:
                     self.state = 1170
@@ -6423,6 +6554,7 @@ class SQLiteParser ( Parser ):
                         break
 
                 self.state = 1184
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_ELSE:
                     self.state = 1182
@@ -6451,6 +6583,7 @@ class SQLiteParser ( Parser ):
                         self.triggerExitRuleEvent()
                     _prevctx = localctx
                     self.state = 1289
+                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,177,self._ctx)
                     if la_ == 1:
                         localctx = SQLiteParser.ExprContext(self, _parentctx, _parentState)
@@ -6477,6 +6610,7 @@ class SQLiteParser ( Parser ):
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SQLiteParser.STAR) | (1 << SQLiteParser.DIV) | (1 << SQLiteParser.MOD))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
+                            self._errHandler.reportMatch(self)
                             self.consume()
                         self.state = 1196
                         self.expr(20)
@@ -6494,6 +6628,7 @@ class SQLiteParser ( Parser ):
                         if not(_la==SQLiteParser.PLUS or _la==SQLiteParser.MINUS):
                             self._errHandler.recoverInline(self)
                         else:
+                            self._errHandler.reportMatch(self)
                             self.consume()
                         self.state = 1199
                         self.expr(19)
@@ -6511,6 +6646,7 @@ class SQLiteParser ( Parser ):
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SQLiteParser.LT2) | (1 << SQLiteParser.GT2) | (1 << SQLiteParser.AMP) | (1 << SQLiteParser.PIPE))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
+                            self._errHandler.reportMatch(self)
                             self.consume()
                         self.state = 1202
                         self.expr(18)
@@ -6528,6 +6664,7 @@ class SQLiteParser ( Parser ):
                         if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SQLiteParser.LT) | (1 << SQLiteParser.LT_EQ) | (1 << SQLiteParser.GT) | (1 << SQLiteParser.GT_EQ))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
+                            self._errHandler.reportMatch(self)
                             self.consume()
                         self.state = 1205
                         self.expr(17)
@@ -6541,6 +6678,7 @@ class SQLiteParser ( Parser ):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 15)")
                         self.state = 1219
+                        self._errHandler.sync(self)
                         la_ = self._interp.adaptivePredict(self._input,166,self._ctx)
                         if la_ == 1:
                             self.state = 1207
@@ -6640,6 +6778,7 @@ class SQLiteParser ( Parser ):
                         self.state = 1229
                         self.match(SQLiteParser.K_IS)
                         self.state = 1231
+                        self._errHandler.sync(self)
                         la_ = self._interp.adaptivePredict(self._input,167,self._ctx)
                         if la_ == 1:
                             self.state = 1230
@@ -6658,6 +6797,7 @@ class SQLiteParser ( Parser ):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 5)")
                         self.state = 1236
+                        self._errHandler.sync(self)
                         _la = self._input.LA(1)
                         if _la==SQLiteParser.K_NOT:
                             self.state = 1235
@@ -6695,6 +6835,7 @@ class SQLiteParser ( Parser ):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 8)")
                         self.state = 1248
+                        self._errHandler.sync(self)
                         _la = self._input.LA(1)
                         if _la==SQLiteParser.K_NOT:
                             self.state = 1247
@@ -6706,10 +6847,12 @@ class SQLiteParser ( Parser ):
                         if not(((((_la - 77)) & ~0x3f) == 0 and ((1 << (_la - 77)) & ((1 << (SQLiteParser.K_GLOB - 77)) | (1 << (SQLiteParser.K_LIKE - 77)) | (1 << (SQLiteParser.K_MATCH - 77)) | (1 << (SQLiteParser.K_REGEXP - 77)))) != 0)):
                             self._errHandler.recoverInline(self)
                         else:
+                            self._errHandler.reportMatch(self)
                             self.consume()
                         self.state = 1251
                         self.expr(0)
                         self.state = 1254
+                        self._errHandler.sync(self)
                         la_ = self._interp.adaptivePredict(self._input,170,self._ctx)
                         if la_ == 1:
                             self.state = 1252
@@ -6728,21 +6871,22 @@ class SQLiteParser ( Parser ):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 7)")
                         self.state = 1261
+                        self._errHandler.sync(self)
                         token = self._input.LA(1)
                         if token in [SQLiteParser.K_ISNULL]:
                             self.state = 1257
                             self.match(SQLiteParser.K_ISNULL)
-
+                            pass
                         elif token in [SQLiteParser.K_NOTNULL]:
                             self.state = 1258
                             self.match(SQLiteParser.K_NOTNULL)
-
+                            pass
                         elif token in [SQLiteParser.K_NOT]:
                             self.state = 1259
                             self.match(SQLiteParser.K_NOT)
                             self.state = 1260
                             self.match(SQLiteParser.K_NULL)
-
+                            pass
                         else:
                             raise NoViableAltException(self)
 
@@ -6756,6 +6900,7 @@ class SQLiteParser ( Parser ):
                             from antlr4.error.Errors import FailedPredicateException
                             raise FailedPredicateException(self, "self.precpred(self._ctx, 4)")
                         self.state = 1265
+                        self._errHandler.sync(self)
                         _la = self._input.LA(1)
                         if _la==SQLiteParser.K_NOT:
                             self.state = 1264
@@ -6765,11 +6910,13 @@ class SQLiteParser ( Parser ):
                         self.state = 1267
                         self.match(SQLiteParser.K_IN)
                         self.state = 1287
+                        self._errHandler.sync(self)
                         la_ = self._interp.adaptivePredict(self._input,176,self._ctx)
                         if la_ == 1:
                             self.state = 1268
                             self.match(SQLiteParser.OPEN_PAR)
                             self.state = 1278
+                            self._errHandler.sync(self)
                             la_ = self._interp.adaptivePredict(self._input,174,self._ctx)
                             if la_ == 1:
                                 self.state = 1269
@@ -6798,6 +6945,7 @@ class SQLiteParser ( Parser ):
 
                         elif la_ == 2:
                             self.state = 1284
+                            self._errHandler.sync(self)
                             la_ = self._interp.adaptivePredict(self._input,175,self._ctx)
                             if la_ == 1:
                                 self.state = 1281
@@ -6938,11 +7086,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_foreign_key_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterForeign_key_clause" ):
                 listener.enterForeign_key_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitForeign_key_clause" ):
                 listener.exitForeign_key_clause(self)
 
 
@@ -6960,6 +7108,7 @@ class SQLiteParser ( Parser ):
             self.state = 1295
             self.foreign_table()
             self.state = 1307
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 1296
@@ -6987,6 +7136,7 @@ class SQLiteParser ( Parser ):
             _la = self._input.LA(1)
             while _la==SQLiteParser.K_MATCH or _la==SQLiteParser.K_ON:
                 self.state = 1323
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [SQLiteParser.K_ON]:
                     self.state = 1309
@@ -6996,8 +7146,10 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.K_DELETE or _la==SQLiteParser.K_UPDATE):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 1319
+                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,181,self._ctx)
                     if la_ == 1:
                         self.state = 1311
@@ -7031,13 +7183,13 @@ class SQLiteParser ( Parser ):
                         pass
 
 
-
+                    pass
                 elif token in [SQLiteParser.K_MATCH]:
                     self.state = 1321
                     self.match(SQLiteParser.K_MATCH)
                     self.state = 1322
                     self.name()
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -7046,9 +7198,11 @@ class SQLiteParser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 1340
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,186,self._ctx)
             if la_ == 1:
                 self.state = 1331
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_NOT:
                     self.state = 1330
@@ -7058,6 +7212,7 @@ class SQLiteParser ( Parser ):
                 self.state = 1333
                 self.match(SQLiteParser.K_DEFERRABLE)
                 self.state = 1338
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,185,self._ctx)
                 if la_ == 1:
                     self.state = 1334
@@ -7111,11 +7266,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_raise_function
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterRaise_function" ):
                 listener.enterRaise_function(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitRaise_function" ):
                 listener.exitRaise_function(self)
 
 
@@ -7133,23 +7288,25 @@ class SQLiteParser ( Parser ):
             self.state = 1343
             self.match(SQLiteParser.OPEN_PAR)
             self.state = 1348
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_IGNORE]:
                 self.state = 1344
                 self.match(SQLiteParser.K_IGNORE)
-
+                pass
             elif token in [SQLiteParser.K_ABORT, SQLiteParser.K_FAIL, SQLiteParser.K_ROLLBACK]:
                 self.state = 1345
                 _la = self._input.LA(1)
                 if not(_la==SQLiteParser.K_ABORT or _la==SQLiteParser.K_FAIL or _la==SQLiteParser.K_ROLLBACK):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
                 self.state = 1346
                 self.match(SQLiteParser.COMMA)
                 self.state = 1347
                 self.error_message()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -7190,11 +7347,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_indexed_column
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterIndexed_column" ):
                 listener.enterIndexed_column(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitIndexed_column" ):
                 listener.exitIndexed_column(self)
 
 
@@ -7210,6 +7367,7 @@ class SQLiteParser ( Parser ):
             self.state = 1352
             self.column_name()
             self.state = 1355
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_COLLATE:
                 self.state = 1353
@@ -7219,6 +7377,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 1358
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_ASC or _la==SQLiteParser.K_DESC:
                 self.state = 1357
@@ -7226,6 +7385,7 @@ class SQLiteParser ( Parser ):
                 if not(_la==SQLiteParser.K_ASC or _la==SQLiteParser.K_DESC):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
 
 
@@ -7295,11 +7455,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_table_constraint
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterTable_constraint" ):
                 listener.enterTable_constraint(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitTable_constraint" ):
                 listener.exitTable_constraint(self)
 
 
@@ -7313,6 +7473,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1362
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_CONSTRAINT:
                 self.state = 1360
@@ -7322,20 +7483,22 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 1400
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_PRIMARY, SQLiteParser.K_UNIQUE]:
                 self.state = 1367
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [SQLiteParser.K_PRIMARY]:
                     self.state = 1364
                     self.match(SQLiteParser.K_PRIMARY)
                     self.state = 1365
                     self.match(SQLiteParser.K_KEY)
-
+                    pass
                 elif token in [SQLiteParser.K_UNIQUE]:
                     self.state = 1366
                     self.match(SQLiteParser.K_UNIQUE)
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -7359,7 +7522,7 @@ class SQLiteParser ( Parser ):
                 self.match(SQLiteParser.CLOSE_PAR)
                 self.state = 1379
                 self.conflict_clause()
-
+                pass
             elif token in [SQLiteParser.K_CHECK]:
                 self.state = 1381
                 self.match(SQLiteParser.K_CHECK)
@@ -7369,7 +7532,7 @@ class SQLiteParser ( Parser ):
                 self.expr(0)
                 self.state = 1384
                 self.match(SQLiteParser.CLOSE_PAR)
-
+                pass
             elif token in [SQLiteParser.K_FOREIGN]:
                 self.state = 1386
                 self.match(SQLiteParser.K_FOREIGN)
@@ -7395,7 +7558,7 @@ class SQLiteParser ( Parser ):
                 self.match(SQLiteParser.CLOSE_PAR)
                 self.state = 1398
                 self.foreign_key_clause()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -7443,11 +7606,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_with_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterWith_clause" ):
                 listener.enterWith_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitWith_clause" ):
                 listener.exitWith_clause(self)
 
 
@@ -7463,6 +7626,7 @@ class SQLiteParser ( Parser ):
             self.state = 1402
             self.match(SQLiteParser.K_WITH)
             self.state = 1404
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,195,self._ctx)
             if la_ == 1:
                 self.state = 1403
@@ -7538,11 +7702,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_qualified_table_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterQualified_table_name" ):
                 listener.enterQualified_table_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitQualified_table_name" ):
                 listener.exitQualified_table_name(self)
 
 
@@ -7555,6 +7719,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1426
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,197,self._ctx)
             if la_ == 1:
                 self.state = 1423
@@ -7566,6 +7731,7 @@ class SQLiteParser ( Parser ):
             self.state = 1428
             self.table_name()
             self.state = 1434
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_INDEXED]:
                 self.state = 1429
@@ -7620,11 +7786,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_ordering_term
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterOrdering_term" ):
                 listener.enterOrdering_term(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitOrdering_term" ):
                 listener.exitOrdering_term(self)
 
 
@@ -7640,6 +7806,7 @@ class SQLiteParser ( Parser ):
             self.state = 1436
             self.expr(0)
             self.state = 1439
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_COLLATE:
                 self.state = 1437
@@ -7649,6 +7816,7 @@ class SQLiteParser ( Parser ):
 
 
             self.state = 1442
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.K_ASC or _la==SQLiteParser.K_DESC:
                 self.state = 1441
@@ -7656,6 +7824,7 @@ class SQLiteParser ( Parser ):
                 if not(_la==SQLiteParser.K_ASC or _la==SQLiteParser.K_DESC):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
 
 
@@ -7688,11 +7857,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_pragma_value
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterPragma_value" ):
                 listener.enterPragma_value(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitPragma_value" ):
                 listener.exitPragma_value(self)
 
 
@@ -7704,6 +7873,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 94, self.RULE_pragma_value)
         try:
             self.state = 1447
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,201,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -7760,11 +7930,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_common_table_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCommon_table_expression" ):
                 listener.enterCommon_table_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCommon_table_expression" ):
                 listener.exitCommon_table_expression(self)
 
 
@@ -7780,6 +7950,7 @@ class SQLiteParser ( Parser ):
             self.state = 1449
             self.table_name()
             self.state = 1461
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 1450
@@ -7843,11 +8014,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_result_column
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterResult_column" ):
                 listener.enterResult_column(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitResult_column" ):
                 listener.exitResult_column(self)
 
 
@@ -7860,6 +8031,7 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 1480
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,206,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -7882,9 +8054,11 @@ class SQLiteParser ( Parser ):
                 self.state = 1473
                 self.expr(0)
                 self.state = 1478
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_AS or _la==SQLiteParser.IDENTIFIER or _la==SQLiteParser.STRING_LITERAL:
                     self.state = 1475
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==SQLiteParser.K_AS:
                         self.state = 1474
@@ -7959,11 +8133,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_table_or_subquery
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterTable_or_subquery" ):
                 listener.enterTable_or_subquery(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitTable_or_subquery" ):
                 listener.exitTable_or_subquery(self)
 
 
@@ -7976,10 +8150,12 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 1529
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,217,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1485
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,207,self._ctx)
                 if la_ == 1:
                     self.state = 1482
@@ -7991,9 +8167,11 @@ class SQLiteParser ( Parser ):
                 self.state = 1487
                 self.table_name()
                 self.state = 1492
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,209,self._ctx)
                 if la_ == 1:
                     self.state = 1489
+                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,208,self._ctx)
                     if la_ == 1:
                         self.state = 1488
@@ -8005,6 +8183,7 @@ class SQLiteParser ( Parser ):
 
 
                 self.state = 1499
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [SQLiteParser.K_INDEXED]:
                     self.state = 1494
@@ -8031,6 +8210,7 @@ class SQLiteParser ( Parser ):
                 self.state = 1501
                 self.match(SQLiteParser.OPEN_PAR)
                 self.state = 1511
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,212,self._ctx)
                 if la_ == 1:
                     self.state = 1502
@@ -8058,9 +8238,11 @@ class SQLiteParser ( Parser ):
                 self.state = 1513
                 self.match(SQLiteParser.CLOSE_PAR)
                 self.state = 1518
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,214,self._ctx)
                 if la_ == 1:
                     self.state = 1515
+                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,213,self._ctx)
                     if la_ == 1:
                         self.state = 1514
@@ -8082,9 +8264,11 @@ class SQLiteParser ( Parser ):
                 self.state = 1522
                 self.match(SQLiteParser.CLOSE_PAR)
                 self.state = 1527
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,216,self._ctx)
                 if la_ == 1:
                     self.state = 1524
+                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,215,self._ctx)
                     if la_ == 1:
                         self.state = 1523
@@ -8137,11 +8321,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_join_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterJoin_clause" ):
                 listener.enterJoin_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitJoin_clause" ):
                 listener.exitJoin_clause(self)
 
 
@@ -8206,11 +8390,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_join_operator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterJoin_operator" ):
                 listener.enterJoin_operator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitJoin_operator" ):
                 listener.exitJoin_operator(self)
 
 
@@ -8223,15 +8407,17 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 1554
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.COMMA]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1541
                 self.match(SQLiteParser.COMMA)
-
+                pass
             elif token in [SQLiteParser.K_CROSS, SQLiteParser.K_INNER, SQLiteParser.K_JOIN, SQLiteParser.K_LEFT, SQLiteParser.K_NATURAL]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1543
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_NATURAL:
                     self.state = 1542
@@ -8239,11 +8425,13 @@ class SQLiteParser ( Parser ):
 
 
                 self.state = 1551
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [SQLiteParser.K_LEFT]:
                     self.state = 1545
                     self.match(SQLiteParser.K_LEFT)
                     self.state = 1547
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==SQLiteParser.K_OUTER:
                         self.state = 1546
@@ -8265,7 +8453,7 @@ class SQLiteParser ( Parser ):
                     raise NoViableAltException(self)
                 self.state = 1553
                 self.match(SQLiteParser.K_JOIN)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -8304,11 +8492,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_join_constraint
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterJoin_constraint" ):
                 listener.enterJoin_constraint(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitJoin_constraint" ):
                 listener.exitJoin_constraint(self)
 
 
@@ -8322,6 +8510,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1570
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_ON]:
                 self.state = 1556
@@ -8425,11 +8614,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_select_core
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterSelect_core" ):
                 listener.enterSelect_core(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitSelect_core" ):
                 listener.exitSelect_core(self)
 
 
@@ -8442,12 +8631,14 @@ class SQLiteParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 1646
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.K_SELECT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1572
                 self.match(SQLiteParser.K_SELECT)
                 self.state = 1574
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,225,self._ctx)
                 if la_ == 1:
                     self.state = 1573
@@ -8455,6 +8646,7 @@ class SQLiteParser ( Parser ):
                     if not(_la==SQLiteParser.K_ALL or _la==SQLiteParser.K_DISTINCT):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
 
 
@@ -8473,11 +8665,13 @@ class SQLiteParser ( Parser ):
                     _la = self._input.LA(1)
 
                 self.state = 1596
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_FROM:
                     self.state = 1584
                     self.match(SQLiteParser.K_FROM)
                     self.state = 1594
+                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,228,self._ctx)
                     if la_ == 1:
                         self.state = 1585
@@ -8505,6 +8699,7 @@ class SQLiteParser ( Parser ):
 
 
                 self.state = 1600
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_WHERE:
                     self.state = 1598
@@ -8514,6 +8709,7 @@ class SQLiteParser ( Parser ):
 
 
                 self.state = 1616
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==SQLiteParser.K_GROUP:
                     self.state = 1602
@@ -8535,6 +8731,7 @@ class SQLiteParser ( Parser ):
                         _la = self._input.LA(1)
 
                     self.state = 1614
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==SQLiteParser.K_HAVING:
                         self.state = 1612
@@ -8545,7 +8742,7 @@ class SQLiteParser ( Parser ):
 
 
 
-
+                pass
             elif token in [SQLiteParser.K_VALUES]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1618
@@ -8596,7 +8793,7 @@ class SQLiteParser ( Parser ):
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -8630,11 +8827,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_compound_operator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCompound_operator" ):
                 listener.enterCompound_operator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCompound_operator" ):
                 listener.exitCompound_operator(self)
 
 
@@ -8646,6 +8843,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 110, self.RULE_compound_operator)
         try:
             self.state = 1653
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,238,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -8703,11 +8901,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_cte_table_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCte_table_name" ):
                 listener.enterCte_table_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCte_table_name" ):
                 listener.exitCte_table_name(self)
 
 
@@ -8723,6 +8921,7 @@ class SQLiteParser ( Parser ):
             self.state = 1655
             self.table_name()
             self.state = 1667
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.OPEN_PAR:
                 self.state = 1656
@@ -8766,11 +8965,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_signed_number
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterSigned_number" ):
                 listener.enterSigned_number(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitSigned_number" ):
                 listener.exitSigned_number(self)
 
 
@@ -8784,6 +8983,7 @@ class SQLiteParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1670
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==SQLiteParser.PLUS or _la==SQLiteParser.MINUS:
                 self.state = 1669
@@ -8791,6 +8991,7 @@ class SQLiteParser ( Parser ):
                 if not(_la==SQLiteParser.PLUS or _la==SQLiteParser.MINUS):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
 
 
@@ -8835,11 +9036,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_literal_value
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterLiteral_value" ):
                 listener.enterLiteral_value(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitLiteral_value" ):
                 listener.exitLiteral_value(self)
 
 
@@ -8857,6 +9058,7 @@ class SQLiteParser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SQLiteParser.K_CURRENT_DATE) | (1 << SQLiteParser.K_CURRENT_TIME) | (1 << SQLiteParser.K_CURRENT_TIMESTAMP))) != 0) or ((((_la - 104)) & ~0x3f) == 0 and ((1 << (_la - 104)) & ((1 << (SQLiteParser.K_NULL - 104)) | (1 << (SQLiteParser.NUMERIC_LITERAL - 104)) | (1 << (SQLiteParser.STRING_LITERAL - 104)) | (1 << (SQLiteParser.BLOB_LITERAL - 104)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -8879,11 +9081,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_unary_operator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterUnary_operator" ):
                 listener.enterUnary_operator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitUnary_operator" ):
                 listener.exitUnary_operator(self)
 
 
@@ -8901,6 +9103,7 @@ class SQLiteParser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SQLiteParser.PLUS) | (1 << SQLiteParser.MINUS) | (1 << SQLiteParser.TILDE))) != 0) or _la==SQLiteParser.K_NOT):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -8923,11 +9126,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_error_message
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterError_message" ):
                 listener.enterError_message(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitError_message" ):
                 listener.exitError_message(self)
 
 
@@ -8967,11 +9170,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_module_argument
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterModule_argument" ):
                 listener.enterModule_argument(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitModule_argument" ):
                 listener.exitModule_argument(self)
 
 
@@ -8983,6 +9186,7 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 122, self.RULE_module_argument)
         try:
             self.state = 1682
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,242,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -9021,11 +9225,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_column_alias
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterColumn_alias" ):
                 listener.enterColumn_alias(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitColumn_alias" ):
                 listener.exitColumn_alias(self)
 
 
@@ -9043,6 +9247,7 @@ class SQLiteParser ( Parser ):
             if not(_la==SQLiteParser.IDENTIFIER or _la==SQLiteParser.STRING_LITERAL):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -9434,11 +9639,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterKeyword" ):
                 listener.enterKeyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitKeyword" ):
                 listener.exitKeyword(self)
 
 
@@ -9456,6 +9661,7 @@ class SQLiteParser ( Parser ):
             if not(((((_la - 25)) & ~0x3f) == 0 and ((1 << (_la - 25)) & ((1 << (SQLiteParser.K_ABORT - 25)) | (1 << (SQLiteParser.K_ACTION - 25)) | (1 << (SQLiteParser.K_ADD - 25)) | (1 << (SQLiteParser.K_AFTER - 25)) | (1 << (SQLiteParser.K_ALL - 25)) | (1 << (SQLiteParser.K_ALTER - 25)) | (1 << (SQLiteParser.K_ANALYZE - 25)) | (1 << (SQLiteParser.K_AND - 25)) | (1 << (SQLiteParser.K_AS - 25)) | (1 << (SQLiteParser.K_ASC - 25)) | (1 << (SQLiteParser.K_ATTACH - 25)) | (1 << (SQLiteParser.K_AUTOINCREMENT - 25)) | (1 << (SQLiteParser.K_BEFORE - 25)) | (1 << (SQLiteParser.K_BEGIN - 25)) | (1 << (SQLiteParser.K_BETWEEN - 25)) | (1 << (SQLiteParser.K_BY - 25)) | (1 << (SQLiteParser.K_CASCADE - 25)) | (1 << (SQLiteParser.K_CASE - 25)) | (1 << (SQLiteParser.K_CAST - 25)) | (1 << (SQLiteParser.K_CHECK - 25)) | (1 << (SQLiteParser.K_COLLATE - 25)) | (1 << (SQLiteParser.K_COLUMN - 25)) | (1 << (SQLiteParser.K_COMMIT - 25)) | (1 << (SQLiteParser.K_CONFLICT - 25)) | (1 << (SQLiteParser.K_CONSTRAINT - 25)) | (1 << (SQLiteParser.K_CREATE - 25)) | (1 << (SQLiteParser.K_CROSS - 25)) | (1 << (SQLiteParser.K_CURRENT_DATE - 25)) | (1 << (SQLiteParser.K_CURRENT_TIME - 25)) | (1 << (SQLiteParser.K_CURRENT_TIMESTAMP - 25)) | (1 << (SQLiteParser.K_DATABASE - 25)) | (1 << (SQLiteParser.K_DEFAULT - 25)) | (1 << (SQLiteParser.K_DEFERRABLE - 25)) | (1 << (SQLiteParser.K_DEFERRED - 25)) | (1 << (SQLiteParser.K_DELETE - 25)) | (1 << (SQLiteParser.K_DESC - 25)) | (1 << (SQLiteParser.K_DETACH - 25)) | (1 << (SQLiteParser.K_DISTINCT - 25)) | (1 << (SQLiteParser.K_DROP - 25)) | (1 << (SQLiteParser.K_EACH - 25)) | (1 << (SQLiteParser.K_ELSE - 25)) | (1 << (SQLiteParser.K_END - 25)) | (1 << (SQLiteParser.K_ESCAPE - 25)) | (1 << (SQLiteParser.K_EXCEPT - 25)) | (1 << (SQLiteParser.K_EXCLUSIVE - 25)) | (1 << (SQLiteParser.K_EXISTS - 25)) | (1 << (SQLiteParser.K_EXPLAIN - 25)) | (1 << (SQLiteParser.K_FAIL - 25)) | (1 << (SQLiteParser.K_FOR - 25)) | (1 << (SQLiteParser.K_FOREIGN - 25)) | (1 << (SQLiteParser.K_FROM - 25)) | (1 << (SQLiteParser.K_FULL - 25)) | (1 << (SQLiteParser.K_GLOB - 25)) | (1 << (SQLiteParser.K_GROUP - 25)) | (1 << (SQLiteParser.K_HAVING - 25)) | (1 << (SQLiteParser.K_IF - 25)) | (1 << (SQLiteParser.K_IGNORE - 25)) | (1 << (SQLiteParser.K_IMMEDIATE - 25)) | (1 << (SQLiteParser.K_IN - 25)) | (1 << (SQLiteParser.K_INDEX - 25)) | (1 << (SQLiteParser.K_INDEXED - 25)) | (1 << (SQLiteParser.K_INITIALLY - 25)) | (1 << (SQLiteParser.K_INNER - 25)) | (1 << (SQLiteParser.K_INSERT - 25)))) != 0) or ((((_la - 89)) & ~0x3f) == 0 and ((1 << (_la - 89)) & ((1 << (SQLiteParser.K_INSTEAD - 89)) | (1 << (SQLiteParser.K_INTERSECT - 89)) | (1 << (SQLiteParser.K_INTO - 89)) | (1 << (SQLiteParser.K_IS - 89)) | (1 << (SQLiteParser.K_ISNULL - 89)) | (1 << (SQLiteParser.K_JOIN - 89)) | (1 << (SQLiteParser.K_KEY - 89)) | (1 << (SQLiteParser.K_LEFT - 89)) | (1 << (SQLiteParser.K_LIKE - 89)) | (1 << (SQLiteParser.K_LIMIT - 89)) | (1 << (SQLiteParser.K_MATCH - 89)) | (1 << (SQLiteParser.K_NATURAL - 89)) | (1 << (SQLiteParser.K_NO - 89)) | (1 << (SQLiteParser.K_NOT - 89)) | (1 << (SQLiteParser.K_NOTNULL - 89)) | (1 << (SQLiteParser.K_NULL - 89)) | (1 << (SQLiteParser.K_OF - 89)) | (1 << (SQLiteParser.K_OFFSET - 89)) | (1 << (SQLiteParser.K_ON - 89)) | (1 << (SQLiteParser.K_OR - 89)) | (1 << (SQLiteParser.K_ORDER - 89)) | (1 << (SQLiteParser.K_OUTER - 89)) | (1 << (SQLiteParser.K_PLAN - 89)) | (1 << (SQLiteParser.K_PRAGMA - 89)) | (1 << (SQLiteParser.K_PRIMARY - 89)) | (1 << (SQLiteParser.K_QUERY - 89)) | (1 << (SQLiteParser.K_RAISE - 89)) | (1 << (SQLiteParser.K_RECURSIVE - 89)) | (1 << (SQLiteParser.K_REFERENCES - 89)) | (1 << (SQLiteParser.K_REGEXP - 89)) | (1 << (SQLiteParser.K_REINDEX - 89)) | (1 << (SQLiteParser.K_RELEASE - 89)) | (1 << (SQLiteParser.K_RENAME - 89)) | (1 << (SQLiteParser.K_REPLACE - 89)) | (1 << (SQLiteParser.K_RESTRICT - 89)) | (1 << (SQLiteParser.K_RIGHT - 89)) | (1 << (SQLiteParser.K_ROLLBACK - 89)) | (1 << (SQLiteParser.K_ROW - 89)) | (1 << (SQLiteParser.K_SAVEPOINT - 89)) | (1 << (SQLiteParser.K_SELECT - 89)) | (1 << (SQLiteParser.K_SET - 89)) | (1 << (SQLiteParser.K_TABLE - 89)) | (1 << (SQLiteParser.K_TEMP - 89)) | (1 << (SQLiteParser.K_TEMPORARY - 89)) | (1 << (SQLiteParser.K_THEN - 89)) | (1 << (SQLiteParser.K_TO - 89)) | (1 << (SQLiteParser.K_TRANSACTION - 89)) | (1 << (SQLiteParser.K_TRIGGER - 89)) | (1 << (SQLiteParser.K_UNION - 89)) | (1 << (SQLiteParser.K_UNIQUE - 89)) | (1 << (SQLiteParser.K_UPDATE - 89)) | (1 << (SQLiteParser.K_USING - 89)) | (1 << (SQLiteParser.K_VACUUM - 89)) | (1 << (SQLiteParser.K_VALUES - 89)) | (1 << (SQLiteParser.K_VIEW - 89)) | (1 << (SQLiteParser.K_VIRTUAL - 89)) | (1 << (SQLiteParser.K_WHEN - 89)) | (1 << (SQLiteParser.K_WHERE - 89)) | (1 << (SQLiteParser.K_WITH - 89)) | (1 << (SQLiteParser.K_WITHOUT - 89)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -9479,11 +9685,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterName" ):
                 listener.enterName(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitName" ):
                 listener.exitName(self)
 
 
@@ -9519,11 +9725,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_function_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterFunction_name" ):
                 listener.enterFunction_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitFunction_name" ):
                 listener.exitFunction_name(self)
 
 
@@ -9559,11 +9765,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_database_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterDatabase_name" ):
                 listener.enterDatabase_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitDatabase_name" ):
                 listener.exitDatabase_name(self)
 
 
@@ -9599,11 +9805,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_table_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterTable_name" ):
                 listener.enterTable_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitTable_name" ):
                 listener.exitTable_name(self)
 
 
@@ -9639,11 +9845,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_table_or_index_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterTable_or_index_name" ):
                 listener.enterTable_or_index_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitTable_or_index_name" ):
                 listener.exitTable_or_index_name(self)
 
 
@@ -9679,11 +9885,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_new_table_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterNew_table_name" ):
                 listener.enterNew_table_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitNew_table_name" ):
                 listener.exitNew_table_name(self)
 
 
@@ -9719,11 +9925,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_column_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterColumn_name" ):
                 listener.enterColumn_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitColumn_name" ):
                 listener.exitColumn_name(self)
 
 
@@ -9759,11 +9965,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_collation_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterCollation_name" ):
                 listener.enterCollation_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitCollation_name" ):
                 listener.exitCollation_name(self)
 
 
@@ -9799,11 +10005,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_foreign_table
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterForeign_table" ):
                 listener.enterForeign_table(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitForeign_table" ):
                 listener.exitForeign_table(self)
 
 
@@ -9839,11 +10045,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_index_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterIndex_name" ):
                 listener.enterIndex_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitIndex_name" ):
                 listener.exitIndex_name(self)
 
 
@@ -9879,11 +10085,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_trigger_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterTrigger_name" ):
                 listener.enterTrigger_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitTrigger_name" ):
                 listener.exitTrigger_name(self)
 
 
@@ -9919,11 +10125,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_view_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterView_name" ):
                 listener.enterView_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitView_name" ):
                 listener.exitView_name(self)
 
 
@@ -9959,11 +10165,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_module_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterModule_name" ):
                 listener.enterModule_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitModule_name" ):
                 listener.exitModule_name(self)
 
 
@@ -9999,11 +10205,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_pragma_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterPragma_name" ):
                 listener.enterPragma_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitPragma_name" ):
                 listener.exitPragma_name(self)
 
 
@@ -10039,11 +10245,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_savepoint_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterSavepoint_name" ):
                 listener.enterSavepoint_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitSavepoint_name" ):
                 listener.exitSavepoint_name(self)
 
 
@@ -10079,11 +10285,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_table_alias
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterTable_alias" ):
                 listener.enterTable_alias(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitTable_alias" ):
                 listener.exitTable_alias(self)
 
 
@@ -10119,11 +10325,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_transaction_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterTransaction_name" ):
                 listener.enterTransaction_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitTransaction_name" ):
                 listener.exitTransaction_name(self)
 
 
@@ -10169,11 +10375,11 @@ class SQLiteParser ( Parser ):
             return SQLiteParser.RULE_any_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "enterAny_name" ):
                 listener.enterAny_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, SQLiteListener ):
+            if hasattr( listener, "exitAny_name" ):
                 listener.exitAny_name(self)
 
 
@@ -10185,22 +10391,23 @@ class SQLiteParser ( Parser ):
         self.enterRule(localctx, 162, self.RULE_any_name)
         try:
             self.state = 1729
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SQLiteParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1722
                 self.match(SQLiteParser.IDENTIFIER)
-
+                pass
             elif token in [SQLiteParser.K_ABORT, SQLiteParser.K_ACTION, SQLiteParser.K_ADD, SQLiteParser.K_AFTER, SQLiteParser.K_ALL, SQLiteParser.K_ALTER, SQLiteParser.K_ANALYZE, SQLiteParser.K_AND, SQLiteParser.K_AS, SQLiteParser.K_ASC, SQLiteParser.K_ATTACH, SQLiteParser.K_AUTOINCREMENT, SQLiteParser.K_BEFORE, SQLiteParser.K_BEGIN, SQLiteParser.K_BETWEEN, SQLiteParser.K_BY, SQLiteParser.K_CASCADE, SQLiteParser.K_CASE, SQLiteParser.K_CAST, SQLiteParser.K_CHECK, SQLiteParser.K_COLLATE, SQLiteParser.K_COLUMN, SQLiteParser.K_COMMIT, SQLiteParser.K_CONFLICT, SQLiteParser.K_CONSTRAINT, SQLiteParser.K_CREATE, SQLiteParser.K_CROSS, SQLiteParser.K_CURRENT_DATE, SQLiteParser.K_CURRENT_TIME, SQLiteParser.K_CURRENT_TIMESTAMP, SQLiteParser.K_DATABASE, SQLiteParser.K_DEFAULT, SQLiteParser.K_DEFERRABLE, SQLiteParser.K_DEFERRED, SQLiteParser.K_DELETE, SQLiteParser.K_DESC, SQLiteParser.K_DETACH, SQLiteParser.K_DISTINCT, SQLiteParser.K_DROP, SQLiteParser.K_EACH, SQLiteParser.K_ELSE, SQLiteParser.K_END, SQLiteParser.K_ESCAPE, SQLiteParser.K_EXCEPT, SQLiteParser.K_EXCLUSIVE, SQLiteParser.K_EXISTS, SQLiteParser.K_EXPLAIN, SQLiteParser.K_FAIL, SQLiteParser.K_FOR, SQLiteParser.K_FOREIGN, SQLiteParser.K_FROM, SQLiteParser.K_FULL, SQLiteParser.K_GLOB, SQLiteParser.K_GROUP, SQLiteParser.K_HAVING, SQLiteParser.K_IF, SQLiteParser.K_IGNORE, SQLiteParser.K_IMMEDIATE, SQLiteParser.K_IN, SQLiteParser.K_INDEX, SQLiteParser.K_INDEXED, SQLiteParser.K_INITIALLY, SQLiteParser.K_INNER, SQLiteParser.K_INSERT, SQLiteParser.K_INSTEAD, SQLiteParser.K_INTERSECT, SQLiteParser.K_INTO, SQLiteParser.K_IS, SQLiteParser.K_ISNULL, SQLiteParser.K_JOIN, SQLiteParser.K_KEY, SQLiteParser.K_LEFT, SQLiteParser.K_LIKE, SQLiteParser.K_LIMIT, SQLiteParser.K_MATCH, SQLiteParser.K_NATURAL, SQLiteParser.K_NO, SQLiteParser.K_NOT, SQLiteParser.K_NOTNULL, SQLiteParser.K_NULL, SQLiteParser.K_OF, SQLiteParser.K_OFFSET, SQLiteParser.K_ON, SQLiteParser.K_OR, SQLiteParser.K_ORDER, SQLiteParser.K_OUTER, SQLiteParser.K_PLAN, SQLiteParser.K_PRAGMA, SQLiteParser.K_PRIMARY, SQLiteParser.K_QUERY, SQLiteParser.K_RAISE, SQLiteParser.K_RECURSIVE, SQLiteParser.K_REFERENCES, SQLiteParser.K_REGEXP, SQLiteParser.K_REINDEX, SQLiteParser.K_RELEASE, SQLiteParser.K_RENAME, SQLiteParser.K_REPLACE, SQLiteParser.K_RESTRICT, SQLiteParser.K_RIGHT, SQLiteParser.K_ROLLBACK, SQLiteParser.K_ROW, SQLiteParser.K_SAVEPOINT, SQLiteParser.K_SELECT, SQLiteParser.K_SET, SQLiteParser.K_TABLE, SQLiteParser.K_TEMP, SQLiteParser.K_TEMPORARY, SQLiteParser.K_THEN, SQLiteParser.K_TO, SQLiteParser.K_TRANSACTION, SQLiteParser.K_TRIGGER, SQLiteParser.K_UNION, SQLiteParser.K_UNIQUE, SQLiteParser.K_UPDATE, SQLiteParser.K_USING, SQLiteParser.K_VACUUM, SQLiteParser.K_VALUES, SQLiteParser.K_VIEW, SQLiteParser.K_VIRTUAL, SQLiteParser.K_WHEN, SQLiteParser.K_WHERE, SQLiteParser.K_WITH, SQLiteParser.K_WITHOUT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1723
                 self.keyword()
-
+                pass
             elif token in [SQLiteParser.STRING_LITERAL]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1724
                 self.match(SQLiteParser.STRING_LITERAL)
-
+                pass
             elif token in [SQLiteParser.OPEN_PAR]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 1725
@@ -10209,7 +10416,7 @@ class SQLiteParser ( Parser ):
                 self.any_name()
                 self.state = 1727
                 self.match(SQLiteParser.CLOSE_PAR)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -10289,6 +10496,7 @@ class SQLiteParser ( Parser ):
             if predIndex == 13:
                 return self.precpred(self._ctx, 4)
          
+
 
 
 

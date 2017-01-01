@@ -1,13 +1,8 @@
-# Generated from java-escape by ANTLR 4.5
+# Generated from C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\CSharp4.g4 by ANTLR 4.6
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-package = globals().get("__package__", None)
-ischild = len(package)>0 if package is not None else False
-if ischild:
-    from .CSharp4Listener import CSharp4Listener
-else:
-    from CSharp4Listener import CSharp4Listener
+
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\u00a5")
@@ -2206,7 +2201,7 @@ def serializedATN():
 
 class CSharp4Parser ( Parser ):
 
-    grammarFileName = "java-escape"
+    grammarFileName = "CSharp4.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -2214,78 +2209,71 @@ class CSharp4Parser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ u"<INVALID>", u"<INVALID>", u"'\\u00EF\\u00BB\\u00BF'", 
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                     u"<INVALID>", u"<INVALID>", u"'abstract'", u"'add'", 
-                     u"'alias'", u"'__arglist'", u"'as'", u"'ascending'", 
-                     u"'base'", u"'bool'", u"'break'", u"'by'", u"'byte'", 
-                     u"'case'", u"'catch'", u"'char'", u"'checked'", u"'class'", 
-                     u"'const'", u"'continue'", u"'decimal'", u"'default'", 
-                     u"'delegate'", u"'descending'", u"'do'", u"'double'", 
-                     u"'dynamic'", u"'else'", u"'enum'", u"'equals'", u"'event'", 
-                     u"'explicit'", u"'extern'", u"'false'", u"'finally'", 
-                     u"'fixed'", u"'float'", u"'for'", u"'foreach'", u"'from'", 
-                     u"'get'", u"'goto'", u"'group'", u"'if'", u"'implicit'", 
-                     u"'in'", u"'int'", u"'interface'", u"'internal'", u"'into'", 
-                     u"'is'", u"'join'", u"'let'", u"'lock'", u"'long'", 
-                     u"'namespace'", u"'new'", u"'null'", u"'object'", u"'on'", 
-                     u"'operator'", u"'orderby'", u"'out'", u"'override'", 
-                     u"'params'", u"'partial'", u"'private'", u"'protected'", 
-                     u"'public'", u"'readonly'", u"'ref'", u"'remove'", 
-                     u"'return'", u"'sbyte'", u"'sealed'", u"'select'", 
-                     u"'set'", u"'short'", u"'sizeof'", u"'stackalloc'", 
-                     u"'static'", u"'string'", u"'struct'", u"'switch'", 
-                     u"'this'", u"'throw'", u"'true'", u"'try'", u"'typeof'", 
-                     u"'uint'", u"'ulong'", u"'unchecked'", u"'unsafe'", 
-                     u"'ushort'", u"'using'", u"'virtual'", u"'void'", u"'volatile'", 
-                     u"'where'", u"'while'", u"'yield'", u"<INVALID>", u"<INVALID>", 
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>", 
-                     u"'{'", u"'}'", u"'['", u"']'", u"'('", u"')'", u"'.'", 
-                     u"','", u"':'", u"';'", u"'+'", u"'-'", u"'*'", u"'/'", 
-                     u"'%'", u"'&'", u"'|'", u"'^'", u"'!'", u"'~'", u"'='", 
-                     u"'<'", u"'>'", u"'?'", u"'::'", u"'??'", u"'++'", 
-                     u"'--'", u"'&&'", u"'||'", u"'->'", u"'=='", u"'!='", 
-                     u"'<='", u"'>='", u"'+='", u"'-='", u"'*='", u"'/='", 
-                     u"'%='", u"'&='", u"'|='", u"'^='", u"'<<'", u"'<<='", 
-                     u"'''", u"'\"'", u"'\\'", u"'\\\\'", u"'#'" ]
+    literalNames = [ "<INVALID>", "<INVALID>", "'\\u00EF\\u00BB\\u00BF'", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "'abstract'", "'add'", "'alias'", 
+                     "'__arglist'", "'as'", "'ascending'", "'base'", "'bool'", 
+                     "'break'", "'by'", "'byte'", "'case'", "'catch'", "'char'", 
+                     "'checked'", "'class'", "'const'", "'continue'", "'decimal'", 
+                     "'default'", "'delegate'", "'descending'", "'do'", 
+                     "'double'", "'dynamic'", "'else'", "'enum'", "'equals'", 
+                     "'event'", "'explicit'", "'extern'", "'false'", "'finally'", 
+                     "'fixed'", "'float'", "'for'", "'foreach'", "'from'", 
+                     "'get'", "'goto'", "'group'", "'if'", "'implicit'", 
+                     "'in'", "'int'", "'interface'", "'internal'", "'into'", 
+                     "'is'", "'join'", "'let'", "'lock'", "'long'", "'namespace'", 
+                     "'new'", "'null'", "'object'", "'on'", "'operator'", 
+                     "'orderby'", "'out'", "'override'", "'params'", "'partial'", 
+                     "'private'", "'protected'", "'public'", "'readonly'", 
+                     "'ref'", "'remove'", "'return'", "'sbyte'", "'sealed'", 
+                     "'select'", "'set'", "'short'", "'sizeof'", "'stackalloc'", 
+                     "'static'", "'string'", "'struct'", "'switch'", "'this'", 
+                     "'throw'", "'true'", "'try'", "'typeof'", "'uint'", 
+                     "'ulong'", "'unchecked'", "'unsafe'", "'ushort'", "'using'", 
+                     "'virtual'", "'void'", "'volatile'", "'where'", "'while'", 
+                     "'yield'", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "'{'", "'}'", "'['", "']'", 
+                     "'('", "')'", "'.'", "','", "':'", "';'", "'+'", "'-'", 
+                     "'*'", "'/'", "'%'", "'&'", "'|'", "'^'", "'!'", "'~'", 
+                     "'='", "'<'", "'>'", "'?'", "'::'", "'??'", "'++'", 
+                     "'--'", "'&&'", "'||'", "'->'", "'=='", "'!='", "'<='", 
+                     "'>='", "'+='", "'-='", "'*='", "'/='", "'%='", "'&='", 
+                     "'|='", "'^='", "'<<'", "'<<='", "'''", "'\"'", "'\\'", 
+                     "'\\\\'", "'#'" ]
 
-    symbolicNames = [ u"<INVALID>", u"Pp_directive", u"BYTE_ORDER_MARK", 
-                      u"SINGLE_LINE_DOC_COMMENT", u"DELIMITED_DOC_COMMENT", 
-                      u"NEW_LINE", u"SINGLE_LINE_COMMENT", u"DELIMITED_COMMENT", 
-                      u"WHITESPACE", u"ABSTRACT", u"ADD", u"ALIAS", u"ARGLIST", 
-                      u"AS", u"ASCENDING", u"BASE", u"BOOL", u"BREAK", u"BY", 
-                      u"BYTE", u"CASE", u"CATCH", u"CHAR", u"CHECKED", u"CLASS", 
-                      u"CONST", u"CONTINUE", u"DECIMAL", u"DEFAULT", u"DELEGATE", 
-                      u"DESCENDING", u"DO", u"DOUBLE", u"DYNAMIC", u"ELSE", 
-                      u"ENUM", u"EQUALS", u"EVENT", u"EXPLICIT", u"EXTERN", 
-                      u"FALSE", u"FINALLY", u"FIXED", u"FLOAT", u"FOR", 
-                      u"FOREACH", u"FROM", u"GET", u"GOTO", u"GROUP", u"IF", 
-                      u"IMPLICIT", u"IN", u"INT", u"INTERFACE", u"INTERNAL", 
-                      u"INTO", u"IS", u"JOIN", u"LET", u"LOCK", u"LONG", 
-                      u"NAMESPACE", u"NEW", u"NULL", u"OBJECT", u"ON", u"OPERATOR", 
-                      u"ORDERBY", u"OUT", u"OVERRIDE", u"PARAMS", u"PARTIAL", 
-                      u"PRIVATE", u"PROTECTED", u"PUBLIC", u"READONLY", 
-                      u"REF", u"REMOVE", u"RETURN", u"SBYTE", u"SEALED", 
-                      u"SELECT", u"SET", u"SHORT", u"SIZEOF", u"STACKALLOC", 
-                      u"STATIC", u"STRING", u"STRUCT", u"SWITCH", u"THIS", 
-                      u"THROW", u"TRUE", u"TRY", u"TYPEOF", u"UINT", u"ULONG", 
-                      u"UNCHECKED", u"UNSAFE", u"USHORT", u"USING", u"VIRTUAL", 
-                      u"VOID", u"VOLATILE", u"WHERE", u"WHILE", u"YIELD", 
-                      u"IDENTIFIER", u"INTEGER_LITERAL", u"LiteralAccess", 
-                      u"REAL_LITERAL", u"CHARACTER_LITERAL", u"STRING_LITERAL", 
-                      u"OPEN_BRACE", u"CLOSE_BRACE", u"OPEN_BRACKET", u"CLOSE_BRACKET", 
-                      u"OPEN_PARENS", u"CLOSE_PARENS", u"DOT", u"COMMA", 
-                      u"COLON", u"SEMICOLON", u"PLUS", u"MINUS", u"STAR", 
-                      u"DIV", u"PERCENT", u"AMP", u"BITWISE_OR", u"CARET", 
-                      u"BANG", u"TILDE", u"ASSIGNMENT", u"LT", u"GT", u"INTERR", 
-                      u"DOUBLE_COLON", u"OP_COALESCING", u"OP_INC", u"OP_DEC", 
-                      u"OP_AND", u"OP_OR", u"OP_PTR", u"OP_EQ", u"OP_NE", 
-                      u"OP_LE", u"OP_GE", u"OP_ADD_ASSIGNMENT", u"OP_SUB_ASSIGNMENT", 
-                      u"OP_MULT_ASSIGNMENT", u"OP_DIV_ASSIGNMENT", u"OP_MOD_ASSIGNMENT", 
-                      u"OP_AND_ASSIGNMENT", u"OP_OR_ASSIGNMENT", u"OP_XOR_ASSIGNMENT", 
-                      u"OP_LEFT_SHIFT", u"OP_LEFT_SHIFT_ASSIGNMENT", u"QUOTE", 
-                      u"DOUBLE_QUOTE", u"BACK_SLASH", u"DOUBLE_BACK_SLASH", 
-                      u"SHARP" ]
+    symbolicNames = [ "<INVALID>", "Pp_directive", "BYTE_ORDER_MARK", "SINGLE_LINE_DOC_COMMENT", 
+                      "DELIMITED_DOC_COMMENT", "NEW_LINE", "SINGLE_LINE_COMMENT", 
+                      "DELIMITED_COMMENT", "WHITESPACE", "ABSTRACT", "ADD", 
+                      "ALIAS", "ARGLIST", "AS", "ASCENDING", "BASE", "BOOL", 
+                      "BREAK", "BY", "BYTE", "CASE", "CATCH", "CHAR", "CHECKED", 
+                      "CLASS", "CONST", "CONTINUE", "DECIMAL", "DEFAULT", 
+                      "DELEGATE", "DESCENDING", "DO", "DOUBLE", "DYNAMIC", 
+                      "ELSE", "ENUM", "EQUALS", "EVENT", "EXPLICIT", "EXTERN", 
+                      "FALSE", "FINALLY", "FIXED", "FLOAT", "FOR", "FOREACH", 
+                      "FROM", "GET", "GOTO", "GROUP", "IF", "IMPLICIT", 
+                      "IN", "INT", "INTERFACE", "INTERNAL", "INTO", "IS", 
+                      "JOIN", "LET", "LOCK", "LONG", "NAMESPACE", "NEW", 
+                      "NULL", "OBJECT", "ON", "OPERATOR", "ORDERBY", "OUT", 
+                      "OVERRIDE", "PARAMS", "PARTIAL", "PRIVATE", "PROTECTED", 
+                      "PUBLIC", "READONLY", "REF", "REMOVE", "RETURN", "SBYTE", 
+                      "SEALED", "SELECT", "SET", "SHORT", "SIZEOF", "STACKALLOC", 
+                      "STATIC", "STRING", "STRUCT", "SWITCH", "THIS", "THROW", 
+                      "TRUE", "TRY", "TYPEOF", "UINT", "ULONG", "UNCHECKED", 
+                      "UNSAFE", "USHORT", "USING", "VIRTUAL", "VOID", "VOLATILE", 
+                      "WHERE", "WHILE", "YIELD", "IDENTIFIER", "INTEGER_LITERAL", 
+                      "LiteralAccess", "REAL_LITERAL", "CHARACTER_LITERAL", 
+                      "STRING_LITERAL", "OPEN_BRACE", "CLOSE_BRACE", "OPEN_BRACKET", 
+                      "CLOSE_BRACKET", "OPEN_PARENS", "CLOSE_PARENS", "DOT", 
+                      "COMMA", "COLON", "SEMICOLON", "PLUS", "MINUS", "STAR", 
+                      "DIV", "PERCENT", "AMP", "BITWISE_OR", "CARET", "BANG", 
+                      "TILDE", "ASSIGNMENT", "LT", "GT", "INTERR", "DOUBLE_COLON", 
+                      "OP_COALESCING", "OP_INC", "OP_DEC", "OP_AND", "OP_OR", 
+                      "OP_PTR", "OP_EQ", "OP_NE", "OP_LE", "OP_GE", "OP_ADD_ASSIGNMENT", 
+                      "OP_SUB_ASSIGNMENT", "OP_MULT_ASSIGNMENT", "OP_DIV_ASSIGNMENT", 
+                      "OP_MOD_ASSIGNMENT", "OP_AND_ASSIGNMENT", "OP_OR_ASSIGNMENT", 
+                      "OP_XOR_ASSIGNMENT", "OP_LEFT_SHIFT", "OP_LEFT_SHIFT_ASSIGNMENT", 
+                      "QUOTE", "DOUBLE_QUOTE", "BACK_SLASH", "DOUBLE_BACK_SLASH", 
+                      "SHARP" ]
 
     RULE_namespace_name = 0
     RULE_type_name = 1
@@ -3009,7 +2997,7 @@ class CSharp4Parser ( Parser ):
 
     def __init__(self, input:TokenStream):
         super().__init__(input)
-        self.checkVersion("4.5")
+        self.checkVersion("4.6")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -3029,11 +3017,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_namespace_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNamespace_name" ):
                 listener.enterNamespace_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNamespace_name" ):
                 listener.exitNamespace_name(self)
 
 
@@ -3069,11 +3057,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_name" ):
                 listener.enterType_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_name" ):
                 listener.exitType_name(self)
 
 
@@ -3174,11 +3162,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_identifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIdentifier" ):
                 listener.enterIdentifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIdentifier" ):
                 listener.exitIdentifier(self)
 
 
@@ -3196,6 +3184,7 @@ class CSharp4Parser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET))) != 0) or ((((_la - 66)) & ~0x3f) == 0 and ((1 << (_la - 66)) & ((1 << (CSharp4Parser.ON - 66)) | (1 << (CSharp4Parser.ORDERBY - 66)) | (1 << (CSharp4Parser.PARTIAL - 66)) | (1 << (CSharp4Parser.REMOVE - 66)) | (1 << (CSharp4Parser.SELECT - 66)) | (1 << (CSharp4Parser.SET - 66)) | (1 << (CSharp4Parser.WHERE - 66)) | (1 << (CSharp4Parser.YIELD - 66)) | (1 << (CSharp4Parser.IDENTIFIER - 66)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -3239,11 +3228,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_namespace_or_type_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNamespace_or_type_name" ):
                 listener.enterNamespace_or_type_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNamespace_or_type_name" ):
                 listener.exitNamespace_or_type_name(self)
 
 
@@ -3256,6 +3245,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 822
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,0,self._ctx)
             if la_ == 1:
                 self.state = 818
@@ -3307,11 +3297,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_argument_list_opt
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_argument_list_opt" ):
                 listener.enterType_argument_list_opt(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_argument_list_opt" ):
                 listener.exitType_argument_list_opt(self)
 
 
@@ -3323,6 +3313,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_type_argument_list_opt)
         try:
             self.state = 835
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,2,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -3377,11 +3368,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_any_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAny_type" ):
                 listener.enterAny_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAny_type" ):
                 listener.exitAny_type(self)
 
 
@@ -3401,19 +3392,20 @@ class CSharp4Parser ( Parser ):
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     self.state = 841
+                    self._errHandler.sync(self)
                     token = self._input.LA(1)
                     if token in [CSharp4Parser.INTERR]:
                         self.state = 838
                         self.match(CSharp4Parser.INTERR)
-
+                        pass
                     elif token in [CSharp4Parser.OPEN_BRACKET]:
                         self.state = 839
                         self.rank_specifier()
-
+                        pass
                     elif token in [CSharp4Parser.STAR]:
                         self.state = 840
                         self.match(CSharp4Parser.STAR)
-
+                        pass
                     else:
                         raise NoViableAltException(self)
              
@@ -3453,11 +3445,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_base_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBase_type" ):
                 listener.enterBase_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBase_type" ):
                 listener.exitBase_type(self)
 
 
@@ -3469,24 +3461,25 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 12, self.RULE_base_type)
         try:
             self.state = 850
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.BOOL, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.DECIMAL, CSharp4Parser.DOUBLE, CSharp4Parser.FLOAT, CSharp4Parser.INT, CSharp4Parser.LONG, CSharp4Parser.SBYTE, CSharp4Parser.SHORT, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.USHORT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 846
                 self.simple_type()
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BY, CSharp4Parser.DESCENDING, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.STRING, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 847
                 self.class_type()
-
+                pass
             elif token in [CSharp4Parser.VOID]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 848
                 self.match(CSharp4Parser.VOID)
                 self.state = 849
                 self.match(CSharp4Parser.STAR)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -3515,11 +3508,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_simple_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSimple_type" ):
                 listener.enterSimple_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSimple_type" ):
                 listener.exitSimple_type(self)
 
 
@@ -3531,17 +3524,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 14, self.RULE_simple_type)
         try:
             self.state = 854
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.DECIMAL, CSharp4Parser.DOUBLE, CSharp4Parser.FLOAT, CSharp4Parser.INT, CSharp4Parser.LONG, CSharp4Parser.SBYTE, CSharp4Parser.SHORT, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.USHORT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 852
                 self.numeric_type()
-
+                pass
             elif token in [CSharp4Parser.BOOL]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 853
                 self.match(CSharp4Parser.BOOL)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -3574,11 +3568,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_numeric_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNumeric_type" ):
                 listener.enterNumeric_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNumeric_type" ):
                 listener.exitNumeric_type(self)
 
 
@@ -3590,22 +3584,23 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 16, self.RULE_numeric_type)
         try:
             self.state = 859
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.INT, CSharp4Parser.LONG, CSharp4Parser.SBYTE, CSharp4Parser.SHORT, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.USHORT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 856
                 self.integral_type()
-
+                pass
             elif token in [CSharp4Parser.DOUBLE, CSharp4Parser.FLOAT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 857
                 self.floating_point_type()
-
+                pass
             elif token in [CSharp4Parser.DECIMAL]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 858
                 self.match(CSharp4Parser.DECIMAL)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -3654,11 +3649,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_integral_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIntegral_type" ):
                 listener.enterIntegral_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIntegral_type" ):
                 listener.exitIntegral_type(self)
 
 
@@ -3676,6 +3671,7 @@ class CSharp4Parser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 80)) & ~0x3f) == 0 and ((1 << (_la - 80)) & ((1 << (CSharp4Parser.SBYTE - 80)) | (1 << (CSharp4Parser.SHORT - 80)) | (1 << (CSharp4Parser.UINT - 80)) | (1 << (CSharp4Parser.ULONG - 80)) | (1 << (CSharp4Parser.USHORT - 80)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -3701,11 +3697,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_floating_point_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFloating_point_type" ):
                 listener.enterFloating_point_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFloating_point_type" ):
                 listener.exitFloating_point_type(self)
 
 
@@ -3723,6 +3719,7 @@ class CSharp4Parser ( Parser ):
             if not(_la==CSharp4Parser.DOUBLE or _la==CSharp4Parser.FLOAT):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -3749,11 +3746,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_nullable_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNullable_type" ):
                 listener.enterNullable_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNullable_type" ):
                 listener.exitNullable_type(self)
 
 
@@ -3804,11 +3801,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_non_nullable_value_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNon_nullable_value_type" ):
                 listener.enterNon_nullable_value_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNon_nullable_value_type" ):
                 listener.exitNon_nullable_value_type(self)
 
 
@@ -3828,15 +3825,16 @@ class CSharp4Parser ( Parser ):
             _la = self._input.LA(1)
             while _la==CSharp4Parser.OPEN_BRACKET or _la==CSharp4Parser.STAR:
                 self.state = 871
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSharp4Parser.OPEN_BRACKET]:
                     self.state = 869
                     self.rank_specifier()
-
+                    pass
                 elif token in [CSharp4Parser.STAR]:
                     self.state = 870
                     self.match(CSharp4Parser.STAR)
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -3892,11 +3890,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_reference_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterReference_type" ):
                 listener.enterReference_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitReference_type" ):
                 listener.exitReference_type(self)
 
 
@@ -3909,6 +3907,7 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 931
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.BOOL, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.DECIMAL, CSharp4Parser.DOUBLE, CSharp4Parser.FLOAT, CSharp4Parser.INT, CSharp4Parser.LONG, CSharp4Parser.SBYTE, CSharp4Parser.SHORT, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.USHORT]:
                 self.enterOuterAlt(localctx, 1)
@@ -3928,6 +3927,7 @@ class CSharp4Parser ( Parser ):
                             if not(_la==CSharp4Parser.STAR or _la==CSharp4Parser.INTERR):
                                 self._errHandler.recoverInline(self)
                             else:
+                                self._errHandler.reportMatch(self)
                                 self.consume()
                             self.state = 882
                             self._errHandler.sync(self)
@@ -3948,6 +3948,7 @@ class CSharp4Parser ( Parser ):
                     if not(_la==CSharp4Parser.STAR or _la==CSharp4Parser.INTERR):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 894
                     self._errHandler.sync(self)
@@ -3955,7 +3956,7 @@ class CSharp4Parser ( Parser ):
 
                 self.state = 895
                 self.rank_specifier()
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BY, CSharp4Parser.DESCENDING, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.STRING, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 897
@@ -3973,6 +3974,7 @@ class CSharp4Parser ( Parser ):
                         if not(_la==CSharp4Parser.STAR or _la==CSharp4Parser.INTERR):
                             self._errHandler.recoverInline(self)
                         else:
+                            self._errHandler.reportMatch(self)
                             self.consume()
                         self.state = 903
                         self._errHandler.sync(self)
@@ -3984,7 +3986,7 @@ class CSharp4Parser ( Parser ):
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-
+                pass
             elif token in [CSharp4Parser.VOID]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 910
@@ -4005,6 +4007,7 @@ class CSharp4Parser ( Parser ):
                             if not(_la==CSharp4Parser.STAR or _la==CSharp4Parser.INTERR):
                                 self._errHandler.recoverInline(self)
                             else:
+                                self._errHandler.reportMatch(self)
                                 self.consume()
                             self.state = 917
                             self._errHandler.sync(self)
@@ -4025,6 +4028,7 @@ class CSharp4Parser ( Parser ):
                     if not(_la==CSharp4Parser.STAR or _la==CSharp4Parser.INTERR):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 929
                     self._errHandler.sync(self)
@@ -4032,7 +4036,7 @@ class CSharp4Parser ( Parser ):
 
                 self.state = 930
                 self.rank_specifier()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -4068,11 +4072,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_type" ):
                 listener.enterClass_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_type" ):
                 listener.exitClass_type(self)
 
 
@@ -4084,6 +4088,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_class_type)
         try:
             self.state = 937
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -4132,11 +4137,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_type" ):
                 listener.enterInterface_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_type" ):
                 listener.exitInterface_type(self)
 
 
@@ -4172,11 +4177,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_delegate_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDelegate_type" ):
                 listener.enterDelegate_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDelegate_type" ):
                 listener.exitDelegate_type(self)
 
 
@@ -4218,11 +4223,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_argument_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_argument_list" ):
                 listener.enterType_argument_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_argument_list" ):
                 listener.exitType_argument_list(self)
 
 
@@ -4271,11 +4276,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_arguments
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_arguments" ):
                 listener.enterType_arguments(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_arguments" ):
                 listener.exitType_arguments(self)
 
 
@@ -4324,11 +4329,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_argument
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_argument" ):
                 listener.enterType_argument(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_argument" ):
                 listener.exitType_argument(self)
 
 
@@ -4363,11 +4368,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_void
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_void" ):
                 listener.enterType_void(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_void" ):
                 listener.exitType_void(self)
 
 
@@ -4403,11 +4408,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_variable_reference
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterVariable_reference" ):
                 listener.enterVariable_reference(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitVariable_reference" ):
                 listener.exitVariable_reference(self)
 
 
@@ -4452,11 +4457,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_argument_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterArgument_list" ):
                 listener.enterArgument_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitArgument_list" ):
                 listener.exitArgument_list(self)
 
 
@@ -4509,11 +4514,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_argument
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterArgument" ):
                 listener.enterArgument(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitArgument" ):
                 listener.exitArgument(self)
 
 
@@ -4526,6 +4531,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 970
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,22,self._ctx)
             if la_ == 1:
                 self.state = 969
@@ -4559,11 +4565,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_argument_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterArgument_name" ):
                 listener.enterArgument_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitArgument_name" ):
                 listener.exitArgument_name(self)
 
 
@@ -4611,11 +4617,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_argument_value
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterArgument_value" ):
                 listener.enterArgument_value(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitArgument_value" ):
                 listener.exitArgument_value(self)
 
 
@@ -4627,26 +4633,27 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 50, self.RULE_argument_value)
         try:
             self.state = 982
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FALSE, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STRING, CSharp4Parser.THIS, CSharp4Parser.TRUE, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.USHORT, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER, CSharp4Parser.INTEGER_LITERAL, CSharp4Parser.REAL_LITERAL, CSharp4Parser.CHARACTER_LITERAL, CSharp4Parser.STRING_LITERAL, CSharp4Parser.OPEN_PARENS, CSharp4Parser.PLUS, CSharp4Parser.MINUS, CSharp4Parser.STAR, CSharp4Parser.AMP, CSharp4Parser.BANG, CSharp4Parser.TILDE, CSharp4Parser.OP_INC, CSharp4Parser.OP_DEC]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 977
                 self.expression()
-
+                pass
             elif token in [CSharp4Parser.REF]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 978
                 self.match(CSharp4Parser.REF)
                 self.state = 979
                 self.variable_reference()
-
+                pass
             elif token in [CSharp4Parser.OUT]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 980
                 self.match(CSharp4Parser.OUT)
                 self.state = 981
                 self.variable_reference()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -4719,11 +4726,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_primary_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPrimary_expression" ):
                 listener.enterPrimary_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPrimary_expression" ):
                 listener.exitPrimary_expression(self)
 
 
@@ -4753,29 +4760,30 @@ class CSharp4Parser ( Parser ):
             _la = self._input.LA(1)
             while ((((_la - 118)) & ~0x3f) == 0 and ((1 << (_la - 118)) & ((1 << (CSharp4Parser.OPEN_PARENS - 118)) | (1 << (CSharp4Parser.DOT - 118)) | (1 << (CSharp4Parser.OP_INC - 118)) | (1 << (CSharp4Parser.OP_DEC - 118)) | (1 << (CSharp4Parser.OP_PTR - 118)))) != 0):
                 self.state = 997
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSharp4Parser.DOT]:
                     self.state = 991
                     self.member_access2()
-
+                    pass
                 elif token in [CSharp4Parser.OPEN_PARENS]:
                     self.state = 992
                     self.method_invocation2()
-
+                    pass
                 elif token in [CSharp4Parser.OP_INC]:
                     self.state = 993
                     self.match(CSharp4Parser.OP_INC)
-
+                    pass
                 elif token in [CSharp4Parser.OP_DEC]:
                     self.state = 994
                     self.match(CSharp4Parser.OP_DEC)
-
+                    pass
                 elif token in [CSharp4Parser.OP_PTR]:
                     self.state = 995
                     self.match(CSharp4Parser.OP_PTR)
                     self.state = 996
                     self.identifier()
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -4904,11 +4912,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_primary_expression_start
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPrimary_expression_start" ):
                 listener.enterPrimary_expression_start(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPrimary_expression_start" ):
                 listener.exitPrimary_expression_start(self)
 
 
@@ -4921,6 +4929,7 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 1047
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,32,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -4969,11 +4978,13 @@ class CSharp4Parser ( Parser ):
                 self.state = 1017
                 self.match(CSharp4Parser.NEW)
                 self.state = 1039
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.DECIMAL, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.STRING, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.USHORT, CSharp4Parser.VOID, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                     self.state = 1018
                     self.any_type()
                     self.state = 1033
+                    self._errHandler.sync(self)
                     la_ = self._interp.adaptivePredict(self._input,30,self._ctx)
                     if la_ == 1:
                         self.state = 1019
@@ -4993,6 +5004,7 @@ class CSharp4Parser ( Parser ):
                         self.state = 1023
                         self.match(CSharp4Parser.CLOSE_BRACKET)
                         self.state = 1025
+                        self._errHandler.sync(self)
                         la_ = self._interp.adaptivePredict(self._input,28,self._ctx)
                         if la_ == 1:
                             self.state = 1024
@@ -5000,6 +5012,7 @@ class CSharp4Parser ( Parser ):
 
 
                         self.state = 1028
+                        self._errHandler.sync(self)
                         _la = self._input.LA(1)
                         if _la==CSharp4Parser.OPEN_BRACE:
                             self.state = 1027
@@ -5016,17 +5029,17 @@ class CSharp4Parser ( Parser ):
                         pass
 
 
-
+                    pass
                 elif token in [CSharp4Parser.OPEN_BRACE]:
                     self.state = 1035
                     self.anonymous_object_initializer()
-
+                    pass
                 elif token in [CSharp4Parser.OPEN_BRACKET]:
                     self.state = 1036
                     self.rank_specifier()
                     self.state = 1037
                     self.array_initializer()
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -5097,11 +5110,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_bracket_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBracket_expression" ):
                 listener.enterBracket_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBracket_expression" ):
                 listener.exitBracket_expression(self)
 
 
@@ -5145,11 +5158,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_simple_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSimple_name" ):
                 listener.enterSimple_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSimple_name" ):
                 listener.exitSimple_name(self)
 
 
@@ -5193,11 +5206,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_parenthesized_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterParenthesized_expression" ):
                 listener.enterParenthesized_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitParenthesized_expression" ):
                 listener.exitParenthesized_expression(self)
 
 
@@ -5237,11 +5250,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_member_access
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMember_access" ):
                 listener.enterMember_access(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMember_access" ):
                 listener.exitMember_access(self)
 
 
@@ -5318,11 +5331,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_predefined_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPredefined_type" ):
                 listener.enterPredefined_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPredefined_type" ):
                 listener.exitPredefined_type(self)
 
 
@@ -5340,6 +5353,7 @@ class CSharp4Parser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -5372,11 +5386,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_expression_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterExpression_list" ):
                 listener.enterExpression_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitExpression_list" ):
                 listener.exitExpression_list(self)
 
 
@@ -5424,11 +5438,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_this_access
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterThis_access" ):
                 listener.enterThis_access(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitThis_access" ):
                 listener.exitThis_access(self)
 
 
@@ -5484,11 +5498,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_base_access
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBase_access" ):
                 listener.enterBase_access(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBase_access" ):
                 listener.exitBase_access(self)
 
 
@@ -5500,6 +5514,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 70, self.RULE_base_access)
         try:
             self.state = 1084
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,34,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -5565,11 +5580,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_object_creation_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterObject_creation_expression" ):
                 listener.enterObject_creation_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitObject_creation_expression" ):
                 listener.exitObject_creation_expression(self)
 
 
@@ -5587,11 +5602,13 @@ class CSharp4Parser ( Parser ):
             self.state = 1087
             self.any_type()
             self.state = 1097
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_PARENS]:
                 self.state = 1088
                 self.match(CSharp4Parser.OPEN_PARENS)
                 self.state = 1090
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BASE) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.CHECKED) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DEFAULT) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FALSE) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CSharp4Parser.NULL - 64)) | (1 << (CSharp4Parser.OBJECT - 64)) | (1 << (CSharp4Parser.ON - 64)) | (1 << (CSharp4Parser.ORDERBY - 64)) | (1 << (CSharp4Parser.OUT - 64)) | (1 << (CSharp4Parser.PARTIAL - 64)) | (1 << (CSharp4Parser.REF - 64)) | (1 << (CSharp4Parser.REMOVE - 64)) | (1 << (CSharp4Parser.SBYTE - 64)) | (1 << (CSharp4Parser.SELECT - 64)) | (1 << (CSharp4Parser.SET - 64)) | (1 << (CSharp4Parser.SHORT - 64)) | (1 << (CSharp4Parser.SIZEOF - 64)) | (1 << (CSharp4Parser.STRING - 64)) | (1 << (CSharp4Parser.THIS - 64)) | (1 << (CSharp4Parser.TRUE - 64)) | (1 << (CSharp4Parser.TYPEOF - 64)) | (1 << (CSharp4Parser.UINT - 64)) | (1 << (CSharp4Parser.ULONG - 64)) | (1 << (CSharp4Parser.UNCHECKED - 64)) | (1 << (CSharp4Parser.USHORT - 64)) | (1 << (CSharp4Parser.WHERE - 64)) | (1 << (CSharp4Parser.YIELD - 64)) | (1 << (CSharp4Parser.IDENTIFIER - 64)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 64)) | (1 << (CSharp4Parser.REAL_LITERAL - 64)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 64)) | (1 << (CSharp4Parser.STRING_LITERAL - 64)) | (1 << (CSharp4Parser.OPEN_PARENS - 64)) | (1 << (CSharp4Parser.PLUS - 64)) | (1 << (CSharp4Parser.MINUS - 64)) | (1 << (CSharp4Parser.STAR - 64)))) != 0) or ((((_la - 129)) & ~0x3f) == 0 and ((1 << (_la - 129)) & ((1 << (CSharp4Parser.AMP - 129)) | (1 << (CSharp4Parser.BANG - 129)) | (1 << (CSharp4Parser.TILDE - 129)) | (1 << (CSharp4Parser.OP_INC - 129)) | (1 << (CSharp4Parser.OP_DEC - 129)))) != 0):
                     self.state = 1089
@@ -5601,17 +5618,18 @@ class CSharp4Parser ( Parser ):
                 self.state = 1092
                 self.match(CSharp4Parser.CLOSE_PARENS)
                 self.state = 1094
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.OPEN_BRACE:
                     self.state = 1093
                     self.object_or_collection_initializer()
 
 
-
+                pass
             elif token in [CSharp4Parser.OPEN_BRACE]:
                 self.state = 1096
                 self.object_or_collection_initializer()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -5641,11 +5659,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_object_or_collection_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterObject_or_collection_initializer" ):
                 listener.enterObject_or_collection_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitObject_or_collection_initializer" ):
                 listener.exitObject_or_collection_initializer(self)
 
 
@@ -5657,6 +5675,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 74, self.RULE_object_or_collection_initializer)
         try:
             self.state = 1101
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,38,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -5702,11 +5721,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_object_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterObject_initializer" ):
                 listener.enterObject_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitObject_initializer" ):
                 listener.exitObject_initializer(self)
 
 
@@ -5719,6 +5738,7 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 1112
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,40,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -5735,6 +5755,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 1106
                 self.member_initializer_list()
                 self.state = 1108
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.COMMA:
                     self.state = 1107
@@ -5777,11 +5798,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_member_initializer_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMember_initializer_list" ):
                 listener.enterMember_initializer_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMember_initializer_list" ):
                 listener.exitMember_initializer_list(self)
 
 
@@ -5837,11 +5858,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_member_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMember_initializer" ):
                 listener.enterMember_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMember_initializer" ):
                 listener.exitMember_initializer(self)
 
 
@@ -5885,11 +5906,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_initializer_value
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInitializer_value" ):
                 listener.enterInitializer_value(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInitializer_value" ):
                 listener.exitInitializer_value(self)
 
 
@@ -5901,17 +5922,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 82, self.RULE_initializer_value)
         try:
             self.state = 1128
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FALSE, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STRING, CSharp4Parser.THIS, CSharp4Parser.TRUE, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.USHORT, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER, CSharp4Parser.INTEGER_LITERAL, CSharp4Parser.REAL_LITERAL, CSharp4Parser.CHARACTER_LITERAL, CSharp4Parser.STRING_LITERAL, CSharp4Parser.OPEN_PARENS, CSharp4Parser.PLUS, CSharp4Parser.MINUS, CSharp4Parser.STAR, CSharp4Parser.AMP, CSharp4Parser.BANG, CSharp4Parser.TILDE, CSharp4Parser.OP_INC, CSharp4Parser.OP_DEC]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1126
                 self.expression()
-
+                pass
             elif token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1127
                 self.object_or_collection_initializer()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -5946,11 +5968,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_collection_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterCollection_initializer" ):
                 listener.enterCollection_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitCollection_initializer" ):
                 listener.exitCollection_initializer(self)
 
 
@@ -5968,6 +5990,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1131
             self.element_initializer_list()
             self.state = 1133
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COMMA:
                 self.state = 1132
@@ -6007,11 +6030,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_element_initializer_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterElement_initializer_list" ):
                 listener.enterElement_initializer_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitElement_initializer_list" ):
                 listener.exitElement_initializer_list(self)
 
 
@@ -6070,11 +6093,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_element_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterElement_initializer" ):
                 listener.enterElement_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitElement_initializer" ):
                 listener.exitElement_initializer(self)
 
 
@@ -6086,12 +6109,13 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 88, self.RULE_element_initializer)
         try:
             self.state = 1150
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FALSE, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STRING, CSharp4Parser.THIS, CSharp4Parser.TRUE, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.USHORT, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER, CSharp4Parser.INTEGER_LITERAL, CSharp4Parser.REAL_LITERAL, CSharp4Parser.CHARACTER_LITERAL, CSharp4Parser.STRING_LITERAL, CSharp4Parser.OPEN_PARENS, CSharp4Parser.PLUS, CSharp4Parser.MINUS, CSharp4Parser.STAR, CSharp4Parser.AMP, CSharp4Parser.BANG, CSharp4Parser.TILDE, CSharp4Parser.OP_INC, CSharp4Parser.OP_DEC]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1145
                 self.non_assignment_expression()
-
+                pass
             elif token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1146
@@ -6100,7 +6124,7 @@ class CSharp4Parser ( Parser ):
                 self.expression_list()
                 self.state = 1148
                 self.match(CSharp4Parser.CLOSE_BRACE)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -6155,11 +6179,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_array_creation_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterArray_creation_expression" ):
                 listener.enterArray_creation_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitArray_creation_expression" ):
                 listener.exitArray_creation_expression(self)
 
 
@@ -6175,6 +6199,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1152
             self.match(CSharp4Parser.NEW)
             self.state = 1169
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,48,self._ctx)
             if la_ == 1:
                 self.state = 1153
@@ -6193,6 +6218,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 1159
                 self.match(CSharp4Parser.CLOSE_BRACKET)
                 self.state = 1161
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.OPEN_BRACKET:
                     self.state = 1160
@@ -6200,6 +6226,7 @@ class CSharp4Parser ( Parser ):
 
 
                 self.state = 1164
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.OPEN_BRACE:
                     self.state = 1163
@@ -6251,11 +6278,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_delegate_creation_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDelegate_creation_expression" ):
                 listener.enterDelegate_creation_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDelegate_creation_expression" ):
                 listener.exitDelegate_creation_expression(self)
 
 
@@ -6302,11 +6329,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_anonymous_object_creation_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAnonymous_object_creation_expression" ):
                 listener.enterAnonymous_object_creation_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAnonymous_object_creation_expression" ):
                 listener.exitAnonymous_object_creation_expression(self)
 
 
@@ -6353,11 +6380,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_anonymous_object_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAnonymous_object_initializer" ):
                 listener.enterAnonymous_object_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAnonymous_object_initializer" ):
                 listener.exitAnonymous_object_initializer(self)
 
 
@@ -6370,6 +6397,7 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 1189
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,50,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -6386,6 +6414,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 1183
                 self.member_declarator_list()
                 self.state = 1185
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.COMMA:
                     self.state = 1184
@@ -6428,11 +6457,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_member_declarator_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMember_declarator_list" ):
                 listener.enterMember_declarator_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMember_declarator_list" ):
                 listener.exitMember_declarator_list(self)
 
 
@@ -6492,11 +6521,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_member_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMember_declarator" ):
                 listener.enterMember_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMember_declarator" ):
                 listener.exitMember_declarator(self)
 
 
@@ -6508,6 +6537,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 100, self.RULE_member_declarator)
         try:
             self.state = 1204
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,52,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -6564,11 +6594,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_typeof_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterTypeof_expression" ):
                 listener.enterTypeof_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitTypeof_expression" ):
                 listener.exitTypeof_expression(self)
 
 
@@ -6585,6 +6615,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1207
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 1216
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,53,self._ctx)
             if la_ == 1:
                 self.state = 1208
@@ -6649,11 +6680,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_unbound_type_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUnbound_type_name" ):
                 listener.enterUnbound_type_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUnbound_type_name" ):
                 listener.exitUnbound_type_name(self)
 
 
@@ -6669,29 +6700,32 @@ class CSharp4Parser ( Parser ):
             self.state = 1218
             self.identifier()
             self.state = 1227
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.CLOSE_PARENS, CSharp4Parser.DOT, CSharp4Parser.LT]:
                 self.state = 1220
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.LT:
                     self.state = 1219
                     self.generic_dimension_specifier()
 
 
-
+                pass
             elif token in [CSharp4Parser.DOUBLE_COLON]:
                 self.state = 1222
                 self.match(CSharp4Parser.DOUBLE_COLON)
                 self.state = 1223
                 self.identifier()
                 self.state = 1225
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.LT:
                     self.state = 1224
                     self.generic_dimension_specifier()
 
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -6704,6 +6738,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 1230
                 self.identifier()
                 self.state = 1232
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.LT:
                     self.state = 1231
@@ -6742,11 +6777,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_generic_dimension_specifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGeneric_dimension_specifier" ):
                 listener.enterGeneric_dimension_specifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGeneric_dimension_specifier" ):
                 listener.exitGeneric_dimension_specifier(self)
 
 
@@ -6762,6 +6797,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1239
             self.match(CSharp4Parser.LT)
             self.state = 1241
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COMMA:
                 self.state = 1240
@@ -6794,11 +6830,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_commas
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterCommas" ):
                 listener.enterCommas(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitCommas" ):
                 listener.exitCommas(self)
 
 
@@ -6854,11 +6890,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_checked_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterChecked_expression" ):
                 listener.enterChecked_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitChecked_expression" ):
                 listener.exitChecked_expression(self)
 
 
@@ -6909,11 +6945,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_unchecked_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUnchecked_expression" ):
                 listener.enterUnchecked_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUnchecked_expression" ):
                 listener.exitUnchecked_expression(self)
 
 
@@ -6964,11 +7000,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_default_value_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDefault_value_expression" ):
                 listener.enterDefault_value_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDefault_value_expression" ):
                 listener.exitDefault_value_expression(self)
 
 
@@ -7042,11 +7078,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_unary_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUnary_expression" ):
                 listener.enterUnary_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUnary_expression" ):
                 listener.exitUnary_expression(self)
 
 
@@ -7058,6 +7094,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 116, self.RULE_unary_expression)
         try:
             self.state = 1280
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,61,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -7154,11 +7191,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_scan_for_cast_generic_precedence
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterScan_for_cast_generic_precedence" ):
                 listener.enterScan_for_cast_generic_precedence(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitScan_for_cast_generic_precedence" ):
                 listener.exitScan_for_cast_generic_precedence(self)
 
 
@@ -7429,11 +7466,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_cast_disambiguation_token
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterCast_disambiguation_token" ):
                 listener.enterCast_disambiguation_token(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitCast_disambiguation_token" ):
                 listener.exitCast_disambiguation_token(self)
 
 
@@ -7446,315 +7483,316 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1364
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.TILDE]:
                 self.state = 1287
                 self.match(CSharp4Parser.TILDE)
-
+                pass
             elif token in [CSharp4Parser.BANG]:
                 self.state = 1288
                 self.match(CSharp4Parser.BANG)
-
+                pass
             elif token in [CSharp4Parser.OPEN_PARENS]:
                 self.state = 1289
                 self.match(CSharp4Parser.OPEN_PARENS)
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BY, CSharp4Parser.DESCENDING, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.state = 1290
                 self.identifier()
-
+                pass
             elif token in [CSharp4Parser.FALSE, CSharp4Parser.NULL, CSharp4Parser.TRUE, CSharp4Parser.INTEGER_LITERAL, CSharp4Parser.REAL_LITERAL, CSharp4Parser.CHARACTER_LITERAL, CSharp4Parser.STRING_LITERAL]:
                 self.state = 1291
                 self.literal()
-
+                pass
             elif token in [CSharp4Parser.ABSTRACT]:
                 self.state = 1292
                 self.match(CSharp4Parser.ABSTRACT)
-
+                pass
             elif token in [CSharp4Parser.BASE]:
                 self.state = 1293
                 self.match(CSharp4Parser.BASE)
-
+                pass
             elif token in [CSharp4Parser.BOOL]:
                 self.state = 1294
                 self.match(CSharp4Parser.BOOL)
-
+                pass
             elif token in [CSharp4Parser.BREAK]:
                 self.state = 1295
                 self.match(CSharp4Parser.BREAK)
-
+                pass
             elif token in [CSharp4Parser.BYTE]:
                 self.state = 1296
                 self.match(CSharp4Parser.BYTE)
-
+                pass
             elif token in [CSharp4Parser.CASE]:
                 self.state = 1297
                 self.match(CSharp4Parser.CASE)
-
+                pass
             elif token in [CSharp4Parser.CATCH]:
                 self.state = 1298
                 self.match(CSharp4Parser.CATCH)
-
+                pass
             elif token in [CSharp4Parser.CHAR]:
                 self.state = 1299
                 self.match(CSharp4Parser.CHAR)
-
+                pass
             elif token in [CSharp4Parser.CHECKED]:
                 self.state = 1300
                 self.match(CSharp4Parser.CHECKED)
-
+                pass
             elif token in [CSharp4Parser.CLASS]:
                 self.state = 1301
                 self.match(CSharp4Parser.CLASS)
-
+                pass
             elif token in [CSharp4Parser.CONST]:
                 self.state = 1302
                 self.match(CSharp4Parser.CONST)
-
+                pass
             elif token in [CSharp4Parser.CONTINUE]:
                 self.state = 1303
                 self.match(CSharp4Parser.CONTINUE)
-
+                pass
             elif token in [CSharp4Parser.DECIMAL]:
                 self.state = 1304
                 self.match(CSharp4Parser.DECIMAL)
-
+                pass
             elif token in [CSharp4Parser.DEFAULT]:
                 self.state = 1305
                 self.match(CSharp4Parser.DEFAULT)
-
+                pass
             elif token in [CSharp4Parser.DELEGATE]:
                 self.state = 1306
                 self.match(CSharp4Parser.DELEGATE)
-
+                pass
             elif token in [CSharp4Parser.DO]:
                 self.state = 1307
                 self.match(CSharp4Parser.DO)
-
+                pass
             elif token in [CSharp4Parser.DOUBLE]:
                 self.state = 1308
                 self.match(CSharp4Parser.DOUBLE)
-
+                pass
             elif token in [CSharp4Parser.ELSE]:
                 self.state = 1309
                 self.match(CSharp4Parser.ELSE)
-
+                pass
             elif token in [CSharp4Parser.ENUM]:
                 self.state = 1310
                 self.match(CSharp4Parser.ENUM)
-
+                pass
             elif token in [CSharp4Parser.EVENT]:
                 self.state = 1311
                 self.match(CSharp4Parser.EVENT)
-
+                pass
             elif token in [CSharp4Parser.EXPLICIT]:
                 self.state = 1312
                 self.match(CSharp4Parser.EXPLICIT)
-
+                pass
             elif token in [CSharp4Parser.EXTERN]:
                 self.state = 1313
                 self.match(CSharp4Parser.EXTERN)
-
+                pass
             elif token in [CSharp4Parser.FINALLY]:
                 self.state = 1314
                 self.match(CSharp4Parser.FINALLY)
-
+                pass
             elif token in [CSharp4Parser.FIXED]:
                 self.state = 1315
                 self.match(CSharp4Parser.FIXED)
-
+                pass
             elif token in [CSharp4Parser.FLOAT]:
                 self.state = 1316
                 self.match(CSharp4Parser.FLOAT)
-
+                pass
             elif token in [CSharp4Parser.FOR]:
                 self.state = 1317
                 self.match(CSharp4Parser.FOR)
-
+                pass
             elif token in [CSharp4Parser.FOREACH]:
                 self.state = 1318
                 self.match(CSharp4Parser.FOREACH)
-
+                pass
             elif token in [CSharp4Parser.GOTO]:
                 self.state = 1319
                 self.match(CSharp4Parser.GOTO)
-
+                pass
             elif token in [CSharp4Parser.IF]:
                 self.state = 1320
                 self.match(CSharp4Parser.IF)
-
+                pass
             elif token in [CSharp4Parser.IMPLICIT]:
                 self.state = 1321
                 self.match(CSharp4Parser.IMPLICIT)
-
+                pass
             elif token in [CSharp4Parser.IN]:
                 self.state = 1322
                 self.match(CSharp4Parser.IN)
-
+                pass
             elif token in [CSharp4Parser.INT]:
                 self.state = 1323
                 self.match(CSharp4Parser.INT)
-
+                pass
             elif token in [CSharp4Parser.INTERFACE]:
                 self.state = 1324
                 self.match(CSharp4Parser.INTERFACE)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.state = 1325
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.LOCK]:
                 self.state = 1326
                 self.match(CSharp4Parser.LOCK)
-
+                pass
             elif token in [CSharp4Parser.LONG]:
                 self.state = 1327
                 self.match(CSharp4Parser.LONG)
-
+                pass
             elif token in [CSharp4Parser.NAMESPACE]:
                 self.state = 1328
                 self.match(CSharp4Parser.NAMESPACE)
-
+                pass
             elif token in [CSharp4Parser.NEW]:
                 self.state = 1329
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.OBJECT]:
                 self.state = 1330
                 self.match(CSharp4Parser.OBJECT)
-
+                pass
             elif token in [CSharp4Parser.OPERATOR]:
                 self.state = 1331
                 self.match(CSharp4Parser.OPERATOR)
-
+                pass
             elif token in [CSharp4Parser.OUT]:
                 self.state = 1332
                 self.match(CSharp4Parser.OUT)
-
+                pass
             elif token in [CSharp4Parser.OVERRIDE]:
                 self.state = 1333
                 self.match(CSharp4Parser.OVERRIDE)
-
+                pass
             elif token in [CSharp4Parser.PARAMS]:
                 self.state = 1334
                 self.match(CSharp4Parser.PARAMS)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.state = 1335
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.state = 1336
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.state = 1337
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.READONLY]:
                 self.state = 1338
                 self.match(CSharp4Parser.READONLY)
-
+                pass
             elif token in [CSharp4Parser.REF]:
                 self.state = 1339
                 self.match(CSharp4Parser.REF)
-
+                pass
             elif token in [CSharp4Parser.RETURN]:
                 self.state = 1340
                 self.match(CSharp4Parser.RETURN)
-
+                pass
             elif token in [CSharp4Parser.SBYTE]:
                 self.state = 1341
                 self.match(CSharp4Parser.SBYTE)
-
+                pass
             elif token in [CSharp4Parser.SEALED]:
                 self.state = 1342
                 self.match(CSharp4Parser.SEALED)
-
+                pass
             elif token in [CSharp4Parser.SHORT]:
                 self.state = 1343
                 self.match(CSharp4Parser.SHORT)
-
+                pass
             elif token in [CSharp4Parser.SIZEOF]:
                 self.state = 1344
                 self.match(CSharp4Parser.SIZEOF)
-
+                pass
             elif token in [CSharp4Parser.STACKALLOC]:
                 self.state = 1345
                 self.match(CSharp4Parser.STACKALLOC)
-
+                pass
             elif token in [CSharp4Parser.STATIC]:
                 self.state = 1346
                 self.match(CSharp4Parser.STATIC)
-
+                pass
             elif token in [CSharp4Parser.STRING]:
                 self.state = 1347
                 self.match(CSharp4Parser.STRING)
-
+                pass
             elif token in [CSharp4Parser.STRUCT]:
                 self.state = 1348
                 self.match(CSharp4Parser.STRUCT)
-
+                pass
             elif token in [CSharp4Parser.SWITCH]:
                 self.state = 1349
                 self.match(CSharp4Parser.SWITCH)
-
+                pass
             elif token in [CSharp4Parser.THIS]:
                 self.state = 1350
                 self.match(CSharp4Parser.THIS)
-
+                pass
             elif token in [CSharp4Parser.THROW]:
                 self.state = 1351
                 self.match(CSharp4Parser.THROW)
-
+                pass
             elif token in [CSharp4Parser.TRY]:
                 self.state = 1352
                 self.match(CSharp4Parser.TRY)
-
+                pass
             elif token in [CSharp4Parser.TYPEOF]:
                 self.state = 1353
                 self.match(CSharp4Parser.TYPEOF)
-
+                pass
             elif token in [CSharp4Parser.UINT]:
                 self.state = 1354
                 self.match(CSharp4Parser.UINT)
-
+                pass
             elif token in [CSharp4Parser.ULONG]:
                 self.state = 1355
                 self.match(CSharp4Parser.ULONG)
-
+                pass
             elif token in [CSharp4Parser.UNCHECKED]:
                 self.state = 1356
                 self.match(CSharp4Parser.UNCHECKED)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.state = 1357
                 self.match(CSharp4Parser.UNSAFE)
-
+                pass
             elif token in [CSharp4Parser.USHORT]:
                 self.state = 1358
                 self.match(CSharp4Parser.USHORT)
-
+                pass
             elif token in [CSharp4Parser.USING]:
                 self.state = 1359
                 self.match(CSharp4Parser.USING)
-
+                pass
             elif token in [CSharp4Parser.VIRTUAL]:
                 self.state = 1360
                 self.match(CSharp4Parser.VIRTUAL)
-
+                pass
             elif token in [CSharp4Parser.VOID]:
                 self.state = 1361
                 self.match(CSharp4Parser.VOID)
-
+                pass
             elif token in [CSharp4Parser.VOLATILE]:
                 self.state = 1362
                 self.match(CSharp4Parser.VOLATILE)
-
+                pass
             elif token in [CSharp4Parser.WHILE]:
                 self.state = 1363
                 self.match(CSharp4Parser.WHILE)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -7783,11 +7821,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_pre_increment_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPre_increment_expression" ):
                 listener.enterPre_increment_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPre_increment_expression" ):
                 listener.exitPre_increment_expression(self)
 
 
@@ -7828,11 +7866,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_pre_decrement_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPre_decrement_expression" ):
                 listener.enterPre_decrement_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPre_decrement_expression" ):
                 listener.exitPre_decrement_expression(self)
 
 
@@ -7880,11 +7918,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_cast_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterCast_expression" ):
                 listener.enterCast_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitCast_expression" ):
                 listener.exitCast_expression(self)
 
 
@@ -7947,11 +7985,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_multiplicative_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMultiplicative_expression" ):
                 listener.enterMultiplicative_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMultiplicative_expression" ):
                 listener.exitMultiplicative_expression(self)
 
 
@@ -7971,25 +8009,26 @@ class CSharp4Parser ( Parser ):
             _la = self._input.LA(1)
             while ((((_la - 126)) & ~0x3f) == 0 and ((1 << (_la - 126)) & ((1 << (CSharp4Parser.STAR - 126)) | (1 << (CSharp4Parser.DIV - 126)) | (1 << (CSharp4Parser.PERCENT - 126)))) != 0):
                 self.state = 1384
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSharp4Parser.STAR]:
                     self.state = 1378
                     self.match(CSharp4Parser.STAR)
                     self.state = 1379
                     self.unary_expression()
-
+                    pass
                 elif token in [CSharp4Parser.DIV]:
                     self.state = 1380
                     self.match(CSharp4Parser.DIV)
                     self.state = 1381
                     self.unary_expression()
-
+                    pass
                 elif token in [CSharp4Parser.PERCENT]:
                     self.state = 1382
                     self.match(CSharp4Parser.PERCENT)
                     self.state = 1383
                     self.unary_expression()
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -8034,11 +8073,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_additive_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAdditive_expression" ):
                 listener.enterAdditive_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAdditive_expression" ):
                 listener.exitAdditive_expression(self)
 
 
@@ -8058,19 +8097,20 @@ class CSharp4Parser ( Parser ):
             _la = self._input.LA(1)
             while _la==CSharp4Parser.PLUS or _la==CSharp4Parser.MINUS:
                 self.state = 1394
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSharp4Parser.PLUS]:
                     self.state = 1390
                     self.match(CSharp4Parser.PLUS)
                     self.state = 1391
                     self.multiplicative_expression()
-
+                    pass
                 elif token in [CSharp4Parser.MINUS]:
                     self.state = 1392
                     self.match(CSharp4Parser.MINUS)
                     self.state = 1393
                     self.multiplicative_expression()
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -8116,11 +8156,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_shift_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterShift_expression" ):
                 listener.enterShift_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitShift_expression" ):
                 listener.exitShift_expression(self)
 
 
@@ -8140,19 +8180,20 @@ class CSharp4Parser ( Parser ):
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     self.state = 1405
+                    self._errHandler.sync(self)
                     token = self._input.LA(1)
                     if token in [CSharp4Parser.OP_LEFT_SHIFT]:
                         self.state = 1400
                         self.match(CSharp4Parser.OP_LEFT_SHIFT)
                         self.state = 1401
                         self.additive_expression()
-
+                        pass
                     elif token in [CSharp4Parser.GT]:
                         self.state = 1402
                         self.right_shift()
                         self.state = 1403
                         self.additive_expression()
-
+                        pass
                     else:
                         raise NoViableAltException(self)
              
@@ -8235,11 +8276,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_relational_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterRelational_expression" ):
                 listener.enterRelational_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitRelational_expression" ):
                 listener.exitRelational_expression(self)
 
 
@@ -8259,43 +8300,44 @@ class CSharp4Parser ( Parser ):
             _la = self._input.LA(1)
             while _la==CSharp4Parser.AS or _la==CSharp4Parser.IS or ((((_la - 135)) & ~0x3f) == 0 and ((1 << (_la - 135)) & ((1 << (CSharp4Parser.LT - 135)) | (1 << (CSharp4Parser.GT - 135)) | (1 << (CSharp4Parser.OP_LE - 135)) | (1 << (CSharp4Parser.OP_GE - 135)))) != 0):
                 self.state = 1423
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSharp4Parser.LT]:
                     self.state = 1411
                     self.match(CSharp4Parser.LT)
                     self.state = 1412
                     self.shift_expression()
-
+                    pass
                 elif token in [CSharp4Parser.GT]:
                     self.state = 1413
                     self.match(CSharp4Parser.GT)
                     self.state = 1414
                     self.shift_expression()
-
+                    pass
                 elif token in [CSharp4Parser.OP_LE]:
                     self.state = 1415
                     self.match(CSharp4Parser.OP_LE)
                     self.state = 1416
                     self.shift_expression()
-
+                    pass
                 elif token in [CSharp4Parser.OP_GE]:
                     self.state = 1417
                     self.match(CSharp4Parser.OP_GE)
                     self.state = 1418
                     self.shift_expression()
-
+                    pass
                 elif token in [CSharp4Parser.IS]:
                     self.state = 1419
                     self.match(CSharp4Parser.IS)
                     self.state = 1420
                     self.isType()
-
+                    pass
                 elif token in [CSharp4Parser.AS]:
                     self.state = 1421
                     self.match(CSharp4Parser.AS)
                     self.state = 1422
                     self.any_type()
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -8348,11 +8390,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_scan_for_shift_generic_precedence
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterScan_for_shift_generic_precedence" ):
                 listener.enterScan_for_shift_generic_precedence(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitScan_for_shift_generic_precedence" ):
                 listener.exitScan_for_shift_generic_precedence(self)
 
 
@@ -8438,11 +8480,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_shift_disambiguation_token
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterShift_disambiguation_token" ):
                 listener.enterShift_disambiguation_token(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitShift_disambiguation_token" ):
                 listener.exitShift_disambiguation_token(self)
 
 
@@ -8460,6 +8502,7 @@ class CSharp4Parser ( Parser ):
             if not(((((_la - 117)) & ~0x3f) == 0 and ((1 << (_la - 117)) & ((1 << (CSharp4Parser.CLOSE_BRACKET - 117)) | (1 << (CSharp4Parser.OPEN_PARENS - 117)) | (1 << (CSharp4Parser.CLOSE_PARENS - 117)) | (1 << (CSharp4Parser.DOT - 117)) | (1 << (CSharp4Parser.COMMA - 117)) | (1 << (CSharp4Parser.COLON - 117)) | (1 << (CSharp4Parser.SEMICOLON - 117)) | (1 << (CSharp4Parser.GT - 117)) | (1 << (CSharp4Parser.INTERR - 117)) | (1 << (CSharp4Parser.OP_EQ - 117)) | (1 << (CSharp4Parser.OP_NE - 117)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -8486,11 +8529,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_isType
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIsType" ):
                 listener.enterIsType(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIsType" ):
                 listener.exitIsType(self)
 
 
@@ -8505,6 +8548,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1443
             self.non_nullable_value_type()
             self.state = 1445
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,72,self._ctx)
             if la_ == 1:
                 self.state = 1444
@@ -8541,11 +8585,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_is_disambiguation_token
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIs_disambiguation_token" ):
                 listener.enterIs_disambiguation_token(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIs_disambiguation_token" ):
                 listener.exitIs_disambiguation_token(self)
 
 
@@ -8563,6 +8607,7 @@ class CSharp4Parser ( Parser ):
             if not(((((_la - 119)) & ~0x3f) == 0 and ((1 << (_la - 119)) & ((1 << (CSharp4Parser.CLOSE_PARENS - 119)) | (1 << (CSharp4Parser.INTERR - 119)) | (1 << (CSharp4Parser.OP_AND - 119)) | (1 << (CSharp4Parser.OP_OR - 119)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -8601,11 +8646,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_equality_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEquality_expression" ):
                 listener.enterEquality_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEquality_expression" ):
                 listener.exitEquality_expression(self)
 
 
@@ -8625,19 +8670,20 @@ class CSharp4Parser ( Parser ):
             _la = self._input.LA(1)
             while _la==CSharp4Parser.OP_EQ or _la==CSharp4Parser.OP_NE:
                 self.state = 1454
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSharp4Parser.OP_EQ]:
                     self.state = 1450
                     self.match(CSharp4Parser.OP_EQ)
                     self.state = 1451
                     self.relational_expression()
-
+                    pass
                 elif token in [CSharp4Parser.OP_NE]:
                     self.state = 1452
                     self.match(CSharp4Parser.OP_NE)
                     self.state = 1453
                     self.relational_expression()
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
@@ -8676,11 +8722,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_and_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAnd_expression" ):
                 listener.enterAnd_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAnd_expression" ):
                 listener.exitAnd_expression(self)
 
 
@@ -8738,11 +8784,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_exclusive_or_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterExclusive_or_expression" ):
                 listener.enterExclusive_or_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitExclusive_or_expression" ):
                 listener.exitExclusive_or_expression(self)
 
 
@@ -8800,11 +8846,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_inclusive_or_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInclusive_or_expression" ):
                 listener.enterInclusive_or_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInclusive_or_expression" ):
                 listener.exitInclusive_or_expression(self)
 
 
@@ -8862,11 +8908,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_conditional_and_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConditional_and_expression" ):
                 listener.enterConditional_and_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConditional_and_expression" ):
                 listener.exitConditional_and_expression(self)
 
 
@@ -8924,11 +8970,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_conditional_or_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConditional_or_expression" ):
                 listener.enterConditional_or_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConditional_or_expression" ):
                 listener.exitConditional_or_expression(self)
 
 
@@ -8984,11 +9030,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_null_coalescing_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNull_coalescing_expression" ):
                 listener.enterNull_coalescing_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNull_coalescing_expression" ):
                 listener.exitNull_coalescing_expression(self)
 
 
@@ -9004,6 +9050,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1499
             self.conditional_or_expression()
             self.state = 1502
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OP_COALESCING:
                 self.state = 1500
@@ -9047,11 +9094,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_conditional_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConditional_expression" ):
                 listener.enterConditional_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConditional_expression" ):
                 listener.exitConditional_expression(self)
 
 
@@ -9067,6 +9114,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1504
             self.null_coalescing_expression()
             self.state = 1510
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.INTERR:
                 self.state = 1505
@@ -9109,11 +9157,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_lambda_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLambda_expression" ):
                 listener.enterLambda_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLambda_expression" ):
                 listener.exitLambda_expression(self)
 
 
@@ -9160,11 +9208,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_anonymous_method_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAnonymous_method_expression" ):
                 listener.enterAnonymous_method_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAnonymous_method_expression" ):
                 listener.exitAnonymous_method_expression(self)
 
 
@@ -9180,6 +9228,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1516
             self.match(CSharp4Parser.DELEGATE)
             self.state = 1518
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_PARENS:
                 self.state = 1517
@@ -9224,11 +9273,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_anonymous_function_signature
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAnonymous_function_signature" ):
                 listener.enterAnonymous_function_signature(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAnonymous_function_signature" ):
                 listener.exitAnonymous_function_signature(self)
 
 
@@ -9240,6 +9289,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 164, self.RULE_anonymous_function_signature)
         try:
             self.state = 1533
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,83,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -9304,11 +9354,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_explicit_anonymous_function_signature
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterExplicit_anonymous_function_signature" ):
                 listener.enterExplicit_anonymous_function_signature(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitExplicit_anonymous_function_signature" ):
                 listener.exitExplicit_anonymous_function_signature(self)
 
 
@@ -9324,6 +9374,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1535
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 1537
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)))) != 0):
                 self.state = 1536
@@ -9363,11 +9414,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_explicit_anonymous_function_parameter_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterExplicit_anonymous_function_parameter_list" ):
                 listener.enterExplicit_anonymous_function_parameter_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitExplicit_anonymous_function_parameter_list" ):
                 listener.exitExplicit_anonymous_function_parameter_list(self)
 
 
@@ -9424,11 +9475,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_explicit_anonymous_function_parameter
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterExplicit_anonymous_function_parameter" ):
                 listener.enterExplicit_anonymous_function_parameter(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitExplicit_anonymous_function_parameter" ):
                 listener.exitExplicit_anonymous_function_parameter(self)
 
 
@@ -9442,6 +9493,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1550
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OUT or _la==CSharp4Parser.REF:
                 self.state = 1549
@@ -9476,11 +9528,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_anonymous_function_parameter_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAnonymous_function_parameter_modifier" ):
                 listener.enterAnonymous_function_parameter_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAnonymous_function_parameter_modifier" ):
                 listener.exitAnonymous_function_parameter_modifier(self)
 
 
@@ -9498,6 +9550,7 @@ class CSharp4Parser ( Parser ):
             if not(_la==CSharp4Parser.OUT or _la==CSharp4Parser.REF):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -9531,11 +9584,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_implicit_anonymous_function_signature
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterImplicit_anonymous_function_signature" ):
                 listener.enterImplicit_anonymous_function_signature(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitImplicit_anonymous_function_signature" ):
                 listener.exitImplicit_anonymous_function_signature(self)
 
 
@@ -9548,12 +9601,14 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 1563
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_PARENS]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1557
                 self.match(CSharp4Parser.OPEN_PARENS)
                 self.state = 1559
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET))) != 0) or ((((_la - 66)) & ~0x3f) == 0 and ((1 << (_la - 66)) & ((1 << (CSharp4Parser.ON - 66)) | (1 << (CSharp4Parser.ORDERBY - 66)) | (1 << (CSharp4Parser.PARTIAL - 66)) | (1 << (CSharp4Parser.REMOVE - 66)) | (1 << (CSharp4Parser.SELECT - 66)) | (1 << (CSharp4Parser.SET - 66)) | (1 << (CSharp4Parser.WHERE - 66)) | (1 << (CSharp4Parser.YIELD - 66)) | (1 << (CSharp4Parser.IDENTIFIER - 66)))) != 0):
                     self.state = 1558
@@ -9562,12 +9617,12 @@ class CSharp4Parser ( Parser ):
 
                 self.state = 1561
                 self.match(CSharp4Parser.CLOSE_PARENS)
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BY, CSharp4Parser.DESCENDING, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1562
                 self.implicit_anonymous_function_parameter()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -9602,11 +9657,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_implicit_anonymous_function_parameter_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterImplicit_anonymous_function_parameter_list" ):
                 listener.enterImplicit_anonymous_function_parameter_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitImplicit_anonymous_function_parameter_list" ):
                 listener.exitImplicit_anonymous_function_parameter_list(self)
 
 
@@ -9655,11 +9710,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_implicit_anonymous_function_parameter
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterImplicit_anonymous_function_parameter" ):
                 listener.enterImplicit_anonymous_function_parameter(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitImplicit_anonymous_function_parameter" ):
                 listener.exitImplicit_anonymous_function_parameter(self)
 
 
@@ -9699,11 +9754,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_anonymous_function_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAnonymous_function_body" ):
                 listener.enterAnonymous_function_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAnonymous_function_body" ):
                 listener.exitAnonymous_function_body(self)
 
 
@@ -9715,17 +9770,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 180, self.RULE_anonymous_function_body)
         try:
             self.state = 1577
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FALSE, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STRING, CSharp4Parser.THIS, CSharp4Parser.TRUE, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.USHORT, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER, CSharp4Parser.INTEGER_LITERAL, CSharp4Parser.REAL_LITERAL, CSharp4Parser.CHARACTER_LITERAL, CSharp4Parser.STRING_LITERAL, CSharp4Parser.OPEN_PARENS, CSharp4Parser.PLUS, CSharp4Parser.MINUS, CSharp4Parser.STAR, CSharp4Parser.AMP, CSharp4Parser.BANG, CSharp4Parser.TILDE, CSharp4Parser.OP_INC, CSharp4Parser.OP_DEC]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1575
                 self.expression()
-
+                pass
             elif token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1576
                 self.block()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -9755,11 +9811,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_query_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterQuery_expression" ):
                 listener.enterQuery_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitQuery_expression" ):
                 listener.exitQuery_expression(self)
 
 
@@ -9812,11 +9868,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_from_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFrom_clause" ):
                 listener.enterFrom_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFrom_clause" ):
                 listener.exitFrom_clause(self)
 
 
@@ -9831,6 +9887,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1582
             self.from_contextual_keyword()
             self.state = 1584
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,91,self._ctx)
             if la_ == 1:
                 self.state = 1583
@@ -9873,11 +9930,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_query_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterQuery_body" ):
                 listener.enterQuery_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitQuery_body" ):
                 listener.exitQuery_body(self)
 
 
@@ -9891,6 +9948,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 1591
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 46)) & ~0x3f) == 0 and ((1 << (_la - 46)) & ((1 << (CSharp4Parser.FROM - 46)) | (1 << (CSharp4Parser.JOIN - 46)) | (1 << (CSharp4Parser.LET - 46)) | (1 << (CSharp4Parser.ORDERBY - 46)) | (1 << (CSharp4Parser.WHERE - 46)))) != 0):
                 self.state = 1590
@@ -9900,6 +9958,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1593
             self.select_or_group_clause()
             self.state = 1595
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,93,self._ctx)
             if la_ == 1:
                 self.state = 1594
@@ -9931,11 +9990,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_query_body_clauses
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterQuery_body_clauses" ):
                 listener.enterQuery_body_clauses(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitQuery_body_clauses" ):
                 listener.exitQuery_body_clauses(self)
 
 
@@ -9998,11 +10057,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_query_body_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterQuery_body_clause" ):
                 listener.enterQuery_body_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitQuery_body_clause" ):
                 listener.exitQuery_body_clause(self)
 
 
@@ -10014,32 +10073,33 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 190, self.RULE_query_body_clause)
         try:
             self.state = 1609
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.FROM]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1604
                 self.from_clause()
-
+                pass
             elif token in [CSharp4Parser.LET]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1605
                 self.let_clause()
-
+                pass
             elif token in [CSharp4Parser.WHERE]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1606
                 self.where_clause()
-
+                pass
             elif token in [CSharp4Parser.JOIN]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 1607
                 self.combined_join_clause()
-
+                pass
             elif token in [CSharp4Parser.ORDERBY]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 1608
                 self.orderby_clause()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -10076,11 +10136,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_let_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLet_clause" ):
                 listener.enterLet_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLet_clause" ):
                 listener.exitLet_clause(self)
 
 
@@ -10126,11 +10186,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_where_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterWhere_clause" ):
                 listener.enterWhere_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitWhere_clause" ):
                 listener.exitWhere_clause(self)
 
 
@@ -10194,11 +10254,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_join_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterJoin_clause" ):
                 listener.enterJoin_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitJoin_clause" ):
                 listener.exitJoin_clause(self)
 
 
@@ -10213,6 +10273,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1619
             self.join_contextual_keyword()
             self.state = 1621
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,96,self._ctx)
             if la_ == 1:
                 self.state = 1620
@@ -10288,11 +10349,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_join_into_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterJoin_into_clause" ):
                 listener.enterJoin_into_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitJoin_into_clause" ):
                 listener.exitJoin_into_clause(self)
 
 
@@ -10307,6 +10368,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1631
             self.join_contextual_keyword()
             self.state = 1633
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,97,self._ctx)
             if la_ == 1:
                 self.state = 1632
@@ -10386,11 +10448,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_combined_join_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterCombined_join_clause" ):
                 listener.enterCombined_join_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitCombined_join_clause" ):
                 listener.exitCombined_join_clause(self)
 
 
@@ -10406,6 +10468,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1645
             self.join_contextual_keyword()
             self.state = 1647
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,98,self._ctx)
             if la_ == 1:
                 self.state = 1646
@@ -10427,6 +10490,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1655
             self.expression()
             self.state = 1659
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.INTO:
                 self.state = 1656
@@ -10461,11 +10525,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_orderby_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOrderby_clause" ):
                 listener.enterOrderby_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOrderby_clause" ):
                 listener.exitOrderby_clause(self)
 
 
@@ -10512,11 +10576,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_orderings
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOrderings" ):
                 listener.enterOrderings(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOrderings" ):
                 listener.exitOrderings(self)
 
 
@@ -10569,11 +10633,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_ordering
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOrdering" ):
                 listener.enterOrdering(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOrdering" ):
                 listener.exitOrdering(self)
 
 
@@ -10589,6 +10653,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1672
             self.expression()
             self.state = 1674
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.ASCENDING or _la==CSharp4Parser.DESCENDING:
                 self.state = 1673
@@ -10621,11 +10686,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_ordering_direction
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOrdering_direction" ):
                 listener.enterOrdering_direction(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOrdering_direction" ):
                 listener.exitOrdering_direction(self)
 
 
@@ -10637,17 +10702,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 208, self.RULE_ordering_direction)
         try:
             self.state = 1678
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ASCENDING]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1676
                 self.ascending_contextual_keyword()
-
+                pass
             elif token in [CSharp4Parser.DESCENDING]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1677
                 self.descending_contextual_keyword()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -10677,11 +10743,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_select_or_group_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSelect_or_group_clause" ):
                 listener.enterSelect_or_group_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSelect_or_group_clause" ):
                 listener.exitSelect_or_group_clause(self)
 
 
@@ -10693,17 +10759,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 210, self.RULE_select_or_group_clause)
         try:
             self.state = 1682
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.SELECT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1680
                 self.select_clause()
-
+                pass
             elif token in [CSharp4Parser.GROUP]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1681
                 self.group_clause()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -10733,11 +10800,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_select_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSelect_clause" ):
                 listener.enterSelect_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSelect_clause" ):
                 listener.exitSelect_clause(self)
 
 
@@ -10786,11 +10853,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_group_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGroup_clause" ):
                 listener.enterGroup_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGroup_clause" ):
                 listener.exitGroup_clause(self)
 
 
@@ -10840,11 +10907,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_query_continuation
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterQuery_continuation" ):
                 listener.enterQuery_continuation(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitQuery_continuation" ):
                 listener.exitQuery_continuation(self)
 
 
@@ -10892,11 +10959,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_assignment
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAssignment" ):
                 listener.enterAssignment(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAssignment" ):
                 listener.exitAssignment(self)
 
 
@@ -10966,11 +11033,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_assignment_operator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAssignment_operator" ):
                 listener.enterAssignment_operator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAssignment_operator" ):
                 listener.exitAssignment_operator(self)
 
 
@@ -10982,62 +11049,63 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 220, self.RULE_assignment_operator)
         try:
             self.state = 1711
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1700
                 self.match(CSharp4Parser.ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.OP_ADD_ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1701
                 self.match(CSharp4Parser.OP_ADD_ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.OP_SUB_ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1702
                 self.match(CSharp4Parser.OP_SUB_ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.OP_MULT_ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 1703
                 self.match(CSharp4Parser.OP_MULT_ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.OP_DIV_ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 1704
                 self.match(CSharp4Parser.OP_DIV_ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.OP_MOD_ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 1705
                 self.match(CSharp4Parser.OP_MOD_ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.OP_AND_ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 1706
                 self.match(CSharp4Parser.OP_AND_ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.OP_OR_ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 1707
                 self.match(CSharp4Parser.OP_OR_ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.OP_XOR_ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 1708
                 self.match(CSharp4Parser.OP_XOR_ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.OP_LEFT_SHIFT_ASSIGNMENT]:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 1709
                 self.match(CSharp4Parser.OP_LEFT_SHIFT_ASSIGNMENT)
-
+                pass
             elif token in [CSharp4Parser.GT]:
                 self.enterOuterAlt(localctx, 11)
                 self.state = 1710
                 self.right_shift_assignment()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -11067,11 +11135,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterExpression" ):
                 listener.enterExpression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitExpression" ):
                 listener.exitExpression(self)
 
 
@@ -11083,6 +11151,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 222, self.RULE_expression)
         try:
             self.state = 1715
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,105,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -11127,11 +11196,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_non_assignment_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNon_assignment_expression" ):
                 listener.enterNon_assignment_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNon_assignment_expression" ):
                 listener.exitNon_assignment_expression(self)
 
 
@@ -11143,6 +11212,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 224, self.RULE_non_assignment_expression)
         try:
             self.state = 1720
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,106,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -11185,11 +11255,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constant_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstant_expression" ):
                 listener.enterConstant_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstant_expression" ):
                 listener.exitConstant_expression(self)
 
 
@@ -11225,11 +11295,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_boolean_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBoolean_expression" ):
                 listener.enterBoolean_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBoolean_expression" ):
                 listener.exitBoolean_expression(self)
 
 
@@ -11273,11 +11343,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStatement" ):
                 listener.enterStatement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStatement" ):
                 listener.exitStatement(self)
 
 
@@ -11289,6 +11359,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 230, self.RULE_statement)
         try:
             self.state = 1729
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,107,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -11335,11 +11406,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_embedded_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEmbedded_statement" ):
                 listener.enterEmbedded_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEmbedded_statement" ):
                 listener.exitEmbedded_statement(self)
 
 
@@ -11351,17 +11422,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 232, self.RULE_embedded_statement)
         try:
             self.state = 1733
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1731
                 self.block()
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BREAK, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.CONTINUE, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DO, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FALSE, CSharp4Parser.FIXED, CSharp4Parser.FLOAT, CSharp4Parser.FOR, CSharp4Parser.FOREACH, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GOTO, CSharp4Parser.GROUP, CSharp4Parser.IF, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LOCK, CSharp4Parser.LONG, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.RETURN, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STRING, CSharp4Parser.SWITCH, CSharp4Parser.THIS, CSharp4Parser.THROW, CSharp4Parser.TRUE, CSharp4Parser.TRY, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.UNSAFE, CSharp4Parser.USHORT, CSharp4Parser.USING, CSharp4Parser.WHERE, CSharp4Parser.WHILE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER, CSharp4Parser.INTEGER_LITERAL, CSharp4Parser.REAL_LITERAL, CSharp4Parser.CHARACTER_LITERAL, CSharp4Parser.STRING_LITERAL, CSharp4Parser.OPEN_PARENS, CSharp4Parser.SEMICOLON, CSharp4Parser.PLUS, CSharp4Parser.MINUS, CSharp4Parser.STAR, CSharp4Parser.AMP, CSharp4Parser.BANG, CSharp4Parser.TILDE, CSharp4Parser.OP_INC, CSharp4Parser.OP_DEC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1732
                 self.simple_embedded_statement()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -11431,11 +11503,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_simple_embedded_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSimple_embedded_statement" ):
                 listener.enterSimple_embedded_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSimple_embedded_statement" ):
                 listener.exitSimple_embedded_statement(self)
 
 
@@ -11447,6 +11519,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 234, self.RULE_simple_embedded_statement)
         try:
             self.state = 1747
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,109,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -11549,11 +11622,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_block
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBlock" ):
                 listener.enterBlock(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBlock" ):
                 listener.exitBlock(self)
 
 
@@ -11569,6 +11642,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1749
             self.match(CSharp4Parser.OPEN_BRACE)
             self.state = 1751
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (CSharp4Parser.ADD - 10)) | (1 << (CSharp4Parser.ALIAS - 10)) | (1 << (CSharp4Parser.ARGLIST - 10)) | (1 << (CSharp4Parser.ASCENDING - 10)) | (1 << (CSharp4Parser.BASE - 10)) | (1 << (CSharp4Parser.BOOL - 10)) | (1 << (CSharp4Parser.BREAK - 10)) | (1 << (CSharp4Parser.BY - 10)) | (1 << (CSharp4Parser.BYTE - 10)) | (1 << (CSharp4Parser.CHAR - 10)) | (1 << (CSharp4Parser.CHECKED - 10)) | (1 << (CSharp4Parser.CONST - 10)) | (1 << (CSharp4Parser.CONTINUE - 10)) | (1 << (CSharp4Parser.DECIMAL - 10)) | (1 << (CSharp4Parser.DEFAULT - 10)) | (1 << (CSharp4Parser.DELEGATE - 10)) | (1 << (CSharp4Parser.DESCENDING - 10)) | (1 << (CSharp4Parser.DO - 10)) | (1 << (CSharp4Parser.DOUBLE - 10)) | (1 << (CSharp4Parser.DYNAMIC - 10)) | (1 << (CSharp4Parser.EQUALS - 10)) | (1 << (CSharp4Parser.FALSE - 10)) | (1 << (CSharp4Parser.FIXED - 10)) | (1 << (CSharp4Parser.FLOAT - 10)) | (1 << (CSharp4Parser.FOR - 10)) | (1 << (CSharp4Parser.FOREACH - 10)) | (1 << (CSharp4Parser.FROM - 10)) | (1 << (CSharp4Parser.GET - 10)) | (1 << (CSharp4Parser.GOTO - 10)) | (1 << (CSharp4Parser.GROUP - 10)) | (1 << (CSharp4Parser.IF - 10)) | (1 << (CSharp4Parser.INT - 10)) | (1 << (CSharp4Parser.INTO - 10)) | (1 << (CSharp4Parser.JOIN - 10)) | (1 << (CSharp4Parser.LET - 10)) | (1 << (CSharp4Parser.LOCK - 10)) | (1 << (CSharp4Parser.LONG - 10)) | (1 << (CSharp4Parser.NEW - 10)) | (1 << (CSharp4Parser.NULL - 10)) | (1 << (CSharp4Parser.OBJECT - 10)) | (1 << (CSharp4Parser.ON - 10)) | (1 << (CSharp4Parser.ORDERBY - 10)) | (1 << (CSharp4Parser.PARTIAL - 10)))) != 0) or ((((_la - 78)) & ~0x3f) == 0 and ((1 << (_la - 78)) & ((1 << (CSharp4Parser.REMOVE - 78)) | (1 << (CSharp4Parser.RETURN - 78)) | (1 << (CSharp4Parser.SBYTE - 78)) | (1 << (CSharp4Parser.SELECT - 78)) | (1 << (CSharp4Parser.SET - 78)) | (1 << (CSharp4Parser.SHORT - 78)) | (1 << (CSharp4Parser.SIZEOF - 78)) | (1 << (CSharp4Parser.STRING - 78)) | (1 << (CSharp4Parser.SWITCH - 78)) | (1 << (CSharp4Parser.THIS - 78)) | (1 << (CSharp4Parser.THROW - 78)) | (1 << (CSharp4Parser.TRUE - 78)) | (1 << (CSharp4Parser.TRY - 78)) | (1 << (CSharp4Parser.TYPEOF - 78)) | (1 << (CSharp4Parser.UINT - 78)) | (1 << (CSharp4Parser.ULONG - 78)) | (1 << (CSharp4Parser.UNCHECKED - 78)) | (1 << (CSharp4Parser.UNSAFE - 78)) | (1 << (CSharp4Parser.USHORT - 78)) | (1 << (CSharp4Parser.USING - 78)) | (1 << (CSharp4Parser.VOID - 78)) | (1 << (CSharp4Parser.WHERE - 78)) | (1 << (CSharp4Parser.WHILE - 78)) | (1 << (CSharp4Parser.YIELD - 78)) | (1 << (CSharp4Parser.IDENTIFIER - 78)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 78)) | (1 << (CSharp4Parser.REAL_LITERAL - 78)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 78)) | (1 << (CSharp4Parser.STRING_LITERAL - 78)) | (1 << (CSharp4Parser.OPEN_BRACE - 78)) | (1 << (CSharp4Parser.OPEN_PARENS - 78)) | (1 << (CSharp4Parser.SEMICOLON - 78)) | (1 << (CSharp4Parser.PLUS - 78)) | (1 << (CSharp4Parser.MINUS - 78)) | (1 << (CSharp4Parser.STAR - 78)) | (1 << (CSharp4Parser.AMP - 78)) | (1 << (CSharp4Parser.BANG - 78)) | (1 << (CSharp4Parser.TILDE - 78)) | (1 << (CSharp4Parser.OP_INC - 78)) | (1 << (CSharp4Parser.OP_DEC - 78)))) != 0):
                 self.state = 1750
@@ -11602,11 +11676,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_statement_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStatement_list" ):
                 listener.enterStatement_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStatement_list" ):
                 listener.exitStatement_list(self)
 
 
@@ -11653,11 +11727,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_empty_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEmpty_statement" ):
                 listener.enterEmpty_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEmpty_statement" ):
                 listener.exitEmpty_statement(self)
 
 
@@ -11700,11 +11774,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_labeled_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLabeled_statement" ):
                 listener.enterLabeled_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLabeled_statement" ):
                 listener.exitLabeled_statement(self)
 
 
@@ -11751,11 +11825,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_declaration_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDeclaration_statement" ):
                 listener.enterDeclaration_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDeclaration_statement" ):
                 listener.exitDeclaration_statement(self)
 
 
@@ -11767,6 +11841,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 244, self.RULE_declaration_statement)
         try:
             self.state = 1772
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.DECIMAL, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.STRING, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.USHORT, CSharp4Parser.VOID, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
@@ -11774,14 +11849,14 @@ class CSharp4Parser ( Parser ):
                 self.local_variable_declaration()
                 self.state = 1767
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             elif token in [CSharp4Parser.CONST]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1769
                 self.local_constant_declaration()
                 self.state = 1770
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -11812,11 +11887,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_local_variable_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLocal_variable_declaration" ):
                 listener.enterLocal_variable_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLocal_variable_declaration" ):
                 listener.exitLocal_variable_declaration(self)
 
 
@@ -11854,11 +11929,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_local_variable_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLocal_variable_type" ):
                 listener.enterLocal_variable_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLocal_variable_type" ):
                 listener.exitLocal_variable_type(self)
 
 
@@ -11903,11 +11978,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_local_variable_declarators
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLocal_variable_declarators" ):
                 listener.enterLocal_variable_declarators(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLocal_variable_declarators" ):
                 listener.exitLocal_variable_declarators(self)
 
 
@@ -11963,11 +12038,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_local_variable_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLocal_variable_declarator" ):
                 listener.enterLocal_variable_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLocal_variable_declarator" ):
                 listener.exitLocal_variable_declarator(self)
 
 
@@ -11983,6 +12058,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1787
             self.identifier()
             self.state = 1790
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.ASSIGNMENT:
                 self.state = 1788
@@ -12021,11 +12097,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_local_variable_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLocal_variable_initializer" ):
                 listener.enterLocal_variable_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLocal_variable_initializer" ):
                 listener.exitLocal_variable_initializer(self)
 
 
@@ -12037,22 +12113,23 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 254, self.RULE_local_variable_initializer)
         try:
             self.state = 1795
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FALSE, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STRING, CSharp4Parser.THIS, CSharp4Parser.TRUE, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.USHORT, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER, CSharp4Parser.INTEGER_LITERAL, CSharp4Parser.REAL_LITERAL, CSharp4Parser.CHARACTER_LITERAL, CSharp4Parser.STRING_LITERAL, CSharp4Parser.OPEN_PARENS, CSharp4Parser.PLUS, CSharp4Parser.MINUS, CSharp4Parser.STAR, CSharp4Parser.AMP, CSharp4Parser.BANG, CSharp4Parser.TILDE, CSharp4Parser.OP_INC, CSharp4Parser.OP_DEC]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1792
                 self.expression()
-
+                pass
             elif token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1793
                 self.array_initializer()
-
+                pass
             elif token in [CSharp4Parser.STACKALLOC]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1794
                 self.local_variable_initializer_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -12085,11 +12162,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_local_constant_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLocal_constant_declaration" ):
                 listener.enterLocal_constant_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLocal_constant_declaration" ):
                 listener.exitLocal_constant_declaration(self)
 
 
@@ -12132,11 +12209,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_expression_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterExpression_statement" ):
                 listener.enterExpression_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitExpression_statement" ):
                 listener.exitExpression_statement(self)
 
 
@@ -12174,11 +12251,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_statement_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStatement_expression" ):
                 listener.enterStatement_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStatement_expression" ):
                 listener.exitStatement_expression(self)
 
 
@@ -12218,11 +12295,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_selection_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSelection_statement" ):
                 listener.enterSelection_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSelection_statement" ):
                 listener.exitSelection_statement(self)
 
 
@@ -12234,17 +12311,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 262, self.RULE_selection_statement)
         try:
             self.state = 1808
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.IF]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1806
                 self.if_statement()
-
+                pass
             elif token in [CSharp4Parser.SWITCH]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1807
                 self.switch_statement()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -12274,7 +12352,7 @@ class CSharp4Parser ( Parser ):
 
     class IfBodyBlockContext(If_bodyContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a CSharp4Parser.If_bodyContext)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a CSharp4Parser.If_bodyContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
@@ -12283,17 +12361,17 @@ class CSharp4Parser ( Parser ):
 
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIfBodyBlock" ):
                 listener.enterIfBodyBlock(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIfBodyBlock" ):
                 listener.exitIfBodyBlock(self)
 
 
     class IfBodySingleContext(If_bodyContext):
 
-        def __init__(self, parser, ctx:ParserRuleContext): # actually a CSharp4Parser.If_bodyContext)
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a CSharp4Parser.If_bodyContext
             super().__init__(parser)
             self.copyFrom(ctx)
 
@@ -12302,11 +12380,11 @@ class CSharp4Parser ( Parser ):
 
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIfBodySingle" ):
                 listener.enterIfBodySingle(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIfBodySingle" ):
                 listener.exitIfBodySingle(self)
 
 
@@ -12317,19 +12395,20 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 264, self.RULE_if_body)
         try:
             self.state = 1812
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_BRACE]:
                 localctx = CSharp4Parser.IfBodyBlockContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1810
                 self.block()
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BREAK, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.CONTINUE, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DO, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FALSE, CSharp4Parser.FIXED, CSharp4Parser.FLOAT, CSharp4Parser.FOR, CSharp4Parser.FOREACH, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GOTO, CSharp4Parser.GROUP, CSharp4Parser.IF, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LOCK, CSharp4Parser.LONG, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.RETURN, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STRING, CSharp4Parser.SWITCH, CSharp4Parser.THIS, CSharp4Parser.THROW, CSharp4Parser.TRUE, CSharp4Parser.TRY, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.UNSAFE, CSharp4Parser.USHORT, CSharp4Parser.USING, CSharp4Parser.WHERE, CSharp4Parser.WHILE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER, CSharp4Parser.INTEGER_LITERAL, CSharp4Parser.REAL_LITERAL, CSharp4Parser.CHARACTER_LITERAL, CSharp4Parser.STRING_LITERAL, CSharp4Parser.OPEN_PARENS, CSharp4Parser.SEMICOLON, CSharp4Parser.PLUS, CSharp4Parser.MINUS, CSharp4Parser.STAR, CSharp4Parser.AMP, CSharp4Parser.BANG, CSharp4Parser.TILDE, CSharp4Parser.OP_INC, CSharp4Parser.OP_DEC]:
                 localctx = CSharp4Parser.IfBodySingleContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1811
                 self.simple_embedded_statement()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -12374,11 +12453,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_if_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIf_statement" ):
                 listener.enterIf_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIf_statement" ):
                 listener.exitIf_statement(self)
 
 
@@ -12401,6 +12480,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1818
             self.if_body()
             self.state = 1821
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,118,self._ctx)
             if la_ == 1:
                 self.state = 1819
@@ -12444,11 +12524,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_switch_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSwitch_statement" ):
                 listener.enterSwitch_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSwitch_statement" ):
                 listener.exitSwitch_statement(self)
 
 
@@ -12498,11 +12578,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_switch_block
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSwitch_block" ):
                 listener.enterSwitch_block(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSwitch_block" ):
                 listener.exitSwitch_block(self)
 
 
@@ -12518,6 +12598,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1829
             self.match(CSharp4Parser.OPEN_BRACE)
             self.state = 1831
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.CASE or _la==CSharp4Parser.DEFAULT:
                 self.state = 1830
@@ -12551,11 +12632,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_switch_sections
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSwitch_sections" ):
                 listener.enterSwitch_sections(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSwitch_sections" ):
                 listener.exitSwitch_sections(self)
 
 
@@ -12606,11 +12687,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_switch_section
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSwitch_section" ):
                 listener.enterSwitch_section(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSwitch_section" ):
                 listener.exitSwitch_section(self)
 
 
@@ -12651,11 +12732,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_switch_labels
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSwitch_labels" ):
                 listener.enterSwitch_labels(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSwitch_labels" ):
                 listener.exitSwitch_labels(self)
 
 
@@ -12711,11 +12792,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_switch_label
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSwitch_label" ):
                 listener.enterSwitch_label(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSwitch_label" ):
                 listener.exitSwitch_label(self)
 
 
@@ -12727,6 +12808,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 278, self.RULE_switch_label)
         try:
             self.state = 1858
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.CASE]:
                 self.enterOuterAlt(localctx, 1)
@@ -12736,14 +12818,14 @@ class CSharp4Parser ( Parser ):
                 self.constant_expression()
                 self.state = 1854
                 self.match(CSharp4Parser.COLON)
-
+                pass
             elif token in [CSharp4Parser.DEFAULT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1856
                 self.match(CSharp4Parser.DEFAULT)
                 self.state = 1857
                 self.match(CSharp4Parser.COLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -12781,11 +12863,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_iteration_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIteration_statement" ):
                 listener.enterIteration_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIteration_statement" ):
                 listener.exitIteration_statement(self)
 
 
@@ -12797,27 +12879,28 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 280, self.RULE_iteration_statement)
         try:
             self.state = 1864
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.WHILE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1860
                 self.while_statement()
-
+                pass
             elif token in [CSharp4Parser.DO]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1861
                 self.do_statement()
-
+                pass
             elif token in [CSharp4Parser.FOR]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1862
                 self.for_statement()
-
+                pass
             elif token in [CSharp4Parser.FOREACH]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 1863
                 self.foreach_statement()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -12856,11 +12939,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_while_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterWhile_statement" ):
                 listener.enterWhile_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitWhile_statement" ):
                 listener.exitWhile_statement(self)
 
 
@@ -12923,11 +13006,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_do_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDo_statement" ):
                 listener.enterDo_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDo_statement" ):
                 listener.exitDo_statement(self)
 
 
@@ -13002,11 +13085,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_for_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFor_statement" ):
                 listener.enterFor_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFor_statement" ):
                 listener.exitFor_statement(self)
 
 
@@ -13024,6 +13107,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1881
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 1883
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (CSharp4Parser.ADD - 10)) | (1 << (CSharp4Parser.ALIAS - 10)) | (1 << (CSharp4Parser.ARGLIST - 10)) | (1 << (CSharp4Parser.ASCENDING - 10)) | (1 << (CSharp4Parser.BASE - 10)) | (1 << (CSharp4Parser.BOOL - 10)) | (1 << (CSharp4Parser.BY - 10)) | (1 << (CSharp4Parser.BYTE - 10)) | (1 << (CSharp4Parser.CHAR - 10)) | (1 << (CSharp4Parser.CHECKED - 10)) | (1 << (CSharp4Parser.DECIMAL - 10)) | (1 << (CSharp4Parser.DEFAULT - 10)) | (1 << (CSharp4Parser.DELEGATE - 10)) | (1 << (CSharp4Parser.DESCENDING - 10)) | (1 << (CSharp4Parser.DOUBLE - 10)) | (1 << (CSharp4Parser.DYNAMIC - 10)) | (1 << (CSharp4Parser.EQUALS - 10)) | (1 << (CSharp4Parser.FALSE - 10)) | (1 << (CSharp4Parser.FLOAT - 10)) | (1 << (CSharp4Parser.FROM - 10)) | (1 << (CSharp4Parser.GET - 10)) | (1 << (CSharp4Parser.GROUP - 10)) | (1 << (CSharp4Parser.INT - 10)) | (1 << (CSharp4Parser.INTO - 10)) | (1 << (CSharp4Parser.JOIN - 10)) | (1 << (CSharp4Parser.LET - 10)) | (1 << (CSharp4Parser.LONG - 10)) | (1 << (CSharp4Parser.NEW - 10)) | (1 << (CSharp4Parser.NULL - 10)) | (1 << (CSharp4Parser.OBJECT - 10)) | (1 << (CSharp4Parser.ON - 10)) | (1 << (CSharp4Parser.ORDERBY - 10)) | (1 << (CSharp4Parser.PARTIAL - 10)))) != 0) or ((((_la - 78)) & ~0x3f) == 0 and ((1 << (_la - 78)) & ((1 << (CSharp4Parser.REMOVE - 78)) | (1 << (CSharp4Parser.SBYTE - 78)) | (1 << (CSharp4Parser.SELECT - 78)) | (1 << (CSharp4Parser.SET - 78)) | (1 << (CSharp4Parser.SHORT - 78)) | (1 << (CSharp4Parser.SIZEOF - 78)) | (1 << (CSharp4Parser.STRING - 78)) | (1 << (CSharp4Parser.THIS - 78)) | (1 << (CSharp4Parser.TRUE - 78)) | (1 << (CSharp4Parser.TYPEOF - 78)) | (1 << (CSharp4Parser.UINT - 78)) | (1 << (CSharp4Parser.ULONG - 78)) | (1 << (CSharp4Parser.UNCHECKED - 78)) | (1 << (CSharp4Parser.USHORT - 78)) | (1 << (CSharp4Parser.VOID - 78)) | (1 << (CSharp4Parser.WHERE - 78)) | (1 << (CSharp4Parser.YIELD - 78)) | (1 << (CSharp4Parser.IDENTIFIER - 78)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 78)) | (1 << (CSharp4Parser.REAL_LITERAL - 78)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 78)) | (1 << (CSharp4Parser.STRING_LITERAL - 78)) | (1 << (CSharp4Parser.OPEN_PARENS - 78)) | (1 << (CSharp4Parser.PLUS - 78)) | (1 << (CSharp4Parser.MINUS - 78)) | (1 << (CSharp4Parser.STAR - 78)) | (1 << (CSharp4Parser.AMP - 78)) | (1 << (CSharp4Parser.BANG - 78)) | (1 << (CSharp4Parser.TILDE - 78)) | (1 << (CSharp4Parser.OP_INC - 78)) | (1 << (CSharp4Parser.OP_DEC - 78)))) != 0):
                 self.state = 1882
@@ -13033,6 +13117,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1885
             self.match(CSharp4Parser.SEMICOLON)
             self.state = 1887
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (CSharp4Parser.ADD - 10)) | (1 << (CSharp4Parser.ALIAS - 10)) | (1 << (CSharp4Parser.ARGLIST - 10)) | (1 << (CSharp4Parser.ASCENDING - 10)) | (1 << (CSharp4Parser.BASE - 10)) | (1 << (CSharp4Parser.BOOL - 10)) | (1 << (CSharp4Parser.BY - 10)) | (1 << (CSharp4Parser.BYTE - 10)) | (1 << (CSharp4Parser.CHAR - 10)) | (1 << (CSharp4Parser.CHECKED - 10)) | (1 << (CSharp4Parser.DECIMAL - 10)) | (1 << (CSharp4Parser.DEFAULT - 10)) | (1 << (CSharp4Parser.DELEGATE - 10)) | (1 << (CSharp4Parser.DESCENDING - 10)) | (1 << (CSharp4Parser.DOUBLE - 10)) | (1 << (CSharp4Parser.DYNAMIC - 10)) | (1 << (CSharp4Parser.EQUALS - 10)) | (1 << (CSharp4Parser.FALSE - 10)) | (1 << (CSharp4Parser.FLOAT - 10)) | (1 << (CSharp4Parser.FROM - 10)) | (1 << (CSharp4Parser.GET - 10)) | (1 << (CSharp4Parser.GROUP - 10)) | (1 << (CSharp4Parser.INT - 10)) | (1 << (CSharp4Parser.INTO - 10)) | (1 << (CSharp4Parser.JOIN - 10)) | (1 << (CSharp4Parser.LET - 10)) | (1 << (CSharp4Parser.LONG - 10)) | (1 << (CSharp4Parser.NEW - 10)) | (1 << (CSharp4Parser.NULL - 10)) | (1 << (CSharp4Parser.OBJECT - 10)) | (1 << (CSharp4Parser.ON - 10)) | (1 << (CSharp4Parser.ORDERBY - 10)) | (1 << (CSharp4Parser.PARTIAL - 10)))) != 0) or ((((_la - 78)) & ~0x3f) == 0 and ((1 << (_la - 78)) & ((1 << (CSharp4Parser.REMOVE - 78)) | (1 << (CSharp4Parser.SBYTE - 78)) | (1 << (CSharp4Parser.SELECT - 78)) | (1 << (CSharp4Parser.SET - 78)) | (1 << (CSharp4Parser.SHORT - 78)) | (1 << (CSharp4Parser.SIZEOF - 78)) | (1 << (CSharp4Parser.STRING - 78)) | (1 << (CSharp4Parser.THIS - 78)) | (1 << (CSharp4Parser.TRUE - 78)) | (1 << (CSharp4Parser.TYPEOF - 78)) | (1 << (CSharp4Parser.UINT - 78)) | (1 << (CSharp4Parser.ULONG - 78)) | (1 << (CSharp4Parser.UNCHECKED - 78)) | (1 << (CSharp4Parser.USHORT - 78)) | (1 << (CSharp4Parser.WHERE - 78)) | (1 << (CSharp4Parser.YIELD - 78)) | (1 << (CSharp4Parser.IDENTIFIER - 78)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 78)) | (1 << (CSharp4Parser.REAL_LITERAL - 78)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 78)) | (1 << (CSharp4Parser.STRING_LITERAL - 78)) | (1 << (CSharp4Parser.OPEN_PARENS - 78)) | (1 << (CSharp4Parser.PLUS - 78)) | (1 << (CSharp4Parser.MINUS - 78)) | (1 << (CSharp4Parser.STAR - 78)) | (1 << (CSharp4Parser.AMP - 78)) | (1 << (CSharp4Parser.BANG - 78)) | (1 << (CSharp4Parser.TILDE - 78)) | (1 << (CSharp4Parser.OP_INC - 78)) | (1 << (CSharp4Parser.OP_DEC - 78)))) != 0):
                 self.state = 1886
@@ -13042,6 +13127,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1889
             self.match(CSharp4Parser.SEMICOLON)
             self.state = 1891
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (CSharp4Parser.ADD - 10)) | (1 << (CSharp4Parser.ALIAS - 10)) | (1 << (CSharp4Parser.ARGLIST - 10)) | (1 << (CSharp4Parser.ASCENDING - 10)) | (1 << (CSharp4Parser.BASE - 10)) | (1 << (CSharp4Parser.BOOL - 10)) | (1 << (CSharp4Parser.BY - 10)) | (1 << (CSharp4Parser.BYTE - 10)) | (1 << (CSharp4Parser.CHAR - 10)) | (1 << (CSharp4Parser.CHECKED - 10)) | (1 << (CSharp4Parser.DECIMAL - 10)) | (1 << (CSharp4Parser.DEFAULT - 10)) | (1 << (CSharp4Parser.DELEGATE - 10)) | (1 << (CSharp4Parser.DESCENDING - 10)) | (1 << (CSharp4Parser.DOUBLE - 10)) | (1 << (CSharp4Parser.DYNAMIC - 10)) | (1 << (CSharp4Parser.EQUALS - 10)) | (1 << (CSharp4Parser.FALSE - 10)) | (1 << (CSharp4Parser.FLOAT - 10)) | (1 << (CSharp4Parser.FROM - 10)) | (1 << (CSharp4Parser.GET - 10)) | (1 << (CSharp4Parser.GROUP - 10)) | (1 << (CSharp4Parser.INT - 10)) | (1 << (CSharp4Parser.INTO - 10)) | (1 << (CSharp4Parser.JOIN - 10)) | (1 << (CSharp4Parser.LET - 10)) | (1 << (CSharp4Parser.LONG - 10)) | (1 << (CSharp4Parser.NEW - 10)) | (1 << (CSharp4Parser.NULL - 10)) | (1 << (CSharp4Parser.OBJECT - 10)) | (1 << (CSharp4Parser.ON - 10)) | (1 << (CSharp4Parser.ORDERBY - 10)) | (1 << (CSharp4Parser.PARTIAL - 10)))) != 0) or ((((_la - 78)) & ~0x3f) == 0 and ((1 << (_la - 78)) & ((1 << (CSharp4Parser.REMOVE - 78)) | (1 << (CSharp4Parser.SBYTE - 78)) | (1 << (CSharp4Parser.SELECT - 78)) | (1 << (CSharp4Parser.SET - 78)) | (1 << (CSharp4Parser.SHORT - 78)) | (1 << (CSharp4Parser.SIZEOF - 78)) | (1 << (CSharp4Parser.STRING - 78)) | (1 << (CSharp4Parser.THIS - 78)) | (1 << (CSharp4Parser.TRUE - 78)) | (1 << (CSharp4Parser.TYPEOF - 78)) | (1 << (CSharp4Parser.UINT - 78)) | (1 << (CSharp4Parser.ULONG - 78)) | (1 << (CSharp4Parser.UNCHECKED - 78)) | (1 << (CSharp4Parser.USHORT - 78)) | (1 << (CSharp4Parser.WHERE - 78)) | (1 << (CSharp4Parser.YIELD - 78)) | (1 << (CSharp4Parser.IDENTIFIER - 78)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 78)) | (1 << (CSharp4Parser.REAL_LITERAL - 78)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 78)) | (1 << (CSharp4Parser.STRING_LITERAL - 78)) | (1 << (CSharp4Parser.OPEN_PARENS - 78)) | (1 << (CSharp4Parser.PLUS - 78)) | (1 << (CSharp4Parser.MINUS - 78)) | (1 << (CSharp4Parser.STAR - 78)) | (1 << (CSharp4Parser.AMP - 78)) | (1 << (CSharp4Parser.BANG - 78)) | (1 << (CSharp4Parser.TILDE - 78)) | (1 << (CSharp4Parser.OP_INC - 78)) | (1 << (CSharp4Parser.OP_DEC - 78)))) != 0):
                 self.state = 1890
@@ -13078,11 +13164,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_for_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFor_initializer" ):
                 listener.enterFor_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFor_initializer" ):
                 listener.exitFor_initializer(self)
 
 
@@ -13094,6 +13180,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 288, self.RULE_for_initializer)
         try:
             self.state = 1898
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,127,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -13130,11 +13217,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_for_condition
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFor_condition" ):
                 listener.enterFor_condition(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFor_condition" ):
                 listener.exitFor_condition(self)
 
 
@@ -13170,11 +13257,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_for_iterator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFor_iterator" ):
                 listener.enterFor_iterator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFor_iterator" ):
                 listener.exitFor_iterator(self)
 
 
@@ -13219,11 +13306,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_statement_expression_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStatement_expression_list" ):
                 listener.enterStatement_expression_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStatement_expression_list" ):
                 listener.exitStatement_expression_list(self)
 
 
@@ -13296,11 +13383,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_foreach_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterForeach_statement" ):
                 listener.enterForeach_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitForeach_statement" ):
                 listener.exitForeach_statement(self)
 
 
@@ -13366,11 +13453,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_jump_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterJump_statement" ):
                 listener.enterJump_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitJump_statement" ):
                 listener.exitJump_statement(self)
 
 
@@ -13382,32 +13469,33 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 298, self.RULE_jump_statement)
         try:
             self.state = 1926
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.BREAK]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1921
                 self.break_statement()
-
+                pass
             elif token in [CSharp4Parser.CONTINUE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 1922
                 self.continue_statement()
-
+                pass
             elif token in [CSharp4Parser.GOTO]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 1923
                 self.goto_statement()
-
+                pass
             elif token in [CSharp4Parser.RETURN]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 1924
                 self.return_statement()
-
+                pass
             elif token in [CSharp4Parser.THROW]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 1925
                 self.throw_statement()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -13435,11 +13523,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_break_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBreak_statement" ):
                 listener.enterBreak_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBreak_statement" ):
                 listener.exitBreak_statement(self)
 
 
@@ -13479,11 +13567,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_continue_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterContinue_statement" ):
                 listener.enterContinue_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitContinue_statement" ):
                 listener.exitContinue_statement(self)
 
 
@@ -13537,11 +13625,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_goto_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGoto_statement" ):
                 listener.enterGoto_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGoto_statement" ):
                 listener.exitGoto_statement(self)
 
 
@@ -13553,6 +13641,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 304, self.RULE_goto_statement)
         try:
             self.state = 1946
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,130,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -13615,11 +13704,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_return_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterReturn_statement" ):
                 listener.enterReturn_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitReturn_statement" ):
                 listener.exitReturn_statement(self)
 
 
@@ -13635,6 +13724,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1948
             self.match(CSharp4Parser.RETURN)
             self.state = 1950
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (CSharp4Parser.ADD - 10)) | (1 << (CSharp4Parser.ALIAS - 10)) | (1 << (CSharp4Parser.ARGLIST - 10)) | (1 << (CSharp4Parser.ASCENDING - 10)) | (1 << (CSharp4Parser.BASE - 10)) | (1 << (CSharp4Parser.BOOL - 10)) | (1 << (CSharp4Parser.BY - 10)) | (1 << (CSharp4Parser.BYTE - 10)) | (1 << (CSharp4Parser.CHAR - 10)) | (1 << (CSharp4Parser.CHECKED - 10)) | (1 << (CSharp4Parser.DECIMAL - 10)) | (1 << (CSharp4Parser.DEFAULT - 10)) | (1 << (CSharp4Parser.DELEGATE - 10)) | (1 << (CSharp4Parser.DESCENDING - 10)) | (1 << (CSharp4Parser.DOUBLE - 10)) | (1 << (CSharp4Parser.DYNAMIC - 10)) | (1 << (CSharp4Parser.EQUALS - 10)) | (1 << (CSharp4Parser.FALSE - 10)) | (1 << (CSharp4Parser.FLOAT - 10)) | (1 << (CSharp4Parser.FROM - 10)) | (1 << (CSharp4Parser.GET - 10)) | (1 << (CSharp4Parser.GROUP - 10)) | (1 << (CSharp4Parser.INT - 10)) | (1 << (CSharp4Parser.INTO - 10)) | (1 << (CSharp4Parser.JOIN - 10)) | (1 << (CSharp4Parser.LET - 10)) | (1 << (CSharp4Parser.LONG - 10)) | (1 << (CSharp4Parser.NEW - 10)) | (1 << (CSharp4Parser.NULL - 10)) | (1 << (CSharp4Parser.OBJECT - 10)) | (1 << (CSharp4Parser.ON - 10)) | (1 << (CSharp4Parser.ORDERBY - 10)) | (1 << (CSharp4Parser.PARTIAL - 10)))) != 0) or ((((_la - 78)) & ~0x3f) == 0 and ((1 << (_la - 78)) & ((1 << (CSharp4Parser.REMOVE - 78)) | (1 << (CSharp4Parser.SBYTE - 78)) | (1 << (CSharp4Parser.SELECT - 78)) | (1 << (CSharp4Parser.SET - 78)) | (1 << (CSharp4Parser.SHORT - 78)) | (1 << (CSharp4Parser.SIZEOF - 78)) | (1 << (CSharp4Parser.STRING - 78)) | (1 << (CSharp4Parser.THIS - 78)) | (1 << (CSharp4Parser.TRUE - 78)) | (1 << (CSharp4Parser.TYPEOF - 78)) | (1 << (CSharp4Parser.UINT - 78)) | (1 << (CSharp4Parser.ULONG - 78)) | (1 << (CSharp4Parser.UNCHECKED - 78)) | (1 << (CSharp4Parser.USHORT - 78)) | (1 << (CSharp4Parser.WHERE - 78)) | (1 << (CSharp4Parser.YIELD - 78)) | (1 << (CSharp4Parser.IDENTIFIER - 78)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 78)) | (1 << (CSharp4Parser.REAL_LITERAL - 78)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 78)) | (1 << (CSharp4Parser.STRING_LITERAL - 78)) | (1 << (CSharp4Parser.OPEN_PARENS - 78)) | (1 << (CSharp4Parser.PLUS - 78)) | (1 << (CSharp4Parser.MINUS - 78)) | (1 << (CSharp4Parser.STAR - 78)) | (1 << (CSharp4Parser.AMP - 78)) | (1 << (CSharp4Parser.BANG - 78)) | (1 << (CSharp4Parser.TILDE - 78)) | (1 << (CSharp4Parser.OP_INC - 78)) | (1 << (CSharp4Parser.OP_DEC - 78)))) != 0):
                 self.state = 1949
@@ -13671,11 +13761,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_throw_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterThrow_statement" ):
                 listener.enterThrow_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitThrow_statement" ):
                 listener.exitThrow_statement(self)
 
 
@@ -13691,6 +13781,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1954
             self.match(CSharp4Parser.THROW)
             self.state = 1956
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (CSharp4Parser.ADD - 10)) | (1 << (CSharp4Parser.ALIAS - 10)) | (1 << (CSharp4Parser.ARGLIST - 10)) | (1 << (CSharp4Parser.ASCENDING - 10)) | (1 << (CSharp4Parser.BASE - 10)) | (1 << (CSharp4Parser.BOOL - 10)) | (1 << (CSharp4Parser.BY - 10)) | (1 << (CSharp4Parser.BYTE - 10)) | (1 << (CSharp4Parser.CHAR - 10)) | (1 << (CSharp4Parser.CHECKED - 10)) | (1 << (CSharp4Parser.DECIMAL - 10)) | (1 << (CSharp4Parser.DEFAULT - 10)) | (1 << (CSharp4Parser.DELEGATE - 10)) | (1 << (CSharp4Parser.DESCENDING - 10)) | (1 << (CSharp4Parser.DOUBLE - 10)) | (1 << (CSharp4Parser.DYNAMIC - 10)) | (1 << (CSharp4Parser.EQUALS - 10)) | (1 << (CSharp4Parser.FALSE - 10)) | (1 << (CSharp4Parser.FLOAT - 10)) | (1 << (CSharp4Parser.FROM - 10)) | (1 << (CSharp4Parser.GET - 10)) | (1 << (CSharp4Parser.GROUP - 10)) | (1 << (CSharp4Parser.INT - 10)) | (1 << (CSharp4Parser.INTO - 10)) | (1 << (CSharp4Parser.JOIN - 10)) | (1 << (CSharp4Parser.LET - 10)) | (1 << (CSharp4Parser.LONG - 10)) | (1 << (CSharp4Parser.NEW - 10)) | (1 << (CSharp4Parser.NULL - 10)) | (1 << (CSharp4Parser.OBJECT - 10)) | (1 << (CSharp4Parser.ON - 10)) | (1 << (CSharp4Parser.ORDERBY - 10)) | (1 << (CSharp4Parser.PARTIAL - 10)))) != 0) or ((((_la - 78)) & ~0x3f) == 0 and ((1 << (_la - 78)) & ((1 << (CSharp4Parser.REMOVE - 78)) | (1 << (CSharp4Parser.SBYTE - 78)) | (1 << (CSharp4Parser.SELECT - 78)) | (1 << (CSharp4Parser.SET - 78)) | (1 << (CSharp4Parser.SHORT - 78)) | (1 << (CSharp4Parser.SIZEOF - 78)) | (1 << (CSharp4Parser.STRING - 78)) | (1 << (CSharp4Parser.THIS - 78)) | (1 << (CSharp4Parser.TRUE - 78)) | (1 << (CSharp4Parser.TYPEOF - 78)) | (1 << (CSharp4Parser.UINT - 78)) | (1 << (CSharp4Parser.ULONG - 78)) | (1 << (CSharp4Parser.UNCHECKED - 78)) | (1 << (CSharp4Parser.USHORT - 78)) | (1 << (CSharp4Parser.WHERE - 78)) | (1 << (CSharp4Parser.YIELD - 78)) | (1 << (CSharp4Parser.IDENTIFIER - 78)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 78)) | (1 << (CSharp4Parser.REAL_LITERAL - 78)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 78)) | (1 << (CSharp4Parser.STRING_LITERAL - 78)) | (1 << (CSharp4Parser.OPEN_PARENS - 78)) | (1 << (CSharp4Parser.PLUS - 78)) | (1 << (CSharp4Parser.MINUS - 78)) | (1 << (CSharp4Parser.STAR - 78)) | (1 << (CSharp4Parser.AMP - 78)) | (1 << (CSharp4Parser.BANG - 78)) | (1 << (CSharp4Parser.TILDE - 78)) | (1 << (CSharp4Parser.OP_INC - 78)) | (1 << (CSharp4Parser.OP_DEC - 78)))) != 0):
                 self.state = 1955
@@ -13732,11 +13823,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_try_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterTry_statement" ):
                 listener.enterTry_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitTry_statement" ):
                 listener.exitTry_statement(self)
 
 
@@ -13754,6 +13845,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1961
             self.block()
             self.state = 1963
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.CATCH:
                 self.state = 1962
@@ -13761,6 +13853,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 1966
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.FINALLY:
                 self.state = 1965
@@ -13793,11 +13886,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_catch_clauses
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterCatch_clauses" ):
                 listener.enterCatch_clauses(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitCatch_clauses" ):
                 listener.exitCatch_clauses(self)
 
 
@@ -13810,12 +13903,14 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 1973
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,136,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 1968
                 self.specific_catch_clauses()
                 self.state = 1970
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.CATCH:
                     self.state = 1969
@@ -13856,11 +13951,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_specific_catch_clauses
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSpecific_catch_clauses" ):
                 listener.enterSpecific_catch_clauses(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSpecific_catch_clauses" ):
                 listener.exitSpecific_catch_clauses(self)
 
 
@@ -13924,11 +14019,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_specific_catch_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSpecific_catch_clause" ):
                 listener.enterSpecific_catch_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSpecific_catch_clause" ):
                 listener.exitSpecific_catch_clause(self)
 
 
@@ -13948,6 +14043,7 @@ class CSharp4Parser ( Parser ):
             self.state = 1984
             self.class_type()
             self.state = 1986
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET))) != 0) or ((((_la - 66)) & ~0x3f) == 0 and ((1 << (_la - 66)) & ((1 << (CSharp4Parser.ON - 66)) | (1 << (CSharp4Parser.ORDERBY - 66)) | (1 << (CSharp4Parser.PARTIAL - 66)) | (1 << (CSharp4Parser.REMOVE - 66)) | (1 << (CSharp4Parser.SELECT - 66)) | (1 << (CSharp4Parser.SET - 66)) | (1 << (CSharp4Parser.WHERE - 66)) | (1 << (CSharp4Parser.YIELD - 66)) | (1 << (CSharp4Parser.IDENTIFIER - 66)))) != 0):
                 self.state = 1985
@@ -13983,11 +14079,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_general_catch_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGeneral_catch_clause" ):
                 listener.enterGeneral_catch_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGeneral_catch_clause" ):
                 listener.exitGeneral_catch_clause(self)
 
 
@@ -14028,11 +14124,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_finally_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFinally_clause" ):
                 listener.enterFinally_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFinally_clause" ):
                 listener.exitFinally_clause(self)
 
 
@@ -14073,11 +14169,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_checked_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterChecked_statement" ):
                 listener.enterChecked_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitChecked_statement" ):
                 listener.exitChecked_statement(self)
 
 
@@ -14118,11 +14214,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_unchecked_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUnchecked_statement" ):
                 listener.enterUnchecked_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUnchecked_statement" ):
                 listener.exitUnchecked_statement(self)
 
 
@@ -14173,11 +14269,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_lock_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLock_statement" ):
                 listener.enterLock_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLock_statement" ):
                 listener.exitLock_statement(self)
 
 
@@ -14234,11 +14330,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_using_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUsing_statement" ):
                 listener.enterUsing_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUsing_statement" ):
                 listener.exitUsing_statement(self)
 
 
@@ -14286,11 +14382,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_resource_acquisition
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterResource_acquisition" ):
                 listener.enterResource_acquisition(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitResource_acquisition" ):
                 listener.exitResource_acquisition(self)
 
 
@@ -14302,6 +14398,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 330, self.RULE_resource_acquisition)
         try:
             self.state = 2017
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,139,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -14351,11 +14448,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_yield_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterYield_statement" ):
                 listener.enterYield_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitYield_statement" ):
                 listener.exitYield_statement(self)
 
 
@@ -14367,6 +14464,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 332, self.RULE_yield_statement)
         try:
             self.state = 2028
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,140,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -14434,11 +14532,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_parse
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterParse" ):
                 listener.enterParse(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitParse" ):
                 listener.exitParse(self)
 
 
@@ -14452,6 +14550,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2031
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.BYTE_ORDER_MARK:
                 self.state = 2030
@@ -14459,6 +14558,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2034
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,142,self._ctx)
             if la_ == 1:
                 self.state = 2033
@@ -14466,6 +14566,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2037
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.USING:
                 self.state = 2036
@@ -14484,6 +14585,7 @@ class CSharp4Parser ( Parser ):
                 _alt = self._interp.adaptivePredict(self._input,144,self._ctx)
 
             self.state = 2046
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.CLASS) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.ENUM) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.INTERFACE) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.NAMESPACE) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 70)) & ~0x3f) == 0 and ((1 << (_la - 70)) & ((1 << (CSharp4Parser.OVERRIDE - 70)) | (1 << (CSharp4Parser.PARTIAL - 70)) | (1 << (CSharp4Parser.PRIVATE - 70)) | (1 << (CSharp4Parser.PROTECTED - 70)) | (1 << (CSharp4Parser.PUBLIC - 70)) | (1 << (CSharp4Parser.READONLY - 70)) | (1 << (CSharp4Parser.SEALED - 70)) | (1 << (CSharp4Parser.STATIC - 70)) | (1 << (CSharp4Parser.STRUCT - 70)) | (1 << (CSharp4Parser.UNSAFE - 70)) | (1 << (CSharp4Parser.VIRTUAL - 70)) | (1 << (CSharp4Parser.VOLATILE - 70)) | (1 << (CSharp4Parser.OPEN_BRACKET - 70)))) != 0):
                 self.state = 2045
@@ -14525,11 +14627,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_namespace_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNamespace_declaration" ):
                 listener.enterNamespace_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNamespace_declaration" ):
                 listener.exitNamespace_declaration(self)
 
 
@@ -14549,6 +14651,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2052
             self.namespace_body()
             self.state = 2054
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.SEMICOLON:
                 self.state = 2053
@@ -14586,11 +14689,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_qualified_identifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterQualified_identifier" ):
                 listener.enterQualified_identifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitQualified_identifier" ):
                 listener.exitQualified_identifier(self)
 
 
@@ -14653,11 +14756,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_namespace_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNamespace_body" ):
                 listener.enterNamespace_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNamespace_body" ):
                 listener.exitNamespace_body(self)
 
 
@@ -14673,6 +14776,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2064
             self.match(CSharp4Parser.OPEN_BRACE)
             self.state = 2066
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,148,self._ctx)
             if la_ == 1:
                 self.state = 2065
@@ -14680,6 +14784,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2069
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.USING:
                 self.state = 2068
@@ -14687,6 +14792,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2072
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.CLASS) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.ENUM) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.INTERFACE) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.NAMESPACE) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 70)) & ~0x3f) == 0 and ((1 << (_la - 70)) & ((1 << (CSharp4Parser.OVERRIDE - 70)) | (1 << (CSharp4Parser.PARTIAL - 70)) | (1 << (CSharp4Parser.PRIVATE - 70)) | (1 << (CSharp4Parser.PROTECTED - 70)) | (1 << (CSharp4Parser.PUBLIC - 70)) | (1 << (CSharp4Parser.READONLY - 70)) | (1 << (CSharp4Parser.SEALED - 70)) | (1 << (CSharp4Parser.STATIC - 70)) | (1 << (CSharp4Parser.STRUCT - 70)) | (1 << (CSharp4Parser.UNSAFE - 70)) | (1 << (CSharp4Parser.VIRTUAL - 70)) | (1 << (CSharp4Parser.VOLATILE - 70)) | (1 << (CSharp4Parser.OPEN_BRACKET - 70)))) != 0):
                 self.state = 2071
@@ -14720,11 +14826,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_extern_alias_directives
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterExtern_alias_directives" ):
                 listener.enterExtern_alias_directives(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitExtern_alias_directives" ):
                 listener.exitExtern_alias_directives(self)
 
 
@@ -14782,11 +14888,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_extern_alias_directive
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterExtern_alias_directive" ):
                 listener.enterExtern_alias_directive(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitExtern_alias_directive" ):
                 listener.exitExtern_alias_directive(self)
 
 
@@ -14831,11 +14937,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_using_directives
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUsing_directives" ):
                 listener.enterUsing_directives(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUsing_directives" ):
                 listener.exitUsing_directives(self)
 
 
@@ -14886,11 +14992,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_using_directive
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUsing_directive" ):
                 listener.enterUsing_directive(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUsing_directive" ):
                 listener.exitUsing_directive(self)
 
 
@@ -14902,6 +15008,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 348, self.RULE_using_directive)
         try:
             self.state = 2093
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,153,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -14951,11 +15058,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_using_alias_directive
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUsing_alias_directive" ):
                 listener.enterUsing_alias_directive(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUsing_alias_directive" ):
                 listener.exitUsing_alias_directive(self)
 
 
@@ -15005,11 +15112,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_using_namespace_directive
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUsing_namespace_directive" ):
                 listener.enterUsing_namespace_directive(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUsing_namespace_directive" ):
                 listener.exitUsing_namespace_directive(self)
 
 
@@ -15052,11 +15159,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_namespace_member_declarations
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNamespace_member_declarations" ):
                 listener.enterNamespace_member_declarations(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNamespace_member_declarations" ):
                 listener.exitNamespace_member_declarations(self)
 
 
@@ -15107,11 +15214,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_namespace_member_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNamespace_member_declaration" ):
                 listener.enterNamespace_member_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNamespace_member_declaration" ):
                 listener.exitNamespace_member_declaration(self)
 
 
@@ -15123,17 +15230,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 356, self.RULE_namespace_member_declaration)
         try:
             self.state = 2112
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NAMESPACE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2110
                 self.namespace_declaration()
-
+                pass
             elif token in [CSharp4Parser.ABSTRACT, CSharp4Parser.CLASS, CSharp4Parser.DELEGATE, CSharp4Parser.ENUM, CSharp4Parser.EXTERN, CSharp4Parser.INTERFACE, CSharp4Parser.INTERNAL, CSharp4Parser.NEW, CSharp4Parser.OVERRIDE, CSharp4Parser.PARTIAL, CSharp4Parser.PRIVATE, CSharp4Parser.PROTECTED, CSharp4Parser.PUBLIC, CSharp4Parser.READONLY, CSharp4Parser.SEALED, CSharp4Parser.STATIC, CSharp4Parser.STRUCT, CSharp4Parser.UNSAFE, CSharp4Parser.VIRTUAL, CSharp4Parser.VOLATILE, CSharp4Parser.OPEN_BRACKET]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2111
                 self.type_declaration()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -15183,11 +15291,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_declaration" ):
                 listener.enterType_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_declaration" ):
                 listener.exitType_declaration(self)
 
 
@@ -15201,6 +15309,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2115
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2114
@@ -15208,6 +15317,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2118
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 70)) & ~0x3f) == 0 and ((1 << (_la - 70)) & ((1 << (CSharp4Parser.OVERRIDE - 70)) | (1 << (CSharp4Parser.PARTIAL - 70)) | (1 << (CSharp4Parser.PRIVATE - 70)) | (1 << (CSharp4Parser.PROTECTED - 70)) | (1 << (CSharp4Parser.PUBLIC - 70)) | (1 << (CSharp4Parser.READONLY - 70)) | (1 << (CSharp4Parser.SEALED - 70)) | (1 << (CSharp4Parser.STATIC - 70)) | (1 << (CSharp4Parser.UNSAFE - 70)) | (1 << (CSharp4Parser.VIRTUAL - 70)) | (1 << (CSharp4Parser.VOLATILE - 70)))) != 0):
                 self.state = 2117
@@ -15215,27 +15325,28 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2125
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.CLASS]:
                 self.state = 2120
                 self.class_definition()
-
+                pass
             elif token in [CSharp4Parser.STRUCT]:
                 self.state = 2121
                 self.struct_definition()
-
+                pass
             elif token in [CSharp4Parser.INTERFACE]:
                 self.state = 2122
                 self.interface_definition()
-
+                pass
             elif token in [CSharp4Parser.ENUM]:
                 self.state = 2123
                 self.enum_definition()
-
+                pass
             elif token in [CSharp4Parser.DELEGATE]:
                 self.state = 2124
                 self.delegate_definition()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -15271,11 +15382,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_qualified_alias_member
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterQualified_alias_member" ):
                 listener.enterQualified_alias_member(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitQualified_alias_member" ):
                 listener.exitQualified_alias_member(self)
 
 
@@ -15351,11 +15462,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_declaration" ):
                 listener.enterClass_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_declaration" ):
                 listener.exitClass_declaration(self)
 
 
@@ -15369,6 +15480,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2133
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2132
@@ -15376,6 +15488,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2136
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 73)) & ~0x3f) == 0 and ((1 << (_la - 73)) & ((1 << (CSharp4Parser.PRIVATE - 73)) | (1 << (CSharp4Parser.PROTECTED - 73)) | (1 << (CSharp4Parser.PUBLIC - 73)) | (1 << (CSharp4Parser.SEALED - 73)) | (1 << (CSharp4Parser.STATIC - 73)) | (1 << (CSharp4Parser.UNSAFE - 73)))) != 0):
                 self.state = 2135
@@ -15383,6 +15496,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2139
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.PARTIAL:
                 self.state = 2138
@@ -15394,6 +15508,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2142
             self.identifier()
             self.state = 2144
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 2143
@@ -15401,6 +15516,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2147
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 2146
@@ -15408,6 +15524,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2150
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 2149
@@ -15417,6 +15534,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2152
             self.class_body()
             self.state = 2154
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.SEMICOLON:
                 self.state = 2153
@@ -15448,11 +15566,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_modifiers" ):
                 listener.enterClass_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_modifiers" ):
                 listener.exitClass_modifiers(self)
 
 
@@ -15523,11 +15641,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_modifier" ):
                 listener.enterClass_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_modifier" ):
                 listener.exitClass_modifier(self)
 
 
@@ -15539,52 +15657,53 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 366, self.RULE_class_modifier)
         try:
             self.state = 2172
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2163
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2164
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2165
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2166
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2167
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.ABSTRACT]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2168
                 self.match(CSharp4Parser.ABSTRACT)
-
+                pass
             elif token in [CSharp4Parser.SEALED]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 2169
                 self.match(CSharp4Parser.SEALED)
-
+                pass
             elif token in [CSharp4Parser.STATIC]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 2170
                 self.match(CSharp4Parser.STATIC)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 2171
                 self.class_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -15616,11 +15735,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_parameter_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_parameter_list" ):
                 listener.enterType_parameter_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_parameter_list" ):
                 listener.exitType_parameter_list(self)
 
 
@@ -15676,11 +15795,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_parameters
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_parameters" ):
                 listener.enterType_parameters(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_parameters" ):
                 listener.exitType_parameters(self)
 
 
@@ -15694,6 +15813,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2179
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2178
@@ -15709,6 +15829,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 2182
                 self.match(CSharp4Parser.COMMA)
                 self.state = 2184
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.OPEN_BRACKET:
                     self.state = 2183
@@ -15743,11 +15864,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_parameter
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_parameter" ):
                 listener.enterType_parameter(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_parameter" ):
                 listener.exitType_parameter(self)
 
 
@@ -15799,11 +15920,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_base
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_base" ):
                 listener.enterClass_base(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_base" ):
                 listener.exitClass_base(self)
 
 
@@ -15863,11 +15984,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_type_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_type_list" ):
                 listener.enterInterface_type_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_type_list" ):
                 listener.exitInterface_type_list(self)
 
 
@@ -15919,11 +16040,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_parameter_constraints_clauses
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_parameter_constraints_clauses" ):
                 listener.enterType_parameter_constraints_clauses(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_parameter_constraints_clauses" ):
                 listener.exitType_parameter_constraints_clauses(self)
 
 
@@ -15981,11 +16102,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_parameter_constraints_clause
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_parameter_constraints_clause" ):
                 listener.enterType_parameter_constraints_clause(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_parameter_constraints_clause" ):
                 listener.exitType_parameter_constraints_clause(self)
 
 
@@ -16041,11 +16162,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_parameter_constraints
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_parameter_constraints" ):
                 listener.enterType_parameter_constraints(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_parameter_constraints" ):
                 listener.exitType_parameter_constraints(self)
 
 
@@ -16058,17 +16179,19 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 2233
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2223
                 self.constructor_constraint()
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BY, CSharp4Parser.CLASS, CSharp4Parser.DESCENDING, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.STRING, CSharp4Parser.STRUCT, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2224
                 self.primary_constraint()
                 self.state = 2227
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,174,self._ctx)
                 if la_ == 1:
                     self.state = 2225
@@ -16078,6 +16201,7 @@ class CSharp4Parser ( Parser ):
 
 
                 self.state = 2231
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.COMMA:
                     self.state = 2229
@@ -16086,7 +16210,7 @@ class CSharp4Parser ( Parser ):
                     self.constructor_constraint()
 
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -16118,11 +16242,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_primary_constraint
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPrimary_constraint" ):
                 listener.enterPrimary_constraint(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPrimary_constraint" ):
                 listener.exitPrimary_constraint(self)
 
 
@@ -16134,22 +16258,23 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 384, self.RULE_primary_constraint)
         try:
             self.state = 2238
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BY, CSharp4Parser.DESCENDING, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.STRING, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2235
                 self.class_type()
-
+                pass
             elif token in [CSharp4Parser.CLASS]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2236
                 self.match(CSharp4Parser.CLASS)
-
+                pass
             elif token in [CSharp4Parser.STRUCT]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2237
                 self.match(CSharp4Parser.STRUCT)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -16184,11 +16309,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_secondary_constraints
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSecondary_constraints" ):
                 listener.enterSecondary_constraints(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSecondary_constraints" ):
                 listener.exitSecondary_constraints(self)
 
 
@@ -16242,11 +16367,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constructor_constraint
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstructor_constraint" ):
                 listener.enterConstructor_constraint(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstructor_constraint" ):
                 listener.exitConstructor_constraint(self)
 
 
@@ -16292,11 +16417,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_body" ):
                 listener.enterClass_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_body" ):
                 listener.exitClass_body(self)
 
 
@@ -16312,6 +16437,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2252
             self.match(CSharp4Parser.OPEN_BRACE)
             self.state = 2254
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.Pp_directive) | (1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.CLASS) | (1 << CSharp4Parser.CONST) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.ENUM) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.EVENT) | (1 << CSharp4Parser.EXPLICIT) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.IMPLICIT) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTERFACE) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OVERRIDE - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.PRIVATE - 65)) | (1 << (CSharp4Parser.PROTECTED - 65)) | (1 << (CSharp4Parser.PUBLIC - 65)) | (1 << (CSharp4Parser.READONLY - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SEALED - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STATIC - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.STRUCT - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.UNSAFE - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VIRTUAL - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.VOLATILE - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0) or _la==CSharp4Parser.TILDE:
                 self.state = 2253
@@ -16345,11 +16471,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_member_declarations
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_member_declarations" ):
                 listener.enterClass_member_declarations(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_member_declarations" ):
                 listener.exitClass_member_declarations(self)
 
 
@@ -16424,11 +16550,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_member_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_member_declaration" ):
                 listener.enterClass_member_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_member_declaration" ):
                 listener.exitClass_member_declaration(self)
 
 
@@ -16441,10 +16567,12 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 2279
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ABSTRACT, CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CLASS, CSharp4Parser.CONST, CSharp4Parser.DECIMAL, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.ENUM, CSharp4Parser.EQUALS, CSharp4Parser.EVENT, CSharp4Parser.EXPLICIT, CSharp4Parser.EXTERN, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.IMPLICIT, CSharp4Parser.INT, CSharp4Parser.INTERFACE, CSharp4Parser.INTERNAL, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.NEW, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.OVERRIDE, CSharp4Parser.PARTIAL, CSharp4Parser.PRIVATE, CSharp4Parser.PROTECTED, CSharp4Parser.PUBLIC, CSharp4Parser.READONLY, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SEALED, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.STATIC, CSharp4Parser.STRING, CSharp4Parser.STRUCT, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNSAFE, CSharp4Parser.USHORT, CSharp4Parser.VIRTUAL, CSharp4Parser.VOID, CSharp4Parser.VOLATILE, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER, CSharp4Parser.OPEN_BRACKET, CSharp4Parser.TILDE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2264
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.OPEN_BRACKET:
                     self.state = 2263
@@ -16452,6 +16580,7 @@ class CSharp4Parser ( Parser ):
 
 
                 self.state = 2267
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,182,self._ctx)
                 if la_ == 1:
                     self.state = 2266
@@ -16459,11 +16588,12 @@ class CSharp4Parser ( Parser ):
 
 
                 self.state = 2276
+                self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CLASS, CSharp4Parser.CONST, CSharp4Parser.DECIMAL, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.ENUM, CSharp4Parser.EQUALS, CSharp4Parser.EVENT, CSharp4Parser.EXPLICIT, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.IMPLICIT, CSharp4Parser.INT, CSharp4Parser.INTERFACE, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.STRING, CSharp4Parser.STRUCT, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.USHORT, CSharp4Parser.VOID, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                     self.state = 2269
                     self.common_member_declaration()
-
+                    pass
                 elif token in [CSharp4Parser.TILDE]:
                     self.state = 2270
                     self.match(CSharp4Parser.TILDE)
@@ -16475,16 +16605,16 @@ class CSharp4Parser ( Parser ):
                     self.match(CSharp4Parser.CLOSE_PARENS)
                     self.state = 2274
                     self.destructor_body()
-
+                    pass
                 else:
                     raise NoViableAltException(self)
 
-
+                pass
             elif token in [CSharp4Parser.Pp_directive]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2278
                 self.match(CSharp4Parser.Pp_directive)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -16514,11 +16644,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_all_member_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAll_member_modifiers" ):
                 listener.enterAll_member_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAll_member_modifiers" ):
                 listener.exitAll_member_modifiers(self)
 
 
@@ -16608,11 +16738,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_all_member_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAll_member_modifier" ):
                 listener.enterAll_member_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAll_member_modifier" ):
                 listener.exitAll_member_modifier(self)
 
 
@@ -16624,82 +16754,83 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 398, self.RULE_all_member_modifier)
         try:
             self.state = 2301
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2286
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2287
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2288
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2289
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2290
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.READONLY]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2291
                 self.match(CSharp4Parser.READONLY)
-
+                pass
             elif token in [CSharp4Parser.VOLATILE]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 2292
                 self.match(CSharp4Parser.VOLATILE)
-
+                pass
             elif token in [CSharp4Parser.VIRTUAL]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 2293
                 self.match(CSharp4Parser.VIRTUAL)
-
+                pass
             elif token in [CSharp4Parser.SEALED]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 2294
                 self.match(CSharp4Parser.SEALED)
-
+                pass
             elif token in [CSharp4Parser.OVERRIDE]:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 2295
                 self.match(CSharp4Parser.OVERRIDE)
-
+                pass
             elif token in [CSharp4Parser.ABSTRACT]:
                 self.enterOuterAlt(localctx, 11)
                 self.state = 2296
                 self.match(CSharp4Parser.ABSTRACT)
-
+                pass
             elif token in [CSharp4Parser.STATIC]:
                 self.enterOuterAlt(localctx, 12)
                 self.state = 2297
                 self.match(CSharp4Parser.STATIC)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 13)
                 self.state = 2298
                 self.match(CSharp4Parser.UNSAFE)
-
+                pass
             elif token in [CSharp4Parser.EXTERN]:
                 self.enterOuterAlt(localctx, 14)
                 self.state = 2299
                 self.match(CSharp4Parser.EXTERN)
-
+                pass
             elif token in [CSharp4Parser.PARTIAL]:
                 self.enterOuterAlt(localctx, 15)
                 self.state = 2300
                 self.partial_contextual_keyword()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -16773,11 +16904,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_common_member_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterCommon_member_declaration" ):
                 listener.enterCommon_member_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitCommon_member_declaration" ):
                 listener.exitCommon_member_declaration(self)
 
 
@@ -16789,6 +16920,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 400, self.RULE_common_member_declaration)
         try:
             self.state = 2318
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,187,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -16910,11 +17042,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_typed_member_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterTyped_member_declaration" ):
                 listener.enterTyped_member_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitTyped_member_declaration" ):
                 listener.exitTyped_member_declaration(self)
 
 
@@ -16929,6 +17061,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2320
             self.any_type()
             self.state = 2330
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,188,self._ctx)
             if la_ == 1:
                 self.state = 2321
@@ -16996,11 +17129,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constant_declarators
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstant_declarators" ):
                 listener.enterConstant_declarators(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstant_declarators" ):
                 listener.exitConstant_declarators(self)
 
 
@@ -17056,11 +17189,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constant_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstant_declarator" ):
                 listener.enterConstant_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstant_declarator" ):
                 listener.exitConstant_declarator(self)
 
 
@@ -17109,11 +17242,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_variable_declarators
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterVariable_declarators" ):
                 listener.enterVariable_declarators(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitVariable_declarators" ):
                 listener.exitVariable_declarators(self)
 
 
@@ -17169,11 +17302,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_variable_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterVariable_declarator" ):
                 listener.enterVariable_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitVariable_declarator" ):
                 listener.exitVariable_declarator(self)
 
 
@@ -17185,6 +17318,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 410, self.RULE_variable_declarator)
         try:
             self.state = 2357
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,191,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -17229,11 +17363,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_variable_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterVariable_initializer" ):
                 listener.enterVariable_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitVariable_initializer" ):
                 listener.exitVariable_initializer(self)
 
 
@@ -17245,17 +17379,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 412, self.RULE_variable_initializer)
         try:
             self.state = 2361
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FALSE, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INT, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STRING, CSharp4Parser.THIS, CSharp4Parser.TRUE, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.USHORT, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER, CSharp4Parser.INTEGER_LITERAL, CSharp4Parser.REAL_LITERAL, CSharp4Parser.CHARACTER_LITERAL, CSharp4Parser.STRING_LITERAL, CSharp4Parser.OPEN_PARENS, CSharp4Parser.PLUS, CSharp4Parser.MINUS, CSharp4Parser.STAR, CSharp4Parser.AMP, CSharp4Parser.BANG, CSharp4Parser.TILDE, CSharp4Parser.OP_INC, CSharp4Parser.OP_DEC]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2359
                 self.expression()
-
+                pass
             elif token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2360
                 self.array_initializer()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -17285,11 +17420,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_declaration" ):
                 listener.enterMethod_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_declaration" ):
                 listener.exitMethod_declaration(self)
 
 
@@ -17361,11 +17496,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_header
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_header" ):
                 listener.enterMethod_header(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_header" ):
                 listener.exitMethod_header(self)
 
 
@@ -17379,6 +17514,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2367
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2366
@@ -17386,6 +17522,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2370
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 70)) & ~0x3f) == 0 and ((1 << (_la - 70)) & ((1 << (CSharp4Parser.OVERRIDE - 70)) | (1 << (CSharp4Parser.PRIVATE - 70)) | (1 << (CSharp4Parser.PROTECTED - 70)) | (1 << (CSharp4Parser.PUBLIC - 70)) | (1 << (CSharp4Parser.SEALED - 70)) | (1 << (CSharp4Parser.STATIC - 70)) | (1 << (CSharp4Parser.UNSAFE - 70)) | (1 << (CSharp4Parser.VIRTUAL - 70)))) != 0):
                 self.state = 2369
@@ -17393,6 +17530,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2373
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,195,self._ctx)
             if la_ == 1:
                 self.state = 2372
@@ -17404,6 +17542,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2376
             self.member_name()
             self.state = 2378
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 2377
@@ -17413,6 +17552,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2380
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 2382
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 2381
@@ -17422,6 +17562,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2384
             self.match(CSharp4Parser.CLOSE_PARENS)
             self.state = 2386
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 2385
@@ -17453,11 +17594,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_modifiers" ):
                 listener.enterMethod_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_modifiers" ):
                 listener.exitMethod_modifiers(self)
 
 
@@ -17537,11 +17678,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_modifier" ):
                 listener.enterMethod_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_modifier" ):
                 listener.exitMethod_modifier(self)
 
 
@@ -17553,67 +17694,68 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 420, self.RULE_method_modifier)
         try:
             self.state = 2405
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2393
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2394
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2395
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2396
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2397
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.STATIC]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2398
                 self.match(CSharp4Parser.STATIC)
-
+                pass
             elif token in [CSharp4Parser.VIRTUAL]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 2399
                 self.match(CSharp4Parser.VIRTUAL)
-
+                pass
             elif token in [CSharp4Parser.SEALED]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 2400
                 self.match(CSharp4Parser.SEALED)
-
+                pass
             elif token in [CSharp4Parser.OVERRIDE]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 2401
                 self.match(CSharp4Parser.OVERRIDE)
-
+                pass
             elif token in [CSharp4Parser.ABSTRACT]:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 2402
                 self.match(CSharp4Parser.ABSTRACT)
-
+                pass
             elif token in [CSharp4Parser.EXTERN]:
                 self.enterOuterAlt(localctx, 11)
                 self.state = 2403
                 self.match(CSharp4Parser.EXTERN)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 12)
                 self.state = 2404
                 self.method_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -17642,11 +17784,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_return_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterReturn_type" ):
                 listener.enterReturn_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitReturn_type" ):
                 listener.exitReturn_type(self)
 
 
@@ -17658,6 +17800,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 422, self.RULE_return_type)
         try:
             self.state = 2409
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,201,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -17694,11 +17837,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_member_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMember_name" ):
                 listener.enterMember_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMember_name" ):
                 listener.exitMember_name(self)
 
 
@@ -17737,11 +17880,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_body" ):
                 listener.enterMethod_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_body" ):
                 listener.exitMethod_body(self)
 
 
@@ -17753,17 +17896,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 426, self.RULE_method_body)
         try:
             self.state = 2415
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2413
                 self.block()
-
+                pass
             elif token in [CSharp4Parser.SEMICOLON]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2414
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -17796,11 +17940,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_formal_parameter_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFormal_parameter_list" ):
                 listener.enterFormal_parameter_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFormal_parameter_list" ):
                 listener.exitFormal_parameter_list(self)
 
 
@@ -17813,6 +17957,7 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 2423
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,204,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -17825,6 +17970,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 2418
                 self.fixed_parameters()
                 self.state = 2421
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.COMMA:
                     self.state = 2419
@@ -17867,11 +18013,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_parameters
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_parameters" ):
                 listener.enterFixed_parameters(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_parameters" ):
                 listener.exitFixed_parameters(self)
 
 
@@ -17940,11 +18086,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_parameter
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_parameter" ):
                 listener.enterFixed_parameter(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_parameter" ):
                 listener.exitFixed_parameter(self)
 
 
@@ -17957,10 +18103,12 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 2445
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,209,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2434
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.OPEN_BRACKET:
                     self.state = 2433
@@ -17968,6 +18116,7 @@ class CSharp4Parser ( Parser ):
 
 
                 self.state = 2437
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if ((((_la - 69)) & ~0x3f) == 0 and ((1 << (_la - 69)) & ((1 << (CSharp4Parser.OUT - 69)) | (1 << (CSharp4Parser.REF - 69)) | (1 << (CSharp4Parser.THIS - 69)))) != 0):
                     self.state = 2436
@@ -17979,6 +18128,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 2440
                 self.identifier()
                 self.state = 2442
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.ASSIGNMENT:
                     self.state = 2441
@@ -18019,11 +18169,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_default_argument
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDefault_argument" ):
                 listener.enterDefault_argument(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDefault_argument" ):
                 listener.exitDefault_argument(self)
 
 
@@ -18066,11 +18216,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_parameter_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterParameter_modifier" ):
                 listener.enterParameter_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitParameter_modifier" ):
                 listener.exitParameter_modifier(self)
 
 
@@ -18088,6 +18238,7 @@ class CSharp4Parser ( Parser ):
             if not(((((_la - 69)) & ~0x3f) == 0 and ((1 << (_la - 69)) & ((1 << (CSharp4Parser.OUT - 69)) | (1 << (CSharp4Parser.REF - 69)) | (1 << (CSharp4Parser.THIS - 69)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -18122,11 +18273,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_parameter_array
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterParameter_array" ):
                 listener.enterParameter_array(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitParameter_array" ):
                 listener.exitParameter_array(self)
 
 
@@ -18140,6 +18291,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2453
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2452
@@ -18196,11 +18348,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_property_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterProperty_declaration" ):
                 listener.enterProperty_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitProperty_declaration" ):
                 listener.exitProperty_declaration(self)
 
 
@@ -18214,6 +18366,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2460
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2459
@@ -18221,6 +18374,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2463
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 70)) & ~0x3f) == 0 and ((1 << (_la - 70)) & ((1 << (CSharp4Parser.OVERRIDE - 70)) | (1 << (CSharp4Parser.PRIVATE - 70)) | (1 << (CSharp4Parser.PROTECTED - 70)) | (1 << (CSharp4Parser.PUBLIC - 70)) | (1 << (CSharp4Parser.SEALED - 70)) | (1 << (CSharp4Parser.STATIC - 70)) | (1 << (CSharp4Parser.UNSAFE - 70)) | (1 << (CSharp4Parser.VIRTUAL - 70)))) != 0):
                 self.state = 2462
@@ -18262,11 +18416,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_property_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterProperty_modifiers" ):
                 listener.enterProperty_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitProperty_modifiers" ):
                 listener.exitProperty_modifiers(self)
 
 
@@ -18346,11 +18500,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_property_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterProperty_modifier" ):
                 listener.enterProperty_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitProperty_modifier" ):
                 listener.exitProperty_modifier(self)
 
 
@@ -18362,67 +18516,68 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 444, self.RULE_property_modifier)
         try:
             self.state = 2488
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2476
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2477
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2478
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2479
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2480
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.STATIC]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2481
                 self.match(CSharp4Parser.STATIC)
-
+                pass
             elif token in [CSharp4Parser.VIRTUAL]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 2482
                 self.match(CSharp4Parser.VIRTUAL)
-
+                pass
             elif token in [CSharp4Parser.SEALED]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 2483
                 self.match(CSharp4Parser.SEALED)
-
+                pass
             elif token in [CSharp4Parser.OVERRIDE]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 2484
                 self.match(CSharp4Parser.OVERRIDE)
-
+                pass
             elif token in [CSharp4Parser.ABSTRACT]:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 2485
                 self.match(CSharp4Parser.ABSTRACT)
-
+                pass
             elif token in [CSharp4Parser.EXTERN]:
                 self.enterOuterAlt(localctx, 11)
                 self.state = 2486
                 self.match(CSharp4Parser.EXTERN)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 12)
                 self.state = 2487
                 self.property_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -18474,11 +18629,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_accessor_declarations
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAccessor_declarations" ):
                 listener.enterAccessor_declarations(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAccessor_declarations" ):
                 listener.exitAccessor_declarations(self)
 
 
@@ -18492,6 +18647,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2491
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2490
@@ -18499,6 +18655,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2494
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)))) != 0):
                 self.state = 2493
@@ -18506,6 +18663,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2506
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.GET]:
                 self.state = 2496
@@ -18513,26 +18671,28 @@ class CSharp4Parser ( Parser ):
                 self.state = 2497
                 self.accessor_body()
                 self.state = 2499
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if ((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)) | (1 << (CSharp4Parser.SET - 55)) | (1 << (CSharp4Parser.OPEN_BRACKET - 55)))) != 0):
                     self.state = 2498
                     self.set_accessor_declaration()
 
 
-
+                pass
             elif token in [CSharp4Parser.SET]:
                 self.state = 2501
                 self.set_contextual_keyword()
                 self.state = 2502
                 self.accessor_body()
                 self.state = 2504
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.GET or _la==CSharp4Parser.INTERNAL or ((((_la - 73)) & ~0x3f) == 0 and ((1 << (_la - 73)) & ((1 << (CSharp4Parser.PRIVATE - 73)) | (1 << (CSharp4Parser.PROTECTED - 73)) | (1 << (CSharp4Parser.OPEN_BRACKET - 73)))) != 0):
                     self.state = 2503
                     self.get_accessor_declaration()
 
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -18570,11 +18730,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_get_accessor_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGet_accessor_declaration" ):
                 listener.enterGet_accessor_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGet_accessor_declaration" ):
                 listener.exitGet_accessor_declaration(self)
 
 
@@ -18588,6 +18748,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2509
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2508
@@ -18595,6 +18756,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2512
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)))) != 0):
                 self.state = 2511
@@ -18639,11 +18801,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_set_accessor_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSet_accessor_declaration" ):
                 listener.enterSet_accessor_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSet_accessor_declaration" ):
                 listener.exitSet_accessor_declaration(self)
 
 
@@ -18657,6 +18819,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2518
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2517
@@ -18664,6 +18827,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2521
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)))) != 0):
                 self.state = 2520
@@ -18701,11 +18865,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_accessor_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAccessor_modifier" ):
                 listener.enterAccessor_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAccessor_modifier" ):
                 listener.exitAccessor_modifier(self)
 
 
@@ -18717,6 +18881,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 452, self.RULE_accessor_modifier)
         try:
             self.state = 2533
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,224,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -18778,11 +18943,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_accessor_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAccessor_body" ):
                 listener.enterAccessor_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAccessor_body" ):
                 listener.exitAccessor_body(self)
 
 
@@ -18794,17 +18959,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 454, self.RULE_accessor_body)
         try:
             self.state = 2537
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2535
                 self.block()
-
+                pass
             elif token in [CSharp4Parser.SEMICOLON]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2536
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -18862,11 +19028,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_event_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEvent_declaration" ):
                 listener.enterEvent_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEvent_declaration" ):
                 listener.exitEvent_declaration(self)
 
 
@@ -18880,6 +19046,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2540
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2539
@@ -18887,6 +19054,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2543
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 70)) & ~0x3f) == 0 and ((1 << (_la - 70)) & ((1 << (CSharp4Parser.OVERRIDE - 70)) | (1 << (CSharp4Parser.PRIVATE - 70)) | (1 << (CSharp4Parser.PROTECTED - 70)) | (1 << (CSharp4Parser.PUBLIC - 70)) | (1 << (CSharp4Parser.SEALED - 70)) | (1 << (CSharp4Parser.STATIC - 70)) | (1 << (CSharp4Parser.UNSAFE - 70)) | (1 << (CSharp4Parser.VIRTUAL - 70)))) != 0):
                 self.state = 2542
@@ -18898,6 +19066,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2546
             self.any_type()
             self.state = 2555
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,228,self._ctx)
             if la_ == 1:
                 self.state = 2547
@@ -18943,11 +19112,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_event_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEvent_modifiers" ):
                 listener.enterEvent_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEvent_modifiers" ):
                 listener.exitEvent_modifiers(self)
 
 
@@ -19027,11 +19196,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_event_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEvent_modifier" ):
                 listener.enterEvent_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEvent_modifier" ):
                 listener.exitEvent_modifier(self)
 
 
@@ -19043,67 +19212,68 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 460, self.RULE_event_modifier)
         try:
             self.state = 2576
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2564
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2565
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2566
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2567
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2568
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.STATIC]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2569
                 self.match(CSharp4Parser.STATIC)
-
+                pass
             elif token in [CSharp4Parser.VIRTUAL]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 2570
                 self.match(CSharp4Parser.VIRTUAL)
-
+                pass
             elif token in [CSharp4Parser.SEALED]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 2571
                 self.match(CSharp4Parser.SEALED)
-
+                pass
             elif token in [CSharp4Parser.OVERRIDE]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 2572
                 self.match(CSharp4Parser.OVERRIDE)
-
+                pass
             elif token in [CSharp4Parser.ABSTRACT]:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 2573
                 self.match(CSharp4Parser.ABSTRACT)
-
+                pass
             elif token in [CSharp4Parser.EXTERN]:
                 self.enterOuterAlt(localctx, 11)
                 self.state = 2574
                 self.match(CSharp4Parser.EXTERN)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 12)
                 self.state = 2575
                 self.event_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -19149,11 +19319,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_event_accessor_declarations
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEvent_accessor_declarations" ):
                 listener.enterEvent_accessor_declarations(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEvent_accessor_declarations" ):
                 listener.exitEvent_accessor_declarations(self)
 
 
@@ -19167,6 +19337,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2579
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2578
@@ -19174,6 +19345,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2589
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD]:
                 self.state = 2581
@@ -19182,7 +19354,7 @@ class CSharp4Parser ( Parser ):
                 self.block()
                 self.state = 2583
                 self.remove_accessor_declaration()
-
+                pass
             elif token in [CSharp4Parser.REMOVE]:
                 self.state = 2585
                 self.remove_contextual_keyword()
@@ -19190,7 +19362,7 @@ class CSharp4Parser ( Parser ):
                 self.block()
                 self.state = 2587
                 self.add_accessor_declaration()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -19224,11 +19396,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_add_accessor_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAdd_accessor_declaration" ):
                 listener.enterAdd_accessor_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAdd_accessor_declaration" ):
                 listener.exitAdd_accessor_declaration(self)
 
 
@@ -19242,6 +19414,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2592
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2591
@@ -19282,11 +19455,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_remove_accessor_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterRemove_accessor_declaration" ):
                 listener.enterRemove_accessor_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitRemove_accessor_declaration" ):
                 listener.exitRemove_accessor_declaration(self)
 
 
@@ -19300,6 +19473,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2598
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2597
@@ -19350,11 +19524,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_indexer_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIndexer_declaration" ):
                 listener.enterIndexer_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIndexer_declaration" ):
                 listener.exitIndexer_declaration(self)
 
 
@@ -19368,6 +19542,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2604
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2603
@@ -19375,6 +19550,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2607
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 70)) & ~0x3f) == 0 and ((1 << (_la - 70)) & ((1 << (CSharp4Parser.OVERRIDE - 70)) | (1 << (CSharp4Parser.PRIVATE - 70)) | (1 << (CSharp4Parser.PROTECTED - 70)) | (1 << (CSharp4Parser.PUBLIC - 70)) | (1 << (CSharp4Parser.SEALED - 70)) | (1 << (CSharp4Parser.UNSAFE - 70)) | (1 << (CSharp4Parser.VIRTUAL - 70)))) != 0):
                 self.state = 2606
@@ -19414,11 +19590,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_indexer_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIndexer_modifiers" ):
                 listener.enterIndexer_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIndexer_modifiers" ):
                 listener.exitIndexer_modifiers(self)
 
 
@@ -19495,11 +19671,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_indexer_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIndexer_modifier" ):
                 listener.enterIndexer_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIndexer_modifier" ):
                 listener.exitIndexer_modifier(self)
 
 
@@ -19511,62 +19687,63 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 472, self.RULE_indexer_modifier)
         try:
             self.state = 2632
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2621
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2622
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2623
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2624
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2625
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.VIRTUAL]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2626
                 self.match(CSharp4Parser.VIRTUAL)
-
+                pass
             elif token in [CSharp4Parser.SEALED]:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 2627
                 self.match(CSharp4Parser.SEALED)
-
+                pass
             elif token in [CSharp4Parser.OVERRIDE]:
                 self.enterOuterAlt(localctx, 8)
                 self.state = 2628
                 self.match(CSharp4Parser.OVERRIDE)
-
+                pass
             elif token in [CSharp4Parser.ABSTRACT]:
                 self.enterOuterAlt(localctx, 9)
                 self.state = 2629
                 self.match(CSharp4Parser.ABSTRACT)
-
+                pass
             elif token in [CSharp4Parser.EXTERN]:
                 self.enterOuterAlt(localctx, 10)
                 self.state = 2630
                 self.match(CSharp4Parser.EXTERN)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 11)
                 self.state = 2631
                 self.indexer_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -19612,11 +19789,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_indexer_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIndexer_declarator" ):
                 listener.enterIndexer_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIndexer_declarator" ):
                 listener.exitIndexer_declarator(self)
 
 
@@ -19632,6 +19809,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2634
             self.any_type()
             self.state = 2638
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET))) != 0) or ((((_la - 66)) & ~0x3f) == 0 and ((1 << (_la - 66)) & ((1 << (CSharp4Parser.ON - 66)) | (1 << (CSharp4Parser.ORDERBY - 66)) | (1 << (CSharp4Parser.PARTIAL - 66)) | (1 << (CSharp4Parser.REMOVE - 66)) | (1 << (CSharp4Parser.SELECT - 66)) | (1 << (CSharp4Parser.SET - 66)) | (1 << (CSharp4Parser.WHERE - 66)) | (1 << (CSharp4Parser.YIELD - 66)) | (1 << (CSharp4Parser.IDENTIFIER - 66)))) != 0):
                 self.state = 2635
@@ -19682,11 +19860,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_operator_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOperator_declaration" ):
                 listener.enterOperator_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOperator_declaration" ):
                 listener.exitOperator_declaration(self)
 
 
@@ -19700,6 +19878,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2646
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2645
@@ -19737,11 +19916,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_operator_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOperator_modifiers" ):
                 listener.enterOperator_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOperator_modifiers" ):
                 listener.exitOperator_modifiers(self)
 
 
@@ -19797,11 +19976,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_operator_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOperator_modifier" ):
                 listener.enterOperator_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOperator_modifier" ):
                 listener.exitOperator_modifier(self)
 
 
@@ -19813,27 +19992,28 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 480, self.RULE_operator_modifier)
         try:
             self.state = 2663
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2659
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.STATIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2660
                 self.match(CSharp4Parser.STATIC)
-
+                pass
             elif token in [CSharp4Parser.EXTERN]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2661
                 self.match(CSharp4Parser.EXTERN)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2662
                 self.operator_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -19867,11 +20047,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_operator_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOperator_declarator" ):
                 listener.enterOperator_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOperator_declarator" ):
                 listener.exitOperator_declarator(self)
 
 
@@ -19883,6 +20063,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 482, self.RULE_operator_declarator)
         try:
             self.state = 2668
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,243,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -19945,11 +20126,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_unary_operator_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUnary_operator_declarator" ):
                 listener.enterUnary_operator_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUnary_operator_declarator" ):
                 listener.exitUnary_operator_declarator(self)
 
 
@@ -20017,11 +20198,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_overloadable_unary_operator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOverloadable_unary_operator" ):
                 listener.enterOverloadable_unary_operator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOverloadable_unary_operator" ):
                 listener.exitOverloadable_unary_operator(self)
 
 
@@ -20039,6 +20220,7 @@ class CSharp4Parser ( Parser ):
             if not(_la==CSharp4Parser.FALSE or ((((_la - 93)) & ~0x3f) == 0 and ((1 << (_la - 93)) & ((1 << (CSharp4Parser.TRUE - 93)) | (1 << (CSharp4Parser.PLUS - 93)) | (1 << (CSharp4Parser.MINUS - 93)) | (1 << (CSharp4Parser.BANG - 93)) | (1 << (CSharp4Parser.TILDE - 93)) | (1 << (CSharp4Parser.OP_INC - 93)) | (1 << (CSharp4Parser.OP_DEC - 93)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -20088,11 +20270,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_binary_operator_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBinary_operator_declarator" ):
                 listener.enterBinary_operator_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBinary_operator_declarator" ):
                 listener.exitBinary_operator_declarator(self)
 
 
@@ -20191,11 +20373,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_overloadable_binary_operator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOverloadable_binary_operator" ):
                 listener.enterOverloadable_binary_operator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOverloadable_binary_operator" ):
                 listener.exitOverloadable_binary_operator(self)
 
 
@@ -20207,6 +20389,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 490, self.RULE_overloadable_binary_operator)
         try:
             self.state = 2707
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,244,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -20390,11 +20573,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_overloadable_operator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOverloadable_operator" ):
                 listener.enterOverloadable_operator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOverloadable_operator" ):
                 listener.exitOverloadable_operator(self)
 
 
@@ -20406,6 +20589,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 492, self.RULE_overloadable_operator)
         try:
             self.state = 2731
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,245,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -20584,11 +20768,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_conversion_operator_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConversion_operator_declarator" ):
                 listener.enterConversion_operator_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConversion_operator_declarator" ):
                 listener.exitConversion_operator_declarator(self)
 
 
@@ -20600,6 +20784,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 494, self.RULE_conversion_operator_declarator)
         try:
             self.state = 2749
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.IMPLICIT]:
                 self.enterOuterAlt(localctx, 1)
@@ -20617,7 +20802,7 @@ class CSharp4Parser ( Parser ):
                 self.identifier()
                 self.state = 2739
                 self.match(CSharp4Parser.CLOSE_PARENS)
-
+                pass
             elif token in [CSharp4Parser.EXPLICIT]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2741
@@ -20634,7 +20819,7 @@ class CSharp4Parser ( Parser ):
                 self.identifier()
                 self.state = 2747
                 self.match(CSharp4Parser.CLOSE_PARENS)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -20663,11 +20848,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_operator_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOperator_body" ):
                 listener.enterOperator_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOperator_body" ):
                 listener.exitOperator_body(self)
 
 
@@ -20679,17 +20864,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 496, self.RULE_operator_body)
         try:
             self.state = 2753
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2751
                 self.block()
-
+                pass
             elif token in [CSharp4Parser.SEMICOLON]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2752
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -20727,11 +20913,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constructor_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstructor_declaration" ):
                 listener.enterConstructor_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstructor_declaration" ):
                 listener.exitConstructor_declaration(self)
 
 
@@ -20745,6 +20931,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2756
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2755
@@ -20752,6 +20939,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2759
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 39)) & ~0x3f) == 0 and ((1 << (_la - 39)) & ((1 << (CSharp4Parser.EXTERN - 39)) | (1 << (CSharp4Parser.INTERNAL - 39)) | (1 << (CSharp4Parser.PRIVATE - 39)) | (1 << (CSharp4Parser.PROTECTED - 39)) | (1 << (CSharp4Parser.PUBLIC - 39)) | (1 << (CSharp4Parser.UNSAFE - 39)))) != 0):
                 self.state = 2758
@@ -20787,11 +20975,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constructor_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstructor_modifiers" ):
                 listener.enterConstructor_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstructor_modifiers" ):
                 listener.exitConstructor_modifiers(self)
 
 
@@ -20853,11 +21041,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constructor_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstructor_modifier" ):
                 listener.enterConstructor_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstructor_modifier" ):
                 listener.exitConstructor_modifier(self)
 
 
@@ -20869,37 +21057,38 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 502, self.RULE_constructor_modifier)
         try:
             self.state = 2775
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2769
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2770
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2771
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2772
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.EXTERN]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2773
                 self.match(CSharp4Parser.EXTERN)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2774
                 self.constructor_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -20939,11 +21128,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constructor_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstructor_declarator" ):
                 listener.enterConstructor_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstructor_declarator" ):
                 listener.exitConstructor_declarator(self)
 
 
@@ -20961,6 +21150,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2778
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 2780
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 2779
@@ -20970,6 +21160,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2782
             self.match(CSharp4Parser.CLOSE_PARENS)
             self.state = 2784
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 2783
@@ -21013,11 +21204,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constructor_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstructor_initializer" ):
                 listener.enterConstructor_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstructor_initializer" ):
                 listener.exitConstructor_initializer(self)
 
 
@@ -21030,6 +21221,7 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 2800
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,256,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -21040,6 +21232,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 2788
                 self.match(CSharp4Parser.OPEN_PARENS)
                 self.state = 2790
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BASE) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.CHECKED) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DEFAULT) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FALSE) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CSharp4Parser.NULL - 64)) | (1 << (CSharp4Parser.OBJECT - 64)) | (1 << (CSharp4Parser.ON - 64)) | (1 << (CSharp4Parser.ORDERBY - 64)) | (1 << (CSharp4Parser.OUT - 64)) | (1 << (CSharp4Parser.PARTIAL - 64)) | (1 << (CSharp4Parser.REF - 64)) | (1 << (CSharp4Parser.REMOVE - 64)) | (1 << (CSharp4Parser.SBYTE - 64)) | (1 << (CSharp4Parser.SELECT - 64)) | (1 << (CSharp4Parser.SET - 64)) | (1 << (CSharp4Parser.SHORT - 64)) | (1 << (CSharp4Parser.SIZEOF - 64)) | (1 << (CSharp4Parser.STRING - 64)) | (1 << (CSharp4Parser.THIS - 64)) | (1 << (CSharp4Parser.TRUE - 64)) | (1 << (CSharp4Parser.TYPEOF - 64)) | (1 << (CSharp4Parser.UINT - 64)) | (1 << (CSharp4Parser.ULONG - 64)) | (1 << (CSharp4Parser.UNCHECKED - 64)) | (1 << (CSharp4Parser.USHORT - 64)) | (1 << (CSharp4Parser.WHERE - 64)) | (1 << (CSharp4Parser.YIELD - 64)) | (1 << (CSharp4Parser.IDENTIFIER - 64)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 64)) | (1 << (CSharp4Parser.REAL_LITERAL - 64)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 64)) | (1 << (CSharp4Parser.STRING_LITERAL - 64)) | (1 << (CSharp4Parser.OPEN_PARENS - 64)) | (1 << (CSharp4Parser.PLUS - 64)) | (1 << (CSharp4Parser.MINUS - 64)) | (1 << (CSharp4Parser.STAR - 64)))) != 0) or ((((_la - 129)) & ~0x3f) == 0 and ((1 << (_la - 129)) & ((1 << (CSharp4Parser.AMP - 129)) | (1 << (CSharp4Parser.BANG - 129)) | (1 << (CSharp4Parser.TILDE - 129)) | (1 << (CSharp4Parser.OP_INC - 129)) | (1 << (CSharp4Parser.OP_DEC - 129)))) != 0):
                     self.state = 2789
@@ -21059,6 +21252,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 2795
                 self.match(CSharp4Parser.OPEN_PARENS)
                 self.state = 2797
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BASE) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.CHECKED) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DEFAULT) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FALSE) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CSharp4Parser.NULL - 64)) | (1 << (CSharp4Parser.OBJECT - 64)) | (1 << (CSharp4Parser.ON - 64)) | (1 << (CSharp4Parser.ORDERBY - 64)) | (1 << (CSharp4Parser.OUT - 64)) | (1 << (CSharp4Parser.PARTIAL - 64)) | (1 << (CSharp4Parser.REF - 64)) | (1 << (CSharp4Parser.REMOVE - 64)) | (1 << (CSharp4Parser.SBYTE - 64)) | (1 << (CSharp4Parser.SELECT - 64)) | (1 << (CSharp4Parser.SET - 64)) | (1 << (CSharp4Parser.SHORT - 64)) | (1 << (CSharp4Parser.SIZEOF - 64)) | (1 << (CSharp4Parser.STRING - 64)) | (1 << (CSharp4Parser.THIS - 64)) | (1 << (CSharp4Parser.TRUE - 64)) | (1 << (CSharp4Parser.TYPEOF - 64)) | (1 << (CSharp4Parser.UINT - 64)) | (1 << (CSharp4Parser.ULONG - 64)) | (1 << (CSharp4Parser.UNCHECKED - 64)) | (1 << (CSharp4Parser.USHORT - 64)) | (1 << (CSharp4Parser.WHERE - 64)) | (1 << (CSharp4Parser.YIELD - 64)) | (1 << (CSharp4Parser.IDENTIFIER - 64)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 64)) | (1 << (CSharp4Parser.REAL_LITERAL - 64)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 64)) | (1 << (CSharp4Parser.STRING_LITERAL - 64)) | (1 << (CSharp4Parser.OPEN_PARENS - 64)) | (1 << (CSharp4Parser.PLUS - 64)) | (1 << (CSharp4Parser.MINUS - 64)) | (1 << (CSharp4Parser.STAR - 64)))) != 0) or ((((_la - 129)) & ~0x3f) == 0 and ((1 << (_la - 129)) & ((1 << (CSharp4Parser.AMP - 129)) | (1 << (CSharp4Parser.BANG - 129)) | (1 << (CSharp4Parser.TILDE - 129)) | (1 << (CSharp4Parser.OP_INC - 129)) | (1 << (CSharp4Parser.OP_DEC - 129)))) != 0):
                     self.state = 2796
@@ -21095,11 +21289,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constructor_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstructor_body" ):
                 listener.enterConstructor_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstructor_body" ):
                 listener.exitConstructor_body(self)
 
 
@@ -21111,17 +21305,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 508, self.RULE_constructor_body)
         try:
             self.state = 2804
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2802
                 self.block()
-
+                pass
             elif token in [CSharp4Parser.SEMICOLON]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2803
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -21165,11 +21360,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_static_constructor_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStatic_constructor_declaration" ):
                 listener.enterStatic_constructor_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStatic_constructor_declaration" ):
                 listener.exitStatic_constructor_declaration(self)
 
 
@@ -21183,6 +21378,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2807
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2806
@@ -21221,11 +21417,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_static_constructor_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStatic_constructor_modifiers" ):
                 listener.enterStatic_constructor_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStatic_constructor_modifiers" ):
                 listener.exitStatic_constructor_modifiers(self)
 
 
@@ -21264,11 +21460,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_static_constructor_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStatic_constructor_body" ):
                 listener.enterStatic_constructor_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStatic_constructor_body" ):
                 listener.exitStatic_constructor_body(self)
 
 
@@ -21280,17 +21476,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 514, self.RULE_static_constructor_body)
         try:
             self.state = 2819
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2817
                 self.block()
-
+                pass
             elif token in [CSharp4Parser.SEMICOLON]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2818
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -21316,11 +21513,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_destructor_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDestructor_declaration" ):
                 listener.enterDestructor_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDestructor_declaration" ):
                 listener.exitDestructor_declaration(self)
 
 
@@ -21359,11 +21556,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_destructor_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDestructor_body" ):
                 listener.enterDestructor_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDestructor_body" ):
                 listener.exitDestructor_body(self)
 
 
@@ -21375,17 +21572,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 518, self.RULE_destructor_body)
         try:
             self.state = 2825
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2823
                 self.block()
-
+                pass
             elif token in [CSharp4Parser.SEMICOLON]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2824
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -21414,11 +21612,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBody" ):
                 listener.enterBody(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBody" ):
                 listener.exitBody(self)
 
 
@@ -21430,17 +21628,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 520, self.RULE_body)
         try:
             self.state = 2829
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.OPEN_BRACE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2827
                 self.block()
-
+                pass
             elif token in [CSharp4Parser.SEMICOLON]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2828
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -21500,11 +21699,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_declaration" ):
                 listener.enterStruct_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_declaration" ):
                 listener.exitStruct_declaration(self)
 
 
@@ -21518,6 +21717,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2832
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2831
@@ -21525,6 +21725,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2835
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.NEW - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)) | (1 << (CSharp4Parser.PUBLIC - 55)) | (1 << (CSharp4Parser.UNSAFE - 55)))) != 0):
                 self.state = 2834
@@ -21532,6 +21733,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2838
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.PARTIAL:
                 self.state = 2837
@@ -21543,6 +21745,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2841
             self.identifier()
             self.state = 2843
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 2842
@@ -21550,6 +21753,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2846
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 2845
@@ -21557,6 +21761,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2849
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 2848
@@ -21566,6 +21771,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2851
             self.struct_body()
             self.state = 2853
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.SEMICOLON:
                 self.state = 2852
@@ -21597,11 +21803,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_modifiers" ):
                 listener.enterStruct_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_modifiers" ):
                 listener.exitStruct_modifiers(self)
 
 
@@ -21663,11 +21869,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_modifier" ):
                 listener.enterStruct_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_modifier" ):
                 listener.exitStruct_modifier(self)
 
 
@@ -21679,37 +21885,38 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 526, self.RULE_struct_modifier)
         try:
             self.state = 2868
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2862
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2863
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2864
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2865
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2866
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2867
                 self.struct_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -21738,11 +21945,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_interfaces
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_interfaces" ):
                 listener.enterStruct_interfaces(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_interfaces" ):
                 listener.exitStruct_interfaces(self)
 
 
@@ -21786,11 +21993,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_body" ):
                 listener.enterStruct_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_body" ):
                 listener.exitStruct_body(self)
 
 
@@ -21806,6 +22013,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2873
             self.match(CSharp4Parser.OPEN_BRACE)
             self.state = 2875
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.CLASS) | (1 << CSharp4Parser.CONST) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.ENUM) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.EVENT) | (1 << CSharp4Parser.EXPLICIT) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.FIXED) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.IMPLICIT) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTERFACE) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OVERRIDE - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.PRIVATE - 65)) | (1 << (CSharp4Parser.PROTECTED - 65)) | (1 << (CSharp4Parser.PUBLIC - 65)) | (1 << (CSharp4Parser.READONLY - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SEALED - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STATIC - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.STRUCT - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.UNSAFE - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VIRTUAL - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.VOLATILE - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 2874
@@ -21839,11 +22047,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_member_declarations
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_member_declarations" ):
                 listener.enterStruct_member_declarations(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_member_declarations" ):
                 listener.exitStruct_member_declarations(self)
 
 
@@ -21912,11 +22120,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_member_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_member_declaration" ):
                 listener.enterStruct_member_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_member_declaration" ):
                 listener.exitStruct_member_declaration(self)
 
 
@@ -21930,6 +22138,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2887
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2886
@@ -21937,6 +22146,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2890
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,274,self._ctx)
             if la_ == 1:
                 self.state = 2889
@@ -21944,11 +22154,12 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2898
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BOOL, CSharp4Parser.BY, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.CLASS, CSharp4Parser.CONST, CSharp4Parser.DECIMAL, CSharp4Parser.DELEGATE, CSharp4Parser.DESCENDING, CSharp4Parser.DOUBLE, CSharp4Parser.DYNAMIC, CSharp4Parser.ENUM, CSharp4Parser.EQUALS, CSharp4Parser.EVENT, CSharp4Parser.EXPLICIT, CSharp4Parser.FLOAT, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.IMPLICIT, CSharp4Parser.INT, CSharp4Parser.INTERFACE, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.LONG, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SBYTE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.SHORT, CSharp4Parser.STRING, CSharp4Parser.STRUCT, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.USHORT, CSharp4Parser.VOID, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.state = 2892
                 self.common_member_declaration()
-
+                pass
             elif token in [CSharp4Parser.FIXED]:
                 self.state = 2893
                 self.match(CSharp4Parser.FIXED)
@@ -21958,7 +22169,7 @@ class CSharp4Parser ( Parser ):
                 self.fixed_size_buffer_declarators()
                 self.state = 2896
                 self.match(CSharp4Parser.SEMICOLON)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -22003,11 +22214,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_array_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterArray_type" ):
                 listener.enterArray_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitArray_type" ):
                 listener.exitArray_type(self)
 
 
@@ -22035,6 +22246,7 @@ class CSharp4Parser ( Parser ):
                     if not(_la==CSharp4Parser.STAR or _la==CSharp4Parser.INTERR):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
                     self.state = 2906
                     self._errHandler.sync(self)
@@ -22089,11 +22301,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_non_array_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNon_array_type" ):
                 listener.enterNon_array_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNon_array_type" ):
                 listener.exitNon_array_type(self)
 
 
@@ -22113,19 +22325,20 @@ class CSharp4Parser ( Parser ):
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
                     self.state = 2916
+                    self._errHandler.sync(self)
                     token = self._input.LA(1)
                     if token in [CSharp4Parser.OPEN_BRACKET]:
                         self.state = 2913
                         self.rank_specifier()
-
+                        pass
                     elif token in [CSharp4Parser.INTERR]:
                         self.state = 2914
                         self.match(CSharp4Parser.INTERR)
-
+                        pass
                     elif token in [CSharp4Parser.STAR]:
                         self.state = 2915
                         self.match(CSharp4Parser.STAR)
-
+                        pass
                     else:
                         raise NoViableAltException(self)
              
@@ -22158,11 +22371,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_rank_specifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterRank_specifiers" ):
                 listener.enterRank_specifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitRank_specifiers" ):
                 listener.exitRank_specifiers(self)
 
 
@@ -22216,11 +22429,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_rank_specifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterRank_specifier" ):
                 listener.enterRank_specifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitRank_specifier" ):
                 listener.exitRank_specifier(self)
 
 
@@ -22236,6 +22449,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2926
             self.match(CSharp4Parser.OPEN_BRACKET)
             self.state = 2928
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COMMA:
                 self.state = 2927
@@ -22268,11 +22482,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_dim_separators
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDim_separators" ):
                 listener.enterDim_separators(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDim_separators" ):
                 listener.exitDim_separators(self)
 
 
@@ -22328,11 +22542,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_array_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterArray_initializer" ):
                 listener.enterArray_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitArray_initializer" ):
                 listener.exitArray_initializer(self)
 
 
@@ -22345,6 +22559,7 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 2948
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,284,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -22361,6 +22576,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 2942
                 self.variable_initializer_list()
                 self.state = 2944
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.COMMA:
                     self.state = 2943
@@ -22403,11 +22619,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_variable_initializer_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterVariable_initializer_list" ):
                 listener.enterVariable_initializer_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitVariable_initializer_list" ):
                 listener.exitVariable_initializer_list(self)
 
 
@@ -22490,11 +22706,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_declaration" ):
                 listener.enterInterface_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_declaration" ):
                 listener.exitInterface_declaration(self)
 
 
@@ -22508,6 +22724,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 2959
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 2958
@@ -22515,6 +22732,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2962
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.NEW - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)) | (1 << (CSharp4Parser.PUBLIC - 55)) | (1 << (CSharp4Parser.UNSAFE - 55)))) != 0):
                 self.state = 2961
@@ -22522,6 +22740,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2965
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.PARTIAL:
                 self.state = 2964
@@ -22533,6 +22752,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2968
             self.identifier()
             self.state = 2970
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 2969
@@ -22540,6 +22760,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2973
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 2972
@@ -22547,6 +22768,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 2976
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 2975
@@ -22556,6 +22778,7 @@ class CSharp4Parser ( Parser ):
             self.state = 2978
             self.interface_body()
             self.state = 2980
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.SEMICOLON:
                 self.state = 2979
@@ -22587,11 +22810,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_modifiers" ):
                 listener.enterInterface_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_modifiers" ):
                 listener.exitInterface_modifiers(self)
 
 
@@ -22653,11 +22876,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_modifier" ):
                 listener.enterInterface_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_modifier" ):
                 listener.exitInterface_modifier(self)
 
 
@@ -22669,37 +22892,38 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 554, self.RULE_interface_modifier)
         try:
             self.state = 2995
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 2989
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 2990
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 2991
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 2992
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 2993
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 2994
                 self.interface_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -22731,11 +22955,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_variant_type_parameter_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterVariant_type_parameter_list" ):
                 listener.enterVariant_type_parameter_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitVariant_type_parameter_list" ):
                 listener.exitVariant_type_parameter_list(self)
 
 
@@ -22798,11 +23022,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_variant_type_parameters
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterVariant_type_parameters" ):
                 listener.enterVariant_type_parameters(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitVariant_type_parameters" ):
                 listener.exitVariant_type_parameters(self)
 
 
@@ -22816,6 +23040,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3002
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3001
@@ -22823,6 +23048,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3005
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.IN or _la==CSharp4Parser.OUT:
                 self.state = 3004
@@ -22838,6 +23064,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 3008
                 self.match(CSharp4Parser.COMMA)
                 self.state = 3010
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.OPEN_BRACKET:
                     self.state = 3009
@@ -22845,6 +23072,7 @@ class CSharp4Parser ( Parser ):
 
 
                 self.state = 3013
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.IN or _la==CSharp4Parser.OUT:
                     self.state = 3012
@@ -22881,11 +23109,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_variance_annotation
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterVariance_annotation" ):
                 listener.enterVariance_annotation(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitVariance_annotation" ):
                 listener.exitVariance_annotation(self)
 
 
@@ -22903,6 +23131,7 @@ class CSharp4Parser ( Parser ):
             if not(_la==CSharp4Parser.IN or _la==CSharp4Parser.OUT):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -22929,11 +23158,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_base
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_base" ):
                 listener.enterInterface_base(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_base" ):
                 listener.exitInterface_base(self)
 
 
@@ -22977,11 +23206,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_body" ):
                 listener.enterInterface_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_body" ):
                 listener.exitInterface_body(self)
 
 
@@ -22997,6 +23226,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3026
             self.match(CSharp4Parser.OPEN_BRACE)
             self.state = 3028
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.EVENT) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 3027
@@ -23030,11 +23260,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_member_declarations
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_member_declarations" ):
                 listener.enterInterface_member_declarations(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_member_declarations" ):
                 listener.exitInterface_member_declarations(self)
 
 
@@ -23138,11 +23368,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_member_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_member_declaration" ):
                 listener.enterInterface_member_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_member_declaration" ):
                 listener.exitInterface_member_declaration(self)
 
 
@@ -23156,6 +23386,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3038
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3037
@@ -23163,6 +23394,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3041
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.NEW:
                 self.state = 3040
@@ -23170,16 +23402,19 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3093
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,311,self._ctx)
             if la_ == 1:
                 self.state = 3043
                 self.any_type()
                 self.state = 3071
+                self._errHandler.sync(self)
                 la_ = self._interp.adaptivePredict(self._input,307,self._ctx)
                 if la_ == 1:
                     self.state = 3044
                     self.identifier()
                     self.state = 3046
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==CSharp4Parser.LT:
                         self.state = 3045
@@ -23189,6 +23424,7 @@ class CSharp4Parser ( Parser ):
                     self.state = 3048
                     self.match(CSharp4Parser.OPEN_PARENS)
                     self.state = 3050
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                         self.state = 3049
@@ -23198,6 +23434,7 @@ class CSharp4Parser ( Parser ):
                     self.state = 3052
                     self.match(CSharp4Parser.CLOSE_PARENS)
                     self.state = 3054
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==CSharp4Parser.WHERE:
                         self.state = 3053
@@ -23245,6 +23482,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 3074
                 self.identifier()
                 self.state = 3076
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.LT:
                     self.state = 3075
@@ -23254,6 +23492,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 3078
                 self.match(CSharp4Parser.OPEN_PARENS)
                 self.state = 3080
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                     self.state = 3079
@@ -23263,6 +23502,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 3082
                 self.match(CSharp4Parser.CLOSE_PARENS)
                 self.state = 3084
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.WHERE:
                     self.state = 3083
@@ -23339,11 +23579,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_method_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_method_declaration" ):
                 listener.enterInterface_method_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_method_declaration" ):
                 listener.exitInterface_method_declaration(self)
 
 
@@ -23357,6 +23597,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3096
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3095
@@ -23364,6 +23605,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3099
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.NEW:
                 self.state = 3098
@@ -23375,6 +23617,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3102
             self.identifier()
             self.state = 3104
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 3103
@@ -23384,6 +23627,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3106
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 3108
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 3107
@@ -23393,6 +23637,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3110
             self.match(CSharp4Parser.CLOSE_PARENS)
             self.state = 3112
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 3111
@@ -23444,11 +23689,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_property_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_property_declaration" ):
                 listener.enterInterface_property_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_property_declaration" ):
                 listener.exitInterface_property_declaration(self)
 
 
@@ -23462,6 +23707,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3117
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3116
@@ -23469,6 +23715,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3120
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.NEW:
                 self.state = 3119
@@ -23524,11 +23771,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_accessors
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_accessors" ):
                 listener.enterInterface_accessors(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_accessors" ):
                 listener.exitInterface_accessors(self)
 
 
@@ -23542,6 +23789,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3129
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3128
@@ -23549,6 +23797,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3151
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.GET]:
                 self.state = 3131
@@ -23556,9 +23805,11 @@ class CSharp4Parser ( Parser ):
                 self.state = 3132
                 self.match(CSharp4Parser.SEMICOLON)
                 self.state = 3139
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.SET or _la==CSharp4Parser.OPEN_BRACKET:
                     self.state = 3134
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==CSharp4Parser.OPEN_BRACKET:
                         self.state = 3133
@@ -23571,16 +23822,18 @@ class CSharp4Parser ( Parser ):
                     self.match(CSharp4Parser.SEMICOLON)
 
 
-
+                pass
             elif token in [CSharp4Parser.SET]:
                 self.state = 3141
                 self.set_contextual_keyword()
                 self.state = 3142
                 self.match(CSharp4Parser.SEMICOLON)
                 self.state = 3149
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.GET or _la==CSharp4Parser.OPEN_BRACKET:
                     self.state = 3144
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==CSharp4Parser.OPEN_BRACKET:
                         self.state = 3143
@@ -23593,7 +23846,7 @@ class CSharp4Parser ( Parser ):
                     self.match(CSharp4Parser.SEMICOLON)
 
 
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -23636,11 +23889,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_event_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_event_declaration" ):
                 listener.enterInterface_event_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_event_declaration" ):
                 listener.exitInterface_event_declaration(self)
 
 
@@ -23654,6 +23907,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3154
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3153
@@ -23661,6 +23915,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3157
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.NEW:
                 self.state = 3156
@@ -23727,11 +23982,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_indexer_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_indexer_declaration" ):
                 listener.enterInterface_indexer_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_indexer_declaration" ):
                 listener.exitInterface_indexer_declaration(self)
 
 
@@ -23745,6 +24000,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3165
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3164
@@ -23752,6 +24008,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3168
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.NEW:
                 self.state = 3167
@@ -23818,11 +24075,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_enum_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEnum_declaration" ):
                 listener.enterEnum_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEnum_declaration" ):
                 listener.exitEnum_declaration(self)
 
 
@@ -23836,6 +24093,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3180
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3179
@@ -23843,6 +24101,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3183
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.NEW - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)) | (1 << (CSharp4Parser.PUBLIC - 55)))) != 0):
                 self.state = 3182
@@ -23854,6 +24113,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3186
             self.identifier()
             self.state = 3188
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 3187
@@ -23863,6 +24123,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3190
             self.enum_body()
             self.state = 3192
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.SEMICOLON:
                 self.state = 3191
@@ -23894,11 +24155,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_enum_base
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEnum_base" ):
                 listener.enterEnum_base(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEnum_base" ):
                 listener.exitEnum_base(self)
 
 
@@ -23945,11 +24206,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_enum_body
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEnum_body" ):
                 listener.enterEnum_body(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEnum_body" ):
                 listener.exitEnum_body(self)
 
 
@@ -23962,6 +24223,7 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 3206
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,334,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -23978,6 +24240,7 @@ class CSharp4Parser ( Parser ):
                 self.state = 3200
                 self.enum_member_declarations()
                 self.state = 3202
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.COMMA:
                     self.state = 3201
@@ -24014,11 +24277,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_enum_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEnum_modifiers" ):
                 listener.enterEnum_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEnum_modifiers" ):
                 listener.exitEnum_modifiers(self)
 
 
@@ -24076,11 +24339,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_enum_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEnum_modifier" ):
                 listener.enterEnum_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEnum_modifier" ):
                 listener.exitEnum_modifier(self)
 
 
@@ -24098,6 +24361,7 @@ class CSharp4Parser ( Parser ):
             if not(((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.NEW - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)) | (1 << (CSharp4Parser.PUBLIC - 55)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -24130,11 +24394,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_enum_member_declarations
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEnum_member_declarations" ):
                 listener.enterEnum_member_declarations(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEnum_member_declarations" ):
                 listener.exitEnum_member_declarations(self)
 
 
@@ -24194,11 +24458,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_enum_member_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEnum_member_declaration" ):
                 listener.enterEnum_member_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEnum_member_declaration" ):
                 listener.exitEnum_member_declaration(self)
 
 
@@ -24212,6 +24476,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3224
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3223
@@ -24221,6 +24486,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3226
             self.identifier()
             self.state = 3229
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.ASSIGNMENT:
                 self.state = 3227
@@ -24287,11 +24553,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_delegate_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDelegate_declaration" ):
                 listener.enterDelegate_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDelegate_declaration" ):
                 listener.exitDelegate_declaration(self)
 
 
@@ -24305,6 +24571,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3232
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3231
@@ -24312,6 +24579,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3235
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.NEW - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)) | (1 << (CSharp4Parser.PUBLIC - 55)) | (1 << (CSharp4Parser.UNSAFE - 55)))) != 0):
                 self.state = 3234
@@ -24325,6 +24593,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3239
             self.identifier()
             self.state = 3241
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 3240
@@ -24334,6 +24603,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3243
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 3245
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 3244
@@ -24343,6 +24613,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3247
             self.match(CSharp4Parser.CLOSE_PARENS)
             self.state = 3249
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 3248
@@ -24376,11 +24647,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_delegate_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDelegate_modifiers" ):
                 listener.enterDelegate_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDelegate_modifiers" ):
                 listener.exitDelegate_modifiers(self)
 
 
@@ -24442,11 +24713,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_delegate_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDelegate_modifier" ):
                 listener.enterDelegate_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDelegate_modifier" ):
                 listener.exitDelegate_modifier(self)
 
 
@@ -24458,37 +24729,38 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 598, self.RULE_delegate_modifier)
         try:
             self.state = 3266
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.NEW]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 3260
                 self.match(CSharp4Parser.NEW)
-
+                pass
             elif token in [CSharp4Parser.PUBLIC]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 3261
                 self.match(CSharp4Parser.PUBLIC)
-
+                pass
             elif token in [CSharp4Parser.PROTECTED]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 3262
                 self.match(CSharp4Parser.PROTECTED)
-
+                pass
             elif token in [CSharp4Parser.INTERNAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 3263
                 self.match(CSharp4Parser.INTERNAL)
-
+                pass
             elif token in [CSharp4Parser.PRIVATE]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 3264
                 self.match(CSharp4Parser.PRIVATE)
-
+                pass
             elif token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 3265
                 self.delegate_modifier_unsafe()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -24514,11 +24786,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_global_attributes
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGlobal_attributes" ):
                 listener.enterGlobal_attributes(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGlobal_attributes" ):
                 listener.exitGlobal_attributes(self)
 
 
@@ -24557,11 +24829,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_global_attribute_sections
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGlobal_attribute_sections" ):
                 listener.enterGlobal_attribute_sections(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGlobal_attribute_sections" ):
                 listener.exitGlobal_attribute_sections(self)
 
 
@@ -24621,11 +24893,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_global_attribute_section
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGlobal_attribute_section" ):
                 listener.enterGlobal_attribute_section(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGlobal_attribute_section" ):
                 listener.exitGlobal_attribute_section(self)
 
 
@@ -24645,6 +24917,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3277
             self.attribute_list()
             self.state = 3279
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COMMA:
                 self.state = 3278
@@ -24678,11 +24951,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_global_attribute_target_specifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGlobal_attribute_target_specifier" ):
                 listener.enterGlobal_attribute_target_specifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGlobal_attribute_target_specifier" ):
                 listener.exitGlobal_attribute_target_specifier(self)
 
 
@@ -24724,11 +24997,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_global_attribute_target
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGlobal_attribute_target" ):
                 listener.enterGlobal_attribute_target(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGlobal_attribute_target" ):
                 listener.exitGlobal_attribute_target(self)
 
 
@@ -24740,17 +25013,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 608, self.RULE_global_attribute_target)
         try:
             self.state = 3288
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ABSTRACT, CSharp4Parser.AS, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BREAK, CSharp4Parser.BYTE, CSharp4Parser.CASE, CSharp4Parser.CATCH, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.CLASS, CSharp4Parser.CONST, CSharp4Parser.CONTINUE, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DO, CSharp4Parser.DOUBLE, CSharp4Parser.ELSE, CSharp4Parser.ENUM, CSharp4Parser.EVENT, CSharp4Parser.EXPLICIT, CSharp4Parser.EXTERN, CSharp4Parser.FALSE, CSharp4Parser.FINALLY, CSharp4Parser.FIXED, CSharp4Parser.FLOAT, CSharp4Parser.FOR, CSharp4Parser.FOREACH, CSharp4Parser.GOTO, CSharp4Parser.IF, CSharp4Parser.IMPLICIT, CSharp4Parser.IN, CSharp4Parser.INT, CSharp4Parser.INTERFACE, CSharp4Parser.INTERNAL, CSharp4Parser.IS, CSharp4Parser.LOCK, CSharp4Parser.LONG, CSharp4Parser.NAMESPACE, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.OPERATOR, CSharp4Parser.OUT, CSharp4Parser.OVERRIDE, CSharp4Parser.PARAMS, CSharp4Parser.PRIVATE, CSharp4Parser.PROTECTED, CSharp4Parser.PUBLIC, CSharp4Parser.READONLY, CSharp4Parser.REF, CSharp4Parser.RETURN, CSharp4Parser.SBYTE, CSharp4Parser.SEALED, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STACKALLOC, CSharp4Parser.STATIC, CSharp4Parser.STRING, CSharp4Parser.STRUCT, CSharp4Parser.SWITCH, CSharp4Parser.THIS, CSharp4Parser.THROW, CSharp4Parser.TRUE, CSharp4Parser.TRY, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.UNSAFE, CSharp4Parser.USHORT, CSharp4Parser.USING, CSharp4Parser.VIRTUAL, CSharp4Parser.VOID, CSharp4Parser.VOLATILE, CSharp4Parser.WHILE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 3286
                 self.keyword()
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BY, CSharp4Parser.DESCENDING, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 3287
                 self.identifier()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -24776,11 +25050,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attributes
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttributes" ):
                 listener.enterAttributes(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttributes" ):
                 listener.exitAttributes(self)
 
 
@@ -24819,11 +25093,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attribute_sections
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttribute_sections" ):
                 listener.enterAttribute_sections(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttribute_sections" ):
                 listener.exitAttribute_sections(self)
 
 
@@ -24883,11 +25157,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attribute_section
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttribute_section" ):
                 listener.enterAttribute_section(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttribute_section" ):
                 listener.exitAttribute_section(self)
 
 
@@ -24903,6 +25177,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3297
             self.match(CSharp4Parser.OPEN_BRACKET)
             self.state = 3299
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,350,self._ctx)
             if la_ == 1:
                 self.state = 3298
@@ -24912,6 +25187,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3301
             self.attribute_list()
             self.state = 3303
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COMMA:
                 self.state = 3302
@@ -24945,11 +25221,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attribute_target_specifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttribute_target_specifier" ):
                 listener.enterAttribute_target_specifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttribute_target_specifier" ):
                 listener.exitAttribute_target_specifier(self)
 
 
@@ -24991,11 +25267,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attribute_target
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttribute_target" ):
                 listener.enterAttribute_target(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttribute_target" ):
                 listener.exitAttribute_target(self)
 
 
@@ -25007,17 +25283,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 618, self.RULE_attribute_target)
         try:
             self.state = 3312
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.ABSTRACT, CSharp4Parser.AS, CSharp4Parser.BASE, CSharp4Parser.BOOL, CSharp4Parser.BREAK, CSharp4Parser.BYTE, CSharp4Parser.CASE, CSharp4Parser.CATCH, CSharp4Parser.CHAR, CSharp4Parser.CHECKED, CSharp4Parser.CLASS, CSharp4Parser.CONST, CSharp4Parser.CONTINUE, CSharp4Parser.DECIMAL, CSharp4Parser.DEFAULT, CSharp4Parser.DELEGATE, CSharp4Parser.DO, CSharp4Parser.DOUBLE, CSharp4Parser.ELSE, CSharp4Parser.ENUM, CSharp4Parser.EVENT, CSharp4Parser.EXPLICIT, CSharp4Parser.EXTERN, CSharp4Parser.FALSE, CSharp4Parser.FINALLY, CSharp4Parser.FIXED, CSharp4Parser.FLOAT, CSharp4Parser.FOR, CSharp4Parser.FOREACH, CSharp4Parser.GOTO, CSharp4Parser.IF, CSharp4Parser.IMPLICIT, CSharp4Parser.IN, CSharp4Parser.INT, CSharp4Parser.INTERFACE, CSharp4Parser.INTERNAL, CSharp4Parser.IS, CSharp4Parser.LOCK, CSharp4Parser.LONG, CSharp4Parser.NAMESPACE, CSharp4Parser.NEW, CSharp4Parser.NULL, CSharp4Parser.OBJECT, CSharp4Parser.OPERATOR, CSharp4Parser.OUT, CSharp4Parser.OVERRIDE, CSharp4Parser.PARAMS, CSharp4Parser.PRIVATE, CSharp4Parser.PROTECTED, CSharp4Parser.PUBLIC, CSharp4Parser.READONLY, CSharp4Parser.REF, CSharp4Parser.RETURN, CSharp4Parser.SBYTE, CSharp4Parser.SEALED, CSharp4Parser.SHORT, CSharp4Parser.SIZEOF, CSharp4Parser.STACKALLOC, CSharp4Parser.STATIC, CSharp4Parser.STRING, CSharp4Parser.STRUCT, CSharp4Parser.SWITCH, CSharp4Parser.THIS, CSharp4Parser.THROW, CSharp4Parser.TRUE, CSharp4Parser.TRY, CSharp4Parser.TYPEOF, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.UNCHECKED, CSharp4Parser.UNSAFE, CSharp4Parser.USHORT, CSharp4Parser.USING, CSharp4Parser.VIRTUAL, CSharp4Parser.VOID, CSharp4Parser.VOLATILE, CSharp4Parser.WHILE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 3310
                 self.keyword()
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BY, CSharp4Parser.DESCENDING, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 3311
                 self.identifier()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -25052,11 +25329,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attribute_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttribute_list" ):
                 listener.enterAttribute_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttribute_list" ):
                 listener.exitAttribute_list(self)
 
 
@@ -25109,11 +25386,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attribute
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttribute" ):
                 listener.enterAttribute(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttribute" ):
                 listener.exitAttribute(self)
 
 
@@ -25129,6 +25406,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3322
             self.attribute_name()
             self.state = 3324
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_PARENS:
                 self.state = 3323
@@ -25157,11 +25435,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attribute_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttribute_name" ):
                 listener.enterAttribute_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttribute_name" ):
                 listener.exitAttribute_name(self)
 
 
@@ -25203,11 +25481,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attribute_arguments
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttribute_arguments" ):
                 listener.enterAttribute_arguments(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttribute_arguments" ):
                 listener.exitAttribute_arguments(self)
 
 
@@ -25223,6 +25501,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3328
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 3330
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (CSharp4Parser.ADD - 10)) | (1 << (CSharp4Parser.ALIAS - 10)) | (1 << (CSharp4Parser.ARGLIST - 10)) | (1 << (CSharp4Parser.ASCENDING - 10)) | (1 << (CSharp4Parser.BASE - 10)) | (1 << (CSharp4Parser.BOOL - 10)) | (1 << (CSharp4Parser.BY - 10)) | (1 << (CSharp4Parser.BYTE - 10)) | (1 << (CSharp4Parser.CHAR - 10)) | (1 << (CSharp4Parser.CHECKED - 10)) | (1 << (CSharp4Parser.DECIMAL - 10)) | (1 << (CSharp4Parser.DEFAULT - 10)) | (1 << (CSharp4Parser.DELEGATE - 10)) | (1 << (CSharp4Parser.DESCENDING - 10)) | (1 << (CSharp4Parser.DOUBLE - 10)) | (1 << (CSharp4Parser.DYNAMIC - 10)) | (1 << (CSharp4Parser.EQUALS - 10)) | (1 << (CSharp4Parser.FALSE - 10)) | (1 << (CSharp4Parser.FLOAT - 10)) | (1 << (CSharp4Parser.FROM - 10)) | (1 << (CSharp4Parser.GET - 10)) | (1 << (CSharp4Parser.GROUP - 10)) | (1 << (CSharp4Parser.INT - 10)) | (1 << (CSharp4Parser.INTO - 10)) | (1 << (CSharp4Parser.JOIN - 10)) | (1 << (CSharp4Parser.LET - 10)) | (1 << (CSharp4Parser.LONG - 10)) | (1 << (CSharp4Parser.NEW - 10)) | (1 << (CSharp4Parser.NULL - 10)) | (1 << (CSharp4Parser.OBJECT - 10)) | (1 << (CSharp4Parser.ON - 10)) | (1 << (CSharp4Parser.ORDERBY - 10)) | (1 << (CSharp4Parser.PARTIAL - 10)))) != 0) or ((((_la - 78)) & ~0x3f) == 0 and ((1 << (_la - 78)) & ((1 << (CSharp4Parser.REMOVE - 78)) | (1 << (CSharp4Parser.SBYTE - 78)) | (1 << (CSharp4Parser.SELECT - 78)) | (1 << (CSharp4Parser.SET - 78)) | (1 << (CSharp4Parser.SHORT - 78)) | (1 << (CSharp4Parser.SIZEOF - 78)) | (1 << (CSharp4Parser.STRING - 78)) | (1 << (CSharp4Parser.THIS - 78)) | (1 << (CSharp4Parser.TRUE - 78)) | (1 << (CSharp4Parser.TYPEOF - 78)) | (1 << (CSharp4Parser.UINT - 78)) | (1 << (CSharp4Parser.ULONG - 78)) | (1 << (CSharp4Parser.UNCHECKED - 78)) | (1 << (CSharp4Parser.USHORT - 78)) | (1 << (CSharp4Parser.WHERE - 78)) | (1 << (CSharp4Parser.YIELD - 78)) | (1 << (CSharp4Parser.IDENTIFIER - 78)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 78)) | (1 << (CSharp4Parser.REAL_LITERAL - 78)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 78)) | (1 << (CSharp4Parser.STRING_LITERAL - 78)) | (1 << (CSharp4Parser.OPEN_PARENS - 78)) | (1 << (CSharp4Parser.PLUS - 78)) | (1 << (CSharp4Parser.MINUS - 78)) | (1 << (CSharp4Parser.STAR - 78)) | (1 << (CSharp4Parser.AMP - 78)) | (1 << (CSharp4Parser.BANG - 78)) | (1 << (CSharp4Parser.TILDE - 78)) | (1 << (CSharp4Parser.OP_INC - 78)) | (1 << (CSharp4Parser.OP_DEC - 78)))) != 0):
                 self.state = 3329
@@ -25264,11 +25543,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_positional_argument_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPositional_argument_list" ):
                 listener.enterPositional_argument_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPositional_argument_list" ):
                 listener.exitPositional_argument_list(self)
 
 
@@ -25317,11 +25596,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_positional_argument
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPositional_argument" ):
                 listener.enterPositional_argument(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPositional_argument" ):
                 listener.exitPositional_argument(self)
 
 
@@ -25366,11 +25645,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_named_argument_list
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNamed_argument_list" ):
                 listener.enterNamed_argument_list(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNamed_argument_list" ):
                 listener.exitNamed_argument_list(self)
 
 
@@ -25426,11 +25705,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_named_argument
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterNamed_argument" ):
                 listener.enterNamed_argument(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitNamed_argument" ):
                 listener.exitNamed_argument(self)
 
 
@@ -25470,11 +25749,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_attribute_argument_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAttribute_argument_expression" ):
                 listener.enterAttribute_argument_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAttribute_argument_expression" ):
                 listener.exitAttribute_argument_expression(self)
 
 
@@ -25509,11 +25788,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_modifier_unsafe" ):
                 listener.enterClass_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_modifier_unsafe" ):
                 listener.exitClass_modifier_unsafe(self)
 
 
@@ -25548,11 +25827,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_modifier_unsafe" ):
                 listener.enterStruct_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_modifier_unsafe" ):
                 listener.exitStruct_modifier_unsafe(self)
 
 
@@ -25587,11 +25866,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_modifier_unsafe" ):
                 listener.enterInterface_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_modifier_unsafe" ):
                 listener.exitInterface_modifier_unsafe(self)
 
 
@@ -25626,11 +25905,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_delegate_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDelegate_modifier_unsafe" ):
                 listener.enterDelegate_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDelegate_modifier_unsafe" ):
                 listener.exitDelegate_modifier_unsafe(self)
 
 
@@ -25665,11 +25944,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_field_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterField_modifier_unsafe" ):
                 listener.enterField_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitField_modifier_unsafe" ):
                 listener.exitField_modifier_unsafe(self)
 
 
@@ -25704,11 +25983,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_modifier_unsafe" ):
                 listener.enterMethod_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_modifier_unsafe" ):
                 listener.exitMethod_modifier_unsafe(self)
 
 
@@ -25743,11 +26022,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_property_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterProperty_modifier_unsafe" ):
                 listener.enterProperty_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitProperty_modifier_unsafe" ):
                 listener.exitProperty_modifier_unsafe(self)
 
 
@@ -25782,11 +26061,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_event_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEvent_modifier_unsafe" ):
                 listener.enterEvent_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEvent_modifier_unsafe" ):
                 listener.exitEvent_modifier_unsafe(self)
 
 
@@ -25821,11 +26100,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_indexer_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIndexer_modifier_unsafe" ):
                 listener.enterIndexer_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIndexer_modifier_unsafe" ):
                 listener.exitIndexer_modifier_unsafe(self)
 
 
@@ -25860,11 +26139,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_operator_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOperator_modifier_unsafe" ):
                 listener.enterOperator_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOperator_modifier_unsafe" ):
                 listener.exitOperator_modifier_unsafe(self)
 
 
@@ -25899,11 +26178,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constructor_modifier_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstructor_modifier_unsafe" ):
                 listener.enterConstructor_modifier_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstructor_modifier_unsafe" ):
                 listener.exitConstructor_modifier_unsafe(self)
 
 
@@ -25962,11 +26241,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_destructor_declaration_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDestructor_declaration_unsafe" ):
                 listener.enterDestructor_declaration_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDestructor_declaration_unsafe" ):
                 listener.exitDestructor_declaration_unsafe(self)
 
 
@@ -25980,6 +26259,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3381
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3380
@@ -25987,9 +26267,11 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3391
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,361,self._ctx)
             if la_ == 1:
                 self.state = 3384
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.EXTERN:
                     self.state = 3383
@@ -25997,6 +26279,7 @@ class CSharp4Parser ( Parser ):
 
 
                 self.state = 3387
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.UNSAFE:
                     self.state = 3386
@@ -26050,11 +26333,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_static_constructor_modifiers_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStatic_constructor_modifiers_unsafe" ):
                 listener.enterStatic_constructor_modifiers_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStatic_constructor_modifiers_unsafe" ):
                 listener.exitStatic_constructor_modifiers_unsafe(self)
 
 
@@ -26067,10 +26350,12 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 3423
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,363,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 3400
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==CSharp4Parser.EXTERN or _la==CSharp4Parser.UNSAFE:
                     self.state = 3399
@@ -26078,6 +26363,7 @@ class CSharp4Parser ( Parser ):
                     if not(_la==CSharp4Parser.EXTERN or _la==CSharp4Parser.UNSAFE):
                         self._errHandler.recoverInline(self)
                     else:
+                        self._errHandler.reportMatch(self)
                         self.consume()
 
 
@@ -26134,6 +26420,7 @@ class CSharp4Parser ( Parser ):
                 if not(_la==CSharp4Parser.EXTERN or _la==CSharp4Parser.UNSAFE):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
                 pass
 
@@ -26184,11 +26471,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_embedded_statement_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEmbedded_statement_unsafe" ):
                 listener.enterEmbedded_statement_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEmbedded_statement_unsafe" ):
                 listener.exitEmbedded_statement_unsafe(self)
 
 
@@ -26200,17 +26487,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 664, self.RULE_embedded_statement_unsafe)
         try:
             self.state = 3427
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.UNSAFE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 3425
                 self.unsafe_statement()
-
+                pass
             elif token in [CSharp4Parser.FIXED]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 3426
                 self.fixed_statement()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -26239,11 +26527,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_unsafe_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUnsafe_statement" ):
                 listener.enterUnsafe_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUnsafe_statement" ):
                 listener.exitUnsafe_statement(self)
 
 
@@ -26281,11 +26569,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_type_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterType_unsafe" ):
                 listener.enterType_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitType_unsafe" ):
                 listener.exitType_unsafe(self)
 
 
@@ -26344,11 +26632,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_pointer_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPointer_type" ):
                 listener.enterPointer_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPointer_type" ):
                 listener.exitPointer_type(self)
 
 
@@ -26361,6 +26649,7 @@ class CSharp4Parser ( Parser ):
         self._la = 0 # Token type
         try:
             self.state = 3456
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.BOOL, CSharp4Parser.BYTE, CSharp4Parser.CHAR, CSharp4Parser.DECIMAL, CSharp4Parser.DOUBLE, CSharp4Parser.FLOAT, CSharp4Parser.INT, CSharp4Parser.LONG, CSharp4Parser.SBYTE, CSharp4Parser.SHORT, CSharp4Parser.UINT, CSharp4Parser.ULONG, CSharp4Parser.USHORT]:
                 self.enterOuterAlt(localctx, 1)
@@ -26371,15 +26660,16 @@ class CSharp4Parser ( Parser ):
                 _la = self._input.LA(1)
                 while _la==CSharp4Parser.OPEN_BRACKET or _la==CSharp4Parser.INTERR:
                     self.state = 3437
+                    self._errHandler.sync(self)
                     token = self._input.LA(1)
                     if token in [CSharp4Parser.OPEN_BRACKET]:
                         self.state = 3435
                         self.rank_specifier()
-
+                        pass
                     elif token in [CSharp4Parser.INTERR]:
                         self.state = 3436
                         self.match(CSharp4Parser.INTERR)
-
+                        pass
                     else:
                         raise NoViableAltException(self)
 
@@ -26389,7 +26679,7 @@ class CSharp4Parser ( Parser ):
 
                 self.state = 3442
                 self.match(CSharp4Parser.STAR)
-
+                pass
             elif token in [CSharp4Parser.ADD, CSharp4Parser.ALIAS, CSharp4Parser.ARGLIST, CSharp4Parser.ASCENDING, CSharp4Parser.BY, CSharp4Parser.DESCENDING, CSharp4Parser.DYNAMIC, CSharp4Parser.EQUALS, CSharp4Parser.FROM, CSharp4Parser.GET, CSharp4Parser.GROUP, CSharp4Parser.INTO, CSharp4Parser.JOIN, CSharp4Parser.LET, CSharp4Parser.OBJECT, CSharp4Parser.ON, CSharp4Parser.ORDERBY, CSharp4Parser.PARTIAL, CSharp4Parser.REMOVE, CSharp4Parser.SELECT, CSharp4Parser.SET, CSharp4Parser.STRING, CSharp4Parser.WHERE, CSharp4Parser.YIELD, CSharp4Parser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 3444
@@ -26399,15 +26689,16 @@ class CSharp4Parser ( Parser ):
                 _la = self._input.LA(1)
                 while _la==CSharp4Parser.OPEN_BRACKET or _la==CSharp4Parser.INTERR:
                     self.state = 3447
+                    self._errHandler.sync(self)
                     token = self._input.LA(1)
                     if token in [CSharp4Parser.OPEN_BRACKET]:
                         self.state = 3445
                         self.rank_specifier()
-
+                        pass
                     elif token in [CSharp4Parser.INTERR]:
                         self.state = 3446
                         self.match(CSharp4Parser.INTERR)
-
+                        pass
                     else:
                         raise NoViableAltException(self)
 
@@ -26417,14 +26708,14 @@ class CSharp4Parser ( Parser ):
 
                 self.state = 3452
                 self.match(CSharp4Parser.STAR)
-
+                pass
             elif token in [CSharp4Parser.VOID]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 3454
                 self.match(CSharp4Parser.VOID)
                 self.state = 3455
                 self.match(CSharp4Parser.STAR)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -26450,11 +26741,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_unmanaged_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUnmanaged_type" ):
                 listener.enterUnmanaged_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUnmanaged_type" ):
                 listener.exitUnmanaged_type(self)
 
 
@@ -26490,11 +26781,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_primary_no_array_creation_expression_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPrimary_no_array_creation_expression_unsafe" ):
                 listener.enterPrimary_no_array_creation_expression_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPrimary_no_array_creation_expression_unsafe" ):
                 listener.exitPrimary_no_array_creation_expression_unsafe(self)
 
 
@@ -26534,11 +26825,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_unary_expression_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterUnary_expression_unsafe" ):
                 listener.enterUnary_expression_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitUnary_expression_unsafe" ):
                 listener.exitUnary_expression_unsafe(self)
 
 
@@ -26550,17 +26841,18 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 676, self.RULE_unary_expression_unsafe)
         try:
             self.state = 3464
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.STAR]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 3462
                 self.pointer_indirection_expression()
-
+                pass
             elif token in [CSharp4Parser.AMP]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 3463
                 self.addressof_expression()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -26589,11 +26881,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_pointer_indirection_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPointer_indirection_expression" ):
                 listener.enterPointer_indirection_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPointer_indirection_expression" ):
                 listener.exitPointer_indirection_expression(self)
 
 
@@ -26634,11 +26926,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_addressof_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAddressof_expression" ):
                 listener.enterAddressof_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAddressof_expression" ):
                 listener.exitAddressof_expression(self)
 
 
@@ -26685,11 +26977,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_sizeof_expression
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSizeof_expression" ):
                 listener.enterSizeof_expression(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSizeof_expression" ):
                 listener.exitSizeof_expression(self)
 
 
@@ -26748,11 +27040,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_statement
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_statement" ):
                 listener.enterFixed_statement(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_statement" ):
                 listener.exitFixed_statement(self)
 
 
@@ -26807,11 +27099,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_pointer_declarators
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_pointer_declarators" ):
                 listener.enterFixed_pointer_declarators(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_pointer_declarators" ):
                 listener.exitFixed_pointer_declarators(self)
 
 
@@ -26867,11 +27159,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_pointer_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_pointer_declarator" ):
                 listener.enterFixed_pointer_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_pointer_declarator" ):
                 listener.exitFixed_pointer_declarator(self)
 
 
@@ -26918,11 +27210,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_pointer_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_pointer_initializer" ):
                 listener.enterFixed_pointer_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_pointer_initializer" ):
                 listener.exitFixed_pointer_initializer(self)
 
 
@@ -26934,6 +27226,7 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 690, self.RULE_fixed_pointer_initializer)
         try:
             self.state = 3499
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,372,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -26972,11 +27265,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_member_declaration_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_member_declaration_unsafe" ):
                 listener.enterStruct_member_declaration_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_member_declaration_unsafe" ):
                 listener.exitStruct_member_declaration_unsafe(self)
 
 
@@ -27030,11 +27323,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_size_buffer_declaration
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_size_buffer_declaration" ):
                 listener.enterFixed_size_buffer_declaration(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_size_buffer_declaration" ):
                 listener.exitFixed_size_buffer_declaration(self)
 
 
@@ -27048,6 +27341,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3504
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACKET:
                 self.state = 3503
@@ -27055,6 +27349,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3507
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if ((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.NEW - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)) | (1 << (CSharp4Parser.PUBLIC - 55)) | (1 << (CSharp4Parser.UNSAFE - 55)))) != 0):
                 self.state = 3506
@@ -27094,11 +27389,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_size_buffer_modifiers
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_size_buffer_modifiers" ):
                 listener.enterFixed_size_buffer_modifiers(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_size_buffer_modifiers" ):
                 listener.exitFixed_size_buffer_modifiers(self)
 
 
@@ -27159,11 +27454,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_size_buffer_modifier
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_size_buffer_modifier" ):
                 listener.enterFixed_size_buffer_modifier(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_size_buffer_modifier" ):
                 listener.exitFixed_size_buffer_modifier(self)
 
 
@@ -27181,6 +27476,7 @@ class CSharp4Parser ( Parser ):
             if not(((((_la - 55)) & ~0x3f) == 0 and ((1 << (_la - 55)) & ((1 << (CSharp4Parser.INTERNAL - 55)) | (1 << (CSharp4Parser.NEW - 55)) | (1 << (CSharp4Parser.PRIVATE - 55)) | (1 << (CSharp4Parser.PROTECTED - 55)) | (1 << (CSharp4Parser.PUBLIC - 55)) | (1 << (CSharp4Parser.UNSAFE - 55)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -27204,11 +27500,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_buffer_element_type
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBuffer_element_type" ):
                 listener.enterBuffer_element_type(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBuffer_element_type" ):
                 listener.exitBuffer_element_type(self)
 
 
@@ -27247,11 +27543,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_size_buffer_declarators
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_size_buffer_declarators" ):
                 listener.enterFixed_size_buffer_declarators(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_size_buffer_declarators" ):
                 listener.exitFixed_size_buffer_declarators(self)
 
 
@@ -27308,11 +27604,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_fixed_size_buffer_declarator
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFixed_size_buffer_declarator" ):
                 listener.enterFixed_size_buffer_declarator(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFixed_size_buffer_declarator" ):
                 listener.exitFixed_size_buffer_declarator(self)
 
 
@@ -27354,11 +27650,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_local_variable_initializer_unsafe
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLocal_variable_initializer_unsafe" ):
                 listener.enterLocal_variable_initializer_unsafe(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLocal_variable_initializer_unsafe" ):
                 listener.exitLocal_variable_initializer_unsafe(self)
 
 
@@ -27407,11 +27703,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_stackalloc_initializer
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStackalloc_initializer" ):
                 listener.enterStackalloc_initializer(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStackalloc_initializer" ):
                 listener.exitStackalloc_initializer(self)
 
 
@@ -27454,11 +27750,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_from_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterFrom_contextual_keyword" ):
                 listener.enterFrom_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitFrom_contextual_keyword" ):
                 listener.exitFrom_contextual_keyword(self)
 
 
@@ -27493,11 +27789,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_let_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLet_contextual_keyword" ):
                 listener.enterLet_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLet_contextual_keyword" ):
                 listener.exitLet_contextual_keyword(self)
 
 
@@ -27532,11 +27828,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_where_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterWhere_contextual_keyword" ):
                 listener.enterWhere_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitWhere_contextual_keyword" ):
                 listener.exitWhere_contextual_keyword(self)
 
 
@@ -27571,11 +27867,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_join_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterJoin_contextual_keyword" ):
                 listener.enterJoin_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitJoin_contextual_keyword" ):
                 listener.exitJoin_contextual_keyword(self)
 
 
@@ -27610,11 +27906,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_on_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOn_contextual_keyword" ):
                 listener.enterOn_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOn_contextual_keyword" ):
                 listener.exitOn_contextual_keyword(self)
 
 
@@ -27649,11 +27945,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_equals_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEquals_contextual_keyword" ):
                 listener.enterEquals_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEquals_contextual_keyword" ):
                 listener.exitEquals_contextual_keyword(self)
 
 
@@ -27688,11 +27984,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_into_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInto_contextual_keyword" ):
                 listener.enterInto_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInto_contextual_keyword" ):
                 listener.exitInto_contextual_keyword(self)
 
 
@@ -27727,11 +28023,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_orderby_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOrderby_contextual_keyword" ):
                 listener.enterOrderby_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOrderby_contextual_keyword" ):
                 listener.exitOrderby_contextual_keyword(self)
 
 
@@ -27766,11 +28062,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_ascending_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAscending_contextual_keyword" ):
                 listener.enterAscending_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAscending_contextual_keyword" ):
                 listener.exitAscending_contextual_keyword(self)
 
 
@@ -27805,11 +28101,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_descending_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDescending_contextual_keyword" ):
                 listener.enterDescending_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDescending_contextual_keyword" ):
                 listener.exitDescending_contextual_keyword(self)
 
 
@@ -27844,11 +28140,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_select_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSelect_contextual_keyword" ):
                 listener.enterSelect_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSelect_contextual_keyword" ):
                 listener.exitSelect_contextual_keyword(self)
 
 
@@ -27883,11 +28179,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_group_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGroup_contextual_keyword" ):
                 listener.enterGroup_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGroup_contextual_keyword" ):
                 listener.exitGroup_contextual_keyword(self)
 
 
@@ -27922,11 +28218,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_by_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBy_contextual_keyword" ):
                 listener.enterBy_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBy_contextual_keyword" ):
                 listener.exitBy_contextual_keyword(self)
 
 
@@ -27961,11 +28257,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_partial_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterPartial_contextual_keyword" ):
                 listener.enterPartial_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitPartial_contextual_keyword" ):
                 listener.exitPartial_contextual_keyword(self)
 
 
@@ -28000,11 +28296,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_alias_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAlias_contextual_keyword" ):
                 listener.enterAlias_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAlias_contextual_keyword" ):
                 listener.exitAlias_contextual_keyword(self)
 
 
@@ -28039,11 +28335,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_yield_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterYield_contextual_keyword" ):
                 listener.enterYield_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitYield_contextual_keyword" ):
                 listener.exitYield_contextual_keyword(self)
 
 
@@ -28078,11 +28374,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_get_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterGet_contextual_keyword" ):
                 listener.enterGet_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitGet_contextual_keyword" ):
                 listener.exitGet_contextual_keyword(self)
 
 
@@ -28117,11 +28413,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_set_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterSet_contextual_keyword" ):
                 listener.enterSet_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitSet_contextual_keyword" ):
                 listener.exitSet_contextual_keyword(self)
 
 
@@ -28156,11 +28452,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_add_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterAdd_contextual_keyword" ):
                 listener.enterAdd_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitAdd_contextual_keyword" ):
                 listener.exitAdd_contextual_keyword(self)
 
 
@@ -28195,11 +28491,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_remove_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterRemove_contextual_keyword" ):
                 listener.enterRemove_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitRemove_contextual_keyword" ):
                 listener.exitRemove_contextual_keyword(self)
 
 
@@ -28234,11 +28530,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_dynamic_contextual_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDynamic_contextual_keyword" ):
                 listener.enterDynamic_contextual_keyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDynamic_contextual_keyword" ):
                 listener.exitDynamic_contextual_keyword(self)
 
 
@@ -28273,11 +28569,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_arglist
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterArglist" ):
                 listener.enterArglist(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitArglist" ):
                 listener.exitArglist(self)
 
 
@@ -28317,11 +28613,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_right_arrow
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterRight_arrow" ):
                 listener.enterRight_arrow(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitRight_arrow" ):
                 listener.exitRight_arrow(self)
 
 
@@ -28367,11 +28663,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_right_shift
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterRight_shift" ):
                 listener.enterRight_shift(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitRight_shift" ):
                 listener.exitRight_shift(self)
 
 
@@ -28417,11 +28713,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_right_shift_assignment
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterRight_shift_assignment" ):
                 listener.enterRight_shift_assignment(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitRight_shift_assignment" ):
                 listener.exitRight_shift_assignment(self)
 
 
@@ -28478,11 +28774,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_literal
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterLiteral" ):
                 listener.enterLiteral(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitLiteral" ):
                 listener.exitLiteral(self)
 
 
@@ -28494,37 +28790,38 @@ class CSharp4Parser ( Parser ):
         self.enterRule(localctx, 760, self.RULE_literal)
         try:
             self.state = 3603
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [CSharp4Parser.FALSE, CSharp4Parser.TRUE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 3597
                 self.boolean_literal()
-
+                pass
             elif token in [CSharp4Parser.INTEGER_LITERAL]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 3598
                 self.match(CSharp4Parser.INTEGER_LITERAL)
-
+                pass
             elif token in [CSharp4Parser.REAL_LITERAL]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 3599
                 self.match(CSharp4Parser.REAL_LITERAL)
-
+                pass
             elif token in [CSharp4Parser.CHARACTER_LITERAL]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 3600
                 self.match(CSharp4Parser.CHARACTER_LITERAL)
-
+                pass
             elif token in [CSharp4Parser.STRING_LITERAL]:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 3601
                 self.match(CSharp4Parser.STRING_LITERAL)
-
+                pass
             elif token in [CSharp4Parser.NULL]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 3602
                 self.match(CSharp4Parser.NULL)
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -28552,11 +28849,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_boolean_literal
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterBoolean_literal" ):
                 listener.enterBoolean_literal(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitBoolean_literal" ):
                 listener.exitBoolean_literal(self)
 
 
@@ -28574,6 +28871,7 @@ class CSharp4Parser ( Parser ):
             if not(_la==CSharp4Parser.FALSE or _la==CSharp4Parser.TRUE):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -28824,11 +29122,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_keyword
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterKeyword" ):
                 listener.enterKeyword(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitKeyword" ):
                 listener.exitKeyword(self)
 
 
@@ -28846,6 +29144,7 @@ class CSharp4Parser ( Parser ):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ABSTRACT) | (1 << CSharp4Parser.AS) | (1 << CSharp4Parser.BASE) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BREAK) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CASE) | (1 << CSharp4Parser.CATCH) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.CHECKED) | (1 << CSharp4Parser.CLASS) | (1 << CSharp4Parser.CONST) | (1 << CSharp4Parser.CONTINUE) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DEFAULT) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.DO) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.ELSE) | (1 << CSharp4Parser.ENUM) | (1 << CSharp4Parser.EVENT) | (1 << CSharp4Parser.EXPLICIT) | (1 << CSharp4Parser.EXTERN) | (1 << CSharp4Parser.FALSE) | (1 << CSharp4Parser.FINALLY) | (1 << CSharp4Parser.FIXED) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FOR) | (1 << CSharp4Parser.FOREACH) | (1 << CSharp4Parser.GOTO) | (1 << CSharp4Parser.IF) | (1 << CSharp4Parser.IMPLICIT) | (1 << CSharp4Parser.IN) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTERFACE) | (1 << CSharp4Parser.INTERNAL) | (1 << CSharp4Parser.IS) | (1 << CSharp4Parser.LOCK) | (1 << CSharp4Parser.LONG) | (1 << CSharp4Parser.NAMESPACE) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CSharp4Parser.NULL - 64)) | (1 << (CSharp4Parser.OBJECT - 64)) | (1 << (CSharp4Parser.OPERATOR - 64)) | (1 << (CSharp4Parser.OUT - 64)) | (1 << (CSharp4Parser.OVERRIDE - 64)) | (1 << (CSharp4Parser.PARAMS - 64)) | (1 << (CSharp4Parser.PRIVATE - 64)) | (1 << (CSharp4Parser.PROTECTED - 64)) | (1 << (CSharp4Parser.PUBLIC - 64)) | (1 << (CSharp4Parser.READONLY - 64)) | (1 << (CSharp4Parser.REF - 64)) | (1 << (CSharp4Parser.RETURN - 64)) | (1 << (CSharp4Parser.SBYTE - 64)) | (1 << (CSharp4Parser.SEALED - 64)) | (1 << (CSharp4Parser.SHORT - 64)) | (1 << (CSharp4Parser.SIZEOF - 64)) | (1 << (CSharp4Parser.STACKALLOC - 64)) | (1 << (CSharp4Parser.STATIC - 64)) | (1 << (CSharp4Parser.STRING - 64)) | (1 << (CSharp4Parser.STRUCT - 64)) | (1 << (CSharp4Parser.SWITCH - 64)) | (1 << (CSharp4Parser.THIS - 64)) | (1 << (CSharp4Parser.THROW - 64)) | (1 << (CSharp4Parser.TRUE - 64)) | (1 << (CSharp4Parser.TRY - 64)) | (1 << (CSharp4Parser.TYPEOF - 64)) | (1 << (CSharp4Parser.UINT - 64)) | (1 << (CSharp4Parser.ULONG - 64)) | (1 << (CSharp4Parser.UNCHECKED - 64)) | (1 << (CSharp4Parser.UNSAFE - 64)) | (1 << (CSharp4Parser.USHORT - 64)) | (1 << (CSharp4Parser.USING - 64)) | (1 << (CSharp4Parser.VIRTUAL - 64)) | (1 << (CSharp4Parser.VOID - 64)) | (1 << (CSharp4Parser.VOLATILE - 64)) | (1 << (CSharp4Parser.WHILE - 64)))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -28891,11 +29190,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_class_definition
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterClass_definition" ):
                 listener.enterClass_definition(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitClass_definition" ):
                 listener.exitClass_definition(self)
 
 
@@ -28913,6 +29212,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3610
             self.identifier()
             self.state = 3612
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 3611
@@ -28920,6 +29220,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3615
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 3614
@@ -28927,6 +29228,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3618
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 3617
@@ -28936,6 +29238,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3620
             self.class_body()
             self.state = 3622
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.SEMICOLON:
                 self.state = 3621
@@ -28986,11 +29289,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_struct_definition
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterStruct_definition" ):
                 listener.enterStruct_definition(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitStruct_definition" ):
                 listener.exitStruct_definition(self)
 
 
@@ -29008,6 +29311,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3625
             self.identifier()
             self.state = 3627
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 3626
@@ -29015,6 +29319,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3630
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 3629
@@ -29022,6 +29327,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3633
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 3632
@@ -29031,6 +29337,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3635
             self.struct_body()
             self.state = 3637
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.SEMICOLON:
                 self.state = 3636
@@ -29081,11 +29388,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_definition
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_definition" ):
                 listener.enterInterface_definition(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_definition" ):
                 listener.exitInterface_definition(self)
 
 
@@ -29103,6 +29410,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3640
             self.identifier()
             self.state = 3642
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 3641
@@ -29110,6 +29418,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3645
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 3644
@@ -29117,6 +29426,7 @@ class CSharp4Parser ( Parser ):
 
 
             self.state = 3648
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 3647
@@ -29126,6 +29436,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3650
             self.interface_body()
             self.state = 3652
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.SEMICOLON:
                 self.state = 3651
@@ -29168,11 +29479,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_enum_definition
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEnum_definition" ):
                 listener.enterEnum_definition(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEnum_definition" ):
                 listener.exitEnum_definition(self)
 
 
@@ -29190,6 +29501,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3655
             self.identifier()
             self.state = 3657
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 3656
@@ -29199,6 +29511,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3659
             self.enum_body()
             self.state = 3661
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.SEMICOLON:
                 self.state = 3660
@@ -29255,11 +29568,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_delegate_definition
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDelegate_definition" ):
                 listener.enterDelegate_definition(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDelegate_definition" ):
                 listener.exitDelegate_definition(self)
 
 
@@ -29279,6 +29592,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3665
             self.identifier()
             self.state = 3667
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 3666
@@ -29288,6 +29602,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3669
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 3671
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 3670
@@ -29297,6 +29612,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3673
             self.match(CSharp4Parser.CLOSE_PARENS)
             self.state = 3675
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 3674
@@ -29351,11 +29667,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_event_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterEvent_declaration2" ):
                 listener.enterEvent_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitEvent_declaration2" ):
                 listener.exitEvent_declaration2(self)
 
 
@@ -29372,6 +29688,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3680
             self.any_type()
             self.state = 3689
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,395,self._ctx)
             if la_ == 1:
                 self.state = 3681
@@ -29417,11 +29734,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_field_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterField_declaration2" ):
                 listener.enterField_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitField_declaration2" ):
                 listener.exitField_declaration2(self)
 
 
@@ -29469,11 +29786,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_property_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterProperty_declaration2" ):
                 listener.enterProperty_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitProperty_declaration2" ):
                 listener.exitProperty_declaration2(self)
 
 
@@ -29525,11 +29842,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constant_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstant_declaration2" ):
                 listener.enterConstant_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstant_declaration2" ):
                 listener.exitConstant_declaration2(self)
 
 
@@ -29590,11 +29907,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_indexer_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterIndexer_declaration2" ):
                 listener.enterIndexer_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitIndexer_declaration2" ):
                 listener.exitIndexer_declaration2(self)
 
 
@@ -29655,11 +29972,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_destructor_definition
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterDestructor_definition" ):
                 listener.enterDestructor_definition(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitDestructor_definition" ):
                 listener.exitDestructor_definition(self)
 
 
@@ -29721,11 +30038,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_constructor_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterConstructor_declaration2" ):
                 listener.enterConstructor_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitConstructor_declaration2" ):
                 listener.exitConstructor_declaration2(self)
 
 
@@ -29743,6 +30060,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3719
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 3721
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 3720
@@ -29752,6 +30070,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3723
             self.match(CSharp4Parser.CLOSE_PARENS)
             self.state = 3725
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COLON:
                 self.state = 3724
@@ -29804,11 +30123,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_declaration2" ):
                 listener.enterMethod_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_declaration2" ):
                 listener.exitMethod_declaration2(self)
 
 
@@ -29824,6 +30143,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3729
             self.method_member_name()
             self.state = 3731
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 3730
@@ -29833,6 +30153,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3733
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 3735
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 3734
@@ -29842,6 +30163,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3737
             self.match(CSharp4Parser.CLOSE_PARENS)
             self.state = 3739
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 3738
@@ -29872,11 +30194,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_member_name
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_member_name" ):
                 listener.enterMethod_member_name(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_member_name" ):
                 listener.exitMethod_member_name(self)
 
 
@@ -29931,11 +30253,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_member_name2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_member_name2" ):
                 listener.enterMethod_member_name2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_member_name2" ):
                 listener.exitMethod_member_name2(self)
 
 
@@ -29948,6 +30270,7 @@ class CSharp4Parser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 3750
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,401,self._ctx)
             if la_ == 1:
                 self.state = 3745
@@ -30031,11 +30354,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_operator_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterOperator_declaration2" ):
                 listener.enterOperator_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitOperator_declaration2" ):
                 listener.exitOperator_declaration2(self)
 
 
@@ -30059,6 +30382,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3765
             self.identifier()
             self.state = 3770
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.COMMA:
                 self.state = 3766
@@ -30116,11 +30440,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_method_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_method_declaration2" ):
                 listener.enterInterface_method_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_method_declaration2" ):
                 listener.exitInterface_method_declaration2(self)
 
 
@@ -30136,6 +30460,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3775
             self.identifier()
             self.state = 3777
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.LT:
                 self.state = 3776
@@ -30145,6 +30470,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3779
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 3781
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG))) != 0) or ((((_la - 65)) & ~0x3f) == 0 and ((1 << (_la - 65)) & ((1 << (CSharp4Parser.OBJECT - 65)) | (1 << (CSharp4Parser.ON - 65)) | (1 << (CSharp4Parser.ORDERBY - 65)) | (1 << (CSharp4Parser.OUT - 65)) | (1 << (CSharp4Parser.PARAMS - 65)) | (1 << (CSharp4Parser.PARTIAL - 65)) | (1 << (CSharp4Parser.REF - 65)) | (1 << (CSharp4Parser.REMOVE - 65)) | (1 << (CSharp4Parser.SBYTE - 65)) | (1 << (CSharp4Parser.SELECT - 65)) | (1 << (CSharp4Parser.SET - 65)) | (1 << (CSharp4Parser.SHORT - 65)) | (1 << (CSharp4Parser.STRING - 65)) | (1 << (CSharp4Parser.THIS - 65)) | (1 << (CSharp4Parser.UINT - 65)) | (1 << (CSharp4Parser.ULONG - 65)) | (1 << (CSharp4Parser.USHORT - 65)) | (1 << (CSharp4Parser.VOID - 65)) | (1 << (CSharp4Parser.WHERE - 65)) | (1 << (CSharp4Parser.YIELD - 65)) | (1 << (CSharp4Parser.IDENTIFIER - 65)) | (1 << (CSharp4Parser.OPEN_BRACKET - 65)))) != 0):
                 self.state = 3780
@@ -30154,6 +30480,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3783
             self.match(CSharp4Parser.CLOSE_PARENS)
             self.state = 3785
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.WHERE:
                 self.state = 3784
@@ -30194,11 +30521,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_property_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_property_declaration2" ):
                 listener.enterInterface_property_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_property_declaration2" ):
                 listener.exitInterface_property_declaration2(self)
 
 
@@ -30250,11 +30577,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_event_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_event_declaration2" ):
                 listener.enterInterface_event_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_event_declaration2" ):
                 listener.exitInterface_event_declaration2(self)
 
 
@@ -30315,11 +30642,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_interface_indexer_declaration2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterInterface_indexer_declaration2" ):
                 listener.enterInterface_indexer_declaration2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitInterface_indexer_declaration2" ):
                 listener.exitInterface_indexer_declaration2(self)
 
 
@@ -30374,11 +30701,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_member_access2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMember_access2" ):
                 listener.enterMember_access2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMember_access2" ):
                 listener.exitMember_access2(self)
 
 
@@ -30424,11 +30751,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_method_invocation2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterMethod_invocation2" ):
                 listener.enterMethod_invocation2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitMethod_invocation2" ):
                 listener.exitMethod_invocation2(self)
 
 
@@ -30444,6 +30771,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3811
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 3813
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BASE) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.CHECKED) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DEFAULT) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FALSE) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CSharp4Parser.NULL - 64)) | (1 << (CSharp4Parser.OBJECT - 64)) | (1 << (CSharp4Parser.ON - 64)) | (1 << (CSharp4Parser.ORDERBY - 64)) | (1 << (CSharp4Parser.OUT - 64)) | (1 << (CSharp4Parser.PARTIAL - 64)) | (1 << (CSharp4Parser.REF - 64)) | (1 << (CSharp4Parser.REMOVE - 64)) | (1 << (CSharp4Parser.SBYTE - 64)) | (1 << (CSharp4Parser.SELECT - 64)) | (1 << (CSharp4Parser.SET - 64)) | (1 << (CSharp4Parser.SHORT - 64)) | (1 << (CSharp4Parser.SIZEOF - 64)) | (1 << (CSharp4Parser.STRING - 64)) | (1 << (CSharp4Parser.THIS - 64)) | (1 << (CSharp4Parser.TRUE - 64)) | (1 << (CSharp4Parser.TYPEOF - 64)) | (1 << (CSharp4Parser.UINT - 64)) | (1 << (CSharp4Parser.ULONG - 64)) | (1 << (CSharp4Parser.UNCHECKED - 64)) | (1 << (CSharp4Parser.USHORT - 64)) | (1 << (CSharp4Parser.WHERE - 64)) | (1 << (CSharp4Parser.YIELD - 64)) | (1 << (CSharp4Parser.IDENTIFIER - 64)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 64)) | (1 << (CSharp4Parser.REAL_LITERAL - 64)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 64)) | (1 << (CSharp4Parser.STRING_LITERAL - 64)) | (1 << (CSharp4Parser.OPEN_PARENS - 64)) | (1 << (CSharp4Parser.PLUS - 64)) | (1 << (CSharp4Parser.MINUS - 64)) | (1 << (CSharp4Parser.STAR - 64)))) != 0) or ((((_la - 129)) & ~0x3f) == 0 and ((1 << (_la - 129)) & ((1 << (CSharp4Parser.AMP - 129)) | (1 << (CSharp4Parser.BANG - 129)) | (1 << (CSharp4Parser.TILDE - 129)) | (1 << (CSharp4Parser.OP_INC - 129)) | (1 << (CSharp4Parser.OP_DEC - 129)))) != 0):
                 self.state = 3812
@@ -30484,11 +30812,11 @@ class CSharp4Parser ( Parser ):
             return CSharp4Parser.RULE_object_creation_expression2
 
         def enterRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "enterObject_creation_expression2" ):
                 listener.enterObject_creation_expression2(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if isinstance( listener, CSharp4Listener ):
+            if hasattr( listener, "exitObject_creation_expression2" ):
                 listener.exitObject_creation_expression2(self)
 
 
@@ -30504,6 +30832,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3817
             self.match(CSharp4Parser.OPEN_PARENS)
             self.state = 3819
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << CSharp4Parser.ADD) | (1 << CSharp4Parser.ALIAS) | (1 << CSharp4Parser.ARGLIST) | (1 << CSharp4Parser.ASCENDING) | (1 << CSharp4Parser.BASE) | (1 << CSharp4Parser.BOOL) | (1 << CSharp4Parser.BY) | (1 << CSharp4Parser.BYTE) | (1 << CSharp4Parser.CHAR) | (1 << CSharp4Parser.CHECKED) | (1 << CSharp4Parser.DECIMAL) | (1 << CSharp4Parser.DEFAULT) | (1 << CSharp4Parser.DELEGATE) | (1 << CSharp4Parser.DESCENDING) | (1 << CSharp4Parser.DOUBLE) | (1 << CSharp4Parser.DYNAMIC) | (1 << CSharp4Parser.EQUALS) | (1 << CSharp4Parser.FALSE) | (1 << CSharp4Parser.FLOAT) | (1 << CSharp4Parser.FROM) | (1 << CSharp4Parser.GET) | (1 << CSharp4Parser.GROUP) | (1 << CSharp4Parser.INT) | (1 << CSharp4Parser.INTO) | (1 << CSharp4Parser.JOIN) | (1 << CSharp4Parser.LET) | (1 << CSharp4Parser.LONG) | (1 << CSharp4Parser.NEW))) != 0) or ((((_la - 64)) & ~0x3f) == 0 and ((1 << (_la - 64)) & ((1 << (CSharp4Parser.NULL - 64)) | (1 << (CSharp4Parser.OBJECT - 64)) | (1 << (CSharp4Parser.ON - 64)) | (1 << (CSharp4Parser.ORDERBY - 64)) | (1 << (CSharp4Parser.OUT - 64)) | (1 << (CSharp4Parser.PARTIAL - 64)) | (1 << (CSharp4Parser.REF - 64)) | (1 << (CSharp4Parser.REMOVE - 64)) | (1 << (CSharp4Parser.SBYTE - 64)) | (1 << (CSharp4Parser.SELECT - 64)) | (1 << (CSharp4Parser.SET - 64)) | (1 << (CSharp4Parser.SHORT - 64)) | (1 << (CSharp4Parser.SIZEOF - 64)) | (1 << (CSharp4Parser.STRING - 64)) | (1 << (CSharp4Parser.THIS - 64)) | (1 << (CSharp4Parser.TRUE - 64)) | (1 << (CSharp4Parser.TYPEOF - 64)) | (1 << (CSharp4Parser.UINT - 64)) | (1 << (CSharp4Parser.ULONG - 64)) | (1 << (CSharp4Parser.UNCHECKED - 64)) | (1 << (CSharp4Parser.USHORT - 64)) | (1 << (CSharp4Parser.WHERE - 64)) | (1 << (CSharp4Parser.YIELD - 64)) | (1 << (CSharp4Parser.IDENTIFIER - 64)) | (1 << (CSharp4Parser.INTEGER_LITERAL - 64)) | (1 << (CSharp4Parser.REAL_LITERAL - 64)) | (1 << (CSharp4Parser.CHARACTER_LITERAL - 64)) | (1 << (CSharp4Parser.STRING_LITERAL - 64)) | (1 << (CSharp4Parser.OPEN_PARENS - 64)) | (1 << (CSharp4Parser.PLUS - 64)) | (1 << (CSharp4Parser.MINUS - 64)) | (1 << (CSharp4Parser.STAR - 64)))) != 0) or ((((_la - 129)) & ~0x3f) == 0 and ((1 << (_la - 129)) & ((1 << (CSharp4Parser.AMP - 129)) | (1 << (CSharp4Parser.BANG - 129)) | (1 << (CSharp4Parser.TILDE - 129)) | (1 << (CSharp4Parser.OP_INC - 129)) | (1 << (CSharp4Parser.OP_DEC - 129)))) != 0):
                 self.state = 3818
@@ -30513,6 +30842,7 @@ class CSharp4Parser ( Parser ):
             self.state = 3821
             self.match(CSharp4Parser.CLOSE_PARENS)
             self.state = 3823
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==CSharp4Parser.OPEN_BRACE:
                 self.state = 3822
@@ -30555,6 +30885,7 @@ class CSharp4Parser ( Parser ):
             if predIndex == 2:
                 return (0 if localctx.first is None else localctx.first.tokenIndex) + 1 == (0 if localctx.second is None else localctx.second.tokenIndex)
          
+
 
 
 

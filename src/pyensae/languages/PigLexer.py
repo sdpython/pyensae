@@ -1,4 +1,4 @@
-# Generated from java-escape by ANTLR 4.5
+# Generated from src\pyensae\languages\Pig.g4 by ANTLR 4.6
 from antlr4 import *
 from io import StringIO
 
@@ -422,9 +422,9 @@ class PigLexer(Lexer):
     MINUS = 89
     QMARK = 90
 
-    modeNames = [u"DEFAULT_MODE"]
+    modeNames = ["DEFAULT_MODE"]
 
-    literalNames = [u"<INVALID>",
+    literalNames = ["<INVALID>",
                     "'define'", "'load'", "'filter'", "'foreach'", "'order'", "'arrange'",
                     "'distinct'", "'cogroup'", "'join'", "'cross'", "'union'", "'split'",
                     "'into'", "'if'", "'all'", "'any'", "'as'", "'by'", "'using'",
@@ -438,7 +438,7 @@ class PigLexer(Lexer):
                     "'$'", "':'", "';'", "'('", "')'", "'{'", "'}'", "'['", "']'",
                     "'#'", "'='", "','", "'.'", "'/'", "'%'", "'+'", "'-'", "'?'"]
 
-    symbolicNames = [u"<INVALID>",
+    symbolicNames = ["<INVALID>",
                      "DEFINE", "LOAD", "FILTER", "FOREACH", "ORDER", "ARRANGE", "DISTINCT",
                      "COGROUP", "JOIN", "CROSS", "UNION", "SPLIT", "INTO", "IF",
                      "ALL", "ANY", "AS", "BY", "USING", "INNER", "OUTER", "ONSCHEMA",
@@ -476,7 +476,7 @@ class PigLexer(Lexer):
 
     def __init__(self, input=None):
         super().__init__(input)
-        self.checkVersion("4.5")
+        self.checkVersion("4.6")
         self._interp = LexerATNSimulator(
             self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None

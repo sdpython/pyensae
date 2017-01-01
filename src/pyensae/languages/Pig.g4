@@ -2,34 +2,7 @@
 http://wiki.apache.org/pig/PigLexer
 http://wiki.apache.org/pig/PigParser
 
-There still some warnings.
-
-warning(125): Pig.g4:85:12: implicit definition of token FUNC in parser
-warning(125): Pig.g4:143:20: implicit definition of token START in parser
-warning(125): Pig.g4:148:12: implicit definition of token CAST_EXPR in parser
-warning(125): Pig.g4:184:12: implicit definition of token BIN_EXPR in parser
-warning(125): Pig.g4:222:6: implicit definition of token LONGINEGER in parser
-warning(125): Pig.g4:231:12: implicit definition of token MAP_VAL in parser
-warning(125): Pig.g4:236:12: implicit definition of token KEY_VAL_PAIR in parser
-warning(125): Pig.g4:245:6: implicit definition of token LEFT_CURLY in parser
-warning(125): Pig.g4:245:45: implicit definition of token RIGHT_CURLY in parser
-warning(125): Pig.g4:246:12: implicit definition of token BAG_VAL in parser
-error(134): Pig.g4:55:0: symbol type conflicts with generated code in target language or runtime
-error(134): Pig.g4:229:0: symbol map conflicts with generated code in target language or runtime
-error(134): Pig.g4:249:0: symbol tuple conflicts with generated code in target language or runtime
-error(134): Pig.g4:72:6: symbol tuple conflicts with generated code in target language or runtime
-error(134): Pig.g4:215:6: symbol map conflicts with generated code in target language or runtime
-error(134): Pig.g4:217:6: symbol tuple conflicts with generated code in target language or runtime
-error(134): Pig.g4:147:19: symbol type conflicts with generated code in target language or runtime
-error(134): Pig.g4:148:22: symbol type conflicts with generated code in target language or runtime
-error(134): Pig.g4:251:12: symbol tuple conflicts with generated code in target language or runtime
-error(134): Pig.g4:51:25: symbol type conflicts with generated code in target language or runtime
-error(134): Pig.g4:245:19: symbol tuple conflicts with generated code in target language or runtime
-error(134): Pig.g4:52:29: symbol type conflicts with generated code in target language or runtime
-error(134): Pig.g4:246:20: symbol tuple conflicts with generated code in target language or runtime
-error(134): Pig.g4:245:33: symbol tuple conflicts with generated code in target language or runtime
-
-
+A few types were replaced by <type_>.
 */
 
 grammar Pig;
@@ -78,11 +51,11 @@ tuple_def
     ;
 
 field 
-    : IDENTIFIER ( COLON type )?
-    | NOT ( field IDENTIFIER type? )
+    : IDENTIFIER ( COLON type_ )?
+    | NOT ( field IDENTIFIER type_? )
     ;
 
-type 
+type_ 
     : simple_type 
     | tuple_type 
     | bag_type 
@@ -99,7 +72,7 @@ simple_type
     ;
 
 tuple_type 
-    : tuple tuple_def
+    : tuple_ tuple_def
     ;
 
 bag_type 
@@ -174,8 +147,8 @@ multi_expr
     ;
 
 cast_expr 
-    : ( LEFT_PAREN type RIGHT_PAREN ) unary_expr
-    | NOT ( CAST_EXPR type unary_expr )
+    : ( LEFT_PAREN type_ RIGHT_PAREN ) unary_expr
+    | NOT ( CAST_EXPR type_ unary_expr )
     | unary_expr
     ;
 
@@ -242,9 +215,9 @@ infix_expr
 
 const_expr 
     : scalar 
-    | map 
+    | map_ 
     | bag 
-    | tuple
+    | tuple_
     ;
 
 scalar 
@@ -256,7 +229,7 @@ scalar
     | NULL
     ;
 
-map 
+map_ 
     : LEFT_BRACKET ( keyvalue ( COMMA keyvalue )* )? RIGHT_BRACKET
     | NOT ( MAP_VAL keyvalue+ )
     ;
@@ -272,13 +245,13 @@ string_val
     ;
 
 bag 
-    : LEFT_CURLY ( tuple ( COMMA tuple )* )? RIGHT_CURLY
-    | NOT ( BAG_VAL tuple+ )
+    : LEFT_CURLY ( tuple_ ( COMMA tuple_ )* )? RIGHT_CURLY
+    | NOT ( BAG_VAL tuple_+ )
     ;
 
-tuple 
+tuple_ 
     : LEFT_PAREN ( const_expr ( COMMA const_expr )* )? RIGHT_PAREN
-    | NOT ( tuple const_expr+ )
+    | NOT ( tuple_ const_expr+ )
     ;
 
 

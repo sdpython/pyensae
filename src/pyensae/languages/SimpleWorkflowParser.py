@@ -1,13 +1,7 @@
-# Generated from java-escape by ANTLR 4.5
+# Generated from src\pyensae\languages\SimpleWorkflow.g4 by ANTLR 4.6
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-package = globals().get("__package__", None)
-ischild = len(package) > 0 if package is not None else False
-if ischild:
-    from .SimpleWorkflowListener import SimpleWorkflowListener
-else:
-    from SimpleWorkflowListener import SimpleWorkflowListener
 
 
 def serializedATN():
@@ -131,7 +125,7 @@ def serializedATN():
 
 class SimpleWorkflowParser (Parser):
 
-    grammarFileName = "java-escape"
+    grammarFileName = "SimpleWorkflow.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -139,24 +133,24 @@ class SimpleWorkflowParser (Parser):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [u"<INVALID>", u"';'", u"'set'", u"'='", u"'for'", u"'('",
-                    u"'in'", u"')'", u"'{'", u"'}'", u"'if'", u"'else'",
-                    u"','", u"'+'", u"'-'", u"'*'", u"'/'", u"'%'", u"'&&'",
-                    u"'||'", u"'=='", u"'!='", u"'<='", u"'>='", u"'>'",
-                    u"'<'", u"'!'", u"'connect'", u"'to'", u"'->'", u"'.'",
-                    u"'flowmodule'", u"'flowdata'", u"'e'"]
+    literalNames = ["<INVALID>", "';'", "'set'", "'='", "'for'", "'('",
+                    "'in'", "')'", "'{'", "'}'", "'if'", "'else'", "','",
+                    "'+'", "'-'", "'*'", "'/'", "'%'", "'&&'", "'||'",
+                    "'=='", "'!='", "'<='", "'>='", "'>'", "'<'", "'!'",
+                    "'connect'", "'to'", "'->'", "'.'", "'flowmodule'",
+                    "'flowdata'", "'e'"]
 
-    symbolicNames = [u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                     u"<INVALID>", u"<INVALID>", u"<INVALID>", u"<INVALID>",
-                     u"<INVALID>", u"<INVALID>", u"Digits", u"Identifier",
-                     u"Sign", u"STRING", u"STRING_DOUBLE_QUOTE", u"STRING_QUOTE",
-                     u"LINE_COMMENT", u"WS"]
+    symbolicNames = ["<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "Digits", "Identifier",
+                     "Sign", "STRING", "STRING_DOUBLE_QUOTE", "STRING_QUOTE",
+                     "LINE_COMMENT", "WS"]
 
     RULE_parse = 0
     RULE_final_stmt = 1
@@ -246,7 +240,7 @@ class SimpleWorkflowParser (Parser):
 
     def __init__(self, input: TokenStream):
         super().__init__(input)
-        self.checkVersion("4.5")
+        self.checkVersion("4.6")
         self._interp = ParserATNSimulator(
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
@@ -270,11 +264,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_parse
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterParse"):
                 listener.enterParse(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitParse"):
                 listener.exitParse(self)
 
     def parse(self):
@@ -327,11 +321,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_final_stmt
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterFinal_stmt"):
                 listener.enterFinal_stmt(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitFinal_stmt"):
                 listener.exitFinal_stmt(self)
 
     def final_stmt(self):
@@ -341,27 +335,28 @@ class SimpleWorkflowParser (Parser):
         self.enterRule(localctx, 2, self.RULE_final_stmt)
         try:
             self.state = 76
+            self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [SimpleWorkflowParser.T__9]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 72
                 self.if_stmt()
-
+                pass
             elif token in [SimpleWorkflowParser.T__3]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 73
                 self.for_stmt()
-
+                pass
             elif token in [SimpleWorkflowParser.T__1]:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 74
                 self.affectation_stmt_comma()
-
+                pass
             elif token in [SimpleWorkflowParser.T__26, SimpleWorkflowParser.Identifier]:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 75
                 self.stmt_comma()
-
+                pass
             else:
                 raise NoViableAltException(self)
 
@@ -386,11 +381,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_affectation_stmt_comma
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterAffectation_stmt_comma"):
                 listener.enterAffectation_stmt_comma(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitAffectation_stmt_comma"):
                 listener.exitAffectation_stmt_comma(self)
 
     def affectation_stmt_comma(self):
@@ -428,11 +423,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_affectation_stmt
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterAffectation_stmt"):
                 listener.enterAffectation_stmt(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitAffectation_stmt"):
                 listener.exitAffectation_stmt(self)
 
     def affectation_stmt(self):
@@ -480,11 +475,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_for_stmt
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterFor_stmt"):
                 listener.enterFor_stmt(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitFor_stmt"):
                 listener.exitFor_stmt(self)
 
     def for_stmt(self):
@@ -550,11 +545,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_if_stmt
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterIf_stmt"):
                 listener.enterIf_stmt(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitIf_stmt"):
                 listener.exitIf_stmt(self)
 
     def if_stmt(self):
@@ -590,6 +585,7 @@ class SimpleWorkflowParser (Parser):
             self.state = 110
             self.match(SimpleWorkflowParser.T__8)
             self.state = 120
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == SimpleWorkflowParser.T__10:
                 self.state = 111
@@ -632,11 +628,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_evaluation_function
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterEvaluation_function"):
                 listener.enterEvaluation_function(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitEvaluation_function"):
                 listener.exitEvaluation_function(self)
 
     def evaluation_function(self):
@@ -675,11 +671,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_expression
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterExpression"):
                 listener.enterExpression(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitExpression"):
                 listener.exitExpression(self)
 
     def expression(self):
@@ -689,6 +685,7 @@ class SimpleWorkflowParser (Parser):
         self.enterRule(localctx, 14, self.RULE_expression)
         try:
             self.state = 129
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 6, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -745,11 +742,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_expression_no_binary
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterExpression_no_binary"):
                 listener.enterExpression_no_binary(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitExpression_no_binary"):
                 listener.exitExpression_no_binary(self)
 
     def expression_no_binary(self):
@@ -759,6 +756,7 @@ class SimpleWorkflowParser (Parser):
         self.enterRule(localctx, 16, self.RULE_expression_no_binary)
         try:
             self.state = 142
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 7, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -829,11 +827,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_function_call
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterFunction_call"):
                 listener.enterFunction_call(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitFunction_call"):
                 listener.exitFunction_call(self)
 
     def function_call(self):
@@ -849,6 +847,7 @@ class SimpleWorkflowParser (Parser):
             self.state = 145
             self.match(SimpleWorkflowParser.T__4)
             self.state = 147
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SimpleWorkflowParser.T__4) | (1 << SimpleWorkflowParser.T__12) | (1 << SimpleWorkflowParser.T__13) | (1 << SimpleWorkflowParser.T__25) | (1 << SimpleWorkflowParser.Digits) | (1 << SimpleWorkflowParser.Identifier) | (1 << SimpleWorkflowParser.Sign) | (1 << SimpleWorkflowParser.STRING))) != 0):
                 self.state = 146
@@ -889,11 +888,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_variable_name
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterVariable_name"):
                 listener.enterVariable_name(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitVariable_name"):
                 listener.exitVariable_name(self)
 
     def variable_name(self):
@@ -923,11 +922,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_binary_operator
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterBinary_operator"):
                 listener.enterBinary_operator(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitBinary_operator"):
                 listener.exitBinary_operator(self)
 
     def binary_operator(self):
@@ -943,6 +942,7 @@ class SimpleWorkflowParser (Parser):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SimpleWorkflowParser.T__12) | (1 << SimpleWorkflowParser.T__13) | (1 << SimpleWorkflowParser.T__14) | (1 << SimpleWorkflowParser.T__15) | (1 << SimpleWorkflowParser.T__16) | (1 << SimpleWorkflowParser.T__17) | (1 << SimpleWorkflowParser.T__18) | (1 << SimpleWorkflowParser.T__19) | (1 << SimpleWorkflowParser.T__20) | (1 << SimpleWorkflowParser.T__21) | (1 << SimpleWorkflowParser.T__22) | (1 << SimpleWorkflowParser.T__23) | (1 << SimpleWorkflowParser.T__24))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -962,11 +962,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_unary_operator
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterUnary_operator"):
                 listener.enterUnary_operator(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitUnary_operator"):
                 listener.exitUnary_operator(self)
 
     def unary_operator(self):
@@ -982,6 +982,7 @@ class SimpleWorkflowParser (Parser):
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SimpleWorkflowParser.T__12) | (1 << SimpleWorkflowParser.T__13) | (1 << SimpleWorkflowParser.T__25))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -1004,11 +1005,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_stmt_comma
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterStmt_comma"):
                 listener.enterStmt_comma(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitStmt_comma"):
                 listener.exitStmt_comma(self)
 
     def stmt_comma(self):
@@ -1049,11 +1050,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_stmt
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterStmt"):
                 listener.enterStmt(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitStmt"):
                 listener.exitStmt(self)
 
     def stmt(self):
@@ -1063,6 +1064,7 @@ class SimpleWorkflowParser (Parser):
         self.enterRule(localctx, 28, self.RULE_stmt)
         try:
             self.state = 170
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 10, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -1106,11 +1108,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_connect_stmt
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterConnect_stmt"):
                 listener.enterConnect_stmt(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitConnect_stmt"):
                 listener.exitConnect_stmt(self)
 
     def connect_stmt(self):
@@ -1121,6 +1123,7 @@ class SimpleWorkflowParser (Parser):
         self._la = 0  # Token type
         try:
             self.state = 184
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 11, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -1133,6 +1136,7 @@ class SimpleWorkflowParser (Parser):
                 if not(_la == SimpleWorkflowParser.T__27 or _la == SimpleWorkflowParser.T__28):
                     self._errHandler.recoverInline(self)
                 else:
+                    self._errHandler.reportMatch(self)
                     self.consume()
                 self.state = 175
                 self.module_input()
@@ -1178,11 +1182,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_data_or_module_output
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterData_or_module_output"):
                 listener.enterData_or_module_output(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitData_or_module_output"):
                 listener.exitData_or_module_output(self)
 
     def data_or_module_output(self):
@@ -1196,6 +1200,7 @@ class SimpleWorkflowParser (Parser):
             self.state = 186
             self.element_name()
             self.state = 189
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == SimpleWorkflowParser.T__29:
                 self.state = 187
@@ -1227,11 +1232,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_module_input
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterModule_input"):
                 listener.enterModule_input(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitModule_input"):
                 listener.exitModule_input(self)
 
     def module_input(self):
@@ -1245,6 +1250,7 @@ class SimpleWorkflowParser (Parser):
             self.state = 191
             self.element_name()
             self.state = 194
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == SimpleWorkflowParser.T__29:
                 self.state = 192
@@ -1276,11 +1282,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_data_stmt
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterData_stmt"):
                 listener.enterData_stmt(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitData_stmt"):
                 listener.exitData_stmt(self)
 
     def data_stmt(self):
@@ -1320,11 +1326,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_module_stmt
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterModule_stmt"):
                 listener.enterModule_stmt(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitModule_stmt"):
                 listener.exitModule_stmt(self)
 
     def module_stmt(self):
@@ -1364,11 +1370,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_module_call
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterModule_call"):
                 listener.enterModule_call(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitModule_call"):
                 listener.exitModule_call(self)
 
     def module_call(self):
@@ -1407,11 +1413,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_element_name
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterElement_name"):
                 listener.enterElement_name(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitElement_name"):
                 listener.exitElement_name(self)
 
     def element_name(self):
@@ -1447,11 +1453,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_list_param_affectation
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterList_param_affectation"):
                 listener.enterList_param_affectation(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitList_param_affectation"):
                 listener.exitList_param_affectation(self)
 
     def list_param_affectation(self):
@@ -1463,6 +1469,7 @@ class SimpleWorkflowParser (Parser):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 212
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == SimpleWorkflowParser.Identifier:
                 self.state = 211
@@ -1504,11 +1511,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_param_affectation
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterParam_affectation"):
                 listener.enterParam_affectation(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitParam_affectation"):
                 listener.exitParam_affectation(self)
 
     def param_affectation(self):
@@ -1545,11 +1552,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_param_name
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterParam_name"):
                 listener.enterParam_name(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitParam_name"):
                 listener.exitParam_name(self)
 
     def param_name(self):
@@ -1582,11 +1589,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_inout_name
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterInout_name"):
                 listener.enterInout_name(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitInout_name"):
                 listener.exitInout_name(self)
 
     def inout_name(self):
@@ -1622,11 +1629,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_module_name
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterModule_name"):
                 listener.enterModule_name(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitModule_name"):
                 listener.exitModule_name(self)
 
     def module_name(self):
@@ -1646,6 +1653,7 @@ class SimpleWorkflowParser (Parser):
             if not(_la == SimpleWorkflowParser.Identifier or _la == SimpleWorkflowParser.STRING):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -1671,11 +1679,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_data_name
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterData_name"):
                 listener.enterData_name(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitData_name"):
                 listener.exitData_name(self)
 
     def data_name(self):
@@ -1695,6 +1703,7 @@ class SimpleWorkflowParser (Parser):
             if not(_la == SimpleWorkflowParser.Identifier or _la == SimpleWorkflowParser.STRING):
                 self._errHandler.recoverInline(self)
             else:
+                self._errHandler.reportMatch(self)
                 self.consume()
         except RecognitionException as re:
             localctx.exception = re
@@ -1723,11 +1732,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_constant
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterConstant"):
                 listener.enterConstant(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitConstant"):
                 listener.exitConstant(self)
 
     def constant(self):
@@ -1737,6 +1746,7 @@ class SimpleWorkflowParser (Parser):
         self.enterRule(localctx, 56, self.RULE_constant)
         try:
             self.state = 240
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 16, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
@@ -1777,11 +1787,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_string_literal
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterString_literal"):
                 listener.enterString_literal(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitString_literal"):
                 listener.exitString_literal(self)
 
     def string_literal(self):
@@ -1817,11 +1827,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_integer_number
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterInteger_number"):
                 listener.enterInteger_number(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitInteger_number"):
                 listener.exitInteger_number(self)
 
     def integer_number(self):
@@ -1833,6 +1843,7 @@ class SimpleWorkflowParser (Parser):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 245
+            self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == SimpleWorkflowParser.Sign:
                 self.state = 244
@@ -1870,11 +1881,11 @@ class SimpleWorkflowParser (Parser):
             return SimpleWorkflowParser.RULE_real_number
 
         def enterRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "enterReal_number"):
                 listener.enterReal_number(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if isinstance(listener, SimpleWorkflowListener):
+            if hasattr(listener, "exitReal_number"):
                 listener.exitReal_number(self)
 
     def real_number(self):
@@ -1885,10 +1896,12 @@ class SimpleWorkflowParser (Parser):
         self._la = 0  # Token type
         try:
             self.state = 271
+            self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 23, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 250
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == SimpleWorkflowParser.Sign:
                     self.state = 249
@@ -1901,11 +1914,13 @@ class SimpleWorkflowParser (Parser):
                 self.state = 254
                 self.match(SimpleWorkflowParser.Digits)
                 self.state = 260
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == SimpleWorkflowParser.T__32:
                     self.state = 255
                     self.match(SimpleWorkflowParser.T__32)
                     self.state = 257
+                    self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la == SimpleWorkflowParser.Sign:
                         self.state = 256
@@ -1919,6 +1934,7 @@ class SimpleWorkflowParser (Parser):
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 263
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == SimpleWorkflowParser.Sign:
                     self.state = 262
@@ -1929,6 +1945,7 @@ class SimpleWorkflowParser (Parser):
                 self.state = 266
                 self.match(SimpleWorkflowParser.T__32)
                 self.state = 268
+                self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == SimpleWorkflowParser.Sign:
                     self.state = 267
