@@ -227,7 +227,7 @@ if not r:
         extras_require={
             'graph_helper': ['matplotlib'],
             'languages': ['antlr4-python3-runtime'],
-            'datasource.linkedin_access': ['python-linkedin'],
+            'datasource.linkedin_access': ['python-linkedin>=4.2'],
             'datasource.convert': ['dbread'],
             'notebook_helper.folium_helper': ['folium'],
             'notebook_helper.magic_notebook': ['qgrid'],
