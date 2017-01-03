@@ -176,8 +176,7 @@ class DataVelibCollect:
         @param      fLOG            logging function
         @return                     list of created file
         """
-        delay = datetime.datetime.fromtimestamp(
-            delayms / 1000.0) - datetime.datetime.fromtimestamp(0.)
+        delay = datetime.timedelta(seconds=delayms/1000)
         now = datetime.datetime.now()
         cloc = now
         delayms /= 50

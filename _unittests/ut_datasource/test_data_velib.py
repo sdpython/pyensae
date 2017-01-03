@@ -123,8 +123,7 @@ class TestDataVelib (unittest.TestCase):
         tempfold = get_temp_folder(__file__, "temp_data_i2")
         temp_file = os.path.join(tempfold, "data_velib.txt")
 
-        delay = datetime.datetime.fromtimestamp(
-            5.0) - datetime.datetime.fromtimestamp(0.)
+        delay = datetime.timedelta(seconds=5)
         dt = datetime.datetime.now() + delay
 
         key = self.get_private_key()
@@ -163,8 +162,7 @@ class TestDataVelib (unittest.TestCase):
         tempfold = get_temp_folder(__file__, "temp_data_func")
         temp_file = os.path.join(tempfold, "data_velib.txt")
 
-        delay = datetime.datetime.fromtimestamp(
-            5.0) - datetime.datetime.fromtimestamp(0.)
+        delay = datetime.timedelta(seconds=5)
         dt = datetime.datetime.now() + delay
 
         key = self.get_private_key()
@@ -196,8 +194,7 @@ class TestDataVelib (unittest.TestCase):
         tempfold = get_temp_folder(__file__, "temp_data_func_bes")
         temp_file = os.path.join(tempfold, "data_velib.txt")
 
-        delay = datetime.datetime.fromtimestamp(
-            5.0) - datetime.datetime.fromtimestamp(0.)
+        delay = datetime.timedelta(seconds=5)
         dt = datetime.datetime.now() + delay
 
         key = self.get_private_key()
