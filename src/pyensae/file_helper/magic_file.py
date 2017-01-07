@@ -96,7 +96,10 @@ class MagicFile(MagicClassWithHelpers):
             errors = args.errors
             if errors is not None and len(errors) < 2:
                 errors = None
-            rows = file_head(args.f, args.n, args.encoding, errors=errors)
+            encoding = args.encoding
+            if encoding is not None and len(encoding) < 2:
+                encoding = None
+            rows = file_head(args.f, args.n, encoding, errors=errors)
             if args.raw:
                 return "".join(rows)
             else:
@@ -196,8 +199,11 @@ class MagicFile(MagicClassWithHelpers):
             errors = args.errors
             if errors is not None and len(errors) < 2:
                 errors = None
+            encoding = args.encoding
+            if encoding is not None and len(encoding) < 2:
+                encoding = None
             iter = enumerate_grep(args.f, args.regex,
-                                  args.encoding, errors=errors)
+                                  encoding, errors=errors)
             if args.n != -1:
                 rows = []
                 for r in iter:
@@ -267,7 +273,10 @@ class MagicFile(MagicClassWithHelpers):
             errors = args.errors
             if errors is not None and len(errors) < 2:
                 errors = None
-            rows = file_tail(args.f, args.n, args.encoding, errors=errors)
+            encoding = args.encoding
+            if encoding is not None and len(encoding) < 2:
+                encoding = None
+            rows = file_tail(args.f, args.n, encoding, errors=errors)
             if args.raw:
                 return "".join(rows)
             else:
