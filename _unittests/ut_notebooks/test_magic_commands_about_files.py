@@ -5,6 +5,7 @@
 import sys
 import os
 import unittest
+import shutil
 
 
 try:
@@ -72,6 +73,13 @@ class TestNotebookRunnerMagicCommand (unittest.TestCase):
                 "pyquickhelper",
                 "src")),
         ]
+
+        cps = [os.path.normpath(nbfile),
+               os.path.join(os.path.dirname(nbfile), "pyensae_sql_magic.ipynb")]
+        for cp in cps:
+            if not os.path.exists(cp):
+                raise FileNotFoundError(cp)
+            shutil.copy(cp, temp)
 
         kernel_name = None if "travis" in sys.executable else install_python_kernel_for_unittest(
             "pyensae")
