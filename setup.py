@@ -231,7 +231,7 @@ if not r:
             'datasource.convert': ['dbread'],
             'notebook_helper.folium_helper': ['folium'],
             'notebook_helper.magic_notebook': ['qgrid'],
-            'remote.ssh_remote_connection': ['paramiko', 'ansiconv', 'ansi2html'],
+            'remote.ssh_remote_connection': ['paramiko', 'ansiconv', 'ansi2html', 'chardet'],
             'remote.azure_connection': ['azure'],
         }
     )

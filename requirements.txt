@@ -4,6 +4,7 @@ antlr4-python3-runtime
 autopep8
 azure
 brewer2mpl
+chardet
 cloud-sptheme
 codecov
 colormap

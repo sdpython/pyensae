@@ -41,7 +41,7 @@ except ImportError:
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.helpgen import docstring2html
 from src.pyensae.file_helper.magic_file import MagicFile
-from src.pyensae.file_helper import file_tail
+from src.pyensae.file_helper import file_tail, file_encoding
 from src.pyensae.sql import Database
 
 
@@ -207,6 +207,16 @@ class TestFiles (unittest.TestCase):
         res = mg.hhelp("-np -f text Database.__init__")
         assert "it can also contain several files separated by" in res
         assert "@param" in res
+
+    def test_encoding(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        this = os.path.abspath(__file__).replace(".pyc", ".py")
+        res = file_encoding(this)
+        self.assertEqual(res, {'encoding': 'ascii', 'confidence': 1.0})
 
 
 if __name__ == "__main__":

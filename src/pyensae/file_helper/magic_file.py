@@ -15,7 +15,7 @@ from pyquickhelper.loghelper import run_cmd
 from pyquickhelper.ipythonhelper import MagicCommandParser, MagicClassWithHelpers
 from pyquickhelper.helpgen import docstring2html
 from .format_helper import format_file_size, format_file_mtime
-from .content_helper import file_head, file_tail, enumerate_grep
+from .content_helper import file_head, file_tail, enumerate_grep, file_encoding
 
 
 @magics_class
@@ -66,6 +66,12 @@ class MagicFile(MagicClassWithHelpers):
             '--encoding',
             default="utf8",
             help='file encoding')
+        parser.add_argument(
+            '-s',
+            '--errors',
+            default="",
+            help='What about errors: "", strict, replace, surrogateescape, '
+                 'xmlcharrefreplace, backslashreplace, namereplace')
         return parser
 
     @line_magic
@@ -78,7 +84,7 @@ class MagicFile(MagicClassWithHelpers):
             :tag: file
             :title: head
 
-            The magic command ``%heal`` is equivalent to::
+            The magic command ``%head`` is equivalent to::
 
                 from pyensae.file_helper import file_head
                 file_head(<filename>, <n>, <encoding>)
@@ -87,11 +93,52 @@ class MagicFile(MagicClassWithHelpers):
         args = self.get_args(line, parser)
 
         if args is not None:
-            rows = file_head(args.f, args.n, args.encoding)
+            errors = args.errors
+            if errors is not None and len(errors) < 2:
+                errors = None
+            rows = file_head(args.f, args.n, args.encoding, errors=errors)
             if args.raw:
                 return "".join(rows)
             else:
                 return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
+
+    @staticmethod
+    def encoding_parser():
+        """
+        defines the way to parse the magic command ``%encoding``
+        """
+        parser = MagicCommandParser(prog="encoding",
+                                    description='guess the encoding of a file')
+        parser.add_argument('f', type=str, help='filename')
+        parser.add_argument(
+            '-n',
+            '--n',
+            type=int,
+            default=2**20,
+            help='maximum number of lines to use to guess the encoding')
+        return parser
+
+    @line_magic
+    def encoding(self, line):
+        """
+        defines ``%encoding``
+        which guesses the encoding
+
+        .. nbref::
+            :tag: file
+            :title: encoding
+
+            The magic command ``%encoding`` is equivalent to::
+
+                from pyensae.file_helper import file_head
+                file_head(<filename>, <n>, <encoding>)
+        """
+        parser = self.get_parser(MagicFile.encoding_parser, "encoding")
+        args = self.get_args(line, parser)
+
+        if args is not None:
+            res = file_encoding(args.f, args.n)
+            return str(res)
 
     @staticmethod
     def grep_parser():
@@ -119,6 +166,12 @@ class MagicFile(MagicClassWithHelpers):
             '--encoding',
             default="utf8",
             help='file encoding')
+        parser.add_argument(
+            '-s',
+            '--errors',
+            default="",
+            help='What about errors: "", strict, replace, surrogateescape, '
+                 'xmlcharrefreplace, backslashreplace, namereplace')
         return parser
 
     @line_magic
@@ -140,7 +193,11 @@ class MagicFile(MagicClassWithHelpers):
         args = self.get_args(line, parser)
 
         if args is not None:
-            iter = enumerate_grep(args.f, args.regex, args.encoding)
+            errors = args.errors
+            if errors is not None and len(errors) < 2:
+                errors = None
+            iter = enumerate_grep(args.f, args.regex,
+                                  args.encoding, errors=errors)
             if args.n != -1:
                 rows = []
                 for r in iter:
@@ -180,6 +237,12 @@ class MagicFile(MagicClassWithHelpers):
             '--encoding',
             default="utf8",
             help='file encoding')
+        parser.add_argument(
+            '-s',
+            '--errors',
+            default="",
+            help='What about errors: "", strict, replace, surrogateescape, '
+                 'xmlcharrefreplace, backslashreplace, namereplace')
         return parser
 
     @line_magic
@@ -201,7 +264,10 @@ class MagicFile(MagicClassWithHelpers):
         args = self.get_args(line, parser)
 
         if args is not None:
-            rows = file_tail(args.f, args.n, args.encoding)
+            errors = args.errors
+            if errors is not None and len(errors) < 2:
+                errors = None
+            rows = file_tail(args.f, args.n, args.encoding, errors=errors)
             if args.raw:
                 return "".join(rows)
             else:
