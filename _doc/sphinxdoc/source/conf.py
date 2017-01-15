@@ -26,5 +26,5 @@ set_sphinx_variables(__file__, "pyensae", "Xavier Dupré", 2016,
 
 blog_root = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/"
 blog_background = False
-exclude_patterns = ["pyensae/file_helper/pigjar/*",
-                    "pyensae/file_helper/hadoopjar/*"]
+exclude_patterns += ["pyensae/file_helper/pigjar/*",
+                     "pyensae/file_helper/hadoopjar/*"]
