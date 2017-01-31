@@ -43,7 +43,7 @@ class DatabaseObject:
             index = _.index
             try:
                 indexes = _.indexes
-            except:
+            except Exception:
                 pass
             break
 

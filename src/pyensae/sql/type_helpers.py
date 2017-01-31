@@ -35,7 +35,7 @@ def guess_type_value(x, none=None):
                         return str
                     else:
                         return None
-                except:
+                except Exception:
                     return None
             else:
                 return str

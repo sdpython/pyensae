@@ -191,7 +191,7 @@ class Corrplot(Linkage):
                     self.cm = self.cmap_builder(cmap)
                 else:
                     self.cm = self.cmap_builder(*cmap)
-            except:
+            except Exception:
                 print("incorrect cmap. Use default one")
                 self._set_default_cmap()
         else:
