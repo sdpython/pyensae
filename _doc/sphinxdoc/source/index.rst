@@ -5,7 +5,7 @@ pyensae documentation
     :target: https://travis-ci.org/sdpython/pyensae
     :alt: Build status
 
-.. image:: https://ci.appveyor.com/api/projects/status/hw3ixda4622h34qb?svg=true
+.. image:: https://ci.appveyor.com/api/projects/status/jioxwx1igwbqwa28?svg=true
     :target: https://ci.appveyor.com/project/sdpython/pyensae
     :alt: Build Status Windows
 
