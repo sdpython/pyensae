@@ -8,11 +8,11 @@ does not explicitely import *folium*.
 from IPython.display import HTML
 
 
-def folium_html_map(map, width=None, height=None, asobj=True):
+def folium_html_map(mapf, width=None, height=None, asobj=True):
     """
     Embeds the HTML source of the map directly into the IPython notebook.
 
-    @param      map     folium map
+    @param      mapf    folium map
     @param      width   width
     @param      height  height
     @param      asobj   return an object which implements ``_repr_html_``
@@ -50,7 +50,7 @@ def folium_html_map(map, width=None, height=None, asobj=True):
         Add parameters *width* and *height* to change the size of the map within a notebook.
         Hopefully, they will be added in folium.
     """
-    res = map._repr_html_()
+    res = mapf._repr_html_()
     if width or height:
         look = '<div style="width:100%;">'
         if not res.startswith(look):
@@ -78,9 +78,9 @@ def folium_html_map(map, width=None, height=None, asobj=True):
         return res
 
 
-def folium_embed_map(map, path="map.html", width="100%", height="510px"):
+def folium_embed_map(mapf, path="map.html", width="100%", height="510px"):
     """
-    @param      map     folium map
+    @param      mapf    folium map
     @param      path    where to store the temporary map
     @return             HTML (IPython)
 
@@ -91,5 +91,5 @@ def folium_embed_map(map, path="map.html", width="100%", height="510px"):
 
     Source: `folium_base.py <https://gist.github.com/psychemedia/f7385255f89137c503b5>`_
     """
-    map.save(path)
+    mapf.save(path)
     return HTML('<iframe src="files/{path}" style="width: {width}; height: {height}; border: none"></iframe>'.format(path=path, width=width, height=height))
