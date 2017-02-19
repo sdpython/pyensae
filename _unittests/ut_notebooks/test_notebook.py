@@ -13,7 +13,6 @@ import unittest
 
 try:
     import src
-    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -23,6 +22,11 @@ except ImportError:
                 "..")))
     if path not in sys.path:
         sys.path.append(path)
+    import src
+
+try:
+    import pyquickhelper as skip_
+except ImportError:
     path = os.path.normpath(
         os.path.abspath(
             os.path.join(
@@ -34,8 +38,24 @@ except ImportError:
                 "src")))
     if path not in sys.path:
         sys.path.append(path)
-    import src
     import pyquickhelper as skip_
+
+try:
+    import jyquickhelper as skip_
+except ImportError:
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..",
+                "..",
+                "jyquickhelper",
+                "src")))
+    if path not in sys.path:
+        sys.path.append(path)
+    import jyquickhelper as skip_
+
 
 from pyquickhelper.loghelper import fLOG
 from src.pyensae.notebook_helper.magic_notebook import MagicNotebook

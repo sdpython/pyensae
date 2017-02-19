@@ -9,7 +9,6 @@ import unittest
 
 try:
     import src
-    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -19,6 +18,11 @@ except ImportError:
                 "..")))
     if path not in sys.path:
         sys.path.append(path)
+    import src
+
+try:
+    import pyquickhelper as skip_
+except ImportError:
     path = os.path.normpath(
         os.path.abspath(
             os.path.join(
@@ -30,8 +34,23 @@ except ImportError:
                 "src")))
     if path not in sys.path:
         sys.path.append(path)
-    import src
     import pyquickhelper as skip_
+
+try:
+    import jyquickhelper as skip_
+except ImportError:
+    path = os.path.normpath(
+        os.path.abspath(
+            os.path.join(
+                os.path.split(__file__)[0],
+                "..",
+                "..",
+                "..",
+                "jyquickhelper",
+                "src")))
+    if path not in sys.path:
+        sys.path.append(path)
+    import jyquickhelper as skip_
 
 
 from pyquickhelper.ipythonhelper.notebook_helper import install_python_kernel_for_unittest
@@ -62,16 +81,21 @@ class TestNotebookRunnerStockPrices (unittest.TestCase):
         if not os.path.exists(nbfile):
             raise FileNotFoundError(nbfile)
         addpath = [os.path.normpath(os.path.join(temp, "..", "..", "..", "src")),
-                   os.path.normpath(
-            os.path.join(
-                temp,
-                "..",
-                "..",
-                "..",
-                "..",
-                "pyquickhelper",
-                "src")),
-        ]
+                   os.path.normpath(os.path.join(temp,
+                                                 "..",
+                                                 "..",
+                                                 "..",
+                                                 "..",
+                                                 "pyquickhelper",
+                                                 "src")),
+                   os.path.normpath(os.path.join(temp,
+                                                 "..",
+                                                 "..",
+                                                 "..",
+                                                 "..",
+                                                 "jyquickhelper",
+                                                 "src")),
+                   ]
         outfile = os.path.join(temp, "out_notebook.ipynb")
         assert not os.path.exists(outfile)
 

@@ -175,9 +175,9 @@ if is_local():
     r = process_standard_options_for_setup(
         sys.argv, __file__, project_var_name,
         layout=["html"],
-        unittest_modules=["pyquickhelper", "pymyinstall"],
-        requirements=["pyquickhelper", "pymyinstall"],
-        additional_notebook_path=["pyquickhelper"],
+        unittest_modules=["pyquickhelper", "jyquickhelper", "pymyinstall"],
+        requirements=["pyquickhelper", "jyquickhelper", "pymyinstall"],
+        additional_notebook_path=["pyquickhelper", "jyquickhelper"],
         coverage_options=dict(
             omit=["*Parser.py", "*Listener.py", "*Lexer.py"]),
         fLOG=logging_function, covtoken=("f929c9b3-bf00-4928-906a-b1dc54d5a5d9", "'_UT_35_std' in outfile"))
