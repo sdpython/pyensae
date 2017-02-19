@@ -265,3 +265,6 @@ auto_*.py
 auto_*.xml
 _doc/notebooks/random*.txt
 _doc/notebooks/None0000000.png
+_unittests/ut_datasource/test_linkedin.py.err
+_unittests/ut_finance/test_stock_file.py.err
+_unittests/run_unittests.py.out
