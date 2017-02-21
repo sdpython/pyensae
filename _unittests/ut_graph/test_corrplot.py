@@ -68,7 +68,7 @@ class TestGraph (unittest.TestCase):
         df = df.corr()
 
         fig = plt.figure(num=None, facecolor='white')
-        ax = plt.subplot(1, 1, 1, aspect='equal', axisbg='white')
+        ax = plt.subplot(1, 1, 1, aspect='equal', facecolor='white')
 
         c = Corrplot(df)
         ax = c.plot(fig=fig, ax=ax)

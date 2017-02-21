@@ -9,12 +9,20 @@ See also `biokit license <https://github.com/biokit/biokit/blob/master/LICENSE>`
 :author: Thomas Cokelaer
 :references: http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
 """
-from .linkage import Linkage
+try:
+    from scipy.cluster.hierarchy import dendrogram, fcluster
+except ImportError as e:
+    # The import of scipy was moved it. It creates a warning otherwise.
+    # lib\importlib\_bootstrap.py:205: ImportWarning: can't resolve package
+    # from __spec__ or __package__, falling back on __name__ and __path__
+    import warnings
+    warnings.warn("corrplot.py requires scipy.")
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Ellipse, Circle, Rectangle, Wedge
 from matplotlib.collections import PatchCollection
 import pandas as pd
+from .linkage import Linkage
 
 
 class Corrplot(Linkage):
@@ -87,7 +95,6 @@ class Corrplot(Linkage):
             compute_correlation = True
 
         if compute_correlation:
-            print("Computing correlation")
             cor = self.df.corr()
             self.df = cor
 
@@ -116,7 +123,6 @@ class Corrplot(Linkage):
         You probably do not need to use that method. Use :meth:`plot` and
         the two parameters order_metric and order_method instead.
         """
-        from scipy.cluster.hierarchy import fcluster, dendrogram
         Y = self.linkage(self.df, method=method, metric=metric)
         ind1 = fcluster(Y, 0.7 * max(Y[:, 2]), 'distance')
         Z = dendrogram(Y, no_plot=True)
@@ -192,7 +198,6 @@ class Corrplot(Linkage):
                 else:
                     self.cm = self.cmap_builder(*cmap)
             except Exception:
-                print("incorrect cmap. Use default one")
                 self._set_default_cmap()
         else:
             self._set_default_cmap()
@@ -217,7 +222,7 @@ class Corrplot(Linkage):
 
         # do we have an axes to plot the data in ?
         if ax is None:
-            ax = plt.subplot(1, 1, 1, aspect='equal', axisbg=axisbg)
+            ax = plt.subplot(1, 1, 1, aspect='equal', facecolor=axisbg)
         else:
             # if so, clear the axes. Colorbar cannot be removed easily.
             plt.sca(ax)
