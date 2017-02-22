@@ -57,7 +57,7 @@ class TestGraph (unittest.TestCase):
             # it requires scipy which is not included in the requirements.txt
             return
 
-        fix_tkinter_issues_virtualenv()
+        fix_tkinter_issues_virtualenv(fLOG=fLOG)
         from matplotlib import pyplot as plt
         plt.style.use('ggplot')
 

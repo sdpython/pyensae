@@ -18,9 +18,6 @@ except ImportError as e:
     import warnings
     warnings.warn("corrplot.py requires scipy.")
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.patches import Ellipse, Circle, Rectangle, Wedge
-from matplotlib.collections import PatchCollection
 import pandas as pd
 from .linkage import Linkage
 
@@ -190,6 +187,10 @@ class Corrplot(Linkage):
             c.plot(colorbar=False, shrink=.8, upper='circle'  )
 
         """
+        import matplotlib.pyplot as plt
+        from matplotlib.patches import Ellipse, Circle, Rectangle, Wedge
+        from matplotlib.collections import PatchCollection
+
         # default
         if cmap is not None:
             try:
@@ -346,6 +347,10 @@ class Corrplot(Linkage):
         return ax
 
     def _add_patches(self, df, method, fill, ax, diagonal=True):
+
+        from matplotlib.patches import Ellipse, Circle, Rectangle, Wedge
+        from matplotlib.collections import PatchCollection
+
         width, height = df.shape
 
         patches = []

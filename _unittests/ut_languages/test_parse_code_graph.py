@@ -75,6 +75,7 @@ class TestParseCodeGraph (unittest.TestCase):
 
         st.draw()
 
+        fix_tkinter_issues_virtualenv()
         import matplotlib.pyplot as plt
         if __name__ == "__main__":
             plt.show()

@@ -38,6 +38,7 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import fix_tkinter_issues_virtualenv
 from src.pyensae.graph_helper.magic_graph import MagicGraph
 
 
@@ -48,6 +49,8 @@ class TestGraph (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
+
+        fix_tkinter_issues_virtualenv(fLOG=fLOG)
         mg = MagicGraph()
         cmd = "ggplot"
         res = mg.mpl_style(cmd)
