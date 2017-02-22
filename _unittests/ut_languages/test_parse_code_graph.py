@@ -38,7 +38,7 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import get_temp_folder
+from pyquickhelper.pycode import get_temp_folder, fix_tkinter_issues_virtualenv
 from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_graph, parse_code
 from src.pyensae.graph_helper import run_dot
 

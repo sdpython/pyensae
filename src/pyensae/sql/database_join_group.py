@@ -739,7 +739,7 @@ class DatabaseJoinGroup:
             for name, tbl_name, sql in li:
                 if tbl_name != table2:
                     continue
-                fields = re.compile("[(](\w*)[)]").search(sql).groups()
+                fields = re.compile("[(](\\w*)[)]").search(sql).groups()
                 if len(fields) == 0:
                     continue
                 field = fields[0]

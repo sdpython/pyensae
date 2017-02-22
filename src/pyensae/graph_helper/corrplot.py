@@ -188,8 +188,6 @@ class Corrplot(Linkage):
 
         """
         import matplotlib.pyplot as plt
-        from matplotlib.patches import Ellipse, Circle, Rectangle, Wedge
-        from matplotlib.collections import PatchCollection
 
         # default
         if cmap is not None:
