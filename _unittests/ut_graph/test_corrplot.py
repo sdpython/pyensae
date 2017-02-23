@@ -39,7 +39,7 @@ except ImportError:
     import src
     import pyquickhelper as skip_
 
-from pyquickhelper.loghelper import fLOG
+from pyquickhelper.loghelper import fLOG, CustomLog
 from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.graph_helper import Corrplot
 from pyquickhelper.pycode import fix_tkinter_issues_virtualenv
@@ -57,27 +57,37 @@ class TestGraph (unittest.TestCase):
             # it requires scipy which is not included in the requirements.txt
             return
 
-        fix_tkinter_issues_virtualenv(fLOG=fLOG)
-        from matplotlib import pyplot as plt
-        plt.style.use('ggplot')
-
         temp = get_temp_folder(__file__, "temp_corrplot")
+        clog = CustomLog(temp)
+        clog("fix")
+        fix_tkinter_issues_virtualenv(fLOG=fLOG)
+        clog("import")
+        from matplotlib import pyplot as plt
+
         letters = "ABCDEFGHIJKLMNOP"[0:10]
         df = pandas.DataFrame(
             dict(((k, numpy.random.random(10) + ord(k) - 65) for k in letters)))
         df = df.corr()
 
-        fig = plt.figure(num=None, facecolor='white')
-        ax = plt.subplot(1, 1, 1, aspect='equal', facecolor='white')
+        clog("figure")
+        subplot_kw = dict(aspect='equal', facecolor='white')
+        fig, ax = plt.subplots(1, 1, subplot_kw=subplot_kw)
 
+        clog("corrplot")
         c = Corrplot(df)
+        clog("plot")
         ax = c.plot(fig=fig, ax=ax)
 
+        clog("save")
         fLOG("save")
         img = os.path.join(temp, "corrplot.png")
         fig.savefig(img)
         fLOG("close")
+        clog("close")
+        if __name__ == "__main__":
+            plt.show()
         plt.close('all')
+        clog("end")
         fLOG("end")
         assert os.path.exists(img)
 
