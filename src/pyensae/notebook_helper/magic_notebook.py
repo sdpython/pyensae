@@ -165,7 +165,7 @@ class MagicNotebook(MagicClassWithHelpers):
             :title: jsdf
 
             The magic command ``%jsdf`` displays a dataframe using
-            `qgrid <https://github.com/quantopian/qgrid>`_ module.
+            `qgrid <https://qgrid.readthedocs.io/en/latest/>`_ module.
             The code is the following::
 
                 import qgrid
@@ -206,7 +206,8 @@ class MagicNotebook(MagicClassWithHelpers):
                                 autoHeight=args.autoHeight,
                                 enableCellNavigation=args.enableCellNavigation,
                                 editable=args.editable)
-            return qgrid.show_grid(df, grid_options=grid_options)
+            res = qgrid.show_grid(df, grid_options=grid_options)
+            return "" if res is None else res
 
 
 def register_notebook_magics(ip=None):
