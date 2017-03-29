@@ -1,4 +1,6 @@
-# Generated from src\pyensae\languages\Pig.g4 by ANTLR 4.6
+# Generated from
+# C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\Pig.g4 by ANTLR
+# 4.6
 from antlr4 import *
 from io import StringIO
 

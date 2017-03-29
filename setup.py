@@ -130,14 +130,15 @@ if is_local() and "--help" not in sys.argv and "--help-commands" not in sys.argv
     if sys.version_info[0] != 2:
         write_version()
 
-    if os.path.exists("version.txt"):
-        with open("version.txt", "r") as f:
+    version = os.path.join(os.path.dirname(__file__), "version.txt")
+    if os.path.exists(version):
+        with open(version, "r") as f:
             lines = f.readlines()
         subversion = "." + lines[0].strip("\r\n ")
         if subversion == ".0":
             raise Exception("subversion is wrong: " + subversion)
     else:
-        raise FileNotFoundError("version.txt")
+        raise FileNotFoundError(version)
 else:
     # when the module is installed, no commit number is displayed
     subversion = ""
@@ -189,11 +190,15 @@ if is_local():
                 "expecting a grammar file: python setup.py update_grammars R.g4")
         grammar = sys.argv[ind + 1]
         if not os.path.exists(grammar):
-            g2 = os.path.join("src", "pyensae", "languages", grammar)
+            cdir = os.path.abspath(os.path.dirname(__file__))
+            g2 = os.path.join(cdir, "src", "pyensae", "languages", grammar)
             if not os.path.exists(g2):
-                raise FileNotFoundError(grammar)
+                raise FileNotFoundError("{0}\n{1}".format(grammar, g2))
             grammar = g2
-        from pyensae.languages import build_grammar
+        try:
+            from pyensae.languages import build_grammar
+        except ImportError:
+            from src.pyensae.languages import build_grammar
         build_grammar(grammar)
         r = True
     if not r and not ({"bdist_msi", "sdist",

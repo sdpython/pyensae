@@ -7,7 +7,7 @@ set pythonexe=%1
 goto start_script:
 
 :default_value_python:
-set pythonexe=c:\Python35_x64\python
+set pythonexe=c:\Python36_x64\python
 
 @echo ~SET pythonexe=%pythonexe%
 
@@ -16,17 +16,17 @@ set current=%~dp0
 @echo ~SET current=%current%
 set PYTHONPATH=%current%\src
 
-%pythonexe% -u setup.py update_grammars Pig.g4
+%pythonexe% -u %current%..\setup.py update_grammars Pig.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u setup.py update_grammars Python3.g4
+%pythonexe% -u %current%..\setup.py update_grammars Python3.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u setup.py update_grammars R.g4
+%pythonexe% -u %current%..\setup.py update_grammars R.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u setup.py update_grammars DOT.g4
+%pythonexe% -u %current%..\setup.py update_grammars DOT.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u setup.py update_grammars SimpleWorkflow.g4
+%pythonexe% -u %current%..\setup.py update_grammars SimpleWorkflow.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u setup.py update_grammars SQLite.g4
+%pythonexe% -u %current%..\setup.py update_grammars SQLite.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u setup.py update_grammars CSharp4.g4
+%pythonexe% -u %current%..\setup.py update_grammars CSharp4.g4
 if %errorlevel% neq 0 exit /b %errorlevel%

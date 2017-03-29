@@ -561,9 +561,9 @@ power
 ///        '{' [dictorsetmaker] '}' |
 ///        NAME | NUMBER | STRING+ | '...' | 'None' | 'True' | 'False')
 atom
- : ( '(' ( yield_expr | testlist_comp )? ')' )
- | ( '[' testlist_comp? ']' )
- | ( '{' dictorsetmaker? '}' )
+ : '(' ( yield_expr | testlist_comp )? ')' 
+ | '[' testlist_comp? ']'  
+ | '{' dictorsetmaker? '}' 
  | NAME 
  | number 
  | ( str_+ )
