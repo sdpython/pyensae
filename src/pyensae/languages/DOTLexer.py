@@ -1,13 +1,13 @@
-# Generated from
-# C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\DOT.g4 by ANTLR
-# 4.6
+# Generated from \DOT.g4 by ANTLR 4.7
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
+import sys
 
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\2\35")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\35")
         buf.write("\u00f5\b\1\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7")
         buf.write("\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r")
         buf.write("\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23")
@@ -39,34 +39,34 @@ def serializedATN():
         buf.write("\3\2\23\4\2UUuu\4\2VVvv\4\2TTtt\4\2KKkk\4\2EEee\4\2II")
         buf.write("ii\4\2CCcc\4\2RRrr\4\2JJjj\4\2FFff\4\2PPpp\4\2QQqq\4\2")
         buf.write("GGgg\4\2WWww\4\2DDdd\6\2C\\aac|\u0082\u0101\5\2\13\f\17")
-        buf.write("\17\"\"\u0105\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t")
-        buf.write("\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21\3")
-        buf.write("\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2\2\31\3\2")
-        buf.write("\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2")
-        buf.write("\2#\3\2\2\2\2%\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2\2")
-        buf.write("\2\2/\3\2\2\2\2\61\3\2\2\2\2\65\3\2\2\2\2\67\3\2\2\2\2")
-        buf.write("9\3\2\2\2\2;\3\2\2\2\3=\3\2\2\2\5?\3\2\2\2\7A\3\2\2\2")
-        buf.write("\tC\3\2\2\2\13E\3\2\2\2\rG\3\2\2\2\17I\3\2\2\2\21K\3\2")
-        buf.write("\2\2\23N\3\2\2\2\25Q\3\2\2\2\27S\3\2\2\2\31U\3\2\2\2\33")
-        buf.write("\\\3\2\2\2\35b\3\2\2\2\37j\3\2\2\2!o\3\2\2\2#t\3\2\2\2")
-        buf.write("%~\3\2\2\2\'\u0096\3\2\2\2)\u0098\3\2\2\2+\u00a3\3\2\2")
-        buf.write("\2-\u00ae\3\2\2\2/\u00b7\3\2\2\2\61\u00bf\3\2\2\2\63\u00c7")
-        buf.write("\3\2\2\2\65\u00c9\3\2\2\2\67\u00d7\3\2\2\29\u00e6\3\2")
-        buf.write("\2\2;\u00f1\3\2\2\2=>\7}\2\2>\4\3\2\2\2?@\7\177\2\2@\6")
-        buf.write("\3\2\2\2AB\7=\2\2B\b\3\2\2\2CD\7?\2\2D\n\3\2\2\2EF\7]")
-        buf.write("\2\2F\f\3\2\2\2GH\7_\2\2H\16\3\2\2\2IJ\7.\2\2J\20\3\2")
-        buf.write("\2\2KL\7/\2\2LM\7@\2\2M\22\3\2\2\2NO\7/\2\2OP\7/\2\2P")
-        buf.write("\24\3\2\2\2QR\7<\2\2R\26\3\2\2\2ST\7a\2\2T\30\3\2\2\2")
-        buf.write("UV\t\2\2\2VW\t\3\2\2WX\t\4\2\2XY\t\5\2\2YZ\t\6\2\2Z[\t")
-        buf.write("\3\2\2[\32\3\2\2\2\\]\t\7\2\2]^\t\4\2\2^_\t\b\2\2_`\t")
-        buf.write("\t\2\2`a\t\n\2\2a\34\3\2\2\2bc\t\13\2\2cd\t\5\2\2de\t")
-        buf.write("\7\2\2ef\t\4\2\2fg\t\b\2\2gh\t\t\2\2hi\t\n\2\2i\36\3\2")
-        buf.write("\2\2jk\t\f\2\2kl\t\r\2\2lm\t\13\2\2mn\t\16\2\2n \3\2\2")
-        buf.write("\2op\t\16\2\2pq\t\13\2\2qr\t\7\2\2rs\t\16\2\2s\"\3\2\2")
-        buf.write("\2tu\t\2\2\2uv\t\17\2\2vw\t\20\2\2wx\t\7\2\2xy\t\4\2\2")
-        buf.write("yz\t\b\2\2z{\t\t\2\2{|\t\n\2\2|$\3\2\2\2}\177\7/\2\2~")
-        buf.write("}\3\2\2\2~\177\3\2\2\2\177\u0094\3\2\2\2\u0080\u0082\7")
-        buf.write("\60\2\2\u0081\u0083\5\'\24\2\u0082\u0081\3\2\2\2\u0083")
+        buf.write("\17\"\"\2\u0105\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2")
+        buf.write("\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\2\17\3\2\2\2\2\21")
+        buf.write("\3\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2\2\31\3")
+        buf.write("\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2")
+        buf.write("\2\2#\3\2\2\2\2%\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2")
+        buf.write("\2\2\2/\3\2\2\2\2\61\3\2\2\2\2\65\3\2\2\2\2\67\3\2\2\2")
+        buf.write("\29\3\2\2\2\2;\3\2\2\2\3=\3\2\2\2\5?\3\2\2\2\7A\3\2\2")
+        buf.write("\2\tC\3\2\2\2\13E\3\2\2\2\rG\3\2\2\2\17I\3\2\2\2\21K\3")
+        buf.write("\2\2\2\23N\3\2\2\2\25Q\3\2\2\2\27S\3\2\2\2\31U\3\2\2\2")
+        buf.write("\33\\\3\2\2\2\35b\3\2\2\2\37j\3\2\2\2!o\3\2\2\2#t\3\2")
+        buf.write("\2\2%~\3\2\2\2\'\u0096\3\2\2\2)\u0098\3\2\2\2+\u00a3\3")
+        buf.write("\2\2\2-\u00ae\3\2\2\2/\u00b7\3\2\2\2\61\u00bf\3\2\2\2")
+        buf.write("\63\u00c7\3\2\2\2\65\u00c9\3\2\2\2\67\u00d7\3\2\2\29\u00e6")
+        buf.write("\3\2\2\2;\u00f1\3\2\2\2=>\7}\2\2>\4\3\2\2\2?@\7\177\2")
+        buf.write("\2@\6\3\2\2\2AB\7=\2\2B\b\3\2\2\2CD\7?\2\2D\n\3\2\2\2")
+        buf.write("EF\7]\2\2F\f\3\2\2\2GH\7_\2\2H\16\3\2\2\2IJ\7.\2\2J\20")
+        buf.write("\3\2\2\2KL\7/\2\2LM\7@\2\2M\22\3\2\2\2NO\7/\2\2OP\7/\2")
+        buf.write("\2P\24\3\2\2\2QR\7<\2\2R\26\3\2\2\2ST\7a\2\2T\30\3\2\2")
+        buf.write("\2UV\t\2\2\2VW\t\3\2\2WX\t\4\2\2XY\t\5\2\2YZ\t\6\2\2Z")
+        buf.write("[\t\3\2\2[\32\3\2\2\2\\]\t\7\2\2]^\t\4\2\2^_\t\b\2\2_")
+        buf.write("`\t\t\2\2`a\t\n\2\2a\34\3\2\2\2bc\t\13\2\2cd\t\5\2\2d")
+        buf.write("e\t\7\2\2ef\t\4\2\2fg\t\b\2\2gh\t\t\2\2hi\t\n\2\2i\36")
+        buf.write("\3\2\2\2jk\t\f\2\2kl\t\r\2\2lm\t\13\2\2mn\t\16\2\2n \3")
+        buf.write("\2\2\2op\t\16\2\2pq\t\13\2\2qr\t\7\2\2rs\t\16\2\2s\"\3")
+        buf.write("\2\2\2tu\t\2\2\2uv\t\17\2\2vw\t\20\2\2wx\t\7\2\2xy\t\4")
+        buf.write("\2\2yz\t\b\2\2z{\t\t\2\2{|\t\n\2\2|$\3\2\2\2}\177\7/\2")
+        buf.write("\2~}\3\2\2\2~\177\3\2\2\2\177\u0094\3\2\2\2\u0080\u0082")
+        buf.write("\7\60\2\2\u0081\u0083\5\'\24\2\u0082\u0081\3\2\2\2\u0083")
         buf.write("\u0084\3\2\2\2\u0084\u0082\3\2\2\2\u0084\u0085\3\2\2\2")
         buf.write("\u0085\u0095\3\2\2\2\u0086\u0088\5\'\24\2\u0087\u0086")
         buf.write("\3\2\2\2\u0088\u0089\3\2\2\2\u0089\u0087\3\2\2\2\u0089")
@@ -154,6 +154,8 @@ class DOTLexer(Lexer):
     PREPROC = 26
     WS = 27
 
+    channelNames = [u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN"]
+
     modeNames = ["DEFAULT_MODE"]
 
     literalNames = ["<INVALID>",
@@ -173,9 +175,9 @@ class DOTLexer(Lexer):
 
     grammarFileName = "DOT.g4"
 
-    def __init__(self, input=None):
-        super().__init__(input)
-        self.checkVersion("4.6")
+    def __init__(self, input=None, output: TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.7")
         self._interp = LexerATNSimulator(
             self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None

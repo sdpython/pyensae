@@ -1,11 +1,13 @@
-# Generated from C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\SQLite.g4 by ANTLR 4.6
+# Generated from \SQLite.g4 by ANTLR 4.7
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
+import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\u009f")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u009f")
         buf.write("\u06c6\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
@@ -176,12 +178,12 @@ def serializedATN():
         buf.write("\17\3\2\n\13\3\2\20\23\3\2\24\27\6\2OOcceexx\4\2==\u008d")
         buf.write("\u008d\5\2\33\33JJ\177\177\6\2\668jj\u0098\u0098\u009a")
         buf.write("\u009b\4\2\n\fhh\4\2\u0097\u0097\u009a\u009a\3\2\33\u0096")
-        buf.write("\u07d3\2\u00aa\3\2\2\2\4\u00af\3\2\2\2\6\u00b5\3\2\2\2")
-        buf.write("\b\u00cf\3\2\2\2\n\u00f1\3\2\2\2\f\u0103\3\2\2\2\16\u010c")
-        buf.write("\3\2\2\2\20\u0114\3\2\2\2\22\u011e\3\2\2\2\24\u0131\3")
-        buf.write("\2\2\2\26\u0155\3\2\2\2\30\u0175\3\2\2\2\32\u019e\3\2")
-        buf.write("\2\2\34\u01e3\3\2\2\2\36\u01f6\3\2\2\2 \u0214\3\2\2\2")
-        buf.write("\"\u021e\3\2\2\2$\u023b\3\2\2\2&\u0241\3\2\2\2(\u024e")
+        buf.write("\2\u07d3\2\u00aa\3\2\2\2\4\u00af\3\2\2\2\6\u00b5\3\2\2")
+        buf.write("\2\b\u00cf\3\2\2\2\n\u00f1\3\2\2\2\f\u0103\3\2\2\2\16")
+        buf.write("\u010c\3\2\2\2\20\u0114\3\2\2\2\22\u011e\3\2\2\2\24\u0131")
+        buf.write("\3\2\2\2\26\u0155\3\2\2\2\30\u0175\3\2\2\2\32\u019e\3")
+        buf.write("\2\2\2\34\u01e3\3\2\2\2\36\u01f6\3\2\2\2 \u0214\3\2\2")
+        buf.write("\2\"\u021e\3\2\2\2$\u023b\3\2\2\2&\u0241\3\2\2\2(\u024e")
         buf.write("\3\2\2\2*\u025b\3\2\2\2,\u0268\3\2\2\2.\u0281\3\2\2\2")
         buf.write("\60\u02a1\3\2\2\2\62\u02eb\3\2\2\2\64\u02fa\3\2\2\2\66")
         buf.write("\u0307\3\2\2\28\u030d\3\2\2\2:\u031b\3\2\2\2<\u032a\3")
@@ -1245,9 +1247,9 @@ class SQLiteParser ( Parser ):
     SPACES=156
     UNEXPECTED_CHAR=157
 
-    def __init__(self, input:TokenStream):
-        super().__init__(input)
-        self.checkVersion("4.6")
+    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.7")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -2967,7 +2969,7 @@ class SQLiteParser ( Parser ):
             elif token in [SQLiteParser.K_DELETE, SQLiteParser.K_INSERT, SQLiteParser.K_UPDATE]:
                 pass
             else:
-                raise NoViableAltException(self)
+                pass
             self.state = 448
             self._errHandler.sync(self)
             token = self._input.LA(1)
@@ -4471,7 +4473,7 @@ class SQLiteParser ( Parser ):
             elif token in [SQLiteParser.EOF, SQLiteParser.SCOL, SQLiteParser.K_ALTER, SQLiteParser.K_ANALYZE, SQLiteParser.K_ATTACH, SQLiteParser.K_BEGIN, SQLiteParser.K_COMMIT, SQLiteParser.K_CREATE, SQLiteParser.K_DELETE, SQLiteParser.K_DETACH, SQLiteParser.K_DROP, SQLiteParser.K_END, SQLiteParser.K_EXPLAIN, SQLiteParser.K_INSERT, SQLiteParser.K_PRAGMA, SQLiteParser.K_REINDEX, SQLiteParser.K_RELEASE, SQLiteParser.K_REPLACE, SQLiteParser.K_ROLLBACK, SQLiteParser.K_SAVEPOINT, SQLiteParser.K_SELECT, SQLiteParser.K_UPDATE, SQLiteParser.K_VACUUM, SQLiteParser.K_VALUES, SQLiteParser.K_WITH, SQLiteParser.UNEXPECTED_CHAR]:
                 pass
             else:
-                raise NoViableAltException(self)
+                pass
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -6470,7 +6472,7 @@ class SQLiteParser ( Parser ):
                 elif token in [SQLiteParser.CLOSE_PAR]:
                     pass
                 else:
-                    raise NoViableAltException(self)
+                    pass
                 self.state = 1146
                 self.match(SQLiteParser.CLOSE_PAR)
                 pass
@@ -7750,7 +7752,7 @@ class SQLiteParser ( Parser ):
             elif token in [SQLiteParser.EOF, SQLiteParser.SCOL, SQLiteParser.K_ALTER, SQLiteParser.K_ANALYZE, SQLiteParser.K_ATTACH, SQLiteParser.K_BEGIN, SQLiteParser.K_COMMIT, SQLiteParser.K_CREATE, SQLiteParser.K_DELETE, SQLiteParser.K_DETACH, SQLiteParser.K_DROP, SQLiteParser.K_END, SQLiteParser.K_EXPLAIN, SQLiteParser.K_INSERT, SQLiteParser.K_LIMIT, SQLiteParser.K_ORDER, SQLiteParser.K_PRAGMA, SQLiteParser.K_REINDEX, SQLiteParser.K_RELEASE, SQLiteParser.K_REPLACE, SQLiteParser.K_ROLLBACK, SQLiteParser.K_SAVEPOINT, SQLiteParser.K_SELECT, SQLiteParser.K_SET, SQLiteParser.K_UPDATE, SQLiteParser.K_VACUUM, SQLiteParser.K_VALUES, SQLiteParser.K_WHERE, SQLiteParser.K_WITH, SQLiteParser.UNEXPECTED_CHAR]:
                 pass
             else:
-                raise NoViableAltException(self)
+                pass
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -8202,7 +8204,7 @@ class SQLiteParser ( Parser ):
                 elif token in [SQLiteParser.EOF, SQLiteParser.SCOL, SQLiteParser.CLOSE_PAR, SQLiteParser.COMMA, SQLiteParser.K_ALTER, SQLiteParser.K_ANALYZE, SQLiteParser.K_ATTACH, SQLiteParser.K_BEGIN, SQLiteParser.K_COMMIT, SQLiteParser.K_CREATE, SQLiteParser.K_CROSS, SQLiteParser.K_DELETE, SQLiteParser.K_DETACH, SQLiteParser.K_DROP, SQLiteParser.K_END, SQLiteParser.K_EXCEPT, SQLiteParser.K_EXPLAIN, SQLiteParser.K_GROUP, SQLiteParser.K_INNER, SQLiteParser.K_INSERT, SQLiteParser.K_INTERSECT, SQLiteParser.K_JOIN, SQLiteParser.K_LEFT, SQLiteParser.K_LIMIT, SQLiteParser.K_NATURAL, SQLiteParser.K_ON, SQLiteParser.K_ORDER, SQLiteParser.K_PRAGMA, SQLiteParser.K_REINDEX, SQLiteParser.K_RELEASE, SQLiteParser.K_REPLACE, SQLiteParser.K_ROLLBACK, SQLiteParser.K_SAVEPOINT, SQLiteParser.K_SELECT, SQLiteParser.K_UNION, SQLiteParser.K_UPDATE, SQLiteParser.K_USING, SQLiteParser.K_VACUUM, SQLiteParser.K_VALUES, SQLiteParser.K_WHERE, SQLiteParser.K_WITH, SQLiteParser.UNEXPECTED_CHAR]:
                     pass
                 else:
-                    raise NoViableAltException(self)
+                    pass
                 pass
 
             elif la_ == 2:
@@ -8450,7 +8452,7 @@ class SQLiteParser ( Parser ):
                 elif token in [SQLiteParser.K_JOIN]:
                     pass
                 else:
-                    raise NoViableAltException(self)
+                    pass
                 self.state = 1553
                 self.match(SQLiteParser.K_JOIN)
                 pass
@@ -8543,7 +8545,7 @@ class SQLiteParser ( Parser ):
             elif token in [SQLiteParser.EOF, SQLiteParser.SCOL, SQLiteParser.CLOSE_PAR, SQLiteParser.COMMA, SQLiteParser.K_ALTER, SQLiteParser.K_ANALYZE, SQLiteParser.K_ATTACH, SQLiteParser.K_BEGIN, SQLiteParser.K_COMMIT, SQLiteParser.K_CREATE, SQLiteParser.K_CROSS, SQLiteParser.K_DELETE, SQLiteParser.K_DETACH, SQLiteParser.K_DROP, SQLiteParser.K_END, SQLiteParser.K_EXCEPT, SQLiteParser.K_EXPLAIN, SQLiteParser.K_GROUP, SQLiteParser.K_INNER, SQLiteParser.K_INSERT, SQLiteParser.K_INTERSECT, SQLiteParser.K_JOIN, SQLiteParser.K_LEFT, SQLiteParser.K_LIMIT, SQLiteParser.K_NATURAL, SQLiteParser.K_ORDER, SQLiteParser.K_PRAGMA, SQLiteParser.K_REINDEX, SQLiteParser.K_RELEASE, SQLiteParser.K_REPLACE, SQLiteParser.K_ROLLBACK, SQLiteParser.K_SAVEPOINT, SQLiteParser.K_SELECT, SQLiteParser.K_UNION, SQLiteParser.K_UPDATE, SQLiteParser.K_VACUUM, SQLiteParser.K_VALUES, SQLiteParser.K_WHERE, SQLiteParser.K_WITH, SQLiteParser.UNEXPECTED_CHAR]:
                 pass
             else:
-                raise NoViableAltException(self)
+                pass
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

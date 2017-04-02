@@ -1,6 +1,4 @@
-# Generated from
-# C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\R.g4 by ANTLR
-# 4.6
+# Generated from \R.g4 by ANTLR 4.7
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .RParser import RParser

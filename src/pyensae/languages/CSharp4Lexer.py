@@ -1,13 +1,13 @@
-# Generated from
-# C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\CSharp4.g4 by
-# ANTLR 4.6
+# Generated from \CSharp4.g4 by ANTLR 4.7
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
+import sys
 
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\2\u00a5")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\u00a5")
         buf.write("\u07e5\b\1\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7")
         buf.write("\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r")
         buf.write("\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23")
@@ -263,14 +263,14 @@ def serializedATN():
         buf.write("\u01c5\u0296\u0296\4\2\u16f0\u16f2\u2162\u2171\5\2\u0905")
         buf.write("\u0905\u0940\u0942\u094b\u094e\5\2\u00af\u00af\u0602\u0605")
         buf.write("\u06df\u06df\b\2aa\u2041\u2042\u2056\u2056\ufe35\ufe36")
-        buf.write("\ufe4f\ufe51\uff41\uff41\u0825\2\3\3\2\2\2\2?\3\2\2\2")
-        buf.write("\2A\3\2\2\2\2C\3\2\2\2\2E\3\2\2\2\2G\3\2\2\2\2O\3\2\2")
-        buf.write("\2\2W\3\2\2\2\2_\3\2\2\2\2a\3\2\2\2\2c\3\2\2\2\2e\3\2")
-        buf.write("\2\2\2g\3\2\2\2\2i\3\2\2\2\2k\3\2\2\2\2m\3\2\2\2\2o\3")
-        buf.write("\2\2\2\2q\3\2\2\2\2s\3\2\2\2\2u\3\2\2\2\2w\3\2\2\2\2y")
-        buf.write("\3\2\2\2\2{\3\2\2\2\2}\3\2\2\2\2\177\3\2\2\2\2\u0081\3")
-        buf.write("\2\2\2\2\u0083\3\2\2\2\2\u0085\3\2\2\2\2\u0087\3\2\2\2")
-        buf.write("\2\u0089\3\2\2\2\2\u008b\3\2\2\2\2\u008d\3\2\2\2\2\u008f")
+        buf.write("\ufe4f\ufe51\uff41\uff41\2\u0825\2\3\3\2\2\2\2?\3\2\2")
+        buf.write("\2\2A\3\2\2\2\2C\3\2\2\2\2E\3\2\2\2\2G\3\2\2\2\2O\3\2")
+        buf.write("\2\2\2W\3\2\2\2\2_\3\2\2\2\2a\3\2\2\2\2c\3\2\2\2\2e\3")
+        buf.write("\2\2\2\2g\3\2\2\2\2i\3\2\2\2\2k\3\2\2\2\2m\3\2\2\2\2o")
+        buf.write("\3\2\2\2\2q\3\2\2\2\2s\3\2\2\2\2u\3\2\2\2\2w\3\2\2\2\2")
+        buf.write("y\3\2\2\2\2{\3\2\2\2\2}\3\2\2\2\2\177\3\2\2\2\2\u0081")
+        buf.write("\3\2\2\2\2\u0083\3\2\2\2\2\u0085\3\2\2\2\2\u0087\3\2\2")
+        buf.write("\2\2\u0089\3\2\2\2\2\u008b\3\2\2\2\2\u008d\3\2\2\2\2\u008f")
         buf.write("\3\2\2\2\2\u0091\3\2\2\2\2\u0093\3\2\2\2\2\u0095\3\2\2")
         buf.write("\2\2\u0097\3\2\2\2\2\u0099\3\2\2\2\2\u009b\3\2\2\2\2\u009d")
         buf.write("\3\2\2\2\2\u009f\3\2\2\2\2\u00a1\3\2\2\2\2\u00a3\3\2\2")
@@ -1174,23 +1174,25 @@ class CSharp4Lexer(Lexer):
     DOUBLE_BACK_SLASH = 162
     SHARP = 163
 
+    channelNames = [u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN"]
+
     modeNames = ["DEFAULT_MODE"]
 
     literalNames = ["<INVALID>",
-                    "'\\u00EF\\u00BB\\u00BF'", "'abstract'", "'add'", "'alias'",
-                    "'__arglist'", "'as'", "'ascending'", "'base'", "'bool'", "'break'",
-                    "'by'", "'byte'", "'case'", "'catch'", "'char'", "'checked'",
-                    "'class'", "'const'", "'continue'", "'decimal'", "'default'",
-                    "'delegate'", "'descending'", "'do'", "'double'", "'dynamic'",
-                    "'else'", "'enum'", "'equals'", "'event'", "'explicit'", "'extern'",
-                    "'false'", "'finally'", "'fixed'", "'float'", "'for'", "'foreach'",
-                    "'from'", "'get'", "'goto'", "'group'", "'if'", "'implicit'",
-                    "'in'", "'int'", "'interface'", "'internal'", "'into'", "'is'",
-                    "'join'", "'let'", "'lock'", "'long'", "'namespace'", "'new'",
-                    "'null'", "'object'", "'on'", "'operator'", "'orderby'", "'out'",
-                    "'override'", "'params'", "'partial'", "'private'", "'protected'",
-                    "'public'", "'readonly'", "'ref'", "'remove'", "'return'", "'sbyte'",
-                    "'sealed'", "'select'", "'set'", "'short'", "'sizeof'", "'stackalloc'",
+                    "'\u00EF\u00BB\u00BF'", "'abstract'", "'add'", "'alias'", "'__arglist'",
+                    "'as'", "'ascending'", "'base'", "'bool'", "'break'", "'by'",
+                    "'byte'", "'case'", "'catch'", "'char'", "'checked'", "'class'",
+                    "'const'", "'continue'", "'decimal'", "'default'", "'delegate'",
+                    "'descending'", "'do'", "'double'", "'dynamic'", "'else'", "'enum'",
+                    "'equals'", "'event'", "'explicit'", "'extern'", "'false'",
+                    "'finally'", "'fixed'", "'float'", "'for'", "'foreach'", "'from'",
+                    "'get'", "'goto'", "'group'", "'if'", "'implicit'", "'in'",
+                    "'int'", "'interface'", "'internal'", "'into'", "'is'", "'join'",
+                    "'let'", "'lock'", "'long'", "'namespace'", "'new'", "'null'",
+                    "'object'", "'on'", "'operator'", "'orderby'", "'out'", "'override'",
+                    "'params'", "'partial'", "'private'", "'protected'", "'public'",
+                    "'readonly'", "'ref'", "'remove'", "'return'", "'sbyte'", "'sealed'",
+                    "'select'", "'set'", "'short'", "'sizeof'", "'stackalloc'",
                     "'static'", "'string'", "'struct'", "'switch'", "'this'", "'throw'",
                     "'true'", "'try'", "'typeof'", "'uint'", "'ulong'", "'unchecked'",
                     "'unsafe'", "'ushort'", "'using'", "'virtual'", "'void'", "'volatile'",
@@ -1295,9 +1297,9 @@ class CSharp4Lexer(Lexer):
 
     grammarFileName = "CSharp4.g4"
 
-    def __init__(self, input=None):
-        super().__init__(input)
-        self.checkVersion("4.6")
+    def __init__(self, input=None, output: TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.7")
         self._interp = LexerATNSimulator(
             self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None

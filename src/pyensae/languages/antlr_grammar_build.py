@@ -41,12 +41,12 @@ def _is_syntax_is_missing(language):
                     locations.keys())))
 
 
-def build_grammar(g4, version="4.6", fLOG=noLOG):
+def build_grammar(g4, version="4.7", fLOG=noLOG):
     """
     compile the grammar for a specific file
 
     @param      g4          grammar format antlr4
-    @param      version     version of *antlr4* to use, 4.4, 4.5-rc-2
+    @param      version     version of *antlr4* to use, 4.7
     @param      fLOG        logging function
     @return                 list of files
 
@@ -131,5 +131,20 @@ def build_grammar(g4, version="4.6", fLOG=noLOG):
                 err +
                 "\nCMD:\njava " +
                 cmd)
+
+    if os.environ["USERNAME"] in g4:
+        dest = os.path.dirname(g4)
+        for name in os.listdir(dest):
+            if "Parser" not in name and "Lexer" not in name and \
+                    "Token" not in name and "Listener" not in name:
+                continue
+            full = os.path.join(dest, name)
+            with open(full, "r", encoding="utf-8") as f:
+                content = f.read()
+            content1 = content.replace(dest, "")
+            if content1 != content:
+                fLOG("[build_grammar] modified", name)
+                with open(full, "w", encoding="utf-8") as f:
+                    f.write(content1)
 
     return out + "\nERR:\n" + err

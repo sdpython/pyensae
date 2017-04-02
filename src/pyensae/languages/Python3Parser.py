@@ -1,11 +1,13 @@
-# Generated from C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\Python3.g4 by ANTLR 4.6
+# Generated from \Python3.g4 by ANTLR 4.7
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
+import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3`")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3`")
         buf.write("\u0422\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
@@ -105,8 +107,8 @@ def serializedATN():
         buf.write("Z\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084\u0086\u0088\u008a")
         buf.write("\u008c\u008e\u0090\u0092\u0094\u0096\u0098\u009a\u009c")
         buf.write("\u009e\u00a0\u00a2\u00a4\u00a6\u00a8\2\6\3\2P\\\3\2./")
-        buf.write("\3\2&\'\3\2(+\u0492\2\u00af\3\2\2\2\4\u00b5\3\2\2\2\6")
-        buf.write("\u00ba\3\2\2\2\b\u00c3\3\2\2\2\n\u00cf\3\2\2\2\f\u00d3")
+        buf.write("\3\2&\'\3\2(+\2\u0492\2\u00af\3\2\2\2\4\u00b5\3\2\2\2")
+        buf.write("\6\u00ba\3\2\2\2\b\u00c3\3\2\2\2\n\u00cf\3\2\2\2\f\u00d3")
         buf.write("\3\2\2\2\16\u00d8\3\2\2\2\20\u00e2\3\2\2\2\22\u0129\3")
         buf.write("\2\2\2\24\u012b\3\2\2\2\26\u0171\3\2\2\2\30\u0173\3\2")
         buf.write("\2\2\32\u0177\3\2\2\2\34\u0179\3\2\2\2\36\u018e\3\2\2")
@@ -794,9 +796,9 @@ class Python3Parser ( Parser ):
     INDENT=93
     DEDENT=94
 
-    def __init__(self, input:TokenStream):
-        super().__init__(input)
-        self.checkVersion("4.6")
+    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.7")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -1461,7 +1463,7 @@ class Python3Parser ( Parser ):
                     elif token in [Python3Parser.CLOSE_PAREN]:
                         pass
                     else:
-                        raise NoViableAltException(self)
+                        pass
 
 
                 pass
@@ -1730,7 +1732,7 @@ class Python3Parser ( Parser ):
                     elif token in [Python3Parser.COLON]:
                         pass
                     else:
-                        raise NoViableAltException(self)
+                        pass
 
 
                 pass
@@ -5483,7 +5485,7 @@ class Python3Parser ( Parser ):
                 elif token in [Python3Parser.CLOSE_PAREN]:
                     pass
                 else:
-                    raise NoViableAltException(self)
+                    pass
                 self.state = 833
                 self.match(Python3Parser.CLOSE_PAREN)
                 pass

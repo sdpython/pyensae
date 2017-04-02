@@ -1,6 +1,4 @@
-# Generated from
-# C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\CSharp4.g4 by
-# ANTLR 4.6
+# Generated from \CSharp4.g4 by ANTLR 4.7
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .CSharp4Parser import CSharp4Parser

@@ -1,12 +1,14 @@
-# Generated from C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\SimpleWorkflow.g4 by ANTLR 4.6
+# Generated from \SimpleWorkflow.g4 by ANTLR 4.7
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
+import sys
 
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3+")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3+")
         buf.write("\u0114\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
@@ -34,32 +36,32 @@ def serializedATN():
         buf.write("\n!\3!\3!\3!\5!\u010f\n!\3!\5!\u0112\n!\3!\2\2\"\2\4\6")
         buf.write("\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\66")
         buf.write("8:<>@\2\6\3\2\17\33\4\2\17\20\34\34\3\2\36\37\4\2%%\'")
-        buf.write("\'\u0113\2E\3\2\2\2\4N\3\2\2\2\6P\3\2\2\2\bS\3\2\2\2\n")
-        buf.write("X\3\2\2\2\ff\3\2\2\2\16|\3\2\2\2\20\u0083\3\2\2\2\22\u0090")
-        buf.write("\3\2\2\2\24\u0092\3\2\2\2\26\u00a0\3\2\2\2\30\u00a2\3")
-        buf.write("\2\2\2\32\u00a4\3\2\2\2\34\u00a6\3\2\2\2\36\u00ac\3\2")
-        buf.write("\2\2 \u00ba\3\2\2\2\"\u00bc\3\2\2\2$\u00c1\3\2\2\2&\u00c6")
-        buf.write("\3\2\2\2(\u00ca\3\2\2\2*\u00ce\3\2\2\2,\u00d3\3\2\2\2")
-        buf.write(".\u00d6\3\2\2\2\60\u00df\3\2\2\2\62\u00e3\3\2\2\2\64\u00e5")
-        buf.write("\3\2\2\2\66\u00e7\3\2\2\28\u00eb\3\2\2\2:\u00f2\3\2\2")
-        buf.write("\2<\u00f4\3\2\2\2>\u00f7\3\2\2\2@\u0111\3\2\2\2BD\5\4")
-        buf.write("\3\2CB\3\2\2\2DG\3\2\2\2EC\3\2\2\2EF\3\2\2\2FH\3\2\2\2")
-        buf.write("GE\3\2\2\2HI\7\2\2\3I\3\3\2\2\2JO\5\f\7\2KO\5\n\6\2LO")
-        buf.write("\5\6\4\2MO\5\34\17\2NJ\3\2\2\2NK\3\2\2\2NL\3\2\2\2NM\3")
-        buf.write("\2\2\2O\5\3\2\2\2PQ\5\b\5\2QR\7\3\2\2R\7\3\2\2\2ST\7\4")
-        buf.write("\2\2TU\5\26\f\2UV\7\5\2\2VW\5\20\t\2W\t\3\2\2\2XY\7\6")
-        buf.write("\2\2YZ\7\7\2\2Z[\5\26\f\2[\\\7\b\2\2\\]\5\24\13\2]^\7")
-        buf.write("\t\2\2^`\7\n\2\2_a\5\4\3\2`_\3\2\2\2ab\3\2\2\2b`\3\2\2")
-        buf.write("\2bc\3\2\2\2cd\3\2\2\2de\7\13\2\2e\13\3\2\2\2fg\7\f\2")
-        buf.write("\2gh\7\7\2\2hi\5\20\t\2ij\7\t\2\2jl\7\n\2\2km\5\4\3\2")
-        buf.write("lk\3\2\2\2mn\3\2\2\2nl\3\2\2\2no\3\2\2\2op\3\2\2\2pz\7")
-        buf.write("\13\2\2qr\7\r\2\2rt\7\n\2\2su\5\4\3\2ts\3\2\2\2uv\3\2")
-        buf.write("\2\2vt\3\2\2\2vw\3\2\2\2wx\3\2\2\2xy\7\13\2\2y{\3\2\2")
-        buf.write("\2zq\3\2\2\2z{\3\2\2\2{\r\3\2\2\2|}\7%\2\2}\17\3\2\2\2")
-        buf.write("~\u0084\5\22\n\2\177\u0080\5\22\n\2\u0080\u0081\5\30\r")
-        buf.write("\2\u0081\u0082\5\20\t\2\u0082\u0084\3\2\2\2\u0083~\3\2")
-        buf.write("\2\2\u0083\177\3\2\2\2\u0084\21\3\2\2\2\u0085\u0091\5")
-        buf.write(":\36\2\u0086\u0091\5\26\f\2\u0087\u0091\5\"\22\2\u0088")
+        buf.write("\'\2\u0113\2E\3\2\2\2\4N\3\2\2\2\6P\3\2\2\2\bS\3\2\2\2")
+        buf.write("\nX\3\2\2\2\ff\3\2\2\2\16|\3\2\2\2\20\u0083\3\2\2\2\22")
+        buf.write("\u0090\3\2\2\2\24\u0092\3\2\2\2\26\u00a0\3\2\2\2\30\u00a2")
+        buf.write("\3\2\2\2\32\u00a4\3\2\2\2\34\u00a6\3\2\2\2\36\u00ac\3")
+        buf.write("\2\2\2 \u00ba\3\2\2\2\"\u00bc\3\2\2\2$\u00c1\3\2\2\2&")
+        buf.write("\u00c6\3\2\2\2(\u00ca\3\2\2\2*\u00ce\3\2\2\2,\u00d3\3")
+        buf.write("\2\2\2.\u00d6\3\2\2\2\60\u00df\3\2\2\2\62\u00e3\3\2\2")
+        buf.write("\2\64\u00e5\3\2\2\2\66\u00e7\3\2\2\28\u00eb\3\2\2\2:\u00f2")
+        buf.write("\3\2\2\2<\u00f4\3\2\2\2>\u00f7\3\2\2\2@\u0111\3\2\2\2")
+        buf.write("BD\5\4\3\2CB\3\2\2\2DG\3\2\2\2EC\3\2\2\2EF\3\2\2\2FH\3")
+        buf.write("\2\2\2GE\3\2\2\2HI\7\2\2\3I\3\3\2\2\2JO\5\f\7\2KO\5\n")
+        buf.write("\6\2LO\5\6\4\2MO\5\34\17\2NJ\3\2\2\2NK\3\2\2\2NL\3\2\2")
+        buf.write("\2NM\3\2\2\2O\5\3\2\2\2PQ\5\b\5\2QR\7\3\2\2R\7\3\2\2\2")
+        buf.write("ST\7\4\2\2TU\5\26\f\2UV\7\5\2\2VW\5\20\t\2W\t\3\2\2\2")
+        buf.write("XY\7\6\2\2YZ\7\7\2\2Z[\5\26\f\2[\\\7\b\2\2\\]\5\24\13")
+        buf.write("\2]^\7\t\2\2^`\7\n\2\2_a\5\4\3\2`_\3\2\2\2ab\3\2\2\2b")
+        buf.write("`\3\2\2\2bc\3\2\2\2cd\3\2\2\2de\7\13\2\2e\13\3\2\2\2f")
+        buf.write("g\7\f\2\2gh\7\7\2\2hi\5\20\t\2ij\7\t\2\2jl\7\n\2\2km\5")
+        buf.write("\4\3\2lk\3\2\2\2mn\3\2\2\2nl\3\2\2\2no\3\2\2\2op\3\2\2")
+        buf.write("\2pz\7\13\2\2qr\7\r\2\2rt\7\n\2\2su\5\4\3\2ts\3\2\2\2")
+        buf.write("uv\3\2\2\2vt\3\2\2\2vw\3\2\2\2wx\3\2\2\2xy\7\13\2\2y{")
+        buf.write("\3\2\2\2zq\3\2\2\2z{\3\2\2\2{\r\3\2\2\2|}\7%\2\2}\17\3")
+        buf.write("\2\2\2~\u0084\5\22\n\2\177\u0080\5\22\n\2\u0080\u0081")
+        buf.write("\5\30\r\2\u0081\u0082\5\20\t\2\u0082\u0084\3\2\2\2\u0083")
+        buf.write("~\3\2\2\2\u0083\177\3\2\2\2\u0084\21\3\2\2\2\u0085\u0091")
+        buf.write("\5:\36\2\u0086\u0091\5\26\f\2\u0087\u0091\5\"\22\2\u0088")
         buf.write("\u0089\7\7\2\2\u0089\u008a\5\20\t\2\u008a\u008b\7\t\2")
         buf.write("\2\u008b\u0091\3\2\2\2\u008c\u008d\5\32\16\2\u008d\u008e")
         buf.write("\5\22\n\2\u008e\u0091\3\2\2\2\u008f\u0091\5\24\13\2\u0090")
@@ -238,9 +240,9 @@ class SimpleWorkflowParser (Parser):
     LINE_COMMENT = 40
     WS = 41
 
-    def __init__(self, input: TokenStream):
-        super().__init__(input)
-        self.checkVersion("4.6")
+    def __init__(self, input: TokenStream, output: TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.7")
         self._interp = ParserATNSimulator(
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None

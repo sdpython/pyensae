@@ -1,12 +1,14 @@
-# Generated from C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\R.g4 by ANTLR 4.6
+# Generated from \R.g4 by ANTLR 4.7
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
+import sys
 
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3A")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3A")
         buf.write("\u00d3\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\3\2\3\2\3\2\3\2\7\2\25\n\2\f\2\16\2\30\13\2\3")
         buf.write("\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3&\n")
@@ -26,7 +28,7 @@ def serializedATN():
         buf.write("\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5\b")
         buf.write("\u00d1\n\b\3\b\2\3\4\t\2\4\6\b\n\f\16\2\13\4\2\3\3@@\3")
         buf.write("\2\f\r\3\2\7\b\3\2\t\n\3\2\17\20\3\2\21\26\3\2\30\31\3")
-        buf.write("\2\32\33\3\2\35\"\u0105\2\26\3\2\2\2\4_\3\2\2\2\6\u00a5")
+        buf.write("\2\32\33\3\2\35\"\2\u0105\2\26\3\2\2\2\4_\3\2\2\2\6\u00a5")
         buf.write("\3\2\2\2\b\u00a7\3\2\2\2\n\u00b4\3\2\2\2\f\u00b6\3\2\2")
         buf.write("\2\16\u00d0\3\2\2\2\20\21\5\4\3\2\21\22\t\2\2\2\22\25")
         buf.write("\3\2\2\2\23\25\7@\2\2\24\20\3\2\2\2\24\23\3\2\2\2\25\30")
@@ -214,9 +216,9 @@ class RParser (Parser):
     NL = 62
     WS = 63
 
-    def __init__(self, input: TokenStream):
-        super().__init__(input)
-        self.checkVersion("4.6")
+    def __init__(self, input: TokenStream, output: TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.7")
         self._interp = ParserATNSimulator(
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None

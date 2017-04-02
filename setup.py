@@ -199,7 +199,7 @@ if is_local():
             from pyensae.languages import build_grammar
         except ImportError:
             from src.pyensae.languages import build_grammar
-        build_grammar(grammar)
+        build_grammar(grammar, fLOG=logging_function)
         r = True
     if not r and not ({"bdist_msi", "sdist",
                        "bdist_wheel", "publish", "publish_doc", "register",

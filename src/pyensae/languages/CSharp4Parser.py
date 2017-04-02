@@ -1,11 +1,13 @@
-# Generated from C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\CSharp4.g4 by ANTLR 4.6
+# Generated from \CSharp4.g4 by ANTLR 4.7
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
+import sys
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\u00a5")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u00a5")
         buf.write("\u0ef4\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
@@ -571,7 +573,7 @@ def serializedATN():
         buf.write("\u008b\u0090\u0091\4\2GGOO\5\2GGOO]]\7\2**__~\177\u0086")
         buf.write("\u0087\u008e\u008f\4\2\66\66GG\5\299AAKM\4\2))ee\6\29")
         buf.write("9AAKMee\4\2**__\23\2\13\13\17\17\21\23\25\37!\"$%\'/\62")
-        buf.write("\62\649;;>CEEGIKOQSVjll\u101c\2\u032e\3\2\2\2\4\u0330")
+        buf.write("\62\649;;>CEEGIKOQSVjll\2\u101c\2\u032e\3\2\2\2\4\u0330")
         buf.write("\3\2\2\2\6\u0332\3\2\2\2\b\u0338\3\2\2\2\n\u0345\3\2\2")
         buf.write("\2\f\u0347\3\2\2\2\16\u0354\3\2\2\2\20\u0358\3\2\2\2\22")
         buf.write("\u035d\3\2\2\2\24\u035f\3\2\2\2\26\u0361\3\2\2\2\30\u0363")
@@ -2209,29 +2211,29 @@ class CSharp4Parser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "<INVALID>", "'\\u00EF\\u00BB\\u00BF'", 
+    literalNames = [ "<INVALID>", "<INVALID>", "'\u00EF\u00BB\u00BF'", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "'abstract'", "'add'", "'alias'", 
-                     "'__arglist'", "'as'", "'ascending'", "'base'", "'bool'", 
-                     "'break'", "'by'", "'byte'", "'case'", "'catch'", "'char'", 
-                     "'checked'", "'class'", "'const'", "'continue'", "'decimal'", 
-                     "'default'", "'delegate'", "'descending'", "'do'", 
-                     "'double'", "'dynamic'", "'else'", "'enum'", "'equals'", 
-                     "'event'", "'explicit'", "'extern'", "'false'", "'finally'", 
-                     "'fixed'", "'float'", "'for'", "'foreach'", "'from'", 
-                     "'get'", "'goto'", "'group'", "'if'", "'implicit'", 
-                     "'in'", "'int'", "'interface'", "'internal'", "'into'", 
-                     "'is'", "'join'", "'let'", "'lock'", "'long'", "'namespace'", 
-                     "'new'", "'null'", "'object'", "'on'", "'operator'", 
-                     "'orderby'", "'out'", "'override'", "'params'", "'partial'", 
-                     "'private'", "'protected'", "'public'", "'readonly'", 
-                     "'ref'", "'remove'", "'return'", "'sbyte'", "'sealed'", 
-                     "'select'", "'set'", "'short'", "'sizeof'", "'stackalloc'", 
-                     "'static'", "'string'", "'struct'", "'switch'", "'this'", 
-                     "'throw'", "'true'", "'try'", "'typeof'", "'uint'", 
-                     "'ulong'", "'unchecked'", "'unsafe'", "'ushort'", "'using'", 
-                     "'virtual'", "'void'", "'volatile'", "'where'", "'while'", 
-                     "'yield'", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "'abstract'", "'add'", "'alias'", "'__arglist'", 
+                     "'as'", "'ascending'", "'base'", "'bool'", "'break'", 
+                     "'by'", "'byte'", "'case'", "'catch'", "'char'", "'checked'", 
+                     "'class'", "'const'", "'continue'", "'decimal'", "'default'", 
+                     "'delegate'", "'descending'", "'do'", "'double'", "'dynamic'", 
+                     "'else'", "'enum'", "'equals'", "'event'", "'explicit'", 
+                     "'extern'", "'false'", "'finally'", "'fixed'", "'float'", 
+                     "'for'", "'foreach'", "'from'", "'get'", "'goto'", 
+                     "'group'", "'if'", "'implicit'", "'in'", "'int'", "'interface'", 
+                     "'internal'", "'into'", "'is'", "'join'", "'let'", 
+                     "'lock'", "'long'", "'namespace'", "'new'", "'null'", 
+                     "'object'", "'on'", "'operator'", "'orderby'", "'out'", 
+                     "'override'", "'params'", "'partial'", "'private'", 
+                     "'protected'", "'public'", "'readonly'", "'ref'", "'remove'", 
+                     "'return'", "'sbyte'", "'sealed'", "'select'", "'set'", 
+                     "'short'", "'sizeof'", "'stackalloc'", "'static'", 
+                     "'string'", "'struct'", "'switch'", "'this'", "'throw'", 
+                     "'true'", "'try'", "'typeof'", "'uint'", "'ulong'", 
+                     "'unchecked'", "'unsafe'", "'ushort'", "'using'", "'virtual'", 
+                     "'void'", "'volatile'", "'where'", "'while'", "'yield'", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "'{'", "'}'", "'['", "']'", 
                      "'('", "')'", "'.'", "','", "':'", "';'", "'+'", "'-'", 
                      "'*'", "'/'", "'%'", "'&'", "'|'", "'^'", "'!'", "'~'", 
@@ -2995,9 +2997,9 @@ class CSharp4Parser ( Parser ):
     DOUBLE_BACK_SLASH=162
     SHARP=163
 
-    def __init__(self, input:TokenStream):
-        super().__init__(input)
-        self.checkVersion("4.6")
+    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.7")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 

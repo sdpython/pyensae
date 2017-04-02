@@ -1,12 +1,14 @@
-# Generated from C:\xadupre\__home_\GitHub\pyensae\src\pyensae\languages\Pig.g4 by ANTLR 4.6
+# Generated from \Pig.g4 by ANTLR 4.7
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
+import sys
 
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3f")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3f")
         buf.write("\u0202\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
@@ -58,8 +60,8 @@ def serializedATN():
         buf.write("\63\u01fc\n\63\r\63\16\63\u01fd\5\63\u0200\n\63\3\63\2")
         buf.write("\3\4\64\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*")
         buf.write(",.\60\62\64\668:<>@BDFHJLNPRTVXZ\\^`bd\2\b\3\2%*\3\2Z")
-        buf.write("[\4\2XY^^\4\2//EE\4\2\34\34@@\6\2//AACEaa\u0215\2f\3\2")
-        buf.write("\2\2\4r\3\2\2\2\6\u008a\3\2\2\2\b\u008c\3\2\2\2\n\u0092")
+        buf.write("[\4\2XY^^\4\2//EE\4\2\34\34@@\6\2//AACEaa\2\u0215\2f\3")
+        buf.write("\2\2\2\4r\3\2\2\2\6\u008a\3\2\2\2\b\u008c\3\2\2\2\n\u0092")
         buf.write("\3\2\2\2\f\u0094\3\2\2\2\16\u009d\3\2\2\2\20\u009f\3\2")
         buf.write("\2\2\22\u00b4\3\2\2\2\24\u00c1\3\2\2\2\26\u00c7\3\2\2")
         buf.write("\2\30\u00c9\3\2\2\2\32\u00cb\3\2\2\2\34\u00ce\3\2\2\2")
@@ -463,9 +465,9 @@ class PigParser (Parser):
     RIGHT_CURLY = 99
     BAG_VAL = 100
 
-    def __init__(self, input: TokenStream):
-        super().__init__(input)
-        self.checkVersion("4.6")
+    def __init__(self, input: TokenStream, output: TextIO = sys.stdout):
+        super().__init__(input, output)
+        self.checkVersion("4.7")
         self._interp = ParserATNSimulator(
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
