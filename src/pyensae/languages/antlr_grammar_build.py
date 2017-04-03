@@ -132,7 +132,7 @@ def build_grammar(g4, version="4.7", fLOG=noLOG):
                 "\nCMD:\njava " +
                 cmd)
 
-    if os.environ["USERNAME"] in g4:
+    if os.environ.get("USERNAME", os.environ.get("USER", "")) in g4:
         dest = os.path.dirname(g4)
         for name in os.listdir(dest):
             if "Parser" not in name and "Lexer" not in name and \
