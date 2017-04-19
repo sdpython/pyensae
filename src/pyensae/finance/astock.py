@@ -65,22 +65,23 @@ class StockPrices:
                 from pyensae import StockPrices
 
                 # download the CAC 40 composition from my website
-                pyensae.download_data('cac40_2013_11_11.txt', website = 'xd')
+                pyensae.download_data('cac40_2013_11_11.txt', website='xd')
 
                 # download all the prices (if not already done) and store them into files
-                actions = pandas.read_csv("cac40_2013_11_11.txt", sep = "\t")
+                actions = pandas.read_csv("cac40_2013_11_11.txt", sep="\t")
 
                 # we remove stocks with not enough historical data
                 stocks = { k:StockPrices(tick = k) for k,v in actions.values  if k != "SOLB.PA"}
-                dates = StockPrices.available_dates( stocks.values() )
-                stocks = { k:v for k,v in stocks.items() if len(v.missing(dates)) <= 10 }
-                print ("nb left", len(stocks))
+                dates = StockPrices.available_dates(stocks.values())
+                stocks = {k:v for k,v in stocks.items() if len(v.missing(dates)) <= 10}
+                print("nb left", len(stocks))
 
                 # we remove dates with missing prices
-                dates = StockPrices.available_dates( stocks.values() )
-                ok    = dates[ dates["missing"] == 0 ]
-                print ("all dates before", len(dates), " after:" , len(ok))
-                for k in stocks : stocks[k] = stocks[k].keep_dates(ok)
+                dates = StockPrices.available_dates(stocks.values())
+                ok    = dates[dates["missing"] == 0]
+                print("all dates before", len(dates), " after:" , len(ok))
+                for k in stocks:
+                    stocks[k] = stocks[k].keep_dates(ok)
 
                 # we compute correlation matrix and returns
                 ret, cor = StockPrices.covariance(stocks.values(), cov = False, ret = True)
@@ -298,6 +299,8 @@ class StockPrices:
         @param      field               which field to use to fill the matrix
         @return                         matrix with the available dates for each stock
         """
+        if field == "ohlc":
+            field = ["Open", "High", "Low", "Close"]
         dates = []
         if isinstance(field, str):
             for st in listStockPrices:
@@ -331,17 +334,11 @@ class StockPrices:
             if len(pivs) == 1:
                 piv = pivs[0]
             else:
-                piv = pivs[0].merge(
-                    pivs[1],
-                    how="outer",
-                    left_index=True,
-                    right_index=True)
+                piv = pivs[0].merge(pivs[1], how="outer",
+                                    left_index=True, right_index=True)
                 for p in pivs[2:]:
                     piv = piv.merge(
-                        p,
-                        how="outer",
-                        left_index=True,
-                        right_index=True)
+                        p, how="outer", left_index=True, right_index=True)
         else:
             raise TypeError("field must be a string, a tuple or a list")
 
@@ -493,9 +490,8 @@ class StockPrices:
             ::
 
                 stocks = [ StockPrices ("BNP.PA", folder = cache),
-                            StockPrices ("CA.PA", folder = cache),
-                            StockPrices ("SAN.PA", folder = cache),
-                            ]
+                           StockPrices ("CA.PA", folder = cache),
+                           StockPrices ("SAN.PA", folder = cache)]
                 fig, ax, plt = StockPrices.draw(stocks)
                 fig.savefig("image.png")
                 fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01", figsize=(16,8))
@@ -521,9 +517,7 @@ class StockPrices:
             listStockPrices = [listStockPrices]
 
         data = StockPrices.available_dates(
-            listStockPrices,
-            missing=False,
-            field=field)
+            listStockPrices, missing=False, field=field)
         if begin is None:
             if end is not None:
                 data = data[data.index <= end]
@@ -555,22 +549,19 @@ class StockPrices:
             ex_h, ex_l = tuple(), tuple()
 
         curve = []
-        for stock in data.columns:
-            if axis == 2:
-                curve.append(
-                    ax.plot(
-                        dates,
-                        data[stock],
-                        "r",
-                        linestyle='solid',
-                        label=str(stock)))
-            else:
-                curve.append(
-                    ax.plot(
-                        dates,
-                        data[stock],
-                        linestyle='solid',
-                        label=str(stock)))
+        if field == "ohlc":
+            from matplotlib.finance import candlestick_ohlc
+            ohlc = list(list(data.ix[i, :4]) for i in range(0, data.shape[0]))
+            ohlc = [[mdates.date2num(t)] + v for t, v in zip(dates, ohlc)]
+            candlestick_ohlc(ax, ohlc, colorup="g")
+        else:
+            for stock in data.columns:
+                if axis == 2:
+                    curve.append(
+                        ax.plot(dates, data[stock], "r", linestyle='solid', label=str(stock)))
+                else:
+                    curve.append(
+                        ax.plot(dates, data[stock], linestyle='solid', label=str(stock)))
 
         if existing is None:
             ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')
