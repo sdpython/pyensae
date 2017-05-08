@@ -232,9 +232,10 @@ if not r:
         install_requires=["pyquickhelper"],
         extras_require={
             'graph_helper': ['matplotlib'],
-            'languages': ['antlr4-python3-runtime'],
-            'datasource.linkedin_access': ['python-linkedin>=4.2'],
+            'datasource.linkedin_access': ['python3-linkedin'],
             'datasource.convert': ['dbread'],
+            'finance': ['pandas-datareader'],
+            'languages': ['antlr4-python3-runtime'],
             'notebook_helper.folium_helper': ['folium'],
             'notebook_helper.magic_notebook': ['qgrid'],
             'remote.ssh_remote_connection': ['paramiko', 'ansiconv', 'ansi2html', 'chardet'],

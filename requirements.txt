@@ -59,6 +59,7 @@ pyquickhelper
 pyreadline
 python-dateutil
 python-jenkins
+python3-linkedin
 pytz
 PyYAML
 pyzmq
