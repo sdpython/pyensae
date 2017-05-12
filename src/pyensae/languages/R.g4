@@ -45,44 +45,44 @@ $ java TestR sample.R
 grammar R;
 
 parse
-    : ( expr (';'|NL) | NL )* EOF
+    : ( expr (';'| NL ) | NL )* EOF
     ;
 
 expr
-    :   expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
-    |   expr '[' sublist ']'
-    |   expr dotop expr
-    |   <assoc=right> expr  expr
-    |   ('-'|'+') expr
-    |   expr affectop expr
-    |   expr rangeop expr
-    |   <assoc=right> expr USER_OP expr // anything wrappedin %: '%' .* '%'
-    |   <assoc=right> expr operator expr
-    |   <assoc=right> expr comparison expr
-    |   '!' expr
-    |   expr ('&'|'&&') expr
-    |   expr ('|'|'||') expr
-    |   expr formop expr
-    |   functiondef '(' NL* formlist? NL* ')' expr // define function
-    |   functioncall
-    |   NL* '{' NL* exprlist '}' NL*  // compound statement
-    |   returnexpr
-    |   ifelseexpr
-    |   ifexpr
-    |   forexpr
-    |   whileexpr
-    |   repeatexpr
-    |   '?' expr // get help on expr, usually string or ID
-    |   nextexpr
-    |   'break'
-    |   ('(' expr ')')
-    |  constant
-    |   identifier
+    : expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
+    | expr '[' sublist ']'
+    | expr dotop expr
+    | <assoc=right> expr  expr
+    | ('-'|'+') expr
+    | expr affectop NL? expr
+    | expr rangeop expr
+    | <assoc=right> expr USER_OP expr // anything wrappedin %: '%' .* '%'
+    | <assoc=right> expr operator expr
+    | <assoc=right> expr comparison expr
+    | '!' expr
+    | expr ('&'|'&&') expr
+    | expr ('|'|'||') expr
+    | formula_simple
+    | functiondef '(' NL* formlist? NL* ')' expr // define function
+    | functioncall
+    | NL* '{' NL* exprlist NL* '}' NL*  // compound statement
+    | returnexpr
+    | ifelseexpr
+    | ifexpr
+    | forexpr
+    | whileexpr
+    | repeatexpr
+    | '?' expr // get help on expr, usually string or ID
+    | nextexpr
+    | 'break'
+    | ('(' expr ')')
+    | constant
+    | identifier
     ;
 
 exprlist
     : (expr ((';'|NL) expr?)*)
-    | ';'
+    |
     ;
     
 formlist
@@ -94,7 +94,11 @@ form:   ID
     |   '...'
     ;
 
-sublist : sub ( NL? ',' NL? sub NL? )* ;
+sublist
+    : sub ( NL* ',' NL* sub NL* )* ;
+
+sublistadd
+    : identifier ( NL? '+' NL? identifier NL? )* ;
 
 sub
     : expr
@@ -147,20 +151,37 @@ forexpr
     ;
 
 ifexpr
-    : 'if' '(' expr ')' expr
+    : 'if' '(' expr ')' NL*  expr
     ;
     
 ifelseexpr
-    : 'if' '(' expr ')' expr 'else' expr
+    : 'if' '(' expr ')' NL*  expr NL* 'else' NL* expr
     ;
 
 returnexpr
     : 'return' '(' expr ')'
     ;
 
-
 functioncall
-    : identifier '(' NL* sublist ')'
+    : identifier '(' NL* sublist NL* ')'
+    ;
+
+formula_simple
+    : formula_simple_B
+    | formula_simple_A
+    | formula_simple_C
+    ;
+
+formula_simple_A
+    : identifier formop ( sublistadd | '.' )
+    ;
+
+formula_simple_B
+    : 'within' '(' identifier ',' '{' expr '}' ')'
+    ;
+
+formula_simple_C
+    : '(' expr ')' formop ( sublistadd | '.' )
     ;
 
 affectop

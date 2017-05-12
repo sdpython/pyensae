@@ -58,6 +58,14 @@ class RListener(ParseTreeListener):
     def exitSublist(self, ctx: RParser.SublistContext):
         pass
 
+    # Enter a parse tree produced by RParser#sublistadd.
+    def enterSublistadd(self, ctx: RParser.SublistaddContext):
+        pass
+
+    # Exit a parse tree produced by RParser#sublistadd.
+    def exitSublistadd(self, ctx: RParser.SublistaddContext):
+        pass
+
     # Enter a parse tree produced by RParser#sub.
     def enterSub(self, ctx: RParser.SubContext):
         pass
@@ -144,6 +152,38 @@ class RListener(ParseTreeListener):
 
     # Exit a parse tree produced by RParser#functioncall.
     def exitFunctioncall(self, ctx: RParser.FunctioncallContext):
+        pass
+
+    # Enter a parse tree produced by RParser#formula_simple.
+    def enterFormula_simple(self, ctx: RParser.Formula_simpleContext):
+        pass
+
+    # Exit a parse tree produced by RParser#formula_simple.
+    def exitFormula_simple(self, ctx: RParser.Formula_simpleContext):
+        pass
+
+    # Enter a parse tree produced by RParser#formula_simple_A.
+    def enterFormula_simple_A(self, ctx: RParser.Formula_simple_AContext):
+        pass
+
+    # Exit a parse tree produced by RParser#formula_simple_A.
+    def exitFormula_simple_A(self, ctx: RParser.Formula_simple_AContext):
+        pass
+
+    # Enter a parse tree produced by RParser#formula_simple_B.
+    def enterFormula_simple_B(self, ctx: RParser.Formula_simple_BContext):
+        pass
+
+    # Exit a parse tree produced by RParser#formula_simple_B.
+    def exitFormula_simple_B(self, ctx: RParser.Formula_simple_BContext):
+        pass
+
+    # Enter a parse tree produced by RParser#formula_simple_C.
+    def enterFormula_simple_C(self, ctx: RParser.Formula_simple_CContext):
+        pass
+
+    # Exit a parse tree produced by RParser#formula_simple_C.
+    def exitFormula_simple_C(self, ctx: RParser.Formula_simple_CContext):
         pass
 
     # Enter a parse tree produced by RParser#affectop.
