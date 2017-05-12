@@ -44,79 +44,178 @@ $ java TestR sample.R
 */
 grammar R;
 
-parse:   (   expr (';'|NL)
-        |   NL
-        )*
-        EOF
+parse
+    : ( expr (';'|NL) | NL )* EOF
     ;
 
-expr:   expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
+expr
+    :   expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
     |   expr '[' sublist ']'
-    |   expr ('::'|':::') expr
-    |   expr ('$'|'@') expr
-    |   <assoc=right> expr '^' expr
+    |   expr dotop expr
+    |   <assoc=right> expr  expr
     |   ('-'|'+') expr
-    |   expr ':' expr
-    |   expr USER_OP expr // anything wrappedin %: '%' .* '%'
-    |   expr ('*'|'/') expr
-    |   expr ('+'|'-') expr
-    |   expr ('>'|'>='|'<'|'<='|'=='|'!=') expr
+    |   expr affectop expr
+    |   expr rangeop expr
+    |   <assoc=right> expr USER_OP expr // anything wrappedin %: '%' .* '%'
+    |   <assoc=right> expr operator expr
+    |   <assoc=right> expr comparison expr
     |   '!' expr
     |   expr ('&'|'&&') expr
     |   expr ('|'|'||') expr
-    |   '~' expr
-    |   expr '~' expr
-    |   expr ('<-'|'<<-'|'='|'->'|'->>'|':=') expr
-    |   'function' '(' formlist? ')' expr // define function
-    |   expr '(' sublist ')'              // call function
-    |   NL? '{' NL? exprlist '}' NL?  // compound statement
-    |   'if' '(' expr ')' expr
-    |   'if' '(' expr ')' expr 'else' expr
-    |   'for' '(' ID 'in' expr ')' expr
-    |   'while' '(' expr ')' expr
-    |   'repeat' expr
+    |   expr formop expr
+    |   functiondef '(' NL* formlist? NL* ')' expr // define function
+    |   functioncall
+    |   NL* '{' NL* exprlist '}' NL*  // compound statement
+    |   returnexpr
+    |   ifelseexpr
+    |   ifexpr
+    |   forexpr
+    |   whileexpr
+    |   repeatexpr
     |   '?' expr // get help on expr, usually string or ID
-    |   'next'
+    |   nextexpr
     |   'break'
-    |   '(' expr ')'
-    |   ID
-    |   STRING
-    |   HEX
-    |   INT
-    |   FLOAT
-    |   COMPLEX
-    |   'NULL'
-    |   'NA'
-    |   'Inf'
-    |   'NaN'
-    |   'TRUE'
-    |   'FALSE'
+    |   ('(' expr ')')
+    |  constant
+    |   identifier
     ;
 
 exprlist
-    :   (expr ((';'|NL) expr?)*)
+    : (expr ((';'|NL) expr?)*)
     | ';'
     ;
-
-formlist : form (',' form)* ;
+    
+formlist
+    : form ( NL? ',' NL* form)*
+    ;
 
 form:   ID
     |   ID '=' expr
     |   '...'
     ;
 
-sublist : sub (',' sub)* ;
+sublist : sub ( NL? ',' NL? sub NL? )* ;
 
-sub :   expr
-    |   ID '='
-    |   ID '=' expr
-    |   STRING '='
-    |   STRING '=' expr
-    |   'NULL' '='
-    |   'NULL' '=' expr
-    |   '...'
+sub
+    : expr
+    | identifier '='
+    | identifier '=' expr
+    | STRING '='
+    | STRING '=' expr
+    | 'NULL' '='
+    | 'NULL' '=' expr
+    | '...'
     |
     ;
+    
+//////    
+// NEW
+//////
+
+constant
+    : STRING
+    | HEX
+    | INT
+    | FLOAT
+    | COMPLEX
+    | 'NULL'
+    | 'NA'
+    | 'Inf'
+    | 'NaN'
+    | boolean
+    ;
+
+boolean
+    : 'TRUE'
+    | 'FALSE'
+    ;
+
+nextexpr
+    : 'next'
+    ;
+
+repeatexpr
+    : 'repeat' expr
+    ;
+
+whileexpr
+    : 'while' '(' expr ')' expr
+    ;
+
+forexpr
+    : 'for' '(' identifier 'in' expr ')' expr
+    ;
+
+ifexpr
+    : 'if' '(' expr ')' expr
+    ;
+    
+ifelseexpr
+    : 'if' '(' expr ')' expr 'else' expr
+    ;
+
+returnexpr
+    : 'return' '(' expr ')'
+    ;
+
+
+functioncall
+    : identifier '(' NL* sublist ')'
+    ;
+
+affectop
+    : '<-'
+    | '<<-'
+    | '='
+    | '->'
+    | '->>'
+    | ':='
+    ;
+
+functiondef
+    : 'function'
+    ;
+    
+identifier
+    : ID
+    ;
+
+formop
+    : '~'
+    ;
+
+rangeop
+    : ':'
+    | '::'
+    | ':::'
+    ;
+
+dotop
+    : '$'
+    | '@'
+    ;
+
+operator
+    : '-'
+    | '+'
+    | '*'
+    | '/'
+    | '%'
+    | '^'
+    ;
+
+comparison
+    : '>'
+    | '>='
+    | '<'
+    | '<='
+    | '=='
+    | '!='
+    ;
+    
+//////
+// END
+//////
 
 HEX :   '0' ('x'|'X') HEXDIGIT+ [Ll]? ;
 
