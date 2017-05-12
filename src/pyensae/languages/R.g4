@@ -50,18 +50,11 @@ parse:   (   expr (';'|NL)
         EOF
     ;
 
-/*
-expr_or_assign
-    :   expr ('<-'|'='|'<<-') expr_or_assign
-    |   expr
-    ;
-*/
-
 expr:   expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
     |   expr '[' sublist ']'
     |   expr ('::'|':::') expr
     |   expr ('$'|'@') expr
-    |   expr '^'<assoc=right> expr
+    |   <assoc=right> expr '^' expr
     |   ('-'|'+') expr
     |   expr ':' expr
     |   expr USER_OP expr // anything wrappedin %: '%' .* '%'
@@ -76,7 +69,7 @@ expr:   expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
     |   expr ('<-'|'<<-'|'='|'->'|'->>'|':=') expr
     |   'function' '(' formlist? ')' expr // define function
     |   expr '(' sublist ')'              // call function
-    |   '{' exprlist '}' // compound statement
+    |   NL? '{' NL? exprlist '}' NL?  // compound statement
     |   'if' '(' expr ')' expr
     |   'if' '(' expr ')' expr 'else' expr
     |   'for' '(' ID 'in' expr ')' expr
@@ -101,8 +94,8 @@ expr:   expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
     ;
 
 exprlist
-    :   expr ((';'|NL) expr?)*
-    |
+    :   (expr ((';'|NL) expr?)*)
+    | ';'
     ;
 
 formlist : form (',' form)* ;

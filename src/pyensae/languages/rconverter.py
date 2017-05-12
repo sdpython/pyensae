@@ -1,9 +1,26 @@
 """
 @file
-@brief Helpers around language grammar.
-This module requires `antlr4 <https://pypi.python.org/pypi/antlr4-python3-runtime/>`_.
+@brief Convert R into Python
 """
-from antlr4 import ParseTreeListener
+from antlr4 import ParseTreeListener, ParseTreeWalker
+from .RParser import RParser
+from .RLexer import RLexer
+from .antlr_grammar_use import parse_code
+
+
+def r2python(code: str) -> str:
+    """
+    Converts a R script into Python.
+
+    @param      code        R string
+    @return                 Python string
+    """
+    parser = parse_code(code, RParser, RLexer)
+    parsed = parser.parse()
+    listen = TreeStringListener(parsed)
+    walker = ParseTreeWalker()
+    walker.walk(listen, parsed)
+    return str(listen)
 
 
 class TreeStringListener(ParseTreeListener):
@@ -28,7 +45,7 @@ class TreeStringListener(ParseTreeListener):
         """
         event
         """
-        text = ("    " * self.level) + "v " + str(node.symbol)
+        text = ("    " * self.level) + str(node.symbol)
         self.buffer.append(text)
 
     def visitErrorNode(self, node):
@@ -42,13 +59,9 @@ class TreeStringListener(ParseTreeListener):
         """
         event
         """
-        if "ruleIndex" in ctx.__dict__:
-            text = ("    " * self.level) + "+ " + \
-                self.parser.ruleNames[
-                ctx.ruleIndex] + ", LT(1)=" + self.parser._input.LT(1).text
-        else:
-            text = ("    " * self.level) + "+ " + \
-                ", LT(1)=" + self.parser._input.LT(1).text
+        kind = str(type(ctx)).split(
+            ".")[-1].strip("'<>").replace("Context", "")
+        text = ("    " * self.level) + "+ {0}".format(kind)
         self.buffer.append(text)
         self.level += 1
 
@@ -57,13 +70,7 @@ class TreeStringListener(ParseTreeListener):
         event
         """
         self.level -= 1
-        if "ruleIndex" in ctx.__dict__:
-            text = ("    " * self.level) + "- " + \
-                self.parser.ruleNames[ctx.ruleIndex] + \
-                ", LT(1)=" + self.parser._input.LT(1).text
-        else:
-            text = ("    " * self.level) + "- " + \
-                ", LT(1)=" + self.parser._input.LT(1).text
+        text = ("    " * self.level) + "- "
         self.buffer.append(text)
 
     def __str__(self):

@@ -216,7 +216,8 @@ class TestFiles (unittest.TestCase):
 
         this = os.path.abspath(__file__).replace(".pyc", ".py")
         res = file_encoding(this)
-        self.assertEqual(res, {'encoding': 'ascii', 'confidence': 1.0, 'language': ''})
+        self.assertEqual(
+            res, {'encoding': 'ascii', 'confidence': 1.0, 'language': ''})
 
 
 if __name__ == "__main__":

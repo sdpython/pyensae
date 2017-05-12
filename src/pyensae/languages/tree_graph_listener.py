@@ -9,8 +9,8 @@ from antlr4 import ParseTreeListener
 class TreeGraphListener(ParseTreeListener):
 
     """
-    this class is an attempt to run through the tree
-    but it is not complete
+    This class is an attempt to run through the tree
+    and to convert into a graph.
 
     .. exref::
         :title: Draw a grammar graph for a small code

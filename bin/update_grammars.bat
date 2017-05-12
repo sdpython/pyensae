@@ -20,7 +20,7 @@ set PYTHONPATH=%current%\src
 if %errorlevel% neq 0 exit /b %errorlevel%
 %pythonexe% -u %current%..\setup.py update_grammars Python3.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars R.g4
+%pythonexe% -u %current%..\setup.py update_grammars R.g4 RFilter.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
 %pythonexe% -u %current%..\setup.py update_grammars DOT.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
