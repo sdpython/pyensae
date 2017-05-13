@@ -26,7 +26,7 @@
     env(func) <- asNamespace("namesp")
 
     ## last
-    bdf <- within(iris, param <- spec == "setosa")
+    bdf <- within(iris, { spec == "setosa" } )
     bf <- tempfile("bf", fet = ".txt")
     ds(bdf, btx, ow = TRUE)
 }

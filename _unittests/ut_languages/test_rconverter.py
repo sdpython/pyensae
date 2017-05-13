@@ -56,6 +56,8 @@ class TestPRConverter(unittest.TestCase):
                    os.path.join(temp, "..", "data", "r1.r")]
 
         exps = ["""
+                    from python2r_helper import within
+
                     # some comments
 
 
@@ -65,7 +67,7 @@ class TestPRConverter(unittest.TestCase):
 
                         def func(infile, csch, predmod):
 
-                            impnode = zoo.test(infile="$infile", dot="$dotdot", csch=csch)
+                            impnode = zoo_test(infile="$infile", dot="$dotdot", csch=csch)
                             obj = waouh(
                                 impnode, nono, trnode, inputs=list(
                                     infile=infile), outputs=list(
@@ -80,7 +82,7 @@ class TestPRConverter(unittest.TestCase):
                         env(func) . asNamespace("namesp")
 
                         # last
-                        bdf = within(iris, param=spec == "setosa")
+                        bdf = within(iris, " spec == \\\"setosa\\\" ")
                         bf = tempfile("bf", fet=".txt")
                         ds(bdf, btx, ow=True)
                 """.replace("                    ", ""),
@@ -121,6 +123,7 @@ class TestPRConverter(unittest.TestCase):
             new_file = os.path.join(temp, os.path.split(script)[-1] + ".py")
             with open(new_file, "w", encoding="utf-8") as f:
                 f.write(pycode)
+            self.maxDiff = None
             self.assertEqual(exp.strip(" \n"), pycode.strip(" \n"))
 
 

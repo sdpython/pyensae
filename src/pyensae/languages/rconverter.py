@@ -230,8 +230,11 @@ class TreeStringListener(ParseTreeListener):
             if text == "if":
                 self.stack.append((name, node))
                 return self.add_code_final()
-            elif text in ("else", ")"):
+            elif text == "else":
                 self.stack.append((name, node))
+                self.stack.append((":EOL", None))
+                return self.add_code_final()
+            elif text == ")":
                 self.stack.append((":EOL", None))
                 return self.add_code_final()
             elif text in ('(', "\n"):
@@ -292,10 +295,8 @@ class TreeStringListener(ParseTreeListener):
                 return self.add_code_final()
             elif text == "{":
                 self.stack.append(("Formop", '"'))
-                self.stack.append((name, node))
                 return self.add_code_final()
             elif text == "}":
-                self.stack.append((name, node))
                 self.stack.append(("Formop", '"'))
                 return self.add_code_final()
         elif name == "Operator":
@@ -402,9 +403,27 @@ class TreeStringListener(ParseTreeListener):
             return "."
         elif name == "Dotop_static":
             return ".static."
-        elif name == "identifier":
+        elif name == "Identifier":
             text = node.symbol.text
-            return text.replace(".", "_")
+            if text == "c":
+                # This is a tuple.
+                return "tuple"
+            else:
+                return text.replace(".", "_")
+        elif name == "Constant":
+            text = node.symbol.text
+            is_formula = False
+            n = node.parentCtx
+            while n is not None:
+                na = self.terminal_node_name(n)
+                if "Formula" in na:
+                    is_formula = True
+                    break
+                n = n.parentCtx
+            if is_formula and text[0] == '"' and text[-1] == '"':
+                return '\\"{0}\\"'.format(text[1:-1])
+            else:
+                return text
         elif name == "Rangeop":
             text = node.symbol.text
             if text == ":":
