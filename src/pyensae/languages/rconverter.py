@@ -36,9 +36,30 @@ def r2python(code: str, pep8=False, fLOG=None) -> str:
     @param      fLOG        logging function
     @return                 Python string
 
+    .. _code-r2python:
+
     The function uses a customized R grammar implemented with Antlr4.
     Formula becomes strings. They should be handled with
     `patsy <http://patsy.readthedocs.io/en/latest/>`_.
+
+    .. exref::
+        :title: Convert R into Python
+
+        .. runpython::
+            :showcode:
+
+            rscript = '''
+                nb=function(y=1930){
+                debut=1816
+                MatDFemale=matrix(D$Female,nrow=111)
+                colnames(MatDFemale)=(debut+0):198
+                cly=(y-debut+1):111
+                deces=diag(MatDFemale[:,cly[cly%in%1:199]])
+                return(c(B$Female[B$Year==y],deces))}
+                '''
+
+            from pyensae.languages import r2python
+            print(r2python(rscript, pep8=True))
     """
     if fLOG:
         fLOG("[r2python] parse ", len(code), "bytes")
