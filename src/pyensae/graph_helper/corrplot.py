@@ -124,7 +124,7 @@ class Corrplot(Linkage):
         ind1 = fcluster(Y, 0.7 * max(Y[:, 2]), 'distance')
         Z = dendrogram(Y, no_plot=True)
         idx1 = Z['leaves']
-        cor2 = self.df.ix[idx1][idx1]
+        cor2 = self.df.iloc[idx1].T.iloc[idx1].T
         if inplace is True:
             self.df = cor2
         else:
