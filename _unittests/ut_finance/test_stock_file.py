@@ -103,6 +103,7 @@ class TestStockFile (unittest.TestCase):
             if is_travis_or_appveyor():
                 warnings.warn(
                     "Probably an issue with pandas_datareader.\n" + str(e))
+                return
 
         file = os.path.join(cache, "save.txt")
         if os.path.exists(file):
