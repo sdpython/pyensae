@@ -1,0 +1,7 @@
+from python2r_helper import inlineif
+
+
+def onefunction():
+
+    od = tempfile("od", fileext=".pdf")   # ccc
+    on_exit(inlineif(file_exists(od), ul(od)), add=True)

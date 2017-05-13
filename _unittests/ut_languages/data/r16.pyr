@@ -1,0 +1,3 @@
+def onefunction():
+
+    checkEquals(d % 1, tuple(0, 0))

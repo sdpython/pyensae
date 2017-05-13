@@ -1,0 +1,3 @@
+def onefunction():
+
+    length = do(p=range(1, 10))

@@ -26,6 +26,22 @@ class RListener(ParseTreeListener):
     def exitExpr(self, ctx: RParser.ExprContext):
         pass
 
+    # Enter a parse tree produced by RParser#affectation.
+    def enterAffectation(self, ctx: RParser.AffectationContext):
+        pass
+
+    # Exit a parse tree produced by RParser#affectation.
+    def exitAffectation(self, ctx: RParser.AffectationContext):
+        pass
+
+    # Enter a parse tree produced by RParser#rangeopexpr.
+    def enterRangeopexpr(self, ctx: RParser.RangeopexprContext):
+        pass
+
+    # Exit a parse tree produced by RParser#rangeopexpr.
+    def exitRangeopexpr(self, ctx: RParser.RangeopexprContext):
+        pass
+
     # Enter a parse tree produced by RParser#exprlist.
     def enterExprlist(self, ctx: RParser.ExprlistContext):
         pass
@@ -72,6 +88,14 @@ class RListener(ParseTreeListener):
 
     # Exit a parse tree produced by RParser#sub.
     def exitSub(self, ctx: RParser.SubContext):
+        pass
+
+    # Enter a parse tree produced by RParser#range_simple.
+    def enterRange_simple(self, ctx: RParser.Range_simpleContext):
+        pass
+
+    # Exit a parse tree produced by RParser#range_simple.
+    def exitRange_simple(self, ctx: RParser.Range_simpleContext):
         pass
 
     # Enter a parse tree produced by RParser#constant.

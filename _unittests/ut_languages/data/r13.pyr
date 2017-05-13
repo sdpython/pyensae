@@ -1,0 +1,3 @@
+def onefunction():
+
+    names(df) .set(names(df))

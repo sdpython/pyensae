@@ -52,10 +52,9 @@ expr
     : expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
     | expr '[' sublist ']'
     | expr dotop expr
-    | <assoc=right> expr  expr
     | ('-'|'+') expr
-    | expr affectop NL? expr
-    | expr rangeop expr
+    | expr affectation
+    | expr rangeopexpr
     | <assoc=right> expr USER_OP expr // anything wrappedin %: '%' .* '%'
     | <assoc=right> expr operator expr
     | <assoc=right> expr comparison expr
@@ -80,6 +79,14 @@ expr
     | identifier
     ;
 
+affectation
+    : affectop NL? expr
+    ;
+
+rangeopexpr
+    : rangeop expr
+    ;
+
 exprlist
     : (expr ((';'|NL) expr?)*)
     |
@@ -101,15 +108,19 @@ sublistadd
     : identifier ( NL? '+' NL? identifier NL? )* ;
 
 sub
-    : expr
-    | identifier '='
+    : identifier '=' range_simple
     | identifier '=' expr
     | STRING '='
     | STRING '=' expr
     | 'NULL' '='
     | 'NULL' '=' expr
     | '...'
-    |
+    | ':'
+    | expr
+    ;
+
+range_simple
+    : (identifier | INT ) ':' (identifier | INT )
     ;
     
 //////    
@@ -163,7 +174,7 @@ returnexpr
     ;
 
 functioncall
-    : identifier '(' NL* sublist NL* ')'
+    : identifier (('(' ')') | ('(' NL* sublist NL* ')'))
     ;
 
 formula_simple
@@ -177,7 +188,10 @@ formula_simple_A
     ;
 
 formula_simple_B
-    : 'within' '(' identifier ',' '{' expr '}' ')'
+    : 'within' '(' identifier ',' (
+           ('{' expr (';' expr)* '}' ) |
+           ( identifier affectop expr )
+           ) ')'
     ;
 
 formula_simple_C
@@ -223,6 +237,7 @@ operator
     | '/'
     | '%'
     | '^'
+    | '%%'
     ;
 
 comparison

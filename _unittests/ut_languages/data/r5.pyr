@@ -1,0 +1,7 @@
+from python2r_helper import inlineif
+
+
+def onefunc():
+
+    on_exit(inlineif(file_exists(filename), afunction(filename)), add=True)
+

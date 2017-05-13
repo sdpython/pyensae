@@ -1,0 +1,6 @@
+import patsy
+
+
+def onefunction():
+
+    lm = lr(formula="( cf == 1 ) ~ age + pa ", data=it)

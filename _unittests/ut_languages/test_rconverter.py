@@ -1,5 +1,5 @@
 """
-@brief      test log(time=2s)
+@brief      test log(time=3s)
 
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
@@ -52,79 +52,48 @@ class TestPRConverter(unittest.TestCase):
 
         temp = get_temp_folder(__file__, "temp_rconverter")
 
-        scripts = [os.path.join(temp, "..", "data", "r2.r"),
-                   os.path.join(temp, "..", "data", "r1.r")]
+        data = os.path.join(temp, "..", "data")
+        files = os.listdir(data)
+        rfiles = [os.path.join(data, _) for _ in sorted(files) if ".r" in _]
+        pyfiles = [os.path.join(data, _) for _ in sorted(files) if ".pyr" in _]
+        self.assertEqual(len(rfiles), len(pyfiles))
+        self.assertTrue(len(rfiles) > 0)
 
-        exps = ["""
-                    from python2r_helper import within
-
-                    # some comments
-
-
-                    def test_machine_chouette_something():
-
-                        # some other comment
-
-                        def func(infile, csch, predmod):
-
-                            impnode = zoo_test(infile="$infile", dot="$dotdot", csch=csch)
-                            obj = waouh(
-                                impnode, nono, trnode, inputs=list(
-                                    infile=infile), outputs=list(
-                                    predmod=predmod))
-
-                            # one
-                            # comment
-                            exjs = epr(unclass(tojs(obj)))
-                            exjs = epr(tojs(obj))
-                            exjs = epr(obj)
-
-                        env(func) . asNamespace("namesp")
-
-                        # last
-                        bdf = within(iris, " spec == \\\"setosa\\\" ")
-                        bf = tempfile("bf", fet=".txt")
-                        ds(bdf, btx, ow=True)
-                """.replace("                    ", ""),
-                """
-                    # example
-                    a = 2
-                    b = 3
-
-
-                    def mySecFun(v, M):
-
-                        u = tuple(0, 0, 0, 0)
-
-                        for i in range(1, length(v)):
-
-                            if i == 1:
-
-                                u[i] = myFirstFun(v[i])
-
-                            else:
-
-                                u[i] = mySecondFun(v[i]) + 2
-
-                                u[i + 1] = myThirdFun(v[i])
-
-                        return u
-
-
-                    Sqv = mySecFun(v)
-                    Sqv
-                """.replace("                    ", ""),
-                ]
-
-        for exp, script in zip(exps, scripts):
+        i = 0
+        for exp, script in zip(pyfiles, rfiles):
+            fLOG(os.path.split(script)[-1])
             with open(script, "r", encoding="utf-8") as f:
                 code = f.read()
-            pycode = r2python(code, pep8=True)
-            new_file = os.path.join(temp, os.path.split(script)[-1] + ".py")
+
+            try:
+                pycode = r2python(code, pep8=True)
+            except Exception as e:
+                fLOG(code)
+                pycode = r2python(code, pep8=True, fLOG=fLOG)
+                raise e
+
+            new_file = os.path.join(
+                temp, "pr" + str(i) + os.path.splitext(script)[-1] + ".py")
             with open(new_file, "w", encoding="utf-8") as f:
                 f.write(pycode)
+
+            try:
+                comp = compile(pycode, new_file, "exec")
+            except Exception as e:
+                fLOG(pycode)
+                pycode = r2python(code, pep8=True, fLOG=fLOG)
+                raise e
+
+            self.assertTrue(comp is not None)
+
+            with open(exp, "r", encoding="utf-8") as f:
+                expcode = f.read()
+
             self.maxDiff = None
-            self.assertEqual(exp.strip(" \n"), pycode.strip(" \n"))
+            if expcode.strip(" \n") != pycode.strip(" \n"):
+                fLOG(pycode)
+                pycode = r2python(code, pep8=True, fLOG=fLOG)
+            self.assertEqual(expcode.strip(" \n"), pycode.strip(" \n"))
 
 
 if __name__ == "__main__":

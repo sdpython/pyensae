@@ -1,0 +1,7 @@
+import patsy
+
+
+def onefunction():
+
+    form = " v1 ~ v2 + v3 "
+    ex = quote()
