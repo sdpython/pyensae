@@ -49,7 +49,9 @@ parse
     ;
 
 expr
-    : expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
+    : ranges
+    | intersections
+    | expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
     | expr '[' sublist ']'
     | expr dotop expr
     | ('-'|'+') expr
@@ -108,8 +110,7 @@ sublistadd
     : identifier ( NL? '+' NL? identifier NL? )* ;
 
 sub
-    : identifier '=' range_simple
-    | identifier '=' expr
+    : identifier '=' expr
     | STRING '='
     | STRING '=' expr
     | 'NULL' '='
@@ -119,11 +120,34 @@ sub
     | expr
     ;
 
+ranges
+    : range_simple
+    | range_complexe
+    ;
+
 range_simple
     : (identifier | INT ) ':' (identifier | INT )
     ;
     
-//////    
+range_complexe
+    : '(' expr ')' ':' expr
+    ;
+
+intersections
+    : intersection_simple
+    | intersection_complexe
+    ;
+
+intersection_simple
+    : identifier  '%in%' expr
+    ;
+
+intersection_complexe
+    : '(' expr ')' '%in%' expr
+    ;
+
+
+//////
 // NEW
 //////
 
@@ -238,6 +262,7 @@ operator
     | '%'
     | '^'
     | '%%'
+    | '%in%'
     ;
 
 comparison

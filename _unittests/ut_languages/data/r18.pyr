@@ -1,0 +1,8 @@
+def nb(y=1930):
+
+    debut = 1816
+    MatDFemale = matrix(D . Female, nrow=111)
+    colnames(MatDFemale) .set(debut + range(0, 198))
+    cly = range((y - debut + 1), 111)
+    deces = diag(MatDFemale[:, cly[set(cly) & set(range(1, 199))]])
+    return tuple(B . Female[B . Year == y], deces)

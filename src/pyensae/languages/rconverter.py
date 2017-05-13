@@ -187,9 +187,6 @@ class TreeStringListener(ParseTreeListener):
                 if len(self.elements) > 0 and self.elements[-1] != '\n':
                     self.elements.append("\n")
                 return self.add_code_final()
-            if text == "%in%":
-                self.stack.append((None, "in"))
-                return self.add_code_final()
             if text == "{":
                 self.empty_stack()
                 if len(self.block) == 0:
@@ -366,9 +363,16 @@ class TreeStringListener(ParseTreeListener):
             else:
                 self.stack.append((name, node))
                 return self.add_code_final()
-        elif name == "Range_simple":
+        elif name in ("Range_simple", "Range_complexe"):
             if text == ":":
                 self.stack.append((name, ","))
+                return self.add_code_final()
+            else:
+                self.stack.append((name, node))
+                return self.add_code_final()
+        elif name in ("Intersection_simple", "Intersection_complexe"):
+            if text == "%in%":
+                self.stack.append((name, node))
                 return self.add_code_final()
             else:
                 self.stack.append((name, node))
@@ -436,7 +440,6 @@ class TreeStringListener(ParseTreeListener):
 
         # We store some end character we need to add.
         closure = {}
-        in_range_simple = False
 
         for ipos, (name, node) in enumerate(self.stack):
 
@@ -453,21 +456,13 @@ class TreeStringListener(ParseTreeListener):
                     b = self.has_parent(node, leave_node)
                     if not b:
                         rem.append(k)
-                        self.fLOG("      closure '{0}' - L-{1} C-{2} ({3})".format(symbol,
-                                                                                   self.terminal_node_name(
-                                                                                       leave_node),
-                                                                                   self.terminal_node_name(node), node.symbol.text))
+                        args = [symbol, self.terminal_node_name(leave_node),
+                                self.terminal_node_name(node), node.symbol.text]
+                        self.fLOG(
+                            "      closure '{0}' - L-{1} C-{2} ({3})".format(*args))
                         self.elements.append(symbol)
                 for r in rem:
                     del closure[r]
-
-            if name == "Range_simple":
-                if not in_range_simple:
-                    self.elements.append("range(")
-                    in_range_simple = True
-                    closure[id(node.parentCtx)] = (node.parentCtx, ")")
-            else:
-                in_range_simple = False
 
             converted = self.to_python(name, node)
 
@@ -555,7 +550,7 @@ class TreeStringListener(ParseTreeListener):
 
     def has_parent(self, current, parent):
         """
-        Tells if *parent* is one of the parents of *current*.
+        Tell if *parent* is one of the parents of *current*.
 
         @param      current     current node
         @param      parent      parent to look for
@@ -631,6 +626,12 @@ class TreeStringListener(ParseTreeListener):
                     return ","
             else:
                 return text
+        elif name in ("Intersection_simple", "Intersection_complexe"):
+            text = node.symbol.text
+            if text == "%in%":
+                return ") & set("
+            else:
+                return text
         elif isinstance(node, str):
             return node
         elif node is None:
@@ -694,3 +695,19 @@ class TreeStringListener(ParseTreeListener):
         usual
         """
         return self.get_python() + "\n----\n" + "\n".join(self.buffer)
+
+    def enterRanges(self, ctx: RParser.RangesContext):
+        self.fLOG("    add 'range('")
+        self.stack.append(("Ranges", "range("))
+
+    def exitRanges(self, ctx: RParser.RangesContext):
+        self.fLOG("    add ') # range'")
+        self.stack.append(("Ranges", ")"))
+
+    def enterIntersections(self, ctx: RParser.RangesContext):
+        self.fLOG("    add 'set('")
+        self.stack.append(("Intersections", "set("))
+
+    def exitIntersections(self, ctx: RParser.RangesContext):
+        self.fLOG("    add ') # set'")
+        self.stack.append(("Intersections", ")"))

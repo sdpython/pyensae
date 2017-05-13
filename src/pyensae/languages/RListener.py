@@ -90,12 +90,52 @@ class RListener(ParseTreeListener):
     def exitSub(self, ctx: RParser.SubContext):
         pass
 
+    # Enter a parse tree produced by RParser#ranges.
+    def enterRanges(self, ctx: RParser.RangesContext):
+        pass
+
+    # Exit a parse tree produced by RParser#ranges.
+    def exitRanges(self, ctx: RParser.RangesContext):
+        pass
+
     # Enter a parse tree produced by RParser#range_simple.
     def enterRange_simple(self, ctx: RParser.Range_simpleContext):
         pass
 
     # Exit a parse tree produced by RParser#range_simple.
     def exitRange_simple(self, ctx: RParser.Range_simpleContext):
+        pass
+
+    # Enter a parse tree produced by RParser#range_complexe.
+    def enterRange_complexe(self, ctx: RParser.Range_complexeContext):
+        pass
+
+    # Exit a parse tree produced by RParser#range_complexe.
+    def exitRange_complexe(self, ctx: RParser.Range_complexeContext):
+        pass
+
+    # Enter a parse tree produced by RParser#intersections.
+    def enterIntersections(self, ctx: RParser.IntersectionsContext):
+        pass
+
+    # Exit a parse tree produced by RParser#intersections.
+    def exitIntersections(self, ctx: RParser.IntersectionsContext):
+        pass
+
+    # Enter a parse tree produced by RParser#intersection_simple.
+    def enterIntersection_simple(self, ctx: RParser.Intersection_simpleContext):
+        pass
+
+    # Exit a parse tree produced by RParser#intersection_simple.
+    def exitIntersection_simple(self, ctx: RParser.Intersection_simpleContext):
+        pass
+
+    # Enter a parse tree produced by RParser#intersection_complexe.
+    def enterIntersection_complexe(self, ctx: RParser.Intersection_complexeContext):
+        pass
+
+    # Exit a parse tree produced by RParser#intersection_complexe.
+    def exitIntersection_complexe(self, ctx: RParser.Intersection_complexeContext):
         pass
 
     # Enter a parse tree produced by RParser#constant.
