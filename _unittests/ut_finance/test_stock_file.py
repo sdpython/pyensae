@@ -104,6 +104,8 @@ class TestStockFile (unittest.TestCase):
                 warnings.warn(
                     "Probably an issue with pandas_datareader.\n" + str(e))
                 return
+            else:
+                raise e
 
         file = os.path.join(cache, "save.txt")
         if os.path.exists(file):
