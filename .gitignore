@@ -268,3 +268,5 @@ _doc/notebooks/None0000000.png
 _unittests/ut_datasource/test_linkedin.py.err
 _unittests/ut_finance/test_stock_file.py.err
 _unittests/run_unittests.py.out
+_doc/sphinxdoc/source/phdoc_static/require.js
+_doc/sphinxdoc/source/phdoc_static/style_notebook_snippet.css

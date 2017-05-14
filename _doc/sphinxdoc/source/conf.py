@@ -28,3 +28,5 @@ blog_root = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/"
 blog_background = False
 exclude_patterns += ["pyensae/file_helper/pigjar/*",
                      "pyensae/file_helper/hadoopjar/*"]
+
+nblinks = {"code-r2python": blog_root + "pyensae/languages/rconverter.html"}
