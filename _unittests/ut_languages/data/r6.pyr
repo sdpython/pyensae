@@ -2,6 +2,5 @@ from python2r_helper import within
 
 
 def onefunc():
-
     df = within(df, " age = as_character ( age ) ",
                 " car_age = as_character ( car_age ) ")

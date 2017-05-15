@@ -1,0 +1,7 @@
+from python2r_helper import ImplicitColumn
+from python2r_helper import bquote
+
+
+def some():
+    t = bquote(list(a=~  (age == ImplicitColumn . whichAge)))
+    r = bquote(~  (age == ImplicitColumn . whichAge))

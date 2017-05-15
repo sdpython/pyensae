@@ -26,6 +26,46 @@ class RListener(ParseTreeListener):
     def exitExpr(self, ctx: RParser.ExprContext):
         pass
 
+    # Enter a parse tree produced by RParser#functiondefbody.
+    def enterFunctiondefbody(self, ctx: RParser.FunctiondefbodyContext):
+        pass
+
+    # Exit a parse tree produced by RParser#functiondefbody.
+    def exitFunctiondefbody(self, ctx: RParser.FunctiondefbodyContext):
+        pass
+
+    # Enter a parse tree produced by RParser#functiondeflambda.
+    def enterFunctiondeflambda(self, ctx: RParser.FunctiondeflambdaContext):
+        pass
+
+    # Exit a parse tree produced by RParser#functiondeflambda.
+    def exitFunctiondeflambda(self, ctx: RParser.FunctiondeflambdaContext):
+        pass
+
+    # Enter a parse tree produced by RParser#functiondefargslambda.
+    def enterFunctiondefargslambda(self, ctx: RParser.FunctiondefargslambdaContext):
+        pass
+
+    # Exit a parse tree produced by RParser#functiondefargslambda.
+    def exitFunctiondefargslambda(self, ctx: RParser.FunctiondefargslambdaContext):
+        pass
+
+    # Enter a parse tree produced by RParser#functiondefargs.
+    def enterFunctiondefargs(self, ctx: RParser.FunctiondefargsContext):
+        pass
+
+    # Exit a parse tree produced by RParser#functiondefargs.
+    def exitFunctiondefargs(self, ctx: RParser.FunctiondefargsContext):
+        pass
+
+    # Enter a parse tree produced by RParser#implicit_column_name.
+    def enterImplicit_column_name(self, ctx: RParser.Implicit_column_nameContext):
+        pass
+
+    # Exit a parse tree produced by RParser#implicit_column_name.
+    def exitImplicit_column_name(self, ctx: RParser.Implicit_column_nameContext):
+        pass
+
     # Enter a parse tree produced by RParser#affectation.
     def enterAffectation(self, ctx: RParser.AffectationContext):
         pass

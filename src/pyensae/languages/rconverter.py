@@ -22,8 +22,10 @@ class R2PyConversionError(Exception):
         except AttributeError:
             text = "ERROR"
         mes = "Unable to convert\n'{0}'\n{1}\n{2}\nPARENT\n'{3}'\n{4}\nSOFAR\n{5}\nSOSTACK\n{5}".format(
-            text, type(node), node, node.parentCtx, type(node.parentCtx), sofar, sostack)
-        mes += "\n------------\n" + message
+            text, type(node), node, ("" if isinstance(
+                node, str) else node.parentCtx),
+            (str if isinstance(node, str) else type(node.parentCtx)), sofar, sostack)
+        mes += "\n------------\n" + str(message)
         Exception.__init__(self, mes)
 
 
@@ -187,9 +189,35 @@ class TreeStringListener(ParseTreeListener):
         elif name == "Boolean":
             self.stack.append((name, node))
             return self.add_code_final()
-        elif name == "Functiondef":
-            self.stack.append((name, node))
-            return self.add_code_final()
+        elif name in ("Functiondef", "Functiondefargs", "Functiondefbody"):
+            if text == "{":
+                self.empty_stack()
+                if len(self.block) == 0:
+                    raise R2PyConversionError(node, name, "".join(
+                        self.elements), "\n".join(str(_) for _ in self.stack))
+                self.block[-1] = True
+                return self.add_code_final()
+            elif text == "}":
+                self.empty_stack()
+                if len(self.block) == 0:
+                    raise R2PyConversionError(node, name, "".join(
+                        self.elements), "\n".join(str(_) for _ in self.stack))
+                self.block.pop()
+                self.indent -= 1
+                self.fLOG(
+                    "[TreeStringListener.add_code*] indent -= 1", "--", self.indent)
+                return self.add_code_final()
+            elif text == '\n':
+                return self.add_code_final()
+            elif text in ('(', ')', 'function'):
+                self.stack.append((name, node))
+                return self.add_code_final()
+        elif name == "Functiondefargslambda":
+            if text == "(":
+                return self.add_code_final()
+            elif text == ")":
+                self.stack.append((name, ":"))
+                return self.add_code_final()
         elif name == "Expr":
             if text.startswith("#"):
                 # Comment
@@ -398,6 +426,14 @@ class TreeStringListener(ParseTreeListener):
             else:
                 self.stack.append((name, node))
                 return self.add_code_final()
+        elif name == "Implicit_column_name":
+            if text == ".":
+                self.imports.add("from python2r_helper import ImplicitColumn")
+                self.stack.append(("Identifier", "ImplicitColumn"))
+                self.stack.append((name, node))
+                return self.add_code_final()
+            elif text in ("(", ")"):
+                return self.add_code_final()
 
         if text.startswith("#"):
             # Comment
@@ -428,15 +464,15 @@ class TreeStringListener(ParseTreeListener):
         is_function_def = False
         is_for = False
         as_namespace = False
-        for name, node in self.stack:
-            if name == "Functiondef":
+        for ipos, (name, node) in enumerate(self.stack):
+            if name == "Functiondef" and not self.search_parents(node, "Functiondefargslambda", 3):
                 is_function_def = True
                 break
             elif name == "Forexpr":
                 is_for = True
                 break
             elif name == "Identifier":
-                text = node.symbol.text
+                text = node if isinstance(node, str) else node.symbol.text
                 if text == "asNamespace":
                     as_namespace = True
                     break
@@ -447,16 +483,18 @@ class TreeStringListener(ParseTreeListener):
         if is_function_def:
             self.elements.append("\n")
             function_name = self.stack[0][1].symbol.text
+            self.fLOG(
+                "[TreeStringListener.empty_stack] add function '{0}'".format(function_name))
             self.elements.append("    " * self.indent)
             self.elements.append("def")
             self.elements.append(" ")
-            function_name = function_name.strip('"').replace('.', "_")
+            function_name = function_name.strip(
+                '"').replace('.', "_").replace("-", "_")
             self.elements.append(function_name)
             self.stack = self.stack[3:]
             last = self.stack[-1][1].symbol.text
             if last != ")":
-                last = self.stack[-1]
-                raise R2PyConversionError(last[0], last[1], "".join(
+                raise R2PyConversionError(self.stack[-1][1], last, "".join(
                     self.elements), "\n".join(str(_) for _ in self.stack))
 
         # We store some end character we need to add.
@@ -569,7 +607,7 @@ class TreeStringListener(ParseTreeListener):
             depth -= 1
         return False
 
-    def has_parent(self, current, parent):
+    def has_parent(self, current, parent, depth=None):
         """
         Tell if *parent* is one of the parents of *current*.
 
@@ -579,11 +617,16 @@ class TreeStringListener(ParseTreeListener):
         """
         if isinstance(current, str):
             raise NotImplementedError()
+        if depth is None:
+            ide = 0
+        else:
+            ide = depth
         n = current
-        while n is not None:
+        while (depth is None or ide > 0) and n is not None:
             if id(n) == id(parent):
                 return True
             n = n.parentCtx
+            ide -= 1
         return False
 
     def to_python(self, name, node):
@@ -603,28 +646,15 @@ class TreeStringListener(ParseTreeListener):
             return "."
         elif name == "Dotop_static":
             return ".static."
-        elif name == "Identifier":
-            text = node.symbol.text
-            if text == "c":
-                # This is a tuple.
-                return "tuple"
-            elif text == "finally":
-                return "finallyR"
-            elif text == "try":
-                parent_name = self.terminal_node_name(node.parentCtx)
-                if parent_name == "Functioncall":
-                    self.imports.add("from python2r_helper import dotry")
-                    return "dotry"
-                else:
-                    return text.replace(".", "_")
-            else:
-                return text.replace(".", "_")
         elif name == "Constant":
             text = node.symbol.text
             if text.startswith("`") and text.endswith("`") and len(text) > 1:
                 return 'RCOL("{0}")'.format(text[1:-1])
             if text == "NULL":
                 return "None"
+            if text.endswith("L"):
+                # Integer
+                return text[:-1]
             is_formula = self.search_parents(node, "Formula")
             if is_formula and text[0] == '"' and text[-1] == '"':
                 return '\\"{0}\\"'.format(text[1:-1])
@@ -657,11 +687,46 @@ class TreeStringListener(ParseTreeListener):
             return node
         elif node is None:
             return ""
+        elif name == "Functiondef":
+            if self.search_parents(node, "Functiondeflambda", 2):
+                return "lambda"
+            else:
+                return node.symbol.text
+        elif name == "Identifier":
+            text = node.symbol.text
+            if text == "c":
+                # This is a tuple.
+                return "tuple"
+            elif text == "class":
+                parent_name = self.terminal_node_name(node.parentCtx)
+                if parent_name == "Functioncall":
+                    self.imports.add("from python2r_helper import make_class")
+                    return "make_class"
+                else:
+                    return text.replace(".", "_")
+            elif text == "finally":
+                self.imports.add("from python2r_helper import finallyR")
+                return "finallyR"
+            elif text in ("bquote", "ImplicitColumn"):
+                self.imports.add(
+                    "from python2r_helper import {0}".format(text))
+                return text
+            elif text == "try":
+                parent_name = self.terminal_node_name(node.parentCtx)
+                if parent_name == "Functioncall":
+                    self.imports.add("from python2r_helper import dotry")
+                    return "dotry"
+                else:
+                    return text.replace(".", "_")
+            else:
+                return text.replace(".", "_")
         else:
             text = node.symbol.text
             if text == "c":
                 # This is a tuple.
                 return "tuple"
+            elif text == "&&":
+                return "and"
             else:
                 return text
 

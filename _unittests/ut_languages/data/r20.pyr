@@ -1,0 +1,3 @@
+def onefunction():
+    df[["v"]] = I(sapply(seq(nrow(df)), lambda i,
+                         r: r[seq(i % length(lett))], r))

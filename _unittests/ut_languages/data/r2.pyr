@@ -4,11 +4,9 @@ from python2r_helper import within
 
 
 def test_machine_chouette_something():
-
     # some other comment
 
     def func(infile, csch, predmod):
-
         impnode = zoo_test(infile="$infile", dot="$dotdot", csch=csch)
         obj = waouh(
             impnode, nono, trnode, inputs=list(

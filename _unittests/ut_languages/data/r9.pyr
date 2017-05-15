@@ -2,5 +2,4 @@ from python2r_helper import inlineif
 
 
 def onefunction():
-
     ou = inlineif(length(grep("^some", basename(du))) > 0, od, "")

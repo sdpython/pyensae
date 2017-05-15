@@ -64,7 +64,8 @@ expr
     | expr ('&'|'&&') expr
     | expr ('|'|'||') expr
     | formula_simple
-    | functiondef '(' NL* formlist? NL* ')' expr // define function
+    | functiondefbody
+    | functiondeflambda
     | functioncall
     | NL* '{' NL* exprlist NL* '}' NL*  // compound statement
     | returnexpr
@@ -74,11 +75,32 @@ expr
     | whileexpr
     | repeatexpr
     | '?' expr // get help on expr, usually string or ID
+    | implicit_column_name
     | nextexpr
     | 'break'
     | ('(' expr ')')
     | constant
     | identifier
+    ;
+
+functiondefbody
+    :  functiondefargs NL* '{' NL* exprlist NL* '}'  // define function
+    ;
+
+functiondeflambda
+    :  functiondefargslambda expr  // define function
+    ;
+
+functiondefargslambda
+    : functiondef '(' NL* formlist? NL* ')'
+    ;
+
+functiondefargs
+    : functiondef '(' NL* formlist? NL* ')'
+    ;
+
+implicit_column_name
+    : '.' '(' identifier ')'
     ;
 
 affectation
@@ -139,7 +161,7 @@ intersections
     ;
 
 intersection_simple
-    : identifier  '%in%' expr
+    : (identifier | constant) '%in%' expr
     ;
 
 intersection_complexe
@@ -208,7 +230,7 @@ formula_simple
     ;
 
 formula_simple_A
-    : identifier formop ( sublistadd | '.' )
+    : identifier? formop ( sublistadd | '.' )
     ;
 
 formula_simple_B
@@ -221,6 +243,8 @@ formula_simple_B
 formula_simple_C
     : '(' expr ')' formop ( sublistadd | '.' )
     ;
+
+PARENTHESIS : '(' | ')' ;
 
 affectop
     : '<-'
@@ -331,7 +355,7 @@ HEX_ESCAPE
     ;
 
 ID  :   '.' (LETTER|'_'|'.') (LETTER|DIGIT|'_'|'.')*
-    |   LETTER (LETTER|DIGIT|'_'|'.')*
+    |   '_'? LETTER (LETTER|DIGIT|'_'|'.')*
     ;
     
 fragment LETTER  : [a-zA-Z] ;

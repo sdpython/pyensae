@@ -1,5 +1,4 @@
 def nb(y=1930):
-
     debut = 1816
     MatDFemale = matrix(D . Female, nrow=111)
     colnames(MatDFemale) .set(debut + range(0, 198))

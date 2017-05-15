@@ -2,7 +2,6 @@ from python2r_helper import inlineif
 
 
 def onefunc():
-
     exj = afunction(
         obj,
         s=s,
