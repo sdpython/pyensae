@@ -1,6 +1,9 @@
+from python2r_helper import make_tuple
+
+
 def onefunction():
 
     def func(ind, outv=False):
-        cols = tuple(l, cf, nf)
+        cols = make_tuple(l, cf, nf)
         if outv:
-            cols = tuple(cols, "cf")
+            cols = make_tuple(cols, "cf")

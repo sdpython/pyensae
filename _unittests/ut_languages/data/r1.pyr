@@ -1,10 +1,12 @@
+from python2r_helper import make_tuple
+
 # example
 a = 2
 b = 3
 
 
 def mySecFun(v, M):
-    u = tuple(0, 0, 0, 0)
+    u = make_tuple(0, 0, 0, 0)
 
     for i in range(1, length(v)):
 

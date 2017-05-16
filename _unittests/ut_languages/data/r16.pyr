@@ -1,2 +1,5 @@
+from python2r_helper import make_tuple
+
+
 def onefunction():
-    checkEquals(d % 1, tuple(0, 0))
+    checkEquals(d % 1, make_tuple(0, 0))
