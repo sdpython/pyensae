@@ -5,7 +5,6 @@
 import sys
 import os
 import unittest
-import warnings
 import pandas
 
 try:
@@ -36,7 +35,6 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.pandas_helper import df_crossjoin
 
 

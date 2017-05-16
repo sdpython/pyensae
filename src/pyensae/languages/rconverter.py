@@ -696,7 +696,8 @@ class TreeStringListener(ParseTreeListener):
             text = node.symbol.text
             if text == "c":
                 # This is a tuple.
-                return "tuple"
+                self.imports.add("from python2r_helper import make_tuple")
+                return "make_tuple"
             elif text == "class":
                 parent_name = self.terminal_node_name(node.parentCtx)
                 if parent_name == "Functioncall":
@@ -724,7 +725,8 @@ class TreeStringListener(ParseTreeListener):
             text = node.symbol.text
             if text == "c":
                 # This is a tuple.
-                return "tuple"
+                self.imports.add("from python2r_helper import make_tuple")
+                return "make_tuple"
             elif text == "&&":
                 return "and"
             else:

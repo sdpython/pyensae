@@ -5,7 +5,6 @@
 import sys
 import os
 import unittest
-import warnings
 import pandas
 import numpy
 
@@ -37,7 +36,6 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.pandas_helper import add_missing_indices
 
 
