@@ -85,7 +85,7 @@ class TestNotebookRunnerMagicCommand (unittest.TestCase):
             "pyensae")
 
         outfile = os.path.join(temp, "out_notebook.ipynb")
-        assert not os.path.exists(outfile)
+        self.assertTrue(not os.path.exists(outfile))
         out = run_notebook(
             nbfile,
             working_dir=temp,
@@ -93,7 +93,7 @@ class TestNotebookRunnerMagicCommand (unittest.TestCase):
             additional_path=addpath,
             kernel_name=kernel_name)
         fLOG(out)
-        assert os.path.exists(outfile)
+        self.assertTrue(os.path.exists(outfile))
 
 
 if __name__ == "__main__":
