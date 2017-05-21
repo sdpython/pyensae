@@ -59,7 +59,7 @@ class TestStockGraph4 (unittest.TestCase):
 
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache4")
-        stock = StockPrices("BNP.PA", folder=cache)
+        stock = StockPrices("NASDAQ:MSFT", folder=cache)
         ret = stock.returns()["2012-04-01":"2014-04-15"]
 
         fig, ax = plt.subplots(figsize=(16, 8))

@@ -361,8 +361,8 @@ class Corrplot(Linkage):
                     continue
                 if diagonal is False and x == y:
                     continue
-                datum = (df.ix[x, y] + 1.) / 2.
-                d = df.ix[x, y]
+                datum = (df.iloc[x, y] + 1.) / 2.
+                d = df.iloc[x, y]
                 d_abs = np.abs(d)
                 #c = self.pvalues[x, y]
                 rotate = -45 if d > 0 else +45

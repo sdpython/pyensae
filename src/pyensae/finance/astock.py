@@ -33,7 +33,7 @@ class StockPrices:
             print (prices.dataframe.head())
     """
 
-    def __init__(self, tick, url="yahoo", folder="cache",
+    def __init__(self, tick, url="google", folder="cache",
                  begin=None, end=None, sep=",",
                  intern=False):
         """
@@ -43,6 +43,12 @@ class StockPrices:
 
         If url is yahoo, the data will be download using ``http://finance.yahoo.com/q/cp?s=^FCHI+Components``.
         The CAC40 composition is described `here <http://fr.wikipedia.org/wiki/CAC_40>`_.
+        However Yahoo introduced the use of cookies in May 2017 and it is not so easy to automate.
+        The default provider will be *google*.
+        Tick names depends on the data prodiver. More details:
+        `European Markets Information <https://www.stockmarketeye.com/users-guide/ticker-symbols-and-data-providers/euro-stocks.html>`_.
+        You can also go to `quandl <https://www.quandl.com/data/EURONEXT/BNP-Bnp-Paribas-Act-A-BNP>`_
+        and get the tick for the module `quandl <https://www.quandl.com/tools/python>`_.
 
         @param      tick        tick name, ex ``BNP.PA``
         @param      url         if yahoo, downloads the data from there if it was not done before
@@ -64,14 +70,14 @@ class StockPrices:
                 import pyensae, pandas
                 from pyensae import StockPrices
 
-                # download the CAC 40 composition from my website
+                # download the CAC 40 composition from my website (for Yahoo)
                 pyensae.download_data('cac40_2013_11_11.txt', website='xd')
 
                 # download all the prices (if not already done) and store them into files
                 actions = pandas.read_csv("cac40_2013_11_11.txt", sep="\t")
 
                 # we remove stocks with not enough historical data
-                stocks = { k:StockPrices(tick = k) for k,v in actions.values  if k != "SOLB.PA"}
+                stocks = { k:StockPrices(tick = k) for k,v in actions.values }
                 dates = StockPrices.available_dates(stocks.values())
                 stocks = {k:v for k,v in stocks.items() if len(v.missing(dates)) <= 10}
                 print("nb left", len(stocks))
@@ -140,18 +146,28 @@ class StockPrices:
             send = end.strftime("%Y-%m-%d")
             name = os.path.join(
                 folder,
-                tick.replace(":", "_") +
+                tick.replace(":", "_").replace("/", "_").replace("\\", "_") +
                 ".{0}.{1}.txt".format(
                     sbeg,
                     send))
 
+            date_format = None
             if not os.path.exists(name):
-                if url == "yahoo":
-                    url = "http://ichart.finance.yahoo.com/table.csv?s=%s&d={0}&e={1}&f={2}&g=d&a={3}&b={4}&c={5}&ignore=.csv".format(
-                        end.month - 1, end.day, end.year,
-                        begin.month - 1, begin.day, begin.year)
-                    url = url % tick
+                if url == "google":
                     use_url = True
+                    url_string = "http://www.google.com/finance/historical?q={0}".format(
+                        self.tickname)
+                    url_string += "&startdate={0}&enddate={1}&output=csv".format(
+                        begin.strftime('%b %d, %Y'), end.strftime('%b %d, %Y'))
+                    url = url_string.replace(" ", "%20")
+                    date_format = "%b-%d-%Y"
+                elif url == "quandl":
+                    import quandl
+                    df = quandl.get(
+                        "EURONEXT/BNP", start_date=begin.strftime('%Y-%m-%d'), end_date=end.strftime('%Y-%m-%d'))
+                    df.reset_index(drop=False).to_csv(
+                        name, sep=sep, index=False)
+                    use_url = False
                 elif url in("yahoo", "google", "fred", "famafrench"):
                     import pandas_datareader.data as web
                     df = web.DataReader(self.tickname, url,
@@ -198,6 +214,12 @@ class StockPrices:
                         "pandas cannot parse the file, check your have access to internet" + str(tick)) from e
                 else:
                     raise e
+
+            if date_format is not None:
+                self.datadf["Date"] = pandas.to_datetime(self.datadf["Date"])
+                self.datadf["Date"] = self.datadf["Date"].apply(
+                    lambda x: x.strftime('%Y-%m-%d'))
+                self.datadf.to_csv(name, sep=sep, index=False)
 
         if not intern:
             try:
@@ -390,7 +412,7 @@ class StockPrices:
         tbl = {v: 1 for v in se if v in da2}
         if len(tbl) > 0:
             ave = self.dataframe.apply(lambda row: row["Date"] in tbl, axis=1)
-            return StockPrices(self.tickname, self.dataframe.ix[ave, :])
+            return StockPrices(self.tickname, self.dataframe.iloc[ave, :])
         else:
             raise Exception("no trading dates left")
 
@@ -408,13 +430,13 @@ class StockPrices:
         plus = df["Date"] > fd    # dates from FirstDate+1 to LastDate
         moins = df["Date"] < ld    # dates from FirstDate to LastDate-1
 
-        res = df.ix[plus, ["Date", "Volume"]]
+        res = df.loc[plus, ["Date", "Volume"]]
 
         for k in df.columns:
             if k in ["Date", "Volume"]:
                 continue
-            m = numpy.array(df.ix[moins, k])
-            p = numpy.array(df.ix[plus, k])
+            m = numpy.array(df.loc[moins, k])
+            p = numpy.array(df.loc[plus, k])
             res[k] = (p - m) / m
 
         return StockPrices(self.tickname, res)
@@ -551,7 +573,8 @@ class StockPrices:
         curve = []
         if field == "ohlc":
             from matplotlib.finance import candlestick_ohlc
-            ohlc = list(list(data.ix[i, :4]) for i in range(0, data.shape[0]))
+            ohlc = list(list(data.iloc[i, :4])
+                        for i in range(0, data.shape[0]))
             ohlc = [[mdates.date2num(t)] + v for t, v in zip(dates, ohlc)]
             candlestick_ohlc(ax, ohlc, colorup="g")
         else:

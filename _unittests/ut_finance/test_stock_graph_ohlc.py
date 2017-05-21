@@ -59,7 +59,7 @@ class TestStockGraphOHLC (unittest.TestCase):
 
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache_ohlc")
-        stock = StockPrices("BNP.PA", folder=cache)
+        stock = StockPrices("NASDAQ:MSFT", folder=cache)
 
         fig, ax = plt.subplots(figsize=(16, 8))
         ax = stock.plot(ax=ax, field="ohlc")

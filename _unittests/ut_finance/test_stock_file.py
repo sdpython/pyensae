@@ -36,24 +36,23 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.finance.astock import StockPrices
 
 
 class TestStockFile (unittest.TestCase):
 
-    def test_save_stock(self):
+    def test_save_stock_google(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        cache = os.path.abspath(os.path.split(__file__)[0])
-        cache = os.path.join(cache, "temp_cache_file")
-        name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-15.txt")
-        if os.path.exists(name):
-            os.remove(name)
+
+        temp = get_temp_folder(__file__, "temp_cache_file_google")
+        cache = temp
 
         stock = StockPrices(
-            "BNP.PA",
+            "NASDAQ:MSFT",
             folder=cache,
             end=datetime.datetime(
                 2014,
@@ -64,16 +63,49 @@ class TestStockFile (unittest.TestCase):
         if os.path.exists(file):
             os.remove(file)
         stock.to_csv(file)
-        assert os.path.exists(file)
+        self.assertTrue(os.path.exists(file))
 
         stock2 = StockPrices(file, sep="\t")
-        assert stock.dataframe.shape == stock2.dataframe.shape
+        self.assertEqual(stock.dataframe.shape, stock2.dataframe.shape)
         df = stock2.dataframe
         file = os.path.join(cache, "out_excel.xlsx")
         if os.path.exists(file):
             os.remove(file)
         df.to_excel(file)
-        assert os.path.exists(file)
+        self.assertTrue(os.path.exists(file))
+
+    def test_save_stock_quandl(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
+
+        temp = get_temp_folder(__file__, "temp_cache_file_quandl")
+        cache = temp
+
+        stock = StockPrices(
+            "EURONEXT/BNP",
+            url="quandl",
+            folder=cache,
+            end=datetime.datetime(
+                2017,
+                1,
+                15))
+
+        file = os.path.join(cache, "save.txt")
+        if os.path.exists(file):
+            os.remove(file)
+        stock.to_csv(file)
+        self.assertTrue(os.path.exists(file))
+
+        stock2 = StockPrices(file, sep="\t")
+        self.assertEqual(stock.dataframe.shape, stock2.dataframe.shape)
+        df = stock2.dataframe
+        file = os.path.join(cache, "out_excel.xlsx")
+        if os.path.exists(file):
+            os.remove(file)
+        df.to_excel(file)
+        self.assertTrue(os.path.exists(file))
 
 
 if __name__ == "__main__":
