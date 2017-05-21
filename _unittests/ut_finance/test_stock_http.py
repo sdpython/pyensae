@@ -36,6 +36,7 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.finance.astock import StockPrices, StockPricesException
 
 
@@ -46,49 +47,44 @@ class TestStockHttp (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        cache = os.path.abspath(os.path.split(__file__)[0])
-        cache = os.path.join(cache, "temp_cache_download_http")
-        name = os.path.join(cache, "BNP.PA.2000-01-03.2014-01-15.txt")
-        if os.path.exists(name):
-            os.remove(name)
+        cache = get_temp_folder(__file__, "temp_cache_download_http")
         stock = StockPrices(
-            "BNP.PA",
+            "NASDAQ:MSFT",
             folder=cache,
             end=datetime.datetime(
                 2014,
                 1,
                 15))
-        assert os.path.exists(name)
+        name = os.path.join(cache, "NASDAQ_MSFT.2000-01-03.2014-01-15.txt")
+        self.assertTrue(os.path.exists(name))
         df = stock.dataframe
-        assert len(df) > 0
+        self.assertTrue(len(df) > 0)
 
     def test_available_dates(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        cache = os.path.abspath(os.path.split(__file__)[0])
-        cache = os.path.join(cache, "temp_cache_dates")
-        stocks = [StockPrices("BNP.PA", folder=cache),
-                  StockPrices("CA.PA", folder=cache),
-                  StockPrices("SAF.PA", folder=cache),
+        cache = get_temp_folder(__file__, "temp_cache_dates")
+        stocks = [StockPrices("NASDAQ:GOOGL", folder=cache),
+                  StockPrices("NASDAQ:MSFT", folder=cache),
+                  StockPrices("NASDAQ:AAPL", folder=cache),
                   ]
         av = StockPrices.available_dates(stocks)
-        assert len(av) > 0
+        self.assertTrue(len(av) > 0)
 
         missing = stocks[-1].missing(av)
-        assert missing is None or len(missing) > 0
+        self.assertTrue(missing is None or len(missing) > 0)
 
     def test_covariance(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        cache = os.path.abspath(os.path.split(__file__)[0])
-        cache = os.path.join(cache, "temp_cache_cov")
-        stocks = [StockPrices("BNP.PA", folder=cache),
-                  StockPrices("CA.PA", folder=cache),
-                  StockPrices("SAF.PA", folder=cache),
+        cache = get_temp_folder(__file__, "temp_cache_cov")
+        stocks = [StockPrices("NASDAQ:GOOGL", folder=cache),
+                  StockPrices("NASDAQ:MSFT", folder=cache),
+                  StockPrices("NASDAQ:AAPL", folder=cache),
                   ]
 
         dates = StockPrices.available_dates(stocks)
@@ -96,12 +92,13 @@ class TestStockHttp (unittest.TestCase):
         stocks = [v.keep_dates(ok) for v in stocks]
 
         cov = StockPrices.covariance(stocks)
-        assert len(cov) == 3
+        self.assertEqual(len(cov), 3)
 
         cor = StockPrices.covariance(stocks, cov=False)
         self.assertEqual(len(cor), 3)
-        assert abs(cor.ix["BNP.PA", "BNP.PA"] - 1) < 1e-5
-        assert abs(cor.ix[2, 2] - 1) < 1e-5
+        self.assertTrue(
+            abs(cor.loc["NASDAQ:GOOGL", "NASDAQ:GOOGL"] - 1) < 1e-5)
+        self.assertTrue(abs(cor.iloc[2, 2] - 1) < 1e-5)
 
         ret, mat = StockPrices.covariance(stocks, cov=False, ret=True)
         self.assertEqual(len(ret), 3)
@@ -132,18 +129,17 @@ class TestStockHttp (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        cache = os.path.abspath(os.path.split(__file__)[0])
-        cache = os.path.join(cache, "temp_cache_index")
+        cache = get_temp_folder(__file__, "temp_cache_index")
         stock = StockPrices(
-            "BNP.PA",
+            "NASDAQ:GOOGL",
             folder=cache,
             end=datetime.datetime(
                 2014,
                 1,
                 15))
         some = stock["2001-01-01":"2002-02-02"]
-        assert isinstance(some, StockPrices)
-        assert len(some) < 1000
+        self.assertTrue(isinstance(some, StockPrices))
+        self.assertTrue(len(some) < 1000)
 
 
 if __name__ == "__main__":

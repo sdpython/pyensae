@@ -64,6 +64,7 @@ pytz
 PyYAML
 pyzmq
 qtconsole
+quandl
 requests
 requests-oauthlib
 simplegeneric

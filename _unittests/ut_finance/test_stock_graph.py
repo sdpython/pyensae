@@ -60,8 +60,8 @@ class TestStockGraph (unittest.TestCase):
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache2")
         stocks = [StockPrices("NASDAQ:MSFT", folder=cache),
-                  StockPrices("NASDAQ:GOOGLE", folder=cache),
-                  StockPrices("NASDAQ:APPLE", folder=cache),
+                  StockPrices("NASDAQ:GOOGL", folder=cache),
+                  StockPrices("NASDAQ:AAPL", folder=cache),
                   ]
 
         if True:

@@ -26,7 +26,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install azure"
   - "%PYTHON%\\Scripts\\pymy_install3 pycrypto"
   - "%PYTHON%\\Scripts\\pip install pycryptodomex"
-  - "%PYTHON%\\Scripts\\pip install urllib3 chardet requests_ftp"
+  - "%PYTHON%\\Scripts\\pip install urllib3 chardet requests_ftp quandl"
   - "%PYTHON%\\Scripts\\pip install pycodestyle prompt_toolkit ipykernel qgrid"
   - "%PYTHON%\\Scripts\\pymy_install3 --task=tool --source=zip graphviz"
   - "set PATH=%PATH%;C:\\projects\\pyensae\\build\\update_modules\\Graphviz\\bin"

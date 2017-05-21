@@ -29,7 +29,7 @@ class StockPrices:
 
         ::
 
-            prices = StockPrices(tick = "BNP.PA")
+            prices = StockPrices(tick = "NASDAQ:MSFT")
             print (prices.dataframe.head())
     """
 
@@ -50,7 +50,7 @@ class StockPrices:
         You can also go to `quandl <https://www.quandl.com/data/EURONEXT/BNP-Bnp-Paribas-Act-A-BNP>`_
         and get the tick for the module `quandl <https://www.quandl.com/tools/python>`_.
 
-        @param      tick        tick name, ex ``BNP.PA``
+        @param      tick        tick name, ex ``NASDAQ:MSFT``
         @param      url         if yahoo, downloads the data from there if it was not done before
         @param      folder      cache folder (created if it does not exists
         @param      begin       first day (datetime), see below
@@ -412,7 +412,7 @@ class StockPrices:
         tbl = {v: 1 for v in se if v in da2}
         if len(tbl) > 0:
             ave = self.dataframe.apply(lambda row: row["Date"] in tbl, axis=1)
-            return StockPrices(self.tickname, self.dataframe.iloc[ave, :])
+            return StockPrices(self.tickname, self.dataframe.loc[ave, :])
         else:
             raise Exception("no trading dates left")
 
@@ -511,9 +511,9 @@ class StockPrices:
 
             ::
 
-                stocks = [ StockPrices ("BNP.PA", folder = cache),
-                           StockPrices ("CA.PA", folder = cache),
-                           StockPrices ("SAN.PA", folder = cache)]
+                stocks = [ StockPrices ("NASDAQ:MSFT", folder = cache),
+                           StockPrices ("NASDAQ:GOOGL", folder = cache),
+                           StockPrices ("NASDAQ:AAPL", folder = cache)]
                 fig, ax, plt = StockPrices.draw(stocks)
                 fig.savefig("image.png")
                 fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01", figsize=(16,8))
@@ -523,8 +523,8 @@ class StockPrices:
 
             ::
 
-                stock = StockPrices ("BNP.PA", folder = cache)
-                stock2 = StockPrices ("CA.PA", folder = cache)
+                stock = StockPrices ("NASDAQ:MSFT", folder = cache)
+                stock2 = StockPrices ("NASDAQ:GOOGL", folder = cache)
                 fig, ax, plt = stock.plot(figsize=(16,8))
                 fig, ax, plt = stock2.plot(existing=(fig,ax), axis=2)
                 plt.show()
