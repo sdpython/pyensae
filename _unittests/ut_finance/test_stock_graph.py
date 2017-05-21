@@ -70,7 +70,7 @@ class TestStockGraph (unittest.TestCase):
             ax = StockPrices.draw(
                 stocks, figsize=(
                     16, 8), field=[
-                    "Adj Close", "Close"],
+                    "Open", "Close"],
                 ax=ax)
             img = os.path.abspath(
                 os.path.join(
@@ -80,7 +80,7 @@ class TestStockGraph (unittest.TestCase):
                 os.remove(img)
             fig.savefig(img)
             plt.close('all')
-            assert os.path.exists(img)
+            self.assertTrue(os.path.exists(img))
 
         if True:
             fLOG("B")
@@ -94,7 +94,7 @@ class TestStockGraph (unittest.TestCase):
                 os .remove(img)
             fig.savefig(img)
             plt.close('all')
-            assert os.path.exists(img)
+            self.assertTrue(os.path.exists(img))
 
         if True:
             fLOG("C")
@@ -108,7 +108,7 @@ class TestStockGraph (unittest.TestCase):
                 os .remove(img)
             fig.savefig(img)
             plt.close('all')
-            assert os.path.exists(img)
+            self.assertTrue(os.path.exists(img))
 
         fLOG("thisend")
 
