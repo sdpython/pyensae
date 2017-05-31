@@ -62,6 +62,13 @@ def r2python(code: str, pep8=False, fLOG=None) -> str:
 
             from pyensae.languages import r2python
             print(r2python(rscript, pep8=True))
+
+    Some patterns are not well migrated such expression ``a:b`` into ``range(a,b)``.
+    The grammar could be improved to detect the beginning of the expression but
+    for now, if the function fails to do the conversion, ``a:b`` must be written
+    into ``(a):b``. The same trick is sometimes needed for other patterns
+    such as the operator ``%in%`` which is converted into an intersection
+    of two sets.
     """
     if fLOG:
         fLOG("[r2python] parse ", len(code), "bytes")
