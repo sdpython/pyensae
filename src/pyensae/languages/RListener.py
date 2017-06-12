@@ -90,6 +90,14 @@ class RListener(ParseTreeListener):
     def exitExprlist(self, ctx: RParser.ExprlistContext):
         pass
 
+    # Enter a parse tree produced by RParser#rightexpr.
+    def enterRightexpr(self, ctx: RParser.RightexprContext):
+        pass
+
+    # Exit a parse tree produced by RParser#rightexpr.
+    def exitRightexpr(self, ctx: RParser.RightexprContext):
+        pass
+
     # Enter a parse tree produced by RParser#formlist.
     def enterFormlist(self, ctx: RParser.FormlistContext):
         pass
@@ -128,6 +136,14 @@ class RListener(ParseTreeListener):
 
     # Exit a parse tree produced by RParser#sub.
     def exitSub(self, ctx: RParser.SubContext):
+        pass
+
+    # Enter a parse tree produced by RParser#subnobracket.
+    def enterSubnobracket(self, ctx: RParser.SubnobracketContext):
+        pass
+
+    # Exit a parse tree produced by RParser#subnobracket.
+    def exitSubnobracket(self, ctx: RParser.SubnobracketContext):
         pass
 
     # Enter a parse tree produced by RParser#ranges.
@@ -256,6 +272,14 @@ class RListener(ParseTreeListener):
 
     # Exit a parse tree produced by RParser#functioncall.
     def exitFunctioncall(self, ctx: RParser.FunctioncallContext):
+        pass
+
+    # Enter a parse tree produced by RParser#inlinefunction.
+    def enterInlinefunction(self, ctx: RParser.InlinefunctionContext):
+        pass
+
+    # Exit a parse tree produced by RParser#inlinefunction.
+    def exitInlinefunction(self, ctx: RParser.InlinefunctionContext):
         pass
 
     # Enter a parse tree produced by RParser#formula_simple.

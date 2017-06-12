@@ -1,0 +1,5 @@
+switch(funName, _machine=eval('''
+ a .set( chouette )
+ '''), _td=eval('''
+ b = chouette2
+ '''))

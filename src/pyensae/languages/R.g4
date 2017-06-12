@@ -112,10 +112,13 @@ rangeopexpr
     ;
 
 exprlist
-    : (expr ((';'|NL) expr?)*)
-    |
+    : expr rightexpr*
     ;
     
+rightexpr
+    : (';'|NL) expr?
+    ;
+
 formlist
     : form ( NL? ',' NL* form)*
     ;
@@ -126,20 +129,24 @@ form:   ID
     ;
 
 sublist
-    : sub ( NL* ',' NL* sub NL* )* ;
+    : sub ( NL* ',' NL* (inlinefunction | sub ) NL* )* ;
 
 sublistadd
     : identifier ( NL? '+' NL? identifier NL? )* ;
 
 sub
-    : identifier '=' expr
+    : subnobracket
+    | expr
+    ;
+
+subnobracket
+    : identifier '=' ( inlinefunction | expr )
     | STRING '='
     | STRING '=' expr
     | 'NULL' '='
     | 'NULL' '=' expr
     | '...'
     | ':'
-    | expr
     ;
 
 ranges
@@ -220,7 +227,14 @@ returnexpr
     ;
 
 functioncall
-    : identifier (('(' ')') | ('(' NL* sublist NL* ')'))
+    : identifier ( ('(' ')') | 
+                   ('(' inlinefunction ')') |   // don't change the order
+                   ('(' NL* sublist NL* ')')
+                 )
+    ;
+    
+inlinefunction
+    : NL* '{' NL* exprlist NL*'}' NL*
     ;
 
 formula_simple

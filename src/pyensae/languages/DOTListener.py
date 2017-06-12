@@ -5,8 +5,7 @@ if __name__ is not None and "." in __name__:
 else:
     from DOTParser import DOTParser
 
-# This class defines a complete listener for a parse tree produced by
-# DOTParser.
+# This class defines a complete listener for a parse tree produced by DOTParser.
 
 
 class DOTListener(ParseTreeListener):

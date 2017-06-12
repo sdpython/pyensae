@@ -275,7 +275,7 @@ class TreeStringListener(ParseTreeListener):
         elif name == "Affectation":
             if text == '\n':
                 return self.add_code_final()
-        elif name == "Sub":
+        elif name in ("Sub", "Subnobracket"):
             if text == '=':
                 # Named parameter.
                 self.stack.append((name, node))
@@ -289,7 +289,7 @@ class TreeStringListener(ParseTreeListener):
                 return self.add_code_final()
             if text == '\n':
                 return self.add_code_final()
-        elif name == "Exprlist":
+        elif name in ("Exprlist", "Rightexpr"):
             if text.startswith("#"):
                 # Comment
                 self.empty_stack()
@@ -298,10 +298,15 @@ class TreeStringListener(ParseTreeListener):
                 self.elements.append("\n")
                 return self.add_code_final()
             if text in (";", "\n"):
-                self.empty_stack()
-                if len(self.elements) > 0 and self.elements[-1] != '\n':
-                    self.elements.append("\n")
-                return self.add_code_final()
+                if self.search_parents(node, "Inlinefunction"):
+                    self.empty_stack()
+                    self.stack.append(("Inlinefunction", text))
+                    return self.add_code_final()
+                else:
+                    self.empty_stack()
+                    if len(self.elements) > 0 and self.elements[-1] != '\n':
+                        self.elements.append("\n")
+                    return self.add_code_final()
         elif name == "Ifelseexpr" or name == "Ifexpr":
             if self.search_parents(node, "Sublist") or self.search_parents(node, "Affectation", 2):
                 if text == "if":
@@ -441,6 +446,25 @@ class TreeStringListener(ParseTreeListener):
                 return self.add_code_final()
             elif text in ("(", ")"):
                 return self.add_code_final()
+        elif name == "Inlinefunction":
+            if text == "{":
+                self.inlinefunction = []
+                self.stack.append((name, "eval('''\n"))
+                return self.add_code_final()
+            elif text in ("\n", ";"):
+                if hasattr(self, "inlinefunction") and len(self.inlinefunction) > 0:
+                    self.stack.append((name, text))
+                return self.add_code_final()
+            elif text == "}":
+                self.stack.append((name, "''')"))
+                self.inlinefunction = []
+                return self.add_code_final()
+            else:
+                self.inlinefunction.append((name, node))
+                return self.add_code_final()
+
+            self.stack.append((name, node))
+            return self.add_code_final()
 
         if text.startswith("#"):
             # Comment
@@ -545,7 +569,8 @@ class TreeStringListener(ParseTreeListener):
                         # We need to add ) when leaving this node.
                         converted = ","
                         closure[id(node.parentCtx)] = (node.parentCtx, ")")
-            elif name == "Affectop" and self.stack[0][0] == "Functioncall" and self.stack[0][1] == "":
+            elif name == "Affectop" and self.stack[0][0] in ("Functioncall", "Inlinefunction") and \
+                    self.stack[0][1] == "":
                 # How to deal with syntax names(df) = something.
                 # We add set add a bracket at the end.
                 converted = ".set("
@@ -736,6 +761,8 @@ class TreeStringListener(ParseTreeListener):
                 return "make_tuple"
             elif text == "&&":
                 return "and"
+            elif text == "||":
+                return "or"
             else:
                 return text
 

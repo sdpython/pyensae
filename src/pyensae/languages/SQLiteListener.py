@@ -5,8 +5,7 @@ if __name__ is not None and "." in __name__:
 else:
     from SQLiteParser import SQLiteParser
 
-# This class defines a complete listener for a parse tree produced by
-# SQLiteParser.
+# This class defines a complete listener for a parse tree produced by SQLiteParser.
 
 
 class SQLiteListener(ParseTreeListener):

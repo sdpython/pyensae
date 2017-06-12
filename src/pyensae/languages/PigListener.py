@@ -5,8 +5,7 @@ if __name__ is not None and "." in __name__:
 else:
     from PigParser import PigParser
 
-# This class defines a complete listener for a parse tree produced by
-# PigParser.
+# This class defines a complete listener for a parse tree produced by PigParser.
 
 
 class PigListener(ParseTreeListener):

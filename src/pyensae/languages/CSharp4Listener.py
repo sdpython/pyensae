@@ -5,8 +5,7 @@ if __name__ is not None and "." in __name__:
 else:
     from CSharp4Parser import CSharp4Parser
 
-# This class defines a complete listener for a parse tree produced by
-# CSharp4Parser.
+# This class defines a complete listener for a parse tree produced by CSharp4Parser.
 
 
 class CSharp4Listener(ParseTreeListener):
@@ -307,13 +306,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitObject_creation_expression(self, ctx: CSharp4Parser.Object_creation_expressionContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#object_or_collection_initializer.
+    # Enter a parse tree produced by CSharp4Parser#object_or_collection_initializer.
     def enterObject_or_collection_initializer(self, ctx: CSharp4Parser.Object_or_collection_initializerContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#object_or_collection_initializer.
+    # Exit a parse tree produced by CSharp4Parser#object_or_collection_initializer.
     def exitObject_or_collection_initializer(self, ctx: CSharp4Parser.Object_or_collection_initializerContext):
         pass
 
@@ -381,8 +378,7 @@ class CSharp4Listener(ParseTreeListener):
     def exitArray_creation_expression(self, ctx: CSharp4Parser.Array_creation_expressionContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#delegate_creation_expression.
+    # Enter a parse tree produced by CSharp4Parser#delegate_creation_expression.
     def enterDelegate_creation_expression(self, ctx: CSharp4Parser.Delegate_creation_expressionContext):
         pass
 
@@ -390,18 +386,15 @@ class CSharp4Listener(ParseTreeListener):
     def exitDelegate_creation_expression(self, ctx: CSharp4Parser.Delegate_creation_expressionContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#anonymous_object_creation_expression.
+    # Enter a parse tree produced by CSharp4Parser#anonymous_object_creation_expression.
     def enterAnonymous_object_creation_expression(self, ctx: CSharp4Parser.Anonymous_object_creation_expressionContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#anonymous_object_creation_expression.
+    # Exit a parse tree produced by CSharp4Parser#anonymous_object_creation_expression.
     def exitAnonymous_object_creation_expression(self, ctx: CSharp4Parser.Anonymous_object_creation_expressionContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#anonymous_object_initializer.
+    # Enter a parse tree produced by CSharp4Parser#anonymous_object_initializer.
     def enterAnonymous_object_initializer(self, ctx: CSharp4Parser.Anonymous_object_initializerContext):
         pass
 
@@ -489,13 +482,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitUnary_expression(self, ctx: CSharp4Parser.Unary_expressionContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#scan_for_cast_generic_precedence.
+    # Enter a parse tree produced by CSharp4Parser#scan_for_cast_generic_precedence.
     def enterScan_for_cast_generic_precedence(self, ctx: CSharp4Parser.Scan_for_cast_generic_precedenceContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#scan_for_cast_generic_precedence.
+    # Exit a parse tree produced by CSharp4Parser#scan_for_cast_generic_precedence.
     def exitScan_for_cast_generic_precedence(self, ctx: CSharp4Parser.Scan_for_cast_generic_precedenceContext):
         pass
 
@@ -563,13 +554,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitRelational_expression(self, ctx: CSharp4Parser.Relational_expressionContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#scan_for_shift_generic_precedence.
+    # Enter a parse tree produced by CSharp4Parser#scan_for_shift_generic_precedence.
     def enterScan_for_shift_generic_precedence(self, ctx: CSharp4Parser.Scan_for_shift_generic_precedenceContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#scan_for_shift_generic_precedence.
+    # Exit a parse tree produced by CSharp4Parser#scan_for_shift_generic_precedence.
     def exitScan_for_shift_generic_precedence(self, ctx: CSharp4Parser.Scan_for_shift_generic_precedenceContext):
         pass
 
@@ -677,8 +666,7 @@ class CSharp4Listener(ParseTreeListener):
     def exitAnonymous_method_expression(self, ctx: CSharp4Parser.Anonymous_method_expressionContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#anonymous_function_signature.
+    # Enter a parse tree produced by CSharp4Parser#anonymous_function_signature.
     def enterAnonymous_function_signature(self, ctx: CSharp4Parser.Anonymous_function_signatureContext):
         pass
 
@@ -686,73 +674,59 @@ class CSharp4Listener(ParseTreeListener):
     def exitAnonymous_function_signature(self, ctx: CSharp4Parser.Anonymous_function_signatureContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#explicit_anonymous_function_signature.
+    # Enter a parse tree produced by CSharp4Parser#explicit_anonymous_function_signature.
     def enterExplicit_anonymous_function_signature(self, ctx: CSharp4Parser.Explicit_anonymous_function_signatureContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#explicit_anonymous_function_signature.
+    # Exit a parse tree produced by CSharp4Parser#explicit_anonymous_function_signature.
     def exitExplicit_anonymous_function_signature(self, ctx: CSharp4Parser.Explicit_anonymous_function_signatureContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#explicit_anonymous_function_parameter_list.
+    # Enter a parse tree produced by CSharp4Parser#explicit_anonymous_function_parameter_list.
     def enterExplicit_anonymous_function_parameter_list(self, ctx: CSharp4Parser.Explicit_anonymous_function_parameter_listContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#explicit_anonymous_function_parameter_list.
+    # Exit a parse tree produced by CSharp4Parser#explicit_anonymous_function_parameter_list.
     def exitExplicit_anonymous_function_parameter_list(self, ctx: CSharp4Parser.Explicit_anonymous_function_parameter_listContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#explicit_anonymous_function_parameter.
+    # Enter a parse tree produced by CSharp4Parser#explicit_anonymous_function_parameter.
     def enterExplicit_anonymous_function_parameter(self, ctx: CSharp4Parser.Explicit_anonymous_function_parameterContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#explicit_anonymous_function_parameter.
+    # Exit a parse tree produced by CSharp4Parser#explicit_anonymous_function_parameter.
     def exitExplicit_anonymous_function_parameter(self, ctx: CSharp4Parser.Explicit_anonymous_function_parameterContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#anonymous_function_parameter_modifier.
+    # Enter a parse tree produced by CSharp4Parser#anonymous_function_parameter_modifier.
     def enterAnonymous_function_parameter_modifier(self, ctx: CSharp4Parser.Anonymous_function_parameter_modifierContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#anonymous_function_parameter_modifier.
+    # Exit a parse tree produced by CSharp4Parser#anonymous_function_parameter_modifier.
     def exitAnonymous_function_parameter_modifier(self, ctx: CSharp4Parser.Anonymous_function_parameter_modifierContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#implicit_anonymous_function_signature.
+    # Enter a parse tree produced by CSharp4Parser#implicit_anonymous_function_signature.
     def enterImplicit_anonymous_function_signature(self, ctx: CSharp4Parser.Implicit_anonymous_function_signatureContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#implicit_anonymous_function_signature.
+    # Exit a parse tree produced by CSharp4Parser#implicit_anonymous_function_signature.
     def exitImplicit_anonymous_function_signature(self, ctx: CSharp4Parser.Implicit_anonymous_function_signatureContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#implicit_anonymous_function_parameter_list.
+    # Enter a parse tree produced by CSharp4Parser#implicit_anonymous_function_parameter_list.
     def enterImplicit_anonymous_function_parameter_list(self, ctx: CSharp4Parser.Implicit_anonymous_function_parameter_listContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#implicit_anonymous_function_parameter_list.
+    # Exit a parse tree produced by CSharp4Parser#implicit_anonymous_function_parameter_list.
     def exitImplicit_anonymous_function_parameter_list(self, ctx: CSharp4Parser.Implicit_anonymous_function_parameter_listContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#implicit_anonymous_function_parameter.
+    # Enter a parse tree produced by CSharp4Parser#implicit_anonymous_function_parameter.
     def enterImplicit_anonymous_function_parameter(self, ctx: CSharp4Parser.Implicit_anonymous_function_parameterContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#implicit_anonymous_function_parameter.
+    # Exit a parse tree produced by CSharp4Parser#implicit_anonymous_function_parameter.
     def exitImplicit_anonymous_function_parameter(self, ctx: CSharp4Parser.Implicit_anonymous_function_parameterContext):
         pass
 
@@ -1460,18 +1434,15 @@ class CSharp4Listener(ParseTreeListener):
     def exitUsing_namespace_directive(self, ctx: CSharp4Parser.Using_namespace_directiveContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#namespace_member_declarations.
+    # Enter a parse tree produced by CSharp4Parser#namespace_member_declarations.
     def enterNamespace_member_declarations(self, ctx: CSharp4Parser.Namespace_member_declarationsContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#namespace_member_declarations.
+    # Exit a parse tree produced by CSharp4Parser#namespace_member_declarations.
     def exitNamespace_member_declarations(self, ctx: CSharp4Parser.Namespace_member_declarationsContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#namespace_member_declaration.
+    # Enter a parse tree produced by CSharp4Parser#namespace_member_declaration.
     def enterNamespace_member_declaration(self, ctx: CSharp4Parser.Namespace_member_declarationContext):
         pass
 
@@ -1559,23 +1530,19 @@ class CSharp4Listener(ParseTreeListener):
     def exitInterface_type_list(self, ctx: CSharp4Parser.Interface_type_listContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#type_parameter_constraints_clauses.
+    # Enter a parse tree produced by CSharp4Parser#type_parameter_constraints_clauses.
     def enterType_parameter_constraints_clauses(self, ctx: CSharp4Parser.Type_parameter_constraints_clausesContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#type_parameter_constraints_clauses.
+    # Exit a parse tree produced by CSharp4Parser#type_parameter_constraints_clauses.
     def exitType_parameter_constraints_clauses(self, ctx: CSharp4Parser.Type_parameter_constraints_clausesContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#type_parameter_constraints_clause.
+    # Enter a parse tree produced by CSharp4Parser#type_parameter_constraints_clause.
     def enterType_parameter_constraints_clause(self, ctx: CSharp4Parser.Type_parameter_constraints_clauseContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#type_parameter_constraints_clause.
+    # Exit a parse tree produced by CSharp4Parser#type_parameter_constraints_clause.
     def exitType_parameter_constraints_clause(self, ctx: CSharp4Parser.Type_parameter_constraints_clauseContext):
         pass
 
@@ -2011,8 +1978,7 @@ class CSharp4Listener(ParseTreeListener):
     def exitBinary_operator_declarator(self, ctx: CSharp4Parser.Binary_operator_declaratorContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#overloadable_binary_operator.
+    # Enter a parse tree produced by CSharp4Parser#overloadable_binary_operator.
     def enterOverloadable_binary_operator(self, ctx: CSharp4Parser.Overloadable_binary_operatorContext):
         pass
 
@@ -2028,13 +1994,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitOverloadable_operator(self, ctx: CSharp4Parser.Overloadable_operatorContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#conversion_operator_declarator.
+    # Enter a parse tree produced by CSharp4Parser#conversion_operator_declarator.
     def enterConversion_operator_declarator(self, ctx: CSharp4Parser.Conversion_operator_declaratorContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#conversion_operator_declarator.
+    # Exit a parse tree produced by CSharp4Parser#conversion_operator_declarator.
     def exitConversion_operator_declarator(self, ctx: CSharp4Parser.Conversion_operator_declaratorContext):
         pass
 
@@ -2094,18 +2058,15 @@ class CSharp4Listener(ParseTreeListener):
     def exitConstructor_body(self, ctx: CSharp4Parser.Constructor_bodyContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#static_constructor_declaration.
+    # Enter a parse tree produced by CSharp4Parser#static_constructor_declaration.
     def enterStatic_constructor_declaration(self, ctx: CSharp4Parser.Static_constructor_declarationContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#static_constructor_declaration.
+    # Exit a parse tree produced by CSharp4Parser#static_constructor_declaration.
     def exitStatic_constructor_declaration(self, ctx: CSharp4Parser.Static_constructor_declarationContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#static_constructor_modifiers.
+    # Enter a parse tree produced by CSharp4Parser#static_constructor_modifiers.
     def enterStatic_constructor_modifiers(self, ctx: CSharp4Parser.Static_constructor_modifiersContext):
         pass
 
@@ -2321,18 +2282,15 @@ class CSharp4Listener(ParseTreeListener):
     def exitInterface_body(self, ctx: CSharp4Parser.Interface_bodyContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#interface_member_declarations.
+    # Enter a parse tree produced by CSharp4Parser#interface_member_declarations.
     def enterInterface_member_declarations(self, ctx: CSharp4Parser.Interface_member_declarationsContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#interface_member_declarations.
+    # Exit a parse tree produced by CSharp4Parser#interface_member_declarations.
     def exitInterface_member_declarations(self, ctx: CSharp4Parser.Interface_member_declarationsContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#interface_member_declaration.
+    # Enter a parse tree produced by CSharp4Parser#interface_member_declaration.
     def enterInterface_member_declaration(self, ctx: CSharp4Parser.Interface_member_declarationContext):
         pass
 
@@ -2340,8 +2298,7 @@ class CSharp4Listener(ParseTreeListener):
     def exitInterface_member_declaration(self, ctx: CSharp4Parser.Interface_member_declarationContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#interface_method_declaration.
+    # Enter a parse tree produced by CSharp4Parser#interface_method_declaration.
     def enterInterface_method_declaration(self, ctx: CSharp4Parser.Interface_method_declarationContext):
         pass
 
@@ -2349,13 +2306,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitInterface_method_declaration(self, ctx: CSharp4Parser.Interface_method_declarationContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#interface_property_declaration.
+    # Enter a parse tree produced by CSharp4Parser#interface_property_declaration.
     def enterInterface_property_declaration(self, ctx: CSharp4Parser.Interface_property_declarationContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#interface_property_declaration.
+    # Exit a parse tree produced by CSharp4Parser#interface_property_declaration.
     def exitInterface_property_declaration(self, ctx: CSharp4Parser.Interface_property_declarationContext):
         pass
 
@@ -2375,13 +2330,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitInterface_event_declaration(self, ctx: CSharp4Parser.Interface_event_declarationContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#interface_indexer_declaration.
+    # Enter a parse tree produced by CSharp4Parser#interface_indexer_declaration.
     def enterInterface_indexer_declaration(self, ctx: CSharp4Parser.Interface_indexer_declarationContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#interface_indexer_declaration.
+    # Exit a parse tree produced by CSharp4Parser#interface_indexer_declaration.
     def exitInterface_indexer_declaration(self, ctx: CSharp4Parser.Interface_indexer_declarationContext):
         pass
 
@@ -2489,13 +2442,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitGlobal_attribute_section(self, ctx: CSharp4Parser.Global_attribute_sectionContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#global_attribute_target_specifier.
+    # Enter a parse tree produced by CSharp4Parser#global_attribute_target_specifier.
     def enterGlobal_attribute_target_specifier(self, ctx: CSharp4Parser.Global_attribute_target_specifierContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#global_attribute_target_specifier.
+    # Exit a parse tree produced by CSharp4Parser#global_attribute_target_specifier.
     def exitGlobal_attribute_target_specifier(self, ctx: CSharp4Parser.Global_attribute_target_specifierContext):
         pass
 
@@ -2611,13 +2562,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitNamed_argument(self, ctx: CSharp4Parser.Named_argumentContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#attribute_argument_expression.
+    # Enter a parse tree produced by CSharp4Parser#attribute_argument_expression.
     def enterAttribute_argument_expression(self, ctx: CSharp4Parser.Attribute_argument_expressionContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#attribute_argument_expression.
+    # Exit a parse tree produced by CSharp4Parser#attribute_argument_expression.
     def exitAttribute_argument_expression(self, ctx: CSharp4Parser.Attribute_argument_expressionContext):
         pass
 
@@ -2709,23 +2658,19 @@ class CSharp4Listener(ParseTreeListener):
     def exitConstructor_modifier_unsafe(self, ctx: CSharp4Parser.Constructor_modifier_unsafeContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#destructor_declaration_unsafe.
+    # Enter a parse tree produced by CSharp4Parser#destructor_declaration_unsafe.
     def enterDestructor_declaration_unsafe(self, ctx: CSharp4Parser.Destructor_declaration_unsafeContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#destructor_declaration_unsafe.
+    # Exit a parse tree produced by CSharp4Parser#destructor_declaration_unsafe.
     def exitDestructor_declaration_unsafe(self, ctx: CSharp4Parser.Destructor_declaration_unsafeContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#static_constructor_modifiers_unsafe.
+    # Enter a parse tree produced by CSharp4Parser#static_constructor_modifiers_unsafe.
     def enterStatic_constructor_modifiers_unsafe(self, ctx: CSharp4Parser.Static_constructor_modifiers_unsafeContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#static_constructor_modifiers_unsafe.
+    # Exit a parse tree produced by CSharp4Parser#static_constructor_modifiers_unsafe.
     def exitStatic_constructor_modifiers_unsafe(self, ctx: CSharp4Parser.Static_constructor_modifiers_unsafeContext):
         pass
 
@@ -2769,13 +2714,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitUnmanaged_type(self, ctx: CSharp4Parser.Unmanaged_typeContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#primary_no_array_creation_expression_unsafe.
+    # Enter a parse tree produced by CSharp4Parser#primary_no_array_creation_expression_unsafe.
     def enterPrimary_no_array_creation_expression_unsafe(self, ctx: CSharp4Parser.Primary_no_array_creation_expression_unsafeContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#primary_no_array_creation_expression_unsafe.
+    # Exit a parse tree produced by CSharp4Parser#primary_no_array_creation_expression_unsafe.
     def exitPrimary_no_array_creation_expression_unsafe(self, ctx: CSharp4Parser.Primary_no_array_creation_expression_unsafeContext):
         pass
 
@@ -2787,13 +2730,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitUnary_expression_unsafe(self, ctx: CSharp4Parser.Unary_expression_unsafeContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#pointer_indirection_expression.
+    # Enter a parse tree produced by CSharp4Parser#pointer_indirection_expression.
     def enterPointer_indirection_expression(self, ctx: CSharp4Parser.Pointer_indirection_expressionContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#pointer_indirection_expression.
+    # Exit a parse tree produced by CSharp4Parser#pointer_indirection_expression.
     def exitPointer_indirection_expression(self, ctx: CSharp4Parser.Pointer_indirection_expressionContext):
         pass
 
@@ -2845,23 +2786,19 @@ class CSharp4Listener(ParseTreeListener):
     def exitFixed_pointer_initializer(self, ctx: CSharp4Parser.Fixed_pointer_initializerContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#struct_member_declaration_unsafe.
+    # Enter a parse tree produced by CSharp4Parser#struct_member_declaration_unsafe.
     def enterStruct_member_declaration_unsafe(self, ctx: CSharp4Parser.Struct_member_declaration_unsafeContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#struct_member_declaration_unsafe.
+    # Exit a parse tree produced by CSharp4Parser#struct_member_declaration_unsafe.
     def exitStruct_member_declaration_unsafe(self, ctx: CSharp4Parser.Struct_member_declaration_unsafeContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#fixed_size_buffer_declaration.
+    # Enter a parse tree produced by CSharp4Parser#fixed_size_buffer_declaration.
     def enterFixed_size_buffer_declaration(self, ctx: CSharp4Parser.Fixed_size_buffer_declarationContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#fixed_size_buffer_declaration.
+    # Exit a parse tree produced by CSharp4Parser#fixed_size_buffer_declaration.
     def exitFixed_size_buffer_declaration(self, ctx: CSharp4Parser.Fixed_size_buffer_declarationContext):
         pass
 
@@ -2889,18 +2826,15 @@ class CSharp4Listener(ParseTreeListener):
     def exitBuffer_element_type(self, ctx: CSharp4Parser.Buffer_element_typeContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#fixed_size_buffer_declarators.
+    # Enter a parse tree produced by CSharp4Parser#fixed_size_buffer_declarators.
     def enterFixed_size_buffer_declarators(self, ctx: CSharp4Parser.Fixed_size_buffer_declaratorsContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#fixed_size_buffer_declarators.
+    # Exit a parse tree produced by CSharp4Parser#fixed_size_buffer_declarators.
     def exitFixed_size_buffer_declarators(self, ctx: CSharp4Parser.Fixed_size_buffer_declaratorsContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#fixed_size_buffer_declarator.
+    # Enter a parse tree produced by CSharp4Parser#fixed_size_buffer_declarator.
     def enterFixed_size_buffer_declarator(self, ctx: CSharp4Parser.Fixed_size_buffer_declaratorContext):
         pass
 
@@ -2908,13 +2842,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitFixed_size_buffer_declarator(self, ctx: CSharp4Parser.Fixed_size_buffer_declaratorContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#local_variable_initializer_unsafe.
+    # Enter a parse tree produced by CSharp4Parser#local_variable_initializer_unsafe.
     def enterLocal_variable_initializer_unsafe(self, ctx: CSharp4Parser.Local_variable_initializer_unsafeContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#local_variable_initializer_unsafe.
+    # Exit a parse tree produced by CSharp4Parser#local_variable_initializer_unsafe.
     def exitLocal_variable_initializer_unsafe(self, ctx: CSharp4Parser.Local_variable_initializer_unsafeContext):
         pass
 
@@ -2990,8 +2922,7 @@ class CSharp4Listener(ParseTreeListener):
     def exitOrderby_contextual_keyword(self, ctx: CSharp4Parser.Orderby_contextual_keywordContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#ascending_contextual_keyword.
+    # Enter a parse tree produced by CSharp4Parser#ascending_contextual_keyword.
     def enterAscending_contextual_keyword(self, ctx: CSharp4Parser.Ascending_contextual_keywordContext):
         pass
 
@@ -2999,13 +2930,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitAscending_contextual_keyword(self, ctx: CSharp4Parser.Ascending_contextual_keywordContext):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#descending_contextual_keyword.
+    # Enter a parse tree produced by CSharp4Parser#descending_contextual_keyword.
     def enterDescending_contextual_keyword(self, ctx: CSharp4Parser.Descending_contextual_keywordContext):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#descending_contextual_keyword.
+    # Exit a parse tree produced by CSharp4Parser#descending_contextual_keyword.
     def exitDescending_contextual_keyword(self, ctx: CSharp4Parser.Descending_contextual_keywordContext):
         pass
 
@@ -3281,28 +3210,23 @@ class CSharp4Listener(ParseTreeListener):
     def exitOperator_declaration2(self, ctx: CSharp4Parser.Operator_declaration2Context):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#interface_method_declaration2.
+    # Enter a parse tree produced by CSharp4Parser#interface_method_declaration2.
     def enterInterface_method_declaration2(self, ctx: CSharp4Parser.Interface_method_declaration2Context):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#interface_method_declaration2.
+    # Exit a parse tree produced by CSharp4Parser#interface_method_declaration2.
     def exitInterface_method_declaration2(self, ctx: CSharp4Parser.Interface_method_declaration2Context):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#interface_property_declaration2.
+    # Enter a parse tree produced by CSharp4Parser#interface_property_declaration2.
     def enterInterface_property_declaration2(self, ctx: CSharp4Parser.Interface_property_declaration2Context):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#interface_property_declaration2.
+    # Exit a parse tree produced by CSharp4Parser#interface_property_declaration2.
     def exitInterface_property_declaration2(self, ctx: CSharp4Parser.Interface_property_declaration2Context):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#interface_event_declaration2.
+    # Enter a parse tree produced by CSharp4Parser#interface_event_declaration2.
     def enterInterface_event_declaration2(self, ctx: CSharp4Parser.Interface_event_declaration2Context):
         pass
 
@@ -3310,13 +3234,11 @@ class CSharp4Listener(ParseTreeListener):
     def exitInterface_event_declaration2(self, ctx: CSharp4Parser.Interface_event_declaration2Context):
         pass
 
-    # Enter a parse tree produced by
-    # CSharp4Parser#interface_indexer_declaration2.
+    # Enter a parse tree produced by CSharp4Parser#interface_indexer_declaration2.
     def enterInterface_indexer_declaration2(self, ctx: CSharp4Parser.Interface_indexer_declaration2Context):
         pass
 
-    # Exit a parse tree produced by
-    # CSharp4Parser#interface_indexer_declaration2.
+    # Exit a parse tree produced by CSharp4Parser#interface_indexer_declaration2.
     def exitInterface_indexer_declaration2(self, ctx: CSharp4Parser.Interface_indexer_declaration2Context):
         pass
 

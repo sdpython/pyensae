@@ -5,8 +5,7 @@ if __name__ is not None and "." in __name__:
 else:
     from SimpleWorkflowParser import SimpleWorkflowParser
 
-# This class defines a complete listener for a parse tree produced by
-# SimpleWorkflowParser.
+# This class defines a complete listener for a parse tree produced by SimpleWorkflowParser.
 
 
 class SimpleWorkflowListener(ParseTreeListener):
@@ -27,13 +26,11 @@ class SimpleWorkflowListener(ParseTreeListener):
     def exitFinal_stmt(self, ctx: SimpleWorkflowParser.Final_stmtContext):
         pass
 
-    # Enter a parse tree produced by
-    # SimpleWorkflowParser#affectation_stmt_comma.
+    # Enter a parse tree produced by SimpleWorkflowParser#affectation_stmt_comma.
     def enterAffectation_stmt_comma(self, ctx: SimpleWorkflowParser.Affectation_stmt_commaContext):
         pass
 
-    # Exit a parse tree produced by
-    # SimpleWorkflowParser#affectation_stmt_comma.
+    # Exit a parse tree produced by SimpleWorkflowParser#affectation_stmt_comma.
     def exitAffectation_stmt_comma(self, ctx: SimpleWorkflowParser.Affectation_stmt_commaContext):
         pass
 
@@ -141,8 +138,7 @@ class SimpleWorkflowListener(ParseTreeListener):
     def exitConnect_stmt(self, ctx: SimpleWorkflowParser.Connect_stmtContext):
         pass
 
-    # Enter a parse tree produced by
-    # SimpleWorkflowParser#data_or_module_output.
+    # Enter a parse tree produced by SimpleWorkflowParser#data_or_module_output.
     def enterData_or_module_output(self, ctx: SimpleWorkflowParser.Data_or_module_outputContext):
         pass
 
@@ -190,13 +186,11 @@ class SimpleWorkflowListener(ParseTreeListener):
     def exitElement_name(self, ctx: SimpleWorkflowParser.Element_nameContext):
         pass
 
-    # Enter a parse tree produced by
-    # SimpleWorkflowParser#list_param_affectation.
+    # Enter a parse tree produced by SimpleWorkflowParser#list_param_affectation.
     def enterList_param_affectation(self, ctx: SimpleWorkflowParser.List_param_affectationContext):
         pass
 
-    # Exit a parse tree produced by
-    # SimpleWorkflowParser#list_param_affectation.
+    # Exit a parse tree produced by SimpleWorkflowParser#list_param_affectation.
     def exitList_param_affectation(self, ctx: SimpleWorkflowParser.List_param_affectationContext):
         pass
 
