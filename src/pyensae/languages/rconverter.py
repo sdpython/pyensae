@@ -449,7 +449,7 @@ class TreeStringListener(ParseTreeListener):
         elif name == "Inlinefunction":
             if text == "{":
                 self.inlinefunction = []
-                self.stack.append((name, "eval('''\n"))
+                self.stack.append((name, "compile_inline_function('''\n"))
                 return self.add_code_final()
             elif text in ("\n", ";"):
                 if hasattr(self, "inlinefunction") and len(self.inlinefunction) > 0:

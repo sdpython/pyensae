@@ -1,5 +1,5 @@
-switch(funName, _machine=eval('''
+switch(funName, _machine=compile_inline_function('''
  a .set( chouette )
- '''), _td=eval('''
+ '''), _td=compile_inline_function('''
  b = chouette2
  '''))

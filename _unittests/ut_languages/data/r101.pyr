@@ -1,4 +1,4 @@
 def mySecFun(v, M):
-    repeat_function(eval('''
+    repeat_function(compile_inline_function('''
  a .set( 1 )
  '''))
