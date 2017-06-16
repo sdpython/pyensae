@@ -13,12 +13,16 @@ from pyquickhelper.filehelper import change_file_status
 from .jython_helper import get_java_cmd, get_java_path
 from ..datasource.http_retrieve import download_data
 
+PIG_VERSION = "0.16.0"
+HADOOP_VERSION = "2.8.0"
 
-def download_pig_standalone(pig_version="0.15.0", hadoop_version="2.7.2", fLOG=noLOG):
+
+def download_pig_standalone(pig_version=PIG_VERSION,
+                            hadoop_version=HADOOP_VERSION, fLOG=noLOG):
     """
     download the standalone jython
-    if it does not exists, we should version 2.5.3 by default
-    in order to fit the cluster's version
+    if it does not exists, we should version ``HADOOP_VERSION``
+    by default in order to fit the cluster's version
 
     @param      pig_version         pig_version
     @param      hadoop_version      hadoop_version
@@ -126,7 +130,7 @@ def get_pig_jars():
                         and "hadoop1-runtime" not in root \
                         and "test" not in root \
                         and "h2" not in name \
-                        and "pig-0.15.0-withouthadoop-h2" not in name:
+                        and ("pig-" + PIG_VERSION + "-withouthadoop-h2") not in name:
                     res.append(os.path.join(root, name))
     return res
 
@@ -148,15 +152,9 @@ def get_hadoop_jars():
     return res
 
 
-def run_pig(pigfile,
-            argv=None,
-            pig_path=None,
-            hadoop_path=None,
-            jython_path=None,
-            timeout=None,
-            logpath="logs",
-            pig_version="0.15.0",
-            hadoop_version="2.7.2",
+def run_pig(pigfile, argv=None, pig_path=None, hadoop_path=None,
+            jython_path=None, timeout=None, logpath="logs",
+            pig_version=PIG_VERSION, hadoop_version=HADOOP_VERSION,
             fLOG=noLOG):
     """
     runs a pig script and returns the standard output and error
