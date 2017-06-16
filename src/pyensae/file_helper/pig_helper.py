@@ -10,11 +10,10 @@ import os
 import glob
 from pyquickhelper.loghelper import run_cmd, noLOG
 from pyquickhelper.filehelper import change_file_status
-from .jython_helper import get_java_cmd, get_java_path
+from .jython_helper import get_java_cmd, get_java_path, HADOOP_VERSION
 from ..datasource.http_retrieve import download_data
 
 PIG_VERSION = "0.16.0"
-HADOOP_VERSION = "2.8.0"
 
 
 def download_pig_standalone(pig_version=PIG_VERSION,

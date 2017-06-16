@@ -9,7 +9,8 @@ import sys
 import urllib
 import urllib.request
 from pyquickhelper.loghelper import run_cmd, noLOG
-from .pig_helper import HADOOP_VERSION
+
+HADOOP_VERSION = "2.8.0"
 
 
 def download_java_standalone(version=HADOOP_VERSION):
