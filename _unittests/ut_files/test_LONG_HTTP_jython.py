@@ -82,7 +82,7 @@ class TestJython (unittest.TestCase):
             return
 
         download_java_standalone()
-        assert is_java_installed()
+        self.assertTrue(is_java_installed())
 
         this = os.path.abspath(os.path.dirname(__file__))
         temp = os.path.join(this, "temp_jython")

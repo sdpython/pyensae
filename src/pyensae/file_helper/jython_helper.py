@@ -10,32 +10,31 @@ import urllib
 import urllib.request
 from pyquickhelper.loghelper import run_cmd, noLOG
 
-HADOOP_VERSION = "2.8.0"
+JYTHON_VERSION = "2.7.1-rc2"
 
 
-def download_java_standalone(version=HADOOP_VERSION):
+def download_java_standalone(version=JYTHON_VERSION):
     """
     download the standalone jython
-    if it does not exists, we should version ``HADOOP_VERSION``
+    if it does not exists, we should version ``JYTHON_VERSION``
     by default in order to fit the cluster's version
 
-    @param      version     ``HADOOP_VERSION`` or ...
+    @param      version     ``JYTHON_VERSION`` or ...
     @return                 path to it
     """
-
     dest = "jython-standalone-%s.jar" % version
-    if version in ("2.5.3", "2.7.1b2", "2.7.0", "2.7.1b3"):
-        url = "http://repo1.maven.org/maven2/org/python/jython-standalone/{1}/{0}".format(
-              dest, version)
-    else:
-        url = "http://search.maven.org/remotecontent?filepath=org/python/jython-standalone/{1}/{0}".format(
-              dest, version)
+    url = "https://search.maven.org/remotecontent?filepath=org/python/jython-standalone/{1}/{0}".format(
+          dest, version)
     this = os.path.abspath(os.path.dirname(__file__))
     final = os.path.join(this, dest)
     if os.path.exists(final):
         return final
 
-    u = urllib.request.urlopen(url)
+    try:
+        u = urllib.request.urlopen(url)
+    except urllib.error.HTTPError as e:
+        raise Exception(
+            "Unable to download file from '{0}'.".format(url)) from e
     alls = u.read()
     u.close()
 
