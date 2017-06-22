@@ -1,3 +1,4 @@
+from python2r_helper import list_or_dict
 from python2r_helper import within
 
 # some comments
@@ -9,8 +10,8 @@ def test_machine_chouette_something():
     def func(infile, csch, predmod):
         impnode = zoo_test(infile="$infile", dot="$dotdot", csch=csch)
         obj = waouh(
-            impnode, nono, trnode, inputs=list(
-                infile=infile), outputs=list(
+            impnode, nono, trnode, inputs=list_or_dict(
+                infile=infile), outputs=list_or_dict(
                 predmod=predmod))
 
         # one

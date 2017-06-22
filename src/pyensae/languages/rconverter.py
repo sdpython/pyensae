@@ -21,11 +21,11 @@ class R2PyConversionError(Exception):
             text = node.symbol.text
         except AttributeError:
             text = "ERROR"
-        mes = "Unable to convert\n'{0}'\n{1}\n{2}\nPARENT\n'{3}'\n{4}\nSOFAR\n{5}\nSOSTACK\n{5}".format(
+        mes = "Unable to convert\n'{0}'\n{1}\n{2}\nPARENT\n'{3}'\n{4}\n---SOFAR---\n{5}\n---SOSTACK---\n{5}\n---END---".format(
             text, type(node), node, ("" if isinstance(
                 node, str) else node.parentCtx),
             (str if isinstance(node, str) else type(node.parentCtx)), sofar, sostack)
-        mes += "\n------------\n" + str(message)
+        mes += "\n------------\nMESSAGE=\n" + str(message)
         Exception.__init__(self, mes)
 
 
@@ -185,7 +185,14 @@ class TreeStringListener(ParseTreeListener):
                 self.in_formula = True
             elif name_parent == "Functioncall":
                 self.stack.append(("Functioncall", ""))
-            self.stack.append((name, node))
+            if text == "list":
+                self.imports.add("from python2r_helper import list_or_dict")
+                self.stack.append((name, "list_or_dict"))
+            elif text == "is":
+                self.imports.add("from python2r_helper import is_")
+                self.stack.append((name, "is_"))
+            else:
+                self.stack.append((name, node))
             return self.add_code_final()
         elif name in ("Affectop", "Comparison"):
             self.stack.append((name, node))
@@ -243,26 +250,37 @@ class TreeStringListener(ParseTreeListener):
                 if len(self.elements) > 0 and self.elements[-1] != '\n':
                     self.elements.append("\n")
                 return self.add_code_final()
+            if text == "break":
+                self.stack.append((name, node))
+                return self.add_code_final()
             if text == "{":
                 self.empty_stack()
                 if len(self.block) == 0:
-                    raise R2PyConversionError(node, name, "".join(
-                        self.elements), "\n".join(str(_) for _ in self.stack))
-                self.block[-1] = True
-                return self.add_code_final()
+                    # We are in an expression.
+                    self.stack.append((name, "("))
+                    return self.add_code_final()
+                else:
+                    self.block[-1] = True
+                    return self.add_code_final()
             if text == "}":
+                # We are in an expression.
                 self.empty_stack()
                 if len(self.block) == 0:
-                    raise R2PyConversionError(node, name, "".join(
-                        self.elements), "\n".join(str(_) for _ in self.stack))
-                self.block.pop()
-                self.indent -= 1
-                self.fLOG(
-                    "[TreeStringListener.add_code] indent -= 1", "--", self.indent)
-                return self.add_code_final()
+                    self.stack.append((name, ")"))
+                    return self.add_code_final()
+                else:
+                    self.block.pop()
+                    self.indent -= 1
+                    self.fLOG(
+                        "[TreeStringListener.add_code] indent -= 1", "--", self.indent)
+                    return self.add_code_final()
         elif name == "Form":
-            self.stack.append((None, node))
-            return self.add_code_final()
+            if text == "...":
+                self.stack.append((None, "*args"))
+                return self.add_code_final()
+            else:
+                self.stack.append((None, node))
+                return self.add_code_final()
         elif name == "Formlist":
             self.stack.append((None, node))
             return self.add_code_final()
@@ -282,6 +300,9 @@ class TreeStringListener(ParseTreeListener):
                 return self.add_code_final()
             if text == ':':
                 self.stack.append((name, node))
+                return self.add_code_final()
+            if text == '...':
+                self.stack.append((name, "*args"))
                 return self.add_code_final()
         elif name == "Sublist":
             if text == ",":
@@ -307,6 +328,23 @@ class TreeStringListener(ParseTreeListener):
                     if len(self.elements) > 0 and self.elements[-1] != '\n':
                         self.elements.append("\n")
                     return self.add_code_final()
+        elif name == "Elseif":
+            if text == "if":
+                if id(node.parentCtx.parentCtx) not in self.indent_level:
+                    raise R2PyConversionError(node, name, "".join(
+                        self.elements), "\n".join(str(_) for _ in self.stack))
+                else:
+                    if self.indent_level[id(node.parentCtx.parentCtx)] != self.indent:
+                        raise R2PyConversionError(node, name, "".join(
+                            self.elements), "\n".join(str(_) for _ in self.stack))
+                self.stack.append((name, "elif"))
+                return self.add_code_final()
+            elif text == "else":
+                # We do nothing. If follows.
+                return self.add_code_final()
+            else:
+                # There should be nothing else.
+                pass
         elif name == "Ifelseexpr" or name == "Ifexpr":
             if self.search_parents(node, "Sublist") or self.search_parents(node, "Affectation", 2):
                 if text == "if":
@@ -354,6 +392,12 @@ class TreeStringListener(ParseTreeListener):
                 return self.add_code_final()
             elif text == "in":
                 self.stack.append((name, node))
+                return self.add_code_final()
+        elif name == "Whileexpr":
+            if text == "while":
+                self.stack.append((name, node))
+                return self.add_code_final()
+            elif text in ('(', ')'):
                 return self.add_code_final()
         elif name == "Rangeop":
             if text == ":":
@@ -502,6 +546,9 @@ class TreeStringListener(ParseTreeListener):
             elif name == "Forexpr":
                 is_for = True
                 break
+            elif name == "Whileexpr":
+                is_for = True
+                break
             elif name == "Identifier":
                 text = node if isinstance(node, str) else node.symbol.text
                 if text == "asNamespace":
@@ -513,7 +560,8 @@ class TreeStringListener(ParseTreeListener):
 
         if is_function_def:
             self.elements.append("\n")
-            function_name = self.stack[0][1].symbol.text
+            function_name = self.stack[0][1] if isinstance(
+                self.stack[0][1], str) else self.stack[0][1].symbol.text
             self.fLOG(
                 "[TreeStringListener.empty_stack] add function '{0}'".format(function_name))
             self.elements.append("    " * self.indent)
@@ -698,7 +746,7 @@ class TreeStringListener(ParseTreeListener):
                 return ","
             else:
                 return text
-        elif name == "Ifexpr" or name == "Ifelseexpr":
+        elif name in ("Ifexpr", "Ifelseexpr"):
             text = node.symbol.text
             if text in ("if", "else") and (self.search_parents(node, "Sublist") or
                                            self.search_parents(node, "Affectation", 2)):

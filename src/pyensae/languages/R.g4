@@ -216,10 +216,17 @@ forexpr
 
 ifexpr
     : 'if' '(' expr ')' NL*  expr
+      (elseif  '(' expr ')' NL*  expr NL*  )*
     ;
     
 ifelseexpr
-    : 'if' '(' expr ')' NL*  expr NL* 'else' NL* expr
+    : 'if' '(' expr ')' NL*  expr NL* 
+      (elseif  '(' expr ')' NL*  expr NL*  )*
+      'else' NL* expr
+    ;
+    
+elseif
+    : 'else' 'if'
     ;
 
 returnexpr

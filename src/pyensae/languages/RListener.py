@@ -258,6 +258,14 @@ class RListener(ParseTreeListener):
     def exitIfelseexpr(self, ctx: RParser.IfelseexprContext):
         pass
 
+    # Enter a parse tree produced by RParser#elseif.
+    def enterElseif(self, ctx: RParser.ElseifContext):
+        pass
+
+    # Exit a parse tree produced by RParser#elseif.
+    def exitElseif(self, ctx: RParser.ElseifContext):
+        pass
+
     # Enter a parse tree produced by RParser#returnexpr.
     def enterReturnexpr(self, ctx: RParser.ReturnexprContext):
         pass
