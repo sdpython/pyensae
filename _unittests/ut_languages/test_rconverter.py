@@ -58,12 +58,6 @@ class TestPRConverter(unittest.TestCase):
         pyfiles = [os.path.join(data, _)
                    for _ in sorted(files) if _.endswith(".pyr")]
 
-        if sys.version_info[:2] < (3, 6):
-            pyfiles35 = [os.path.join(data, _)
-                         for _ in sorted(files) if _.endswith(".pyr35")]
-            pyfiles35 = {k.replace(".pyr", ".pyr35"): k for k in pyfiles35}
-            pyfiles = [pyfiles35.get(_, _) for _ in pyfiles]
-
         self.assertEqual(len(rfiles), len(pyfiles))
         self.assertTrue(len(rfiles) > 0)
 
@@ -101,7 +95,12 @@ class TestPRConverter(unittest.TestCase):
             if expcode.strip(" \n") != pycode.strip(" \n"):
                 fLOG(pycode)
                 pycode = r2python(code, pep8=True, fLOG=fLOG)
-            self.assertEqual(expcode.strip(" \n"), pycode.strip(" \n"))
+
+            if sys.version_info[:2] >= (3, 6):
+                self.assertEqual(expcode.strip(" \n"), pycode.strip(" \n"))
+            else:
+                self.assertEqual(expcode.strip(" \n").replace("@", "*"),
+                                 pycode.strip(" \n").replace("@", "*"))
 
 
 if __name__ == "__main__":
