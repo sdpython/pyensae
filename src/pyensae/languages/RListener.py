@@ -114,6 +114,14 @@ class RListener(ParseTreeListener):
     def exitForm(self, ctx: RParser.FormContext):
         pass
 
+    # Enter a parse tree produced by RParser#argumentname.
+    def enterArgumentname(self, ctx: RParser.ArgumentnameContext):
+        pass
+
+    # Exit a parse tree produced by RParser#argumentname.
+    def exitArgumentname(self, ctx: RParser.ArgumentnameContext):
+        pass
+
     # Enter a parse tree produced by RParser#sublist.
     def enterSublist(self, ctx: RParser.SublistContext):
         pass

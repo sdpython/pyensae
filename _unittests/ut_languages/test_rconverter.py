@@ -55,7 +55,15 @@ class TestPRConverter(unittest.TestCase):
         data = os.path.join(temp, "..", "data")
         files = os.listdir(data)
         rfiles = [os.path.join(data, _) for _ in sorted(files) if ".r" in _]
-        pyfiles = [os.path.join(data, _) for _ in sorted(files) if ".pyr" in _]
+        pyfiles = [os.path.join(data, _)
+                   for _ in sorted(files) if _.endswith(".pyr")]
+
+        if sys.version_info[:2] < (3, 6):
+            pyfiles35 = [os.path.join(data, _)
+                         for _ in sorted(files) if _.endswith(".pyr35")]
+            pyfiles35 = {k.replace(".pyr", ".pyr35"): k for k in pyfiles35}
+            pyfiles = [pyfiles35.get(_, _) for _ in pyfiles]
+
         self.assertEqual(len(rfiles), len(pyfiles))
         self.assertTrue(len(rfiles) > 0)
 

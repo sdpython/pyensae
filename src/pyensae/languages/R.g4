@@ -57,12 +57,12 @@ expr
     | ('-'|'+') expr
     | expr affectation
     | expr rangeopexpr
-    | <assoc=right> expr USER_OP expr // anything wrappedin %: '%' .* '%'
-    | <assoc=right> expr operator expr
-    | <assoc=right> expr comparison expr
+    | <assoc=right> expr NL* USER_OP NL* expr // anything wrappedin %: '%' .* '%'
+    | <assoc=right> expr NL* operator NL* expr
+    | <assoc=right> expr NL* comparison NL* expr
     | '!' expr
-    | expr ('&'|'&&') expr
-    | expr ('|'|'||') expr
+    | expr NL* ('&'|'&&') NL* expr
+    | expr NL* ('|'|'||') NL* expr
     | formula_simple
     | functiondefbody
     | functiondeflambda
@@ -78,7 +78,7 @@ expr
     | implicit_column_name
     | nextexpr
     | 'break'
-    | ('(' expr ')')
+    | ('(' NL* expr NL* ')')
     | constant
     | identifier
     ;
@@ -123,9 +123,14 @@ formlist
     : form ( NL? ',' NL* form)*
     ;
 
-form:   ID
-    |   ID '=' expr
+form
+    :   argumentname
+    |   argumentname '=' expr
     |   '...'
+    ;
+
+argumentname
+    : ID
     ;
 
 sublist
@@ -256,7 +261,7 @@ formula_simple_A
 
 formula_simple_B
     : 'within' '(' identifier ',' (
-           ('{' expr (';' expr)* '}' ) |
+           ('{' NL* expr (';' expr)* NL* '}' ) |
            ( identifier affectop expr )
            ) ')'
     ;

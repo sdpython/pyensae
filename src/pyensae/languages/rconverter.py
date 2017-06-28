@@ -2,6 +2,7 @@
 @file
 @brief Convert R into Python
 """
+import sys
 from antlr4 import ParseTreeListener, ParseTreeWalker
 from pyquickhelper.pycode import remove_extra_spaces_and_pep8
 from .RParser import RParser
@@ -69,6 +70,14 @@ def r2python(code: str, pep8=False, fLOG=None) -> str:
     into ``(a):b``. The same trick is sometimes needed for other patterns
     such as the operator ``%in%`` which is converted into an intersection
     of two sets.
+
+    Kwonws bugs:
+
+    * ``} else {`` needs to be replaced by ``} EOL else {``
+    * comment added at the end of line must be followed by an empty line
+    * ``m[,1]`` must be replaced by ``M[:,1]``
+    * formula ``~.`` is not translated
+    * ``%<%`` cannot be followed by an empty line
     """
     if fLOG:
         fLOG("[r2python] parse ", len(code), "bytes")
@@ -119,6 +128,7 @@ class TreeStringListener(ParseTreeListener):
         self.in_formula = False
         self._fLOG = fLOG
         self.indent_level = {}
+        self.add_lambda = False
 
     def fLOG(self, *l, **p):
         """
@@ -184,6 +194,10 @@ class TreeStringListener(ParseTreeListener):
                 self.stack.append(("Formop", '"'))
                 self.in_formula = True
             elif name_parent == "Functioncall":
+                if text == "system.time":
+                    self.add_lambda = True
+                else:
+                    self.add_lambda = False
                 self.stack.append(("Functioncall", ""))
             if text == "list":
                 self.imports.add("from python2r_helper import list_or_dict")
@@ -191,6 +205,9 @@ class TreeStringListener(ParseTreeListener):
             elif text == "is":
                 self.imports.add("from python2r_helper import is_")
                 self.stack.append((name, "is_"))
+            elif text == "(" and self.add_lambda:
+                self.stack.append((name, "lambda: "))
+                self.stack.append((name, node))
             else:
                 self.stack.append((name, node))
             return self.add_code_final()
@@ -245,6 +262,15 @@ class TreeStringListener(ParseTreeListener):
             if text == "!":
                 self.stack.append(("Not!", node))
                 return self.add_code_final()
+            if text == "%*%":
+                if sys.version_info[:2] >= (3, 6):
+                    self.stack.append((name, "@"))
+                else:
+                    self.stack.append((name, "*"))
+                return self.add_code_final()
+            if text in ("%>%", "%<%", "%+%", "%-%", "%/%"):
+                self.stack.append((name, text.replace("%", "")))
+                return self.add_code_final()
             if text == "\n":
                 self.empty_stack()
                 if len(self.elements) > 0 and self.elements[-1] != '\n':
@@ -281,12 +307,20 @@ class TreeStringListener(ParseTreeListener):
             else:
                 self.stack.append((None, node))
                 return self.add_code_final()
+        elif name == "Argumentname":
+            self.stack.append((name, node))
+            return self.add_code_final()
         elif name == "Formlist":
             self.stack.append((None, node))
             return self.add_code_final()
         elif name == "Functioncall":
-            if text in ('(', ')'):
+            if text == ')':
                 self.stack.append((name, node))
+                return self.add_code_final()
+            if text == '(':
+                self.stack.append((name, node))
+                if self.add_lambda:
+                    self.stack.append((name, "lambda: "))
                 return self.add_code_final()
             if text == '\n':
                 return self.add_code_final()
@@ -356,6 +390,9 @@ class TreeStringListener(ParseTreeListener):
                 elif text in ("(", ")"):
                     self.stack.append((name, node))
                     return self.add_code_final()
+                elif text == "\n":
+                    raise R2PyConversionError(node, name, "".join(
+                        self.elements), "\n".join(str(_) for _ in self.stack))
             else:
 
                 if text == "if":
@@ -464,6 +501,9 @@ class TreeStringListener(ParseTreeListener):
         elif name == "Operator":
             if text == "%%":
                 self.stack.append((name, "%"))
+                return self.add_code_final()
+            elif text == "^":
+                self.stack.append((name, "**"))
                 return self.add_code_final()
             else:
                 self.stack.append((name, node))
@@ -747,7 +787,7 @@ class TreeStringListener(ParseTreeListener):
             else:
                 return text
         elif name in ("Ifexpr", "Ifelseexpr"):
-            text = node.symbol.text
+            text = node if isinstance(node, str) else node.symbol.text
             if text in ("if", "else") and (self.search_parents(node, "Sublist") or
                                            self.search_parents(node, "Affectation", 2)):
                 if text == "if":
@@ -772,6 +812,12 @@ class TreeStringListener(ParseTreeListener):
                 return "lambda"
             else:
                 return node.symbol.text
+        elif name == "Argumentname":
+            text = node.symbol.text
+            if text == "lambda":
+                return "lambda_"
+            else:
+                return text.replace(".", "_")
         elif name == "Identifier":
             text = node.symbol.text
             if text == "c":
@@ -780,7 +826,7 @@ class TreeStringListener(ParseTreeListener):
                 return "make_tuple"
             elif text == "class":
                 parent_name = self.terminal_node_name(node.parentCtx)
-                if parent_name == "Functioncall":
+                if parent_name in ("Functioncall", "Subnobracket"):
                     self.imports.add("from python2r_helper import make_class")
                     return "make_class"
                 else:
@@ -788,6 +834,8 @@ class TreeStringListener(ParseTreeListener):
             elif text == "finally":
                 self.imports.add("from python2r_helper import finallyR")
                 return "finallyR"
+            elif text == "lambda":
+                return "lambda_"
             elif text in ("bquote", "ImplicitColumn"):
                 self.imports.add(
                     "from python2r_helper import {0}".format(text))
