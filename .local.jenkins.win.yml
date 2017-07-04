@@ -12,7 +12,7 @@ install:
   - pip freeze > pip_freeze.txt
 script:
   - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests", NAME: "UT" }
-  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests_LONG", NAME: "UT_LONG"}
+  - { CMD: "python -X faulthandler -X showrefcount -u setup.py unittests_LONG", NAME: "UT_LONG", TIMEOUT: 900}
 after_script:
   - python setup.py bdist_wheel
   - if [ ${DIST} != "conda" and ${VERSION} == "3.6" and ${NAME} == "UT" ] then copy dist\*.whl {{root_path}}\..\..\local_pypi\local_pypi_server fi
