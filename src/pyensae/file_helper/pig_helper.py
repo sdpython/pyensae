@@ -32,6 +32,10 @@ def download_pig_standalone(pig_version=PIG_VERSION,
     This function might need to be run twice if the first try
     fails, it might to due to very long path when unzipping the
     downloaded file.
+
+    Hadoop is downloaded from one of the websites referenced at
+    ` <http://www.apache.org/dyn/closer.cgi/hadoop/common/hadoop-2.8.0/hadoop-2.8.0.tar.gz>`_.
+    Check the source to see which one was chosen.
     """
     fbs = []
 
@@ -53,7 +57,7 @@ def download_pig_standalone(pig_version=PIG_VERSION,
         os.mkdir(d)
     fn = download_data(name="hadoop-%s.tar.gz" % hadoop_version,
                        whereTo=d,
-                       website="http://wwwftp.ciril.fr/pub/apache/hadoop/common/hadoop-%s/" % hadoop_version,
+                       website="http://apache.crihan.fr/dist/hadoop/common/hadoop-%s/" % hadoop_version,
                        fLOG=fLOG)
     fbs.append(fn)
     change_file_status(d)
