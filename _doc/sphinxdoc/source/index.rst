@@ -62,6 +62,19 @@ The module also implements magic commands to access an Hadoop cluster
 (Azure, Cloudera), to run SQL queries on `SQLite <https://sqlite.org/>`_,
 parsing financial data from `Yahoo Finance <https://fr.finance.yahoo.com/>`_.
 
+Galleries and examples
+----------------------
+
+.. toctree::
+    :maxdepth: 2
+
+    api/index
+    i_ex
+    i_nb
+    i_faq
+    gyexamples/index
+    all_notebooks
+
 Functionalities
 ---------------
 
@@ -73,18 +86,6 @@ Functionalities
 * magic commands to access Azure Blob Storage and HDInsight (see :class:`MagicAzure <pyensae.remote.magic_azure.MagicAzure>`)
 * magic commands to display content of a folder in DataFrame (see :class:`MagicFile <pyensae.file_helper.magic_file.MagicFile>`)
 * magic commands to display an autamated menu in a notebook (see :class:`MagicFile <pyensae.notebook_helper.magic_notebook.MagicNotebook>`)
-
-Galleries and examples
-----------------------
-
-.. toctree::
-    :maxdepth: 2
-
-    i_ex
-    i_nb
-    i_faq
-    gyexamples/index
-    all_notebooks
 
 Dependencies
 ------------
@@ -128,10 +129,10 @@ Navigation
 
     indexmenu
 
-+----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
-| :ref:`l-modules`     |  :ref:`l-functions` | :ref:`l-classes`    | :ref:`l-methods`   | :ref:`l-staticmethods` | :ref:`l-properties`                            |
-+----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
-| :ref:`modindex`      |  :ref:`l-EX2`       | :ref:`search`       | :ref:`l-license`   | :ref:`l-changes`       | :ref:`l-README`                                |
-+----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
-| :ref:`genindex`      |  :ref:`l-FAQ2`      | :ref:`l-notebooks`  | :ref:`l-NB2`       | :ref:`l-statcode`      | `Unit Test Coverage <coverage/index.html>`_    |
-+----------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
++------------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
+| :ref:`l-modules`       |  :ref:`l-functions` | :ref:`l-classes`    | :ref:`l-methods`   | :ref:`l-staticmethods` | :ref:`l-properties`                            |
++------------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
+| :ref:`modindex`        |  :ref:`l-EX2`       | :ref:`search`       | :ref:`l-license`   | :ref:`l-changes`       | :ref:`l-README`                                |
++------------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+
+| :ref:`API <genindex>`  |  :ref:`l-FAQ2`      | :ref:`l-notebooks`  | :ref:`l-NB2`       | :ref:`l-statcode`      | `Unit Test Coverage <coverage/index.html>`_    |
++------------------------+---------------------+---------------------+--------------------+------------------------+------------------------------------------------+

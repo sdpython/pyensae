@@ -54,23 +54,25 @@ class DatabaseCore (DatabaseCore2):
 
     def __init__(self, sql_file, engine="SQLite", user=None, password=None,
                  host="localhost", LOG=None, attach=None):
-        """constructor
+        """
+        Create a database object.
+
         @param      sql_file        database file database file (use ``:memory:`` to avoid creating a file and using only memory)
                                     it can also contain several files separated by ;
-                                        @code
-                                        name_file ; nickname,second_file ; ...
-                                        @endcode
+                                    ``name_file ; nickname,second_file ; ...``
         @param      engine          SQLite or MySQL (if it is installed), ODBCMSSQL
         @param      user            user if needed
         @param      host            to connect to a MSSQL database
         @param      password        password if needed
         @param      LOG             LOG function, if None, choose ``print``
-        @param      attach          dictionary ``{ nickname: filename }``, list of database to attach
+        @param      attach          dictionary ``{nickname: filename}``,
+                                    list of databases to attach
 
         @warning If the folder does not exist, it will be created
 
         .. versionchanged:: 1.1
-            Parameter *dbfile* can be of type `sqlite3.Connection <https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection>`_.
+            Parameter *dbfile* can be of type
+            `sqlite3.Connection <https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection>`_.
         """
 
         # attach cases
@@ -180,7 +182,8 @@ class DatabaseCore (DatabaseCore2):
             self._sql_file = ":memory:"
 
     def isMSSQL(self):
-        """says if the syntax is MS SQL Server
+        """
+        Says if the syntax is MS SQL Server.
         """
         if self._engine == "ODBCMSSQL":
             return True
@@ -188,7 +191,7 @@ class DatabaseCore (DatabaseCore2):
 
     def isMemory(self):
         """
-        tells if the Database takes place in memory (``:memory:``)
+        Tells if the Database takes place in memory (``:memory:``).
         """
         return self._sql_file == ":memory:"
 
@@ -200,12 +203,15 @@ class DatabaseCore (DatabaseCore2):
         """
         This function offers the possibility to postpone the insertion,
         they will be processed all at the time during when method commit is called.
+
         @param      n           number of insertion to postpone
         """
         self._buffer_insert_s = n
 
     def is_connected(self):
-        """says if the database is connected
+        """
+        Says if the database is connected.
+
         @return         "_connection" in self.__dict__
         """
         return "_connection" in self.__dict__
@@ -280,7 +286,9 @@ class DatabaseCore (DatabaseCore2):
         return _list_special_function
 
     def connect(self, odbc_string=None):
-        """open a connection to the database
+        """
+        Open a connection to the database.
+
         @param      odbc_string     use a different odbc string
         """
         if self.isMemory():
@@ -332,7 +340,8 @@ class DatabaseCore (DatabaseCore2):
                 self.attach_database(v, k)
 
     def close(self):
-        """close the database
+        """
+        Close the database.
         """
         if self.isMemory():
             # we should not close, otherwise, we lose the data
@@ -343,7 +352,8 @@ class DatabaseCore (DatabaseCore2):
             del self._connection
 
     def commit(self):
-        """call this function after any insert request
+        """
+        Call this function after any insert request.
         """
         self._check_connection()
 
@@ -359,6 +369,8 @@ class DatabaseCore (DatabaseCore2):
 
     def get_file(self, attached_db=False):
         """
+        Get database file.
+
         @param      attached_db     if True, add the list of attached databases
         @return                     the database file
         """
@@ -378,21 +390,26 @@ class DatabaseCore (DatabaseCore2):
             return self._sql_file
 
     def has_table(self, table):
-        """say if the table belongs to the database
+        """
+        Say if the table belongs to the database.
+
         @param      table       table name
         @return                 boolean
         """
         return table in self.get_table_list("." in table)
 
     def has_index(self, index):
-        """say if the index belongs to the database
+        """
+        Say if the index belongs to the database.
+
         @param      index       index name
         @return                 boolean"""
         return index in [s[0] for s in self.get_index_list()]
 
     def get_index_on_table(self, table, full=False):
         """
-        return the list of indexes on a specific table
+        Return the list of indexes on a specific table.
+
         @param      table       table
         @param      full        if True returns all fields, otherwise, returns only the index names
         @return                 list of the index on this table
@@ -404,7 +421,9 @@ class DatabaseCore (DatabaseCore2):
             return [l[0] for l in indexes if l[1] == table]
 
     def get_column_type(self, table, column):
-        """return the column type of a table
+        """
+        Return the column type of a table.
+
         @param      table       table name
         @param      column      column name
         @return                 type (python class)
@@ -419,7 +438,9 @@ class DatabaseCore (DatabaseCore2):
             (column, table))
 
     def get_index_list(self, attached="main"):
-        """return the list of indexes
+        """
+        Return the list of indexes.
+
         @param        attached      if main, returns the index for the main database, otherwise, for an attached database
         @return                     list of tuple (index_name, table, sql_request, fields)
         """
@@ -465,7 +486,9 @@ class DatabaseCore (DatabaseCore2):
         return res
 
     def get_attached_database_list(self, file=False):
-        """return all the attached database (avoid the temporary ones and the main one)
+        """
+        Return all the attached database (avoid the temporary ones and the main one).
+
         @param      file        ask for file also
         @return                 a list of tuple (alias, file)
         """
@@ -484,7 +507,7 @@ class DatabaseCore (DatabaseCore2):
 
     def get_table_list(self, add_attached=False):
         """
-        return the list of table
+        Return the list of tables.
 
         @param      add_attached        if True, add the list of tables included in the attached databases
         @return                         the table list
@@ -518,34 +541,36 @@ class DatabaseCore (DatabaseCore2):
 
     def get_table_columns(self, table, dictionary=False):
         """
-        @see me get_table_columns_list
-        example: (dictionary == False)
-        @code
-        [('fid', <type 'int'>), ('fidp', <type 'int'>), ('field', <type 'str'>)]
-        @endcode
+        See @see me get_table_columns_list.
 
-        or (dictionary = True)
-        @code
-        {0: ('fid', <type 'int'>), 1: ('fidp', <type 'int'>), 2: ('field', <type 'str'>)}
-        @endcode
+        Example (`dictionary == False`):
+        ::
+            [('fid', <type 'int'>), ('fidp', <type 'int'>), ('field', <type 'str'>)]
+
+        Or (`dictionary = True`):
+        ::
+            {0: ('fid', <type 'int'>), 1: ('fidp', <type 'int'>), 2: ('field', <type 'str'>)}
         """
         return self.get_table_columns_list(table, dictionary)
 
     def get_table_columns_list(self, table, dictionary=False):
-        """return all the columns for a table
+        """
+        Return all the columns for a table.
+
         @param      table       table name
         @param      dictionary  returns the list as a dictionary
         @return                 a list of tuple (column name, Python type)
 
-        example: (dictionary == False)
-        @code
-        [('fid', <type 'int'>), ('fidp', <type 'int'>), ('field', <type 'str'>)]
-        @endcode
+        Example (`dictionary == False`):
 
-        or (dictionary = True)
-        @code
-        {0: ('fid', <type 'int'>), 1: ('fidp', <type 'int'>), 2: ('field', <type 'str'>)}
-        @endcode
+        ::
+            [('fid', <type 'int'>), ('fidp', <type 'int'>), ('field', <type 'str'>)]
+
+        Or (`dictionary = True`):
+
+        ::
+
+            {0: ('fid', <type 'int'>), 1: ('fidp', <type 'int'>), 2: ('field', <type 'str'>)}
         """
         if "." in table:
             prefix = table.split(".")[0] + "."
@@ -578,7 +603,9 @@ class DatabaseCore (DatabaseCore2):
             return res
 
     def get_table_nb_lines(self, table):
-        """return the number of lines in a table (or number of observations)
+        """
+        Return the number of lines in a table (or number of observations).
+
         @param      table       table name
         @return                 integer
         """
@@ -591,14 +618,17 @@ class DatabaseCore (DatabaseCore2):
 
     def len(self, table):
         """
-        returns the number of lines of table ``table``
+        Returns the number of lines of table ``table``.
+
         @param  table       table
         @return             int
         """
         return self.get_table_nb_lines(table)
 
     def get_table_nfirst_lines(self, table, n=1):
-        """returns the n first lines
+        """
+        Return the *n* first lines.
+
         @param      table       table name
         @param      n           number of asked lines
         @return                 integer
@@ -620,7 +650,8 @@ class DatabaseCore (DatabaseCore2):
 
     def get_sql_columns(self, request):
         """
-        return the columns name for a SQL request
+        Return the columns name for a SQL request.
+
         @param      request             SQL request
         @return                         list of columns name
         """
@@ -636,7 +667,7 @@ class DatabaseCore (DatabaseCore2):
     class _cross_product_iter:
 
         """
-        iterator for CROSS
+        Iterator for CROSS.
         """
 
         def __init__(self, db, request):
@@ -747,19 +778,22 @@ class DatabaseCore (DatabaseCore2):
             pass
 
     def _analyse(self, request, header=False):
-        """analyse the request  does it contains cross product
+        """
+        Analyse the request does it contains cross product.
+
         @param      request     request
         @param      header      add a header in the first line
         @return                 None or an iterator
 
-        example:
-        @code
-        CROSS f1,f2,f3
-        PLACE a,b,c
-        FROM table
-        ORDER BY f8
-        WHERE f9 == ' '  -- optional
-        @endcode
+        Example:
+
+        ::
+
+            CROSS f1,f2,f3
+            PLACE a,b,c
+            FROM table
+            ORDER BY f8
+            WHERE f9 == ' '  -- optional
         """
         if "CROSS" not in request.upper():
             return None
@@ -770,7 +804,9 @@ class DatabaseCore (DatabaseCore2):
             return iter
 
     def execute(self, request, nolog=False):
-        """open a cursor with a query and return it to the user
+        """
+        Open a cursor with a query and return it to the user.
+
         @param      request         SQL request
         @param      nolog           if True, do not log anything
         @return                     cursor
@@ -828,17 +864,20 @@ class DatabaseCore (DatabaseCore2):
             return cur
 
     def execute_view(self, request, add_column_name=False, nolog=True):
-        """open a cursor with a query and returns the result into a list
+        """
+        Open a cursor with a query and returns the result into a list.
+
         @param      request             SQL request
         @param      add_column_name     add the column name before the first line
         @param      nolog               if True, do not log anything
         @return                         cursor
 
-        example
-        @code
-        t    = Database (file)
-        view = t.execute_view ("SELECT * FROM table1 ;")
-        @endcode
+        Example:
+
+        ::
+
+            t    = Database (file)
+            view = t.execute_view ("SELECT * FROM table1 ;")
         """
         cur = self.execute(request, nolog=nolog)
         if add_column_name:
@@ -852,7 +891,9 @@ class DatabaseCore (DatabaseCore2):
         return res
 
     def execute_script(self, script, nolog=True):
-        """open a cursor and run a script
+        """
+        Open a cursor and run a script.
+
         @param      script              SQL script
         @param      nolog               if True, do not log anything
         @return                         cursor
@@ -877,7 +918,9 @@ class DatabaseCore (DatabaseCore2):
     ##########################################################################
 
     def attach_database(self, db, alias):
-        """attach another database
+        """
+        Attach another database.
+
         @param      db          database to attach
         @param      alias       database alias
         """
@@ -893,7 +936,9 @@ class DatabaseCore (DatabaseCore2):
                 (db.get_file(), alias))
 
     def add_function(self, name, nbparam, function):
-        """add a function which can be used as any other SQL function (strim, ...)
+        """
+        Add a function which can be used as any other SQL function (strim, ...).
+
         @param      name            function name (it does not allow _)
         @param      nbparam         number of parameters
         @param      function        function to add
@@ -909,7 +954,9 @@ class DatabaseCore (DatabaseCore2):
     ##########################################################################
 
     def create_index(self, indexname, table, columns, unique=False):
-        """creates an index on a table using some columns
+        """
+        Creates an index on a table using some columns.
+
         @param      indexname   index name
         @param      table       table name
         @param      columns     list of columns
@@ -935,7 +982,9 @@ class DatabaseCore (DatabaseCore2):
         self.execute(sql)
 
     def create_table(self, table, columns, temporary=False, nolog=False):
-        """creates a table
+        """
+        Creates a table.
+
         @param      table           table name
         @param      columns         columns definition, dictionary { key:(column_name,python_type) }
                                     if PRIMARYKEY is added, the key is considered as the primary key.
@@ -1052,7 +1101,9 @@ class DatabaseCore (DatabaseCore2):
     ##########################################################################
 
     def remove_table(self, table):
-        """remove a table
+        """
+        Remove a table.
+
         @param      table       table name
         @return                 return a cursor
         """
@@ -1063,7 +1114,9 @@ class DatabaseCore (DatabaseCore2):
     ##########################################################################
 
     def _insert_sql(self, table, insert_values):
-        """build the sql for an insert request
+        """
+        Build the sql for an insert request.
+
         @param      table               table name
         @param      insert_values       dictionary or a list
         @return                         string
@@ -1107,10 +1160,12 @@ class DatabaseCore (DatabaseCore2):
             raise TypeError("unexpected type: " + str(type(insert_values)))
 
     def insert(self, table, insert_values, cursor=None, nolog=True):
-        """insert into a table
+        """
+        Insert into a table.
+
         @param      table           table name
         @param      insert_values   values to insert (a list of dictionary or a single dictionary)
-        @param      cursor          if cursor != None, use it, otherwise creates a new one
+        @param      cursor          if *cursor is not None*, use it, otherwise creates a new one
         @param      nolog           if True, do not log anything
         @return                     sql request or None if several insertion were sent (result is too long)
 
@@ -1180,7 +1235,9 @@ class DatabaseCore (DatabaseCore2):
                     type(insert_values))))
 
     def update(self, table, key, value, values):
-        """update some values  WHERE key=value
+        """
+        Update some values ``WHERE key=value``.
+
         @param      table       table to update
         @param      key         key
         @param      value       WHERE key = value

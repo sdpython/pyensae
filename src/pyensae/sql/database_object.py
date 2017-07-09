@@ -12,17 +12,18 @@ module_odbc = None
 class DatabaseObject:
 
     """
-    methods for database related to object, @see cl Database
+    Methods for database related to object, see @see cl Database.
     """
 
     def fill_table_with_objects(
             self, tablename, iterator_on, check_existence=False, skip_exception=False):
         """
         Fill a table of a database with object (from ``iterator_on``) following the interface:
-            - a property ``schema_database`` which gives the schema
-            - a property ``asrow`` which puts all values in a row
-            - a property ``index`` which precises the index to unless it returns None
-            - a property ``indexes`` which precises other indexes to create (optional)
+
+        - a property ``schema_database`` which gives the schema
+        - a property ``asrow`` which puts all values in a row
+        - a property ``index`` which precises the index to unless it returns None
+        - a property ``indexes`` which precises other indexes to create (optional)
 
         The property ``asrow`` must not include other objects, only their ids.
         If the table does not exists, it creates it.
@@ -117,7 +118,7 @@ class DatabaseObject:
 
     def enumerate_objects(self, table, classObject):
         """
-        iterator on objects assuming each row of a table is a object (classObject type).
+        Iterator on objects assuming each row of a table is a object (classObject type).
         The classObject must have the following properties:
             - a staticmethod ``schema_database_read`` which gives the schema
             - the constructor must accept a constructor where parameter have the same name as the column names
@@ -127,10 +128,11 @@ class DatabaseObject:
         @return                     iterator on object
 
         Example:
-        @code
+
+        ::
+
         for blog in db.enumerate_objects ("blogs", StreamRSS):
             #...
-        @endcode
         """
         schema = classObject.schema_database_read()
         for row in self.execute("SELECT * FROM %s" % table):

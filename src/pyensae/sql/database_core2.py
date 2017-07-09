@@ -28,20 +28,24 @@ class NoHeaderException(Exception):
 class DatabaseCore2:
 
     """
-    complementary methods for class Database
+    Complementary methods for class @see cl Database.
     """
 
     _split_expr = "\\r?\\t"
 
     def _check_connection(self):
-        """check the SQL connection"""
+        """
+        Check the SQL connection.
+        """
         if "_connection" not in self.__dict__:
             message = "use connect method before doing operation on this database"
             raise Exception(message)
 
     def _check_values(self, values):
-        """when values are inserted or updated, this method doubles "'"
-        it does not allow str values, only str
+        """
+        When values are inserted or updated, this method doubles ``"'"``
+        it does not allow str values, only str.
+
         @param      values      dictionary
         @return                 dictionary
         """
@@ -58,11 +62,12 @@ class DatabaseCore2:
             return values
 
     def summary(self, light=False):
-        """return the list of tables, their columns, and their length
+        """
+        Return the list of tables, their columns, and their length.
+
         @param      light   light version, no count, no first lines
         @return             a dictionary where the keys are (t,i), t is a table name, i is in ["columns", "size", "first_lines"],
                             a str message
-
         """
         tables = self.get_table_list()
         indexes = self.get_index_list()
@@ -130,7 +135,6 @@ class DatabaseCore2:
     def _guess_columns(
             self, file, format, columns_name=None, filter_case=None, header=True, encoding="utf-8"):
         """
-
         Guess the columns types from a file (the method assumes there is a header),
         The types are chosen in that order: int, float, str.
         It keeps the most frequent one with if there is not too many errors.
@@ -340,7 +344,9 @@ class DatabaseCore2:
     def _process_text_line(self, line, columns, format, lower_case, num_line,
                            fill_missing=0, filter_case=None,
                            strict_separator=False):
-        """process a text line
+        """
+        Process a text line.
+
         @param      line                text line to process (or a list if it already splitted)
         @param      columns             columns definition @see me _append_table
         @param      format              only tsv for the moment

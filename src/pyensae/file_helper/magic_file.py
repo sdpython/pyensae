@@ -370,11 +370,13 @@ class MagicFile(MagicClassWithHelpers):
         .. nbref::
             :title: PYTHON
 
-            The magic command ``%%PYTHON`` is almost to::
+            The magic command ``%%PYTHON`` is almost to:
+
+            ::
 
                 with open(<filename>, "w", encoding="utf8") as f:
-                    f.write("# -*- coding: utf8 -*-\n")
-                    f.write(cell.replace("\r", ""))
+                    f.write("# -*- coding: utf8 -*-\\n")
+                    f.write(cell.replace("\\r", ""))
         """
         parser = self.get_parser(MagicFile.PYTHON_parser, "PYTHON")
         args = self.get_args(line, parser)
