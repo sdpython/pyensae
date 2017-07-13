@@ -23,8 +23,8 @@ graphs
 
 .. autosignature:: pyensae.graph_helper.graphviz_helper.run_dot
 
-magics commands and notebooks
-+++++++++++++++++++++++++++++
+notebooks and magic command helpers
++++++++++++++++++++++++++++++++++++
 
 .. autosignature:: pyensae.notebook_helper.folium_helper.folium_html_map
 

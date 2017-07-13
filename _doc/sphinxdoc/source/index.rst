@@ -66,7 +66,7 @@ Galleries and examples
 ----------------------
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     api/index
     i_ex
