@@ -194,7 +194,8 @@ class TestFiles (unittest.TestCase):
         res = mg.hhelp(cmd)
         assert "<p>extracts the first nbline of a file " in res
         res = mg.hhelp("-np -f rst file_tail")
-        assert ":param      threshold:" in res
+        if ":param" in res:
+            raise Exception(res)
         res = mg.hhelp("-np -f rawhtml Database")
         assert "SQL file which can be empty or not," in res
         doc = docstring2html(Database.__init__, format="rawhtml")
