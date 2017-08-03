@@ -192,7 +192,8 @@ class TestFiles (unittest.TestCase):
             {"file_tail": file_tail, "Database": Database, "text": 3})
         cmd = "-np -f rawhtml file_tail"
         res = mg.hhelp(cmd)
-        assert "<p>extracts the first nbline of a file " in res
+        if "<p>Extracts the first nbline of a file " not in res:
+            raise Exception(res)
         res = mg.hhelp("-np -f rst file_tail")
         if ":param" in res:
             raise Exception(res)
