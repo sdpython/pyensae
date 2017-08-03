@@ -241,5 +241,10 @@ if not r:
             'notebook_helper.magic_notebook': ['qgrid'],
             'remote.ssh_remote_connection': ['paramiko', 'ansiconv', 'ansi2html', 'chardet'],
             'remote.azure_connection': ['azure'],
-        }
+        },
+        entry_points={
+            'console_scripts': [
+                'file_head = pyensae.cli.head_cli:file_head_cli',
+                'file_tail = pyensae.cli.tail_cli:file_tail_cli',
+            ]}
     )

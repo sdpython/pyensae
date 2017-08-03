@@ -71,6 +71,7 @@ Galleries and examples
     api/index
     i_ex
     i_nb
+    i_cmd
     i_faq
     gyexamples/index
     all_notebooks

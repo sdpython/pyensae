@@ -21,17 +21,15 @@ def replace_comma_by_point(file):
         f.write(text)
 
 
-def file_head(filename, nbline=10, encoding="utf8", errors=None):
+def file_head(filename: str, nbline=10, encoding="utf8", errors: str=None):
     """
-    extracts the first nbline of a file (assuming it is text file)
+    Extracts the first nbline of a file (assuming it is text file).
 
     @param      filename        filename
     @param      nbline          number of lines
     @param      encoding        encoding
     @param      errors          see `open <https://docs.python.org/3/library/functions.html#open>`_
     @return                     list of lines
-
-    .. versionadded:: 1.1
     """
     if isinstance(filename, str):
         if not os.path.exists(filename):
@@ -49,9 +47,9 @@ def file_head(filename, nbline=10, encoding="utf8", errors=None):
         return rows
 
 
-def file_tail(filename, nbline=10, encoding="utf8", threshold=2 ** 14, errors=None):
+def file_tail(filename: str, nbline=10, encoding="utf8", threshold=2 ** 14, errors: str=None):
     """
-    extracts the first nbline of a file (assuming it is text file)
+    Extracts the first nbline of a file (assuming it is text file).
 
     @param      filename        filename
     @param      nbline          number of lines
@@ -67,8 +65,6 @@ def file_tail(filename, nbline=10, encoding="utf8", threshold=2 ** 14, errors=No
     by moving the cursor by one character (see line B).
 
     The first returned line may be incomplete.
-
-    .. versionadded:: 1.1
     """
     if not os.path.exists(filename):
         raise FileNotFoundError(filename)
