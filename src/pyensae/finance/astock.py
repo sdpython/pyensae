@@ -68,7 +68,7 @@ class StockPrices:
             ::
 
                 import pyensae, pandas
-                from pyensae import StockPrices
+                from pyensae.finance.astock import StockPrices
 
                 # download the CAC 40 composition from my website (for Yahoo)
                 pyensae.download_data('cac40_2013_11_11.txt', website='xd')
@@ -501,7 +501,7 @@ class StockPrices:
         @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curves on the second axis.
         @param      args                other parameters to give method ``plt.subplots``
         @param      ax                  use existing `axes <http://matplotlib.org/api/axes_api.html>`_
-        @return                         `axes <http://matplotlib.org/api/axes_api.html>`_
+        @return     fig, ax, plt        `axes <http://matplotlib.org/api/axes_api.html>`_
 
         The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
         can change the graph size (see the example below).
@@ -633,7 +633,7 @@ class StockPrices:
             ax.grid(True)
             ax.legend(ex_l + tuple(data.columns))
 
-        return ax
+        return fig, ax, plt
 
     def to_csv(self, filename, sep="\t", index=False, **params):
         """
