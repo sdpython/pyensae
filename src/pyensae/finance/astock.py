@@ -511,9 +511,10 @@ class StockPrices:
 
             ::
 
-                stocks = [ StockPrices ("NASDAQ:MSFT", folder = cache),
-                           StockPrices ("NASDAQ:GOOGL", folder = cache),
-                           StockPrices ("NASDAQ:AAPL", folder = cache)]
+                from pyensae.finance import StockPrices
+                stocks = [ StockPrices("NASDAQ:MSFT", folder = cache),
+                           StockPrices("NASDAQ:GOOGL", folder = cache),
+                           StockPrices("NASDAQ:AAPL", folder = cache)]
                 fig, ax, plt = StockPrices.draw(stocks)
                 fig.savefig("image.png")
                 fig, ax, plt = StockPrices.draw(stocks, begin="2010-01-01", figsize=(16,8))
@@ -523,8 +524,9 @@ class StockPrices:
 
             ::
 
-                stock = StockPrices ("NASDAQ:MSFT", folder = cache)
-                stock2 = StockPrices ("NASDAQ:GOOGL", folder = cache)
+                from pyensae.finance import StockPrices
+                stock = StockPrices("NASDAQ:MSFT", folder = cache)
+                stock2 = StockPrices "NASDAQ:GOOGL", folder = cache)
                 fig, ax, plt = stock.plot(figsize=(16,8))
                 fig, ax, plt = stock2.plot(existing=(fig,ax), axis=2)
                 plt.show()
