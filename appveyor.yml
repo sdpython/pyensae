@@ -23,7 +23,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyensae"
   - "%PYTHON%\\Scripts\\pip install cryptography keyring jyquickhelper"
-  - "%PYTHON%\\Scripts\\pip install azure"
+  - "%PYTHON%\\Scripts\\pip install azure seaborn"
   - "%PYTHON%\\Scripts\\pymy_install3 pycrypto"
   - "%PYTHON%\\Scripts\\pip install pycryptodomex semantic_version"
   - "%PYTHON%\\Scripts\\pip install urllib3 chardet requests_ftp quandl"
