@@ -38,7 +38,7 @@ README
     :alt: Waffle
     :target: https://waffle.io/sdpython/pyensae
     
-.. image:: http://www.xavierdupre.fr/app/pyensae/helpsphinx/nbcov.png
+.. image:: http://www.xavierdupre.fr/app/pyensae/helpsphinx/_images/nbcov.png
     :target: http://www.xavierdupre.fr/app/pyensae/helpsphinx/all_notebooks_coverage.html
     :alt: Notebook Coverage    
     
