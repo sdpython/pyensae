@@ -37,6 +37,11 @@ README
 .. image:: https://badge.waffle.io/sdpython/pyensae.png?label=ready&title=Ready
     :alt: Waffle
     :target: https://waffle.io/sdpython/pyensae
+    
+.. image:: http://www.xavierdupre.fr/app/pyensae/helpsphinx/nbcov.png
+    :target: http://www.xavierdupre.fr/app/pyensae/helpsphinx/all_notebooks_coverage.html
+    :alt: Notebook Coverage    
+    
 
 **Links:**
 

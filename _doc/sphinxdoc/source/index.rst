@@ -35,6 +35,10 @@ pyensae documentation
     :alt: Waffle
     :target: https://waffle.io/sdpython/pyensae
 
+.. image:: nbcov.png
+    :target: http://www.xavierdupre.fr/app/pyensae/helpsphinx/all_notebooks_coverage.html
+    :alt: Notebook Coverage        
+
 **Links:** `pypi <https://pypi.python.org/pypi/pyensae/>`_,
 `github <https://github.com/sdpython/pyensae/>`_,
 `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_,
