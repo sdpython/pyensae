@@ -10,7 +10,7 @@ finance
 
 .. autosignature:: pyensae.finance.astock.StockPrices
     :members:
-    
+
 graphs
 ++++++
 
@@ -18,6 +18,8 @@ graphs
     :members:
 
 .. autosignature:: pyensae.graph_helper.graphviz_helper.dot_exe
+
+.. autosignature:: pyensae.graph_helper.blockdiag_helper.draw_diagram
 
 .. autosignature:: pyensae.graph_helper.matplotlib_helper.mpl_switch_style
 
@@ -39,5 +41,3 @@ dataframes
 .. autosignature:: pyensae.ml_helper.pandas_helper.pandas_fillna
 
 .. autosignature:: pyensae.ml_helper.pandas_helper.pandas_groupby_nan
-
-

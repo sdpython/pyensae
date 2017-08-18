@@ -37,7 +37,7 @@ pyensae documentation
 
 .. image:: nbcov.png
     :target: http://www.xavierdupre.fr/app/pyensae/helpsphinx/all_notebooks_coverage.html
-    :alt: Notebook Coverage        
+    :alt: Notebook Coverage
 
 **Links:** `pypi <https://pypi.python.org/pypi/pyensae/>`_,
 `github <https://github.com/sdpython/pyensae/>`_,
@@ -79,6 +79,7 @@ Galleries and examples
     i_faq
     gyexamples/index
     all_notebooks
+    HISTORY
 
 Functionalities
 ---------------
