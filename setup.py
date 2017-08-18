@@ -233,7 +233,7 @@ if not r:
         package_data=package_data,
         install_requires=["pyquickhelper"],
         extras_require={
-            'graph_helper': ['matplotlib'],
+            'graph_helper': ['matplotlib', 'blockdiag'],
             'datasource.linkedin_access': ['python3-linkedin'],
             'datasource.convert': ['dbread'],
             'finance': ['pandas-datareader'],
