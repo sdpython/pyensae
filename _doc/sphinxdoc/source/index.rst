@@ -9,6 +9,9 @@ pyensae documentation
     :target: https://ci.appveyor.com/project/sdpython/pyensae
     :alt: Build Status Windows
 
+.. image:: https://circleci.com/gh/sdpython/pyensae/tree/master.svg?style=svg
+    :target: https://circleci.com/gh/sdpython/pyensae/tree/master
+
 .. image:: https://badge.fury.io/py/pyensae.svg
     :target: http://badge.fury.io/py/pyensae
 

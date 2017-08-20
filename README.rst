@@ -12,8 +12,11 @@ README
     :target: https://ci.appveyor.com/project/sdpython/pyensae
     :alt: Build Status Windows
 
-.. image:: https://badge.fury.io/py/pyensae.svg
-    :target: http://badge.fury.io/py/pyensae
+.. image:: https://circleci.com/gh/sdpython/pyensae/tree/master.svg?style=svg
+    :target: https://circleci.com/gh/sdpython/pyensae/tree/master
+
+.. image:: https://badge.fury.io/py/cpyquickhelper.svg
+    :target: http://badge.fury.io/py/cpyquickhelper
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
     :alt: MIT License
