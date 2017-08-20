@@ -36,6 +36,7 @@ pycrypto
 pycryptodomex
 pydocstyle
 pyflakes
+pymyinstall
 pyquickhelper>1.5.2122
 python-jenkins
 python3-linkedin
