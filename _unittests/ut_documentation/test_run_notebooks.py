@@ -39,7 +39,7 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import get_temp_folder
+from pyquickhelper.pycode import get_temp_folder, is_travis_or_appveyor
 from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
 from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
 import src.pyensae
@@ -57,11 +57,7 @@ class TestRunNotebooks(unittest.TestCase):
             # notebooks are not converted into python 2.7, so not tested
             return
 
-        if "travis" in sys.executable:
-            # requires too many dependencies
-            return
-
-        kernel_name = None if "travis" in sys.executable else install_python_kernel_for_unittest(
+        kernel_name = None if is_travis_or_appveyor() else install_python_kernel_for_unittest(
             "pymyinstall")
 
         temp = get_temp_folder(__file__, "temp_run_notebooks")

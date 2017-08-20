@@ -9,6 +9,7 @@ coverage
 Cython
 docformatter
 dbfread
+easydev
 folium
 ipython
 jupyter
@@ -23,6 +24,7 @@ nbconvert>=5.0.0
 nbformat
 nbpresent
 nbsphinx
+networkx
 notebook>=5.0.0
 numpy>=1.11.1
 openpyxl
@@ -43,6 +45,8 @@ python3-linkedin
 PyYAML
 qgrid
 quandl
+scikit-learn
+scipy
 semantic_version
 setuptools
 Sphinx
