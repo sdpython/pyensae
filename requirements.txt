@@ -47,6 +47,7 @@ qgrid
 quandl
 scikit-learn
 scipy
+seaborn
 semantic_version
 setuptools
 Sphinx
