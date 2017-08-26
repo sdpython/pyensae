@@ -7,6 +7,8 @@ import sys
 import os
 import unittest
 import datetime
+import warnings
+from quandl.errors.quandl_error import LimitExceededError
 
 
 try:
@@ -83,14 +85,13 @@ class TestStockFile (unittest.TestCase):
         temp = get_temp_folder(__file__, "temp_cache_file_quandl")
         cache = temp
 
-        stock = StockPrices(
-            "EURONEXT/BNP",
-            url="quandl",
-            folder=cache,
-            end=datetime.datetime(
-                2017,
-                1,
-                15))
+        try:
+            stock = StockPrices("EURONEXT/BNP", url="quandl", folder=cache,
+                                end=datetime.datetime(2017, 1, 15))
+        except LimitExceededError:
+            warnings.warn(
+                "[test_save_stock_quandl] reached quandl free quota. Stop test.")
+            return
 
         file = os.path.join(cache, "save.txt")
         if os.path.exists(file):
