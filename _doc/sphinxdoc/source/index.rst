@@ -82,6 +82,7 @@ Galleries and examples
     i_faq
     gyexamples/index
     all_notebooks
+    blog/blogindex
     HISTORY
 
 Functionalities
