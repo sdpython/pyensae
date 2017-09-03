@@ -60,6 +60,8 @@ class TestTableFormula(unittest.TestCase):
         exp = pandas.DataFrame(dict(sum_d_a=[3, 3], sum_d_b=[3.2, 3.1]))
         exp.sort_index(inplace=True)
         group.sort_index(inplace=True)
+        exp.sort_index(inplace=True, axis=1)
+        group.sort_index(inplace=True, axis=1)
         assert_frame_equal(group, exp)
 
         groupmax = table.fgroupby(lambda v: v["name"],
@@ -69,6 +71,8 @@ class TestTableFormula(unittest.TestCase):
         exp = pandas.DataFrame(dict(max_d_a=[2, 3], max_d_b=[2.1, 3.1]))
         exp.sort_index(inplace=True)
         groupmax.sort_index(inplace=True)
+        exp.sort_index(inplace=True, axis=1)
+        groupmax.sort_index(inplace=True, axis=1)
         assert_frame_equal(groupmax, exp)
 
         group = table.fgroupby(lambda v: v["name"],
@@ -79,6 +83,8 @@ class TestTableFormula(unittest.TestCase):
         exp = pandas.DataFrame(dict(sum_d_a=[0.84127, 1.47619]))
         exp.sort_index(inplace=True)
         group.sort_index(inplace=True)
+        exp.sort_index(inplace=True, axis=1)
+        group.sort_index(inplace=True, axis=1)
         assert_frame_equal(group, exp)
 
     def test_TableFormula_add(self):
