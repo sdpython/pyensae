@@ -18,11 +18,12 @@ class TableFormula(pandas.DataFrame):
         """
         pandas.DataFrame.__init__(self, *args, **kwargs)
 
-    def sort(self, function_sort):
+    def sort(self, function_sort, reverse=False):
         """
         Sort rows based on the value returned by *function_sort*.
 
         @param      function_sort   lambda function
+        @param      reverse         reverse order
 
         The function creates a column ``__key__`` an removes it later.
         """
@@ -30,7 +31,7 @@ class TableFormula(pandas.DataFrame):
             raise ValueError(
                 "__key__ cannot be used in the original dataframe.")
         self["__key__"] = self.apply(lambda row: function_sort(row), axis=1)
-        self.sort_values("__key__", inplace=True)
+        self.sort_values("__key__", inplace=True, ascending=not reverse)
         self.drop("__key__", inplace=True, axis=1)
 
     def fgroupby(self, function_key, function_values, columns=None,
@@ -105,7 +106,7 @@ class TableFormula(pandas.DataFrame):
             gr = cp.groupby("__key__", as_index=False).agg(aggs)
         gr.columns = [rep.get(_, _) for _ in gr.columns]
         gr = gr.drop("__key__", axis=1)
-        return gr
+        return TableFormula(gr)
 
     def add_column_index(self, index):
         """
