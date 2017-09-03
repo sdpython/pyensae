@@ -18,6 +18,21 @@ class TableFormula(pandas.DataFrame):
         """
         pandas.DataFrame.__init__(self, *args, **kwargs)
 
+    def sort(self, function_sort):
+        """
+        Sort rows based on the value returned by *function_sort*.
+
+        @param      function_sort   lambda function
+
+        The function creates a column ``__key__`` an removes it later.
+        """
+        if "__key__" in self.columns:
+            raise ValueError(
+                "__key__ cannot be used in the original dataframe.")
+        self["__key__"] = self.apply(lambda row: function_sort(row), axis=1)
+        self.sort_values("__key__", inplace=True)
+        self.drop("__key__", inplace=True, axis=1)
+
     def fgroupby(self, function_key, function_values, columns=None,
                  function_agg=None, function_weight=None):
         """

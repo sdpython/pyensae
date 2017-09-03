@@ -89,6 +89,18 @@ class TestTableFormula(unittest.TestCase):
         exp.set_index("__key__", inplace=True)
         assert_frame_equal(table, exp)
 
+    def test_TableFormula_sort(self):
+        fLOG(__file__, self._testMethodName, OutputPrint=__name__ == "__main__")
+
+        table = TableFormula()
+        table["A"] = [0, 1]
+        table.add_column_vector("B", [6, 7])
+        table.sort(lambda row: -row["B"])
+        exp = pandas.DataFrame(dict(A=[1, 0], B=[7, 6], C=[1, 0]))
+        exp = exp.set_index("C")
+        exp.index.rename(None, inplace=True)
+        assert_frame_equal(table, exp, check_index_type=False)
+
 
 if __name__ == "__main__":
     unittest.main()
