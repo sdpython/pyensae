@@ -9,7 +9,8 @@ import datetime
 
 class TableFormula(pandas.DataFrame):
     """
-    Extends class :epkg:`pandas:DataFrame`.
+    Extends class :epkg:`pandas:DataFrame` or proposes extensions
+    to existing functions using lambda functions.
     """
 
     def __init__(self, *args, **kwargs):
@@ -20,12 +21,13 @@ class TableFormula(pandas.DataFrame):
 
     def sort(self, function_sort, reverse=False):
         """
-        Sort rows based on the value returned by *function_sort*.
+        Sorts rows based on the values returned by *function_sort*.
 
         @param      function_sort   lambda function
         @param      reverse         reverse order
 
-        The function creates a column ``__key__`` an removes it later.
+        The function creates a column ``__key__`` and removes it later.
+        The changes happen inplace.
         """
         if "__key__" in self.columns:
             raise ValueError(
@@ -37,19 +39,20 @@ class TableFormula(pandas.DataFrame):
     def fgroupby(self, function_key, function_values, columns=None,
                  function_agg=None, function_weight=None):
         """
-        Groups information based on columns defined by lambda function.
+        Groups information based on columns defined by lambda functions.
 
         @param      function_key        defines the key
         @param      function_values     defines the values
         @param      columns             name of the columns, if None, new ones will be created
         @param      function_agg        how to aggregate the data, if None, the default is
-                                        :epkg:`pandas:DataFrane:sum`.
+                                        :epkg:`pandas:DataFrame:sum`.
         @param      function_weight     defines weights, can be None
 
         The function uses columns ``__key__``, ``__weight__``.
         You should not use these names.
         Others columns are created ``__value_{0}__`` and
-        ``__weight_{0}__``.
+        ``__weight_{0}__``. All of them are created and removed
+        before returning the result.
 
         Example:
 
@@ -108,30 +111,38 @@ class TableFormula(pandas.DataFrame):
         gr = gr.drop("__key__", axis=1)
         return TableFormula(gr)
 
-    def add_column_index(self, index):
+    def add_column_index(self, index, name=None):
         """
-        Change the index.
+        Changes the index.
 
         @param      index       new_index
+        @param      name        name of the index
+
+        The changes happen inplace.
         """
         self["__key__"] = index
         self.set_index("__key__", inplace=True)
+        self.index.rename(name, inplace=True)
 
     def add_column_vector(self, name, values):
         """
-        Add a column knowing its name and values.
+        Adds a column knowing its name and a vector of values.
 
         @param      name                name of the column
         @param      values              values
+
+        The changes happen inplace.
         """
         self[name] = values
 
     def addc(self, name, function_value):
         """
-        Add a column knowing its name and a lambda function.
+        Adds a column knowing its name and a lambda function.
 
         @param      name                name of the column
         @param      function_value      function
+
+        The changes happen inplace.
         """
         self[name] = self.apply(lambda row: function_value(row), axis=1)
 

@@ -41,3 +41,6 @@ dataframes
 .. autosignature:: pyensae.ml_helper.pandas_helper.pandas_fillna
 
 .. autosignature:: pyensae.ml_helper.pandas_helper.pandas_groupby_nan
+
+.. autosignature:: pyensae.ml_helper.pandas_helper.TableFormula
+    :members:

@@ -99,6 +99,7 @@ class TestTableFormula(unittest.TestCase):
         exp = pandas.DataFrame(
             dict(A=[0, 1], B=[6, 7], C=[0, 7], __key__=[4, 5]))
         exp.set_index("__key__", inplace=True)
+        exp.index.rename(None, inplace=True)
         assert_frame_equal(table, exp)
 
     def test_TableFormula_sort(self):
