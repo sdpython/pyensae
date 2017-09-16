@@ -21,16 +21,16 @@ class StockPricesException(Exception):
 class StockPrices:
 
     """
-    defines a class containing stock prices, provides basic functions,
-    the class uses `pandas <http://pandas.pydata.org/>`_ to load the data.
+    Defines a class containing stock prices, provides basic functions,
+    the class uses :epkg:`pandas` to load the data.
 
     .. exref::
         :title: retrieve stock prices from the Yahoo source
 
         ::
 
-            prices = StockPrices(tick = "NASDAQ:MSFT")
-            print (prices.dataframe.head())
+            prices = StockPrices(tick="NASDAQ:MSFT")
+            print(prices.dataframe.head())
     """
 
     def __init__(self, tick, url="google", folder="cache",
@@ -155,11 +155,11 @@ class StockPrices:
             if not os.path.exists(name):
                 if url == "google":
                     use_url = True
-                    url_string = "http://www.google.com/finance/historical?q={0}".format(
+                    url_string = "http://finance.google.com/finance/historical?q={0}".format(
                         self.tickname)
                     url_string += "&startdate={0}&enddate={1}&output=csv".format(
                         begin.strftime('%b %d, %Y'), end.strftime('%b %d, %Y'))
-                    url = url_string.replace(" ", "%20")
+                    url = url_string.replace(" ", "+").replace(",", "%2C")
                     date_format = "%b-%d-%Y"
                 elif url == "quandl":
                     import quandl
@@ -180,6 +180,7 @@ class StockPrices:
                         url)
 
                 if use_url:
+                    self.url_ = url
                     try:
                         u = urllib.request.urlopen(url)
                         text = u.read()
@@ -203,6 +204,8 @@ class StockPrices:
                             ", check you execute the program in a folder you have permission to modify (" +
                             os.getcwd() +
                             ")") from e
+                else:
+                    self.url_ = name
 
             try:
                 self.datadf = pandas.read_csv(name, sep=sep)
@@ -247,6 +250,13 @@ class StockPrices:
         @return     number of observations
         """
         return len(self.datadf)
+
+    @property
+    def shape(self):
+        """
+        @return     number of observations
+        """
+        return self.datadf.shape
 
     @property
     def tick(self):
