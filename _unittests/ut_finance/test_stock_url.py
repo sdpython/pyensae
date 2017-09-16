@@ -37,7 +37,7 @@ except ImportError:
 
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from src.pyensae.finance.astock import StockPrices, StockPricesException
+from src.pyensae.finance.astock import StockPrices
 
 
 class TestStockUrl(unittest.TestCase):
