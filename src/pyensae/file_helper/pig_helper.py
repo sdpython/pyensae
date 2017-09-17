@@ -13,7 +13,7 @@ from pyquickhelper.filehelper import change_file_status
 from .jython_helper import get_java_cmd, get_java_path
 from ..datasource.http_retrieve import download_data
 
-PIG_VERSION = "0.17.0"
+PIG_VERSION = "0.16.0"
 HADOOP_VERSION = "2.8.1"
 
 
