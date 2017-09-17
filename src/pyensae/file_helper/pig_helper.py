@@ -13,7 +13,7 @@ from pyquickhelper.filehelper import change_file_status
 from .jython_helper import get_java_cmd, get_java_path
 from ..datasource.http_retrieve import download_data
 
-PIG_VERSION = "0.16.0"
+PIG_VERSION = "0.17.0"
 HADOOP_VERSION = "2.8.1"
 
 
@@ -68,7 +68,7 @@ def download_pig_standalone(pig_version=PIG_VERSION,
     if not os.path.exists(d):
         os.mkdir(d)
     fn = download_data(name="pig-%s.tar.gz" % pig_version,
-                       whereTo=d,
+                       whereTo=d, silent=True,
                        website="http://apache.crihan.fr/dist/pig/pig-%s/" % pig_version,
                        fLOG=fLOG)
     fbs.append(fn)

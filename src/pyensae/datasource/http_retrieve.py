@@ -64,11 +64,11 @@ def remove_empty_line(file):
 
 def download_data(name, moduleName=None, url=None, glo=None,
                   loc=None, whereTo=".", website="xd", timeout=None,
-                  retry=2, fLOG=noLOG):
+                  retry=2, silent=False, fLOG=noLOG):
     """
-    retrieve a module given its name, a text file or a zip file,
+    Retrieves a module given its name, a text file or a zip file,
     look for it on http://www.xavierdupre.fr/... (website),
-    the file is copied at this file location and uncompressed if it is a zip file (or a tar.gz file)
+    the file is copied at this file location and uncompressed if it is a zip file (or a tar.gz file).
 
     @param      name        (str) name of the module
     @param      moduleName  (str|None) like import name as moduleName, None for name
@@ -79,6 +79,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
     @param      website     website to look for
     @param      timeout     timeout (seconds) when establishing the connection (see `urlopen <https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen>`_)
     @param      retry       number of retries in case of failure when downloading the data
+    @param      silent      if True, convert some exception into warnings when unzipping a tar file
     @param      fLOG        logging function
     @return                 modules or list of files
 
@@ -104,7 +105,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
     `Download a file from Dropbox with Python <http://www.xavierdupre.fr/blog/2015-01-20_nojs.html>`_.
 
     .. versionchanged:: 1.1
-        Parameter *retry* was added.
+        Parameters *retry*, *silent* were added.
     """
     from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz, decompress_bz2
 
@@ -176,7 +177,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
         return decompress_zip(outfile, whereTo, fLOG)
 
     elif name.endswith(".tar.gz"):
-        return decompress_targz(outfile, whereTo, fLOG)
+        return decompress_targz(outfile, whereTo, silent=silent, fLOG=fLOG)
 
     elif name.endswith(".gz"):
         return decompress_gz(outfile, whereTo, fLOG)
