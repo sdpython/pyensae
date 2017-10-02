@@ -35,7 +35,7 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
-from src.pyensae.pandas_helper import df_crossjoin
+from src.pyensae.ml_helper import df_crossjoin
 
 
 class TestPandasJoins (unittest.TestCase):

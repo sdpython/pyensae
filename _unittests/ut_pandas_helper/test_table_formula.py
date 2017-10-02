@@ -42,7 +42,7 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
-from src.pyensae.pandas_helper import TableFormula
+from src.pyensae.ml_helper import TableFormula
 
 
 class TestTableFormula(unittest.TestCase):

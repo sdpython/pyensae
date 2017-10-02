@@ -270,3 +270,8 @@ _unittests/ut_finance/test_stock_file.py.err
 _unittests/run_unittests.py.out
 _doc/sphinxdoc/source/phdoc_static/require.js
 _doc/sphinxdoc/source/phdoc_static/style_notebook_snippet.css
+.vscode/settings.json
+src/pyensae/.vscode/settings.json
+_doc/sphinxdoc/plot_directive/source/pyensae/graph_helper/corrplot-1.pdf
+_doc/sphinxdoc/plot_directive/source/pyensae/graph_helper/corrplot-1.hires.png
+_doc/sphinxdoc/plot_directive/source/pyensae/graph_helper/corrplot-1.png

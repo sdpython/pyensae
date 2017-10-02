@@ -29,13 +29,14 @@ class StockPrices:
 
         ::
 
+            from pyensae.finance import StockPrices
             prices = StockPrices(tick="NASDAQ:MSFT")
             print(prices.dataframe.head())
     """
 
     def __init__(self, tick, url="google", folder="cache",
                  begin=None, end=None, sep=",",
-                 intern=False):
+                 intern=False, use_dtime=False):
         """
         Loads a stock price from either a url or a folder where the data was cached.
         If a filename ``<folder>/<tick>.<day1>.<day2>.txt`` already exists, it takes it from here.
@@ -57,6 +58,7 @@ class StockPrices:
         @param      end         last day (datetime), see below
         @param      sep         column separator
         @param      intern      do not use unless you know what to do (see :meth:`__getitem__ <pyensae.finance.astock.StockPrices.__getitem__>`)
+        @param      use_dtime   if True, use DateTime instead of string
 
         If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
         prices for a date before this one).
@@ -74,7 +76,7 @@ class StockPrices:
                 pyensae.download_data('cac40_2013_11_11.txt', website='xd')
 
                 # download all the prices (if not already done) and store them into files
-                actions = pandas.read_csv("cac40_2013_11_11.txt", sep="\t")
+                actions = pandas.read_csv("cac40_2013_11_11.txt", sep="\\t")
 
                 # we remove stocks with not enough historical data
                 stocks = { k:StockPrices(tick = k) for k,v in actions.values }
@@ -146,7 +148,7 @@ class StockPrices:
             send = end.strftime("%Y-%m-%d")
             name = os.path.join(
                 folder,
-                tick.replace(":", "_").replace("/", "_").replace("\\", "_") +
+                tick.replace(":", "_").replace("/", "_").replace("\\\\", "_") +
                 ".{0}.{1}.txt".format(
                     sbeg,
                     send))
@@ -223,6 +225,9 @@ class StockPrices:
                 self.datadf["Date"] = self.datadf["Date"].apply(
                     lambda x: x.strftime('%Y-%m-%d'))
                 self.datadf.to_csv(name, sep=sep, index=False)
+
+        if use_dtime:
+            self.datadf["Date"] = pandas.to_datetime(self.datadf["Date"])
 
         if not intern:
             try:

@@ -28,5 +28,5 @@ http
 linkedin
 ++++++++
 
-.. autosignature:: pyensae.datasource.linkedin_access.LinkedInAcces
+.. autosignature:: pyensae.datasource.linkedin_access.LinkedInAccess
     :members:

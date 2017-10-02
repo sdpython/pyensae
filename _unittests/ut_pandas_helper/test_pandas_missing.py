@@ -36,7 +36,7 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
-from src.pyensae.pandas_helper import add_missing_indices
+from src.pyensae.ml_helper import add_missing_indices
 
 
 class TestPandasMissing(unittest.TestCase):

@@ -3,13 +3,15 @@
 @brief provides functionalities around `LinkedIn <http://fr.linkedin.com/>`_.
 
 Some pointers:
-   - `API LinkedIn <http://developer.linkedin.com/rest>`_
-   - `examples with LinkedIn API <http://developer.linkedin.com/apis>`_
-   - `using oauth <https://developer.linkedin.com/documents/getting-oauth-token-python>`_
+
+- `API LinkedIn <http://developer.linkedin.com/rest>`_
+- `examples with LinkedIn API <http://developer.linkedin.com/apis>`_
+- `using oauth <https://developer.linkedin.com/documents/getting-oauth-token-python>`_
 
 Existing Python libraries:
-   - `python-linkedin <https://github.com/ozgur/python-linkedin>`_
-   - `linkedin-client-library <https://github.com/mrgaaron/LinkedIn-Client-Library>`_
+
+- `python-linkedin <https://github.com/ozgur/python-linkedin>`_
+- `linkedin-client-library <https://github.com/mrgaaron/LinkedIn-Client-Library>`_
 
 .. require: requests_oauthlib
 

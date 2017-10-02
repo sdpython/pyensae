@@ -40,7 +40,7 @@ except ImportError:
 
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from src.pyensae.pandas_helper import TableFormula
+from src.pyensae.ml_helper import TableFormula
 from pyquickhelper.pycode import fix_tkinter_issues_virtualenv
 
 

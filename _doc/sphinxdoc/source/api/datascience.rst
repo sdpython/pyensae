@@ -3,7 +3,7 @@ Datascience
 ===========
 
 .. contents::
-    :locals:
+    :local:
 
 finance
 +++++++
@@ -36,11 +36,11 @@ notebooks and magic command helpers
 dataframes
 ++++++++++
 
-.. autosignature:: pyensae.ml_helper.pandas_helper.numpy_types
+.. autosignature:: pyensae.ml_helper.numpy_types
 
-.. autosignature:: pyensae.ml_helper.pandas_helper.pandas_fillna
+.. autosignature:: pyensae.ml_helper.pandas_fillna
 
-.. autosignature:: pyensae.ml_helper.pandas_helper.pandas_groupby_nan
+.. autosignature:: pyensae.ml_helper.pandas_groupby_nan
 
-.. autosignature:: pyensae.ml_helper.pandas_helper.TableFormula
+.. autosignature:: pyensae.ml_helper.table_formula.TableFormula
     :members:

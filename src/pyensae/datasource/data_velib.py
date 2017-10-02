@@ -350,6 +350,7 @@ class DataVelibCollect:
         """
         draw a graph using four columns: lng, lat, available_bike_stands, available_bikes
 
+        @param      df                  dataframe
         @param      args                other parameters to give method ``plt.subplots``
         @param      use_folium          use folium to create the map
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
@@ -399,6 +400,7 @@ class DataVelibCollect:
         Displays a javascript animation,
         see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_.
 
+        @param      df                  dataframe
         @param      interval            see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_
         @param      args                other parameters to give method ``plt.figure``
         @return                         animation
@@ -477,8 +479,9 @@ class DataVelibCollect:
                  delta_speed=2.5,
                  fLOG=print):
         """
-        simulate velibs on a set of stations given by df
+        Simulates velibs on a set of stations given by df
 
+        @param      df          dataframe with station information
         @param      nbbike      number of bicycles
         @param      period      period
         @param      speed       average speed (in km/h)
