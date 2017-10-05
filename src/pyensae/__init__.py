@@ -1,7 +1,9 @@
 #-*- coding: utf-8 -*-
 """
 @file
-@brief Main file
+@brief Module *pyense*.
+Recurrent needs for teachings
+turned into functions.
 """
 import sys
 from .datasource.http_retrieve import download_data
