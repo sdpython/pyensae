@@ -170,7 +170,6 @@ class MagicNotebook(MagicClassWithHelpers):
 
                 import qgrid
                 if firt_call:
-                    qgrid.nbinstall(overwrite=False)
                     qgrid.set_defaults(remote_js=<remote_slick>,
                                     precision=<precision>)
                     self.first_jsdf_call = False
@@ -190,7 +189,6 @@ class MagicNotebook(MagicClassWithHelpers):
         args = self.get_args(line, parser)
 
         if not hasattr(self, "first_jsdf_call") or self.first_jsdf_call:
-            qgrid.nbinstall(overwrite=False)
             qgrid.set_defaults(remote_js=args.remote_slick,
                                precision=args.precision)
             self.first_jsdf_call = False
