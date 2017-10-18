@@ -8,6 +8,7 @@ import os
 import unittest
 import datetime
 import pandas
+import warnings
 
 
 try:
@@ -53,7 +54,9 @@ class TestDataVelib (unittest.TestCase):
 
         look at the code to see where I chose to put this key not shared in this file
         """
-        import keyring
+        with warnings.catch_warnings():
+            warnings.simplefilter('ignore', DeprecationWarning)
+            import keyring
         machine = os.environ.get(
             "COMPUTERNAME", os.environ.get("HOSTNAME", "CI"))
         try:

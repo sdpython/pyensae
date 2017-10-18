@@ -85,7 +85,9 @@ class TestLinkedIn (unittest.TestCase):
         import linkedin as skip___
 
     def get_access_token(self):
-        import keyring
+        with warnings.catch_warnings():
+            warnings.simplefilter('ignore', DeprecationWarning)
+            import keyring
         machine = os.environ.get(
             "COMPUTERNAME", os.environ.get("HOSTNAME", "CI"))
         res = []
