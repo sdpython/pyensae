@@ -183,7 +183,10 @@ class MagicNotebook(MagicClassWithHelpers):
         args = self.get_args(line, parser)
 
         if not hasattr(self, "first_jsdf_call") or self.first_jsdf_call:
-            qgrid.set_defaults(precision=args.precision)
+            if args is not None:
+                qgrid.set_defaults(precision=args.precision)
+            else:
+                qgrid.set_defaults()
             self.first_jsdf_call = False
 
         if args is not None:
