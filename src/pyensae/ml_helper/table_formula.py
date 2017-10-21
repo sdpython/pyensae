@@ -172,7 +172,7 @@ class TableFormula(pandas.DataFrame):
         ::
 
             table.graph_XY ( [ [ lambda v: v["sum_a"], lambda v: v["sum_b"], "xy label 1"],
-                              [ lambda v: v["sum_b"], lambda v: v["sum_c"], "xy label 2"],
+                               [ lambda v: v["sum_b"], lambda v: v["sum_c"], "xy label 2"],
                                 ])
         """
         if ax is None:
@@ -182,15 +182,18 @@ class TableFormula(pandas.DataFrame):
         smarker = {(True, True): 'o-', (True, False): 'o', (False, True): '-',
                    #(False, False) :''
                    }[marker, link_point]
-        allvalues = []
 
+        has_date = False
         for xf, yf, label in curves:
             x = self.apply(xf, axis=1)
             y = self.apply(yf, axis=1)
+            if isinstance(x[0], datetime.datetime):
+                import matplotlib.dates
+                x = [matplotlib.dates.date2num(d) for d in x]
+                has_date = True
             ax.plot(x, y, smarker, label=label)
-            allvalues.extend(x)
 
-        if isinstance(allvalues[0], datetime.datetime):
+        if has_date:
             import matplotlib.dates
             hfmt = matplotlib.dates.DateFormatter(format_date)
             if "%H" in format_date or "%M" in format_date:
