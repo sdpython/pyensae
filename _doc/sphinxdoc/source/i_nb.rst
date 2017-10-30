@@ -7,12 +7,6 @@ Magic commands
 .. contents::
     :local:
 
-Python
-------
-
-.. nbreflist::
-    :contents:
-
 Azure
 -----
 
@@ -20,12 +14,25 @@ Azure
     :contents:
     :tag: Azure
 
+Files
+-----
+
+.. nbreflist::
+    :contents:
+    :tag: file
+
 Hadoop
 ------
 
 .. nbreflist::
     :contents:
     :tag: Hadoop
+
+Python
+------
+
+.. nbreflist::
+    :contents:
 
 SQL
 ---
