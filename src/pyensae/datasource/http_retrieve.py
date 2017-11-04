@@ -6,6 +6,7 @@ import os
 import sys
 import importlib
 import re
+import time
 import urllib.request
 from pyquickhelper.loghelper import noLOG
 
@@ -159,6 +160,8 @@ def download_data(name, moduleName=None, url=None, glo=None,
                     else:
                         fLOG("[download_data] (1)  fail and retry to download '{0}' to '{1}'".format(
                             url, outfile))
+                        # We wait for 2 seconds.
+                        time.sleep(2)
                 except Exception as e:
                     if retry <= 1:
                         raise DownloadDataException(
@@ -166,6 +169,8 @@ def download_data(name, moduleName=None, url=None, glo=None,
                     else:
                         fLOG("[download_data] (2)  fail and retry to download '{0}' to '{1}'".format(
                             url, outfile))
+                        # We wait for 2 seconds.
+                        time.sleep(2)
                 retry -= 1
             u = open(outfile, "wb")
             u.write(alls)
