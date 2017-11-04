@@ -135,7 +135,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
         path = "../../../../complements_site_web"
         f2 = os.path.join(path, file)
         if os.path.exists(f2):
-            fLOG("adding file", f2)
+            fLOG("[download_data] adding file", f2)
             u = open(f2, "r")
             alls = u.read()
             u.close()
@@ -143,7 +143,8 @@ def download_data(name, moduleName=None, url=None, glo=None,
             if url is None:
                 url = website
             url += file
-            fLOG("    downloading of ", url, " to ", outfile)
+            fLOG("[download_data]    download '{0}' to '{1}'".format(
+                url, outfile))
             while retry > 0:
                 try:
                     u = urllib.request.urlopen(
@@ -151,20 +152,20 @@ def download_data(name, moduleName=None, url=None, glo=None,
                     alls = u.read()
                     u.close()
                     break
-                except Exception as e:
-                    if retry <= 1:
-                        raise DownloadDataException(
-                            "unable to retrieve data from {0}".format(url)) from e
-                    else:
-                        fLOG("    fail and retry to download of ",
-                             url, " to ", outfile)
                 except ConnectionResetError as ee:
                     if retry <= 0:
                         raise DownloadDataException(
-                            "unable to retrieve data from {0}".format(url)) from ee
+                            "Unable (1) to retrieve data from '{0}'. Error: {1}".format(url, ee)) from ee
                     else:
-                        fLOG("    fail and retry to download of ",
-                             url, " to ", outfile)
+                        fLOG("[download_data] (1)  fail and retry to download '{0}' to '{1}'".format(
+                            url, outfile))
+                except Exception as e:
+                    if retry <= 1:
+                        raise DownloadDataException(
+                            "Unable (2) to retrieve data from '{0}'. Error: {1}".format(url, e)) from e
+                    else:
+                        fLOG("[download_data] (2)  fail and retry to download '{0}' to '{1}'".format(
+                            url, outfile))
                 retry -= 1
             u = open(outfile, "wb")
             u.write(alls)
@@ -199,7 +200,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
             if "Parent module '' not loaded" in str(e):
                 reg1 = re.compile("^(from +[.])[a-zA-Z]")
                 reg2 = re.compile("^from +[.]{2}")
-                fLOG("removing relative import for ", name)
+                fLOG("[download_data] removing relative import for ", name)
                 with open(outfile, "r") as f:
                     lines = f.readlines()
                 fil = []
@@ -220,30 +221,33 @@ def download_data(name, moduleName=None, url=None, glo=None,
                             fir = False
                     fil.append(ls.strip("\n\r"))
                 if not fir:
-                    fLOG("end removing relative import for ", name)
+                    fLOG("[download_data] end removing relative import for ", name)
                     with open(outfile, "w") as f:
                         f.write("\n".join(fil))
 
             try:
                 temp = importlib.import_module(name)
             except Exception as e:
-                fLOG("issue (3) while importing ", name, " -- ", origname)
-                fLOG("sys.path ", sys.path)
+                fLOG("[download_data] issue (3) while importing ",
+                     name, " -- ", origname)
+                fLOG("[download_data] sys.path ", sys.path)
                 for _ in sys.path:
-                    fLOG("    path ", _)
-                fLOG("sys.modules.keys()", list(sys.modules.keys()))
+                    fLOG("[download_data]     path ", _)
+                fLOG("[download_data] sys.modules.keys()",
+                     list(sys.modules.keys()))
                 for _ in sorted(sys.modules):
-                    fLOG("    modules ", _)
+                    fLOG("[download_data]     modules ", _)
                 raise e
 
         except Exception as e:
-            fLOG("issue (2) while importing ", name, " -- ", origname)
-            fLOG("sys.path ", sys.path)
+            fLOG("[download_data] issue (2) while importing ",
+                 name, " -- ", origname)
+            fLOG("[download_data] sys.path ", sys.path)
             for _ in sys.path:
-                fLOG("    path ", _)
+                fLOG("[download_data]     path ", _)
             fLOG("sys.modules.keys()", list(sys.modules.keys()))
             for _ in sorted(sys.modules):
-                fLOG("    modules ", _)
+                fLOG("[download_data]     modules ", _)
             raise e
 
         if name not in temp.__name__:
