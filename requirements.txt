@@ -39,7 +39,7 @@ pycryptodomex
 pydocstyle
 pyflakes
 pymyinstall
-pyquickhelper>1.5.2122
+pyquickhelper>=1.5.2259
 python-jenkins
 python3-linkedin
 PyYAML
