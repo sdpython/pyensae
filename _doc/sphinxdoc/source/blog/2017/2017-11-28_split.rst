@@ -1,0 +1,10 @@
+
+.. blogpost::
+    :title: Module split
+    :keywords: module, pyenbc
+    :date: 2017-11-28
+    :categories: module
+
+    For version 1.2, the module was split and module
+    :epkg:`pyenbc` will take functions, classes which
+    deal with remote functionalities.
