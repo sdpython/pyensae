@@ -72,24 +72,11 @@ def load_ipython_extension(ip):
 
     @param      ip      from ``get_ipython()``
     """
-    from .remote.magic_remote_ssh import register_magics_ssh
-    try:
-        from .remote.magic_azure import register_azure_magics
-        az = True
-    except ImportError as e:
-        if "azure" in str(e):
-            az = False
-        else:
-            raise e
-
     from .sql.magic_sql import register_sql_magics
     from .file_helper.magic_file import register_file_magics
     from .graph_helper.magic_graph import register_graph_magics
     from .notebook_helper.magic_notebook import register_notebook_magics
 
-    register_magics_ssh(ip)
-    if az:
-        register_azure_magics(ip)
     register_sql_magics(ip)
     register_file_magics(ip)
     register_graph_magics(ip)

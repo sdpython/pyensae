@@ -61,9 +61,6 @@ Functionalities
 * import a tsv file into a database
 * retrieve stock prices from Yahoo Finance
 * magic commands to easily use SQLite3 from a notebook
-* magic commands to access a Cloudera Cluster and run PIG jobs
-* magic commands to access Azure Blob Storage and HDInsight
-* magic commands to display content of a folder in DataFrame
 
 Dependencies
 ------------
@@ -76,16 +73,6 @@ Class *StockPrices* requires:
 
 * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
 * `six <https://pypi.python.org/pypi/six>`_
-
-Class *ASSHClient* requires:
-
-* `paramiko <http://www.paramiko.org/>`_
-* `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_
-* `ecdsa <https://pypi.python.org/pypi/ecdsa>`_
-
-Class *AzureClient* requires:
-
-* `azure <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/index.html>`_
 
 The function *register_magics* defines magic commands
 to send commands to a remote commands through a SSH connection:
