@@ -1,6 +1,5 @@
 antlr4-python3-runtime
 autopep8
-azure
 babel!=2.0
 blockdiag
 bokeh
@@ -31,11 +30,8 @@ openpyxl
 pandas>=0.20.0
 pandas_datareader
 pandocfilters
-paramiko
 pillow
 pycodestyle>=2.0.0
-pycrypto
-pycryptodomex
 pydocstyle
 pyflakes
 pymyinstall

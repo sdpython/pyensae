@@ -246,8 +246,6 @@ if not r:
             'languages': ['antlr4-python3-runtime'],
             'notebook_helper.folium_helper': ['folium'],
             'notebook_helper.magic_notebook': ['qgrid'],
-            'remote.ssh_remote_connection': ['paramiko', 'ansiconv', 'ansi2html', 'chardet'],
-            'remote.azure_connection': ['azure'],
         },
         entry_points={
             'console_scripts': [
