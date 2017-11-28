@@ -61,9 +61,9 @@ are available through function::
     download_data("td8_velib.zip", website = "xd")
 
 The data comes from `xavierdupre.fr <http://www.xavierdupre.fr/>`_.
-The module also implements magic commands to access an Hadoop cluster
-(Azure, Cloudera), to run SQL queries on `SQLite <https://sqlite.org/>`_,
-parsing financial data from `Yahoo Finance <https://fr.finance.yahoo.com/>`_.
+The module also implements magic commands 
+to run SQL queries on `SQLite <https://sqlite.org/>`_,
+parsing financial data from `Google Finance <https://finance.google.com/finance>`_.
 
 Galleries and examples
 ----------------------
@@ -93,39 +93,10 @@ Functionalities
 * magic commands to display content of a folder in DataFrame (see :class:`MagicFile <pyensae.file_helper.magic_file.MagicFile>`)
 * magic commands to display an autamated menu in a notebook (see :class:`MagicFile <pyensae.notebook_helper.magic_notebook.MagicNotebook>`)
 
-Dependencies
-------------
-
-* `numpy <http://www.numpy.org/>`_
-* `pandas <http://pandas.pydata.org/>`_
-* `pyquickhelper <https://pypi.python.org/pypi/pyquickhelper>`_
-
-For the class :class:`StockPrices <pyensae.finance.astock.StockPrices>`:
-    * `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
-    * `six <https://pypi.python.org/pypi/six>`_
-
-The :class:`ASSHClient <pyensae.remote.ssh_remote_connection.ASSClient>` requires:
-    * `paramiko <http://www.paramiko.org/>`_
-    * `pycrypto <https://pypi.python.org/pypi/pycrypto/>`_
-    * `ecdsa <https://pypi.python.org/pypi/ecdsa>`_
-
-The :class:`AzureClient <pyensae.remote.azure_connection.AzureClient>` requires:
-    * `azure <http://www.xavierdupre.fr/app/azure-sdk-for-python/helpsphinx/index.html>`_
-
-The function :func:`register_magics_ssh <pyensae.remote.magic_remote_ssh.register_magics_ssh>` defines magic commands
-to send commands to a remote commands through a SSH connection:
-    * ``%remote_open``, ``%remote_close``
-    * ``%remote_cmd``, ``%remote_up``, ``%remote_down``
-
 The magic commands will be automatically enabled if the module is imported from a notebook.
 It also proposes others magic commands such as ``%head``, ``%tail``, ``%textdiff``,
 ``%hhelp``, ``%runpy``, ``%lsr``, ``%compress``. Type ``<magic_command> -h``
 to get their usage.
-
-Installation
-------------
-
-``pip install pyquickhelper`` or to avoid installing the dependencies ``pip install pyquickhelper --no-deps``.
 
 Navigation
 ----------
