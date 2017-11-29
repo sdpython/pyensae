@@ -3,6 +3,14 @@
 History
 =======
 
+1.2.??? (20??-??-??)
+====================
+
+**Features**
+
+* `16`: split *pyensae* into *pyenbc* for remote access to clusters
+  and the rest
+
 1.1.689 (2017-11-28)
 ====================
 

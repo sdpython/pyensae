@@ -61,7 +61,7 @@ are available through function::
     download_data("td8_velib.zip", website = "xd")
 
 The data comes from `xavierdupre.fr <http://www.xavierdupre.fr/>`_.
-The module also implements magic commands 
+The module also implements magic commands
 to run SQL queries on `SQLite <https://sqlite.org/>`_,
 parsing financial data from `Google Finance <https://finance.google.com/finance>`_.
 
