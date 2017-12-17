@@ -4,6 +4,7 @@
     :keywords: yahoo finance, quandl, google finance, cookie
     :date: 2017-05-21
     :categories: finance
+    :lid: blog-yahoo-finance-201711
 
     `Yahoo Finance <https://finance.yahoo.com/quote/BNPQY/history?p=BNPQY>`_
     now requires cookies to download the data and it becomes

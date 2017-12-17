@@ -1,6 +1,6 @@
 """
 @file
-@brief Download stock prices (from Yahoo website) and other prices
+@brief Downloads stock prices (from Yahoo website) and other prices.
 """
 import os
 import urllib.request
@@ -13,7 +13,7 @@ from pyquickhelper.filehelper import is_file_string
 
 class StockPricesException(Exception):
     """
-    raised by StockPrices classes
+    Raised by StockPrices classes.
     """
     pass
 
@@ -53,6 +53,8 @@ class StockPrices:
 
         @param      tick        tick name, ex ``NASDAQ:MSFT``
         @param      url         if yahoo, downloads the data from there if it was not done before
+                                url is possible, ``'google'``, ``'yahoo_new'``,
+                                ``'quandl'`` are predefined values
         @param      folder      cache folder (created if it does not exists
         @param      begin       first day (datetime), see below
         @param      end         last day (datetime), see below
@@ -94,10 +96,15 @@ class StockPrices:
                 # we compute correlation matrix and returns
                 ret, cor = StockPrices.covariance(stocks.values(), cov = False, ret = True)
 
-        You should also look at `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_.
-        If you use Google Finance as a provider, the tick name is usually
+        You should also look at
+        `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_.
+        If you use `Google Finance <https://www.google.com/finance>`_
+        as a provider, the tick name is usually
         prefixed by the market places (NASDAQ for example). The export
         does not work for all markets places.
+        Another provider was added, ``yahoo_new`` which delegates the task
+        of getting data from `Yahoo Finance <https://finance.yahoo.com/>`_ to module
+        `yahoo-historical <https://github.com/AndrewRPorter/yahoo-historical>`_.
 
         """
         if isinstance(url, pandas.DataFrame):
@@ -169,6 +176,13 @@ class StockPrices:
                         "EURONEXT/BNP", start_date=begin.strftime('%Y-%m-%d'), end_date=end.strftime('%Y-%m-%d'))
                     df.reset_index(drop=False).to_csv(
                         name, sep=sep, index=False)
+                    use_url = False
+                elif url in ('yahoo_new'):
+                    from yahoo_historical import Fetcher
+                    data = Fetcher(tick, [begin.year, begin.month, begin.day],
+                                   [end.year, end.month, end.day])
+                    df = data.getHistorical()
+                    df.to_csv(name, sep=sep, index=False)
                     use_url = False
                 elif url in("yahoo", "google", "fred", "famafrench"):
                     import pandas_datareader.data as web
