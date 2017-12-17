@@ -49,6 +49,7 @@ except ImportError:
     import pymyinstall as skip__
 
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.datasource.data_velib import DataVelibCollect
 
 
@@ -77,7 +78,7 @@ class TestDataVelibOffline (unittest.TestCase):
         sub = df[df["collect_date"] == dt]
         fig, ax, plt = DataVelibCollect.draw(sub)
 
-    def test_data_velib_animation(self):
+    def test_data_velib_animation_plt(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -95,7 +96,33 @@ class TestDataVelibOffline (unittest.TestCase):
             return
 
         df = DataVelibCollect.to_df(data)
-        DataVelibCollect.js_animation(df)
+        anim = DataVelibCollect.animation(df)
+        self.assertTrue(anim is not True)
+
+    def test_data_velib_animation_moviepy(self):
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__",
+            LogFile="temp_hal_log2.txt")
+        fold = os.path.abspath(os.path.split(__file__)[0])
+        data = os.path.join(fold, "data")
+
+        if "travis" in sys.executable:
+            return
+
+        from pymyinstall.installhelper.install_cmd_helper import is_conda_distribution
+        if is_conda_distribution():
+            # not tested on anaconda
+            return
+
+        df = DataVelibCollect.to_df(data)
+        anim = DataVelibCollect.animation(df, module="moviepy")
+        self.assertTrue(anim is not None)
+        temp = get_temp_folder(__file__, "temp_moviepy")
+        img = os.path.join(temp, "anim.gif")
+        anim.write_gif(img, fps=20)
+        self.assertTrue(os.path.exists(img))
 
 
 if __name__ == "__main__":

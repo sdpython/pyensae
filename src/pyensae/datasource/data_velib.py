@@ -62,7 +62,7 @@ class DataVelibCollect:
 
     def get_contracts(self):
         """
-        returns the list of contracts
+        Returns the list of contracts.
 
         @return     dictionary    { 'station':1 }
         """
@@ -89,7 +89,8 @@ class DataVelibCollect:
 
     def get_json(self, contract):
         """
-        return the data associated to a contract
+        Returns the data associated to a contract.
+
         @param      contract        contract name, @see te _contracts
         @return                     json string
         """
@@ -166,7 +167,8 @@ class DataVelibCollect:
                         log_every=10,
                         fLOG=print):
         """
-        collects data for a period of time
+        Collects data for a period of time.
+
         @param      contract        contract name, @see te _contracts
         @param      delayms         delay between two collections (in ms)
         @param      outfile         write data in this file (json), if single_file is True, outfile is used as a prefix
@@ -229,7 +231,7 @@ class DataVelibCollect:
             log_every=1,
             fLOG=print):
         """
-        run the collection of the data for velib, data are stored using Json format.
+        Runs the collection of the data for velib, data are stored using :epkg:`json` format.
         The function creates a file every time a new status is downloaded.
 
         @param      key             (str|None) if None, the function calls function see @see me velib_get_key
@@ -271,8 +273,8 @@ class DataVelibCollect:
     @staticmethod
     def velib_get_key():
         """
-        open a windows to get a key (from a user) and a contract (city)
-        the function is independent from the others
+        Opens a windows to get a key (from a user) and a contract (city)
+        the function is independent from the others.
 
         @return     key
         """
@@ -287,8 +289,8 @@ class DataVelibCollect:
     @staticmethod
     def to_df(folder, regex="velib_data.*[.]txt"):
         """
-        reads all file in a folder (assuming there were produced by this class) and
-        returns a dataframe with it
+        Reads all files in a folder (assuming there were produced by this class) and
+        returns a dataframe with it.
 
         each file is a status of all stations, a row per station will be added to the file
 
@@ -297,21 +299,22 @@ class DataVelibCollect:
         @return             pandas DataFrame
 
         It produces a table with the following columns:
-            - address
-            - available_bike_stands
-            - available_bikes
-            - banking
-            - bike_stands
-            - bonus
-            - collect_date
-            - contract_name
-            - last_update
-            - lat
-            - lng
-            - name
-            - number
-            - status
-            - file
+
+        - address
+        - available_bike_stands
+        - available_bikes
+        - banking
+        - bike_stands
+        - bonus
+        - collect_date
+        - contract_name
+        - last_update
+        - lat
+        - lng
+        - name
+        - number
+        - status
+        - file
         """
         if regex is None:
             regex = ".*"
@@ -348,17 +351,25 @@ class DataVelibCollect:
     @staticmethod
     def draw(df, use_folium=False, **args):
         """
-        draw a graph using four columns: lng, lat, available_bike_stands, available_bikes
+        Draws a graph using four columns: *lng*, *lat*, *available_bike_stands*, *available_bikes*.
 
         @param      df                  dataframe
-        @param      args                other parameters to give method ``plt.subplots``
+        @param      args                other parameters to give method ``plt.subplots`` or :epkg:`folium`
         @param      use_folium          use folium to create the map
         @return                         fig, ax, plt, (fig,ax) comes plt.subplot, plt is matplotlib.pyplot
+
+        Additional parameters:
+
+        * size: change the size of points
 
         .. versionchanged:: 1.1
             Parameter *use_folium* was added. It relies on module
             `folium <https://github.com/python-visualization/folium>`_.
         """
+        size = args.get('size', 1)
+        if 'size' in args:
+            del args['size']
+
         if not use_folium:
             import matplotlib.pyplot as plt
             fig, ax = plt.subplots(**args)
@@ -366,9 +377,9 @@ class DataVelibCollect:
             x = df["lng"]
             y = df["lat"]
             areaf = df.apply(
-                lambda r: numpy.pi * (r["available_bike_stands"]) ** 2, axis=1)
+                lambda r: r["available_bike_stands"] ** 0.5 * size, axis=1)
             areab = df.apply(
-                lambda r: numpy.pi * (r["available_bikes"]) ** 2, axis=1)
+                lambda r: r["available_bikes"] ** 0.5 * size, axis=1)
             ax.scatter(x, y, areaf, alpha=0.5, label="place", color="r")
             ax.scatter(x, y, areab, alpha=0.5, label="bike", color="g")
             ax.grid(True)
@@ -387,29 +398,41 @@ class DataVelibCollect:
                 t = "+ {0} o {1}".format(row["available_bikes"],
                                          row["available_bike_stands"])
                 folium.CircleMarker([row["lat"], row["lng"]], color='#3186cc', fill_color='#3186cc',
-                                    popup=t, radius=(row["available_bikes"] / numpy.pi) ** 0.5 * 30).add_to(map_osm)
+                                    popup=t, radius=(row["available_bikes"] / numpy.pi) ** 0.5 * 30 * size).add_to(map_osm)
                 folium.CircleMarker([row["lat"], row["lng"]], color='#cc8631', fill_color='#cc8631',
-                                    popup=t, radius=(row["available_bike_stands"] / numpy.pi) ** 0.5 * 30).add_to(map_osm)
+                                    popup=t, radius=(row["available_bike_stands"] / numpy.pi) ** 0.5 * 30 * size).add_to(map_osm)
 
             df.apply(lambda row: add_marker(row), axis=1)
             return map_osm
 
     @staticmethod
-    def js_animation(df, interval=20, **args):
+    def animation(df, interval=20, module="matplotlib", **args):
         """
         Displays a javascript animation,
         see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_.
 
         @param      df                  dataframe
         @param      interval            see `animation.FuncAnimation <http://matplotlib.org/api/animation_api.html#matplotlib.animation.FuncAnimation>`_
+        @param      module              module to build the animation
         @param      args                other parameters to give method ``plt.figure``
         @return                         animation
-        """
-        import matplotlib.pyplot as plt
-        from matplotlib import animation
 
-        #xlim = min(df["lng"]),max(df["lng"])
-        #ylim = min(df["lat"]),max(df["lat"])
+        Available modules for animation:
+
+        * :epkg:`matplotlib`
+        * :epkg:`moviepy`
+
+        Additional arguments:
+
+        * size: size of scatter plots
+        * duration: if module is 'moviepy', duration of the animation
+        """
+        size = args.get('size', 1)
+        if 'size' in args:
+            del args['size']
+        duration = args.get('duration', 2)
+        if 'duration' in args:
+            del args['duration']
 
         dates = list(sorted(set(df["file"])))
         datas = []
@@ -418,9 +441,9 @@ class DataVelibCollect:
             x = sub["lng"]
             y = sub["lat"]
             colp = df.apply(
-                lambda r: numpy.pi * (r["available_bike_stands"]) ** 2, axis=1)
+                lambda r: r["available_bike_stands"] ** 0.5 * size, axis=1)
             colb = df.apply(
-                lambda r: numpy.pi * (r["available_bikes"]) ** 2, axis=1)
+                lambda r: r["available_bikes"] ** 0.5 * size, axis=1)
             x = tuple(x)
             y = tuple(y)
             colp = tuple(colp)
@@ -428,37 +451,64 @@ class DataVelibCollect:
             data = (x, y, colp, colb)
             datas.append(data)
 
-        fig, ax = plt.subplots(**args)
-        x, y, c, d = datas[0]
+        import matplotlib.pyplot as plt
 
-        scat1 = ax.scatter(x, y, c, alpha=0.5, color="r", label="place")
-        scat2 = ax.scatter(x, y, d, alpha=0.5, color="g", label="bike")
-        ax.grid(True)
-        ax.legend()
-        ax.set_xlabel("longitude")
-        ax.set_ylabel("latitude")
-
-        def animate(i, datas, scat1, scat2):
+        def scatter_fig(i=0):
+            fig, ax = plt.subplots(**args)
             x, y, c, d = datas[i]
-            # scat1.set_array(numpy.array(c))
-            # scat2.set_array(numpy.array(d))
-            #scat1.set_array(numpy.array(x + y))
-            #scat2.set_array(numpy.array(x + y))
-            scat1._sizes = c
-            scat2._sizes = d
-            return scat1, scat2
 
-        anim = animation.FuncAnimation(fig, animate, frames=len(datas),
-                                       interval=interval, fargs=(datas, scat1, scat2), blit=True)
-        plt.close('all')
-        return anim
+            scat1 = ax.scatter(x, y, c, alpha=0.5, color="r", label="place")
+            scat2 = ax.scatter(x, y, d, alpha=0.5, color="g", label="bike")
+            ax.grid(True)
+            ax.legend()
+            ax.set_xlabel("longitude")
+            ax.set_ylabel("latitude")
+            return fig, ax, scat1, scat2
+
+        if module == "matplotlib":
+            from matplotlib import animation
+
+            def animate(i, datas, scat1, scat2):
+                x, y, c, d = datas[i]
+                # scat1.set_array(numpy.array(c))
+                # scat2.set_array(numpy.array(d))
+                #scat1.set_array(numpy.array(x + y))
+                #scat2.set_array(numpy.array(x + y))
+                scat1._sizes = c
+                scat2._sizes = d
+                return scat1, scat2
+
+            fig, ax, scat1, scat2 = scatter_fig()
+            anim = animation.FuncAnimation(fig, animate, frames=len(datas),
+                                           interval=interval, fargs=(datas, scat1, scat2), blit=True)
+            plt.close('all')
+            return anim
+
+        elif module == "moviepy":
+            from moviepy.video.io.bindings import mplfig_to_npimage
+            import moviepy.editor as mpy
+
+            def make_frame_mpl(t):
+                i = min(int(t * len(datas)), len(datas) - 1)
+                x, y, c, d = datas[i]
+                # scat1.set_xdata(x)  # <= Update the curve
+                # scat1.set_ydata(y)  # <= Update the curve
+                scat1._sizes = c
+                scat2._sizes = d
+                res = mplfig_to_npimage(fig)
+                return res
+
+            fig, ax, scat1, scat2 = scatter_fig(0)
+
+            animation = mpy.VideoClip(make_frame_mpl, duration=duration)
+            return animation
+        else:
+            raise ValueError("Unsupported module '{0}'".format(module))
 
     @staticmethod
     def distance_haversine(lat1, lon1, lat2, lon2):
         """
-        compute the haversine distance
-
-        see `Haversine distance <http://en.wikipedia.org/wiki/Haversine_formula>`_
+        Computes the `haversine <https://en.wikipedia.org/wiki/Haversine_formula>`_ distance.
 
         @return      double
         """
@@ -479,7 +529,7 @@ class DataVelibCollect:
                  delta_speed=2.5,
                  fLOG=print):
         """
-        Simulates velibs on a set of stations given by df
+        Simulates velibs on a set of stations given by df.
 
         @param      df          dataframe with station information
         @param      nbbike      number of bicycles

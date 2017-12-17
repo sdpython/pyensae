@@ -275,3 +275,10 @@ src/pyensae/.vscode/settings.json
 _doc/sphinxdoc/plot_directive/source/pyensae/graph_helper/corrplot-1.pdf
 _doc/sphinxdoc/plot_directive/source/pyensae/graph_helper/corrplot-1.hires.png
 _doc/sphinxdoc/plot_directive/source/pyensae/graph_helper/corrplot-1.png
+_doc/notebooks/data_velib/besancon.*.txt
+_doc/notebooks/besancon.df.*
+_doc/notebooks/*.gif
+_doc/notebooks/*.exe
+_doc/notebooks/data_velib
+_doc/notebooks/temp
+
