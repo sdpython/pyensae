@@ -44,7 +44,7 @@ from src.pyensae.finance.astock import StockPrices
 
 class TestStockFile (unittest.TestCase):
 
-    def _test_save_stock_google(self):
+    def test_save_stock_google(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -76,7 +76,7 @@ class TestStockFile (unittest.TestCase):
         df.to_excel(file)
         self.assertTrue(os.path.exists(file))
 
-    def _test_save_stock_quandl(self):
+    def test_save_stock_quandl(self):
         fLOG(
             __file__,
             self._testMethodName,
