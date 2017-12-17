@@ -116,6 +116,8 @@ class TestDataVelibOffline (unittest.TestCase):
             # not tested on anaconda
             return
 
+        from imageio.plugins.ffmpeg import download
+        download()
         df = DataVelibCollect.to_df(data)
         anim = DataVelibCollect.animation(df, module="moviepy")
         self.assertTrue(anim is not None)
