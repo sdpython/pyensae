@@ -40,7 +40,7 @@ except ImportError:
 
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.filehelper import synchronize_folder
-from pyquickhelper.pycode import get_temp_folder, add_missing_development_version, is_travis_or_apppveyor
+from pyquickhelper.pycode import get_temp_folder, add_missing_development_version, is_travis_or_appveyor
 from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut, get_additional_paths
 
 
@@ -81,9 +81,12 @@ class TestNotebook123Coverage(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if is_travis_or_apppveyor():
+        if is_travis_or_appveyor():
             # The notebook requires credentials.
             return False
+
+        from imageio.plugins.ffmpeg import download
+        download()
         self.a_test_notebook_runner("pyensae_velib", ".")
 
 
