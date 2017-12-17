@@ -240,8 +240,9 @@ if not r:
         install_requires=["pyquickhelper>=1.5.2259"],
         extras_require={
             'graph_helper': ['matplotlib', 'blockdiag'],
-            'datasource.linkedin_access': ['python3-linkedin'],
             'datasource.convert': ['dbread'],
+            'datasource.data_velib': ['moviepy'],
+            'datasource.linkedin_access': ['python3-linkedin'],
             'finance': ['pandas-datareader'],
             'languages': ['antlr4-python3-runtime'],
             'notebook_helper.folium_helper': ['folium'],
