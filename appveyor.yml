@@ -25,7 +25,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install keyring jyquickhelper"
   - "%PYTHON%\\Scripts\\pip install seaborn blockdiag"
   - "%PYTHON%\\Scripts\\pip install semantic_version"
-  - "%PYTHON%\\Scripts\\pip install urllib3 chardet requests_ftp quandl"
+  - "%PYTHON%\\Scripts\\pip install urllib3 chardet requests_ftp quandl moviepy"
   - "%PYTHON%\\Scripts\\pip install pycodestyle prompt_toolkit ipykernel qgrid"
   - "%PYTHON%\\Scripts\\pymy_install3 --task=tool --source=zip graphviz"
   - "set PATH=%PATH%;C:\\projects\\pyensae\\build\\update_modules\\Graphviz\\bin"

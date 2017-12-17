@@ -19,6 +19,7 @@ keyring
 Mako
 matplotlib
 mistune
+moviepy
 nbconvert>=5.0.0
 nbformat
 nbpresent
