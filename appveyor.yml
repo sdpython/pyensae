@@ -23,7 +23,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install pymyinstall"
   - "%PYTHON%\\Scripts\\pymy_install3 --set=pyensae"
   - "%PYTHON%\\Scripts\\pip install keyring jyquickhelper"
-  - "%PYTHON%\\Scripts\\pip install seaborn blockdiag"
+  - "%PYTHON%\\Scripts\\pip install seaborn blockdiag colorlog"
   - "%PYTHON%\\Scripts\\pip install semantic_version yahoo-historical"
   - "%PYTHON%\\Scripts\\pip install urllib3 chardet requests_ftp quandl moviepy"
   - "%PYTHON%\\Scripts\\pip install pycodestyle prompt_toolkit ipykernel qgrid"
