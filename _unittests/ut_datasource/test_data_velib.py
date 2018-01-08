@@ -42,11 +42,11 @@ except ImportError:
 
 
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import is_travis_or_appveyor, get_temp_folder
+from pyquickhelper.pycode import is_travis_or_appveyor, get_temp_folder, ExtTestCase
 from src.pyensae.datasource.data_velib import DataVelibCollect
 
 
-class TestDataVelib (unittest.TestCase):
+class TestDataVelib (ExtTestCase):
 
     def get_private_key(self):
         """
@@ -91,16 +91,16 @@ class TestDataVelib (unittest.TestCase):
         temp_file = os.path.join(tempfold, "data_velib.txt")
         if os.path.exists(temp_file):
             os.remove(temp_file)
-        assert not os.path.exists(temp_file)
+        self.assertTrue(not os.path.exists(temp_file))
 
         key = self.get_private_key()
         if key is None:
             return
 
         velib = DataVelibCollect(key)
-        js = velib.get_json("Paris")
+        js = velib.get_json("Besancon")  # Paris changed velib's owner (2018-01).
 
-        assert isinstance(js, list)
+        self.assertIsInstance(js, list)
         fLOG(type(js))
         nb = 0
         for o in js:
@@ -108,12 +108,12 @@ class TestDataVelib (unittest.TestCase):
             nb += 1
             if nb > 10:
                 break
-        assert nb > 0
-        assert len(js) > 0
+        self.assertGreater(nb, 0)
+        self.assertGreater(len(js), 0)
 
         tbl = pandas.DataFrame(js)
         tbl.to_csv(temp_file, sep="\t")
-        assert os.path.exists(temp_file)
+        self.assertExists(temp_file)
         fLOG(tbl[:10])
 
     def test_data_velib_json_collect(self):
@@ -145,8 +145,8 @@ class TestDataVelib (unittest.TestCase):
             raise Exception(
                 "len(lines)<1: %d\n%s" %
                 (len(lines), "\n".join(lines)))
-        assert len(lines) < 10
-        assert "\t" in lines[0]
+        self.assertLesser(len(lines), 10)
+        self.assertIn("\t", lines[0])
 
         dt = datetime.datetime.now() + delay
         velib.collecting_data("Paris", 1000, temp_file, stop_datetime=dt,
@@ -172,7 +172,8 @@ class TestDataVelib (unittest.TestCase):
         if key is None:
             return
 
-        DataVelibCollect.run_collection(key, contract="Paris", delayms=1000,
+        # Paris changed velib's owner (2018-01)
+        DataVelibCollect.run_collection(key, contract="Nancy", delayms=1000,
                                         folder_file=temp_file, single_file=True,
                                         stop_datetime=dt, log_every=1, fLOG=fLOG)
 
@@ -184,8 +185,8 @@ class TestDataVelib (unittest.TestCase):
             raise Exception(
                 "len(lines)<1: %d\n%s" %
                 (len(lines), "\n".join(lines)))
-        assert len(lines) < 10
-        assert "\t" in lines[0]
+        self.assertLesser(len(lines), 10)
+        self.assertIn("\t", lines[0])
 
     def test_data_velib_json_collect_func_besancon(self):
         fLOG(
@@ -216,8 +217,8 @@ class TestDataVelib (unittest.TestCase):
             raise Exception(
                 "len(lines)<1: %d\n%s" %
                 (len(lines), "\n".join(lines)))
-        assert len(lines) < 10
-        assert "\t" in lines[0]
+        self.assertLesser(len(lines), 10)
+        self.assertIn("\t", lines[0])
 
     def test_data_velib_contract(self):
         fLOG(
@@ -232,8 +233,8 @@ class TestDataVelib (unittest.TestCase):
 
         velib = DataVelibCollect(key)
         cont = velib.get_contracts()
-        fLOG("**", cont)
-        assert len(cont) > 0
+        # fLOG("**", cont)
+        self.assertGreater(len(cont), 0)
 
 
 if __name__ == "__main__":

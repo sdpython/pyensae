@@ -96,9 +96,8 @@ class DataVelibCollect:
         """
         if contract not in self.contracts:
             raise Exception(
-                "unable to find contract in:\n" +
-                "\n".join(
-                    self.contracts.keys()))
+                "Unable to find contract '{0}' in:\n{1}".format(contract, "\n".join(
+                    self.contracts.keys())))
         url = DataVelibCollect._url_api % (contract, self.apiKey)
 
         try:
