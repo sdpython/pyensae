@@ -20,7 +20,7 @@ class DownloadDataException(Exception):
 
 def remove_empty_line(file):
     """
-    remove empty line in an imported file
+    Removes empty line in an imported file.
 
     @param      file        local file name
     """
@@ -92,7 +92,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
 
         ::
 
-            from pyensae import download_data
+            from pyensae.datasource import download_data
             download_data('voeux.zip', website = 'xd')
 
     .. exref::
