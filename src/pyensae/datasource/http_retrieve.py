@@ -73,7 +73,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
 
     @param      name        (str) name of the module
     @param      moduleName  (str|None) like import name as moduleName, None for name
-    @param      url         (str|None) link to the website to use
+    @param      url         (str|list|None) link to the website to use (or the websites if list)
     @param      glo         (dict|None) if None, it will be replaced ``globals()``
     @param      loc         (dict|None) if None, it will be replaced ``locals()``
     @param      whereTo     specify a folder where downloaded files will be placed
@@ -107,6 +107,11 @@ def download_data(name, moduleName=None, url=None, glo=None,
 
     .. versionchanged:: 1.1
         Parameters *retry*, *silent* were added.
+
+    .. versionchanged:: 1.2
+        Parameter *url* can be a list. The function
+        tries the first one which contains the file.
+
     """
     from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz, decompress_bz2
 
@@ -115,10 +120,19 @@ def download_data(name, moduleName=None, url=None, glo=None,
     if loc is None:
         loc = locals()
 
-    if website == "xd":
-        website = "http://www.xavierdupre.fr/enseignement/complements/"
-    elif website == "xdtd":
-        website = "http://www.xavierdupre.fr/site2013/enseignements/tddata/"
+    def transform_url(w):
+        if isinstance(w, list):
+            return [transform_url(_) for _ in w]
+        if w == "xd":
+            w = "http://www.xavierdupre.fr/enseignement/complements/"
+        elif w == "xdtd":
+            w = "http://www.xavierdupre.fr/site2013/enseignements/tddata/"
+        return w
+
+    website = transform_url(website)
+    url = transform_url(url)
+    if url is None:
+        url = website
 
     if not os.path.exists(whereTo):
         raise FileExistsError("this folder should exists " + whereTo)
@@ -141,37 +155,53 @@ def download_data(name, moduleName=None, url=None, glo=None,
             alls = u.read()
             u.close()
         else:
-            if url is None:
-                url = website
-            url += file
-            fLOG("[download_data]    download '{0}' to '{1}'".format(
-                url, outfile))
-            while retry > 0:
-                try:
-                    u = urllib.request.urlopen(
-                        url) if timeout is None else urllib.request.urlopen(url, timeout=timeout)
-                    alls = u.read()
-                    u.close()
+            if not isinstance(url, list):
+                urls = [url]
+            else:
+                urls = url
+            excs = []
+            success = False
+            for url in urls:
+                if success:
                     break
-                except ConnectionResetError as ee:
-                    if retry <= 0:
-                        raise DownloadDataException(
-                            "Unable (1) to retrieve data from '{0}'. Error: {1}".format(url, ee)) from ee
-                    else:
-                        fLOG("[download_data] (1)  fail and retry to download '{0}' to '{1}'".format(
-                            url, outfile))
-                        # We wait for 2 seconds.
-                        time.sleep(2)
-                except Exception as e:
-                    if retry <= 1:
-                        raise DownloadDataException(
-                            "Unable (2) to retrieve data from '{0}'. Error: {1}".format(url, e)) from e
-                    else:
-                        fLOG("[download_data] (2)  fail and retry to download '{0}' to '{1}'".format(
-                            url, outfile))
-                        # We wait for 2 seconds.
-                        time.sleep(2)
-                retry -= 1
+                url += file
+                fLOG("[download_data]    download '{0}' to '{1}'".format(
+                    url, outfile))
+                while retry > 0:
+                    try:
+                        u = urllib.request.urlopen(
+                            url) if timeout is None else urllib.request.urlopen(url, timeout=timeout)
+                        alls = u.read()
+                        u.close()
+                        success = True
+                        break
+                    except ConnectionResetError as ee:
+                        if retry <= 0:
+                            exc = DownloadDataException(
+                                "Unable (1) to retrieve data from '{0}'. Error: {1}".format(url, ee))
+                            excs.append(exc)
+                            excs.append(ee)
+                            break
+                        else:
+                            fLOG("[download_data] (1)  fail and retry to download '{0}' to '{1}'".format(
+                                url, outfile))
+                            # We wait for 2 seconds.
+                            time.sleep(2)
+                    except Exception as e:
+                        if retry <= 1:
+                            exc = DownloadDataException(
+                                "Unable (2) to retrieve data from '{0}'. Error: {1}".format(url, e))
+                            excs.append(exc)
+                            excs.append(e)
+                            break
+                        else:
+                            fLOG("[download_data] (2)  fail and retry to download '{0}' to '{1}'".format(
+                                url, outfile))
+                            # We wait for 2 seconds.
+                            time.sleep(2)
+                    retry -= 1
+            if not success and len(excs) > 0:
+                raise excs[0]
             u = open(outfile, "wb")
             u.write(alls)
             u.close()

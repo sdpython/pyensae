@@ -98,7 +98,8 @@ class TestDataVelib (ExtTestCase):
             return
 
         velib = DataVelibCollect(key)
-        js = velib.get_json("Besancon")  # Paris changed velib's owner (2018-01).
+        # Paris changed velib's owner (2018-01).
+        js = velib.get_json("Besancon")
 
         self.assertIsInstance(js, list)
         fLOG(type(js))
