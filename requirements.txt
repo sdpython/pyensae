@@ -1,12 +1,15 @@
 antlr4-python3-runtime
+blockdiag
 colormap
 coverage
 dbfread
 easydev
 folium
 jyquickhelper
+keyring
 Mako
 networkx
+openpyxl
 pandas_datareader
 pandocfilters
 pymyinstall
