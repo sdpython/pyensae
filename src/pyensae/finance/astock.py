@@ -603,7 +603,12 @@ class StockPrices:
 
         curve = []
         if field == "ohlc":
-            from matplotlib.finance import candlestick_ohlc
+            try:
+                # since matplotlib 2.2.0
+                # see https://github.com/matplotlib/mpl_finance
+                from mpl_finance import candlestick_ohlc
+            except ImportError:
+                from matplotlib.finance import candlestick_ohlc
             ohlc = list(list(data.iloc[i, :4])
                         for i in range(0, data.shape[0]))
             ohlc = [[mdates.date2num(t)] + v for t, v in zip(dates, ohlc)]

@@ -10,6 +10,7 @@ History
 
 * `16`: split *pyensae* into *pyenbc* for remote access to clusters
   and the rest
+* `17`: replace matplotlib.finance by mpl_finance (needed since matplotlib 2.2.0)
 
 1.1.689 (2017-11-28)
 ====================

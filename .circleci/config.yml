@@ -54,6 +54,7 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
             pip install git+https://github.com/sdpython/sphinxcontrib-images.git --upgrade --no-deps
+            pip install git+https://github.com/matplotlib/mpl_finance
 
       - save_cache:
           paths:
