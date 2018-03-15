@@ -25,7 +25,7 @@ class StockPrices:
     the class uses :epkg:`pandas` to load the data.
 
     .. exref::
-        :title: retrieve stock prices from the Yahoo source
+        :title: Retrieve stock prices from the Yahoo source
 
         ::
 
@@ -164,7 +164,7 @@ class StockPrices:
             if not os.path.exists(name):
                 if url == "google":
                     use_url = True
-                    url_string = "http://finance.google.com/finance/historical?q={0}".format(
+                    url_string = "https://finance.google.com/finance/historical?q={0}".format(
                         self.tickname)
                     url_string += "&startdate={0}&enddate={1}&output=csv".format(
                         begin.strftime('%b %d, %Y'), end.strftime('%b %d, %Y'))
@@ -192,8 +192,7 @@ class StockPrices:
                     use_url = False
                 else:
                     raise Exception(
-                        "unable to download data from the following website" + str(tick) + " - " +
-                        url)
+                        "Unable to download data '{0}' from the following website '{1}'".format(tick, url))
 
                 if use_url:
                     self.url_ = url
@@ -203,23 +202,20 @@ class StockPrices:
                         u.close()
                     except urllib.error.HTTPError as e:
                         raise Exception(
-                            "HTTPError, unable to load tick " + tick + "\nURL: " + url) from e
+                            "HTTPError, unable to load tick '{0}'\nURL: {1}".format(tick, url)) from e
 
                     if len(text) < 10:
-                        raise Exception("nothing to download for " + tick +
-                                        " less than 10 downloaded bytes")
+                        raise Exception(
+                            "nothing to download for '{0}' less than 10 downloaded bytes".format(tick))
 
                     try:
                         f = open(name, "wb")
                         f.write(text)
                         f.close()
                     except PermissionError as e:
-                        raise Exception(
-                            "PermissionError, unable to create directory " +
-                            folder +
-                            ", check you execute the program in a folder you have permission to modify (" +
-                            os.getcwd() +
-                            ")") from e
+                        raise Exception(("PermissionError, unable to create directory '{0}', " +
+                                         "check you execute the program in a folder you have " +
+                                         "permission to modify ({1})").format(folder, os.getcwd())) from e
                 else:
                     self.url_ = name
 
@@ -230,7 +226,7 @@ class StockPrices:
                     content = t.read()
                 if "Firewall Authentication" in content:
                     raise Exception(
-                        "pandas cannot parse the file, check your have access to internet" + str(tick)) from e
+                        "pandas cannot parse the file, check your have access to internet '{0}'".format(tick)) from e
                 else:
                     raise e
 
@@ -256,7 +252,7 @@ class StockPrices:
 
     def __getitem__(self, key):
         """
-        overloads the ``getitem`` operator to get a StockPrice object
+        Overloads the ``getitem`` operator to get a @see cl StockPrice object.
 
         @param      key     key
         @return             StockPrice
@@ -280,38 +276,38 @@ class StockPrices:
     @property
     def tick(self):
         """
-        returns the tick name
+        Returns the tick name.
         """
         return self.tickname
 
     @property
     def dataframe(self):
         """
-        returns the dataframe
+        Returns the dataframe.
         """
         return self.datadf
 
     def df(self):
         """
-        returns the dataframe
+        Returns the dataframe.
         """
         return self.datadf
 
     def FirstDate(self):
         """
-        returns the first date
+        Returns the first date.
         """
         return self.datadf["Date"].min()
 
     def LastDate(self):
         """
-        returns the first date
+        Returns the first date.
         """
         return self.datadf["Date"].max()
 
     def missing(self, trading_dates):
         """
-        return the list of missing dates from an overset of trading dates
+        Returnq the list of missing dates from an overset of trading dates.
 
         @param      trading_dates       trading_dates (DataFrame having the column ``Date`` or in the index)
         @return                         missing dates (or None if issues)
@@ -447,7 +443,7 @@ class StockPrices:
 
     def returns(self):
         """
-        builds the returns series
+        Builds the series of returns.
 
         @param      col     column to use to compute the returns
         @return             StockPrices
@@ -474,7 +470,7 @@ class StockPrices:
     def covariance(
             listStockPrices, missing=True, field="Close", cov=True, ret=False):
         """
-        computes the covariances matrix (of returns)
+        Computes the covariances matrix (of returns).
 
         @param      listStockPrices     list of StockPrices
         @param      field               which field to use to fill the matrix
@@ -506,7 +502,7 @@ class StockPrices:
              existing=None, axis=1, ax=None,
              **args):
         """
-        see :meth:`draw <pyensae.finance.astock.StockPrices.draw>`
+        See :meth:`draw <pyensae.finance.astock.StockPrices.draw>`.
         """
         return StockPrices.draw(self, begin=begin, end=end,
                                 field=field, date_format=date_format,
@@ -518,8 +514,9 @@ class StockPrices:
              existing=None, axis=1, ax=None,
              **args):
         """
-        Draw a graph showing one or several time series.
-        The example was taken `here <http://matplotlib.org/examples/api/date_demo.html>`_.
+        Draws a graph showing one or several time series.
+        The example was taken
+        `date_demo.py <https://matplotlib.org/examples/api/date_demo.html>`_.
 
         @param      listStockPrices     list of @see cl StockPrices (or one @see cl StockPrices if it is the only one)
         @param      begin               first date (datetime) or None to take the first one
@@ -532,7 +529,7 @@ class StockPrices:
         @param      ax                  use existing `axes <http://matplotlib.org/api/axes_api.html>`_
         @return                         `axes <http://matplotlib.org/api/axes_api.html>`_
 
-        The parameter ``figsize`` of the method `subplots <http://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
+        The parameter ``figsize`` of the method `subplots <https://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
         can change the graph size (see the example below).
 
         .. exref::
@@ -563,7 +560,7 @@ class StockPrices:
         .. versionchanged:: 1.1
             Parameter *existing* was removed and parameter *ax* was added.
             If the date overlaps, the method
-            `autofmt_xdate <http://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure.autofmt_xdate>`_
+            `autofmt_xdate <https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure.autofmt_xdate>`_
             should be called.
         """
         if isinstance(listStockPrices, StockPrices):
@@ -673,8 +670,8 @@ class StockPrices:
 
     def to_csv(self, filename, sep="\t", index=False, **params):
         """
-        saves the file in text format
-        see `to_csv <http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_csv.html>`_
+        Saves the file in text format,
+        see `to_csv <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_csv.html>`_
 
         @param      filename        filename
         @param      sep             separator
@@ -685,7 +682,7 @@ class StockPrices:
 
     def to_excel(self, excel_writer, **params):
         """
-        saves the file in Excel format,
-        see `to_excel <http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.DataFrame.to_excel.html>`_
+        Saves the file in Excel format,
+        see `to_excel <https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.to_excel.html>`_
         """
         self.dataframe.to_excel(excel_writer, **params)

@@ -40,21 +40,21 @@ from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.finance.astock import StockPrices
 
 
-class TestStockUrl(unittest.TestCase):
+class TestStockUrlYahoo(unittest.TestCase):
 
-    def test_download_stock_default(self):
+    def test_download_stock_yahoo(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        cache = get_temp_folder(__file__, "temp_url_default")
-        stock = StockPrices("NASDAQ:MSFT", folder=cache,
+        cache = get_temp_folder(__file__, "temp_url_yahoo")
+        stock = StockPrices("^FCHI", folder=cache, url="yahoo",
                             begin=datetime.datetime(2014, 1, 15))
         df = stock.dataframe
         dmin = df.Date.min()
         self.assertIn("2014", str(dmin))
-        self.assertTrue(stock.url_.startswith(
-            "https://finance.google.com/finance/historical?q=NASDAQ:MSFT&startdate=Jan+15%2C+2014"))
+        if "^FCHI.2014-01-15" not in stock.url_:
+            raise AssertionError(stock.url_)
 
 
 if __name__ == "__main__":

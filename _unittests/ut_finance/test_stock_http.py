@@ -48,13 +48,8 @@ class TestStockHttp (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_cache_download_http")
-        stock = StockPrices(
-            "NASDAQ:MSFT",
-            folder=cache,
-            end=datetime.datetime(
-                2014,
-                1,
-                15))
+        stock = StockPrices("NASDAQ:MSFT", folder=cache,
+                            end=datetime.datetime(2014, 1, 15))
         name = os.path.join(cache, "NASDAQ_MSFT.2000-01-03.2014-01-15.txt")
         self.assertTrue(os.path.exists(name))
         df = stock.dataframe

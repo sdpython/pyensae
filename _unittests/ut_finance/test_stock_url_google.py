@@ -40,14 +40,14 @@ from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.finance.astock import StockPrices
 
 
-class TestStockUrl(unittest.TestCase):
+class TestStockUrlGoogle(unittest.TestCase):
 
-    def test_download_stock_default(self):
+    def test_download_stock_google(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        cache = get_temp_folder(__file__, "temp_url_default")
+        cache = get_temp_folder(__file__, "temp_url_google")
         stock = StockPrices("NASDAQ:MSFT", folder=cache,
                             begin=datetime.datetime(2014, 1, 15))
         df = stock.dataframe
