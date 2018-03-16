@@ -1,6 +1,6 @@
 
 .. blogpost::
-    :title: Module split
+    :title: Yahoo finance needs cookie (2)
     :keywords: module, pyenbc
     :date: 2017-12-27
     :categories: module

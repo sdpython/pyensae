@@ -18,6 +18,13 @@ class StockPricesException(Exception):
     pass
 
 
+class StockPricesHTTPException(StockPricesException):
+    """
+    Raised by StockPrices classes.
+    """
+    pass
+
+
 class StockPrices:
 
     """
@@ -111,7 +118,7 @@ class StockPrices:
             self.datadf = url
             self.tickname = tick
             if "Date" not in url.columns:
-                raise Exception(
+                raise StockPricesHTTPException(
                     "the dataframe does not contain any column 'Date': {0}".format(
                         ",".join(
                             _ for _ in url.columns)))
@@ -119,7 +126,7 @@ class StockPrices:
             with open(tick, "r") as f:
                 for line in f.readlines():
                     if line.startswith('<!DOCTYPE html PUBLIC'):
-                        raise Exception(
+                        raise StockPricesHTTPException(
                             "pandas cannot parse the file, check your have access to internet: " + str(tick))
                     break
             try:
@@ -128,21 +135,18 @@ class StockPrices:
                 with open(tick, "r") as t:
                     content = t.read()
                 if "Firewall Authentication" in content:
-                    raise Exception(
+                    raise StockPricesException(
                         "pandas cannot parse the file, check your have access to internet: " + str(tick)) from e
                 else:
-                    raise e
+                    raise
         else:
             if not os.path.exists(folder):
                 try:
                     os.mkdir(folder)
                 except PermissionError as e:
-                    raise Exception(
-                        "PermissionError, unable to create directory " +
-                        folder +
-                        ", check you execute the program in a folder you have permission to modify (" +
-                        os.getcwd() +
-                        ")") from e
+                    raise StockPricesException(("PermissionError, unable to create directory '{0}', " +
+                                                "check you execute the program in a folder you have " +
+                                                "permission to modify ({1})").format(folder, os.getcwd())) from e
             self.tickname = tick
 
             if begin is None:
@@ -191,7 +195,7 @@ class StockPrices:
                     df.to_csv(name, sep=sep, index=False)
                     use_url = False
                 else:
-                    raise Exception(
+                    raise StockPricesHTTPException(
                         "Unable to download data '{0}' from the following website '{1}'".format(tick, url))
 
                 if use_url:
@@ -201,11 +205,11 @@ class StockPrices:
                         text = u.read()
                         u.close()
                     except urllib.error.HTTPError as e:
-                        raise Exception(
+                        raise StockPricesHTTPException(
                             "HTTPError, unable to load tick '{0}'\nURL: {1}".format(tick, url)) from e
 
                     if len(text) < 10:
-                        raise Exception(
+                        raise StockPricesHTTPException(
                             "nothing to download for '{0}' less than 10 downloaded bytes".format(tick))
 
                     try:
@@ -213,9 +217,9 @@ class StockPrices:
                         f.write(text)
                         f.close()
                     except PermissionError as e:
-                        raise Exception(("PermissionError, unable to create directory '{0}', " +
-                                         "check you execute the program in a folder you have " +
-                                         "permission to modify ({1})").format(folder, os.getcwd())) from e
+                        raise StockPricesException(("PermissionError, unable to create directory '{0}', " +
+                                                    "check you execute the program in a folder you have " +
+                                                    "permission to modify ({1})").format(folder, os.getcwd())) from e
                 else:
                     self.url_ = name
 
@@ -225,10 +229,10 @@ class StockPrices:
                 with open(tick, "r") as t:
                     content = t.read()
                 if "Firewall Authentication" in content:
-                    raise Exception(
+                    raise StockPricesException(
                         "pandas cannot parse the file, check your have access to internet '{0}'".format(tick)) from e
                 else:
-                    raise e
+                    raise
 
             if date_format is not None:
                 self.datadf["Date"] = pandas.to_datetime(self.datadf["Date"])
@@ -439,7 +443,7 @@ class StockPrices:
             ave = self.dataframe.apply(lambda row: row["Date"] in tbl, axis=1)
             return StockPrices(self.tickname, self.dataframe.loc[ave, :])
         else:
-            raise Exception("no trading dates left")
+            raise StockPricesException("no trading dates left")
 
     def returns(self):
         """

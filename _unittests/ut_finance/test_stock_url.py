@@ -7,6 +7,7 @@ import sys
 import os
 import unittest
 import datetime
+import warnings
 
 
 try:
@@ -37,7 +38,7 @@ except ImportError:
 
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from src.pyensae.finance.astock import StockPrices
+from src.pyensae.finance.astock import StockPrices, StockPricesHTTPException
 
 
 class TestStockUrl(unittest.TestCase):
@@ -48,8 +49,12 @@ class TestStockUrl(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_url_default")
-        stock = StockPrices("NASDAQ:MSFT", folder=cache,
-                            begin=datetime.datetime(2014, 1, 15))
+        try:
+            stock = StockPrices("NASDAQ:MSFT", folder=cache,
+                                begin=datetime.datetime(2014, 1, 15))
+        except StockPricesHTTPException as e:
+            warnings.warn(str(e))
+            return
         df = stock.dataframe
         dmin = df.Date.min()
         self.assertIn("2014", str(dmin))
