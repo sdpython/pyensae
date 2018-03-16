@@ -36,10 +36,13 @@ except ImportError:
 
 from pyquickhelper.loghelper import fLOG
 from src.pyensae.finance.astock import StockPrices
-from pyquickhelper.pycode import fix_tkinter_issues_virtualenv, is_travis_or_appveyor
+from pyquickhelper.pycode import fix_tkinter_issues_virtualenv, ExtTestCase
 
 
-class TestStockGraph4 (unittest.TestCase):
+class TestStockGraph4 (ExtTestCase):
+
+    tick = 'GOOGL'
+    source = 'yahoo'
 
     def test_graph4(self):
         """
@@ -50,16 +53,14 @@ class TestStockGraph4 (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if is_travis_or_appveyor() == "appveyor":
-            return
-
         fix_tkinter_issues_virtualenv()
 
         from matplotlib import pyplot as plt
 
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache4")
-        stock = StockPrices("NASDAQ:MSFT", folder=cache)
+        stock = StockPrices(TestStockGraph4.tick,
+                            folder=cache, url=TestStockGraph4.source)
         ret = stock.returns()["2012-04-01":"2014-04-15"]
 
         fig, ax = plt.subplots(figsize=(16, 8))
@@ -73,7 +74,7 @@ class TestStockGraph4 (unittest.TestCase):
             os.remove(img)
         fig.savefig(img)
         plt.close('all')
-        assert os.path.exists(img)
+        self.assertExists(img)
 
 
 if __name__ == "__main__":

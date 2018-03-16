@@ -37,11 +37,14 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import is_travis_or_appveyor
+from pyquickhelper.pycode import is_travis_or_appveyor, ExtTestCase
 from src.pyensae.finance.astock import StockPrices
 
 
-class TestLONGStockFile (unittest.TestCase):
+class TestLONGStockFile (ExtTestCase):
+
+    tick = 'GOOGL'
+    source = 'yahoo'
 
     def test_save_stock_google(self):
         fLOG(
@@ -50,19 +53,14 @@ class TestLONGStockFile (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache_file_google")
-        name = os.path.join(cache, "NASDAQ_GOOG.2000-01-03.2014-01-15.txt")
+        name = os.path.join(cache, TestLONGStockFile.tick.replace(
+            ":", "_") + ".2000-01-03.2014-01-15.txt")
         if os.path.exists(name):
             os.remove(name)
 
         try:
-            stock = StockPrices(
-                "NASDAQ:GOOG",
-                url="google",
-                folder=cache,
-                end=datetime.datetime(
-                    2014,
-                    1,
-                    15))
+            stock = StockPrices(TestLONGStockFile.tick, url=TestLONGStockFile.source,
+                                folder=cache, end=datetime.datetime(2014, 1, 15))
         except ImportError as e:
             # There is an issue with pandas_datareader on travis.
             # Not up to date with the latest pandas.
@@ -77,16 +75,16 @@ class TestLONGStockFile (unittest.TestCase):
         if os.path.exists(file):
             os.remove(file)
         stock.to_csv(file)
-        assert os.path.exists(file)
+        self.assertExists(file)
 
         stock2 = StockPrices(file, sep="\t")
-        assert stock.dataframe.shape == stock2.dataframe.shape
+        self.assertEqual(stock.dataframe.shape, stock2.dataframe.shape)
         df = stock2.dataframe
         file = os.path.join(cache, "out_excel.xlsx")
         if os.path.exists(file):
             os.remove(file)
         df.to_excel(file)
-        assert os.path.exists(file)
+        self.assertExists(file)
 
 
 if __name__ == "__main__":

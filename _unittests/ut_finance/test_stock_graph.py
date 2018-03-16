@@ -36,10 +36,13 @@ except ImportError:
 
 from pyquickhelper.loghelper import fLOG
 from src.pyensae.finance.astock import StockPrices
-from pyquickhelper.pycode import fix_tkinter_issues_virtualenv, is_travis_or_appveyor
+from pyquickhelper.pycode import fix_tkinter_issues_virtualenv, ExtTestCase
 
 
-class TestStockGraph (unittest.TestCase):
+class TestStockGraph(ExtTestCase):
+
+    tick = ['MSFT', 'GOOGL', 'AAPL']
+    source = 'yahoo'
 
     def test_graph(self):
         """
@@ -50,19 +53,14 @@ class TestStockGraph (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if is_travis_or_appveyor() == "appveyor":
-            return
-
         fix_tkinter_issues_virtualenv()
 
         from matplotlib import pyplot as plt
 
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache2")
-        stocks = [StockPrices("NASDAQ:MSFT", folder=cache),
-                  StockPrices("NASDAQ:GOOGL", folder=cache),
-                  StockPrices("NASDAQ:AAPL", folder=cache),
-                  ]
+        stocks = [StockPrices(t, folder=cache, url=TestStockGraph.source)
+                  for t in TestStockGraph.tick]
 
         if True:
             fLOG("A", sys.executable)
@@ -80,7 +78,7 @@ class TestStockGraph (unittest.TestCase):
                 os.remove(img)
             fig.savefig(img)
             plt.close('all')
-            self.assertTrue(os.path.exists(img))
+            self.assertExists(img)
 
         if True:
             fLOG("B")
@@ -94,7 +92,7 @@ class TestStockGraph (unittest.TestCase):
                 os .remove(img)
             fig.savefig(img)
             plt.close('all')
-            self.assertTrue(os.path.exists(img))
+            self.assertExists(img)
 
         if True:
             fLOG("C")
@@ -108,7 +106,7 @@ class TestStockGraph (unittest.TestCase):
                 os .remove(img)
             fig.savefig(img)
             plt.close('all')
-            self.assertTrue(os.path.exists(img))
+            self.assertExists(img)
 
         fLOG("thisend")
 
