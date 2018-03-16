@@ -40,25 +40,22 @@ from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.finance.astock import StockPrices
 
 
-class TestStockFileDatetime (unittest.TestCase):
+class TestStockFileDatetime(unittest.TestCase):
 
-    def test_save_stock_google_datetime(self):
+    tick = 'GOOGL'
+    source = 'yahoo'
+
+    def test_save_stock_datetime(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        temp = get_temp_folder(__file__, "temp_cache_file_google")
+        temp = get_temp_folder(__file__, "temp_save_stock_datetime")
         cache = temp
 
-        stock = StockPrices(
-            "NASDAQ:MSFT",
-            use_dtime=True,
-            folder=cache,
-            end=datetime.datetime(
-                2014,
-                1,
-                15))
+        stock = StockPrices(TestStockFileDatetime.tick, use_dtime=True, folder=cache,
+                            end=datetime.datetime(2014, 1, 15), url=TestStockFileDatetime.source)
 
         file = os.path.join(cache, "save.txt")
         if os.path.exists(file):
