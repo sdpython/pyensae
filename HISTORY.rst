@@ -3,7 +3,7 @@
 History
 =======
 
-1.2.9999 (20??-??-??)
+1.2.9999 (2018-12-31)
 =====================
 
 **Features**
@@ -11,6 +11,10 @@ History
 * `16`: split *pyensae* into *pyenbc* for remote access to clusters
   and the rest
 * `17`: replace matplotlib.finance by mpl_finance (needed since matplotlib 2.2.0)
+
+**Bug**
+
+* `18`: fix urls to download data (google, yahoo)
 
 1.1.689 (2017-11-28)
 ====================
