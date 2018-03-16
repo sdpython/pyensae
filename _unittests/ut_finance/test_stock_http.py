@@ -40,7 +40,10 @@ from pyquickhelper.pycode import get_temp_folder
 from src.pyensae.finance.astock import StockPrices, StockPricesException
 
 
-class TestStockHttp (unittest.TestCase):
+class TestStockHttp(unittest.TestCase):
+
+    source = 'yahoo'
+    ticks = ['MSFT', 'GOOGL', 'AAPL']
 
     def test_download_stock(self):
         fLOG(
@@ -48,9 +51,11 @@ class TestStockHttp (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_cache_download_http")
-        stock = StockPrices("NASDAQ:MSFT", folder=cache,
-                            end=datetime.datetime(2014, 1, 15))
-        name = os.path.join(cache, "NASDAQ_MSFT.2000-01-03.2014-01-15.txt")
+        stock = StockPrices(TestStockHttp.ticks[0], folder=cache,
+                            end=datetime.datetime(2014, 1, 15),
+                            url=TestStockHttp.source)
+        u = TestStockHttp.ticks[0].replace(":", "_")
+        name = os.path.join(cache, u + ".2000-01-03.2014-01-15.txt")
         self.assertTrue(os.path.exists(name))
         df = stock.dataframe
         self.assertTrue(len(df) > 0)
@@ -61,10 +66,8 @@ class TestStockHttp (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_cache_dates")
-        stocks = [StockPrices("NASDAQ:GOOGL", folder=cache),
-                  StockPrices("NASDAQ:MSFT", folder=cache),
-                  StockPrices("NASDAQ:AAPL", folder=cache),
-                  ]
+        stocks = [StockPrices(t, folder=cache, url=TestStockHttp.source)
+                  for t in TestStockHttp.ticks]
         av = StockPrices.available_dates(stocks)
         self.assertTrue(len(av) > 0)
 
@@ -77,10 +80,8 @@ class TestStockHttp (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_cache_cov")
-        stocks = [StockPrices("NASDAQ:GOOGL", folder=cache),
-                  StockPrices("NASDAQ:MSFT", folder=cache),
-                  StockPrices("NASDAQ:AAPL", folder=cache),
-                  ]
+        stocks = [StockPrices(t, folder=cache, url=TestStockHttp.source)
+                  for t in TestStockHttp.ticks]
 
         dates = StockPrices.available_dates(stocks)
         ok = dates[dates["missing"] == 0]
@@ -91,8 +92,9 @@ class TestStockHttp (unittest.TestCase):
 
         cor = StockPrices.covariance(stocks, cov=False)
         self.assertEqual(len(cor), 3)
+        t = TestStockHttp.ticks[1]
         self.assertTrue(
-            abs(cor.loc["NASDAQ:GOOGL", "NASDAQ:GOOGL"] - 1) < 1e-5)
+            abs(cor.loc[t, t] - 1) < 1e-5)
         self.assertTrue(abs(cor.iloc[2, 2] - 1) < 1e-5)
 
         ret, mat = StockPrices.covariance(stocks, cov=False, ret=True)
@@ -111,9 +113,6 @@ class TestStockHttp (unittest.TestCase):
         try:
             StockPrices(file)
         except StockPricesException as e:
-            if "schema: " not in str(e):
-                raise Exception("unexpected error (1)") from e
-        except Exception as e:
             if "pandas cannot parse the file" not in str(e):
                 raise Exception("unexpected error (2)") from e
             if "Error tokenizing data" in str(e):
@@ -125,13 +124,9 @@ class TestStockHttp (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_cache_index")
-        stock = StockPrices(
-            "NASDAQ:GOOGL",
-            folder=cache,
-            end=datetime.datetime(
-                2014,
-                1,
-                15))
+        stock = StockPrices(TestStockHttp.ticks[0], folder=cache,
+                            end=datetime.datetime(2014, 1, 15),
+                            url=TestStockHttp.source)
         some = stock["2001-01-01":"2002-02-02"]
         self.assertTrue(isinstance(some, StockPrices))
         self.assertTrue(len(some) < 1000)

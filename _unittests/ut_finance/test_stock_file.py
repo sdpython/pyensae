@@ -39,7 +39,7 @@ except ImportError:
 
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from src.pyensae.finance.astock import StockPrices
+from src.pyensae.finance.astock import StockPrices, StockPricesHTTPException
 
 
 class TestStockFile (unittest.TestCase):
@@ -53,13 +53,12 @@ class TestStockFile (unittest.TestCase):
         temp = get_temp_folder(__file__, "temp_cache_file_google")
         cache = temp
 
-        stock = StockPrices(
-            "NASDAQ:MSFT",
-            folder=cache,
-            end=datetime.datetime(
-                2014,
-                1,
-                15))
+        try:
+            stock = StockPrices("NASDAQ:MSFT", folder=cache,
+                                end=datetime.datetime(2014, 1, 15), url="google")
+        except StockPricesHTTPException as e:
+            warnings.warn(str(e))
+            return
 
         file = os.path.join(cache, "save.txt")
         if os.path.exists(file):
