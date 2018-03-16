@@ -18,7 +18,6 @@
             from src.pyensae.finance.astock import StockPrices
             stock = StockPrices("NASDAQ:MSFT", folder=cache,
                                 begin=datetime.datetime(2018, 3, 10))
+            print(stock)
         except Exception as e:
             print(e)
-        finally:
-            print(stock)
