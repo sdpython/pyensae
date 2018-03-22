@@ -1,0 +1,17 @@
+
+.. blogpost::
+    :title: cctx et finance
+    :keywords: cctx, bitcoin
+    :date: 2018-03-22
+    :categories: finance
+
+    I came accross this package:
+    `cctx <https://github.com/ccxt/ccxt>`_.
+    The summary is the following:
+    *A JavaScript / Python / PHP cryptocurrency trading library with support for 90+ exchanges*.
+    The library is available in javascript, php, python but
+    the last two languages are obtained by translating the
+    javascript into python and php.
+    There are a few commits per day.
+    That's moght be worth following if you
+    are interested cryptocurrencies.

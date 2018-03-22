@@ -1,9 +1,9 @@
 
 .. blogpost::
     :title: Google Finance stopped delivering historical data
-    :keywords: module, pyenbc
+    :keywords: pyenbc, StockPrices, data
     :date: 2018-03-16
-    :categories: module
+    :categories: finance
 
     After :epkg:`Yahoo Finance <https://finance.yahoo.com/>`_
     made it more difficult to access historical data,
