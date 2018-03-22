@@ -11,8 +11,6 @@ import datetime
 
 try:
     import src
-    import pyquickhelper as skip_
-    import pymyinstall as skip__
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -22,6 +20,11 @@ except ImportError:
                 "..")))
     if path not in sys.path:
         sys.path.append(path)
+    import src
+
+try:
+    import pyquickhelper as skip_
+except ImportError:
     path = os.path.normpath(
         os.path.abspath(
             os.path.join(
@@ -33,20 +36,7 @@ except ImportError:
                 "src")))
     if path not in sys.path:
         sys.path.append(path)
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..",
-                "..",
-                "pymyinstall",
-                "src")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
     import pyquickhelper as skip_
-    import pymyinstall as skip__
 
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
@@ -90,11 +80,6 @@ class TestDataVelibOffline (unittest.TestCase):
         if "travis" in sys.executable:
             return
 
-        from pymyinstall.installhelper.install_cmd_helper import is_conda_distribution
-        if is_conda_distribution():
-            # not tested on anaconda
-            return
-
         df = DataVelibCollect.to_df(data)
         anim = DataVelibCollect.animation(df)
         self.assertTrue(anim is not True)
@@ -109,11 +94,6 @@ class TestDataVelibOffline (unittest.TestCase):
         data = os.path.join(fold, "data")
 
         if "travis" in sys.executable:
-            return
-
-        from pymyinstall.installhelper.install_cmd_helper import is_conda_distribution
-        if is_conda_distribution():
-            # not tested on anaconda
             return
 
         from imageio.plugins.ffmpeg import download

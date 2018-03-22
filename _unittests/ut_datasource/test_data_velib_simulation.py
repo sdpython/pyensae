@@ -10,8 +10,6 @@ import unittest
 
 try:
     import src
-    import pyquickhelper as skip_
-    import pymyinstall as skip__
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -21,6 +19,11 @@ except ImportError:
                 "..")))
     if path not in sys.path:
         sys.path.append(path)
+    import src
+
+try:
+    import pyquickhelper as skip_
+except ImportError:
     path = os.path.normpath(
         os.path.abspath(
             os.path.join(
@@ -32,20 +35,7 @@ except ImportError:
                 "src")))
     if path not in sys.path:
         sys.path.append(path)
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..",
-                "..",
-                "pymyinstall",
-                "src")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
     import pyquickhelper as skip_
-    import pymyinstall as skip__
 
 from pyquickhelper.loghelper import fLOG
 from src.pyensae.datasource.data_velib import DataVelibCollect
