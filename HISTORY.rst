@@ -3,29 +3,37 @@
 History
 =======
 
-1.2.9999 (2018-12-31)
-=====================
+current - 2018-03-31 - 0.00Mb
+=============================
 
-**Features**
+1.2.731 - 2018-03-22 - 0.50Mb
+=============================
+
+1.2.729 - 2018-03-16 - 0.50Mb
+=============================
+
+* `18`: fix urls to download data (google, yahoo) (2018-03-16)
+
+1.2.722 - 2018-03-11 - 0.50Mb
+=============================
+
+* `17`: update candle plot for finance (matplotlib.finance was removed in 2.2.0) (2018-03-10)
+
+1.2.717 - 2018-02-20 - 0.50Mb
+=============================
+
+1.2.710 - 2017-12-18 - 0.50Mb
+=============================
 
 * `16`: split *pyensae* into *pyenbc* for remote access to clusters
-  and the rest
-* `17`: replace matplotlib.finance by mpl_finance (needed since matplotlib 2.2.0)
+  and the rest (2017-11-29)
 
-**Bug**
+1.1.689 - 2017-11-21 - 0.53Mb
+=============================
 
-* `18`: fix urls to download data (google, yahoo)
-
-1.1.689 (2017-11-28)
-====================
-
-**Bug**
-
-* `15`: StockPrices: start and end date are not taking into account with the default data provider
-
-**Features**
-
-* `9`: switch from Yahoo Finance to Google as the default provider
-  for financial data
-* `11`: create graph image with blockdiag
-* `13`: add a class *TableFormula* as an example to extend pandas dataframe
+* `15`: StockPrices: start and end date are not taking into account with the default data provider (2017-09-17)
+* `14`: StockPrices: switch to google as default data provider (2017-09-17)
+* `13`: add a class TableFormula as an example to extend pandas dataframe (2017-09-03)
+* `11`: create graph image with blockdiag (2017-08-18)
+* `10`: fix download_data (2017-08-12)
+* `9`: Finance (2017-08-05)

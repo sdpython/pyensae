@@ -10,31 +10,25 @@ from .database_join_group import DatabaseJoinGroup
 from pyquickhelper.loghelper import fLOG
 
 
-class Database (
-        DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoinGroup):
-
+class Database(DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoinGroup):
     """
     This class allows the user to load table from text files and store them into a
     SQL file which can be empty or not,
-    it is using SQLite3 module.
-
-    Under Windows, you can use SQLiteSpy to have a graphical overview of the database.
-    http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index
-
-    .. versionchanged:: 1.1
-        Parameter *dbfile* can be of type `sqlite3.Connection <https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection>`_.
+    it is using :epkg:`SQLite3` module.
+    Under Windows, you can use
+    `SQLiteSpy <http://www.yunqa.de/delphi/doku.php/products/sqlitespy/index>`_
+    to have a graphical overview of the database.
+    Parameter *dbfile* can be of type
+    `sqlite3.Connection <https://docs.python.org/3/library/sqlite3.html#sqlite3.Connection>`_.
     """
 
     def __init__(self, dbfile, engine="SQLite", user=None, password=None,
-                 host="localhost", LOG=print, attach=None):
+                 host="localhost", LOG=fLOG, attach=None):
         """
-        constructor
 
         @param      dbfile          database file (use ``:memory:`` to avoid creating a file and using only memory)
                                     it can also contain several files separated by ;
-                                        @code
-                                        name_file ; nickname,second_file ; ...
-                                        @endcode
+                                    ``name_file ; nickname,second_file ; ...``
         @param      engine          SQLite or MySQL (if it is installed)
         @param      user            user if needed
         @param      password        password if needed
@@ -51,7 +45,7 @@ class Database (
     @staticmethod
     def schema_database(df, add_id=True):
         """
-        returns the schema for a database which would contains this database
+        Returns the schema for a database which would contains this database.
 
         @param      df          pandas DataFrame
         @param      add_id      if True, adds an index "PRIMARYKEY"
@@ -74,18 +68,19 @@ class Database (
         return schema
 
     @staticmethod
-    def fill_sql_table(df, filename_or_database, tablename, add_id="idr"):
+    def fill_sql_table(df, filename_or_database, tablename, add_id="idr", **kwargs):
         """
-        returns a Database object, creates the database if it does not exists,
-        same for the table
+        Returns a Database object, creates the database if it does not exists,
+        same for the table.
 
         @param      df                      pandas DataFrame
         @param      filename_or_database    filename or Database object,
                                                 in that second case, we assume method connect was called before
         @param      tablename               table name
-        @param      add_id                  if != None, then the function adds an id, it first takes the
-                                            max(id) and goes on incrementing it;
-        @return                             Database object (new or the one from the parameters),
+        @param      add_id                  if != None then the function adds an id, it first takes the
+                                            ``max(id)`` and goes on incrementing it
+        @param      kwargs                  sent to @see cl Database
+        @return                             ``Database`` object (new or the one from the parameters),
                                             in both case, the database is not disconnected
 
         .. exref::
@@ -117,7 +112,7 @@ class Database (
         schema = Database.schema_database(df, add_id)
 
         if isinstance(filename_or_database, str):
-            db = Database(filename_or_database, LOG=fLOG)
+            db = Database(filename_or_database, **kwargs)
             db.connect()
 
             if tablename not in db.get_table_list():
@@ -137,7 +132,7 @@ class Database (
 
     def import_dataframe(self, df, tablename, add_id="idr"):
         """
-        imports a DataFrame into a table
+        Imports a DataFrame into a table.
 
         @param      df              pandas DataFrame
         @param      tablename       table name
@@ -148,7 +143,7 @@ class Database (
 
     def to_df(self, request):
         """
-        converts a SQL request into a DataFrame
+        Converts a SQL request into a :epkg:`pandas:Dataframe`.
 
         @param      request     SQL request
         @return                 DataFrame
@@ -160,7 +155,7 @@ class Database (
 
     def copy_to(self, db, subset=None):
         """
-        copy all tables into db, we assume both database are not connected
+        Copies all tables into db, we assume both database are not connected.
 
         @param      db      another database (possibly empty)
         @param      subset  list of tables to copy or None for all

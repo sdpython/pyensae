@@ -13,7 +13,7 @@ pyensae documentation
     :target: https://circleci.com/gh/sdpython/pyensae/tree/master
 
 .. image:: https://badge.fury.io/py/pyensae.svg
-    :target: http://badge.fury.io/py/pyensae
+    :target: https://pypi.org/project/pyensae/
 
 .. image:: http://img.shields.io/github/issues/sdpython/pyensae.png
     :alt: GitHub Issues

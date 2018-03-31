@@ -15,7 +15,7 @@ from pyquickhelper.loghelper import noLOG
 
 def decompress_zip(filename, whereTo=".", fLOG=noLOG):
     """
-    unzip a zip file
+    Unzips a zip file.
 
     @param      filename        file to process
     @param      whereTo         location of the result
@@ -47,12 +47,13 @@ def decompress_zip(filename, whereTo=".", fLOG=noLOG):
 
 
 def extractall_silent(self, path=".", members=None, *, numeric_owner=False, silent=False):
-    """Extract all members from the archive to the current working
-       directory and set owner, modification time and permissions on
-       directories afterwards. `path' specifies a different directory
-       to extract to. `members' is optional and must be a subset of the
-       list returned by getmembers(). If `numeric_owner` is True, only
-       the numbers for user/group names are used and not the names.
+    """
+    Extracts all members from the archive to the current working
+    directory and set owner, modification time and permissions on
+    directories afterwards. `path' specifies a different directory
+    to extract to. `members' is optional and must be a subset of the
+    list returned by getmembers(). If `numeric_owner` is True, only
+    the numbers for user/group names are used and not the names.
 
     Same function as `TarFile.extractall <https://github.com/python/cpython/blob/master/Lib/tarfile.py>`_
     but raises a warning if something wrong happens if silent is True.
@@ -100,16 +101,13 @@ def extractall_silent(self, path=".", members=None, *, numeric_owner=False, sile
 
 def decompress_targz(filename, whereTo=".", silent=True, fLOG=noLOG):
     """
-    Decompress a tar.gz file.
+    Decompresses a *tar.gz* file.
 
     @param      filename        file to process
     @param      folder          location of the result
     @param      silent          raise a warning instead of an error
     @param      fLOG            logging function
     @return                     return the list of decompressed files
-
-    .. versionchanged::
-        Parameter *silent* was added.
     """
     tfile = tarfile.open(filename, 'r:gz')
     files = tfile.getmembers()
@@ -120,7 +118,7 @@ def decompress_targz(filename, whereTo=".", silent=True, fLOG=noLOG):
 
 def decompress_gz(filename, whereTo=".", fLOG=noLOG):
     """
-    decompress a tar.gz file
+    Decompresses a *tar.gz* file.
 
     @param      filename        file to process
     @param      folder          location of the result
@@ -138,7 +136,7 @@ def decompress_gz(filename, whereTo=".", fLOG=noLOG):
 
 def decompress_bz2(filename, whereTo=".", fLOG=noLOG):
     """
-    decompress a bz2 file
+    Decompresses a *bz2* file.
 
     @param      filename        file to process
     @param      folder          location of the result
@@ -146,8 +144,9 @@ def decompress_bz2(filename, whereTo=".", fLOG=noLOG):
     @return                     return the list of decompressed files (only one)
     """
     if not filename.endswith(".bz2"):
-        raise NameError("the file should end with .bz2: " + filename)
-    dest = os.path.join(whereTo, filename[:-3])
+        raise NameError(
+            "the file should end with .bz2 not '{0}'".format(filename))
+    dest = os.path.join(whereTo, os.path.split(filename)[-1][:-4])
     with bz2.open(filename, 'rb') as f:
         with open(dest, "wb") as g:
             g.write(f.read())

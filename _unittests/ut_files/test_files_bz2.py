@@ -1,5 +1,5 @@
 """
-@brief      test log(time=10s)
+@brief      test log(time=12s)
 
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
@@ -9,7 +9,6 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
-import pandas
 
 
 try:
@@ -39,38 +38,22 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG
-from src.pyensae.sql.database_main import Database
+from pyquickhelper.pycode import get_temp_folder, ExtTestCase
+from src.pyensae.file_helper.decompress_helper import decompress_bz2
 
 
-class TestDatabaseDF (unittest.TestCase):
+class TestFilesBz2(ExtTestCase):
 
-    def test_import_df(self):
+    def test_bz2(self):
         fLOG(
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        dbf = os.path.join(
-            os.path.abspath(
-                os.path.split(__file__)[0]),
-            "temp_database_df.db3")
-        if os.path.exists(dbf):
-            os.remove(dbf)
-
-        values = [{"name": "A", "age": 10, "score": 34.5},
-                  {"name": "B", "age": 20, "score": -34.5}, ]
-        df = pandas.DataFrame(values)
-        db = Database.fill_sql_table(df, dbf, "newtable")
-        db.execute_view("SELECT * FROM newtable")
-        df2 = db.to_df("SELECT * FROM newtable")
-        df3 = df2[["age", "name", "score"]]
-        self.assertGreater(len(df), 0)
-        self.assertEqual(len(df3), len(df))
-        for a, b in zip(df.values, df3.values):
-            self.assertGreater(len(a), 0)
-            self.assertEqual(len(a), len(b))
-            for c, d in zip(a, b):
-                self.assertEqual(c, d)
-        db.close()
+        temp = get_temp_folder(__file__, "temp_bz2")
+        data = os.path.join(temp, "..", "data", "lines_utf8.txt.bz2")
+        res = decompress_bz2(data, temp)
+        self.assertFalse(res[0].endswith('.'))
+        self.assertExists(res[0])
 
 
 if __name__ == "__main__":

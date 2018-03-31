@@ -1,5 +1,5 @@
 """
-@brief      test log(time=12s)
+@brief      test log(time=2s)
 
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
@@ -146,7 +146,7 @@ class TestFiles (unittest.TestCase):
         fLOG("--", fp)
         res = mg.tail("{0} -n 3".format(fp))
         fLOG("*****", res)
-        assert "unittest.main" in res.data
+        self.assertIn("unittest.main", res.data)
         res = mg.tail("{0} --n 3 -e ascii".format(fp))
         res = mg.tail("{0} --n 3 -e utf8".format(fp))
         res = file_tail(fp, threshold=300, nbline=3)
@@ -162,7 +162,7 @@ class TestFiles (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
         fp = os.path.join(os.path.dirname(__file__), "data", "lines_utf8.txt")
         lines = file_tail(fp, nbline=3, threshold=20)
-        fLOG(lines)
+        self.assertTrue(lines is not None)
 
     def test_files_repo(self):
         fLOG(
@@ -198,17 +198,17 @@ class TestFiles (unittest.TestCase):
         if ":param" in res:
             raise Exception(res)
         res = mg.hhelp("-np -f rawhtml Database")
-        assert "SQL file which can be empty or not," in res
+        self.assertIn("SQL file which can be empty or not,", res)
         doc = docstring2html(Database.__init__, format="rawhtml")
-        assert "it can also contain several files separated by" in doc
+        self.assertIn("it can also contain several files separated by", doc)
         fLOG("----------")
         res = mg.hhelp("-np -f rst Database.__init__")
-        assert "it can also contain several files separated by" in res
+        self.assertIn("it can also contain several files separated by", res)
         res = mg.hhelp("Database.__init__")
-        assert res is not None
+        self.assertTrue(res is not None)
         res = mg.hhelp("-np -f text Database.__init__")
-        assert "it can also contain several files separated by" in res
-        assert "@param" in res
+        self.assertIn("it can also contain several files separated by", res)
+        self.assertIn("@param", res)
 
     def test_encoding(self):
         fLOG(

@@ -16,27 +16,25 @@ from pyquickhelper.loghelper.flog import GetPath
 from .file_text_binary import TextFile
 
 
-class TextFileColumns (TextFile):
-
+class TextFileColumns(TextFile):
     """
     This class opens a text file as if it were a binary file. It can deal with null characters.
     The file is interpreted as a TSV file or file containing columns.
     The separator is found automatically.
     The columns are assumed to be in the first line but it is not mandatory.
-
-    We walk along a file through an iterator, every line is automatically converted into a dictionary ``{ column : value }``.
+    It walks along a file through an iterator, every line is automatically converted into a dictionary ``{ column : value }``.
     If the class was able to guess what type is which column, the conversion will automatically take place.
 
-    @code
-    f = TextFileColumns (filename)
-            # filename is a file
-            # the separator is unknown --> the class automatically determines it
-            # as well as the columns and their type
-    f.open ()
-    for d in f :
-        print d        # d is a dictionary
-    f.close ()
-    @endcode
+    ::
+
+        f = TextFileColumns(filename)
+                # filename is a file
+                # the separator is unknown --> the class automatically determines it
+                # as well as the columns and their type
+        f.open()
+        for d in f:
+            print(d)       # d is a dictionary
+        f.close()
 
     @var _force_header      there is a header even if not detected
     @var _force_noheader    there is no header even if detected
@@ -55,7 +53,6 @@ class TextFileColumns (TextFile):
                  force_sep=None, nb_line_guess=100, mistake=3, encoding="utf-8",
                  strict_separator=False):
         """
-        construction
         @param      filename                    filename
         @param      errors                      see str (errors = ...)
         @param      fLOG                        LOG function, see `fLOG <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/loghelper/flog.html#pyquickhelper.loghelper.flog.fLOG>`_
@@ -131,7 +128,8 @@ class TextFileColumns (TextFile):
             self.LOG("    TextFileColumns (2): regex: ", self._regexfix)
 
     def __str__(self):
-        """return the header
+        """
+        Returns the header.
         """
         return str(self.__dict__)
 
@@ -145,8 +143,8 @@ class TextFileColumns (TextFile):
 
     def open(self):
         """
-        open the file and find out if there is a header, what are the columns, what are their type...
-        any information about which format was found is logged
+        Opens the file and find out if there is a header, what are the columns, what are their type...
+        any information about which format was found is logged.
         """
         if "_header" not in self.__dict__:
             header, columns, sep, regex = self.guess_columns(force_header=self._force_header,
@@ -187,8 +185,8 @@ class TextFileColumns (TextFile):
 
     def close(self):
         """
-        close the file and remove all information related to the format,
-        next time it is opened, the format will be checked again
+        Closes the file and remove all information related to the format,
+        next time it is opened, the format will be checked again.
         """
         TextFile.close(self)
         self._nb -= 1
@@ -200,8 +198,8 @@ class TextFileColumns (TextFile):
             del self.__dict__["_conv"]
 
     def __iter__(self):
-        """iterator
-        @return         a dictionary { column_name: value }
+        """
+        @return         a dictionary ``{ column_name: value }``
         """
         class tempo__:
 
@@ -318,7 +316,7 @@ class TextFileColumns (TextFile):
     @staticmethod
     def _store(output, l, encoding="utf-8"):
         """
-        store a list of dictionaries into a file (add a header)
+        Stores a list of dictionaries into a file (add a header).
 
         @param      output      filename
         @param      l           list of dictionary key:value
@@ -342,7 +340,9 @@ class TextFileColumns (TextFile):
         f.close()
 
     def sort(self, output, key, maxmemory=2 ** 28, folder=None, fLOG=noLOG):
-        """sort a text file, even a big one, one or several columns gives the order
+        """
+        Sorts a text file, even a big one, one or several columns gives the order.
+
         @param      output      output file result
         @param      key         lines sorted depending of these columns
         @param      maxmemory   a file is split into smaller files which contains not more than maxmemory lines
@@ -413,7 +413,9 @@ class TextFileColumns (TextFile):
     @staticmethod
     def fusion(key, files, output, force_header=False, encoding="utf-8", fLOG=noLOG):
         """
-        does a fusion between several files with the same columns (different order is allowed)
+        Does a fusion between several files
+        with the same columns (different order is allowed).
+
         @param      key             columns to be compared
         @param      files           list of files
         @param      output          output file

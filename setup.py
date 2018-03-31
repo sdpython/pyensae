@@ -41,28 +41,6 @@ package_data = {project_var_name + ".subproject": ["*.tohelp"],
 ############
 
 
-def is_local():
-    file = os.path.abspath(__file__).replace("\\", "/").lower()
-    if "/temp/" in file and "pip-" in file:
-        return False
-    for cname in {"bdist_msi", "build27", "build_script", "build_sphinx", "build_ext",
-                  "bdist_wheel", "bdist_egg", "bdist_wininst", "clean_pyd", "clean_space",
-                  "copy27", "copy_dist", "local_pypi", "notebook", "publish", "publish_doc",
-                  "register", "unittests", "unittests_LONG", "unittests_SKIP", "unittests_GUI",
-                  "run27", "sdist", "setupdep", "test_local_pypi", "upload_docs", "setup_hook",
-                  "copy_sphinx", "write_version", "lab"}:
-        if cname in sys.argv:
-            try:
-                import_pyquickhelper()
-            except ImportError:
-                return False
-            return True
-    else:
-        return False
-
-    return False
-
-
 def ask_help():
     return "--help" in sys.argv or "--help-commands" in sys.argv
 
@@ -88,6 +66,15 @@ def import_pyquickhelper():
                 os.getcwd())
             raise ImportError(message) from e
     return pyquickhelper
+
+
+def is_local():
+    file = os.path.abspath(__file__).replace("\\", "/").lower()
+    if "/temp/" in file and "pip-" in file:
+        return False
+    import_pyquickhelper()
+    from pyquickhelper.pycode.setup_helper import available_commands_list
+    return available_commands_list(sys.argv)
 
 
 def verbose():
@@ -168,6 +155,7 @@ if is_local():
         additional_notebook_path=["pyquickhelper", "jyquickhelper"],
         coverage_options=dict(
             omit=["*Parser.py", "*Listener.py", "*Lexer.py"]),
+        github_owner='sdpython',
         fLOG=logging_function, covtoken=("f929c9b3-bf00-4928-906a-b1dc54d5a5d9", "'_UT_36_std' in outfile"))
     if not r and "update_grammars" in sys.argv:
         # expecting python setup.py update_grammars file
