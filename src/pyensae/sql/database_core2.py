@@ -466,7 +466,7 @@ class DatabaseCore2:
                             skip_exception=False):
         """
         Builds an ``INSERT SQL`` request from a dictionary.
-        
+
         @param      dico            dictionary
         @param      table           table name
         @param      exe             if True, execute the request, if False, do nothing except returning the request
@@ -496,14 +496,17 @@ class DatabaseCore2:
                     self._connection.execute(sql)
             except SQLite.OperationalError as e:
                 if skip_exception:
-                    self.LOG("OperationalError: unable to execute a query", e, sql)
+                    self.LOG(
+                        "OperationalError: unable to execute a query", e, sql)
                 else:
-                    raise ExceptionSQL("OperationalError: unable to execute a query", e, sql)
+                    raise ExceptionSQL(
+                        "OperationalError: unable to execute a query", e, sql)
             except SQLite.IntegrityError as e:
                 if skip_exception:
                     self.LOG("IntegrityError: unable to execute a query", e, sql)
                 else:
-                    raise ExceptionSQL("IntegrityError: unable to execute a query", e, sql)
+                    raise ExceptionSQL(
+                        "IntegrityError: unable to execute a query", e, sql)
         return sql
 
     def get_python_code(self, varname="db"):

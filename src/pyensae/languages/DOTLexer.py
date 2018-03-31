@@ -124,7 +124,7 @@ class DOTLexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
-    decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
+    decisionsToDFA = [DFA(ds, i) for i, ds in enumerate(atn.decisionToState)]
 
     T__0 = 1
     T__1 = 2
@@ -154,55 +154,51 @@ class DOTLexer(Lexer):
     PREPROC = 26
     WS = 27
 
-    channelNames = [ u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN" ]
+    channelNames = [u"DEFAULT_TOKEN_CHANNEL", u"HIDDEN"]
 
-    modeNames = [ "DEFAULT_MODE" ]
+    modeNames = ["DEFAULT_MODE"]
 
-    literalNames = [ "<INVALID>",
-            "'{'", "'}'", "';'", "'='", "'['", "']'", "','", "'->'", "'--'", 
-            "':'", "'_'" ]
+    literalNames = ["<INVALID>",
+                    "'{'", "'}'", "';'", "'='", "'['", "']'", "','", "'->'", "'--'",
+                    "':'", "'_'"]
 
-    symbolicNames = [ "<INVALID>",
-            "STRICT", "GRAPH", "DIGRAPH", "NODE", "EDGE", "SUBGRAPH", "NUMBER", 
-            "STRING", "HTML_STRING", "TAG", "EntityRef", "ID", "COMMENT", 
-            "LINE_COMMENT", "PREPROC", "WS" ]
+    symbolicNames = ["<INVALID>",
+                     "STRICT", "GRAPH", "DIGRAPH", "NODE", "EDGE", "SUBGRAPH", "NUMBER",
+                     "STRING", "HTML_STRING", "TAG", "EntityRef", "ID", "COMMENT",
+                     "LINE_COMMENT", "PREPROC", "WS"]
 
-    ruleNames = [ "T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6", 
-                  "T__7", "T__8", "T__9", "T__10", "STRICT", "GRAPH", "DIGRAPH", 
-                  "NODE", "EDGE", "SUBGRAPH", "NUMBER", "DIGIT", "STRING", 
-                  "HTML_STRING", "TAG", "EntityRef", "ID", "LETTER", "COMMENT", 
-                  "LINE_COMMENT", "PREPROC", "WS" ]
+    ruleNames = ["T__0", "T__1", "T__2", "T__3", "T__4", "T__5", "T__6",
+                 "T__7", "T__8", "T__9", "T__10", "STRICT", "GRAPH", "DIGRAPH",
+                 "NODE", "EDGE", "SUBGRAPH", "NUMBER", "DIGIT", "STRING",
+                 "HTML_STRING", "TAG", "EntityRef", "ID", "LETTER", "COMMENT",
+                 "LINE_COMMENT", "PREPROC", "WS"]
 
     grammarFileName = "DOT.g4"
 
-    def __init__(self, input=None, output:TextIO = sys.stdout):
+    def __init__(self, input=None, output: TextIO = sys.stdout):
         super().__init__(input, output)
         self.checkVersion("4.7")
-        self._interp = LexerATNSimulator(self, self.atn, self.decisionsToDFA, PredictionContextCache())
+        self._interp = LexerATNSimulator(
+            self, self.atn, self.decisionsToDFA, PredictionContextCache())
         self._actions = None
         self._predicates = None
 
+    def action(self, localctx: RuleContext, ruleIndex: int, actionIndex: int):
+        if self._actions is None:
+            actions = dict()
+            actions[25] = self.COMMENT_action
+            actions[26] = self.LINE_COMMENT_action
+            self._actions = actions
+        action = self._actions.get(ruleIndex, None)
+        if action is not None:
+            action(localctx, actionIndex)
+        else:
+            raise Exception("No registered action for:" + str(ruleIndex))
 
-    def action(self, localctx:RuleContext, ruleIndex:int, actionIndex:int):
-    	if self._actions is None:
-    		actions = dict()
-    		actions[25] = self.COMMENT_action 
-    		actions[26] = self.LINE_COMMENT_action 
-    		self._actions = actions
-    	action = self._actions.get(ruleIndex, None)
-    	if action is not None:
-    		action(localctx, actionIndex)
-    	else:
-    		raise Exception("No registered action for:" + str(ruleIndex))
-
-    def COMMENT_action(self, localctx:RuleContext , actionIndex:int):
+    def COMMENT_action(self, localctx: RuleContext, actionIndex: int):
         if actionIndex == 0:
-            skip();
-     
+            skip()
 
-    def LINE_COMMENT_action(self, localctx:RuleContext , actionIndex:int):
+    def LINE_COMMENT_action(self, localctx: RuleContext, actionIndex: int):
         if actionIndex == 1:
-            skip();
-     
-
-
+            skip()

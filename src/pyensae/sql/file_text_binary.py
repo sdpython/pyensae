@@ -28,7 +28,7 @@ class TextFile:
     @var    _encoding       encoding
 
     Example:
-    
+
     ::
 
         f = TextFile(filename)
@@ -112,9 +112,9 @@ class TextFile:
     def __iter__(self):
         """
         Iterator
-        
+
         ::
-        
+
             f = open('...', 'r')
             for line in f :
                 ...
@@ -226,7 +226,7 @@ class TextFile:
     def _interpret(self, line):
         """
         Splits a line into a list, separator ``\\t``.
-        
+
         @param      line        string
         @return                 list
         """
@@ -400,12 +400,12 @@ class TextFile:
         @param      force_sep       force the separator to be the one chosen by the user (None by default)
         @param      mistake         not more than mistake conversion in numbers are allowed
         @return                     4-tuple, see below
-        
+
         Returned result is a 4 t-uple:
-        
-        - True or False: presence of a header (it means 
+
+        - True or False: presence of a header (it means
           there is at least one numerical column)
-        - column definition ``{ position : (name, type) }`` or 
+        - column definition ``{ position : (name, type) }`` or
           ``{ position : (name, (str, max_length*2)) }``
         - separator
         - regex which allow the user to extract information from the file

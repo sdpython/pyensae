@@ -133,7 +133,7 @@ class DatabaseImportExport:
     def append_values(self, values, tablename, schema, cursor=None,
                       skip_exception=False, encoding="utf-8"):
         """
-        Uses @see me _append_table to fill a table will the 
+        Uses @see me _append_table to fill a table will the
         values contained in values (as list).
 
         @param      values          list of list (each cell is a value)
@@ -259,7 +259,8 @@ class DatabaseImportExport:
                     v[0] for k, v in columns.items()])
 
             if strict_separator or column_has_space:
-                file = TextFile(file, errors='ignore', fLOG=self.LOG, encoding=encoding)
+                file = TextFile(file, errors='ignore',
+                                fLOG=self.LOG, encoding=encoding)
                 skip = False
             else:
                 self.LOG("   changes", changes)
@@ -300,7 +301,8 @@ class DatabaseImportExport:
                         unique_key[dic[unique]] = 0
 
                 if dic is not None:
-                    self._get_insert_request(dic, table, True, primarykey, cursor=cursor)
+                    self._get_insert_request(
+                        dic, table, True, primarykey, cursor=cursor)
                     nbinsert += 1
                     all += 1
                     if all % every == 0:
@@ -350,12 +352,12 @@ class DatabaseImportExport:
         ``preprocessing_function`` is a function whose prototype is for example:
 
         ::
-        
+
             def preprocessing_score (s) :
                 return s.replace (",",".")
 
         And:
-        
+
         - if ``PRIMARYKEY`` is added, the key is considered as the primary key
         - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)
 
@@ -380,11 +382,12 @@ class DatabaseImportExport:
             if len(columns_) != len(columns):
                 raise DBException(
                     "different number of columns:\ncolumns={0}\nguessed={1}".format(
-                    str(columns), str(columns_)))
+                        str(columns), str(columns_)))
             columns = columns_
 
         if add_key is not None:
-            columns[len(columns)] = (add_key, int, "PRIMARYKEY", "AUTOINCREMENT")
+            columns[len(columns)] = (
+                add_key, int, "PRIMARYKEY", "AUTOINCREMENT")
 
         for i in columns:
             v = columns[i]
