@@ -16,7 +16,7 @@ from .database_exception import DBException
 class DatabaseImportExport:
 
     """
-    This class is not neant to be working alone.
+    This class is not meant to be working alone.
     It contains import, export function for a database, in various formats.
     """
 
@@ -24,14 +24,10 @@ class DatabaseImportExport:
     # exporting functions
     ##########################################################################
 
-    def export_table_into_flat_file(self, table,
-                                    filename,
-                                    header=False,
-                                    columns=None,
-                                    post_process=None,
-                                    encoding="utf8"):
+    def export_table_into_flat_file(self, table, filename, header=False, columns=None,
+                                    post_process=None, encoding="utf8"):
         """
-        export a table into a flat file
+        Exports a table into a flat file.
 
         @param      table           table name
         @param      filename        filename
@@ -67,6 +63,8 @@ class DatabaseImportExport:
 
     def _clean_string(self, s):
         """
+        Cleans string.
+
         @param      s       string
         @return             remove \\r\\t\\n
         """
@@ -77,12 +75,11 @@ class DatabaseImportExport:
             s = s.replace(k, v)
         return s
 
-    def export_view_into_flat_file(self, view_sql,
-                                   filename,
-                                   header=False,
-                                   post_process=None,
+    def export_view_into_flat_file(self, view_sql, filename, header=False, post_process=None,
                                    encoding="utf8"):
-        """export a table into a flat file
+        """
+        Exports a table into a flat file.
+
         @param      view_sql        SQL request
         @param      filename        filename
         @param      header          if != None, add a header on the first line (header is a list of string)
@@ -133,10 +130,11 @@ class DatabaseImportExport:
     # importing functions
     ##########################################################################
 
-    def append_values(
-            self, values, tablename, schema, cursor=None, skip_exception=False, encoding="utf-8"):
+    def append_values(self, values, tablename, schema, cursor=None,
+                      skip_exception=False, encoding="utf-8"):
         """
-        use @see me _append_table to fill a table will the values contained in values (as list)
+        Uses @see me _append_table to fill a table will the 
+        values contained in values (as list).
 
         @param      values          list of list (each cell is a value)
         @param      tablename       name of the table to fill
@@ -156,24 +154,13 @@ class DatabaseImportExport:
             skip_exception=skip_exception,
             encoding=encoding)
 
-    def _append_table(self, file,
-                      table,
-                      columns,
-                      format="tsv",
-                      header=False,
-                      stop=-1,
-                      lower_case=False,
-                      cursor=None,
-                      fill_missing=0,
-                      unique=None,
-                      filter_case=None,
-                      strict_separator=False,
-                      skip_exception=False,
-                      changes=None,
-                      encoding="utf-8",
+    def _append_table(self, file, table, columns, format="tsv", header=False,
+                      stop=-1, lower_case=False, cursor=None, fill_missing=0,
+                      unique=None, filter_case=None, strict_separator=False,
+                      skip_exception=False, changes=None, encoding="utf-8",
                       **params):
         """
-        append element to a database
+        Appends element to a database.
 
         @param      file                file name or a matrix (this matrix can be an iterator)
         @param      table               table name
@@ -232,12 +219,8 @@ class DatabaseImportExport:
             for line in file:
                 if stop != -1 and all >= stop:
                     break
-                dic = self._process_text_line(line,
-                                              columns,
-                                              format=format,
-                                              lower_case=lower_case,
-                                              num_line=num_line,
-                                              filter_case=filter_case,
+                dic = self._process_text_line(line, columns, format=format, lower_case=lower_case,
+                                              num_line=num_line, filter_case=filter_case,
                                               strict_separator=strict_separator)
 
                 if unique is not None:
@@ -248,11 +231,7 @@ class DatabaseImportExport:
 
                 num_line += 1
                 if dic is not None:
-                    self._get_insert_request(dic,
-                                             table,
-                                             True,
-                                             primarykey,
-                                             cursor=cursor,
+                    self._get_insert_request(dic, table, True, primarykey, cursor=cursor,
                                              skip_exception=skip_exception)
                     nbinsert += 1
                     #self._connection.execute (s)
@@ -280,11 +259,7 @@ class DatabaseImportExport:
                     v[0] for k, v in columns.items()])
 
             if strict_separator or column_has_space:
-                file = TextFile(
-                    file,
-                    errors='ignore',
-                    fLOG=self.LOG,
-                    encoding=encoding)
+                file = TextFile(file, errors='ignore', fLOG=self.LOG, encoding=encoding)
                 skip = False
             else:
                 self.LOG("   changes", changes)
@@ -310,14 +285,9 @@ class DatabaseImportExport:
                     if len(line.strip("\r\n")) == 0:
                         continue
                     if tsv:
-                        dic = self._process_text_line(line,
-                                                      columns,
-                                                      format,
-                                                      lower_case=lower_case,
-                                                      num_line=num_line - 1,
-                                                      fill_missing=fill_missing,
-                                                      filter_case=filter_case,
-                                                      strict_separator=strict_separator)
+                        dic = self._process_text_line(line, columns, format, lower_case=lower_case,
+                                                      num_line=num_line - 1, fill_missing=fill_missing,
+                                                      filter_case=filter_case, strict_separator=strict_separator)
                     else:
                         dic = format(line, **params)
                         if dic is None:
@@ -330,12 +300,7 @@ class DatabaseImportExport:
                         unique_key[dic[unique]] = 0
 
                 if dic is not None:
-                    self._get_insert_request(
-                        dic,
-                        table,
-                        True,
-                        primarykey,
-                        cursor=cursor)
+                    self._get_insert_request(dic, table, True, primarykey, cursor=cursor)
                     nbinsert += 1
                     all += 1
                     if all % every == 0:
@@ -349,26 +314,13 @@ class DatabaseImportExport:
         self.commit()
         return nbinsert
 
-    def import_table_from_flat_file(self,
-                                    file,
-                                    table,
-                                    columns,
-                                    format="tsv",
-                                    header=False,
-                                    display=False,
-                                    lower_case=False,
-                                    table_exists=False,
-                                    temporary=False,
-                                    fill_missing=False,
-                                    indexes=[],
-                                    filter_case=None,
-                                    change_to_text=[],
-                                    strict_separator=False,
-                                    add_key=None,
-                                    encoding="utf-8",
-                                    **params):
+    def import_table_from_flat_file(self, file, table, columns, format="tsv", header=False,
+                                    display=False, lower_case=False, table_exists=False,
+                                    temporary=False, fill_missing=False, indexes=[],
+                                    filter_case=None, change_to_text=[], strict_separator=False,
+                                    add_key=None, encoding="utf-8", **params):
         """
-        add a table to database from a file
+        Adds a table to database from a file.
 
         @param      file                file name or matrix
         @param      table               table name
@@ -391,22 +343,24 @@ class DatabaseImportExport:
         @return                         the number of added rows
 
         The columns definition must follow the schema:
-            - dictionary ``{ key:(column_name,python_type) }``
-            - or ``{ key:(column_name,python_type,preprocessing_function) }``
 
+        - dictionary ``{ key: (column_name,python_type) }``
+        - or ``{ key: (column_name,python_type,preprocessing_function) }``
 
         ``preprocessing_function`` is a function whose prototype is for example:
 
-        @code
-        def preprocessing_score (s) :
-            return s.replace (",",".")
-        @endcode
+        ::
+        
+            def preprocessing_score (s) :
+                return s.replace (",",".")
 
         And:
-            - if ``PRIMARYKEY`` is added, the key is considered as the primary key
-            - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)
+        
+        - if ``PRIMARYKEY`` is added, the key is considered as the primary key
+        - if ``AUTOINCREMENT`` is added, the key will automatically filled (like an id)
 
-        @warning The function does not react well when a column name includes a space.
+        @warning The function does not react well when a column name
+                 includes a space.
         """
         if display:
             if isinstance(file, list):
@@ -426,17 +380,11 @@ class DatabaseImportExport:
             if len(columns_) != len(columns):
                 raise DBException(
                     "different number of columns:\ncolumns={0}\nguessed={1}".format(
-                        str(columns),
-                        str(columns_)))
+                    str(columns), str(columns_)))
             columns = columns_
 
         if add_key is not None:
-            columns[
-                len(columns)] = (
-                add_key,
-                int,
-                "PRIMARYKEY",
-                "AUTOINCREMENT")
+            columns[len(columns)] = (add_key, int, "PRIMARYKEY", "AUTOINCREMENT")
 
         for i in columns:
             v = columns[i]
@@ -462,19 +410,10 @@ class DatabaseImportExport:
 
         if table not in self.get_table_list():
             raise DBException("unable to find table " + table + " (2)")
-        nb = self._append_table(file,
-                                table,
-                                columns,
-                                format=format,
-                                header=header,
-                                lower_case=lower_case,
-                                cursor=cursor,
-                                fill_missing=fill_missing,
-                                filter_case=filter_case,
-                                strict_separator=strict_separator,
-                                changes=changes,
-                                encoding=encoding,
-                                **params)
+        nb = self._append_table(file, table, columns, format=format, header=header,
+                                lower_case=lower_case, cursor=cursor, fill_missing=fill_missing,
+                                filter_case=filter_case, strict_separator=strict_separator,
+                                changes=changes, encoding=encoding, **params)
 
         self.LOG(nb, " lines imported")
 

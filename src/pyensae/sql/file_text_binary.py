@@ -11,14 +11,14 @@ import math
 import time
 import decimal
 from pyquickhelper.loghelper import noLOG
-
 from .type_helpers import guess_type_value
 
 
 class TextFile:
 
     """
-    This class opens a text file as if it were a binary file. It can deal with null characters which are missed by open function.
+    This class opens a text file as if it were a binary file.
+    It can deal with null characters which are missed by open function.
 
     @var    filename        file name
     @var    errors          decoding in utf8 can raise some errors, see `str <https://docs.python.org/3.4/library/stdtypes.html?highlight=str#str>`_ to understand the meaning of this parameter
@@ -28,13 +28,14 @@ class TextFile:
     @var    _encoding       encoding
 
     Example:
-    @code
-    f = TextFile(filename)
-    f.open ()
-    for line in f :
-        print line
-    f.close ()
-    @endcode
+    
+    ::
+
+        f = TextFile(filename)
+        f.open ()
+        for line in f :
+            print line
+        f.close ()
     """
 
     _split_expr = re.compile("\\r?\\t", re.U)
@@ -43,7 +44,6 @@ class TextFile:
     def __init__(self, filename, errors=None, fLOG=noLOG, buffer_size=2 ** 20,
                  filter=None, separated=False, encoding="utf-8"):
         """
-        construction
         @param      filename        filename
         @param      errors          see str (errors = ...)
         @param      fLOG            LOG function, see `fLOG <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/loghelper/flog.html#pyquickhelper.loghelper.flog.fLOG>`_
@@ -61,7 +61,8 @@ class TextFile:
         self._separated = separated
 
     def open(self):
-        """open the file in reading mode
+        """
+        Opens the file in reading mode.
         """
         self.LOG("  TextFile: opening file ", self.filename)
         if self._separated:
@@ -75,26 +76,30 @@ class TextFile:
         self._read = 0
 
     def close(self):
-        """close the file
+        """
+        Closes the file.
         """
         self._f.close()
         self.LOG("  TextFile: closing file ", self.filename)
         del self.__dict__["_f"]
 
     def get_nb_readlines(self):
-        """returns the number of read lines
+        """
+        Returns the number of read lines.
         """
         return self._nbline
 
     def get_nb_readbytes(self):
-        """returns the number of read bytes
+        """
+        Returns the number of read bytes.
         """
         return self._nbline
 
     def readlines(self):
-        """extracts all the lines,
+        """
+        Extracts all the lines,
         the file must not be opened through method open
-        \n are removed
+        ``\\n`` are removed.
         """
         self.open()
         res = []
@@ -105,13 +110,15 @@ class TextFile:
         return res
 
     def __iter__(self):
-        """iterator
-        @code
-        f.open ()
-        for line in f :
-            ...
-        f.close ()
-        @endcode
+        """
+        Iterator
+        
+        ::
+        
+            f = open('...', 'r')
+            for line in f :
+                ...
+            f.close ()
 
         @return         a str string
         """
@@ -205,7 +212,9 @@ class TextFile:
         return cont, columns, this_column, file_column, prefix
 
     def _interpret_columns(self, line):
-        """interpret the first line which contains the columns name
+        """
+        Interprets the first line which contains the columns name.
+
         @param      line        string
         @return                 dictionary { name:position }"""
         col = self._interpret(line)
@@ -215,7 +224,9 @@ class TextFile:
         return res
 
     def _interpret(self, line):
-        """split a line into a list, separator ``\\t``
+        """
+        Splits a line into a list, separator ``\\t``.
+        
         @param      line        string
         @return                 list
         """
@@ -223,7 +234,8 @@ class TextFile:
         return col
 
     def join(self, definition, output, missing_value="", unique=None, **param):
-        """join several files together
+        """
+        Joins several files together.
 
         @param  definition      list of triplets:
                                     filename, this_column, file_column, prefix
@@ -357,7 +369,8 @@ class TextFile:
             return miss
 
     def _count_s(self, car):
-        """returns the number of every character in car
+        """
+        Returns the number of every character in car.
         """
         res = {}
         for i, c in enumerate(car):
@@ -368,13 +381,16 @@ class TextFile:
         return res
 
     def _get_type(self, s):
-        """guess the type of value s
+        """
+        Guesses the type of value s.
         """
         return guess_type_value(s)
 
     def guess_columns(self, nb=100, force_header=False, changes=None, force_noheader=False,
                       fields=None, regex=None, force_sep=None, mistake=3):
-        """guess the columns type
+        """
+        Guesses the columns type.
+
         @param      nb              number of lines to have a look to in order to find all the necessary elements
         @param      force_header    impose a header whether it is detect or not
         @param      changes         modify some column names, example { "query":"query___" }
@@ -383,11 +399,16 @@ class TextFile:
         @param      regex           if the default expression for a field is not the expected one, change by looking into regex
         @param      force_sep       force the separator to be the one chosen by the user (None by default)
         @param      mistake         not more than mistake conversion in numbers are allowed
-        @return                     4-tuple
-                                        - True or False: presence of a header (it means there is at least one numerical column)
-                                        - column definition { position : (name, type) } or { position : (name, (str, max_length*2)) }
-                                        - separator
-                                        - regex which allow the user to extract information from the file
+        @return                     4-tuple, see below
+        
+        Returned result is a 4 t-uple:
+        
+        - True or False: presence of a header (it means 
+          there is at least one numerical column)
+        - column definition ``{ position : (name, type) }`` or 
+          ``{ position : (name, (str, max_length*2)) }``
+        - separator
+        - regex which allow the user to extract information from the file
 
         The column separator is looked into ``, | ; \\t``
         @warning The file must not be opened, it will be several times.
@@ -476,15 +497,8 @@ class TextFile:
                     bestnb = h[bestsep, k]
                     bestcol = k + 1
 
-        self.LOG(
-            "  TextFile.guess_columns: sep ",
-            repr(bestsep),
-            "nb cols",
-            bestcol,
-            " bestnb ",
-            bestnb,
-            " more ",
-            h)
+        self.LOG("  TextFile.guess_columns: sep ", repr(bestsep), "nb cols", bestcol, " bestnb ",
+                 bestnb, " more ", h)
 
         # determine the type of every column
 
@@ -619,7 +633,7 @@ class TextFile:
 
     def count_rejected_lines(self, header, exp, output=None):
         """
-        count the number of rejected lines by regular expression exp
+        Counts the number of rejected lines by regular expression exp.
 
         @param      header          header or not in the first line
         @param      exp             regular expression
@@ -663,7 +677,7 @@ class TextFile:
     def _build_regex(self, sep, columns, exp=_build_regex_default_value_types,
                      nomore=False, regex=None):
         """
-        Build a regular expression.
+        Builds a regular expression.
 
         @param          sep             separator
         @param          columns         columns definition

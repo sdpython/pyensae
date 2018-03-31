@@ -136,9 +136,11 @@ class TestDatabaseMissing(ExtTestCase):
 
     def test_guess(self):
         self.assertEqual(guess_type_value(5), int)
+        self.assertEqual(guess_type_value('5'), int)
         self.assertEqual(guess_type_value(5.5), float)
-        self.assertEqual(guess_type_value(None), str)
-        self.assertEqual(guess_type_value(None, True), None)
+        self.assertEqual(guess_type_value('5.5'), float)
+        self.assertEqual(guess_type_value(None), None)
+        self.assertEqual(guess_type_value(None, None), None)
         self.assertEqual(guess_type_value_type(), [None, str, int, float])
         self.assertEqual(get_default_value_type(int), 0)
         self.assertEqual(get_default_value_type(float), 0.)

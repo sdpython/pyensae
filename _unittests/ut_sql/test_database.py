@@ -38,11 +38,12 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import ExtTestCase
 from src.pyensae.sql.database_helper import import_flatfile_into_database
 from src.pyensae.sql.database_main import Database
 
 
-class TestDatabase (unittest.TestCase):
+class TestDatabase(ExtTestCase):
 
     def test_import_flatflit(self):
         fLOG(
@@ -61,12 +62,12 @@ class TestDatabase (unittest.TestCase):
         if os.path.exists(dbf):
             os.remove(dbf)
         import_flatfile_into_database(dbf, file, fLOG=fLOG)
-        assert os.path.exists(dbf)
+        self.assertExists(dbf)
         db = Database(dbf, LOG=fLOG)
         db.connect()
         view = db.execute_view("SELECT * FROM ACAPA")
-        assert len(view) > 0
-        assert len(view[0]) == 7
+        self.assertGreater(len(view), 0)
+        self.assertEqual(len(view[0]), 7)
 
 
 if __name__ == "__main__":

@@ -35,7 +35,7 @@ class DatabaseCore2:
 
     def _check_connection(self):
         """
-        Check the SQL connection.
+        Checks the SQL connection.
         """
         if "_connection" not in self.__dict__:
             message = "use connect method before doing operation on this database"
@@ -63,7 +63,7 @@ class DatabaseCore2:
 
     def summary(self, light=False):
         """
-        Return the list of tables, their columns, and their length.
+        Returns the list of tables, their columns, and their length.
 
         @param      light   light version, no count, no first lines
         @return             a dictionary where the keys are (t,i), t is a table name, i is in ["columns", "size", "first_lines"],
@@ -135,7 +135,7 @@ class DatabaseCore2:
     def _guess_columns(
             self, file, format, columns_name=None, filter_case=None, header=True, encoding="utf-8"):
         """
-        Guess the columns types from a file (the method assumes there is a header),
+        Guesses the columns types from a file (the method assumes there is a header),
         The types are chosen in that order: int, float, str.
         It keeps the most frequent one with if there is not too many errors.
         The separator must be tabs (``\\t``).
@@ -345,7 +345,7 @@ class DatabaseCore2:
                            fill_missing=0, filter_case=None,
                            strict_separator=False):
         """
-        Process a text line.
+        Processes a text line.
 
         @param      line                text line to process (or a list if it already splitted)
         @param      columns             columns definition @see me _append_table
@@ -464,7 +464,9 @@ class DatabaseCore2:
                             primarykey=None,
                             cursor=None,
                             skip_exception=False):
-        """build an INSERT SQL request from a dictionary
+        """
+        Builds an ``INSERT SQL`` request from a dictionary.
+        
         @param      dico            dictionary
         @param      table           table name
         @param      exe             if True, execute the request, if False, do nothing except returning the request
@@ -494,30 +496,20 @@ class DatabaseCore2:
                     self._connection.execute(sql)
             except SQLite.OperationalError as e:
                 if skip_exception:
-                    self.LOG(
-                        "OperationalError: unable to execute a query",
-                        e,
-                        sql)
+                    self.LOG("OperationalError: unable to execute a query", e, sql)
                 else:
-                    raise ExceptionSQL(
-                        "OperationalError: unable to execute a query",
-                        e,
-                        sql)
+                    raise ExceptionSQL("OperationalError: unable to execute a query", e, sql)
             except SQLite.IntegrityError as e:
                 if skip_exception:
-                    self.LOG(
-                        "IntegrityError: unable to execute a query",
-                        e,
-                        sql)
+                    self.LOG("IntegrityError: unable to execute a query", e, sql)
                 else:
-                    raise ExceptionSQL(
-                        "IntegrityError: unable to execute a query",
-                        e,
-                        sql)
+                    raise ExceptionSQL("IntegrityError: unable to execute a query", e, sql)
         return sql
 
     def get_python_code(self, varname="db"):
-        """return the python code associated to this database
+        """
+        Returns the python code associated to this database.
+
         @param      varname     name of the variable
         @return                 2-uple: simp, scode (import part, code part)
         """

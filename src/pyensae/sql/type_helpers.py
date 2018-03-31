@@ -14,29 +14,33 @@ def guess_type_value(x, none=None):
     @param      none        if True and all values are empty, return None
     @return                 type
 
-    @warning if an integer starts with a zero, then it is a string
+    @warning if an integer starts with a zero, then it is a string.
     """
-    if isinstance(x, int):
-        return int
-    elif isinstance(x, float):
-        try:
-            int(x)
-            return int if int(x) == x else float
-        except Exception:
-            return float
-    else:
-        if none:
-            if x is None:
-                return None
-            try:
-                if len(x) > 0:
-                    return str
-                else:
-                    return None
-            except Exception:
-                return None
-        else:
+    if x is None:
+        return none
+    try:
+        int(x)
+        if isinstance(x, str) and x[0] == '0' and len(x) > 1:
             return str
+        else:
+            return int if isinstance(x, int) or len(x) < 9 else str
+    except (ValueError, TypeError):
+        try:
+            x = float(x)
+            return float
+        except ValueError:
+            if none:
+                if x is None:
+                    return None
+                try:
+                    if len(x) > 0:
+                        return str
+                    else:
+                        return None
+                except Exception:
+                    return None
+            else:
+                return str
 
 
 def guess_type_value_type(none=True):
