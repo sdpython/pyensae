@@ -21,9 +21,9 @@ def replace_comma_by_point(file):
         f.write(text)
 
 
-def file_head(filename: str, nbline=10, encoding="utf8", errors: str=None):
+def file_head(filename: str, nbline=10, encoding="utf8", errors=None):
     """
-    Extracts the first nbline of a file (assuming it is text file).
+    Extracts the first *nbline* of a file (assuming it is text file).
 
     @param      filename        filename
     @param      nbline          number of lines
@@ -47,7 +47,7 @@ def file_head(filename: str, nbline=10, encoding="utf8", errors: str=None):
         return rows
 
 
-def file_tail(filename: str, nbline=10, encoding="utf8", threshold=2 ** 14, errors: str=None):
+def file_tail(filename: str, nbline=10, encoding="utf8", threshold=2 ** 14, errors=None):
     """
     Extracts the first nbline of a file (assuming it is text file).
 

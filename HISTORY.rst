@@ -3,13 +3,10 @@
 History
 =======
 
-current - 2018-03-31 - 0.00Mb
+current - 2018-04-14 - 0.00Mb
 =============================
 
 1.2.731 - 2018-03-22 - 0.50Mb
-=============================
-
-1.2.729 - 2018-03-16 - 0.50Mb
 =============================
 
 * `18`: fix urls to download data (google, yahoo) (2018-03-16)
@@ -20,9 +17,6 @@ current - 2018-03-31 - 0.00Mb
 * `17`: update candle plot for finance (matplotlib.finance was removed in 2.2.0) (2018-03-10)
 
 1.2.717 - 2018-02-20 - 0.50Mb
-=============================
-
-1.2.710 - 2017-12-18 - 0.50Mb
 =============================
 
 * `16`: split *pyensae* into *pyenbc* for remote access to clusters
@@ -37,3 +31,6 @@ current - 2018-03-31 - 0.00Mb
 * `11`: create graph image with blockdiag (2017-08-18)
 * `10`: fix download_data (2017-08-12)
 * `9`: Finance (2017-08-05)
+* `5`: allow to submit a hive job on HDInsight from a notebook (2017-02-25)
+* `6`: fix appveyor build (2016-06-22)
+* `4`: use pyquickhelper magic parser to interpret python variable for azure magic commands (2016-05-14)

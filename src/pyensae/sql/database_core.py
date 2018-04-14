@@ -313,7 +313,7 @@ class DatabaseCore(DatabaseCore2):
                             "DATABASE=%s" % self._sql_file,
                             "Trusted_Connection=yes",
                             "MARS_Connection=yes",
-                            #"MultipleActiveResultSets=True",
+                            # "MultipleActiveResultSets=True",
                             #"Integrated Security=SSPI",
                             ]
                     #temp = ["DSN=%s" % self._sql_file ]

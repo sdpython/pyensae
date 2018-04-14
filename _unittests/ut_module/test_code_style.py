@@ -29,9 +29,9 @@ from pyquickhelper.pycode import check_pep8
 from pyquickhelper.pycode.utils_tests_helper import _extended_refactoring
 
 
-class TestFlake8(unittest.TestCase):
+class TestCodeStyle(unittest.TestCase):
 
-    def test_flake8_src(self):
+    def test_code_style_src(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -40,7 +40,7 @@ class TestFlake8(unittest.TestCase):
         if sys.version_info[0] == 2 or "Anaconda" in sys.executable \
                 or "condavir" in sys.executable:
             warnings.warn(
-                "skipping test_flake8 because of Python 2 or " + sys.executable)
+                "skipping test_code_style because of Python 2 or " + sys.executable)
             return
 
         thi = os.path.abspath(os.path.dirname(__file__))
@@ -48,7 +48,7 @@ class TestFlake8(unittest.TestCase):
         check_pep8(src_, fLOG=fLOG, extended=[("fLOG", _extended_refactoring)],
                    neg_filter="((.*Listener[.]py)|(.*pigjar.?pig.*[.]py)|(.*Parser[.]py)|(.*Lexer[.]py))$")
 
-    def test_flake8_test(self):
+    def test_code_style_test(self):
         fLOG(
             __file__,
             self._testMethodName,
@@ -57,7 +57,7 @@ class TestFlake8(unittest.TestCase):
         if sys.version_info[0] == 2 or "Anaconda" in sys.executable \
                 or "condavir" in sys.executable:
             warnings.warn(
-                "skipping test_flake8 because of Python 2 or " + sys.executable)
+                "skipping test_code_style because of Python 2 or " + sys.executable)
             return
 
         thi = os.path.abspath(os.path.dirname(__file__))

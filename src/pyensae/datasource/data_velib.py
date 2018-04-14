@@ -1,4 +1,4 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 """
 @file
 @brief The file contains a class which collects data coming from Velib.

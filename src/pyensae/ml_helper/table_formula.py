@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 @file
 @brief Adds functionalities to a dataframe.
@@ -180,7 +180,7 @@ class TableFormula(pandas.DataFrame):
             fig, ax = plt.subplots(1, 1, figsize=figsize)
 
         smarker = {(True, True): 'o-', (True, False): 'o', (False, True): '-',
-                   #(False, False) :''
+                   # (False, False) :''
                    }[marker, link_point]
 
         has_date = False

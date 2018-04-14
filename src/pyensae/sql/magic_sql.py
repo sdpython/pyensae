@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 @file
 @brief Defines SQL commands to play with `sqlite3 <https://docs.python.org/3/library/sqlite3.html>`_.

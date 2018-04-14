@@ -89,7 +89,7 @@ class LinkedInAccess:
                                  'location',
                                  'distance', 'num-connections', 'skills',
                                  'educations',
-                                 #'school-name',
+                                 # 'school-name',
                                  ]
 
     default_selectors_search_profile = [
@@ -97,7 +97,7 @@ class LinkedInAccess:
                     'first-name',
                     'last-name',
                     'educations',
-                    #'school-name',
+                    # 'school-name',
                     'public-profile-url',
                     'location', 'headline',
                     'last-modified-timestamp',
