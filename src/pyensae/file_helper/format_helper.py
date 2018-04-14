@@ -8,7 +8,7 @@ import datetime
 
 def format_file_size(size):
     """
-    format the file size as string
+    Formats the file size as string.
 
     @param      size        numeric value
     @return                 string (something + unit)
@@ -28,7 +28,7 @@ def format_file_size(size):
 
 def format_file_mtime(timestamp):
     """
-    return a datetime for a file
+    Returns a :epkg:`datetime` for a file.
 
     @param      timestamp       modified date for example
     @return                     datetime

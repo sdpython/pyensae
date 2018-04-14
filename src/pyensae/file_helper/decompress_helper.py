@@ -15,7 +15,7 @@ from pyquickhelper.loghelper import noLOG
 
 def decompress_zip(filename, whereTo=".", fLOG=noLOG):
     """
-    Unzips a zip file.
+    Unzips a :epkg:`zip` file.
 
     @param      filename        file to process
     @param      whereTo         location of the result
@@ -101,7 +101,7 @@ def extractall_silent(self, path=".", members=None, *, numeric_owner=False, sile
 
 def decompress_targz(filename, whereTo=".", silent=True, fLOG=noLOG):
     """
-    Decompresses a *tar.gz* file.
+    Decompresses a :epkg:`tar.gz` file.
 
     @param      filename        file to process
     @param      folder          location of the result
@@ -118,7 +118,7 @@ def decompress_targz(filename, whereTo=".", silent=True, fLOG=noLOG):
 
 def decompress_gz(filename, whereTo=".", fLOG=noLOG):
     """
-    Decompresses a *tar.gz* file.
+    Decompresses a :epkg:`tar.gz` file.
 
     @param      filename        file to process
     @param      folder          location of the result
@@ -136,7 +136,7 @@ def decompress_gz(filename, whereTo=".", fLOG=noLOG):
 
 def decompress_bz2(filename, whereTo=".", fLOG=noLOG):
     """
-    Decompresses a *bz2* file.
+    Decompresses a :epkg:`bz2` file.
 
     @param      filename        file to process
     @param      folder          location of the result
