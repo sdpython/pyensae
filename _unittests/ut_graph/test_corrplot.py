@@ -40,12 +40,12 @@ except ImportError:
     import pyquickhelper as skip_
 
 from pyquickhelper.loghelper import fLOG, CustomLog
-from pyquickhelper.pycode import get_temp_folder
+from pyquickhelper.pycode import get_temp_folder, ExtTestCase
 from src.pyensae.graph_helper import Corrplot
 from pyquickhelper.pycode import fix_tkinter_issues_virtualenv
 
 
-class TestGraph (unittest.TestCase):
+class TestGraph(ExtTestCase):
 
     def test_graph_corrplot(self):
         fLOG(
@@ -76,7 +76,8 @@ class TestGraph (unittest.TestCase):
         clog("corrplot")
         c = Corrplot(df)
         clog("plot")
-        ax = c.plot(fig=fig, ax=ax)
+        for up in ['lower', 'upper', 'method', 'both']:
+            ax = c.plot(fig=fig, ax=ax)
 
         clog("save")
         fLOG("save")
@@ -89,7 +90,7 @@ class TestGraph (unittest.TestCase):
         plt.close('all')
         clog("end")
         fLOG("end")
-        assert os.path.exists(img)
+        self.assertExists(img)
 
 
 if __name__ == "__main__":
