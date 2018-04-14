@@ -155,8 +155,8 @@ if is_local():
         additional_notebook_path=["pyquickhelper", "jyquickhelper"],
         coverage_options=dict(
             omit=["*Parser.py", "*Listener.py", "*Lexer.py"]),
-        github_owner='sdpython',
-        fLOG=logging_function, covtoken=("f929c9b3-bf00-4928-906a-b1dc54d5a5d9", "'_UT_36_std' in outfile"))
+        github_owner='sdpython', fLOG=logging_function,
+        covtoken=("f929c9b3-bf00-4928-906a-b1dc54d5a5d9", "'_UT_36_std' in outfile"))
     if not r and "update_grammars" in sys.argv:
         # expecting python setup.py update_grammars file
         ind = sys.argv.index("update_grammars")

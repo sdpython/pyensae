@@ -22,7 +22,7 @@ current - 2018-04-14 - 0.00Mb
 * `16`: split *pyensae* into *pyenbc* for remote access to clusters
   and the rest (2017-11-29)
 
-1.1.689 - 2017-11-21 - 0.53Mb
+1.1.689 - 2017-11-21 - 7.56Mb
 =============================
 
 * `15`: StockPrices: start and end date are not taking into account with the default data provider (2017-09-17)
