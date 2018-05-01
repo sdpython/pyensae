@@ -251,12 +251,10 @@ class DataVelibCollect:
 
             ::
 
-                DataVelibCollect.run_collection (private_key,
-                            contract = "Paris",
-                            delayms = 60000,
-                            single_file = False,
-                            stop_datetime = None,
-                            log_every = 1)
+                from pyensae.datasource import DataVelibCollect
+                DataVelibCollect.run_collection(private_key, contract="Paris",
+                            delayms=60000, single_file=False, stop_datetime=None,
+                            log_every=1)
         """
         if key is None:
             key = DataVelibCollect.velib_get_key()
