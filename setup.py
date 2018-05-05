@@ -217,8 +217,6 @@ if not r:
         extras_require={
             'graph_helper': ['matplotlib', 'blockdiag'],
             'datasource.convert': ['dbread'],
-            'datasource.data_velib': ['moviepy'],
-            'datasource.linkedin_access': ['python3-linkedin'],
             'finance': ['pandas-datareader'],
             'languages': ['antlr4-python3-runtime'],
             'notebook_helper.folium_helper': ['folium'],

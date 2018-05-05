@@ -14,7 +14,6 @@ pandas_datareader
 pandocfilters
 pymyinstall
 pyquickhelper>=1.7.2514
-python3-linkedin
 qgrid
 quandl
 scikit-learn
