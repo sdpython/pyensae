@@ -31,5 +31,6 @@ nblinks = {"code-r2python": blog_root + "pyensae/languages/rconverter.html"}
 
 epkg_dictionary["blockdiag"] = 'http://blockdiag.com/'
 epkg_dictionary["json"] = 'https://en.wikipedia.org/wiki/JSON'
+epkg_dictionary["manydataapi"] = 'http://www.xavierdupre.fr/app/manydataapi/helpsphinx/index.html'
 epkg_dictionary["pyenbc"] = 'http://www.xavierdupre.fr/app/pyenbc/helpsphinx/index.html'
 epkg_dictionary["SQLite3"] = 'https://www.sqlite.org/index.html'

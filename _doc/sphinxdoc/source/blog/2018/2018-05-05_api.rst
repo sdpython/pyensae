@@ -1,0 +1,10 @@
+
+.. blogpost::
+    :title: Move code to manydataapi
+    :keywords: API
+    :date: 2018-05-05
+    :categories: code
+
+    API started to be difficult to maintain and
+    unit test. The code was moved to
+    :epkg:`manydataapi` (linkedin, velib).
