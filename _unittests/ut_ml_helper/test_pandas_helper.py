@@ -68,7 +68,10 @@ class TestPandasHelper(ExtTestCase):
                 self.assertIsInstance(li[-1], float)
             except AssertionError as e:
                 raise AssertionError("Issue with {0}".format(ty)) from e
-            self.assertTrue(numpy.isnan(li[-1]))
+            try:
+                self.assertTrue(numpy.isnan(li[-1]))
+            except AssertionError as e:
+                raise AssertionError("Issue with value {0}".format(li)) from e
 
         for ty in types:
             data = [{"this": "cst", "type": "tt1=" + str(ty[0]), "value": ty[1]},
