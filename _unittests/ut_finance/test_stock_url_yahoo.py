@@ -48,13 +48,23 @@ class TestStockUrlYahoo(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_url_yahoo")
-        stock = StockPrices("^FCHI", folder=cache, url="yahoo",
-                            begin=datetime.datetime(2014, 1, 15))
-        df = stock.dataframe
-        dmin = df.Date.min()
-        self.assertIn("2014", str(dmin))
-        if "^FCHI.2014-01-15" not in stock.url_:
-            raise AssertionError(stock.url_)
+        exc = []
+        for n in range(0, 4):
+            stock = StockPrices("^FCHI", folder=cache, url="yahoo",
+                                begin=datetime.datetime(2014, 1, 15))
+            df = stock.dataframe
+            dmin, dmax = df.Date.min(), df.Date.max()
+            try:
+                self.assertIn("2014", str(dmin))
+                self.assertNotEqual(dmin, dmax)
+                if "^FCHI.2014-01-15" not in stock.url_:
+                    raise AssertionError(stock.url_)
+                return
+            except AssertionError as e:
+                exc.append(e)
+        if len(exc) > 0:
+            e = exc[0]
+            raise AssertionError('nb tries={0}'.format(len(exc))) from e
 
 
 if __name__ == "__main__":
