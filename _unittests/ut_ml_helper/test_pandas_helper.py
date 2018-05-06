@@ -43,18 +43,13 @@ except ImportError:
     import pyquickhelper as skip_
 
 
-from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import ExtTestCase
 from src.pyensae.ml_helper import pandas_groupby_nan, numpy_types
 
 
-class TestPandasHelper(unittest.TestCase):
+class TestPandasHelper(ExtTestCase):
 
     def test_pandas_groupbynan(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
         types = [(str, "e"), (int, -10), (float, -20.2),
                  (bytes, bytes("a", "ascii"))]
         skip = (numpy.bool_, numpy.complex64, numpy.complex128)
@@ -69,8 +64,8 @@ class TestPandasHelper(unittest.TestCase):
             gr = pandas_groupby_nan(df, "value")
             co = gr.sum()
             li = list(co["value"])
-            # fLOG("###", li)
-            assert numpy.isnan(li[-1])
+            self.assertIsInstance(li[-1], float)
+            self.assertTrue(numpy.isnan(li[-1]))
 
         for ty in types:
             data = [{"this": "cst", "type": "tt1=" + str(ty[0]), "value": ty[1]},
@@ -87,8 +82,8 @@ class TestPandasHelper(unittest.TestCase):
             if t:
                 co = gr.sum()
                 li = list(co["value"])
-                # fLOG("###", li)
-                assert numpy.isnan(li[-1])
+                self.assertIsInstance(li[-1], float)
+                self.assertTrue(numpy.isnan(li[-1]))
             try:
                 gr = pandas_groupby_nan(df, ["value", "this"])
                 t = True
@@ -102,11 +97,6 @@ class TestPandasHelper(unittest.TestCase):
                 self.assertEqual(len(li), 2)
 
     def test_pandas_groupbynan_tuple(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
         data = [dict(a="a", b="b", c="c", n=1), dict(
             b="b", n=2), dict(a="a", n=3), dict(c="c", n=4)]
         df = pandas.DataFrame(data)
@@ -122,7 +112,6 @@ class TestPandasHelper(unittest.TestCase):
             gr2 = gr2_.sum().sort_values("n")
             self.assertEqual(gr2.shape, (4, 4))
             d = gr2.to_dict("records")
-            fLOG(gr2)
             self.assertEqual(d[0]["a"], "a")
             self.assertEqual(d[0]["b"], "b")
             self.assertEqual(d[0]["c"], "c")
