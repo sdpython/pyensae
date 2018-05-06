@@ -50,7 +50,7 @@ from src.pyensae.ml_helper import pandas_groupby_nan, numpy_types
 class TestPandasHelper(ExtTestCase):
 
     def test_pandas_groupbynan(self):
-        types = [(str, "e"), (int, -10), (float, -20.2),
+        types = [(int, -10), (float, -20.2), (str, "e"),
                  (bytes, bytes("a", "ascii"))]
         skip = (numpy.bool_, numpy.complex64, numpy.complex128)
         types += [(_, _(5)) for _ in numpy_types() if _ not in skip]
