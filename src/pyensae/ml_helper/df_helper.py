@@ -10,7 +10,7 @@ from pandas import Index
 
 def numpy_types():
     """
-    return the list of numpy available types
+    Returns the list of numpy available types.
 
     @return     list of types
     """
@@ -38,7 +38,7 @@ def numpy_types():
 
 def pandas_fillna(df, by, hasna=None, suffix=None):
     """
-    replace the nan value for something not nan
+    Replaces the nan value for something not nan.
 
     @param      df      dataframe
     @param      by      list of columns for which we need to replace nan
@@ -83,7 +83,7 @@ def pandas_fillna(df, by, hasna=None, suffix=None):
 
 def pandas_groupby_nan(df, by, axis=0, as_index=False, suffix=None, nanback=True, **kwargs):
     """
-    Does a groupby including keeping missing values.
+    Does a *groupby* including keeping missing values.
 
     @param      df          dataframe
     @param      by          column or list of columns

@@ -64,7 +64,10 @@ class TestPandasHelper(ExtTestCase):
             gr = pandas_groupby_nan(df, "value")
             co = gr.sum()
             li = list(co["value"])
-            self.assertIsInstance(li[-1], float)
+            try:
+                self.assertIsInstance(li[-1], float)
+            except AssertionError as e:
+                raise AssertionError("Issue with {0}".format(ty)) from e
             self.assertTrue(numpy.isnan(li[-1]))
 
         for ty in types:
