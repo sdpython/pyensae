@@ -25,17 +25,18 @@ except ImportError:
 class TestCodeStyle(ExtTestCase):
 
     def test_style_src(self):
+        fLOG(OutputPrint=True)
         thi = os.path.abspath(os.path.dirname(__file__))
         src_ = os.path.normpath(os.path.join(thi, "..", "..", "src"))
-        check_pep8(src_, fLOG=fLOG, neg_pattern='.*((Parser)|(Lexer)|(Listener))[.]py$',
+        check_pep8(src_, fLOG=fLOG, neg_pattern='.*((Parser)|(Lexer)|(Listener)|(antlr_grammar_use))[.]py$',
+                   verbose=True,
                    pylint_ignore=('C0103', 'C1801', 'R0201', 'R1705', 'W0108', 'W0613',
                                   'C0111', 'W0622', 'W0612', 'C0412', 'W0621',
                                   'W0212', 'R1704', 'W0622', 'W0201', 'R1710',
                                   'W0703', 'R1703', 'R0911', 'R0912', 'R0915',
                                   'E0203', 'C0302', 'C0200', 'R1702', 'E1101',
                                   'R0914', 'W0123', 'W0123'),
-                   skip=["Parser.py",
-                         "http_retrieve.py:191: W0703",
+                   skip=["http_retrieve.py:191: W0703",
                          "astock.py:135: W0703",
                          "astock.py:229: W0703",
                          "http_retrieve.py:192: W0703",
@@ -48,9 +49,11 @@ class TestCodeStyle(ExtTestCase):
                          ])
 
     def test_style_test(self):
+        fLOG(OutputPrint=True)
         thi = os.path.abspath(os.path.dirname(__file__))
         test = os.path.normpath(os.path.join(thi, "..", ))
-        check_pep8(test, fLOG=fLOG, neg_pattern="temp_.*",
+        check_pep8(test, fLOG=fLOG, neg_pattern="(temp_.*)|(.*test_parse_code.*[.]py)",
+                   verbose=True,
                    pylint_ignore=('C0103', 'C1801', 'R0201', 'R1705', 'W0108', 'W0613',
                                   'C0111', 'W0622', 'W0612', 'C0412', 'W0621',
                                   'W0125', 'E1127', 'E1101', 'W1402', 'W0212',),

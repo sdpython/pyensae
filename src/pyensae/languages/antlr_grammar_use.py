@@ -73,7 +73,7 @@ def get_parser_lexer(language):
 
 def parse_code(code, class_parser, class_lexer):
     """
-    parse a code and returns a tree
+    Parses a code and returns a tree.
 
     @param      code                code to parse
     @param      class_parser        parser
@@ -108,7 +108,7 @@ def parse_code(code, class_parser, class_lexer):
 
 def get_tree_string(tree, parser, format=TreeStringListener):
     """
-    returns a string which shows the parsed tree
+    Returns a string which shows the parsed tree.
 
     @param      tree        from @see fn parse_code
     @param      parser      the parser used to build the tree, output of @see fn parse_code
@@ -126,7 +126,7 @@ def get_tree_string(tree, parser, format=TreeStringListener):
 
 def get_tree_graph(tree, parser, format=TreeGraphListener):
     """
-    returns a graph with networkx
+    Returns a graph with :epkg:`networkx`.
 
     @param      tree        from @see fn parse_code
     @param      parser      the parser used to build the tree, output of @see fn parse_code
