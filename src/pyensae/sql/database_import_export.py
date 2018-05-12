@@ -91,7 +91,7 @@ class DatabaseImportExport:
         self._check_connection()
 
         if header:
-            if isinstance(header, list) or isinstance(header, tuple):
+            if isinstance(header, (list, tuple)):
                 header_line = "\t".join(header) + sepline
             elif isinstance(header, bool):
                 col = self.get_sql_columns(view_sql)
@@ -318,8 +318,8 @@ class DatabaseImportExport:
 
     def import_table_from_flat_file(self, file, table, columns, format="tsv", header=False,
                                     display=False, lower_case=False, table_exists=False,
-                                    temporary=False, fill_missing=False, indexes=[],
-                                    filter_case=None, change_to_text=[], strict_separator=False,
+                                    temporary=False, fill_missing=False, indexes=None,
+                                    filter_case=None, change_to_text=None, strict_separator=False,
                                     add_key=None, encoding="utf-8", **params):
         """
         Adds a table to database from a file.
@@ -328,7 +328,8 @@ class DatabaseImportExport:
         @param      table               table name
         @param      columns             columns definition (see below)
                                         if None: columns are guessed
-        @param      format              tsv, the only one accepted for the time being, it can be a function whose parameter are a line and **params
+        @param      format              tsv, the only one accepted for the time being,
+                                        it can be a function whose parameter are a line and **params
         @param      header              the file has a header of not, if True, skip the first line
         @param      lower_case          put every string in lower case before inserting it
         @param      table_exists        if True, do not create the table
@@ -364,6 +365,10 @@ class DatabaseImportExport:
         @warning The function does not react well when a column name
                  includes a space.
         """
+        if indexes is None:
+            indexes = []
+        if change_to_text is None:
+            change_to_text = []
         if display:
             if isinstance(file, list):
                 self.LOG("processing file ", file[:min(len(file), 10)])

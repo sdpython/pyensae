@@ -9,6 +9,7 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
+import warnings
 
 
 try:
@@ -55,7 +56,7 @@ class TestParseCode (unittest.TestCase):
 
         try:
             for lang in langs:
-                clparser, cllexer = get_parser_lexer(lang)
+                get_parser_lexer(lang)
             return
         except ImportError:
             pass
@@ -141,15 +142,16 @@ class TestParseCode (unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        # does not work yet
-        return
-
         code = """
         A = LOAD 'filename.txt' USING PigStorage('\t');
         STORE A INTO 'samefile.txt' ;
         """
 
-        clparser, cllexer = get_parser_lexer("Pig")
+        try:
+            clparser, cllexer = get_parser_lexer("Pig")
+        except ImportError:
+            warnings.warn("Grammar for Pig not ready yet.")
+            return
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
         st = get_tree_string(tree, parser, None)
@@ -189,16 +191,23 @@ class TestParseCode (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         # the grammar does not fully compile
-        return
 
         code = """
         def addition(x, y):
             return x + y
         """
 
-        clparser, cllexer = get_parser_lexer("Python3")
+        try:
+            clparser, cllexer = get_parser_lexer("Python3")
+        except ImportError:
+            warnings.warn("Grammar for Python3 not ready yet.")
+            return
         parser = parse_code(code, clparser, cllexer)
-        tree = parser.parse()
+        try:
+            tree = parser.single_input()
+        except NameError as e:
+            warnings.warn("Grammar for Python3 not ready yet: {0}".format(e))
+            return
         st = get_tree_string(tree, parser)
         fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
@@ -210,7 +219,6 @@ class TestParseCode (unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         # the grammar does not fully compile
-        return
 
         code = """
         digraph {
@@ -221,7 +229,7 @@ class TestParseCode (unittest.TestCase):
 
         clparser, cllexer = get_parser_lexer("DOT")
         parser = parse_code(code, clparser, cllexer)
-        tree = parser.parse()
+        tree = parser.graph()
         st = get_tree_string(tree, parser)
         fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0

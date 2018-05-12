@@ -5,7 +5,7 @@
 """
 
 
-class DBException (Exception):
+class DBException(Exception):
 
     """
     custom exception
@@ -13,20 +13,20 @@ class DBException (Exception):
     pass
 
 
-class ExceptionSQL (DBException):
+class ExceptionSQL(DBException):
 
     """
     exception related to SQL instructions and only them
     """
 
     def __init__(self, description, ex, sql, log=True):
-        """constructor
+        """
         @param      description     message
         @param      ex              sqlite exception
         @param      sql             SQL instruction
         @param      log             log the exception
         """
-        Exception.__init__(self, description + "\n" + sql)
+        DBException.__init__(self, description + "\n" + sql)
         self.ex = ex
         self.sql = sql
         if False and log:

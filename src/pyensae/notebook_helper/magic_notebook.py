@@ -4,9 +4,9 @@
 @brief Magic command to help within notebooks
 """
 from IPython.core.magic import magics_class, line_magic
+import qgrid
 from jyquickhelper import add_notebook_menu
 from pyquickhelper.ipythonhelper import MagicCommandParser, MagicClassWithHelpers
-import qgrid
 
 
 @magics_class

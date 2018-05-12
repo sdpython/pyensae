@@ -11,7 +11,7 @@ from .tree_graph_listener import TreeGraphListener
 
 def get_parser_lexer(language):
     """
-    returns two classes, a parser and a lexer from antlr4
+    Returns two classes, a parser and a lexer from :epkg:`antlr4`.
 
     @param      language    to analyse
     @return                 Parser, Lexer
@@ -33,17 +33,15 @@ def get_parser_lexer(language):
             from .SQLiteParser import SQLiteParser
             return SQLiteParser, SQLiteLexer
         elif language == "DOT":
-            raise ImportError("Python3 is not available yet")
             from .DOTLexer import DOTLexer
             from .DOTParser import DOTParser
             return DOTParser, DOTLexer
         elif language == "Pig":
             raise ImportError("Pig is not available yet")
-            from .PigLexer import PigLexer
-            from .PigParser import PigParser
-            return PigParser, PigLexer
+            # from .PigLexer import PigLexer
+            # from .PigParser import PigParser
+            # return PigParser, PigLexer
         elif language == "Python3":
-            raise ImportError("Python3 is not available yet")
             from .Python3Lexer import Python3Lexer
             from .Python3Parser import Python3Parser
             return Python3Parser, Python3Lexer

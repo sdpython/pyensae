@@ -3,12 +3,12 @@
 @brief Various functions to decompress files
 """
 import zipfile
-import tarfile
 import os
 import gzip
 import bz2
 import warnings
 import copy
+import tarfile
 from tarfile import ExtractError
 from pyquickhelper.loghelper import noLOG
 

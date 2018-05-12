@@ -22,7 +22,7 @@ class R2PyConversionError(Exception):
             text = node.symbol.text
         except AttributeError:
             text = "ERROR"
-        mes = "Unable to convert\n'{0}'\n{1}\n{2}\nPARENT\n'{3}'\n{4}\n---SOFAR---\n{5}\n---SOSTACK---\n{5}\n---END---".format(
+        mes = "Unable to convert\n'{0}'\n{1}\n{2}\nPARENT\n'{3}'\n{4}\n---SOFAR---\n{5}\n---SOSTACK---\n{6}\n---END---".format(
             text, type(node), node, ("" if isinstance(
                 node, str) else node.parentCtx),
             (str if isinstance(node, str) else type(node.parentCtx)), sofar, sostack)

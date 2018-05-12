@@ -65,7 +65,7 @@ class TestDot (unittest.TestCase):
             tree.export_graphviz(clf, out_file=outfile)
             img = os.path.join(temp, "out_tree.png")
             try:
-                out, err = run_dot(outfile, img)
+                run_dot(outfile, img)
             except FileNotFoundError as e:
                 p = os.environ.get("PATH", None)
                 raise Exception("PATH={0}".format(p)) from e

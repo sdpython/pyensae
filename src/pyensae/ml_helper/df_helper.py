@@ -3,8 +3,8 @@
 @file
 @brief Helpers for pandas `pandas <http://pandas.pydata.org/>`_.
 """
-import numpy
 import warnings
+import numpy
 from pandas import Index
 
 

@@ -2,12 +2,11 @@
 @file
 @brief      generic class to access a SQL database
 """
-
+from pyquickhelper.loghelper import fLOG
 from .database_core import DatabaseCore
 from .database_import_export import DatabaseImportExport
 from .database_object import DatabaseObject
 from .database_join_group import DatabaseJoinGroup
-from pyquickhelper.loghelper import fLOG
 
 
 class Database(DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoinGroup):

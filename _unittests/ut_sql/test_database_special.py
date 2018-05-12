@@ -58,18 +58,33 @@ class TestDatabaseSpecial (unittest.TestCase):
         mat = [line for line in cur]
         view = db.execute_view(sql, add_column_name=True)
         self.assertEqual(len(view), len(mat) + 1)
-        self.assertEqual(view[0], ['1;nb_click', '1;url', '2;nb_click', '2;url', '3;nb_click', '3;url', '4;nb_click', '4;url', '5;nb_click', '5;url', '6;nb_click', '6;url', '7;nb_click', '7;url', '8;nb_click', '8;url', '9;nb_click',
-                                   '9;url', '10;nb_click', '10;url', '11;nb_click', '11;url', '12;nb_click', '12;url', '13;nb_click', '13;url', '14;nb_click', '14;url', '15;nb_click', '15;url', '16;nb_click', '16;url', '18;nb_click', '18;url'])
+        self.assertEqual(view[0], ['1;nb_click', '1;url', '2;nb_click', '2;url', '3;nb_click', '3;url',
+                                   '4;nb_click', '4;url', '5;nb_click', '5;url', '6;nb_click', '6;url', '7;nb_click',
+                                   '7;url', '8;nb_click', '8;url', '9;nb_click',
+                                   '9;url', '10;nb_click', '10;url', '11;nb_click', '11;url', '12;nb_click',
+                                   '12;url', '13;nb_click', '13;url', '14;nb_click',
+                                   '14;url', '15;nb_click', '15;url', '16;nb_click', '16;url', '18;nb_click', '18;url'])
         self.assertEqual(len(view[0]), len(view[1]))
 
         exp = {
-            1: [268.0, 'www.facebook.com/login.php', 97.0, 'www.friendster.com/login.php', 29.0, 'https://login.facebook.com/login.php', 15.0,
-                'https://login.yahoo.com/', 10.0, 'https://login.facebook.com/login.php', 10.0, 'lite.facebook.com/login/?next=http%3A%2F%2Flite.facebook.com%2Ftheamloong%2Fvideo%2Fof%2FTNT-sanshou',
+            1: [268.0, 'www.facebook.com/login.php', 97.0, 'www.friendster.com/login.php',
+                29.0, 'https://login.facebook.com/login.php', 15.0,
+                'https://login.yahoo.com/', 10.0, 'https://login.facebook.com/login.php', 10.0,
+                'lite.facebook.com/login/?next=http%3A%2F%2Flite.facebook.com%2Ftheamloong%2Fvideo%2Fof%2FTNT-sanshou',
                 13.0, 'lite.facebook.com/login/?next=http%3A%2F%2Flite.facebook.com%2Ftheamloong%2Fvideo%2Fof%2FTNT-sanshou',
                 5.0, 'https://login.verizonwireless.com/amserver/UI/Login', 6.0, 'https://login.facebook.com/login.php', 2.0,
-                'https://login.comcast.net/', 0.0, 'HottieMatchUp.com/matchcomlogin', 0.0, 'FreshPCFix.com/loginscreen', 0.0, 'FreshPCFix.com/loginscreen', 0.0,
-                'login.marketingblacksmith.com', 0.0, 'sites.managerslogin.com', 0.0, 'sites.managerslogin.com', 0.0, 'sites.managerslogin.com'],
-            -1: [3.0, 'https://sso.uboc.com/obc/forms/login.fcc?user_type=R', 3.0, 'https://www.atitesting.com/login.aspx', 1.0, 'askabouttech.com/how-to-bypass-login-password-on-windows-vista/', 1.0, 'homegrownfreaks.net/forums/login.html', 1.0, 'https://trade.htsc.com.cn/webtrade/login/loginAction1.do?method=preLogin2&opType=TD', 1.0, 'moodle.dist113.org/login/in/in.php?p=addicting+games+the+impossible+quiz', 1.0, 'www.edweek.org/login.html?source=http://www.edweek.org/ew/articles/2009/08/25/02sat.h29.html&destina', 1.0, 'www.gifs.net/image/Holidays/Birthday/Cake/9451?n=login.php3', 1.0, 'www.grazeit.com/pages/blackplanet-com-login-1814/', 1.0, 'www.myspace-login.us/',
+                'https://login.comcast.net/', 0.0, 'HottieMatchUp.com/matchcomlogin', 0.0,
+                'FreshPCFix.com/loginscreen', 0.0, 'FreshPCFix.com/loginscreen', 0.0,
+                'login.marketingblacksmith.com', 0.0, 'sites.managerslogin.com', 0.0,
+                'sites.managerslogin.com', 0.0, 'sites.managerslogin.com'],
+            -1: [3.0, 'https://sso.uboc.com/obc/forms/login.fcc?user_type=R', 3.0,
+                 'https://www.atitesting.com/login.aspx', 1.0, 'askabouttech.com/how-to-bypass-login-password-on-windows-vista/',
+                 1.0, 'homegrownfreaks.net/forums/login.html',
+                 1.0, 'https://trade.htsc.com.cn/webtrade/login/loginAction1.do?method=preLogin2&opType=TD',
+                 1.0, 'moodle.dist113.org/login/in/in.php?p=addicting+games+the+impossible+quiz',
+                 1.0, 'www.edweek.org/login.html?source=http://www.edweek.org/ew/articles/2009/08/25/02sat.h29.html&destina',
+                 1.0, 'www.gifs.net/image/Holidays/Birthday/Cake/9451?n=login.php3',
+                 1.0, 'www.grazeit.com/pages/blackplanet-com-login-1814/', 1.0, 'www.myspace-login.us/',
                  None, None, None, None, None, None, None, None, None, None, None, None, None, None],
         }
 
@@ -77,7 +92,7 @@ class TestDatabaseSpecial (unittest.TestCase):
             if view[k] != v:
                 if len(view[k]) != len(v):
                     raise Exception(
-                        "exp[%d] and view [k] have different lengths" % (k, k))
+                        "exp[%d] and view [%d] have different lengths" % (k, k))
                 for a, b in zip(v, view[k]):
                     if a != b:
                         raise Exception(
@@ -143,7 +158,8 @@ class TestDatabaseSpecial (unittest.TestCase):
                 (b'0401\xe5\xbd\xb1\xe9\x9f\xb3live\xe7\xa7\x80'.decode("utf8"),
                    b'0401\xe5\xbd\xb1\xe9\x9f\xb3\xe8\xa6\x96\xe8\xa8\x8a'.decode(
                     "utf8"),
-                   0.416666666666667, 5, 12, 0.0, 0.454545454545455, 5, 0.272727272727273, 1, 0.5, 4, 0.5, 2, 999999999, 999999999, 0, 1, 2, 0, 1.0)],
+                   0.416666666666667, 5, 12, 0.0, 0.454545454545455, 5, 0.272727272727273,
+                   1, 0.5, 4, 0.5, 2, 999999999, 999999999, 0, 1, 2, 0, 1.0)],
                ]
         if view not in exp:
             print("2", str(view).encode("utf8"))

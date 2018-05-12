@@ -10,7 +10,8 @@ def df_crossjoin(df1, df2, **kwargs):
     """
     Make a cross join (cartesian product) between two dataframes by using a constant temporary key.
     Also sets a MultiIndex which is the cartesian product of the indices of the input dataframes.
-    Source: `Cross join / cartesian product between pandas DataFrames <https://mkonrad.net/2016/04/16/cross-join--cartesian-product-between-pandas-dataframes.html>`_
+    Source: `Cross join / cartesian product between pandas DataFrames
+    https://mkonrad.net/2016/04/16/cross-join--cartesian-product-between-pandas-dataframes.html>`_.
 
     @param      df1     dataframe 1
     @param      df2     dataframe 2

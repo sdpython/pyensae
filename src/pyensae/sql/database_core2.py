@@ -110,7 +110,7 @@ class DatabaseCore2:
             lines.append("\n")
             lines.append("indexes")
             for tu in indexes:
-                if isinstance(tu, tuple) or isinstance(tu, list):
+                if isinstance(tu, (tuple, list)):
                     lines.append("    " + "\t".join([str(x) for x in tu]))
                 else:
                     lines.append("    " + tu)
@@ -124,11 +124,11 @@ class DatabaseCore2:
                     continue
                 lines.append("    " + "\t" + a)
                 continue
-                rrr = self.execute(
-                    "SELECT name FROM %s.sqlite_master ORDER BY name;" %
-                    (a,))
-                for b in rrr:
-                    lines.append("       " + "\t" + b[0])
+                #~ rrr = self.execute(
+                #       ~ "SELECT name FROM %s.sqlite_master ORDER BY name;" %
+                #       ~ (a,))
+                #~ for b in rrr:
+                #       ~ lines.append("       " + "\t" + b[0])
 
         return res, "\n".join(lines)
 
@@ -367,9 +367,7 @@ class DatabaseCore2:
         if filter_case is not None:
             line = [filter_case(s) for s in line]
 
-        # try :
-        if 1:
-
+        try:
             if fill_missing > 0:
                 m = max(columns.keys())
                 if m >= len(line):
@@ -449,13 +447,8 @@ class DatabaseCore2:
                     res[v[0]] = val
 
             return res
-        # except Exception, e
-        else:
-            self.LOG(
-                "(c)line number ",
-                num_line,
-                "***unable to process a line columns ",
-                line)
+        except Exception:
+            self.LOG("(c)line number", num_line, "***unable to process a line columns:", line)
             return None
 
     def _get_insert_request(self, dico,

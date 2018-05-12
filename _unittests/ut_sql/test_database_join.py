@@ -107,8 +107,14 @@ class TestDatabaseJoin (unittest.TestCase):
             print(sql)
             raise Exception("sql queries should be identifical")
 
-        assert fields == [('query', 'query'), ('profile_QSSH.pos', 'profile_QSSH_pos'), ('type', 'type'), ('bucket', 'bucket'), ('max_nb', 'max_nb'), ('sum_difftime', 'sum_difftime'), ('profile_QSSH.url', 'url'), ('url_QSSH.pos', 'url_QSSH_pos'),
-                          ('co', 'co'), ('nb_view', 'nb_view'), ('sum_nb_view', 'sum_nb_view'), ('sum_difftime_view', 'sum_difftime_view'), ('nb_click', 'nb_click'), ('sum_nb_click', 'sum_nb_click'), ('sum_difftime_click', 'sum_difftime_click')]
+        assert fields == [('query', 'query'), ('profile_QSSH.pos', 'profile_QSSH_pos'), ('type', 'type'),
+                          ('bucket', 'bucket'), ('max_nb',
+                                                 'max_nb'), ('sum_difftime', 'sum_difftime'),
+                          ('profile_QSSH.url', 'url'), ('url_QSSH.pos', 'url_QSSH_pos'),
+                          ('co', 'co'), ('nb_view',
+                                         'nb_view'), ('sum_nb_view', 'sum_nb_view'),
+                          ('sum_difftime_view', 'sum_difftime_view'),
+                          ('nb_click', 'nb_click'), ('sum_nb_click', 'sum_nb_click'), ('sum_difftime_click', 'sum_difftime_click')]
         view = db.execute_view(sql)
         assert len(view) == 2
 
@@ -125,8 +131,15 @@ class TestDatabaseJoin (unittest.TestCase):
                 print("exp", b)
                 print(a == b)
         assert sql.replace(" ", "") == tep.replace(" ", "")
-        assert fields == [('query', 'query'), ('profile_QSSH.pos', 'pos'), ('type', 'type'), ('bucket', 'bucket'), ('max_nb', 'max_nb'), ('sum_difftime', 'sum_difftime'), ('profile_QSSH.url', 'url'), ('co', 'co'), (
-            'nb_view', 'nb_view'), ('sum_nb_view', 'sum_nb_view'), ('sum_difftime_view', 'sum_difftime_view'), ('nb_click', 'nb_click'), ('sum_nb_click', 'sum_nb_click'), ('sum_difftime_click', 'sum_difftime_click')]
+        assert fields == [('query', 'query'), ('profile_QSSH.pos', 'pos'), ('type', 'type'),
+                          ('bucket', 'bucket'), ('max_nb',
+                                                 'max_nb'), ('sum_difftime', 'sum_difftime'),
+                          ('profile_QSSH.url', 'url'), ('co',
+                                                        'co'), ('nb_view', 'nb_view'),
+                          ('sum_nb_view', 'sum_nb_view'), ('sum_difftime_view',
+                                                           'sum_difftime_view'),
+                          ('nb_click', 'nb_click'), ('sum_nb_click', 'sum_nb_click'),
+                          ('sum_difftime_click', 'sum_difftime_click')]
         view = db.execute_view(sql)
         assert len(view) == 1
 

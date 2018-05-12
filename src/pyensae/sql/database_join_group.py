@@ -279,8 +279,7 @@ class DatabaseJoinGroup:
             ppref = n.predecessor.PREFIX
             pref = n.PREFIX
 
-            if isinstance(parent_key, str) or isinstance(parent_key, str):
-
+            if isinstance(parent_key, str):
                 if parent_key.startswith("<PREFIX>"):
                     a, b = parent_key[8:].split(".")
                     parent_key = (self._find_in_fas(fas, a, b),)
@@ -358,16 +357,9 @@ class DatabaseJoinGroup:
     # the class itself: multiple joins using this tree
     ##################################################
 
-    def inner_joins(self, root,
-                    execute=False,
-                    create_index=False,
-                    created_table=None,
-                    duplicate_column=True,
-                    order=[],
-                    unique=False,
-                    distinct=False,
-                    fields=None,
-                    nolog=True):
+    def inner_joins(self, root, execute=False, create_index=False, created_table=None,
+                    duplicate_column=True, order=None, unique=False, distinct=False,
+                    fields=None, nolog=True):
         """create several SQL inner join requests (included into each others)
         @param      root                JoinTreeNode (the root)
         @param      execute             if True, execute the query
@@ -392,6 +384,8 @@ class DatabaseJoinGroup:
                     - Improve the handling of keyword DISTINCT
                     - Handle keyword fields
         """
+        if order is None:
+            order = []
         if create_index:
             raise Exception(
                 "create_index = True: this option is not available")
@@ -477,14 +471,8 @@ class DatabaseJoinGroup:
                     (str(where)))
         return sql
 
-    def histogram(self, table,
-                  columns,
-                  col_sums=[],
-                  values=None,
-                  sql_add=None,
-                  execute=False,
-                  created_table=None,
-                  new_column="histogram",
+    def histogram(self, table, columns, col_sums=None, values=None, sql_add=None,
+                  execute=False, created_table=None, new_column="histogram",
                   nolog=False):
         """
         create a SQL request to compute an histogram
@@ -505,7 +493,8 @@ class DatabaseJoinGroup:
         @return                         SQL request
 
         """
-
+        if col_sums is None:
+            col_sums = []
         if isinstance(columns, str):
             columns = (columns,)
 
@@ -655,19 +644,9 @@ class DatabaseJoinGroup:
 
         return select
 
-    def inner_join(self, table1, table2,
-                   field1, field2=None,
-                   where=None,
-                   execute=False,
-                   create_index=True,
-                   created_table=None,
-                   prefix="",
-                   duplicate_column=True,
-                   prefix_all="",
-                   order=[],
-                   unique=True,
-                   params={},
-                   nolog=True):
+    def inner_join(self, table1, table2, field1, field2=None, where=None, execute=False,
+                   create_index=True, created_table=None, prefix="", duplicate_column=True,
+                   prefix_all="", order=None, unique=True, params=None, nolog=True):
         """create a SQL inner join request
         @param      table1              first table
         @param      table2              second table
@@ -686,7 +665,10 @@ class DatabaseJoinGroup:
         @param      nolog               if True, do not log the query, otherwise, skip that part
         @return                         SQL request, list of fields ("source", "new name")
         """
-
+        if order is None:
+            order = []
+        if params is None:
+            params = {}
         if field2 is None:
             field2 = field1
 

@@ -55,14 +55,18 @@ class TextFileColumns(TextFile):
         """
         @param      filename                    filename
         @param      errors                      see str (errors = ...)
-        @param      fLOG                        LOG function, see `fLOG <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/loghelper/flog.html#pyquickhelper.loghelper.flog.fLOG>`_
+        @param      fLOG                        LOG function, see `fLOG
+                                                <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/
+                                                pyquickhelper/loghelper/flog.html#pyquickhelper.loghelper.flog.fLOG>`_
         @param      force_header                defines the first line as columns header whatever is it relevant or not
         @param      changes                     to change the column name, gives the correspondence, example: { "query":"query___" },
                                                 it can be a list if there is no header and you want to name any column
         @param      force_noheader              there is no header at all
         @param      regex                       specify a different regular expression (only if changes is a list)
-                                                if it is a dictionary, the class will replace the default by the one associated in regex for this field
-        @param      filter                      None if there is no filter, otherwise it is a function which takes a dictionary and returns a boolean
+                                                if it is a dictionary, the class will replace the default
+                                                by the one associated in regex for this field
+        @param      filter                      None if there is no filter, otherwise it is a function
+                                                which takes a dictionary and returns a boolean
                                                 which tells if the line must considered or not
         @param      fields                      when the header is not here, these fields will name the columns
         @param      keep_text_when_bad_type     keep the value when the conversion type does not word

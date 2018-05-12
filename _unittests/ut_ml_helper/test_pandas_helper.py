@@ -71,7 +71,8 @@ class TestPandasHelper(ExtTestCase):
             try:
                 self.assertTrue(numpy.isnan(li[-1]))
             except AssertionError as e:
-                raise AssertionError("Issue with value {0}\n--df--\n{1}\n--co--\n{2}".format(li, df, co)) from e
+                raise AssertionError(
+                    "Issue with value {0}\n--df--\n{1}\n--co--\n{2}".format(li, df, co)) from e
 
         for ty in types:
             data = [{"this": "cst", "type": "tt1=" + str(ty[0]), "value": ty[1]},
@@ -95,7 +96,6 @@ class TestPandasHelper(ExtTestCase):
                 t = True
             except (TypeError, NotImplementedError):
                 t = False
-                pass
 
             if t:
                 co = gr.sum()

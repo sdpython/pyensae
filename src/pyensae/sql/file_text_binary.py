@@ -21,7 +21,9 @@ class TextFile:
     It can deal with null characters which are missed by open function.
 
     @var    filename        file name
-    @var    errors          decoding in utf8 can raise some errors, see `str <https://docs.python.org/3.4/library/stdtypes.html?highlight=str#str>`_ to understand the meaning of this parameter
+    @var    errors          decoding in utf8 can raise some errors,
+                            see `str <https://docs.python.org/3.4/library/stdtypes.html?highlight=str#str>`_
+                            to understand the meaning of this parameter
     @var    LOG             logging function
     @var    _buffer_size    read a text file _buffer_size bytes each time
     @var    _filter         function filter, None or return True or False whether a line should considered or not
@@ -46,7 +48,8 @@ class TextFile:
         """
         @param      filename        filename
         @param      errors          see str (errors = ...)
-        @param      fLOG            LOG function, see `fLOG <http://www.xavierdupre.fr/app/pyquickhelper/helpsphinx/pyquickhelper/loghelper/flog.html#pyquickhelper.loghelper.flog.fLOG>`_
+        @param      fLOG            LOG function, see `fLOG <http://www.xavierdupre.fr/app/pyquickhelper/
+                                    helpsphinx/pyquickhelper/loghelper/flog.html#pyquickhelper.loghelper.flog.fLOG>`_
         @param      buffer_size     buffer_size (mostly use to test the reading function)
         @param      filter          None if there is no filter, otherwise it is a function which takes a list and returns a boolean
                                     which tells if the line must considered or not

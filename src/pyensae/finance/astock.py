@@ -66,7 +66,8 @@ class StockPrices:
         @param      begin       first day (datetime), see below
         @param      end         last day (datetime), see below
         @param      sep         column separator
-        @param      intern      do not use unless you know what to do (see :meth:`__getitem__ <pyensae.finance.astock.StockPrices.__getitem__>`)
+        @param      intern      do not use unless you know what to do
+                                (see :meth:`__getitem__ <pyensae.finance.astock.StockPrices.__getitem__>`)
         @param      use_dtime   if True, use DateTime instead of string
 
         If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
@@ -181,14 +182,14 @@ class StockPrices:
                     df.reset_index(drop=False).to_csv(
                         name, sep=sep, index=False)
                     use_url = False
-                elif url in ('yahoo_new'):
+                elif url == 'yahoo_new':
                     from yahoo_historical import Fetcher
                     data = Fetcher(tick, [begin.year, begin.month, begin.day],
                                    [end.year, end.month, end.day])
                     df = data.getHistorical()
                     df.to_csv(name, sep=sep, index=False)
                     use_url = False
-                elif url in("yahoo", "google", "fred", "famafrench"):
+                elif url in ("yahoo", "google", "fred", "famafrench"):
                     import pandas_datareader.data as web
                     df = web.DataReader(self.tickname, url,
                                         begin, end).reset_index(drop=False)
@@ -361,7 +362,7 @@ class StockPrices:
                     date = row[0]
                     dates.append(
                         {"Date": date, "tick": st.tick, field: row[index]})
-        elif isinstance(field, tuple) or isinstance(field, list):
+        elif isinstance(field, (tuple, list)):
             for st in listStockPrices:
                 lifi = list(st.dataframe.columns)
                 indexes = [lifi.index(f) for f in field]
@@ -377,7 +378,7 @@ class StockPrices:
         df = pandas.DataFrame(dates)
         if isinstance(field, str):
             piv = df.pivot("Date", "tick", field)
-        elif isinstance(field, tuple) or isinstance(field, list):
+        elif isinstance(field, (tuple, list)):
             pivs = [df.pivot("Date", "tick", f) for f in field]
             for fi, piv in zip(field, pivs):
                 col = [c + "," + fi for c in piv.columns]
@@ -395,6 +396,7 @@ class StockPrices:
 
         if missing:
             def count_nan(row):
+                "count nans"
                 n = 0
                 for k, v in row.items():
                     if k == "Date":
@@ -528,12 +530,14 @@ class StockPrices:
         @param      field               Open, High, Low, Close, Adj Close, Volume
         @param      date_format         ``%Y`` or ``%Y-%m`` or ``%Y-%m-%d`` or None if you prefer the function to choose
         @param      args                other arguments to send to ``plt.subplots``
-        @param      axis                1 or 2, it only works if existing != None. If axis is 2, the function draws the curves on the second axis.
+        @param      axis                1 or 2, it only works if existing is not None.
+                                        If axis is 2, the function draws the curves on the second axis.
         @param      args                other parameters to give method ``plt.subplots``
         @param      ax                  use existing `axes <http://matplotlib.org/api/axes_api.html>`_
         @return                         `axes <http://matplotlib.org/api/axes_api.html>`_
 
-        The parameter ``figsize`` of the method `subplots <https://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
+        The parameter ``figsize`` of the method
+        `subplots <https://matplotlib.org/api/pyplot_api.html?highlight=subplots#matplotlib.pyplot.subplots>`_
         can change the graph size (see the example below).
 
         .. exref::
@@ -586,6 +590,7 @@ class StockPrices:
         end = dates[-1]
 
         def price(x):
+            "local formatting"
             return '%1.2f' % x
 
         import matplotlib.pyplot as plt

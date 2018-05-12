@@ -13,7 +13,7 @@ openpyxl
 pandas_datareader
 pandocfilters
 pymyinstall
-pyquickhelper>=1.7.2514
+pyquickhelper>=1.8
 qgrid
 quandl
 scikit-learn

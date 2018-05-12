@@ -78,9 +78,9 @@ def _detectfont(font):
         globber = (glob.glob(d) for d in fontdirs)
         for fontdir in sum(globber, []):
             for root, _, files in os.walk(fontdir):
-                for font in fontfiles:
-                    if font in files:
-                        fontpath = os.path.join(root, font)
+                for font_ in fontfiles:
+                    if font_ in files:
+                        fontpath = os.path.join(root, font_)
                         break
 
     return fontpath

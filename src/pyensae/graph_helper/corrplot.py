@@ -109,7 +109,7 @@ class Corrplot(Linkage):
 
     def order(self, method='complete', metric='euclidean', inplace=False):
         """
-        Rearrange the order of rows and columns after clustering
+        Rearranges the order of rows and columns after clustering.
 
         :param method: any scipy method (e.g., single, average, centroid,
             median, ward). See scipy.cluster.hierarchy.linkage
@@ -133,6 +133,7 @@ class Corrplot(Linkage):
         self.Z = Z
         self.idx1 = idx1
         self.ind1 = ind1
+        return cor2
 
     def plot(self, fig=None, grid=True,
              rotation=30, lower=None, upper=None,
@@ -233,9 +234,6 @@ class Corrplot(Linkage):
         width, height = df.shape
         labels = (df.columns)
 
-        # add all patches to the figure
-        # TODO check value of lower and upper
-
         if upper is None and lower is None:
             mode = 'method'
         elif upper and lower:
@@ -279,7 +277,7 @@ class Corrplot(Linkage):
             for i in range(0, width):
                 ratio1 = float(i) / width
                 ratio2 = float(i + 2) / width
-                # TODO 1- set axis off
+                # set axis off
                 # 2 - set xlabels along the diagonal
                 # set colorbar either on left or bottom
                 if mode == 'lower':
@@ -375,7 +373,6 @@ class Corrplot(Linkage):
                     else:
                         func = Rectangle
                         w = h = d_abs * self.shrink
-                        # FIXME shring must be <=1
                         offset = (1 - w) / 2.
                         if method == 'color':
                             w = 1
@@ -391,7 +388,6 @@ class Corrplot(Linkage):
                         patch.set_linestyle('dotted')
                     # ax.add_artist(patch)
                     patches.append(patch)
-                    # FIXME edgecolor is always printed
                 elif method == 'circle':
                     patch = Circle((x, y), radius=d_abs * self.shrink / 2.)
                     if self.edgecolor:

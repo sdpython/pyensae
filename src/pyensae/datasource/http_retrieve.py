@@ -78,7 +78,8 @@ def download_data(name, moduleName=None, url=None, glo=None,
     @param      loc         (dict|None) if None, it will be replaced ``locals()``
     @param      whereTo     specify a folder where downloaded files will be placed
     @param      website     website to look for
-    @param      timeout     timeout (seconds) when establishing the connection (see `urlopen <https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen>`_)
+    @param      timeout     timeout (seconds) when establishing the connection
+                            (see `urlopen <https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen>`_)
     @param      retry       number of retries in case of failure when downloading the data
     @param      silent      if True, convert some exception into warnings when unzipping a tar file
     @param      fLOG        logging function
@@ -121,6 +122,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
         loc = locals()
 
     def transform_url(w):
+        "local function"
         if isinstance(w, list):
             return [transform_url(_) for _ in w]
         if w == "xd":
@@ -200,8 +202,12 @@ def download_data(name, moduleName=None, url=None, glo=None,
                             # We wait for 2 seconds.
                             time.sleep(2)
                     retry -= 1
-            if not success and len(excs) > 0:
-                raise excs[0]
+            if not success:
+                if len(excs) > 0:
+                    raise excs[0]
+                else:
+                    raise DownloadDataException(
+                        "Unable (3) to retrieve data from '{0}'. Error: {1}".format(url, e))
             u = open(outfile, "wb")
             u.write(alls)
             u.close()

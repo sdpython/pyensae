@@ -9,6 +9,7 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
+import warnings
 
 
 try:
@@ -50,7 +51,6 @@ class TestParseCode (unittest.TestCase):
             __file__,
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
-        return
 
         try:
             clparser, cllexer = get_parser_lexer("language")
@@ -62,7 +62,9 @@ class TestParseCode (unittest.TestCase):
 
         for lang in ["language"]:
             gr = os.path.join(folder, lang + ".g4")
-            assert os.path.exists(gr)
+            if not os.path.exists(gr):
+                warnings.warn("'{0}' does not exists.".format(gr))
+                continue
             build_grammar(lang, fLOG=fLOG)
 
     def test_extra(self):
@@ -74,9 +76,11 @@ class TestParseCode (unittest.TestCase):
         code = """
         example of the language
         """
-        return
-        from src.pyensae.languages.LanguageLexer import LanguageLexer
-        from src.pyensae.languages.LanguageParser import LanguageParser
+        try:
+            from src.pyensae.languages.LanguageLexer import LanguageLexer
+            from src.pyensae.languages.LanguageParser import LanguageParser
+        except ImportError:
+            return
 
         parser = parse_code(code, LanguageParser, LanguageLexer)
         tree = parser.parse()

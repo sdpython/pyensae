@@ -3,8 +3,8 @@
 @file
 @brief Adds functionalities to a dataframe.
 """
-import pandas
 import datetime
+import pandas
 
 
 class TableFormula(pandas.DataFrame):
@@ -95,17 +95,16 @@ class TableFormula(pandas.DataFrame):
             values.append(n)
             rep[n] = cnew
             if function_weight is None:
-                cp[n] = cp.apply(lambda row: v(row), axis=1)
+                cp[n] = cp.apply(lambda row, v=v: v(row), axis=1)
             else:
-                cp[n] = cp.apply(lambda row: v(row), axis=1) * cp["__weight__"]
+                cp[n] = cp.apply(lambda row, v=v: v(row), axis=1) * cp["__weight__"]
 
         if function_weight is None:
             aggs = {k: v for k, v in zip(values, function_agg)}
             gr = cp.groupby("__key__", as_index=False).agg(aggs)
         else:
             sum_weight = cp["__weight__"].sum()
-            aggs = {k: (lambda c: v(c, sum_weight))
-                    for k, v in zip(values, function_agg)}
+            aggs = {k: (lambda c, v=v: v(c, sum_weight)) for k, v in zip(values, function_agg)}
             gr = cp.groupby("__key__", as_index=False).agg(aggs)
         gr.columns = [rep.get(_, _) for _ in gr.columns]
         gr = gr.drop("__key__", axis=1)

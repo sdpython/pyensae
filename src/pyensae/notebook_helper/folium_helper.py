@@ -92,4 +92,5 @@ def folium_embed_map(mapf, path="map.html", width="100%", height="510px"):
     Source: `folium_base.py <https://gist.github.com/psychemedia/f7385255f89137c503b5>`_
     """
     mapf.save(path)
-    return HTML('<iframe src="files/{path}" style="width: {width}; height: {height}; border: none"></iframe>'.format(path=path, width=width, height=height))
+    return HTML('<iframe src="files/{path}" style="width: {width}; height: {height}; border: none">' +
+                '</iframe>'.format(path=path, width=width, height=height))

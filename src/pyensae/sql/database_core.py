@@ -144,7 +144,7 @@ class DatabaseCore(DatabaseCore2):
                 #cwd = os.path.join (os.path.abspath (os.path.split (__file__) [0]), "..", "..")
                 #fi  = os.path.split (sql_file) [1]
 
-                if "SCRIPT_LOOKUP" in DatabaseCore.__dict__:
+                if hasattr(DatabaseCore, "SCRIPT_LOOKUP"):
                     script = DatabaseCore.SCRIPT_LOOKUP
                     lines = script.split("\n")
                     lines = [l if "__CWD__ =" not in l else
@@ -165,7 +165,6 @@ class DatabaseCore(DatabaseCore2):
                         f.close()
                     except IOError:
                         self.LOG("unable to write ", summary)
-                        pass
 
         self._attach = attach
         self._buffer_insert = []
@@ -1148,7 +1147,7 @@ class DatabaseCore(DatabaseCore2):
             values = ",".join(values)
             sql = "INSERT INTO %s (%s) VALUES (%s)" % (table, keys, values)
             return sql
-        elif isinstance(insert_values, tuple) or isinstance(insert_values, list):
+        elif isinstance(insert_values, (tuple, list)):
             values = []
             for v in insert_values:
                 if v is None:
@@ -1260,7 +1259,7 @@ class DatabaseCore(DatabaseCore2):
         alls = []
         for k, v in values.items():
             if k != key:
-                if isinstance(v, str) or isinstance(v, datetime.datetime):
+                if isinstance(v, (str, datetime.datetime)):
                     alls += ["%s='%s'" % (k, str(v))]
                 else:
                     alls += ["%s=%s" % (k, str(v))]

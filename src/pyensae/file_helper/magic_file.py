@@ -27,7 +27,8 @@ class MagicFile(MagicClassWithHelpers):
     .. faqref::
         :title: Magic command not found
 
-        Magic commands are automatically added when importing the module ::
+        Magic commands are automatically added when importing
+        the module::
 
             import pyensae
 
@@ -77,8 +78,8 @@ class MagicFile(MagicClassWithHelpers):
     @line_magic
     def head(self, line):
         """
-        defines ``%head``
-        which displays the first lines of a file
+        Defines ``%head``
+        which displays the first lines of a file.
 
         .. nbref::
             :tag: file
@@ -104,11 +105,12 @@ class MagicFile(MagicClassWithHelpers):
                 return "".join(rows)
             else:
                 return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
+        return None
 
     @staticmethod
     def encoding_parser():
         """
-        defines the way to parse the magic command ``%encoding``
+        Defines the way to parse the magic command ``%encoding``.
         """
         parser = MagicCommandParser(prog="encoding",
                                     description='guess the encoding of a file')
@@ -124,8 +126,8 @@ class MagicFile(MagicClassWithHelpers):
     @line_magic
     def encoding(self, line):
         """
-        defines ``%encoding``
-        which guesses the encoding
+        Defines ``%encoding``
+        which guesses the encoding.
 
         .. nbref::
             :tag: file
@@ -142,6 +144,7 @@ class MagicFile(MagicClassWithHelpers):
         if args is not None:
             res = file_encoding(args.f, args.n)
             return str(res)
+        return None
 
     @staticmethod
     def grep_parser():
@@ -217,6 +220,7 @@ class MagicFile(MagicClassWithHelpers):
                 return "".join(rows)
             else:
                 return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
+        return None
 
     @staticmethod
     def tail_parser():
@@ -281,6 +285,7 @@ class MagicFile(MagicClassWithHelpers):
                 return "".join(rows)
             else:
                 return HTML("<pre>\n{0}\n</pre>".format("".join(rows)))
+        return None
 
     @staticmethod
     def lsr_parser():
@@ -306,8 +311,9 @@ class MagicFile(MagicClassWithHelpers):
     @line_magic
     def lsr(self, line):
         """
-        define ``%lsr`` which returns the content of a folder,
-        the method stops after around 10000 files --> you should precise the filter.
+        Defines ``%lsr`` which returns the content of a folder,
+        the method stops after around 10000 files
+        --> you should precise the filter.
 
         .. nbref::
             :tag: file
@@ -348,11 +354,12 @@ class MagicFile(MagicClassWithHelpers):
                     r = {"name": r, "directory": True}
                 rows.append(r)
             return pandas.DataFrame(rows)
+        return None
 
     @staticmethod
     def PYTHON_parser():
         """
-        defines the way to parse the magic command ``%%PYTHON``
+        Defines the way to parse the magic command ``%%PYTHON``.
         """
         parser = MagicCommandParser(prog="PYTHON",
                                     description='the command stores the content of the cell as a local file.')
@@ -365,7 +372,7 @@ class MagicFile(MagicClassWithHelpers):
     @cell_magic
     def PYTHON(self, line, cell=None):
         """
-        defines command ``%%PYTHON``
+        Defines command ``%%PYTHON``.
 
         .. nbref::
             :title: PYTHON
@@ -386,14 +393,16 @@ class MagicFile(MagicClassWithHelpers):
             with open(filename, "w", encoding="utf8") as f:
                 f.write("# -*- coding: utf8 -*-\n")
                 f.write(cell.replace("\r", ""))
+        return None
 
     @staticmethod
     def runpy_parser():
         """
-        defines the way to parse the magic command ``%%runpy``
+        Defines the way to parse the magic command ``%%runpy``.
         """
         parser = MagicCommandParser(prog="runpy",
-                                    description='run a python script which accepts standards input and produces standard outputs, a timeout is set up at 10s')
+                                    description='run a python script which accepts standards input and ' +
+                                    'produces standard outputs, a timeout is set up at 10s')
         parser.add_argument(
             'file',
             type=str,
@@ -409,7 +418,7 @@ class MagicFile(MagicClassWithHelpers):
     @cell_magic
     def runpy(self, line, cell=None):
         """
-        defines command ``%%runpy``
+        Defines command ``%%runpy``.
 
         .. nbref::
             :title: runpy
@@ -449,33 +458,29 @@ class MagicFile(MagicClassWithHelpers):
                         '<font color="#DD0000">Error</font><br /><pre>\n%s\n</pre>' % err)
                 else:
                     return HTML('<pre>\n%s\n</pre>' % out)
+        return None
 
     @staticmethod
     def lsrepo_parser():
         """
-        defines the way to parse the magic command ``%lsrepo``
+        Defines the way to parse the magic command ``%lsrepo``.
         """
         parser = MagicCommandParser(prog="lsrepo",
                                     description='display the content of a repository (GIT or SVN)')
-        parser.add_argument(
-            'path',
-            type=str,
-            nargs="?",
-            help='path',
-            default=".")
+        parser.add_argument('path', type=str, nargs="?", help='path', default=".")
         return parser
 
     @line_magic
     def lsrepo(self, line):
         """
-        define ``%lsrepo``
+        Defines ``%lsrepo``.
 
         .. nbref::
             :tag: file
             :title: lsrepo
 
-            The method returns the files present in a repository (GIT or SVN).
-            The code is equivalent to::
+            The method returns the files present in a repository
+            (:epkg:`GIT` or :pkg:`SVN`). The code is equivalent to::
 
                 from pyquickhelper.filehelper import explore_folder_iterfile_repo
                 res = explore_folder_iterfile_repo(<filename>, <pattern>)
@@ -507,11 +512,12 @@ class MagicFile(MagicClassWithHelpers):
                     r = {"name": r, "directory": True}
                 rows.append(r)
             return pandas.DataFrame(rows)
+        return None
 
     @staticmethod
     def hhelp_parser():
         """
-        defines the way to parse the magic command ``%hhelp``
+        Defines the way to parse the magic command ``%hhelp``.
 
         .. versionadded:: 1.1
         """
@@ -539,7 +545,7 @@ class MagicFile(MagicClassWithHelpers):
     @line_magic
     def hhelp(self, line):
         """
-        define ``%hhelp``, it displays the help for an object in HTML
+        Define ``%hhelp``, it displays the help for an object in :epkg:`HTML`.
 
         .. nbref::
             :title: hhelp
@@ -562,6 +568,7 @@ class MagicFile(MagicClassWithHelpers):
                 return docstring2html(obj, format=format)
             else:
                 print(docstring2html(obj, format=format))
+        return None
 
 
 def register_file_magics(ip=None):

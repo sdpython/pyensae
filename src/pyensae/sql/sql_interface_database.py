@@ -5,10 +5,9 @@
 It will be used to implement magic functions
 """
 import pandas
-
+from pyquickhelper.loghelper import noLOG
 from .database_main import Database
 from .sql_interface import InterfaceSQL, InterfaceSQLException
-from pyquickhelper.loghelper import noLOG
 
 
 class InterfaceSQLDatabase(InterfaceSQL):
@@ -20,12 +19,10 @@ class InterfaceSQLDatabase(InterfaceSQL):
 
     def __init__(self, filename):
         """
-        initialize the object
-
         @param      filename        str or :class:`Database <pyensae.sql.database_main.Database>`
 
-        If *filename* is a :class:`Database <pyensae.sql.database_main.Database>`, the
-        object is kept as is.
+        If *filename* is a :class:`Database <pyensae.sql.database_main.Database>`,
+        the object is kept as is.
 
         .. versionchanged:: 1.1
             Parameter *filename* can be a database.

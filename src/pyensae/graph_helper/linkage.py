@@ -19,13 +19,15 @@ class Linkage(object):
 
     def __init__(self):
         """
-        constructor
-
         :param data: a dataframe or possibly a numpy matrix.
         """
         pass
 
     def linkage(self, df, method, metric):
+        """
+        Mostly calls `linkage
+        <https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html>`_.
+        """
         from scipy.cluster.hierarchy import linkage
         from scipy.spatial.distance import pdist, squareform
         d = pdist(df)

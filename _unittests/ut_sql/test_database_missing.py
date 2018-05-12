@@ -9,10 +9,10 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
-import pandas
-import numpy
 import datetime
 import decimal
+import pandas
+import numpy
 
 
 try:

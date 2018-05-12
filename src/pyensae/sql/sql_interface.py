@@ -17,8 +17,6 @@ class InterfaceSQLException(BaseException):
 
     def __init__(self, message):
         """
-        constructor
-
         @param      message     exception message
         """
         self.message = message
@@ -147,7 +145,7 @@ class InterfaceSQL:
 
     def __init__(self, obj):
         """
-        initialize the object
+        Initializes the object.
 
         @param      obj         anything, see below
 

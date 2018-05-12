@@ -55,7 +55,8 @@ class TestNotebookFolium (unittest.TestCase):
             # an expected error
             # jinja2.exceptions.TemplateNotFound: tiles\openstreetmap\tiles.txt
             warnings.warn(
-                "test_notebook_folium not run on Anaconda, it raises that error: jinja2.exceptions.TemplateNotFound: tiles/openstreetmap/tiles.txt")
+                "test_notebook_folium not run on Anaconda, it raises that error: " +
+                "jinja2.exceptions.TemplateNotFound: tiles/openstreetmap/tiles.txt")
             return
 
         import folium
