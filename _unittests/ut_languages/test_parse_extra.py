@@ -10,11 +10,11 @@ import sys
 import os
 import unittest
 import warnings
+from pyquickhelper.loghelper import fLOG
 
 
 try:
     import src
-    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -24,21 +24,8 @@ except ImportError:
                 "..")))
     if path not in sys.path:
         sys.path.append(path)
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..",
-                "..",
-                "pyquickhelper",
-                "src")))
-    if path not in sys.path:
-        sys.path.append(path)
     import src
-    import pyquickhelper as skip_
 
-from pyquickhelper.loghelper import fLOG
 from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
 from src.pyensae.languages.antlr_grammar_build import build_grammar
 import src.pyensae.languages.antlr_grammar_use as source_parser

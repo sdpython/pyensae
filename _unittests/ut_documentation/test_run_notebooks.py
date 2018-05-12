@@ -6,6 +6,10 @@
 import sys
 import os
 import unittest
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder, is_travis_or_appveyor
+from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
+from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
 
 
 try:
@@ -21,27 +25,7 @@ except ImportError:
         sys.path.append(path)
     import src
 
-try:
-    import pyquickhelper as skip_
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..",
-                "..",
-                "pyquickhelper",
-                "src")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import pyquickhelper as skip_
 
-
-from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import get_temp_folder, is_travis_or_appveyor
-from pyquickhelper.ipythonhelper import execute_notebook_list, execute_notebook_list_finalize_ut
-from pyquickhelper.ipythonhelper import install_python_kernel_for_unittest
 import src.pyensae
 
 

@@ -13,11 +13,12 @@ import datetime
 import decimal
 import pandas
 import numpy
+from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import get_temp_folder, ExtTestCase
 
 
 try:
     import src
-    import pyquickhelper as skip_
 except ImportError:
     path = os.path.normpath(
         os.path.abspath(
@@ -27,22 +28,8 @@ except ImportError:
                 "..")))
     if path not in sys.path:
         sys.path.append(path)
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..",
-                "..",
-                "pyquickhelper",
-                "src")))
-    if path not in sys.path:
-        sys.path.append(path)
     import src
-    import pyquickhelper as skip_
 
-from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import get_temp_folder, ExtTestCase
 from src.pyensae.sql.database_main import Database
 from src.pyensae.sql.database_core import DatabaseCore
 from src.pyensae.sql.database_exception import DBException
