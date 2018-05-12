@@ -124,10 +124,10 @@ class DatabaseCore2:
                     continue
                 lines.append("    " + "\t" + a)
                 continue
-                #~ rrr = self.execute(
+                # ~ rrr = self.execute(
                 #       ~ "SELECT name FROM %s.sqlite_master ORDER BY name;" %
                 #       ~ (a,))
-                #~ for b in rrr:
+                # ~ for b in rrr:
                 #       ~ lines.append("       " + "\t" + b[0])
 
         return res, "\n".join(lines)
@@ -448,7 +448,8 @@ class DatabaseCore2:
 
             return res
         except Exception:
-            self.LOG("(c)line number", num_line, "***unable to process a line columns:", line)
+            self.LOG("(c)line number", num_line,
+                     "***unable to process a line columns:", line)
             return None
 
     def _get_insert_request(self, dico,

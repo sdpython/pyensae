@@ -44,7 +44,7 @@ class TestCodeStyle(ExtTestCase):
                          "sql_interface.py:18: W0231",
                          "file_text_binary.py:680: W0102",
                          "sql_interface_database.py:20: W0231",
-                         "table_formula.py:107: W0631",
+                         "table_formula.py:108: W0631",
                          "R0401: Cyclic import (src.pyensae.sql.sql_interface",
                          ])
 

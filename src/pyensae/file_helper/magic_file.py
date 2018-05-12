@@ -467,7 +467,8 @@ class MagicFile(MagicClassWithHelpers):
         """
         parser = MagicCommandParser(prog="lsrepo",
                                     description='display the content of a repository (GIT or SVN)')
-        parser.add_argument('path', type=str, nargs="?", help='path', default=".")
+        parser.add_argument('path', type=str, nargs="?",
+                            help='path', default=".")
         return parser
 
     @line_magic
