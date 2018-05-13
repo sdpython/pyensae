@@ -11,7 +11,7 @@ Mako
 networkx
 openpyxl
 pandas
--e git+https://github.com/pydata#egg=pandas_datareader
+git+https://github.com/pydata/pandas-datareader.git
 pandocfilters
 pymyinstall
 pyquickhelper>=1.8
