@@ -10,8 +10,8 @@ keyring
 Mako
 networkx
 openpyxl
-pandas!=0.23.0rc2
-pandas_datareader
+pandas
+[-e] git+https://github.com/pydata#egg=pandas_datareader
 pandocfilters
 pymyinstall
 pyquickhelper>=1.8
