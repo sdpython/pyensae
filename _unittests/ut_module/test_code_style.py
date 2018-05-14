@@ -25,7 +25,10 @@ except ImportError:
 class TestCodeStyle(ExtTestCase):
 
     def test_style_src(self):
-        fLOG(OutputPrint=True)
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         thi = os.path.abspath(os.path.dirname(__file__))
         src_ = os.path.normpath(os.path.join(thi, "..", "..", "src"))
         check_pep8(src_, fLOG=fLOG, neg_pattern='.*((Parser)|(Lexer)|(Listener)|(antlr_grammar_use))[.]py$',
@@ -49,7 +52,10 @@ class TestCodeStyle(ExtTestCase):
                          ])
 
     def test_style_test(self):
-        fLOG(OutputPrint=True)
+        fLOG(
+            __file__,
+            self._testMethodName,
+            OutputPrint=__name__ == "__main__")
         thi = os.path.abspath(os.path.dirname(__file__))
         test = os.path.normpath(os.path.join(thi, "..", ))
         check_pep8(test, fLOG=fLOG, neg_pattern="(temp_.*)|(.*test_parse_code.*[.]py)",

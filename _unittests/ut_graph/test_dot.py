@@ -10,7 +10,7 @@ import sys
 import os
 import unittest
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import get_temp_folder, ExtTestCase
+from pyquickhelper.pycode import get_temp_folder, ExtTestCase, skipif_travis
 
 
 try:
@@ -32,6 +32,7 @@ from src.pyensae.graph_helper import run_dot
 
 class TestDot(ExtTestCase):
 
+    @skipif_travis("No such file or directory: 'dot': 'dot'")
     def test_graph_style(self):
         fLOG(
             __file__,

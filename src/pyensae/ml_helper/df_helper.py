@@ -121,6 +121,7 @@ def pandas_groupby_nan(df, by, axis=0, as_index=False, suffix=None, nanback=True
         :showcode:
 
         from pandas import DataFrame
+        from pyensae.ml_helper import pandas_groupby_nan
 
         data = [dict(a="a", b="b", c="c", n=1), dict(b="b", n=2),
                 dict(a="a", n=3), dict(c="c", n=4)]
