@@ -626,7 +626,11 @@ class StockPrices:
                 ax = ax.twinx()
             fig = None
         else:
-            fig, ax = plt.subplots(**args)
+            if 'label' in args:
+                args_ = {k: v for k, v in args.items() if k not in ('label', )}
+            else:
+                args_ = args
+            fig, ax = plt.subplots(**args_)
             ex_h, ex_l = tuple(), tuple()
 
         curve = []

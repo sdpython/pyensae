@@ -29,6 +29,8 @@ from src.pyensae.finance.astock import StockPrices
 
 class TestStockUrlYahoo(unittest.TestCase):
 
+    source = 'yahoo_new'
+
     def test_download_stock_yahoo(self):
         fLOG(
             __file__,
@@ -37,7 +39,7 @@ class TestStockUrlYahoo(unittest.TestCase):
         cache = get_temp_folder(__file__, "temp_url_yahoo")
         exc = []
         for n in range(0, 4):
-            stock = StockPrices("^FCHI", folder=cache, url="yahoo",
+            stock = StockPrices("^FCHI", folder=cache, url=TestStockUrlYahoo.source,
                                 begin=datetime.datetime(2014, 1, 15))
             df = stock.dataframe
             dmin, dmax = df.Date.min(), df.Date.max()
