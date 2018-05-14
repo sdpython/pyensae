@@ -1,24 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-import datetime
-import re
 import sphinxjp.themes.basicstrap
+from pyquickhelper.helpgen.default_conf import set_sphinx_variables
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.split(__file__)[0])))
-sys.path.insert(
-    0,
-    os.path.abspath(
-        os.path.join(
-            os.path.split(__file__)[0],
-            "..",
-            "..",
-            "..",
-            "..",
-            "pyquickhelper",
-            "src")))
-
-from pyquickhelper.helpgen.default_conf import set_sphinx_variables
 
 set_sphinx_variables(__file__, "pyensae", "Xavier Dupré", 2018,
                      "basicstrap", None, locals(), add_extensions=None,

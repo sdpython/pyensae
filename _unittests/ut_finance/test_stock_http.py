@@ -30,8 +30,8 @@ from src.pyensae.finance.astock import StockPrices, StockPricesException
 
 class TestStockHttp(unittest.TestCase):
 
-    source = 'yahoo'
     ticks = ['MSFT', 'GOOGL', 'AAPL']
+    source = 'yahoo_new'
 
     def test_download_stock(self):
         fLOG(

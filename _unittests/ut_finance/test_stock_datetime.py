@@ -31,7 +31,7 @@ from src.pyensae.finance.astock import StockPrices
 class TestStockFileDatetime(unittest.TestCase):
 
     tick = 'GOOGL'
-    source = 'yahoo'
+    source = 'yahoo_new'
 
     def test_save_stock_datetime(self):
         fLOG(

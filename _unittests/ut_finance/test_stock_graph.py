@@ -27,7 +27,7 @@ from src.pyensae.finance.astock import StockPrices
 class TestStockGraph(ExtTestCase):
 
     tick = ['MSFT', 'GOOGL', 'AAPL']
-    source = 'yahoo'
+    source = 'yahoo_new'
 
     def test_graph(self):
         """

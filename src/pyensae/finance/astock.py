@@ -39,25 +39,92 @@ class StockPrices:
             from pyensae.finance import StockPrices
             prices = StockPrices(tick="NASDAQ:MSFT")
             print(prices.dataframe.head())
+
+    The class loads a stock price from either a url or a folder
+    where the data was cached. If a filename
+    ``<folder>/<tick>.<day1>.<day2>.txt`` already exists,
+    it takes it from here. Otherwise, it downloads it.
+
+    A couple of providers have been implemented but it is not
+    easy to keep them up to date as policies from website
+    change on a regular basis.
+    If *url* is ``'yahoo'``, the data will be download using
+    `CAC 40 <http://finance.yahoo.com/q/cp?s=^FCHI+Components>`_.
+    The CAC40 composition is described by
+    `Wikipedia CAC 40 <http://fr.wikipedia.org/wiki/CAC_40>`_.
+    However `Yahoo Finance <https://fr.finance.yahoo.com/>`_
+    introduced the use of cookies in May 2017
+    and it is not so easy to automate.
+    The default provider could be
+    *Google Finance* which has now been integrated into the
+    search engine.
+    Tick names depends on the data prodiver. More details:
+    `European Markets Information <https://www.stockmarketeye.com/users-guide/ticker-symbols-and-data-providers/euro-stocks.html>`_.
+    You can also go to `quandl <https://www.quandl.com/data/EURONEXT/BNP-Bnp-Paribas-Act-A-BNP>`_
+    and get the tick for the module `quandl <https://www.quandl.com/tools/python>`_.
+    As of May 14th, the following error appears when using
+    ``url='yahoo'`` which comes from an error in
+    :epkg:`pandas_reader`::
+
+        ImmediateDeprecationError(DEP_ERROR_MSG.format('Yahoo Daily'))
+        pandas_datareader.exceptions.ImmediateDeprecationError:
+        Yahoo Daily has been immediately deprecated due to large breaks in the API without the
+        introduction of a stable replacement. Pull Requests to re-enable these data
+        connectors are welcome.
+
+        See https://github.com/pydata/pandas-datareader/issues
+
+    ``url='yahoo_new'`` should solve the issue.
+    It relies on :epkg:`yahoo_historial`.
+    Data can be downloaded for a specific period of time.
+    If not specified, it takes the largest available.
+
+    .. exref::
+        :title: Compute the average returns and correlation matrix
+
+        ::
+
+            import pyensae, pandas
+            from pyensae.finance import StockPrices
+            from pyensae.datasource import download_data
+
+            # download the CAC 40 composition from my website (for Yahoo)
+            download_data('cac40_2013_11_11.txt', website='xd')
+
+            # download all the prices (if not already done) and store them into files
+            actions = pandas.read_csv("cac40_2013_11_11.txt", sep="\\t")
+
+            # we remove stocks with not enough historical data
+            stocks = { k:StockPrices(tick = k) for k,v in actions.values }
+            dates = StockPrices.available_dates(stocks.values())
+            stocks = {k:v for k,v in stocks.items() if len(v.missing(dates)) <= 10}
+            print("nb left", len(stocks))
+
+            # we remove dates with missing prices
+            dates = StockPrices.available_dates(stocks.values())
+            ok = dates[dates["missing"] == 0]
+            print("all dates before", len(dates), " after:" , len(ok))
+            for k in stocks:
+                stocks[k] = stocks[k].keep_dates(ok)
+
+            # we compute correlation matrix and returns
+            ret, cor = StockPrices.covariance(stocks.values(), cov = False, ret = True)
+
+    You should also look at
+    `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_.
+    If you use `Google Finance <https://www.google.com/finance>`_
+    as a provider, the tick name is usually
+    prefixed by the market places (NASDAQ for example). The export
+    does not work for all markets places.
+    Another provider was added, ``yahoo_new`` which delegates the task
+    of getting data from `Yahoo Finance <https://finance.yahoo.com/>`_ to module
+    `yahoo-historical <https://github.com/AndrewRPorter/yahoo-historical>`_.
     """
 
     def __init__(self, tick, url="google", folder="cache",
                  begin=None, end=None, sep=",",
                  intern=False, use_dtime=False):
         """
-        Loads a stock price from either a url or a folder where the data was cached.
-        If a filename ``<folder>/<tick>.<day1>.<day2>.txt`` already exists, it takes it from here.
-        Otherwise, it downloads it.
-
-        If url is yahoo, the data will be download using ``http://finance.yahoo.com/q/cp?s=^FCHI+Components``.
-        The CAC40 composition is described `here <http://fr.wikipedia.org/wiki/CAC_40>`_.
-        However Yahoo introduced the use of cookies in May 2017 and it is not so easy to automate.
-        The default provider will be *google*.
-        Tick names depends on the data prodiver. More details:
-        `European Markets Information <https://www.stockmarketeye.com/users-guide/ticker-symbols-and-data-providers/euro-stocks.html>`_.
-        You can also go to `quandl <https://www.quandl.com/data/EURONEXT/BNP-Bnp-Paribas-Act-A-BNP>`_
-        and get the tick for the module `quandl <https://www.quandl.com/tools/python>`_.
-
         @param      tick        tick name, ex ``NASDAQ:MSFT``
         @param      url         if yahoo, downloads the data from there if it was not done before
                                 url is possible, ``'google'``, ``'yahoo_new'``,
@@ -69,51 +136,6 @@ class StockPrices:
         @param      intern      do not use unless you know what to do
                                 (see :meth:`__getitem__ <pyensae.finance.astock.StockPrices.__getitem__>`)
         @param      use_dtime   if True, use DateTime instead of string
-
-        If begin is None, the date will 2000/01/03 (it seems Yahoo Finance does not provide
-        prices for a date before this one).
-        If end is None, the date will the date of yesterday.
-
-        .. exref::
-            :title: Compute the average returns and correlation matrix
-
-            ::
-
-                import pyensae, pandas
-                from pyensae import StockPrices
-
-                # download the CAC 40 composition from my website (for Yahoo)
-                pyensae.download_data('cac40_2013_11_11.txt', website='xd')
-
-                # download all the prices (if not already done) and store them into files
-                actions = pandas.read_csv("cac40_2013_11_11.txt", sep="\\t")
-
-                # we remove stocks with not enough historical data
-                stocks = { k:StockPrices(tick = k) for k,v in actions.values }
-                dates = StockPrices.available_dates(stocks.values())
-                stocks = {k:v for k,v in stocks.items() if len(v.missing(dates)) <= 10}
-                print("nb left", len(stocks))
-
-                # we remove dates with missing prices
-                dates = StockPrices.available_dates(stocks.values())
-                ok    = dates[dates["missing"] == 0]
-                print("all dates before", len(dates), " after:" , len(ok))
-                for k in stocks:
-                    stocks[k] = stocks[k].keep_dates(ok)
-
-                # we compute correlation matrix and returns
-                ret, cor = StockPrices.covariance(stocks.values(), cov = False, ret = True)
-
-        You should also look at
-        `pyensae et notebook <http://www.xavierdupre.fr/blog/notebooks/example%20pyensae.html>`_.
-        If you use `Google Finance <https://www.google.com/finance>`_
-        as a provider, the tick name is usually
-        prefixed by the market places (NASDAQ for example). The export
-        does not work for all markets places.
-        Another provider was added, ``yahoo_new`` which delegates the task
-        of getting data from `Yahoo Finance <https://finance.yahoo.com/>`_ to module
-        `yahoo-historical <https://github.com/AndrewRPorter/yahoo-historical>`_.
-
         """
         if isinstance(url, pandas.DataFrame):
             self.datadf = url

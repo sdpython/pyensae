@@ -40,10 +40,6 @@ class TestGraph(ExtTestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        if "travis" in sys.executable:
-            # it requires scipy which is not included in the requirements.txt
-            return
-
         temp = get_temp_folder(__file__, "temp_corrplot")
         clog = CustomLog(temp)
         clog("fix")

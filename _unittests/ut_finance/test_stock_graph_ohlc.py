@@ -30,7 +30,7 @@ from src.pyensae.finance.astock import StockPrices
 class TestStockGraphOHLC(ExtTestCase):
 
     tick = 'MSFT'
-    source = 'yahoo'
+    source = 'yahoo_new'
 
     def test_graph_ohlc(self):
         fLOG(

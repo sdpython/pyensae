@@ -5,12 +5,12 @@
 """
 import warnings
 import numpy
-from pandas import Index
+from pandas import Index, DataFrame
 
 
 def numpy_types():
     """
-    Returns the list of numpy available types.
+    Returns the list of :epkg:`numpy` available types.
 
     @return     list of types
     """
@@ -38,7 +38,7 @@ def numpy_types():
 
 def pandas_fillna(df, by, hasna=None, suffix=None):
     """
-    Replaces the nan value for something not nan.
+    Replaces the :epkg:`nan` values for something not :epkg:`nan`.
 
     @param      df      dataframe
     @param      by      list of columns for which we need to replace nan
@@ -83,19 +83,50 @@ def pandas_fillna(df, by, hasna=None, suffix=None):
 
 def pandas_groupby_nan(df, by, axis=0, as_index=False, suffix=None, nanback=True, **kwargs):
     """
-    Does a *groupby* including keeping missing values.
+    Does a *groupby* including keeping missing values (:epkg:`nan`).
 
     @param      df          dataframe
     @param      by          column or list of columns
     @param      axis        only 0 is allowed
     @param      as_index    should be False
     @param      suffix      None or a string
-    @param      nanback     nan back in this index (does not work when grouping by multiple columns)
+    @param      nanback     put :epkg:`nan` back in the index,
+                            otherwise it leaves a replacement for :epkg:`nan`.
+                            (does not work when grouping by multiple columns)
     @param      kwargs      other parameters sent to
                             `groupby <http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.groupby.html>`_
     @return                 groupby results
 
     See `groupby and missing values <http://pandas-docs.github.io/pandas-docs-travis/groupby.html#na-and-nat-group-handling>`_.
+    If no :epkg:`nan` is detected, the function falls back in regular
+    :epkg:`pandas:DataFrame:groupby` which has the following
+    behavior.
+
+    .. runpython::
+        :showcode:
+
+        from pandas import DataFrame
+
+        data = [dict(a="a", b="b", c="c", n=1), dict(b="b", n=2),
+                dict(a="a", n=3), dict(c="c", n=4)]
+        df = DataFrame(data)
+        print(df)
+        gr = df.groupby(["a", "b", "c"]).sum()
+        print(gr)
+
+    Function @see fn pandas_groupby_nan modifies the behavior
+    with:
+
+    .. runpython::
+        :showcode:
+
+        from pandas import DataFrame
+
+        data = [dict(a="a", b="b", c="c", n=1), dict(b="b", n=2),
+                dict(a="a", n=3), dict(c="c", n=4)]
+        df = DataFrame(data)
+        gr2 = pandas_groupby_nan(df, ["a", "b", "c"])
+        print(gr2)
     """
     if axis != 0:
         raise NotImplementedError("axis should be 0")
@@ -115,8 +146,7 @@ def pandas_groupby_nan(df, by, axis=0, as_index=False, suffix=None, nanback=True
         res = df_copy.groupby(by, axis=axis, as_index=as_index, **kwargs)
         if len(by) == 1:
             if not nanback:
-                import pandas
-                dummy = pandas.DataFrame([{"a": "a"}])
+                dummy = DataFrame([{"a": "a"}])
                 do = dummy.dtypes[0]
                 typ = {c: t for c, t in zip(df.columns, df.dtypes)}
                 if typ[by[0]] != do:
@@ -133,16 +163,17 @@ def pandas_groupby_nan(df, by, axis=0, as_index=False, suffix=None, nanback=True
                 res.grouper.groupings[0].obj[b].replace(
                     fnan, numpy.nan, inplace=True)
                 if isinstance(res.grouper.groupings[0].grouper, numpy.ndarray):
-                    res.grouper.groupings[0].grouper = numpy.array(new_val)
+                    arr = numpy.array(new_val)
+                    res.grouper.groupings[0].grouper = arr
+                    if hasattr(res.grouper.groupings[0], '_cache') and 'result_index' in res.grouper.groupings[0]._cache:
+                        del res.grouper.groupings[0]._cache['result_index']
                 else:
                     raise NotImplementedError("Not implemented for type: {0}".format(
                         type(res.grouper.groupings[0].grouper)))
-                res.grouper._cache[
-                    'result_index'] = res.grouper.groupings[0]._group_index
+                res.grouper._cache['result_index'] = res.grouper.groupings[0]._group_index
         else:
             if not nanback:
-                import pandas
-                dummy = pandas.DataFrame([{"a": "a"}])
+                dummy = DataFrame([{"a": "a"}])
                 do = dummy.dtypes[0]
                 typ = {c: t for c, t in zip(df.columns, df.dtypes)}
                 for b in by:

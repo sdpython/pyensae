@@ -9,6 +9,7 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
+from PIL import Image
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 
@@ -62,7 +63,6 @@ class TestBlockDiag(unittest.TestCase):
             }
             """.replace("            ", "")
         img = draw_diagram(code, format="pillow")
-        from PIL import Image
         self.assertTrue(img, Image)
         self.assertEqual(img.size, (832, 200))
 
