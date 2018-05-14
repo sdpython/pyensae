@@ -107,11 +107,10 @@ def pandas_groupby_nan(df, by, axis=0, as_index=False, suffix=None, nanback=True
 
         from pandas import DataFrame
 
-        data = [dict(a="a", b="b", c="c", n=1), dict(b="b", n=2),
-                dict(a="a", n=3), dict(c="c", n=4)]
+        data = [dict(a=2, ind="a", n=1), dict(a=2, ind="a"), dict(a=3, ind="b"), dict(a=30)]
         df = DataFrame(data)
         print(df)
-        gr = df.groupby(["a", "b", "c"]).sum()
+        gr = df.groupby(["ind"]).sum()
         print(gr)
 
     Function @see fn pandas_groupby_nan modifies the behavior
@@ -123,10 +122,9 @@ def pandas_groupby_nan(df, by, axis=0, as_index=False, suffix=None, nanback=True
         from pandas import DataFrame
         from pyensae.ml_helper import pandas_groupby_nan
 
-        data = [dict(a="a", b="b", c="c", n=1), dict(b="b", n=2),
-                dict(a="a", n=3), dict(c="c", n=4)]
+        data = [dict(a=2, ind="a", n=1), dict(a=2, ind="a"), dict(a=3, ind="b"), dict(a=30)]
         df = DataFrame(data)
-        gr2 = pandas_groupby_nan(df, ["a", "b", "c"])
+        gr2 = pandas_groupby_nan(df, ["ind"]).sum()
         print(gr2)
     """
     if axis != 0:
