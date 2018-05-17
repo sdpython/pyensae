@@ -62,4 +62,3 @@ Magic command for notebooks
 +++++++++++++++++++++++++++
 
 .. autosignature:: pyensae.file_helper.magic_file.MagicFile
-    :members:
