@@ -35,7 +35,7 @@ def _private_test_style_src(fLOG, run_lint, verbose=False, pattern=".*[.]py$"):
 def _private_test_style_test(fLOG, run_lint, verbose=False, pattern=".*[.]py$"):
     thi = os.path.abspath(os.path.dirname(__file__))
     test_ = os.path.normpath(os.path.join(thi, "..", "..", '_unittests'))
-    check_pep8(test, fLOG=fLOG, neg_pattern="(temp_.*)|(.*test_parse_code.*[.]py)",
+    check_pep8(test_, fLOG=fLOG, neg_pattern="(temp_.*)|(.*test_parse_code.*[.]py)",
                verbose=verbose, pattern=pattern, run_lint=run_lint,
                pylint_ignore=('C0103', 'C1801', 'R0201', 'R1705', 'W0108', 'W0613',
                               'C0111', 'W0622', 'W0612', 'C0412', 'W0621',
