@@ -59,9 +59,6 @@ class Corrplot(Linkage):
             a numpy matrix. Note, however, that values must be between -1 and 1. If not,
             or if the matrix (or list of lists) is not squared, then correlation is
             computed. The data or computed correlation is stored in :attr:`df` attribute.
-        :param bool compute_correlation: if the matrix is non-squared or values are not
-            bounded in -1,+1, correlation is computed. If you do not want that behaviour,
-            set this parameter to False. (True by default).
         :param na: replace NA values with this value (default 0)
 
         The :attr:`params` contains some tunable parameters for the colorbar in the
@@ -174,6 +171,7 @@ class Corrplot(Linkage):
         :param order_metric: see : meth:`order`.
         :param cmap: a valid cmap from matplotlib or colormap package (e.g.,
             'jet', or 'copper'). Default is red/white/blue colors.
+        :param binarise_color: two colors only, negative, positive
         :param ax: a matplotlib axes.
         :param figsize: gives that parameter to the new created figure
         :return: ax (matplotlib axes)

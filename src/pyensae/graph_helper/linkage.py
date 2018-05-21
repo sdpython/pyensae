@@ -19,7 +19,7 @@ class Linkage(object):
 
     def __init__(self):
         """
-        :param data: a dataframe or possibly a numpy matrix.
+        unused
         """
         pass
 
@@ -27,6 +27,14 @@ class Linkage(object):
         """
         Mostly calls `linkage
         <https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html>`_.
+
+        @param      df          dataframe
+        @param      method      see `linkage
+                                <https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html>`_
+        @param      metric      see `linkage
+                                <https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html>`_
+        @return                 output of `linkage
+                                <https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html>`_
         """
         from scipy.cluster.hierarchy import linkage
         from scipy.spatial.distance import pdist, squareform

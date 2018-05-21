@@ -41,6 +41,7 @@ class TreeStringListener(ParseTreeListener):
         constructor
 
         @param      parser      parser used to parse the code
+        @param      fLOG        logging function
         """
         ParseTreeListener.__init__(self)
         self.buffer = []
@@ -82,7 +83,7 @@ class TreeStringListener(ParseTreeListener):
 
     def add_code(self, node):
         """
-        Converts one node into python.
+        Converts one node into :epkg:`python`.
         """
         name = self.terminal_node_name(node)
         text = node.symbol.text
@@ -495,7 +496,7 @@ class TreeStringListener(ParseTreeListener):
 
     def empty_stack(self):
         """
-        Empty the stack.
+        Empties the stack.
         """
         if len(self.stack) > 0 and len(self.block) > 0 and not self.block[-1]:
             self.indent -= 1
@@ -656,7 +657,7 @@ class TreeStringListener(ParseTreeListener):
 
     def has_parent(self, current, parent, depth=None):
         """
-        Tell if *parent* is one of the parents of *current*.
+        Tells if *parent* is one of the parents of *current*.
 
         @param      current     current node
         @param      parent      parent to look for
@@ -678,7 +679,7 @@ class TreeStringListener(ParseTreeListener):
 
     def to_python(self, name, node):
         """
-        Convert a couple (name, node) into Python.
+        Converts a couple *(name, node)* into :epkg:`Python`.
         """
         if name == "Affectop":
             return "="
@@ -791,7 +792,7 @@ class TreeStringListener(ParseTreeListener):
 
     def terminal_node_name(self, node):
         """
-        Converts a terminal node into a rule name
+        Converts a terminal node into a rule name.
         """
         return str(type(node.parentCtx)).split('.')[-1].strip("]['><").replace("Context", "")
 
@@ -842,17 +843,29 @@ class TreeStringListener(ParseTreeListener):
         return self.get_python() + "\n----\n" + "\n".join(self.buffer)
 
     def enterRanges(self, ctx: RParser.RangesContext):
+        """
+        event
+        """
         self.fLOG("    add 'range('")
         self.stack.append(("Ranges", "range("))
 
     def exitRanges(self, ctx: RParser.RangesContext):
+        """
+        event
+        """
         self.fLOG("    add ') # range'")
         self.stack.append(("Ranges", ")"))
 
     def enterIntersections(self, ctx: RParser.RangesContext):
+        """
+        event
+        """
         self.fLOG("    add 'set('")
         self.stack.append(("Intersections", "set("))
 
     def exitIntersections(self, ctx: RParser.RangesContext):
+        """
+        event
+        """
         self.fLOG("    add ') # set'")
         self.stack.append(("Intersections", ")"))

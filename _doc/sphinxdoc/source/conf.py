@@ -15,8 +15,10 @@ blog_background = False
 
 nblinks = {"code-r2python": blog_root + "pyensae/languages/rconverter.html"}
 
+epkg_dictionary["antlr4"] = 'https://github.com/antlr/antlr4'
 epkg_dictionary["blockdiag"] = 'http://blockdiag.com/'
 epkg_dictionary["json"] = 'https://en.wikipedia.org/wiki/JSON'
 epkg_dictionary["manydataapi"] = 'http://www.xavierdupre.fr/app/manydataapi/helpsphinx/index.html'
+epkg_dictionary["networkx"] = 'https://networkx.github.io/'
 epkg_dictionary["pyenbc"] = 'http://www.xavierdupre.fr/app/pyenbc/helpsphinx/index.html'
 epkg_dictionary["SQLite3"] = 'https://www.sqlite.org/index.html'

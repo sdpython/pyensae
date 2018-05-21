@@ -11,7 +11,7 @@ from .joins import df_crossjoin
 def add_missing_indices(df, column, all_values, values=None, fillvalue=numpy.nan):
     """
     After aggregation, it usually happens that the series is sparse.
-    This function add rows for missing time.
+    This function adds rows for missing time.
 
     @param      df          dataframe to extend
     @param      column      column with time
@@ -27,8 +27,8 @@ def add_missing_indices(df, column, all_values, values=None, fillvalue=numpy.nan
 
             import pandas
             from pyensae.ml_helper import add_missing_indices
-            df = pandas.DataFrame([{"x":3, "y": 4, "z":1}, {"x":5, "y": 6, "z":2}])
-            df2 = add_missing_indices(df, "x", ["y", "z"], [3,4,5,6])
+            df = pandas.DataFrame([{"x": 3, "y": 4, "z": 1}, {"x": 5, "y": 6, "z": 2}])
+            df2 = add_missing_indices(df, "x", [3, 4, 5, 6])
             print(df2)
 
         .. runpython::
@@ -36,8 +36,8 @@ def add_missing_indices(df, column, all_values, values=None, fillvalue=numpy.nan
 
             import pandas
             from pyensae.ml_helper import add_missing_indices
-            df = pandas.DataFrame([{"x":3, "y": 4, "z":1}, {"x":5, "y": 6, "z":2}])
-            df2 = add_missing_indices(df, "x", ["y"], [3,4,5,6])
+            df = pandas.DataFrame([{"x": 3, "y": 4, "z": 1}, {"x": 5, "y": 6, "z": 2}])
+            df2 = add_missing_indices(df, "x", values=["y"], all_values=[3, 4, 5, 6])
             print(df2)
 
     """
@@ -61,6 +61,12 @@ def add_missing_indices(df, column, all_values, values=None, fillvalue=numpy.nan
     else:
         raise TypeError(
             "Unexpected type for all_values '{0}'".format(type(all_values)))
+
+    # Merge only happens on columns with the same type.
+    cols = set(dfti.columns)
+    for c in df.columns:
+        if c in cols and dfti[c].dtype != df[c].dtype:
+            dfti[c] = dfti[c].astype(df[c].dtype)
 
     if len(keys) == 0:
         dfj = df.merge(dfti, on=column, how="right")
