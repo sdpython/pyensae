@@ -27,7 +27,7 @@ from src.pyensae.ml_helper import add_missing_indices
 
 class TestPandasMissing(unittest.TestCase):
 
-    def _test_missing_indices(self):
+    def test_missing_indices(self):
         df = pandas.DataFrame(
             [{"x": 3, "y": 4, "z": 1}, {"x": 5, "y": 6, "z": 2}])
         df2 = add_missing_indices(
