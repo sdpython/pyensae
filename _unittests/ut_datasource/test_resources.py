@@ -1,5 +1,5 @@
 """
-@brief      test log(time=2s)
+@brief      test log(time=3s)
 
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
@@ -9,7 +9,7 @@ will sort all test files by increasing time and run them.
 import sys
 import os
 import unittest
-from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import ExtTestCase, get_temp_folder
 
 
 try:
@@ -25,47 +25,27 @@ except ImportError:
         sys.path.append(path)
     import src
 
-from src.pyensae.datasource.http_retrieve import download_data
+from src.pyensae.datasource.http_retrieve import download_data, DownloadDataException
 
 
-class TestResources (unittest.TestCase):
+class TestResources(ExtTestCase):
 
-    def test_import_one(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-        fold = os.path.join(
-            os.path.abspath(
-                os.path.split(__file__)[0]),
-            "temp_http")
-        if not os.path.exists(fold):
-            os.mkdir(fold)
+    def test_download_data(self):
+        fold = get_temp_folder(__file__, "temp_download_data")
         exp = ["VOEUX01.txt", "voeux.zip"]
-        for f in exp:
-            g = os.path.join(fold, f)
-            if os.path.exists(g):
-                os.remove(g)
         one = "voeux.zip"
-        res = download_data(one, website="xd", whereTo=fold, fLOG=fLOG)
-        fLOG(len(res), res)
-        assert len(res) == 14
-        assert "VOEUX01.txt" in res[0]
+        res = download_data(one, website="xd", whereTo=fold, timeout=2)
+        self.assertEqual(len(res), 14)
+        self.assertIn("VOEUX01.txt", res[0])
         for f in exp:
             g = os.path.join(fold, f)
-            assert os.path.exists(g)
+            self.assertExists(g)
 
-    def test_import_all(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-        all = [" "]
-        if __name__ == "__main__":
-            # we only test all the resources if this file is the main file
-            # otherwise it takes too much time
-            for a in all:
-                pass
+    def test_download_data_failures(self):
+        fold = get_temp_folder(__file__, "temp_download_data_failures")
+        one = "voeux2.zip"
+        self.assertRaise(lambda: download_data(one, website="xd", whereTo=fold, timeout=2),
+                         DownloadDataException)
 
 
 if __name__ == "__main__":

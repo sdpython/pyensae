@@ -18,6 +18,13 @@ class DownloadDataException(Exception):
     pass
 
 
+class RetrieveDataException(Exception):
+    """
+    raised when data cannot be downloaded
+    """
+    pass
+
+
 def remove_empty_line(file):
     """
     Removes empty line in an imported file.
@@ -71,8 +78,8 @@ def download_data(name, moduleName=None, url=None, glo=None,
     look for it on http://www.xavierdupre.fr/... (website),
     the file is copied at this file location and uncompressed if it is a zip file (or a tar.gz file).
 
-    @param      name        (str) name of the module
-    @param      moduleName  (str|None) like import name as moduleName, None for name
+    @param      name        (str) name of the file to download
+    @param      moduleName  (str|None) like import name as moduleName if *name* is a module
     @param      url         (str|list|None) link to the website to use (or the websites if list)
     @param      glo         (dict|None) if None, it will be replaced ``globals()``
     @param      loc         (dict|None) if None, it will be replaced ``locals()``
@@ -114,6 +121,20 @@ def download_data(name, moduleName=None, url=None, glo=None,
         tries the first one which contains the file.
 
     """
+    if isinstance(url, list):
+        outfiles = []
+        for i, u in enumerate(url):
+            n, e = os.path.splitext(name)
+            n2 = "{0}-{1}.{2}".format(n, i, e)
+            res = download_data(n2, moduleName=moduleName, url=u, glo=glo,
+                                loc=loc, whereTo=whereTo, website=website, timeout=timeout,
+                                retry=retry, silent=silent, fLOG=fLOG)
+            if isinstance(res, list):
+                outfile.extend(res)
+            else:
+                outfile.append(res)
+        return outfiles
+
     from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz, decompress_bz2
 
     if glo is None:
@@ -143,77 +164,61 @@ def download_data(name, moduleName=None, url=None, glo=None,
     if name in sys.modules:
         return sys.modules[name]
     elif "." not in name:
-        fLOG("    unable to find module ", name)
+        fLOG("[download_data]    unable to find module ", name)
 
     file = name if "." in name else "%s.py" % name
     outfile = file if whereTo == "." else os.path.join(whereTo, file)
 
-    if not os.path.exists(outfile):
-        path = "../../../../complements_site_web"
-        f2 = os.path.join(path, file)
-        if os.path.exists(f2):
-            fLOG("[download_data] adding file", f2)
-            u = open(f2, "r")
-            alls = u.read()
-            u.close()
-        else:
-            if not isinstance(url, list):
-                urls = [url]
-            else:
-                urls = url
-            excs = []
-            success = False
-            for url in urls:
-                if success:
+    if url is not None and not os.path.exists(outfile):
+        excs = []
+        success = False
+        alls = None
+        url += file
+        fLOG("[download_data]    download '{0}' to '{1}'".format(
+            url, outfile))
+        while retry > 0:
+            try:
+                u = urllib.request.urlopen(
+                    url) if timeout is None else urllib.request.urlopen(url, timeout=timeout)
+                alls = u.read()
+                u.close()
+                success = True
+                break
+            except ConnectionResetError as ee:
+                if retry <= 0:
+                    exc = DownloadDataException(
+                        "Unable (1) to retrieve data from '{0}'. Error: {1}".format(url, ee))
+                    excs.append(exc)
+                    excs.append(ee)
                     break
-                url += file
-                fLOG("[download_data]    download '{0}' to '{1}'".format(
-                    url, outfile))
-                while retry > 0:
-                    try:
-                        u = urllib.request.urlopen(
-                            url) if timeout is None else urllib.request.urlopen(url, timeout=timeout)
-                        alls = u.read()
-                        u.close()
-                        success = True
-                        break
-                    except ConnectionResetError as ee:
-                        if retry <= 0:
-                            exc = DownloadDataException(
-                                "Unable (1) to retrieve data from '{0}'. Error: {1}".format(url, ee))
-                            excs.append(exc)
-                            excs.append(ee)
-                            break
-                        else:
-                            fLOG("[download_data] (1)  fail and retry to download '{0}' to '{1}'".format(
-                                url, outfile))
-                            # We wait for 2 seconds.
-                            time.sleep(2)
-                    except Exception as e:
-                        if retry <= 1:
-                            exc = DownloadDataException(
-                                "Unable (2) to retrieve data from '{0}'. Error: {1}".format(url, e))
-                            excs.append(exc)
-                            excs.append(e)
-                            break
-                        else:
-                            fLOG("[download_data] (2)  fail and retry to download '{0}' to '{1}'".format(
-                                url, outfile))
-                            # We wait for 2 seconds.
-                            time.sleep(2)
-                    retry -= 1
-            if not success:
-                if len(excs) > 0:
-                    raise excs[0]
                 else:
-                    raise DownloadDataException(
-                        "Unable (3) to retrieve data from '{0}'. Error: {1}".format(url, e))
+                    fLOG("[download_data] (1)  fail and retry to download '{0}' to '{1}'".format(
+                        url, outfile))
+                    # We wait for 2 seconds.
+                    time.sleep(2)
+            except Exception as e:
+                if retry <= 1:
+                    exc = DownloadDataException(
+                        "Unable (2) to retrieve data from '{0}'. Error: {1}".format(url, e))
+                    excs.append(exc)
+                    excs.append(e)
+                    break
+                else:
+                    fLOG("[download_data] (2)  fail and retry to download '{0}' to '{1}'".format(
+                        url, outfile))
+                    # We wait for 2 seconds.
+                    time.sleep(2)
+            retry -= 1
+
+        if success and alls is not None:
             u = open(outfile, "wb")
             u.write(alls)
             u.close()
-    else:
-        if name.endswith(".tar.gz") and os.stat(outfile).st_size > 2 ** 20:
-            return [outfile]
+        elif len(excs) > 0:
+            raise excs[0]
+        else:
+            raise DownloadDataException(
+                "Unable to retrieve data from '{0}'".format(url))
 
     if name.endswith(".zip"):
         return decompress_zip(outfile, whereTo, fLOG)
@@ -286,7 +291,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
             fLOG("[download_data] sys.path ", sys.path)
             for _ in sys.path:
                 fLOG("[download_data]     path ", _)
-            fLOG("sys.modules.keys()", list(sys.modules.keys()))
+            fLOG("[download_data] sys.modules.keys()", list(sys.modules.keys()))
             for _ in sorted(sys.modules):
                 fLOG("[download_data]     modules ", _)
             raise e
