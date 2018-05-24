@@ -34,7 +34,7 @@ class TestResources(ExtTestCase):
         fold = get_temp_folder(__file__, "temp_download_data")
         exp = ["VOEUX01.txt", "voeux.zip"]
         one = "voeux.zip"
-        res = download_data(one, website="xd", whereTo=fold, timeout=2)
+        res = download_data(one, website="xd", whereTo=fold, timeout=10)
         self.assertEqual(len(res), 14)
         self.assertIn("VOEUX01.txt", res[0])
         for f in exp:
@@ -44,7 +44,7 @@ class TestResources(ExtTestCase):
     def test_download_data_failures(self):
         fold = get_temp_folder(__file__, "temp_download_data_failures")
         one = "voeux2.zip"
-        self.assertRaise(lambda: download_data(one, website="xd", whereTo=fold, timeout=2),
+        self.assertRaise(lambda: download_data(one, website="xd", whereTo=fold, timeout=10),
                          DownloadDataException)
 
 
