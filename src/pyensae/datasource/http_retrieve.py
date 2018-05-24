@@ -121,20 +121,6 @@ def download_data(name, moduleName=None, url=None, glo=None,
         tries the first one which contains the file.
 
     """
-    if isinstance(url, list):
-        outfiles = []
-        for i, u in enumerate(url):
-            n, e = os.path.splitext(name)
-            n2 = "{0}-{1}.{2}".format(n, i, e)
-            res = download_data(n2, moduleName=moduleName, url=u, glo=glo,
-                                loc=loc, whereTo=whereTo, website=website, timeout=timeout,
-                                retry=retry, silent=silent, fLOG=fLOG)
-            if isinstance(res, list):
-                outfile.extend(res)
-            else:
-                outfile.append(res)
-        return outfiles
-
     from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz, decompress_bz2
 
     if glo is None:
@@ -160,6 +146,35 @@ def download_data(name, moduleName=None, url=None, glo=None,
     if not os.path.exists(whereTo):
         raise FileExistsError("this folder should exists " + whereTo)
 
+    # Multiple downloads.
+    if isinstance(url, list):
+        if not isinstance(name, list):
+            raise TypeError("If url is a list, name be a list too.")
+        if len(name) != len(url):
+            raise ValueError("url and name must be list of the same size.")
+        outfiles = []
+        for i, u in enumerate(url):
+            res = download_data(name[i], moduleName=moduleName, url=u, glo=glo,
+                                loc=loc, whereTo=whereTo, website=website, timeout=timeout,
+                                retry=retry, silent=silent, fLOG=fLOG)
+            if isinstance(res, list):
+                outfiles.extend(res)
+            else:
+                outfiles.append(res)
+        return outfiles
+    elif isinstance(name, list):
+        outfiles = []
+        for i, n in enumerate(name):
+            res = download_data(n, moduleName=moduleName, url=url, glo=glo,
+                                loc=loc, whereTo=whereTo, website=website, timeout=timeout,
+                                retry=retry, silent=silent, fLOG=fLOG)
+            if isinstance(res, list):
+                outfiles.extend(res)
+            else:
+                outfiles.append(res)
+        return outfiles
+
+    # Single download.
     origname = name
     if name in sys.modules:
         return sys.modules[name]

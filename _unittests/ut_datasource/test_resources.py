@@ -33,8 +33,19 @@ class TestResources(ExtTestCase):
     def test_download_data(self):
         fold = get_temp_folder(__file__, "temp_download_data")
         exp = ["VOEUX01.txt", "voeux.zip"]
-        one = "voeux.zip"
-        res = download_data(one, website="xd", whereTo=fold, timeout=10)
+        res = download_data(["voeux.zip"], website="xd",
+                            whereTo=fold, timeout=10)
+        self.assertEqual(len(res), 14)
+        self.assertIn("VOEUX01.txt", res[0])
+        for f in exp:
+            g = os.path.join(fold, f)
+            self.assertExists(g)
+
+    def test_download_data2(self):
+        fold = get_temp_folder(__file__, "temp_download_data2")
+        exp = ["VOEUX01.txt", "voeux.zip"]
+        res = download_data(["voeux.zip"], website=["xd"],
+                            whereTo=fold, timeout=10)
         self.assertEqual(len(res), 14)
         self.assertIn("VOEUX01.txt", res[0])
         for f in exp:
