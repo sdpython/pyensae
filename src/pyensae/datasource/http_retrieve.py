@@ -148,6 +148,9 @@ def download_data(name, moduleName=None, url=None, glo=None,
 
     # Multiple downloads.
     if isinstance(url, list):
+        single = isinstance(name, str)
+        if single:
+            name = [name] * len(url)
         if not isinstance(name, list):
             raise TypeError("If url is a list, name be a list too.")
         if len(name) != len(url):
@@ -161,6 +164,8 @@ def download_data(name, moduleName=None, url=None, glo=None,
                 outfiles.extend(res)
             else:
                 outfiles.append(res)
+                if single and res is not None and os.path.exists(res):
+                    break
         return outfiles
     elif isinstance(name, list):
         outfiles = []
