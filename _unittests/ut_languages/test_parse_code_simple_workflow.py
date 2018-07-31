@@ -28,7 +28,7 @@ except ImportError:
 
 from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code, get_tree_graph
 from src.pyensae.languages.antlr_grammar_build import build_grammar
-from src.pyensae.graph_helper import run_dot
+from src.pyensae.graphhelper import run_dot
 import src.pyensae.languages.antlr_grammar_use as source_parser
 
 

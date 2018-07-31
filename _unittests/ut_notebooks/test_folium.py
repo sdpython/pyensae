@@ -23,7 +23,7 @@ except ImportError:
     import src
 
 
-from src.pyensae.notebook_helper import folium_html_map, folium_embed_map
+from src.pyensae.notebookhelper import folium_html_map, folium_embed_map
 
 
 class TestNotebookFolium (unittest.TestCase):

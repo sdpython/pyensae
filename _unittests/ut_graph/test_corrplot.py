@@ -29,7 +29,7 @@ except ImportError:
         sys.path.append(path)
     import src
 
-from src.pyensae.graph_helper import Corrplot
+from src.pyensae.graphhelper import Corrplot
 
 
 class TestGraph(ExtTestCase):

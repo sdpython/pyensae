@@ -22,7 +22,7 @@ except ImportError:
     import src
 
 
-from src.pyensae.ml_helper import df_crossjoin
+from src.pyensae.mlhelper import df_crossjoin
 
 
 class TestPandasJoins (unittest.TestCase):

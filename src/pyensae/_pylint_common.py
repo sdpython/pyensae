@@ -29,6 +29,7 @@ def _private_test_style_src(fLOG, run_lint, verbose=False, pattern=".*[.]py$"):
                      "sql_interface_database.py:20: W0231",
                      "table_formula.py:108: W0631",
                      "R0401: Cyclic import (src.pyensae.sql.sql_interface",
+                     "database_core2.py:230: R1714",
                      ])
 
 

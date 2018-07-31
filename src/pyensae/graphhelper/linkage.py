@@ -11,7 +11,7 @@ See also `biokit license <https://github.com/biokit/biokit/blob/master/LICENSE>`
 """
 
 
-class Linkage(object):
+class Linkage:
     """
     Linkage used in other tools such as Heatmap,
     the class requires `scipy <http://www.scipy.org/>`_.

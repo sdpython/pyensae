@@ -27,7 +27,7 @@ except ImportError:
     import src
 
 
-from src.pyensae.graph_helper import run_dot
+from src.pyensae.graphhelper import run_dot
 
 
 class TestDot(ExtTestCase):

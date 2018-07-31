@@ -27,7 +27,7 @@ except ImportError:
         sys.path.append(path)
     import src
 
-from src.pyensae.graph_helper import draw_diagram
+from src.pyensae.graphhelper import draw_diagram
 
 
 class TestBlockDiag(unittest.TestCase):

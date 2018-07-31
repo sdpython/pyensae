@@ -27,8 +27,8 @@ except ImportError:
         sys.path.append(path)
     import src
 
-from src.pyensae.file_helper.magic_file import MagicFile
-from src.pyensae.file_helper import file_tail, file_encoding
+from src.pyensae.filehelper.magic_file import MagicFile
+from src.pyensae.filehelper import file_tail, file_encoding
 from src.pyensae.sql import Database
 
 

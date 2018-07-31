@@ -27,7 +27,7 @@ except ImportError:
     import src
 
 from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_graph, parse_code
-from src.pyensae.graph_helper import run_dot
+from src.pyensae.graphhelper import run_dot
 
 
 class TestParseCodeGraph (unittest.TestCase):

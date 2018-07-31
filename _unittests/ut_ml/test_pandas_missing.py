@@ -22,7 +22,7 @@ except ImportError:
     import src
 
 
-from src.pyensae.ml_helper import add_missing_indices
+from src.pyensae.mlhelper import add_missing_indices
 
 
 class TestPandasMissing(unittest.TestCase):

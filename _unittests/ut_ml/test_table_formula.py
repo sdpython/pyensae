@@ -25,7 +25,7 @@ except ImportError:
         sys.path.append(path)
     import src
 
-from src.pyensae.ml_helper import TableFormula
+from src.pyensae.mlhelper import TableFormula
 
 
 class TestTableFormula(unittest.TestCase):

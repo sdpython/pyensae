@@ -393,7 +393,6 @@ class MagicFile(MagicClassWithHelpers):
             with open(filename, "w", encoding="utf8") as f:
                 f.write("# -*- coding: utf8 -*-\n")
                 f.write(cell.replace("\r", ""))
-        return None
 
     @staticmethod
     def runpy_parser():

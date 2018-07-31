@@ -121,7 +121,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
         tries the first one which contains the file.
 
     """
-    from ..file_helper.decompress_helper import decompress_zip, decompress_targz, decompress_gz, decompress_bz2
+    from ..filehelper.decompress_helper import decompress_zip, decompress_targz, decompress_gz, decompress_bz2
 
     if glo is None:
         glo = globals()

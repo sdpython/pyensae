@@ -26,7 +26,7 @@ except ImportError:
         sys.path.append(path)
     import src
 
-from src.pyensae.file_helper.decompress_helper import decompress_bz2
+from src.pyensae.filehelper.decompress_helper import decompress_bz2
 
 
 class TestFilesBz2(ExtTestCase):

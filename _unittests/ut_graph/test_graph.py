@@ -26,7 +26,7 @@ except ImportError:
         sys.path.append(path)
     import src
 
-from src.pyensae.graph_helper.magic_graph import MagicGraph
+from src.pyensae.graphhelper.magic_graph import MagicGraph
 
 
 class TestGraph (unittest.TestCase):
@@ -40,8 +40,7 @@ class TestGraph (unittest.TestCase):
         fix_tkinter_issues_virtualenv(fLOG=fLOG)
         mg = MagicGraph()
         cmd = "ggplot"
-        res = mg.mpl_style(cmd)
-        fLOG(res)
+        mg.mpl_style(cmd)
 
 
 if __name__ == "__main__":

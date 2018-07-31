@@ -441,7 +441,7 @@ class TextFile:
 
         # guess the separation
         sep = TextFile._sep_available
-        if force_sep is not None and force_sep not in force_sep:
+        if force_sep not in (None, force_sep):
             sep += force_sep
         h = {}
         mx = 0

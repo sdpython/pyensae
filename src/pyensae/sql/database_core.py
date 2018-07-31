@@ -478,7 +478,7 @@ class DatabaseCore(DatabaseCore2):
         if attached == "main":
             attach = self.get_attached_database_list()
             for a in attach:
-                if a == "main" or a == "temp":
+                if a in ("main", "temp"):
                     continue
                 r = self.get_index_list(a)
                 res.extend(r)

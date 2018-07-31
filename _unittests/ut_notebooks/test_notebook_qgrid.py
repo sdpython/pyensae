@@ -26,7 +26,7 @@ except ImportError:
         sys.path.append(path)
     import src
 
-from src.pyensae.notebook_helper.magic_notebook import MagicNotebook
+from src.pyensae.notebookhelper.magic_notebook import MagicNotebook
 
 
 class TestNotebookQGrid(unittest.TestCase):
