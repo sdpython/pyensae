@@ -24,12 +24,12 @@ def file_tail_cli(fLOG=print, args=None):
         Extracts the first line of a file.
     """
     try:
-        from pyensae.file_helper.content_helper import file_tail
+        from pyensae.filehelper.content_helper import file_tail
     except ImportError:
         folder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
         sys.path.append(folder)
-        from pyensae.file_helper.content_helper import file_tail
+        from pyensae.filehelper.content_helper import file_tail
 
     call_cli_function(file_tail, args=args, fLOG=fLOG,
                       skip_parameters=('fLOG',))

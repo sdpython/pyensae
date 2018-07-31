@@ -24,12 +24,12 @@ def file_head_cli(fLOG=print, args=None):
         Extracts the first line of a file.
     """
     try:
-        from pyensae.file_helper.content_helper import file_head
+        from pyensae.filehelper.content_helper import file_head
     except ImportError:
         folder = os.path.normpath(os.path.join(
             os.path.abspath(os.path.dirname(__file__)), "..", ".."))
         sys.path.append(folder)
-        from pyensae.file_helper.content_helper import file_head
+        from pyensae.filehelper.content_helper import file_head
 
     call_cli_function(file_head, args=args, fLOG=fLOG,
                       skip_parameters=('fLOG',))
