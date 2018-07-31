@@ -26,7 +26,7 @@ def add_missing_indices(df, column, all_values, values=None, fillvalue=numpy.nan
             :showcode:
 
             import pandas
-            from pyensae.ml_helper import add_missing_indices
+            from pyensae.mlhelper import add_missing_indices
             df = pandas.DataFrame([{"x": 3, "y": 4, "z": 1}, {"x": 5, "y": 6, "z": 2}])
             df2 = add_missing_indices(df, "x", [3, 4, 5, 6])
             print(df2)
@@ -35,7 +35,7 @@ def add_missing_indices(df, column, all_values, values=None, fillvalue=numpy.nan
             :showcode:
 
             import pandas
-            from pyensae.ml_helper import add_missing_indices
+            from pyensae.mlhelper import add_missing_indices
             df = pandas.DataFrame([{"x": 3, "y": 4, "z": 1}, {"x": 5, "y": 6, "z": 2}])
             df2 = add_missing_indices(df, "x", values=["y"], all_values=[3, 4, 5, 6])
             print(df2)

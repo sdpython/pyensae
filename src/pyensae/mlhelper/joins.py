@@ -25,7 +25,7 @@ def df_crossjoin(df1, df2, **kwargs):
             :showcode:
 
             import pandas
-            from pyensae.ml_helper import df_crossjoin
+            from pyensae.mlhelper import df_crossjoin
             df = pandas.DataFrame([{"x":3, "y": 4}, {"x":5, "y": 6}])
             jj = df_crossjoin(df, df.copy())
 

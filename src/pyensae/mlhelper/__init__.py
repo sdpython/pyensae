@@ -1,6 +1,6 @@
 """
 @file
-@brief Shortucts to ml_helper.
+@brief Shortucts to mlhelper.
 """
 
 from .joins import df_crossjoin
