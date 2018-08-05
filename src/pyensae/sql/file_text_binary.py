@@ -144,7 +144,7 @@ class TextFile:
 
         begin = 0
         sel = 0
-        tim = time.clock()
+        tim = time.perf_counter()
         while len(blin) > 0:
 
             pos = blin.find(endline, begin)
@@ -171,7 +171,7 @@ class TextFile:
             line = str(temp)
             begin = pos + 1
 
-            tim2 = time.clock()
+            tim2 = time.perf_counter()
             if tim2 - tim > 60:
                 tim = tim2
                 ratio = float(self._read) / filesize * 100

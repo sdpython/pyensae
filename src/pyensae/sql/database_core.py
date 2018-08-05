@@ -842,7 +842,7 @@ class DatabaseCore(DatabaseCore2):
             # classic ways
             self._check_connection()
             cur = self._connection.cursor()
-            dat = time.clock()
+            dat = time.perf_counter()
             try:
                 if not nolog:
                     lines = request.split("\n")
@@ -852,7 +852,7 @@ class DatabaseCore(DatabaseCore2):
                     else:
                         self.LOG("SQL ", "\n".join([repr(x) for x in lines]))
                 cur.execute(request)
-                dat2 = time.clock()
+                dat2 = time.perf_counter()
                 if dat2 - dat > 10:
                     self.LOG("SQL end")
             except Exception as e:
