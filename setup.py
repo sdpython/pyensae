@@ -174,6 +174,7 @@ if not r:
         packages=packages,
         package_dir=package_dir,
         package_data=package_data,
+        setup_requires=["pyquickhelper"],
         install_requires=["pyquickhelper>=1.5.2259"],
         extras_require={
             'graphhelper': ['matplotlib', 'blockdiag'],
