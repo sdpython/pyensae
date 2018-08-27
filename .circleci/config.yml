@@ -31,6 +31,7 @@ jobs:
           command: |
                     sudo apt-get install -y texlive
                     sudo apt-get install -y texlive-latex-extra
+                    sudo apt-get install -y dvipng
           
       - run:
           name: Install 7z, unrar
