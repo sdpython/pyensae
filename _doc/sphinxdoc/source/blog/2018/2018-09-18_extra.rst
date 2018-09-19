@@ -1,0 +1,34 @@
+
+.. blogpost::
+    :title: Install pyensae with extra dependencies
+    :keywords: API
+    :date: 2018-09-18
+    :categories: install
+
+    *pyensae* does not declare all dependencies
+    by default.
+
+    ::
+
+        extras_require={
+            'graphhelper': ['matplotlib', 'blockdiag'],
+            'datasource': ['dbread'],
+            'finance': ['pandas-datareader'],
+            'languages': ['antlr4-python3-runtime'],
+            'notebookhelper': ['folium', 'qgrid'],
+        },
+
+    For example, the instruction ``%lod_ext pyensae``
+    in a notebook imports ``pyensae.notebookhelper``
+    which requires extra dependencies to be installed
+    with the following instructions:
+
+    ::
+
+        pip install pyensae[notebookhelper]
+
+    And to install *pyensae* with multiple options:
+
+    ::
+
+        pip install pyensae[graphhelper,datasource,finance,languages,notebookhelper]

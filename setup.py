@@ -178,11 +178,10 @@ if not r:
         install_requires=["pyquickhelper>=1.5.2259"],
         extras_require={
             'graphhelper': ['matplotlib', 'blockdiag'],
-            'datasource.convert': ['dbread'],
+            'datasource': ['dbread'],
             'finance': ['pandas-datareader'],
             'languages': ['antlr4-python3-runtime'],
-            'notebookhelper.folium_helper': ['folium'],
-            'notebookhelper.magic_notebook': ['qgrid'],
+            'notebookhelper': ['folium', 'qgrid'],
         },
         entry_points={
             'console_scripts': [
