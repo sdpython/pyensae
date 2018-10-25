@@ -1,4 +1,4 @@
-# Generated from \CSharpParser.g4 by ANTLR 4.7.1
+# Generated from CSharpParser.g4 by ANTLR 4.7.1
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .CSharpParser import CSharpParser
@@ -1920,6 +1920,14 @@ class CSharpParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by CSharpParser#object_creation_expression.
     def exitObject_creation_expression(self, ctx: CSharpParser.Object_creation_expressionContext):
+        pass
+
+    # Enter a parse tree produced by CSharpParser#documented_item.
+    def enterDocumented_item(self, ctx: CSharpParser.Documented_itemContext):
+        pass
+
+    # Exit a parse tree produced by CSharpParser#documented_item.
+    def exitDocumented_item(self, ctx: CSharpParser.Documented_itemContext):
         pass
 
     # Enter a parse tree produced by CSharpParser#identifier.

@@ -83,6 +83,7 @@ argument
 expression
 	: assignment
 	| non_assignment_expression
+    | documented_item
 	;
 
 non_assignment_expression
@@ -518,7 +519,8 @@ namespace_member_declaration
 
 type_declaration
 	: attributes? all_member_modifiers?
-      (class_definition | struct_definition | interface_definition | enum_definition | delegate_definition)
+      (class_definition | struct_definition | interface_definition | 
+       enum_definition | delegate_definition | documented_item)
   ;
 
 qualified_alias_member
@@ -1126,6 +1128,11 @@ method_invocation
 object_creation_expression
 	: OPEN_PARENS argument_list? CLOSE_PARENS object_or_collection_initializer?
 	;
+    
+documented_item
+    : SINGLE_LINE_DOC_COMMENT
+    | SINGLE_LINE_COMMENT
+    ;
 
 identifier
 	: IDENTIFIER

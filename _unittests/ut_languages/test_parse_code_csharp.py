@@ -39,12 +39,12 @@ class TestParseCodeCSharp(ExtTestCase):
         {
             public static class world
             {
-                public static double function(double x, doubly y)
+                public static double function(double x, double y)
                 { return x+y ; }
             }
             public class world_nostatic
             {
-                public virtual double function(double x, doubly y)
+                public virtual double function(double x, double y)
                 { return x+y ; }
             }
             /// <summary>
@@ -55,7 +55,10 @@ class TestParseCodeCSharp(ExtTestCase):
                 public int J => myj;
                 int myj;
                 public world_nostatic2(int j) { myj = j; }
-                public override double function(double x, doubly y)
+                /// <summary>
+                /// DOCDOC
+                /// </summary>
+                public override double function(double x, double y)
                 { return base.function(x, y); }
             }
         }
@@ -66,9 +69,7 @@ class TestParseCodeCSharp(ExtTestCase):
         tree = parser.compilation_unit()
         st = get_tree_string(tree, parser)
         self.assertNotEmpty(st)
-        help(tree)
-        help(parser)
-        print(st)
+        self.assertIn("/// <summary>", st)
 
 
 if __name__ == "__main__":
