@@ -11,8 +11,8 @@ from pyquickhelper.loghelper import noLOG
 
 def _is_syntax_is_missing(language):
     """
-    download the grammar for a specific language if
-    the files is missing
+    Downloads the grammar for a specific language if
+    the files is missing.
 
     @param      language        language: python, sqlite, ...
     @return                     grammar file
@@ -21,7 +21,7 @@ def _is_syntax_is_missing(language):
         "R": "https://github.com/antlr/grammars-v4/tree/master/r/R.g4",
         "SQLite": "https://github.com/antlr/grammars-v4/blob/master/sqlite/SQLite.g4",
         "Pig": "http://wiki.apache.org/pig/PigLexer",
-        "CSharp4": "https://github.com/antlr/grammars-v4/tree/master/csharp",
+        "CSharp": "https://github.com/antlr/grammars-v4/tree/master/csharp",
     }
 
     folder = os.path.dirname(__file__)
@@ -41,9 +41,9 @@ def _is_syntax_is_missing(language):
                     locations.keys())))
 
 
-def build_grammar(g4, version="4.7", fLOG=noLOG):
+def build_grammar(g4, version="4.7.1", fLOG=noLOG):
     """
-    compile the grammar for a specific file
+    Compiles the grammar for a specific file.
 
     @param      g4          grammar format antlr4
     @param      version     version of *antlr4* to use, 4.7
@@ -52,10 +52,11 @@ def build_grammar(g4, version="4.7", fLOG=noLOG):
 
     The compilation must be done with `antlr4 <http://www.antlr.org/>`_.
     It generates a lexer and a parser which can be imported in Python.
-    The options for the command line are described at: `antlr4 options <https://theantlrguy.atlassian.net/wiki/display/ANTLR4/Options>`_.
+    The options for the command line are described at:
+    `antlr4 options <https://theantlrguy.atlassian.net/wiki/display/ANTLR4/Options>`_.
 
     .. exref::
-        :title: Build a Antlr4 grammer
+        :title: Builds a Antlr4 grammar
 
         See `grammars-v4 <https://github.com/antlr/grammars-v4>`_
 
@@ -95,12 +96,18 @@ def build_grammar(g4, version="4.7", fLOG=noLOG):
     # we remove -rc...
     version = version.split("-")[0]
 
-    cmd = "org.antlr.v4.Tool -Dlanguage=Python3 " + g4
+    cmd = "org.antlr.v4.Tool "
+    if "Lexer" not in g4:
+        cmd += "-Dlanguage=Python3 "
+    cmd += g4
     from pyquickhelper.loghelper import run_cmd
     out, err = run_cmd("java " + cmd, wait=True, fLOG=fLOG)
 
     def compiled():
-        lexer = g4.replace(".g4", "Lexer.py")
+        if "Lexer" in g4:
+            lexer = g4.replace(".g4", ".tokens")
+        else:
+            lexer = g4.replace(".g4", ".py")
         return os.path.exists(lexer)
 
     if not compiled() or (len(err) > 0 and "error" in err):
@@ -121,16 +128,20 @@ def build_grammar(g4, version="4.7", fLOG=noLOG):
                     "\nCMD:\njava " +
                     cmd +
                     "\nYou should do it manually.")
-        else:
-            raise Exception(
-                "unable to compile: " +
-                final +
-                "\nCLASSPATH:\n" +
-                os.environ["CLASSPATH"] +
-                "\nERR:\n" +
-                err +
-                "\nCMD:\njava " +
-                cmd)
+        elif err:
+            err_lines = err.split(err)
+            err_lines = [_ for _ in err_lines if not _.startswith("warning(")]
+            err2 = "\n".join(err_lines).strip("\n ")
+            if len(err2) > 0:
+                raise Exception(
+                    "unable to compile: " +
+                    final +
+                    "\nCLASSPATH:\n" +
+                    os.environ["CLASSPATH"] +
+                    "\nERR:\n" +
+                    err +
+                    "\nCMD:\njava " +
+                    cmd)
 
     if os.environ.get("USERNAME", os.environ.get("USER", "")) in g4:
         dest = os.path.dirname(g4)
@@ -147,4 +158,4 @@ def build_grammar(g4, version="4.7", fLOG=noLOG):
                 with open(full, "w", encoding="utf-8") as f:
                     f.write(content1)
 
-    return out + "\nERR:\n" + err
+    return out + "\n---ERR---\n" + err

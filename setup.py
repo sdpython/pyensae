@@ -50,6 +50,8 @@ def is_local():
     if "/temp/" in file and "pip-" in file:
         return False
     from pyquickhelper.pycode.setup_helper import available_commands_list
+    if "update_grammars" in sys.argv:
+        return True
     return available_commands_list(sys.argv)
 
 
@@ -129,16 +131,16 @@ if is_local():
             raise Exception(
                 "expecting a grammar file: python setup.py update_grammars R.g4")
         grammar = sys.argv[ind + 1]
+        try:
+            from pyensae.languages import build_grammar
+        except ImportError:
+            from src.pyensae.languages import build_grammar
         if not os.path.exists(grammar):
             cdir = os.path.abspath(os.path.dirname(__file__))
             g2 = os.path.join(cdir, "src", "pyensae", "languages", grammar)
             if not os.path.exists(g2):
                 raise FileNotFoundError("{0}\n{1}".format(grammar, g2))
             grammar = g2
-        try:
-            from pyensae.languages import build_grammar
-        except ImportError:
-            from src.pyensae.languages import build_grammar
         build_grammar(grammar, fLOG=logging_function)
         r = True
     if not r and not ({"bdist_msi", "sdist",
@@ -175,7 +177,7 @@ if not r:
         package_dir=package_dir,
         package_data=package_data,
         setup_requires=["pyquickhelper"],
-        install_requires=["pyquickhelper>=1.5.2259"],
+        install_requires=["pyquickhelper>=1.8"],
         extras_require={
             'graphhelper': ['matplotlib', 'blockdiag'],
             'datasource': ['dbread'],

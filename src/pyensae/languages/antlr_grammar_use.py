@@ -25,9 +25,9 @@ def get_parser_lexer(language):
             from .RParser import RParser
             return RParser, RLexer
         elif language == "CSharp4":
-            from .CSharp4Lexer import CSharp4Lexer
-            from .CSharp4Parser import CSharp4Parser
-            return CSharp4Parser, CSharp4Lexer
+            from .CSharpLexer import CSharpLexer
+            from .CSharpParser import CSharpParser
+            return CSharpParser, CSharpLexer
         elif language == "SQLite":
             from .SQLiteLexer import SQLiteLexer
             from .SQLiteParser import SQLiteParser
@@ -90,7 +90,7 @@ def parse_code(code, class_parser, class_lexer):
             STORE A INTO 'samefile.txt' ;
             '''
 
-            clparser,cllexer = get_parser_lexer("Pig")
+            clparser, cllexer = get_parser_lexer("Pig")
             parser = parse_code(code, clparser, cllexer)
             tree = parser.parse()
             st = get_tree_string(tree, parser, None)

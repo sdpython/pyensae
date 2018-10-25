@@ -1,4 +1,4 @@
-# Generated from \Pig.g4 by ANTLR 4.7
+# Generated from \Pig.g4 by ANTLR 4.7.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -467,7 +467,7 @@ class PigParser (Parser):
 
     def __init__(self, input: TokenStream, output: TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7")
+        self.checkVersion("4.7.1")
         self._interp = ParserATNSimulator(
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None

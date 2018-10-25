@@ -282,3 +282,10 @@ _doc/notebooks/*.exe
 _doc/notebooks/data_velib
 _doc/notebooks/temp
 
+src/pyensae/languages/R.interp
+src/pyensae/languages/CSharpLexer.interp
+src/pyensae/languages/CSharpLexer.java
+src/pyensae/languages/CSharpLexer.tokens
+src/pyensae/languages/CSharpParser.interp
+src/pyensae/languages/CSharpParser.tokens
+*.interp

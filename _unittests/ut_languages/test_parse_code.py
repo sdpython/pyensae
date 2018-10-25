@@ -166,7 +166,7 @@ class TestParseCode (unittest.TestCase):
 
         clparser, cllexer = get_parser_lexer("C#")
         parser = parse_code(code, clparser, cllexer)
-        tree = parser.parse()
+        tree = parser.compilation_unit()
         st = get_tree_string(tree, parser)
         fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
