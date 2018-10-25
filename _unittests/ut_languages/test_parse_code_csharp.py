@@ -55,9 +55,9 @@ class TestParseCodeCSharp(ExtTestCase):
                 public int J => myj;
                 int myj;
                 public world_nostatic2(int j) { myj = j; }
-                /// <summary>
+                /// <desc>
                 /// DOCDOC
-                /// </summary>
+                /// </desc>
                 public override double function(double x, double y)
                 { return base.function(x, y); }
             }
@@ -66,7 +66,7 @@ class TestParseCodeCSharp(ExtTestCase):
 
         clparser, cllexer = get_parser_lexer("C#")
         parser = parse_code(code, clparser, cllexer)
-        tree = parser.compilation_unit()
+        tree = parser.parse()
         st = get_tree_string(tree, parser)
         self.assertNotEmpty(st)
         self.assertIn("/// <summary>", st)

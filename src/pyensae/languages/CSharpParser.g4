@@ -83,7 +83,6 @@ argument
 expression
 	: assignment
 	| non_assignment_expression
-    | documented_item
 	;
 
 non_assignment_expression
@@ -515,12 +514,13 @@ namespace_member_declarations
 namespace_member_declaration
 	: namespace_declaration
 	| type_declaration
+    | documented_item
 	;
 
 type_declaration
 	: attributes? all_member_modifiers?
       (class_definition | struct_definition | interface_definition | 
-       enum_definition | delegate_definition | documented_item)
+       enum_definition | delegate_definition)
   ;
 
 qualified_alias_member
@@ -581,7 +581,7 @@ class_member_declarations
 	;
 
 class_member_declaration
-	: attributes? all_member_modifiers? (common_member_declaration | destructor_definition)
+	: documented_item | (attributes? all_member_modifiers? (common_member_declaration | destructor_definition))
 	;
 
 all_member_modifiers
