@@ -31,7 +31,7 @@ from src.pyensae.languages.antlr_grammar_build import build_grammar
 import src.pyensae.languages.antlr_grammar_use as source_parser
 
 
-class TestParseCode (unittest.TestCase):
+class TestParseCode(unittest.TestCase):
 
     def test_build_parser(self):
         fLOG(
