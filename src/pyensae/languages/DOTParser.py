@@ -136,7 +136,7 @@ class DOTParser (Parser):
 
     class GraphContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -210,11 +210,11 @@ class DOTParser (Parser):
 
     class Stmt_listContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def stmt(self, i: int=None):
+        def stmt(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(DOTParser.StmtContext)
             else:
@@ -265,7 +265,7 @@ class DOTParser (Parser):
 
     class StmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -278,7 +278,7 @@ class DOTParser (Parser):
         def attr_stmt(self):
             return self.getTypedRuleContext(DOTParser.Attr_stmtContext, 0)
 
-        def gid(self, i: int=None):
+        def gid(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(DOTParser.GidContext)
             else:
@@ -350,7 +350,7 @@ class DOTParser (Parser):
 
     class Attr_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -403,11 +403,11 @@ class DOTParser (Parser):
 
     class Attr_listContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def a_list(self, i: int=None):
+        def a_list(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(DOTParser.A_listContext)
             else:
@@ -462,11 +462,11 @@ class DOTParser (Parser):
 
     class A_listContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def gid(self, i: int=None):
+        def gid(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(DOTParser.GidContext)
             else:
@@ -528,7 +528,7 @@ class DOTParser (Parser):
 
     class Edge_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -595,23 +595,23 @@ class DOTParser (Parser):
 
     class EdgeRHSContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def edgeop(self, i: int=None):
+        def edgeop(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(DOTParser.EdgeopContext)
             else:
                 return self.getTypedRuleContext(DOTParser.EdgeopContext, i)
 
-        def node_id(self, i: int=None):
+        def node_id(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(DOTParser.Node_idContext)
             else:
                 return self.getTypedRuleContext(DOTParser.Node_idContext, i)
 
-        def subgraph(self, i: int=None):
+        def subgraph(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(DOTParser.SubgraphContext)
             else:
@@ -671,7 +671,7 @@ class DOTParser (Parser):
 
     class EdgeopContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -710,7 +710,7 @@ class DOTParser (Parser):
 
     class Node_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -757,7 +757,7 @@ class DOTParser (Parser):
 
     class Node_idContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -804,7 +804,7 @@ class DOTParser (Parser):
 
     class PortContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -869,7 +869,7 @@ class DOTParser (Parser):
 
     class SubgraphContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -929,7 +929,7 @@ class DOTParser (Parser):
 
     class Compass_ptContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -971,7 +971,7 @@ class DOTParser (Parser):
 
     class GidContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 

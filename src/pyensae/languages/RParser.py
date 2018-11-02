@@ -566,20 +566,20 @@ class RParser (Parser):
 
     class ParseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def EOF(self):
             return self.getToken(RParser.EOF, 0)
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
                 return self.getTypedRuleContext(RParser.ExprContext, i)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -643,7 +643,7 @@ class RParser (Parser):
 
     class ExprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -653,7 +653,7 @@ class RParser (Parser):
         def intersections(self):
             return self.getTypedRuleContext(RParser.IntersectionsContext, 0)
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
@@ -674,7 +674,7 @@ class RParser (Parser):
         def exprlist(self):
             return self.getTypedRuleContext(RParser.ExprlistContext, 0)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -742,7 +742,7 @@ class RParser (Parser):
             if hasattr(listener, "exitExpr"):
                 listener.exitExpr(self)
 
-    def expr(self, _p: int=0):
+    def expr(self, _p: int = 0):
         _parentctx = self._ctx
         _parentState = self.state
         localctx = RParser.ExprContext(self, self._ctx, _parentState)
@@ -1264,7 +1264,7 @@ class RParser (Parser):
 
     class FunctiondefbodyContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1274,7 +1274,7 @@ class RParser (Parser):
         def exprlist(self):
             return self.getTypedRuleContext(RParser.ExprlistContext, 0)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -1347,7 +1347,7 @@ class RParser (Parser):
 
     class FunctiondeflambdaContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1389,14 +1389,14 @@ class RParser (Parser):
 
     class FunctiondefargslambdaContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def functiondef(self):
             return self.getTypedRuleContext(RParser.FunctiondefContext, 0)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -1468,14 +1468,14 @@ class RParser (Parser):
 
     class FunctiondefargsContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def functiondef(self):
             return self.getTypedRuleContext(RParser.FunctiondefContext, 0)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -1546,7 +1546,7 @@ class RParser (Parser):
 
     class Implicit_column_nameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1589,7 +1589,7 @@ class RParser (Parser):
 
     class AffectationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1640,7 +1640,7 @@ class RParser (Parser):
 
     class RangeopexprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1681,14 +1681,14 @@ class RParser (Parser):
 
     class ExprlistContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def expr(self):
             return self.getTypedRuleContext(RParser.ExprContext, 0)
 
-        def rightexpr(self, i: int=None):
+        def rightexpr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.RightexprContext)
             else:
@@ -1734,7 +1734,7 @@ class RParser (Parser):
 
     class RightexprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1786,17 +1786,17 @@ class RParser (Parser):
 
     class FormlistContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def form(self, i: int=None):
+        def form(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.FormContext)
             else:
                 return self.getTypedRuleContext(RParser.FormContext, i)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -1862,7 +1862,7 @@ class RParser (Parser):
 
     class FormContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1923,7 +1923,7 @@ class RParser (Parser):
 
     class ArgumentnameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1959,23 +1959,23 @@ class RParser (Parser):
 
     class SublistContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def sub(self, i: int=None):
+        def sub(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.SubContext)
             else:
                 return self.getTypedRuleContext(RParser.SubContext, i)
 
-        def inlinefunction(self, i: int=None):
+        def inlinefunction(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.InlinefunctionContext)
             else:
                 return self.getTypedRuleContext(RParser.InlinefunctionContext, i)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -2072,17 +2072,17 @@ class RParser (Parser):
 
     class SublistaddContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def identifier(self, i: int=None):
+        def identifier(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.IdentifierContext)
             else:
                 return self.getTypedRuleContext(RParser.IdentifierContext, i)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -2153,7 +2153,7 @@ class RParser (Parser):
 
     class SubContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2204,7 +2204,7 @@ class RParser (Parser):
 
     class SubnobracketContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2318,7 +2318,7 @@ class RParser (Parser):
 
     class RangesContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2370,17 +2370,17 @@ class RParser (Parser):
 
     class Range_simpleContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def identifier(self, i: int=None):
+        def identifier(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.IdentifierContext)
             else:
                 return self.getTypedRuleContext(RParser.IdentifierContext, i)
 
-        def INT(self, i: int=None):
+        def INT(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.INT)
             else:
@@ -2443,11 +2443,11 @@ class RParser (Parser):
 
     class Range_complexeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
@@ -2490,7 +2490,7 @@ class RParser (Parser):
 
     class IntersectionsContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2542,7 +2542,7 @@ class RParser (Parser):
 
     class Intersection_simpleContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2601,11 +2601,11 @@ class RParser (Parser):
 
     class Intersection_complexeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
@@ -2649,7 +2649,7 @@ class RParser (Parser):
 
     class ConstantContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2753,7 +2753,7 @@ class RParser (Parser):
 
     class BooleanContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2792,7 +2792,7 @@ class RParser (Parser):
 
     class NextexprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2825,7 +2825,7 @@ class RParser (Parser):
 
     class RepeatexprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2863,11 +2863,11 @@ class RParser (Parser):
 
     class WhileexprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
@@ -2910,14 +2910,14 @@ class RParser (Parser):
 
     class ForexprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def identifier(self):
             return self.getTypedRuleContext(RParser.IdentifierContext, 0)
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
@@ -2964,23 +2964,23 @@ class RParser (Parser):
 
     class IfexprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
                 return self.getTypedRuleContext(RParser.ExprContext, i)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
                 return self.getToken(RParser.NL, i)
 
-        def elseif(self, i: int=None):
+        def elseif(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ElseifContext)
             else:
@@ -3079,23 +3079,23 @@ class RParser (Parser):
 
     class IfelseexprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
                 return self.getTypedRuleContext(RParser.ExprContext, i)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
                 return self.getToken(RParser.NL, i)
 
-        def elseif(self, i: int=None):
+        def elseif(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ElseifContext)
             else:
@@ -3217,7 +3217,7 @@ class RParser (Parser):
 
     class ElseifContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3252,7 +3252,7 @@ class RParser (Parser):
 
     class ReturnexprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3294,7 +3294,7 @@ class RParser (Parser):
 
     class FunctioncallContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3307,7 +3307,7 @@ class RParser (Parser):
         def sublist(self):
             return self.getTypedRuleContext(RParser.SublistContext, 0)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -3393,14 +3393,14 @@ class RParser (Parser):
 
     class InlinefunctionContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def exprlist(self):
             return self.getTypedRuleContext(RParser.ExprlistContext, 0)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -3482,7 +3482,7 @@ class RParser (Parser):
 
     class Formula_simpleContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3542,7 +3542,7 @@ class RParser (Parser):
 
     class Formula_simple_AContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3606,17 +3606,17 @@ class RParser (Parser):
 
     class Formula_simple_BContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def identifier(self, i: int=None):
+        def identifier(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.IdentifierContext)
             else:
                 return self.getTypedRuleContext(RParser.IdentifierContext, i)
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(RParser.ExprContext)
             else:
@@ -3625,7 +3625,7 @@ class RParser (Parser):
         def affectop(self):
             return self.getTypedRuleContext(RParser.AffectopContext, 0)
 
-        def NL(self, i: int=None):
+        def NL(self, i: int = None):
             if i is None:
                 return self.getTokens(RParser.NL)
             else:
@@ -3725,7 +3725,7 @@ class RParser (Parser):
 
     class Formula_simple_CContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3787,7 +3787,7 @@ class RParser (Parser):
 
     class AffectopContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3826,7 +3826,7 @@ class RParser (Parser):
 
     class FunctiondefContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3859,7 +3859,7 @@ class RParser (Parser):
 
     class IdentifierContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3895,7 +3895,7 @@ class RParser (Parser):
 
     class FormopContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3928,7 +3928,7 @@ class RParser (Parser):
 
     class RangeopContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3967,7 +3967,7 @@ class RParser (Parser):
 
     class DotopContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -4006,7 +4006,7 @@ class RParser (Parser):
 
     class OperatorContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -4045,7 +4045,7 @@ class RParser (Parser):
 
     class ComparisonContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 

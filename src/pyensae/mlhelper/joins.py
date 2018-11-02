@@ -33,8 +33,8 @@ def df_crossjoin(df1, df2, **kwargs):
     """
     df1['_tmpkey'] = 1
     df2['_tmpkey'] = 1
-    res = pandas.merge(df1, df2, on='_tmpkey', **
-                       kwargs).drop('_tmpkey', axis=1)
+    res = pandas.merge(df1, df2, on='_tmpkey',
+                       ** kwargs).drop('_tmpkey', axis=1)
     res.index = pandas.MultiIndex.from_product((df1.index, df2.index))
     df1.drop('_tmpkey', axis=1, inplace=True)
     df2.drop('_tmpkey', axis=1, inplace=True)

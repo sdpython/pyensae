@@ -474,7 +474,7 @@ class PigParser (Parser):
 
     class ParseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -515,11 +515,11 @@ class PigParser (Parser):
 
     class QueryContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def statement(self, i: int=None):
+        def statement(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.StatementContext)
             else:
@@ -542,7 +542,7 @@ class PigParser (Parser):
             if hasattr(listener, "exitQuery"):
                 listener.exitQuery(self)
 
-    def query(self, _p: int=0):
+    def query(self, _p: int = 0):
         _parentctx = self._ctx
         _parentState = self.state
         localctx = PigParser.QueryContext(self, self._ctx, _parentState)
@@ -610,7 +610,7 @@ class PigParser (Parser):
 
     class StatementContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -698,7 +698,7 @@ class PigParser (Parser):
 
     class AliasContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -734,7 +734,7 @@ class PigParser (Parser):
 
     class Op_clauseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -802,7 +802,7 @@ class PigParser (Parser):
 
     class Load_clauseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -868,7 +868,7 @@ class PigParser (Parser):
 
     class FilenameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -904,7 +904,7 @@ class PigParser (Parser):
 
     class As_clauseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -945,14 +945,14 @@ class PigParser (Parser):
 
     class Tuple_defContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def LEFT_PAREN(self):
             return self.getToken(PigParser.LEFT_PAREN, 0)
 
-        def field(self, i: int=None):
+        def field(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.FieldContext)
             else:
@@ -961,7 +961,7 @@ class PigParser (Parser):
         def RIGHT_PAREN(self):
             return self.getToken(PigParser.RIGHT_PAREN, 0)
 
-        def COMMA(self, i: int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:
@@ -1050,7 +1050,7 @@ class PigParser (Parser):
 
     class FieldContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1132,7 +1132,7 @@ class PigParser (Parser):
 
     class Type_Context(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1200,7 +1200,7 @@ class PigParser (Parser):
 
     class Simple_typeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1257,7 +1257,7 @@ class PigParser (Parser):
 
     class Tuple_typeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1298,7 +1298,7 @@ class PigParser (Parser):
 
     class Bag_typeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1339,7 +1339,7 @@ class PigParser (Parser):
 
     class Map_typeContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1385,7 +1385,7 @@ class PigParser (Parser):
 
     class Func_clauseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1473,17 +1473,17 @@ class PigParser (Parser):
 
     class Func_nameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def IDENTIFIER(self, i: int=None):
+        def IDENTIFIER(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.IDENTIFIER)
             else:
                 return self.getToken(PigParser.IDENTIFIER, i)
 
-        def PERIOD(self, i: int=None):
+        def PERIOD(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.PERIOD)
             else:
@@ -1557,17 +1557,17 @@ class PigParser (Parser):
 
     class Func_argsContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def QUOTEDSTRING(self, i: int=None):
+        def QUOTEDSTRING(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.QUOTEDSTRING)
             else:
                 return self.getToken(PigParser.QUOTEDSTRING, i)
 
-        def COMMA(self, i: int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:
@@ -1641,7 +1641,7 @@ class PigParser (Parser):
 
     class Store_clauseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1707,7 +1707,7 @@ class PigParser (Parser):
 
     class Filter_clauseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1758,7 +1758,7 @@ class PigParser (Parser):
 
     class CondContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1794,17 +1794,17 @@ class PigParser (Parser):
 
     class Or_condContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def and_cond(self, i: int=None):
+        def and_cond(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.And_condContext)
             else:
                 return self.getTypedRuleContext(PigParser.And_condContext, i)
 
-        def OR(self, i: int=None):
+        def OR(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.OR)
             else:
@@ -1852,17 +1852,17 @@ class PigParser (Parser):
 
     class And_condContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def unary_cond(self, i: int=None):
+        def unary_cond(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Unary_condContext)
             else:
                 return self.getTypedRuleContext(PigParser.Unary_condContext, i)
 
-        def AND(self, i: int=None):
+        def AND(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.AND)
             else:
@@ -1910,7 +1910,7 @@ class PigParser (Parser):
 
     class Unary_condContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1923,7 +1923,7 @@ class PigParser (Parser):
         def RIGHT_PAREN(self):
             return self.getToken(PigParser.RIGHT_PAREN, 0)
 
-        def expr(self, i: int=None):
+        def expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.ExprContext)
             else:
@@ -2008,7 +2008,7 @@ class PigParser (Parser):
 
     class Not_condContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2049,7 +2049,7 @@ class PigParser (Parser):
 
     class Null_check_condContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2107,7 +2107,7 @@ class PigParser (Parser):
 
     class ExprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2143,23 +2143,23 @@ class PigParser (Parser):
 
     class Add_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def multi_expr(self, i: int=None):
+        def multi_expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Multi_exprContext)
             else:
                 return self.getTypedRuleContext(PigParser.Multi_exprContext, i)
 
-        def PLUS(self, i: int=None):
+        def PLUS(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.PLUS)
             else:
                 return self.getToken(PigParser.PLUS, i)
 
-        def MINUS(self, i: int=None):
+        def MINUS(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.MINUS)
             else:
@@ -2213,29 +2213,29 @@ class PigParser (Parser):
 
     class Multi_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def cast_expr(self, i: int=None):
+        def cast_expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Cast_exprContext)
             else:
                 return self.getTypedRuleContext(PigParser.Cast_exprContext, i)
 
-        def START(self, i: int=None):
+        def START(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.START)
             else:
                 return self.getToken(PigParser.START, i)
 
-        def DIV(self, i: int=None):
+        def DIV(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.DIV)
             else:
                 return self.getToken(PigParser.DIV, i)
 
-        def PERCENT(self, i: int=None):
+        def PERCENT(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.PERCENT)
             else:
@@ -2289,7 +2289,7 @@ class PigParser (Parser):
 
     class Cast_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2371,7 +2371,7 @@ class PigParser (Parser):
 
     class Unary_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2441,7 +2441,7 @@ class PigParser (Parser):
 
     class Eval_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2492,20 +2492,20 @@ class PigParser (Parser):
 
     class Var_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def projectable_expr(self):
             return self.getTypedRuleContext(PigParser.Projectable_exprContext, 0)
 
-        def dot_proj(self, i: int=None):
+        def dot_proj(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Dot_projContext)
             else:
                 return self.getTypedRuleContext(PigParser.Dot_projContext, i)
 
-        def pound_proj(self, i: int=None):
+        def pound_proj(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Pound_projContext)
             else:
@@ -2563,7 +2563,7 @@ class PigParser (Parser):
 
     class Projectable_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2624,14 +2624,14 @@ class PigParser (Parser):
 
     class Dot_projContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def PERIOD(self):
             return self.getToken(PigParser.PERIOD, 0)
 
-        def col_ref(self, i: int=None):
+        def col_ref(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Col_refContext)
             else:
@@ -2643,7 +2643,7 @@ class PigParser (Parser):
         def RIGHT_PAREN(self):
             return self.getToken(PigParser.RIGHT_PAREN, 0)
 
-        def COMMA(self, i: int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:
@@ -2743,7 +2743,7 @@ class PigParser (Parser):
 
     class Pound_projContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2793,7 +2793,7 @@ class PigParser (Parser):
 
     class Bin_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2806,7 +2806,7 @@ class PigParser (Parser):
         def QMARK(self):
             return self.getToken(PigParser.QMARK, 0)
 
-        def infix_expr(self, i: int=None):
+        def infix_expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Infix_exprContext)
             else:
@@ -2887,7 +2887,7 @@ class PigParser (Parser):
 
     class Neg_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2928,7 +2928,7 @@ class PigParser (Parser):
 
     class Distinct_clauseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2970,7 +2970,7 @@ class PigParser (Parser):
 
     class Col_refContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3022,7 +3022,7 @@ class PigParser (Parser):
 
     class Alias_col_refContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3067,7 +3067,7 @@ class PigParser (Parser):
 
     class Dollar_col_refContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3108,7 +3108,7 @@ class PigParser (Parser):
 
     class Infix_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3144,7 +3144,7 @@ class PigParser (Parser):
 
     class Const_exprContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3213,7 +3213,7 @@ class PigParser (Parser):
 
     class ScalarContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3270,7 +3270,7 @@ class PigParser (Parser):
 
     class Map_Context(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3280,13 +3280,13 @@ class PigParser (Parser):
         def RIGHT_BRACKET(self):
             return self.getToken(PigParser.RIGHT_BRACKET, 0)
 
-        def keyvalue(self, i: int=None):
+        def keyvalue(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.KeyvalueContext)
             else:
                 return self.getTypedRuleContext(PigParser.KeyvalueContext, i)
 
-        def COMMA(self, i: int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:
@@ -3379,7 +3379,7 @@ class PigParser (Parser):
 
     class KeyvalueContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3451,7 +3451,7 @@ class PigParser (Parser):
 
     class String_valContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3496,7 +3496,7 @@ class PigParser (Parser):
 
     class BagContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3506,13 +3506,13 @@ class PigParser (Parser):
         def RIGHT_CURLY(self):
             return self.getToken(PigParser.RIGHT_CURLY, 0)
 
-        def tuple_(self, i: int=None):
+        def tuple_(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Tuple_Context)
             else:
                 return self.getTypedRuleContext(PigParser.Tuple_Context, i)
 
-        def COMMA(self, i: int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:
@@ -3605,7 +3605,7 @@ class PigParser (Parser):
 
     class Tuple_Context(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3615,13 +3615,13 @@ class PigParser (Parser):
         def RIGHT_PAREN(self):
             return self.getToken(PigParser.RIGHT_PAREN, 0)
 
-        def const_expr(self, i: int=None):
+        def const_expr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(PigParser.Const_exprContext)
             else:
                 return self.getTypedRuleContext(PigParser.Const_exprContext, i)
 
-        def COMMA(self, i: int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(PigParser.COMMA)
             else:

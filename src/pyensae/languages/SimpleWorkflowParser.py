@@ -249,14 +249,14 @@ class SimpleWorkflowParser (Parser):
 
     class ParseContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def EOF(self):
             return self.getToken(SimpleWorkflowParser.EOF, 0)
 
-        def final_stmt(self, i: int=None):
+        def final_stmt(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(SimpleWorkflowParser.Final_stmtContext)
             else:
@@ -303,7 +303,7 @@ class SimpleWorkflowParser (Parser):
 
     class Final_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -372,7 +372,7 @@ class SimpleWorkflowParser (Parser):
 
     class Affectation_stmt_commaContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -411,7 +411,7 @@ class SimpleWorkflowParser (Parser):
 
     class Affectation_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -457,7 +457,7 @@ class SimpleWorkflowParser (Parser):
 
     class For_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -467,7 +467,7 @@ class SimpleWorkflowParser (Parser):
         def function_call(self):
             return self.getTypedRuleContext(SimpleWorkflowParser.Function_callContext, 0)
 
-        def final_stmt(self, i: int=None):
+        def final_stmt(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(SimpleWorkflowParser.Final_stmtContext)
             else:
@@ -530,14 +530,14 @@ class SimpleWorkflowParser (Parser):
 
     class If_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def expression(self):
             return self.getTypedRuleContext(SimpleWorkflowParser.ExpressionContext, 0)
 
-        def final_stmt(self, i: int=None):
+        def final_stmt(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(SimpleWorkflowParser.Final_stmtContext)
             else:
@@ -619,7 +619,7 @@ class SimpleWorkflowParser (Parser):
 
     class Evaluation_functionContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -656,7 +656,7 @@ class SimpleWorkflowParser (Parser):
 
     class ExpressionContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -715,7 +715,7 @@ class SimpleWorkflowParser (Parser):
 
     class Expression_no_binaryContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -812,14 +812,14 @@ class SimpleWorkflowParser (Parser):
 
     class Function_callContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def evaluation_function(self):
             return self.getTypedRuleContext(SimpleWorkflowParser.Evaluation_functionContext, 0)
 
-        def expression(self, i: int=None):
+        def expression(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(SimpleWorkflowParser.ExpressionContext)
             else:
@@ -879,7 +879,7 @@ class SimpleWorkflowParser (Parser):
 
     class Variable_nameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -916,7 +916,7 @@ class SimpleWorkflowParser (Parser):
 
     class Binary_operatorContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -956,7 +956,7 @@ class SimpleWorkflowParser (Parser):
 
     class Unary_operatorContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -996,7 +996,7 @@ class SimpleWorkflowParser (Parser):
 
     class Stmt_commaContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1035,7 +1035,7 @@ class SimpleWorkflowParser (Parser):
 
     class StmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1096,7 +1096,7 @@ class SimpleWorkflowParser (Parser):
 
     class Connect_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1170,7 +1170,7 @@ class SimpleWorkflowParser (Parser):
 
     class Data_or_module_outputContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1220,7 +1220,7 @@ class SimpleWorkflowParser (Parser):
 
     class Module_inputContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1270,7 +1270,7 @@ class SimpleWorkflowParser (Parser):
 
     class Data_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1314,7 +1314,7 @@ class SimpleWorkflowParser (Parser):
 
     class Module_stmtContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1358,7 +1358,7 @@ class SimpleWorkflowParser (Parser):
 
     class Module_callContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1404,7 +1404,7 @@ class SimpleWorkflowParser (Parser):
 
     class Element_nameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1441,11 +1441,11 @@ class SimpleWorkflowParser (Parser):
 
     class List_param_affectationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def param_affectation(self, i: int=None):
+        def param_affectation(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(SimpleWorkflowParser.Param_affectationContext)
             else:
@@ -1499,7 +1499,7 @@ class SimpleWorkflowParser (Parser):
 
     class Param_affectationContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1543,7 +1543,7 @@ class SimpleWorkflowParser (Parser):
 
     class Param_nameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1580,7 +1580,7 @@ class SimpleWorkflowParser (Parser):
 
     class Inout_nameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1617,7 +1617,7 @@ class SimpleWorkflowParser (Parser):
 
     class Module_nameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1667,7 +1667,7 @@ class SimpleWorkflowParser (Parser):
 
     class Data_nameContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1717,7 +1717,7 @@ class SimpleWorkflowParser (Parser):
 
     class ConstantContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1778,7 +1778,7 @@ class SimpleWorkflowParser (Parser):
 
     class String_literalContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1815,7 +1815,7 @@ class SimpleWorkflowParser (Parser):
 
     class Integer_numberContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1863,17 +1863,17 @@ class SimpleWorkflowParser (Parser):
 
     class Real_numberContext(ParserRuleContext):
 
-        def __init__(self, parser, parent: ParserRuleContext=None, invokingState: int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def Digits(self, i: int=None):
+        def Digits(self, i: int = None):
             if i is None:
                 return self.getTokens(SimpleWorkflowParser.Digits)
             else:
                 return self.getToken(SimpleWorkflowParser.Digits, i)
 
-        def Sign(self, i: int=None):
+        def Sign(self, i: int = None):
             if i is None:
                 return self.getTokens(SimpleWorkflowParser.Sign)
             else:
