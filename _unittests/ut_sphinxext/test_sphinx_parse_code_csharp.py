@@ -71,7 +71,6 @@ class TestSphinxParseCodeCSharp(ExtTestCase):
         self.assertNotEmpty(els)
         self.assertEqual(els[0].__class__.__name__, "CSharpDomain")
         self.assertEqual(str(els[0]), "namespace world_nostatic")
-            
 
 
 if __name__ == "__main__":
