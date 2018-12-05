@@ -76,7 +76,17 @@ def download_data(name, moduleName=None, url=None, glo=None,
     """
     Retrieves a module given its name, a text file or a zip file,
     look for it on http://www.xavierdupre.fr/... (website),
-    the file is copied at this file location and uncompressed if it is a zip file (or a tar.gz file).
+    the file is copied at this file location and uncompressed
+    if it is a zip file (or a tar.gz file).
+    This function can be replaced in most cases by function
+    `urlretrieve <https://docs.python.org/3/library/urllib.request.html#urllib.request.urlretrieve>`_.
+
+    ::
+
+        import urllib.request
+        url = 'https://...'
+        dest = "downloaded_file.bin"
+        urllib.request.urlretrieve(url, dest)
 
     @param      name        (str) name of the file to download
     @param      moduleName  (str|None) like import name as moduleName if *name* is a module
@@ -101,14 +111,14 @@ def download_data(name, moduleName=None, url=None, glo=None,
         ::
 
             from pyensae.datasource import download_data
-            download_data('voeux.zip', website = 'xd')
+            download_data('voeux.zip', website='xd')
 
     .. exref::
         :title: Download data from a website
 
         ::
 
-            download_data("facebook.tar.gz",website="http://snap.stanford.edu/data/")
+            download_data("facebook.tar.gz", website="http://snap.stanford.edu/data/")
 
     If it does not work, I suggest to use standard python:
     `Download a file from Dropbox with Python <http://www.xavierdupre.fr/blog/2015-01-20_nojs.html>`_.
@@ -119,7 +129,6 @@ def download_data(name, moduleName=None, url=None, glo=None,
     .. versionchanged:: 1.2
         Parameter *url* can be a list. The function
         tries the first one which contains the file.
-
     """
     from ..filehelper.decompress_helper import decompress_zip, decompress_targz, decompress_gz, decompress_bz2
 
