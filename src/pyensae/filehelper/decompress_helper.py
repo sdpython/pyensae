@@ -31,14 +31,14 @@ def decompress_zip(filename, whereTo=".", fLOG=noLOG):
             if not os.path.exists(tos):
                 finalfolder = os.path.split(tos)[0]
                 if not os.path.exists(finalfolder):
-                    fLOG("    creating folder ", finalfolder)
+                    fLOG("[decompress_zip] creating folder '{0}'".format(finalfolder))
                     os.makedirs(finalfolder)
                 if not info.filename.endswith("/"):
                     u = open(tos, "wb")
                     u.write(data)
                     u.close()
                     files.append(tos)
-                    fLOG("    unzipped ", info.filename, " to ", tos)
+                    fLOG("[decompress_zip] unzipped '{0}' to '{1}'".format(info.filename, tos))
             elif not tos.endswith("/"):
                 files.append(tos)
         elif not info.filename.endswith("/"):

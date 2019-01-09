@@ -74,10 +74,10 @@ def download_data(name, moduleName=None, url=None, glo=None,
                   loc=None, whereTo=".", website="xd", timeout=None,
                   retry=2, silent=False, fLOG=noLOG):
     """
-    Retrieves a module given its name, a text file or a zip file,
-    look for it on http://www.xavierdupre.fr/... (website),
+    Retrieves a module given its name, a text file or a :epkg:`zip` file,
+    looks for it on ``http://www.xavierdupre.fr/...`` (website),
     the file is copied at this file location and uncompressed
-    if it is a zip file (or a tar.gz file).
+    if it is a :epkg:`zip` file (or a :epkg:`tar.gz` file).
     This function can be replaced in most cases by function
     `urlretrieve <https://docs.python.org/3/library/urllib.request.html#urllib.request.urlretrieve>`_.
 
@@ -193,7 +193,7 @@ def download_data(name, moduleName=None, url=None, glo=None,
     if name in sys.modules:
         return sys.modules[name]
     elif "." not in name:
-        fLOG("[download_data]    unable to find module ", name)
+        fLOG("[download_data] unable to find module '{0}'".format(name))
 
     file = name if "." in name else "%s.py" % name
     outfile = file if whereTo == "." else os.path.join(whereTo, file)
