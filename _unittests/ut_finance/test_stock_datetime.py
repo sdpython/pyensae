@@ -59,6 +59,9 @@ class TestStockFileDatetime(unittest.TestCase):
             os.remove(file)
         df.to_excel(file)
         self.assertTrue(os.path.exists(file))
+        ret = stock2.returns()
+        df.loc["2013-04-01":"2013-04-30", "Close"] = 0
+        ret.dataframe.loc["2013-04-01":"2013-04-30", "Close"] = 0
 
 
 if __name__ == "__main__":

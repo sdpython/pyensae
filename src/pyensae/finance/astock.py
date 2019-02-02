@@ -146,6 +146,7 @@ class StockPrices:
                         ",".join(
                             _ for _ in url.columns)))
         elif isinstance(tick, str) and is_file_string(tick) and os.path.exists(tick):
+            self.tickname = os.path.split(tick)[-1]
             with open(tick, "r") as f:
                 for line in f.readlines():
                     if line.startswith('<!DOCTYPE html PUBLIC'):
@@ -180,12 +181,8 @@ class StockPrices:
 
             sbeg = begin.strftime("%Y-%m-%d")
             send = end.strftime("%Y-%m-%d")
-            name = os.path.join(
-                folder,
-                tick.replace(":", "_").replace("/", "_").replace("\\\\", "_") +
-                ".{0}.{1}.txt".format(
-                    sbeg,
-                    send))
+            name = os.path.join(folder, tick.replace(":", "_").replace("/", "_").replace("\\\\", "_") +
+                                ".{0}.{1}.txt".format(sbeg, send))
 
             date_format = None
             if not os.path.exists(name):
@@ -269,6 +266,17 @@ class StockPrices:
         if not intern:
             try:
                 self.datadf = self.datadf.sort_values("Date")
+            except ValueError as e:
+                if "'Date' is both an index level and a column label" in str(e):
+                    vals = self.datadf['Date']
+                    ind = self.datadf.index
+                    if numpy.array_equal(vals, ind):
+                        self.datadf = self.datadf.sort_index()
+                    else:
+                        raise StockPricesException(
+                            "Columns Date and index are different.") from e
+                else:
+                    raise
             except AttributeError:
                 self.datadf = self.datadf.sort("Date")
             except KeyError as e:
@@ -528,19 +536,21 @@ class StockPrices:
     def plot(self, begin=None, end=None,
              field="Close", date_format=None,
              existing=None, axis=1, ax=None,
-             **args):
+             label_prefix=None, color=None, **args):
         """
         See :meth:`draw <pyensae.finance.astock.StockPrices.draw>`.
         """
         return StockPrices.draw(self, begin=begin, end=end,
                                 field=field, date_format=date_format,
-                                existing=existing, axis=axis, ax=ax, **args)
+                                existing=existing, axis=axis, ax=ax,
+                                label_prefix=label_prefix, color=color,
+                                **args)
 
     @staticmethod
     def draw(listStockPrices, begin=None, end=None,
              field="Close", date_format=None,
              existing=None, axis=1, ax=None,
-             **args):
+             label_prefix=None, color=None, **args):
         """
         Draws a graph showing one or several time series.
         The example was taken
@@ -554,6 +564,8 @@ class StockPrices:
         @param      args                other arguments to send to ``plt.subplots``
         @param      axis                1 or 2, it only works if existing is not None.
                                         If axis is 2, the function draws the curves on the second axis.
+        @param      label_prefix        to prefix curve label
+        @param      color               curve color
         @param      args                other parameters to give method ``plt.subplots``
         @param      ax                  use existing `axes <http://matplotlib.org/api/axes_api.html>`_
         @return                         `axes <http://matplotlib.org/api/axes_api.html>`_
@@ -646,13 +658,20 @@ class StockPrices:
             ohlc = [[mdates.date2num(t)] + v for t, v in zip(dates, ohlc)]
             candlestick_ohlc(ax, ohlc, colorup="g")
         else:
+            if label_prefix is None:
+                label_prefix = ""
+            add_args = {}
+            if color:
+                add_args['c'] = color
             for stock in data.columns:
                 if axis == 2:
                     curve.append(
-                        ax.plot(dates, data[stock], "r", linestyle='solid', label=str(stock)))
+                        ax.plot(dates, data[stock], "r", linestyle='solid',
+                                label=label_prefix + str(stock), **add_args))
                 else:
                     curve.append(
-                        ax.plot(dates, data[stock], linestyle='solid', label=str(stock)))
+                        ax.plot(dates, data[stock], linestyle='solid', c=color,
+                                label=label_prefix + str(stock), **add_args))
 
         if existing is None:
             ax.format_xdata = mdates.DateFormatter('%Y-%m-%d')

@@ -18,7 +18,7 @@ def _private_test_style_src(fLOG, run_lint, verbose=False, pattern=".*[.]py$"):
                               'W0212', 'R1704', 'W0622', 'W0201', 'R1710',
                               'W0703', 'R1703', 'R0911', 'R0912', 'R0915',
                               'E0203', 'C0302', 'C0200', 'R1702', 'E1101',
-                              'R0914', 'W0123', 'W0123'),
+                              'R0914', 'W0123', 'W0123', 'W0107'),
                skip=["http_retrieve.py:191: W0703",
                      "astock.py:135: W0703",
                      "astock.py:229: W0703",
