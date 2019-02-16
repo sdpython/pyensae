@@ -88,7 +88,7 @@ def _detectfont(font):
 
 def draw_diagram(graph, module="blockdiag", format="pillow", **options):
     """
-    Draw a graph based on module :epkg:`blockdiag`.
+    Draws a graph based on module :epkg:`blockdiag`.
 
     @param      graph       graph definition,
                             see `syntax <http://blockdiag.com/en/blockdiag/examples.html>`_

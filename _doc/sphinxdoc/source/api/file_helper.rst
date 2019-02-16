@@ -29,35 +29,6 @@ compression
 
 .. autosignature:: pyensae.filehelper.decompress_helper.decompress_zip
 
-java
-++++
-
-.. autosignature:: pyensae.filehelper.jython_helper.download_java_standalone
-
-.. autosignature:: pyensae.filehelper.maven_helper.download_jar_from_maven
-
-.. autosignature:: pyensae.filehelper.pig_helper.download_pig_standalone
-
-.. autosignature:: pyensae.filehelper.pig_helper.get_hadoop_jars
-
-.. autosignature:: pyensae.filehelper.pig_helper.get_hadoop_path
-
-.. autosignature:: pyensae.filehelper.jython_helper.get_java_cmd
-
-.. autosignature:: pyensae.filehelper.jython_helper.get_java_path
-
-.. autosignature:: pyensae.filehelper.jython_helper.get_jython_jar
-
-.. autosignature:: pyensae.filehelper.pig_helper.get_pig_jars
-
-.. autosignature:: pyensae.filehelper.pig_helper.get_pig_path
-
-.. autosignature:: pyensae.filehelper.jython_helper.is_java_installed
-
-.. autosignature:: pyensae.filehelper.jython_helper.run_jython
-
-.. autosignature:: pyensae.filehelper.pig_helper.run_pig
-
 Magic command for notebooks
 +++++++++++++++++++++++++++
 

@@ -1,9 +1,4 @@
 
-.. _l-README:
-
-README
-======
-
 .. image:: https://travis-ci.org/sdpython/pyensae.svg?branch=master
     :target: https://travis-ci.org/sdpython/pyensae
     :alt: Build status
@@ -41,51 +36,36 @@ README
     :target: http://www.xavierdupre.fr/app/pyensae/helpsphinx/all_notebooks_coverage.html
     :alt: Notebook Coverage
 
+.. _l-README:
+
+pyensae
+=======
+
+This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_
+for teachings available at
+`ENSAE - Programmation - Xavier Dupré <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html>`_.
+It was the first module created for that usage.
+It does not have a clear purpose except hiding
+some annoying logic and shorten notebooks.
+It can:
+
+
+* retrieve data for practical lessons
+* import a tsv file into a database
+* retrieve stock prices from Yahoo Finance
+
+It implements a couple of magic commands to play with
+*SQLite3* in a notebook and easily show the head or tail
+of a text file. It can fill missing values in timeseries
+with *add_missing_indices* or download data from a website,
+a helper to change the size of *folium* maps or some grammar
+to parse language such as *R* or *SQL*. It also implements a basic
+way to convert a *R* script into nasty *Python*.
+
+
 **Links:**
 
 * `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
 * `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_
 * `Blog <http://www.xavierdupre.fr/app/pyensae/helpsphinx/blog/main_0000.html#ap-main-0>`_
 
-Description
------------
-
-This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_
-for teachings available at
-`ENSAE - Programmation - Xavier Dupré <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html>`_.
-
-Functionalities
----------------
-
-* retrieve data for practical lessons
-* import a tsv file into a database
-* retrieve stock prices from Yahoo Finance
-* magic commands to easily use SQLite3 from a notebook
-
-Dependencies
-------------
-
-* `numpy <http://www.numpy.org/>`_
-* `pandas <http://pandas.pydata.org/>`_
-* `pyquickhelper <https://pypi.python.org/pypi/pyquickhelper/>`_
-
-Class *StockPrices* requires:
-
-* `dateutil <https://pypi.python.org/pypi/python-dateutil>`_
-* `six <https://pypi.python.org/pypi/six>`_
-
-The function *register_magics* defines magic commands
-to send commands to a remote commands through a SSH connection:
-
-* ``%remote_open``, ``%remote_close``
-* ``%remote_cmd``, ``%remote_up``, ``%remote_down``
-
-The magic commands will be automatically enabled if the module is imported from a notebook.
-
-Contributions
--------------
-
-Started in 2013/08.
-
-* First contributor: `Xavier Dupré <http://www.xavierdupre.fr/>`_.
-* Others contributors: ENSAE's students.
