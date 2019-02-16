@@ -62,7 +62,6 @@ a helper to change the size of *folium* maps or some grammar
 to parse language such as *R* or *SQL*. It also implements a basic
 way to convert a *R* script into nasty *Python*.
 
-
 **Links:**
 
 * `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
