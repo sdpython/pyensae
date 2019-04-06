@@ -1,35 +1,14 @@
 """
 @brief      test log(time=2s)
-
-You should indicate a time in seconds. The program ``run_unittests.py``
-will sort all test files by increasing time and run them.
 """
-
-
-import sys
 import os
 import unittest
 import shlex
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.helpgen import docstring2html
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pyensae.filehelper.magic_file import MagicFile
-from src.pyensae.filehelper import file_tail, file_encoding
-from src.pyensae.sql import Database
+from pyensae.filehelper.magic_file import MagicFile
+from pyensae.filehelper import file_tail, file_encoding
+from pyensae.sql import Database
 
 
 class TestFiles (unittest.TestCase):

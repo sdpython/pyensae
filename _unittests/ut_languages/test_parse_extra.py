@@ -4,31 +4,13 @@
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
 """
-
-
-import sys
 import os
 import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
-from src.pyensae.languages.antlr_grammar_build import build_grammar
-import src.pyensae.languages.antlr_grammar_use as source_parser
+from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
+from pyensae.languages.antlr_grammar_build import build_grammar
+import pyensae.languages.antlr_grammar_use as source_parser
 
 
 class TestParseCode (unittest.TestCase):
@@ -64,8 +46,8 @@ class TestParseCode (unittest.TestCase):
         example of the language
         """
         try:
-            from src.pyensae.languages.LanguageLexer import LanguageLexer
-            from src.pyensae.languages.LanguageParser import LanguageParser
+            from pyensae.languages.LanguageLexer import LanguageLexer
+            from pyensae.languages.LanguageParser import LanguageParser
         except ImportError:
             return
 

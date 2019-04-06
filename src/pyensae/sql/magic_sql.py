@@ -456,9 +456,8 @@ class MagicSQL(MagicClassWithHelpers):
                 cell = args.query
                 if cell is None or len(cell) == 0:
                     raise ValueError("no SQL query is defined")
-                else:
-                    query = cell
-                    full = True
+                query = cell
+                full = True
             else:
                 query = cell
 

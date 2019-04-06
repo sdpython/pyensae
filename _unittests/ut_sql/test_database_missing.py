@@ -4,9 +4,6 @@
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
 """
-
-
-import sys
 import os
 import unittest
 import datetime
@@ -15,25 +12,10 @@ import pandas
 import numpy
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder, ExtTestCase
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pyensae.sql.database_main import Database
-from src.pyensae.sql.database_core import DatabaseCore
-from src.pyensae.sql.database_exception import DBException
-from src.pyensae.sql.type_helpers import get_default_value_type, guess_type_value_type, guess_type_value
+from pyensae.sql.database_main import Database
+from pyensae.sql.database_core import DatabaseCore
+from pyensae.sql.database_exception import DBException
+from pyensae.sql.type_helpers import get_default_value_type, guess_type_value_type, guess_type_value
 
 
 class TestDatabaseMissing(ExtTestCase):

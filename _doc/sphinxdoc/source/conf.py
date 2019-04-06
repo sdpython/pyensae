@@ -26,4 +26,3 @@ epkg_dictionary = ({
     "pyenbc": 'http://www.xavierdupre.fr/app/pyenbc/helpsphinx/index.html',
     "SQLite3": 'https://www.sqlite.org/index.html',
 })
-

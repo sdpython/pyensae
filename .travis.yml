@@ -8,5 +8,6 @@ install:
     - pip install qgrid --upgrade --pre
     - pip install -U git+https://github.com/ozgur/python-linkedin --no-deps
     - pip install git+https://github.com/matplotlib/mpl_finance
+    - export PYTHONPATH=src
 script:
     - python setup.py unittests

@@ -33,12 +33,11 @@ def _is_syntax_is_missing(language):
             "The grammar {0} is not available, you should get it from {1}".format(
                 language,
                 locations[language]))
-    else:
-        raise KeyError(
-            "unexpected language: {0}, not in {1}".format(
-                language,
-                ",".join(
-                    locations.keys())))
+    raise KeyError(
+        "unexpected language: {0}, not in {1}".format(
+            language,
+            ",".join(
+                locations.keys())))
 
 
 def build_grammar(g4, version="4.7.1", fLOG=noLOG):

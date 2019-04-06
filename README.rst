@@ -28,10 +28,6 @@
     :alt: GitHub Issues
     :target: https://github.com/sdpython/pyensae/issues
 
-.. image:: https://badge.waffle.io/sdpython/pyensae.png?label=ready&title=Ready
-    :alt: Waffle
-    :target: https://waffle.io/sdpython/pyensae
-
 .. image:: http://www.xavierdupre.fr/app/pyensae/helpsphinx/_images/nbcov.png
     :target: http://www.xavierdupre.fr/app/pyensae/helpsphinx/all_notebooks_coverage.html
     :alt: Notebook Coverage
@@ -48,7 +44,6 @@ It was the first module created for that usage.
 It does not have a clear purpose except hiding
 some annoying logic and shorten notebooks.
 It can:
-
 
 * retrieve data for practical lessons
 * import a tsv file into a database
@@ -67,4 +62,3 @@ way to convert a *R* script into nasty *Python*.
 * `GitHub/pyensae <https://github.com/sdpython/pyensae/>`_
 * `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_
 * `Blog <http://www.xavierdupre.fr/app/pyensae/helpsphinx/blog/main_0000.html#ap-main-0>`_
-

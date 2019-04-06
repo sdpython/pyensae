@@ -1,28 +1,10 @@
 """
 @brief      test log(time=7s)
 """
-
-import sys
-import os
 import unittest
 import pandas
 from pyquickhelper.loghelper import fLOG
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pyensae.mlhelper import df_crossjoin
+from pyensae.mlhelper import df_crossjoin
 
 
 class TestPandasJoins (unittest.TestCase):

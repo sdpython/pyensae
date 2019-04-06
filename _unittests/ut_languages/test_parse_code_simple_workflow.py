@@ -11,25 +11,10 @@ import os
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code, get_tree_graph
-from src.pyensae.languages.antlr_grammar_build import build_grammar
-from src.pyensae.graphhelper import run_dot
-import src.pyensae.languages.antlr_grammar_use as source_parser
+from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code, get_tree_graph
+from pyensae.languages.antlr_grammar_build import build_grammar
+from pyensae.graphhelper import run_dot
+import pyensae.languages.antlr_grammar_use as source_parser
 
 
 class TestParseCodeSimpleWorkflow (unittest.TestCase):

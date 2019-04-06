@@ -11,23 +11,8 @@ import os
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder, fix_tkinter_issues_virtualenv
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_graph, parse_code
-from src.pyensae.graphhelper import run_dot
+from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_graph, parse_code
+from pyensae.graphhelper import run_dot
 
 
 class TestParseCodeGraph (unittest.TestCase):

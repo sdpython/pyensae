@@ -161,8 +161,7 @@ class StockPrices:
                 if "Firewall Authentication" in content:
                     raise StockPricesException(
                         "pandas cannot parse the file, check your have access to internet: " + str(tick)) from e
-                else:
-                    raise
+                raise
         else:
             if not os.path.exists(folder):
                 try:
@@ -251,8 +250,7 @@ class StockPrices:
                 if "Firewall Authentication" in content:
                     raise StockPricesException(
                         "pandas cannot parse the file, check your have access to internet '{0}'".format(tick)) from e
-                else:
-                    raise
+                raise
 
             if date_format is not None:
                 self.datadf["Date"] = pandas.to_datetime(self.datadf["Date"])

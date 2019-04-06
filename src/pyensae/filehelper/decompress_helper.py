@@ -97,8 +97,7 @@ def extractall_silent(self, path=".", members=None, *, numeric_owner=False, sile
         except ExtractError as e:
             if self.errorlevel > 1:
                 raise
-            else:
-                self._dbg(1, "tarfile: %s" % e)
+            self._dbg(1, "tarfile: %s" % e)
 
 
 def decompress_targz(filename, whereTo=".", silent=True, fLOG=noLOG):

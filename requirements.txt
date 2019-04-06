@@ -14,7 +14,7 @@ pandas
 git+https://github.com/pydata/pandas-datareader.git
 pandocfilters
 pymyinstall
-pyquickhelper>=1.8
+pyquickhelper>=1.9
 qgrid
 quandl
 scikit-learn

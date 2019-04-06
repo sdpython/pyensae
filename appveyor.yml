@@ -24,6 +24,7 @@ install:
   - "%PYTHON%\\Scripts\\pip install git+https://github.com/matplotlib/mpl_finance"
   - "set PATH=%PATH%;C:\\projects\\pyensae\\build\\update_modules\\Graphviz\\bin"
   - "dir C:\\projects\\pyensae\\build\\update_modules\\Graphviz\\bin"
+  - set PYTHONPATH=src
 build: off
 
 test_script:

@@ -8,22 +8,7 @@ import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pyensae.notebookhelper import folium_html_map, folium_embed_map
+from pyensae.notebookhelper import folium_html_map, folium_embed_map
 
 
 class TestNotebookFolium (unittest.TestCase):

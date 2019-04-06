@@ -11,24 +11,9 @@ import os
 import unittest
 import warnings
 from pyquickhelper.pycode import ExtTestCase
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-from src.pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
-from src.pyensae.languages.antlr_grammar_build import build_grammar
-import src.pyensae.languages.antlr_grammar_use as source_parser
+from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
+from pyensae.languages.antlr_grammar_build import build_grammar
+import pyensae.languages.antlr_grammar_use as source_parser
 
 
 class TestParseCodeCSharp(ExtTestCase):

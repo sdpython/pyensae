@@ -740,10 +740,9 @@ class TextFile:
                     raise Exception(
                         "this expression does not compile (%s), pattern %s, columns %s" %
                         (str(e), final, s))
-                else:
-                    raise Exception(
-                        "this expression does not compile (%s), pattern %s" %
-                        (str(e), final))
+                raise Exception(
+                    "this expression does not compile (%s), pattern %s" %
+                    (str(e), final))
 
         exp = {int: "[-]?[0-9]*?",
                float: "[0-9.eE]*?",

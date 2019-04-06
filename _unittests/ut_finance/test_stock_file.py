@@ -1,9 +1,6 @@
 """
 @brief      test log(time=3s)
 """
-
-
-import sys
 import os
 import unittest
 import datetime
@@ -11,23 +8,7 @@ import warnings
 from quandl.errors.quandl_error import LimitExceededError
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-
-
-try:
-    import src
-except ImportError:
-    path = os.path.normpath(
-        os.path.abspath(
-            os.path.join(
-                os.path.split(__file__)[0],
-                "..",
-                "..")))
-    if path not in sys.path:
-        sys.path.append(path)
-    import src
-
-
-from src.pyensae.finance.astock import StockPrices, StockPricesHTTPException
+from pyensae.finance.astock import StockPrices, StockPricesHTTPException
 
 
 class TestStockFile (unittest.TestCase):
