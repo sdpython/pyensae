@@ -20,6 +20,6 @@ quandl
 scikit-learn
 scipy
 seaborn
-sphinxjp.themes.basicstrap
+sphinx_readable_theme
 wheel
 yahoo-historical
