@@ -21,6 +21,5 @@ scikit-learn
 scipy
 seaborn
 sphinxjp.themes.basicstrap
-sphinxjp.themes.sphinxjp
 wheel
 yahoo-historical
