@@ -41,11 +41,4 @@ def _private_test_style_test(fLOG, run_lint, verbose=False, pattern=".*[.]py$"):
                pylint_ignore=('C0103', 'C1801', 'R0201', 'R1705', 'W0108', 'W0613',
                               'C0111', 'W0622', 'W0612', 'C0412', 'W0621',
                               'W0125', 'E1127', 'E1101', 'W1402', 'W0212',),
-               skip=["src' imported but unused",
-                     "skip_' imported but unused",
-                     "skip__' imported but unused",
-                     "skip___' imported but unused",
-                     "Unused variable 'skip_'",
-                     "imported as skip_",
-                     "Unused import src",
-                     ])
+               skip=[])
