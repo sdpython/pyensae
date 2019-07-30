@@ -28,6 +28,7 @@ class TestDatabaseDF (unittest.TestCase):
         values = [{"name": "A", "age": 10, "score": 34.5},
                   {"name": "B", "age": 20, "score": -34.5}, ]
         df = pandas.DataFrame(values)
+        df = df[['age', 'name', 'score']]
         db = Database.fill_sql_table(df, dbf, "newtable")
         db.execute_view("SELECT * FROM newtable")
         df2 = db.to_df("SELECT * FROM newtable")

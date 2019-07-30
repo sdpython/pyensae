@@ -75,6 +75,7 @@ class TestDatabaseMissing(ExtTestCase):
         values = [{"name": "A", "age": 10, "score": 34.5},
                   {"name": "B", "age": 20, "score": -34.5}, ]
         df = pandas.DataFrame(values)
+        df = df[['age', 'name', 'score']]
         db = Database.fill_sql_table(df, dbf, "newtable")
         has = db.has_index('ind')
         self.assertFalse(has)
