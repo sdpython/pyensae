@@ -1,4 +1,12 @@
 
+.. image:: https://github.com/sdpython/pyensae/blob/master/_doc/sphinxdoc/source/phdoc_static/project_ico.png?raw=true
+    :target: https://github.com/sdpython/pyensae/
+
+.. _l-README:
+
+pyensae
+=======
+
 .. image:: https://travis-ci.org/sdpython/pyensae.svg?branch=master
     :target: https://travis-ci.org/sdpython/pyensae
     :alt: Build status
@@ -31,11 +39,6 @@
 .. image:: http://www.xavierdupre.fr/app/pyensae/helpsphinx/_images/nbcov.png
     :target: http://www.xavierdupre.fr/app/pyensae/helpsphinx/all_notebooks_coverage.html
     :alt: Notebook Coverage
-
-.. _l-README:
-
-pyensae
-=======
 
 This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_
 for teachings available at
