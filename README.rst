@@ -4,8 +4,8 @@
 
 .. _l-README:
 
-pyensae
-=======
+pyensae: hide complexity for teachings
+======================================
 
 .. image:: https://travis-ci.org/sdpython/pyensae.svg?branch=master
     :target: https://travis-ci.org/sdpython/pyensae
