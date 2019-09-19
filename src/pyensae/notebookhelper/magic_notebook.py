@@ -4,7 +4,12 @@
 @brief Magic command to help within notebooks
 """
 from IPython.core.magic import magics_class, line_magic
-import qgrid
+try:
+    import qgrid
+except ImportError:
+    # We ignore that error since it is not
+    # part of the mandatory requirements.
+    pass
 from jyquickhelper import add_notebook_menu
 from pyquickhelper.ipythonhelper import MagicCommandParser, MagicClassWithHelpers
 
