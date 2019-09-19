@@ -117,6 +117,8 @@ class Corrplot(Linkage):
         You probably do not need to use that method. Use :meth:`plot` and
         the two parameters order_metric and order_method instead.
         """
+        if None is method or None is metric:
+            return self.df
         Y = self.linkage(self.df, method=method, metric=metric)
         ind1 = fcluster(Y, 0.7 * max(Y[:, 2]), 'distance')
         Z = dendrogram(Y, no_plot=True)
