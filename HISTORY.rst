@@ -5,11 +5,20 @@
 History
 =======
 
-current - 2018-07-31 - 0.00Mb
+current - 2019-09-19 - 0.00Mb
+=============================
+
+* `30`: add a None ordered parameter (2019-09-19)
+* `31`: Remove strong dependency on qgrid (2019-09-19)
+* `28`: Python 2 vs Python 3 (2019-02-02)
+* `29`: StockPrice fails with pandas 0.24 (2019-02-02)
+* `26`: update default antlr4 version to 4.7.1 (2018-10-25)
+* `25`: update CSharp grammar (2018-10-25)
+
+1.2.788 - 2018-07-31 - 0.48Mb
 =============================
 
 * `21`: remove underscores in subfolders (2018-07-31)
-* `12`: [won't fix] add magic command for blockdiag (2018-06-16)
 * `24`: fix download_data when url is a list or urls (2018-06-16)
 * `23`: fix add_missing_indices failing due to more strict comparisons in pandas 0.23 (2018-05-21)
 * `19`: velib collection, group files instead of having multiple files (moved to maydataapi) (2018-05-21)

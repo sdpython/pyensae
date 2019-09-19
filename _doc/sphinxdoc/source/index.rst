@@ -30,13 +30,21 @@ pyensae documentation
 .. image:: https://codecov.io/github/sdpython/pyensae/coverage.svg?branch=master
     :target: https://codecov.io/github/sdpython/pyensae?branch=master
 
-.. image:: https://badge.waffle.io/sdpython/pyensae.png?label=ready&title=Ready
-    :alt: Waffle
-    :target: https://waffle.io/sdpython/pyensae
-
 .. image:: nbcov.png
     :target: http://www.xavierdupre.fr/app/pyensae/helpsphinx/all_notebooks_coverage.html
     :alt: Notebook Coverage
+
+.. image:: https://pepy.tech/badge/pyensae/month
+    :target: https://pepy.tech/project/pyensae/month
+    :alt: Downloads
+
+.. image:: https://img.shields.io/github/forks/sdpython/pyensae.svg
+    :target: https://github.com/sdpython/pyensae/
+    :alt: Forks
+
+.. image:: https://img.shields.io/github/stars/sdpython/pyensae.svg
+    :target: https://github.com/sdpython/pyensae/
+    :alt: Stars
 
 **Links:** `pypi <https://pypi.python.org/pypi/pyensae/>`_,
 `github <https://github.com/sdpython/pyensae/>`_,

@@ -52,6 +52,18 @@ pyensae: hide complexity for teachings
     :target: https://github.com/sdpython/pyensae/
     :alt: Stars
 
+.. image:: https://pepy.tech/badge/pyensae/month
+    :target: https://pepy.tech/project/pyensae/month
+    :alt: Downloads
+
+.. image:: https://img.shields.io/github/forks/sdpython/pyensae.svg
+    :target: https://github.com/sdpython/pyensae/
+    :alt: Forks
+
+.. image:: https://img.shields.io/github/stars/sdpython/pyensae.svg
+    :target: https://github.com/sdpython/pyensae/
+    :alt: Stars
+
 This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_
 for teachings available at
 `ENSAE - Programmation - Xavier Dupré <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html>`_.
