@@ -36,7 +36,7 @@ class TestResources(ExtTestCase):
         fold = get_temp_folder(__file__, "temp_download_data_failures")
         one = "voeux2.zip"
         self.assertRaise(lambda: download_data(one, website="xd", whereTo=fold, timeout=10),
-                         (DownloadDataException, zipfile.BadZipFile))
+                         (DownloadDataException, zipfile.BadZipFile, RuntimeError))
 
 
 if __name__ == "__main__":
