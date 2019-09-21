@@ -22,7 +22,11 @@ def decompress_zip(filename, whereTo=".", fLOG=noLOG):
     @param      fLOG            logging function
     @return                     return the list of decompressed files
     """
-    file = zipfile.ZipFile(filename, "r")
+    try:
+        file = zipfile.ZipFile(filename, "r")
+    except zipfile.BadZipFile as e:
+        raise RuntimeError("Unable to unzip '{}'.".format(
+            filename)) from e
     files = []
     for info in file.infolist():
         if not os.path.exists(info.filename):
