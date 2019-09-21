@@ -5,7 +5,9 @@ import os
 import unittest
 import zipfile
 from pyquickhelper.pycode import ExtTestCase, get_temp_folder
-from pyensae.datasource.http_retrieve import download_data, DownloadDataException
+from pyensae.datasource.http_retrieve import (
+    download_data, DownloadDataException, RetrieveDataException
+)
 
 
 class TestResources(ExtTestCase):
@@ -36,7 +38,8 @@ class TestResources(ExtTestCase):
         fold = get_temp_folder(__file__, "temp_download_data_failures")
         one = "voeux2.zip"
         self.assertRaise(lambda: download_data(one, website="xd", whereTo=fold, timeout=10),
-                         (DownloadDataException, zipfile.BadZipFile, RuntimeError))
+                         (DownloadDataException, zipfile.BadZipFile,
+                          RuntimeError, RetrieveDataException))
 
 
 if __name__ == "__main__":
