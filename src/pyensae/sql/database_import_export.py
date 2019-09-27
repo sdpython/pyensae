@@ -226,8 +226,7 @@ class DatabaseImportExport:
                 if unique is not None:
                     if dic[unique] in unique_key:
                         continue
-                    else:
-                        unique_key[dic[unique]] = 0
+                    unique_key[dic[unique]] = 0
 
                 num_line += 1
                 if dic is not None:
@@ -297,8 +296,7 @@ class DatabaseImportExport:
                 if unique is not None:
                     if dic[unique] in unique_key:
                         continue
-                    else:
-                        unique_key[dic[unique]] = 0
+                    unique_key[dic[unique]] = 0
 
                 if dic is not None:
                     self._get_insert_request(

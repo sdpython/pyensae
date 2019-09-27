@@ -194,7 +194,7 @@ class StockPrices:
                     url = url_string.replace(" ", "+").replace(",", "%2C")
                     date_format = "%b-%d-%Y"
                 elif url == "quandl":
-                    import quandl
+                    import quandl  # pylint: disable=C0415
                     df = quandl.get(
                         "EURONEXT/BNP", start_date=begin.strftime('%Y-%m-%d'), end_date=end.strftime('%Y-%m-%d'))
                     df.reset_index(drop=False).to_csv(
@@ -208,7 +208,7 @@ class StockPrices:
                     df.to_csv(name, sep=sep, index=False)
                     use_url = False
                 elif url in ("yahoo", "google", "fred", "famafrench"):
-                    import pandas_datareader.data as web
+                    import pandas_datareader.data as web  # pylint: disable=C0415
                     df = web.DataReader(self.tickname, url,
                                         begin, end).reset_index(drop=False)
                     df.to_csv(name, sep=sep, index=False)
@@ -625,8 +625,8 @@ class StockPrices:
             "local formatting"
             return '%1.2f' % x
 
-        import matplotlib.pyplot as plt
-        import matplotlib.dates as mdates
+        import matplotlib.pyplot as plt  # pylint: disable=C0415
+        import matplotlib.dates as mdates  # pylint: disable=C0415
 
         if ax is not None:
             ex_h, ex_l = ax.get_legend_handles_labels()

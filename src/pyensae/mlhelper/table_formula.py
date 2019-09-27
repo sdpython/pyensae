@@ -7,7 +7,7 @@ import datetime
 import pandas
 
 
-class TableFormula(pandas.DataFrame):
+class TableFormula(pandas.DataFrame):  # pylint: disable=W0223
     """
     Extends class :epkg:`pandas:DataFrame` or proposes extensions
     to existing functions using lambda functions.
@@ -101,11 +101,12 @@ class TableFormula(pandas.DataFrame):
                     row), axis=1) * cp["__weight__"]
 
         if function_weight is None:
-            aggs = {k: v for k, v in zip(values, function_agg)}
+            aggs = {k: v for k, v in zip(  # pylint: disable=R1721
+                values, function_agg)}  # pylint: disable=R1721
             gr = cp.groupby("__key__", as_index=False).agg(aggs)
         else:
             sum_weight = cp["__weight__"].sum()
-            aggs = {k: (lambda c, v=v: v(c, sum_weight))
+            aggs = {k: (lambda c, v=v: v(c, sum_weight))  # pylint: disable=W0631
                     for k, v in zip(values, function_agg)}
             gr = cp.groupby("__key__", as_index=False).agg(aggs)
         gr.columns = [rep.get(_, _) for _ in gr.columns]
@@ -177,7 +178,7 @@ class TableFormula(pandas.DataFrame):
                                 ])
         """
         if ax is None:
-            import matplotlib.pyplot as plt
+            import matplotlib.pyplot as plt  # pylint: disable=C0415
             fig, ax = plt.subplots(1, 1, figsize=figsize)
 
         smarker = {(True, True): 'o-', (True, False): 'o', (False, True): '-',
@@ -189,13 +190,13 @@ class TableFormula(pandas.DataFrame):
             x = self.apply(xf, axis=1)
             y = self.apply(yf, axis=1)
             if isinstance(x[0], datetime.datetime):
-                import matplotlib.dates
+                import matplotlib.dates  # pylint: disable=C0415
                 x = [matplotlib.dates.date2num(d) for d in x]
                 has_date = True
             ax.plot(x, y, smarker, label=label)
 
         if has_date:
-            import matplotlib.dates
+            import matplotlib.dates  # pylint: disable=C0415
             hfmt = matplotlib.dates.DateFormatter(format_date)
             if "%H" in format_date or "%M" in format_date:
                 ax.xaxis.set_major_locator(matplotlib.dates.MinuteLocator())

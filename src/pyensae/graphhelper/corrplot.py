@@ -188,7 +188,7 @@ class Corrplot(Linkage):
             c.plot(colorbar=False, shrink=.8, upper='circle'  )
 
         """
-        import matplotlib.pyplot as plt
+        import matplotlib.pyplot as plt  # pylint: disable=C0415
 
         # default
         if cmap is not None:
@@ -355,7 +355,7 @@ class Corrplot(Linkage):
             for y in range(height):
                 if fill == 'lower' and x > y:
                     continue
-                elif fill == 'upper' and x < y:
+                if fill == 'upper' and x < y:
                     continue
                 if diagonal is False and x == y:
                     continue

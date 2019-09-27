@@ -139,7 +139,7 @@ class TreeGraphListener(ParseTreeListener):
 
         @return     `networkx Graph <https://networkx.github.io/documentation/latest/tutorial/tutorial.html?highlight=graph>`_
         """
-        import networkx
+        import networkx  # pylint: disable=C0415
         verti = self.Vertices
         edges = self.Edges
 
@@ -157,12 +157,12 @@ class TreeGraphListener(ParseTreeListener):
         @param      matplotlib axis
         """
         if ax is None:
-            import matplotlib.pyplot as plt
+            import matplotlib.pyplot as plt  # pylint: disable=C0415
             fig, ax = plt.subplots()
 
         G = self.to_networkx()
 
-        import networkx
+        import networkx  # pylint: disable=C0415
         pos = networkx.spring_layout(G)  # positions for all nodes
         verti = self.Vertices
         labels = {p: verti[p][0] for p in pos}

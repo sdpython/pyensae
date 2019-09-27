@@ -147,7 +147,7 @@ class Database(DatabaseCore, DatabaseImportExport, DatabaseObject, DatabaseJoinG
         @param      request     SQL request
         @return                 DataFrame
         """
-        import pandas
+        import pandas  # pylint: disable=C0415
         cols = self.get_sql_columns(request)
         iter = self.execute_view(request, nolog=True)
         return pandas.DataFrame(iter, columns=cols)

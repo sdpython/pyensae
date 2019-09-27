@@ -31,7 +31,7 @@ class TestNotebookFolium (unittest.TestCase):
                 "jinja2.exceptions.TemplateNotFound: tiles/openstreetmap/tiles.txt")
             return
 
-        import folium
+        import folium  # pylint: disable=C0415
         map_osm = folium.Map(location=[48.85, 2.34])
         map_osm.save(outfile)
         assert os.path.exists(outfile)

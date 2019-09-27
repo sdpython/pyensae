@@ -17,9 +17,9 @@ def dBase2df(file, encoding="cp437"):
 
     The module relies on `dbfread <https://pypi.python.org/pypi/dbfread/>`_.
     """
-    import dbfread
+    import dbfread  # pylint: disable=C0415
     table = dbfread.DBF(file, load=False, encoding=encoding)
-    res = [_ for _ in table]
+    res = list(table)
     return pandas.DataFrame(res)
 
 
@@ -58,7 +58,7 @@ def dBase2sqllite(
         cursor = db
 
     if isinstance(table, str):
-        import dbfread
+        import dbfread  # pylint: disable=C0415
         table = dbfread.DBF(table, load=False, encoding=encoding)
 
     cursor.execute('drop table if exists %s' % table.name)

@@ -416,7 +416,7 @@ class DatabaseCore2:
                             val = v[1][0](val)
                         elif v[1] is datetime.datetime:
                             if isinstance(val, datetime.datetime):
-                                val = val
+                                pass
                             elif isinstance(val, str):
                                 val = datetime.datetime.parse(val)
                             else:

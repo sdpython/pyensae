@@ -220,11 +220,10 @@ def download_data(name, moduleName=None, url=None, glo=None,
                     excs.append(exc)
                     excs.append(ee)
                     break
-                else:
-                    fLOG("[download_data] (1)  fail and retry to download '{0}' to '{1}'".format(
-                        url, outfile))
-                    # We wait for 2 seconds.
-                    time.sleep(2)
+                fLOG("[download_data] (1)  fail and retry to download '{0}' to '{1}'".format(
+                    url, outfile))
+                # We wait for 2 seconds.
+                time.sleep(2)
             except Exception as e:
                 if retry <= 1:
                     exc = DownloadDataException(
@@ -232,11 +231,10 @@ def download_data(name, moduleName=None, url=None, glo=None,
                     excs.append(exc)
                     excs.append(e)
                     break
-                else:
-                    fLOG("[download_data] (2)  fail and retry to download '{0}' to '{1}'".format(
-                        url, outfile))
-                    # We wait for 2 seconds.
-                    time.sleep(2)
+                fLOG("[download_data] (2)  fail and retry to download '{0}' to '{1}'".format(
+                    url, outfile))
+                # We wait for 2 seconds.
+                time.sleep(2)
             retry -= 1
 
         if success and alls is not None:

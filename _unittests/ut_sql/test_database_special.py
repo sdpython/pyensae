@@ -25,7 +25,7 @@ class TestDatabaseSpecial (unittest.TestCase):
         sql = """CROSS pos PLACE nb_click,url FROM url_QSSH ORDER BY nb_click -- comment
                     DESC LIMIT 100"""
         cur = db.execute(sql)
-        mat = [line for line in cur]
+        mat = list(cur)
         view = db.execute_view(sql, add_column_name=True)
         self.assertEqual(len(view), len(mat) + 1)
         self.assertEqual(view[0], ['1;nb_click', '1;url', '2;nb_click', '2;url', '3;nb_click', '3;url',
@@ -73,7 +73,7 @@ class TestDatabaseSpecial (unittest.TestCase):
         sql = """CROSS pos PLACE nb_click FROM url_QSSH ORDER BY nb_click -- comment
                     DESC LIMIT 100"""
         cur = db.execute(sql)
-        mat = [line for line in cur]
+        mat = list(cur)
         view = db.execute_view(sql, add_column_name=True)
         self.assertEqual(len(view), len(mat) + 1)
         self.assertEqual(len(view[0]), len(view[1]))
@@ -81,7 +81,7 @@ class TestDatabaseSpecial (unittest.TestCase):
         sql = """CROSS pos,pos PLACE nb_click FROM url_QSSH ORDER BY nb_click -- comment
                     DESC LIMIT 100"""
         cur = db.execute(sql)
-        mat = [line for line in cur]
+        mat = list(cur)
         view = db.execute_view(sql, add_column_name=True)
         self.assertEqual(len(view), len(mat) + 1)
         self.assertEqual(len(view[0]), len(view[1]))

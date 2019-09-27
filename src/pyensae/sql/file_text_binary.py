@@ -316,8 +316,7 @@ class TextFile:
                     if val in uniquekey:
                         uniquekey[val] += 1
                         continue
-                    else:
-                        uniquekey[val] = 1
+                    uniquekey[val] = 1
 
                 if len(col) != oldnb:
                     col.extend(["" for i in range(0, oldnb - len(col))])
@@ -584,7 +583,7 @@ class TextFile:
         else:
             hhhh, _ = 0, bestcol
             while _ > 0:
-                hhhh, _ = hhhh, _ / 10
+                hhhh, _ = hhhh, _ / 10  # pylint: disable=W0127
             format = "c%0" + str(hhhh) + "d"
             names = [format % i for i in range(bestcol)]
 
@@ -677,7 +676,8 @@ class TextFile:
                                         float: "[-]?[0-9]*?([.][0-9]*?)?([eE][-]?[0-9]{0,4})?",
                                         str: ".*"}
 
-    def _build_regex(self, sep, columns, exp=_build_regex_default_value_types,
+    def _build_regex(self, sep, columns,  # pylint: disable=W0102
+                     exp=_build_regex_default_value_types,  # pylint: disable=W0102
                      nomore=False, regex=None):
         """
         Builds a regular expression.

@@ -28,7 +28,7 @@ class TestNotebookQGrid(unittest.TestCase):
             # qgrid needs a true notebook as the grid is editable
             pass
         except TypeError as e:
-            import qgrid
+            import qgrid  # pylint: disable=C0415
             raise Exception("qgrid: {0}".format(qgrid.__version__)) from e
         except AttributeError as e:
             if "'NoneType' object has no attribute 'session'" not in str(e):

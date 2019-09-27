@@ -600,7 +600,7 @@ class DatabaseJoinGroup:
         elif isinstance(values, list):
             values = sorted(copy.copy(values))
             values2 = values[1:] + [max(1e10, max(values) + 1), ]
-            names = [x for x in values]
+            names = list(values)
             couple = list(zip(range(0, len(values)), values, values2, names))
 
             def filterfunctionhistogramlist(v):
@@ -760,7 +760,7 @@ class DatabaseJoinGroup:
         for c in cols1:
             if ":" in c:
                 continue
-            elif c in keyfields:
+            if c in keyfields:
                 fields.append(keyfields[c])
             elif c in cols2:
                 if duplicate_column:

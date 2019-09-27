@@ -57,7 +57,7 @@ class TestDatabaseInsert (unittest.TestCase):
         line = db.get_table_nfirst_lines("ACAPA")
         col = [_[0] for _ in db.get_table_columns("ACAPA")]
         line = line[0]
-        add = {k: v for k, v in zip(col, line)}
+        add = {k: v for k, v in zip(col, line)}  # pylint: disable=R1721
         db.insert("ACAPA", add)
         db.commit()
         db.update("ACAPA", "Date", add["Date"], add)

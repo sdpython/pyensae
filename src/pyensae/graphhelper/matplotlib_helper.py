@@ -19,5 +19,5 @@ def mpl_switch_style(style="ggplot"):
     # sphinx is doing and graphs are not part of the documentation but show up
     # in a separate window
     if "plt" not in sys.modules:
-        import matplotlib.pyplot as plt
+        import matplotlib.pyplot as plt  # pylint: disable=C0415
     plt.style.use(style)

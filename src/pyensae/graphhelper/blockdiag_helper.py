@@ -107,13 +107,13 @@ def draw_diagram(graph, module="blockdiag", format="pillow", **options):
     See notebook :ref:`drawdiagramrst`.
     """
     if module == "blockdiag":
-        import blockdiag
+        import blockdiag  # pylint: disable=C0415
         module = blockdiag
-        import blockdiag.parser
+        import blockdiag.parser  # pylint: disable=C0415
         parser = blockdiag.parser
-        import blockdiag.builder
+        import blockdiag.builder  # pylint: disable=C0415
         builder = blockdiag.builder
-        import blockdiag.drawer
+        import blockdiag.drawer  # pylint: disable=C0415
         drawer = blockdiag.drawer
     else:
         raise ValueError(

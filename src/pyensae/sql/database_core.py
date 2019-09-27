@@ -576,7 +576,7 @@ class DatabaseCore(DatabaseCore2):
             prefix = table.split(".")[0] + "."
             table = table.split(".")[1]
         else:
-            table = table
+            # table = table
             prefix = ""
         cur = self._connection.cursor()
 
@@ -882,9 +882,9 @@ class DatabaseCore(DatabaseCore2):
         cur = self.execute(request, nolog=nolog)
         if add_column_name:
             col_name_list = [tuple[0] for tuple in cur.description]
-            res = [col_name_list] + [x for x in cur]
+            res = [col_name_list] + list(cur)
         else:
-            res = [x for x in cur]
+            res = list(cur)
         cur.close()
         if not nolog and (len(res) == 0 or len(res) > 1e4):
             self.LOG("execute_view ", len(res), "results")
@@ -974,7 +974,7 @@ class DatabaseCore(DatabaseCore2):
             table = table.split(".")[1]
         else:
             prefix = ""
-            table = table
+            # table = table
 
         self.LOG("index create ", indexname, table, columns, unique)
         if unique:

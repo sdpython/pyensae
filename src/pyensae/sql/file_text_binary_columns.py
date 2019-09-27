@@ -101,7 +101,7 @@ class TextFileColumns(TextFile):
         if isinstance(changes, list):
             hhhh, _ = 0, len(changes)
             while _ > 0:
-                hhhh, _ = hhhh, _ / 10
+                hhhh, _ = hhhh, _ / 10  # pylint: disable=W0127
             forma_ = "c%0" + str(hhhh) + "d"
 
             self._changes = {}
