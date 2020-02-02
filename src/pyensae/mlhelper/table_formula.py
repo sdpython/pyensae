@@ -11,13 +11,14 @@ class TableFormula(pandas.DataFrame):  # pylint: disable=W0223
     """
     Extends class :epkg:`pandas:DataFrame` or proposes extensions
     to existing functions using lambda functions.
+    See `Extending Pandas
+    <https://pandas.pydata.org/pandas-docs/
+    stable/development/extending.html>`_.
     """
 
-    def __init__(self, *args, **kwargs):
-        """
-        Constructor.
-        """
-        pandas.DataFrame.__init__(self, *args, **kwargs)
+    @property
+    def _constructor(self):
+        return TableFormula
 
     def sort(self, function_sort, reverse=False):
         """
