@@ -31,7 +31,8 @@ class TestNotebookQGrid(unittest.TestCase):
             import qgrid  # pylint: disable=C0415
             raise Exception("qgrid: {0}".format(qgrid.__version__)) from e
         except AttributeError as e:
-            if "'NoneType' object has no attribute 'session'" not in str(e):
+            if ("'NoneType' object has no attribute 'session'" not in str(e) and
+                    "module 'pandas.core' has no attribute 'index'" not in str(e)):
                 raise e
         try:
             res = mg.jsdf("df --editable=False")
@@ -41,7 +42,8 @@ class TestNotebookQGrid(unittest.TestCase):
             # qgrid needs a true notebook as the grid is editable
             pass
         except AttributeError as e:
-            if "'NoneType' object has no attribute 'session'" not in str(e):
+            if ("'NoneType' object has no attribute 'session'" not in str(e) and
+                    "module 'pandas.core' has no attribute 'index'" not in str(e)):
                 raise e
 
 
