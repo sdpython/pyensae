@@ -18,7 +18,7 @@ def _private_test_style_src(fLOG, run_lint, verbose=False, pattern=".*[.]py$"):
                               'W0212', 'R1704', 'W0622', 'W0201', 'R1710',
                               'W0703', 'R1703', 'R0911', 'R0912', 'R0915',
                               'E0203', 'C0302', 'C0200', 'R1702', 'E1101',
-                              'R0914', 'W0123', 'W0123', 'W0107'),
+                              'R0914', 'W0123', 'W0123', 'W0107', 'C0415'),
                skip=["http_retrieve.py:191: W0703",
                      "astock.py:135: W0703",
                      "astock.py:229: W0703",
@@ -29,6 +29,7 @@ def _private_test_style_src(fLOG, run_lint, verbose=False, pattern=".*[.]py$"):
                      "sql_interface_database.py:20: W0231",
                      "table_formula.py:108: W0631",
                      "R0401: Cyclic import (src.pyensae.sql.sql_interface",
+                     "R0401: Cyclic import (pyensae.sql.sql_interface",
                      "database_core2.py:230: R1714",
                      ])
 
@@ -40,5 +41,6 @@ def _private_test_style_test(fLOG, run_lint, verbose=False, pattern=".*[.]py$"):
                verbose=verbose, pattern=pattern, run_lint=run_lint,
                pylint_ignore=('C0103', 'C1801', 'R0201', 'R1705', 'W0108', 'W0613',
                               'C0111', 'W0622', 'W0612', 'C0412', 'W0621',
-                              'W0125', 'E1127', 'E1101', 'W1402', 'W0212',),
+                              'W0125', 'E1127', 'E1101', 'W1402', 'W0212',
+                              'C0415'),
                skip=[])

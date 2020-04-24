@@ -5,13 +5,18 @@
 History
 =======
 
-current - 2019-09-19 - 0.00Mb
+current - 2020-04-24 - 0.00Mb
 =============================
 
-* `30`: add a None ordered parameter (2019-09-19)
+* `33`: Failure when updating to pandas 1.0 (2020-02-02)
+
+1.3.825 - 2019-09-20 - 0.45Mb
+=============================
+
 * `31`: Remove strong dependency on qgrid (2019-09-19)
-* `28`: Python 2 vs Python 3 (2019-02-02)
+* `30`: add a None ordered parameter (2019-09-19)
 * `29`: StockPrice fails with pandas 0.24 (2019-02-02)
+* `28`: Python 2 vs Python 3 (2019-02-02)
 * `26`: update default antlr4 version to 4.7.1 (2018-10-25)
 * `25`: update CSharp grammar (2018-10-25)
 
@@ -28,29 +33,8 @@ current - 2019-09-19 - 0.00Mb
 
 * `22`: move pandas_groupby_nan to pandas_streaming (2018-05-17)
 * `20`: move access to API to manydataapi (2018-05-05)
-
-1.2.743 - 2018-04-14 - 0.49Mb
-=============================
-
-1.2.731 - 2018-03-22 - 0.50Mb
-=============================
-
 * `18`: fix urls to download data (google, yahoo) (2018-03-16)
-
-1.2.722 - 2018-03-11 - 0.50Mb
-=============================
-
 * `17`: update candle plot for finance (matplotlib.finance was removed in 2.2.0) (2018-03-10)
-
-1.2.717 - 2018-02-20 - 0.50Mb
-=============================
-
-* `16`: split *pyensae* into *pyenbc* for remote access to clusters
-  and the rest (2017-11-29)
-
-1.1.689 - 2017-11-21 - 7.56Mb
-=============================
-
 * `15`: StockPrices: start and end date are not taking into account with the default data provider (2017-09-17)
 * `14`: StockPrices: switch to google as default data provider (2017-09-17)
 * `13`: add a class TableFormula as an example to extend pandas dataframe (2017-09-03)
