@@ -179,7 +179,7 @@ if not r:
         setup_requires=["pyquickhelper"],
         install_requires=[
             "pyquickhelper>=1.8", "yahoo_historical",
-            "numpy", "pandas",  "matplotlib"
+            "numpy", "pandas", "matplotlib"
         ],
         extras_require={
             'graphhelper': ['blockdiag'],

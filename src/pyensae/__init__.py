@@ -12,7 +12,7 @@ from .datasource.http_retrieve import download_data
 if sys.version_info[0] < 3:
     raise ImportError("pyensae only works with Python 3")
 
-__version__ = "1.3.837"
+__version__ = "1.3.838"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pyensae"
 __url__ = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html"

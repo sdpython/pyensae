@@ -8,6 +8,7 @@ History
 current - 2020-04-24 - 0.00Mb
 =============================
 
+* `34`: Extend the list of dependencies (2020-04-24)
 * `33`: Failure when updating to pandas 1.0 (2020-02-02)
 
 1.3.825 - 2019-09-20 - 0.45Mb
