@@ -14,8 +14,8 @@ def file_head_cli(fLOG=print, args=None):
     """
     Takes the first lines from a file using function @see fn file_head.
 
-    @param      fLOG        logging function
-    @param      args        to overwrite ``sys.args``
+    :param fLOG: logging function
+    :param args: to overwrite ``sys.args``
 
     .. cmdref::
         :title: extract the first lines of a file

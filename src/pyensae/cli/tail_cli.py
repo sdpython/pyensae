@@ -12,10 +12,11 @@ from pyquickhelper.cli.cli_helper import call_cli_function
 
 def file_tail_cli(fLOG=print, args=None):
     """
-    Takes the last lines from a file using function @see fn file_tail.
+    Takes the last lines from a file using function
+    @see fn file_tail.
 
-    @param      fLOG        logging function
-    @param      args        to overwrite ``sys.args``
+    :param fLOG: logging function
+    :param args: to overwrite ``sys.args``
 
     .. cmdref::
         :title: extract the last lines of a file
