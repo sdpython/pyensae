@@ -14,6 +14,7 @@ openpyxl
 pandas
 git+https://github.com/pydata/pandas-datareader.git
 pandocfilters
+pylzma
 pymyinstall
 pyquickhelper>=1.9.3100
 pyshp

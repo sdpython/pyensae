@@ -183,7 +183,7 @@ if not r:
         ],
         extras_require={
             'graphhelper': ['blockdiag'],
-            'datasource': ['dbread', 'geopandas', 'shapely', 'pyshp'],
+            'datasource': ['dbread', 'geopandas', 'shapely', 'pyshp', 'pylzma'],
             'finance': ['pandas-datareader', 'yahoo_historical'],
             'languages': ['antlr4-python3-runtime'],
             'notebookhelper': ['folium', 'qgrid'],
