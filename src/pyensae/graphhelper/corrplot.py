@@ -141,8 +141,8 @@ class Corrplot(Linkage):
              order_method='complete', order_metric='euclidean', cmap=None,
              ax=None, binarise_color=False, figsize=None):
         """
-        plot the correlation matrix from the content of :attr:`df`
-        (dataframe)
+        Plots the correlation matrix from the content of :attr:`df`
+        (dataframe).
 
         By default, the correlation is shown on the upper and lower triangle and is
         symmetric wrt to the diagonal. The symbols are ellipses. The symbols can
@@ -179,14 +179,14 @@ class Corrplot(Linkage):
         :return: ax (matplotlib axes)
 
         The colorbar can be tuned with the parameters stored in :attr:`params`.
+        Here is an example. See notebook for other examples:
 
-        Here is an example. See notebook for other examples::
+        ::
 
             c = corrplot.Corrplot(dataframe)
             c.plot(cmap=('Orange', 'white', 'green'))
             c.plot(method='circle')
             c.plot(colorbar=False, shrink=.8, upper='circle'  )
-
         """
         import matplotlib.pyplot as plt  # pylint: disable=C0415
 

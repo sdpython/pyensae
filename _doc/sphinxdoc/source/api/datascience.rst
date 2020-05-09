@@ -23,6 +23,13 @@ graphs
 
 .. autosignature:: pyensae.graphhelper.graphviz_helper.run_dot
 
+maps
+++++
+
+.. autosignature:: pyensae.graphhelper.mapplot.plot_map_france
+
+.. autosignature:: pyensae.graphhelper.mapplot.plot_map_france_polygon
+
 notebooks and magic command helpers
 +++++++++++++++++++++++++++++++++++
 

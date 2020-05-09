@@ -12,6 +12,13 @@ conversion
 
 .. autosignature:: pyensae.datasource.convert.dBase2sqllite
 
+data
+++++
+
+.. autosignature:: pyensae.datasource.geodata.lambert932WGPS
+
+.. autosignature:: pyensae.datasource.geodata.load_french_departements
+
 http
 ++++
 

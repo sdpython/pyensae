@@ -23,6 +23,8 @@ nblinks = {"code-r2python": blog_root + "pyensae/languages/rconverter.html"}
 epkg_dictionary = ({
     "antlr4": 'https://github.com/antlr/antlr4',
     "blockdiag": 'http://blockdiag.com/',
+    'GeoDataFrame': 'https://geopandas.org/reference/geopandas.GeoDataFrame.html',
+    'geopandas': 'https://geopandas.org/',
     "json": 'https://en.wikipedia.org/wiki/JSON',
     "manydataapi": 'http://www.xavierdupre.fr/app/manydataapi/helpsphinx/index.html',
     "networkx": 'https://networkx.github.io/',

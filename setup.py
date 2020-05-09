@@ -178,13 +178,13 @@ if not r:
         package_data=package_data,
         setup_requires=["pyquickhelper"],
         install_requires=[
-            "pyquickhelper>=1.8", "yahoo_historical",
-            "numpy", "pandas", "matplotlib"
+            "pyquickhelper>=1.8",
+            "numpy>=1.18", "pandas>=1.0", "matplotlib"
         ],
         extras_require={
             'graphhelper': ['blockdiag'],
-            'datasource': ['dbread'],
-            'finance': ['pandas-datareader'],
+            'datasource': ['dbread', 'geopandas', 'shapely', 'pyshp'],
+            'finance': ['pandas-datareader', 'yahoo_historical'],
             'languages': ['antlr4-python3-runtime'],
             'notebookhelper': ['folium', 'qgrid'],
         },

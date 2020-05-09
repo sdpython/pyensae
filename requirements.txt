@@ -5,6 +5,7 @@ coverage
 dbfread
 easydev
 folium
+geopandas
 jyquickhelper
 keyring
 Mako
@@ -15,11 +16,13 @@ git+https://github.com/pydata/pandas-datareader.git
 pandocfilters
 pymyinstall
 pyquickhelper>=1.9.3100
+pyshp
 qgrid
 quandl
 scikit-learn
 scipy
 seaborn
+shapely
 sphinx_readable_theme
 wheel
 yahoo-historical
