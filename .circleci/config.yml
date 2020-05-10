@@ -49,19 +49,26 @@ jobs:
                     sudo apt-get install -y graphviz
           
       - run:
-          name: Install pyproj for cartopy
+          name: Install libproj
           command: |
-            # echo "deb http://deb.debian.org/debian sid main" | sudo tee /etc/apt/sources.list.d/proj.list
-            # sudo apt-get -qq update
-            # sudo apt-get -t sid install -y libproj-dev proj-bin=7.0.1-1 proj-data libgeos-dev python-gdal gdal-bin libc6
-            # sudo apt-get install -y libproj-dev>=6.2.0 proj-bin>=6.2.0 proj-data>=6.2.0 libgeos-dev python-gdal gdal-bin libc6
-            wget http://es.archive.ubuntu.com/ubuntu/pool/universe/p/proj/libproj9_4.9.2-2_amd64.deb 
-            sudo dpkg -i libproj9_4.9.2-2_amd64.deb 
-            wget http://es.archive.ubuntu.com/ubuntu/pool/universe/p/proj/libproj-dev_4.9.2-2_amd64.deb
-            sudo dpkg -i libproj-dev_4.9.2-2_amd64.deb
+            sudo apt-get install -y libgeos-dev libproj-dev proj-data graphviz
+
+      - run:
+          name: Install standard libraries
+          command: |
             python3 -m venv venv
             . venv/bin/activate
-            sudo pip install git+https://github.com/pyproj4/pyproj.git
+            pip3 install scipy matplotlib numpy cython pandas
+
+      - run:
+          name: Install pyproj, shapely, cartopy
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install pyproj
+            pip3 uninstall -y shapely
+            pip3 install --no-binary shapely shapely
+            pip3 install cartopy
 
       - run:
           name: install dependencies
