@@ -53,7 +53,7 @@ jobs:
           command: |
             echo "deb http://deb.debian.org/debian sid main" | sudo tee /etc/apt/sources.list.d/proj.list
             sudo apt-get -qq update
-            sudo apt-get -t sid install -y libproj-dev proj-bin=6.1.1-1 proj-data libgeos-dev python-gdal gdal-bin libc6
+            sudo apt-get -t sid install -y libproj-dev proj-bin=7.0.1-1 proj-data libgeos-dev python-gdal gdal-bin libc6
             wget http://es.archive.ubuntu.com/ubuntu/pool/universe/p/proj/libproj9_4.9.2-2_amd64.deb 
             sudo dpkg -i libproj9_4.9.2-2_amd64.deb 
             wget http://es.archive.ubuntu.com/ubuntu/pool/universe/p/proj/libproj-dev_4.9.2-2_amd64.deb
