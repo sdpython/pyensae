@@ -182,11 +182,19 @@ if not r:
             "numpy>=1.18", "pandas>=1.0", "matplotlib"
         ],
         extras_require={
-            'graphhelper': ['blockdiag'],
+            'graphhelper': ['blockdiag', 'cartopy'],
             'datasource': ['dbread', 'geopandas', 'shapely', 'pyshp', 'pylzma'],
             'finance': ['pandas-datareader', 'yahoo_historical'],
             'languages': ['antlr4-python3-runtime'],
             'notebookhelper': ['folium', 'qgrid'],
+            'all': [
+                "pyquickhelper>=1.8", "numpy>=1.18", "pandas>=1.0", "matplotlib",
+                'blockdiag', 'cartopy',
+                'dbread', 'geopandas', 'shapely', 'pyshp', 'pylzma',
+                'pandas-datareader', 'yahoo_historical',
+                'antlr4-python3-runtime',
+                'folium', 'qgrid',
+            ],
         },
         entry_points={
             'console_scripts': [

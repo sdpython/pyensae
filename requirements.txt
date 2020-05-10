@@ -1,5 +1,6 @@
 antlr4-python3-runtime
 blockdiag
+cartopy
 colormap
 coverage
 dbfread
