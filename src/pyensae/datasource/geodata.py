@@ -72,7 +72,7 @@ def load_french_departements(cache=None):
             :showcode:
 
             from pyensae.datasource import load_french_departements
-            df = load_french_departements(cache=temp)
+            df = load_french_departements()
             print(df.head(2).T)
     """
     if cache is None:
