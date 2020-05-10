@@ -4,6 +4,7 @@ cartopy
 colormap
 coverage
 dbfread
+descartes
 easydev
 folium
 geopandas
