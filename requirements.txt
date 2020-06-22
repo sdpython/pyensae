@@ -31,5 +31,7 @@ scipy
 seaborn
 shapely
 sphinx
+sphinxcontrib.imagesvg
+sphinx_gallery
 wheel
 yahoo-historical
