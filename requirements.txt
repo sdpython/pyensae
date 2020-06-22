@@ -1,4 +1,5 @@
 antlr4-python3-runtime
+autopep8
 blockdiag
 cartopy
 colormap
@@ -8,6 +9,7 @@ descartes
 easydev
 folium
 geopandas
+jupyter_sphinx
 jyquickhelper
 keyring
 Mako
@@ -16,6 +18,8 @@ openpyxl
 pandas
 git+https://github.com/pydata/pandas-datareader.git
 pandocfilters
+pycodestyle
+pylint
 pylzma
 pymyinstall
 pyquickhelper>=1.9.3100
@@ -26,5 +30,6 @@ scikit-learn
 scipy
 seaborn
 shapely
+sphinx
 wheel
 yahoo-historical
