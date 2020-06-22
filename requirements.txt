@@ -26,6 +26,5 @@ scikit-learn
 scipy
 seaborn
 shapely
-sphinx_readable_theme
 wheel
 yahoo-historical
