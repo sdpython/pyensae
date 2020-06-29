@@ -15,9 +15,6 @@ class TestStockGraph(ExtTestCase):
     source = 'yahoo_new'
 
     def test_graph(self):
-        """
-        This test is failing with Python 3.4 if many pictures are drawn.
-        """
         fLOG(
             __file__,
             self._testMethodName,
