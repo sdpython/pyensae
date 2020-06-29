@@ -1,4 +1,4 @@
-# Generated from \SimpleWorkflow.g4 by ANTLR 4.7.1
+# Generated from \SimpleWorkflow.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .SimpleWorkflowParser import SimpleWorkflowParser
@@ -265,3 +265,6 @@ class SimpleWorkflowListener(ParseTreeListener):
     # Exit a parse tree produced by SimpleWorkflowParser#real_number.
     def exitReal_number(self, ctx: SimpleWorkflowParser.Real_numberContext):
         pass
+
+
+del SimpleWorkflowParser

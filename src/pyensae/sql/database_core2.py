@@ -94,12 +94,12 @@ class DatabaseCore2:
 
             if len(first) > 0:
                 lines.append("    first_lines")
-                for l in first:
+                for lf in first:
                     fo = []
-                    if l is None:
+                    if lf is None:
                         lines.append("        None")
                     else:
-                        for x in l:
+                        for x in lf:
                             if not isinstance(x, str):
                                 fo.append(str(x))
                             else:

@@ -318,19 +318,19 @@ class TextFileColumns(TextFile):
                 break
 
     @staticmethod
-    def _store(output, l, encoding="utf-8"):
+    def _store(output, la, encoding="utf-8"):
         """
         Stores a list of dictionaries into a file (add a header).
 
         @param      output      filename
-        @param      l           list of dictionary key:value
+        @param      la          list of dictionary key:value
         @param      encoding    encoding
         @warning                format is utf-8
         """
         sepline = "\n"  # GetSepLine ()
         f = open(output, "w", encoding=encoding)
         nbline = 0
-        for d in l:
+        for d in la:
             if nbline == 0:
                 keys = list(d.keys())
                 keys.sort()
@@ -386,7 +386,7 @@ class TextFileColumns(TextFile):
             memo.append((k, line))
             if len(memo) > maxmemory:
                 memo.sort(key=lambda el: el[0])
-                memo = [l[1] for l in memo]
+                memo = [la[1] for la in memo]
                 tempout = os.path.join(folder, "root_%05d.txt" % len(files))
                 self.LOG("writing file %d lines in " % len(memo), tempout)
                 TextFileColumns._store(tempout, memo)
@@ -395,7 +395,7 @@ class TextFileColumns(TextFile):
 
         if len(memo) > 0:
             memo.sort(key=lambda el: el[0])
-            memo = [l[1] for l in memo]
+            memo = [la[1] for la in memo]
             tempout = os.path.join(folder, "root_%05d.txt" % len(files))
             self.LOG("writing file %d lines in " % len(memo), tempout)
             TextFileColumns._store(tempout, memo)

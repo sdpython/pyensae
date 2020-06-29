@@ -1,9 +1,13 @@
-# Generated from \Python3.g4 by ANTLR 4.7
+# Generated from \Python3.g4 by ANTLR 4.8
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-from typing.io import TextIO
 import sys
+if sys.version_info[1] > 5:
+	from typing import TextIO
+else:
+	from typing.io import TextIO
+
 
 def serializedATN():
     with StringIO() as buf:
@@ -798,9 +802,10 @@ class Python3Parser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7")
+        self.checkVersion("4.8")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
+
 
 
 
@@ -870,6 +875,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class File_inputContext(ParserRuleContext):
 
@@ -946,6 +952,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Eval_inputContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1008,11 +1015,15 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class DecoratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def AT(self):
+            return self.getToken(Python3Parser.AT, 0)
 
         def dotted_name(self):
             return self.getTypedRuleContext(Python3Parser.Dotted_nameContext,0)
@@ -1020,6 +1031,12 @@ class Python3Parser ( Parser ):
 
         def NEWLINE(self):
             return self.getToken(Python3Parser.NEWLINE, 0)
+
+        def OPEN_PAREN(self):
+            return self.getToken(Python3Parser.OPEN_PAREN, 0)
+
+        def CLOSE_PAREN(self):
+            return self.getToken(Python3Parser.CLOSE_PAREN, 0)
 
         def arglist(self):
             return self.getTypedRuleContext(Python3Parser.ArglistContext,0)
@@ -1078,6 +1095,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class DecoratorsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1131,6 +1149,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class DecoratedContext(ParserRuleContext):
 
@@ -1194,6 +1213,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class FuncdefContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1210,9 +1230,15 @@ class Python3Parser ( Parser ):
             return self.getTypedRuleContext(Python3Parser.ParametersContext,0)
 
 
+        def COLON(self):
+            return self.getToken(Python3Parser.COLON, 0)
+
         def suite(self):
             return self.getTypedRuleContext(Python3Parser.SuiteContext,0)
 
+
+        def ARROW(self):
+            return self.getToken(Python3Parser.ARROW, 0)
 
         def test(self):
             return self.getTypedRuleContext(Python3Parser.TestContext,0)
@@ -1267,11 +1293,18 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ParametersContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def OPEN_PAREN(self):
+            return self.getToken(Python3Parser.OPEN_PAREN, 0)
+
+        def CLOSE_PAREN(self):
+            return self.getToken(Python3Parser.CLOSE_PAREN, 0)
 
         def typedargslist(self):
             return self.getTypedRuleContext(Python3Parser.TypedargslistContext,0)
@@ -1318,6 +1351,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TypedargslistContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1331,12 +1365,30 @@ class Python3Parser ( Parser ):
                 return self.getTypedRuleContext(Python3Parser.TfpdefContext,i)
 
 
+        def ASSIGN(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.ASSIGN)
+            else:
+                return self.getToken(Python3Parser.ASSIGN, i)
+
         def test(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(Python3Parser.TestContext)
             else:
                 return self.getTypedRuleContext(Python3Parser.TestContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
+
+        def STAR(self):
+            return self.getToken(Python3Parser.STAR, 0)
+
+        def POWER(self):
+            return self.getToken(Python3Parser.POWER, 0)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_typedargslist
@@ -1533,6 +1585,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TfpdefContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1541,6 +1594,9 @@ class Python3Parser ( Parser ):
 
         def NAME(self):
             return self.getToken(Python3Parser.NAME, 0)
+
+        def COLON(self):
+            return self.getToken(Python3Parser.COLON, 0)
 
         def test(self):
             return self.getTypedRuleContext(Python3Parser.TestContext,0)
@@ -1587,6 +1643,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class VarargslistContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1600,12 +1657,30 @@ class Python3Parser ( Parser ):
                 return self.getTypedRuleContext(Python3Parser.VfpdefContext,i)
 
 
+        def ASSIGN(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.ASSIGN)
+            else:
+                return self.getToken(Python3Parser.ASSIGN, i)
+
         def test(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(Python3Parser.TestContext)
             else:
                 return self.getTypedRuleContext(Python3Parser.TestContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
+
+        def STAR(self):
+            return self.getToken(Python3Parser.STAR, 0)
+
+        def POWER(self):
+            return self.getToken(Python3Parser.POWER, 0)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_varargslist
@@ -1802,6 +1877,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class VfpdefContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1840,6 +1916,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class StmtContext(ParserRuleContext):
 
@@ -1898,6 +1975,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Simple_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1913,6 +1991,12 @@ class Python3Parser ( Parser ):
 
         def NEWLINE(self):
             return self.getToken(Python3Parser.NEWLINE, 0)
+
+        def SEMI_COLON(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.SEMI_COLON)
+            else:
+                return self.getToken(Python3Parser.SEMI_COLON, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_simple_stmt
@@ -1967,6 +2051,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Small_stmtContext(ParserRuleContext):
 
@@ -2079,6 +2164,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Expr_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2106,6 +2192,12 @@ class Python3Parser ( Parser ):
         def testlist(self):
             return self.getTypedRuleContext(Python3Parser.TestlistContext,0)
 
+
+        def ASSIGN(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.ASSIGN)
+            else:
+                return self.getToken(Python3Parser.ASSIGN, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_expr_stmt
@@ -2188,6 +2280,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Testlist_star_exprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2207,6 +2300,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.Star_exprContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_testlist_star_expr
@@ -2284,12 +2383,51 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class AugassignContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def ADD_ASSIGN(self):
+            return self.getToken(Python3Parser.ADD_ASSIGN, 0)
+
+        def SUB_ASSIGN(self):
+            return self.getToken(Python3Parser.SUB_ASSIGN, 0)
+
+        def MULT_ASSIGN(self):
+            return self.getToken(Python3Parser.MULT_ASSIGN, 0)
+
+        def AT_ASSIGN(self):
+            return self.getToken(Python3Parser.AT_ASSIGN, 0)
+
+        def DIV_ASSIGN(self):
+            return self.getToken(Python3Parser.DIV_ASSIGN, 0)
+
+        def MOD_ASSIGN(self):
+            return self.getToken(Python3Parser.MOD_ASSIGN, 0)
+
+        def AND_ASSIGN(self):
+            return self.getToken(Python3Parser.AND_ASSIGN, 0)
+
+        def OR_ASSIGN(self):
+            return self.getToken(Python3Parser.OR_ASSIGN, 0)
+
+        def XOR_ASSIGN(self):
+            return self.getToken(Python3Parser.XOR_ASSIGN, 0)
+
+        def LEFT_SHIFT_ASSIGN(self):
+            return self.getToken(Python3Parser.LEFT_SHIFT_ASSIGN, 0)
+
+        def RIGHT_SHIFT_ASSIGN(self):
+            return self.getToken(Python3Parser.RIGHT_SHIFT_ASSIGN, 0)
+
+        def POWER_ASSIGN(self):
+            return self.getToken(Python3Parser.POWER_ASSIGN, 0)
+
+        def IDIV_ASSIGN(self):
+            return self.getToken(Python3Parser.IDIV_ASSIGN, 0)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_augassign
@@ -2326,6 +2464,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Del_stmtContext(ParserRuleContext):
 
@@ -2372,6 +2511,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Pass_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2410,6 +2550,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Flow_stmtContext(ParserRuleContext):
 
@@ -2495,6 +2636,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Break_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2534,6 +2676,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Continue_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2572,6 +2715,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Return_stmtContext(ParserRuleContext):
 
@@ -2625,6 +2769,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Yield_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2664,6 +2809,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Raise_stmtContext(ParserRuleContext):
 
@@ -2733,6 +2879,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Import_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2790,6 +2937,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Import_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2835,6 +2983,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Import_fromContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2851,9 +3000,30 @@ class Python3Parser ( Parser ):
             return self.getTypedRuleContext(Python3Parser.Dotted_nameContext,0)
 
 
+        def STAR(self):
+            return self.getToken(Python3Parser.STAR, 0)
+
+        def OPEN_PAREN(self):
+            return self.getToken(Python3Parser.OPEN_PAREN, 0)
+
         def import_as_names(self):
             return self.getTypedRuleContext(Python3Parser.Import_as_namesContext,0)
 
+
+        def CLOSE_PAREN(self):
+            return self.getToken(Python3Parser.CLOSE_PAREN, 0)
+
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.DOT)
+            else:
+                return self.getToken(Python3Parser.DOT, i)
+
+        def ELLIPSIS(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.ELLIPSIS)
+            else:
+                return self.getToken(Python3Parser.ELLIPSIS, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_import_from
@@ -2954,6 +3124,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Import_as_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3009,6 +3180,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Dotted_as_nameContext(ParserRuleContext):
 
@@ -3067,6 +3239,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Import_as_namesContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3079,6 +3252,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.Import_as_nameContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_import_as_names
@@ -3132,6 +3311,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Dotted_as_namesContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3144,6 +3324,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.Dotted_as_nameContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_dotted_as_names
@@ -3188,6 +3374,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Dotted_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3199,6 +3386,12 @@ class Python3Parser ( Parser ):
                 return self.getTokens(Python3Parser.NAME)
             else:
                 return self.getToken(Python3Parser.NAME, i)
+
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.DOT)
+            else:
+                return self.getToken(Python3Parser.DOT, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_dotted_name
@@ -3243,6 +3436,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Global_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3257,6 +3451,12 @@ class Python3Parser ( Parser ):
                 return self.getTokens(Python3Parser.NAME)
             else:
                 return self.getToken(Python3Parser.NAME, i)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_global_stmt
@@ -3303,6 +3503,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Nonlocal_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3317,6 +3518,12 @@ class Python3Parser ( Parser ):
                 return self.getTokens(Python3Parser.NAME)
             else:
                 return self.getToken(Python3Parser.NAME, i)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_nonlocal_stmt
@@ -3363,6 +3570,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Assert_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3378,6 +3586,9 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.TestContext,i)
 
+
+        def COMMA(self):
+            return self.getToken(Python3Parser.COMMA, 0)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_assert_stmt
@@ -3421,6 +3632,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Compound_stmtContext(ParserRuleContext):
 
@@ -3533,6 +3745,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class If_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3548,6 +3761,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.TestContext,i)
 
+
+        def COLON(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COLON)
+            else:
+                return self.getToken(Python3Parser.COLON, i)
 
         def suite(self, i:int=None):
             if i is None:
@@ -3630,6 +3849,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class While_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3642,6 +3862,12 @@ class Python3Parser ( Parser ):
         def test(self):
             return self.getTypedRuleContext(Python3Parser.TestContext,0)
 
+
+        def COLON(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COLON)
+            else:
+                return self.getToken(Python3Parser.COLON, i)
 
         def suite(self, i:int=None):
             if i is None:
@@ -3702,6 +3928,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class For_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3721,6 +3948,12 @@ class Python3Parser ( Parser ):
         def testlist(self):
             return self.getTypedRuleContext(Python3Parser.TestlistContext,0)
 
+
+        def COLON(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COLON)
+            else:
+                return self.getToken(Python3Parser.COLON, i)
 
         def suite(self, i:int=None):
             if i is None:
@@ -3785,6 +4018,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Try_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3793,6 +4027,12 @@ class Python3Parser ( Parser ):
 
         def TRY(self):
             return self.getToken(Python3Parser.TRY, 0)
+
+        def COLON(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COLON)
+            else:
+                return self.getToken(Python3Parser.COLON, i)
 
         def suite(self, i:int=None):
             if i is None:
@@ -3905,6 +4145,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class With_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3921,9 +4162,18 @@ class Python3Parser ( Parser ):
                 return self.getTypedRuleContext(Python3Parser.With_itemContext,i)
 
 
+        def COLON(self):
+            return self.getToken(Python3Parser.COLON, 0)
+
         def suite(self):
             return self.getTypedRuleContext(Python3Parser.SuiteContext,0)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_with_stmt
@@ -3973,6 +4223,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class With_itemContext(ParserRuleContext):
 
@@ -4031,6 +4282,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Except_clauseContext(ParserRuleContext):
 
@@ -4099,6 +4351,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class SuiteContext(ParserRuleContext):
 
@@ -4186,6 +4439,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TestContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4271,6 +4525,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Test_nocondContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4328,6 +4583,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class LambdefContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4336,6 +4592,9 @@ class Python3Parser ( Parser ):
 
         def LAMBDA(self):
             return self.getToken(Python3Parser.LAMBDA, 0)
+
+        def COLON(self):
+            return self.getToken(Python3Parser.COLON, 0)
 
         def test(self):
             return self.getTypedRuleContext(Python3Parser.TestContext,0)
@@ -4388,6 +4647,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Lambdef_nocondContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4396,6 +4656,9 @@ class Python3Parser ( Parser ):
 
         def LAMBDA(self):
             return self.getToken(Python3Parser.LAMBDA, 0)
+
+        def COLON(self):
+            return self.getToken(Python3Parser.COLON, 0)
 
         def test_nocond(self):
             return self.getTypedRuleContext(Python3Parser.Test_nocondContext,0)
@@ -4447,6 +4710,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Or_testContext(ParserRuleContext):
 
@@ -4510,6 +4774,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class And_testContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4572,6 +4837,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Not_testContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4633,6 +4899,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class ComparisonContext(ParserRuleContext):
 
@@ -4697,11 +4964,33 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Comp_opContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def LESS_THAN(self):
+            return self.getToken(Python3Parser.LESS_THAN, 0)
+
+        def GREATER_THAN(self):
+            return self.getToken(Python3Parser.GREATER_THAN, 0)
+
+        def EQUALS(self):
+            return self.getToken(Python3Parser.EQUALS, 0)
+
+        def GT_EQ(self):
+            return self.getToken(Python3Parser.GT_EQ, 0)
+
+        def LT_EQ(self):
+            return self.getToken(Python3Parser.LT_EQ, 0)
+
+        def NOT_EQ_1(self):
+            return self.getToken(Python3Parser.NOT_EQ_1, 0)
+
+        def NOT_EQ_2(self):
+            return self.getToken(Python3Parser.NOT_EQ_2, 0)
 
         def IN(self):
             return self.getToken(Python3Parser.IN, 0)
@@ -4813,6 +5102,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Star_exprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4822,6 +5112,9 @@ class Python3Parser ( Parser ):
         def expr(self):
             return self.getTypedRuleContext(Python3Parser.ExprContext,0)
 
+
+        def STAR(self):
+            return self.getToken(Python3Parser.STAR, 0)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_star_expr
@@ -4862,6 +5155,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4874,6 +5168,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.Xor_exprContext,i)
 
+
+        def OR_OP(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.OR_OP)
+            else:
+                return self.getToken(Python3Parser.OR_OP, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_expr
@@ -4918,6 +5218,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Xor_exprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4930,6 +5231,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.And_exprContext,i)
 
+
+        def XOR(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.XOR)
+            else:
+                return self.getToken(Python3Parser.XOR, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_xor_expr
@@ -4974,6 +5281,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class And_exprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4986,6 +5294,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.Shift_exprContext,i)
 
+
+        def AND_OP(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.AND_OP)
+            else:
+                return self.getToken(Python3Parser.AND_OP, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_and_expr
@@ -5030,6 +5344,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Shift_exprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5042,6 +5357,18 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.Arith_exprContext,i)
 
+
+        def LEFT_SHIFT(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.LEFT_SHIFT)
+            else:
+                return self.getToken(Python3Parser.LEFT_SHIFT, i)
+
+        def RIGHT_SHIFT(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.RIGHT_SHIFT)
+            else:
+                return self.getToken(Python3Parser.RIGHT_SHIFT, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_shift_expr
@@ -5100,6 +5427,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Arith_exprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5112,6 +5440,18 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.TermContext,i)
 
+
+        def ADD(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.ADD)
+            else:
+                return self.getToken(Python3Parser.ADD, i)
+
+        def MINUS(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.MINUS)
+            else:
+                return self.getToken(Python3Parser.MINUS, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_arith_expr
@@ -5170,6 +5510,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TermContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5182,6 +5523,36 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.FactorContext,i)
 
+
+        def STAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.STAR)
+            else:
+                return self.getToken(Python3Parser.STAR, i)
+
+        def DIV(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.DIV)
+            else:
+                return self.getToken(Python3Parser.DIV, i)
+
+        def MOD(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.MOD)
+            else:
+                return self.getToken(Python3Parser.MOD, i)
+
+        def IDIV(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.IDIV)
+            else:
+                return self.getToken(Python3Parser.IDIV, i)
+
+        def AT(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.AT)
+            else:
+                return self.getToken(Python3Parser.AT, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_term
@@ -5258,15 +5629,25 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class FactorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def ADD(self):
+            return self.getToken(Python3Parser.ADD, 0)
+
         def factor(self):
             return self.getTypedRuleContext(Python3Parser.FactorContext,0)
 
+
+        def MINUS(self):
+            return self.getToken(Python3Parser.MINUS, 0)
+
+        def NOT_OP(self):
+            return self.getToken(Python3Parser.NOT_OP, 0)
 
         def power(self):
             return self.getTypedRuleContext(Python3Parser.PowerContext,0)
@@ -5331,6 +5712,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class PowerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5347,6 +5729,9 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.TrailerContext,i)
 
+
+        def POWER(self):
+            return self.getToken(Python3Parser.POWER, 0)
 
         def factor(self):
             return self.getTypedRuleContext(Python3Parser.FactorContext,0)
@@ -5403,11 +5788,18 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class AtomContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def OPEN_PAREN(self):
+            return self.getToken(Python3Parser.OPEN_PAREN, 0)
+
+        def CLOSE_PAREN(self):
+            return self.getToken(Python3Parser.CLOSE_PAREN, 0)
 
         def yield_expr(self):
             return self.getTypedRuleContext(Python3Parser.Yield_exprContext,0)
@@ -5416,6 +5808,18 @@ class Python3Parser ( Parser ):
         def testlist_comp(self):
             return self.getTypedRuleContext(Python3Parser.Testlist_compContext,0)
 
+
+        def OPEN_BRACK(self):
+            return self.getToken(Python3Parser.OPEN_BRACK, 0)
+
+        def CLOSE_BRACK(self):
+            return self.getToken(Python3Parser.CLOSE_BRACK, 0)
+
+        def OPEN_BRACE(self):
+            return self.getToken(Python3Parser.OPEN_BRACE, 0)
+
+        def CLOSE_BRACE(self):
+            return self.getToken(Python3Parser.CLOSE_BRACE, 0)
 
         def dictorsetmaker(self):
             return self.getTypedRuleContext(Python3Parser.DictorsetmakerContext,0)
@@ -5434,6 +5838,9 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.Str_Context,i)
 
+
+        def ELLIPSIS(self):
+            return self.getToken(Python3Parser.ELLIPSIS, 0)
 
         def NONE(self):
             return self.getToken(Python3Parser.NONE, 0)
@@ -5575,6 +5982,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Testlist_compContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5591,6 +5999,12 @@ class Python3Parser ( Parser ):
         def comp_for(self):
             return self.getTypedRuleContext(Python3Parser.Comp_forContext,0)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_testlist_comp
@@ -5656,19 +6070,35 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TrailerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def OPEN_PAREN(self):
+            return self.getToken(Python3Parser.OPEN_PAREN, 0)
+
+        def CLOSE_PAREN(self):
+            return self.getToken(Python3Parser.CLOSE_PAREN, 0)
+
         def arglist(self):
             return self.getTypedRuleContext(Python3Parser.ArglistContext,0)
 
 
+        def OPEN_BRACK(self):
+            return self.getToken(Python3Parser.OPEN_BRACK, 0)
+
         def subscriptlist(self):
             return self.getTypedRuleContext(Python3Parser.SubscriptlistContext,0)
 
+
+        def CLOSE_BRACK(self):
+            return self.getToken(Python3Parser.CLOSE_BRACK, 0)
+
+        def DOT(self):
+            return self.getToken(Python3Parser.DOT, 0)
 
         def NAME(self):
             return self.getToken(Python3Parser.NAME, 0)
@@ -5738,6 +6168,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class SubscriptlistContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5750,6 +6181,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.SubscriptContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_subscriptlist
@@ -5803,6 +6240,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class SubscriptContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5815,6 +6253,9 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.TestContext,i)
 
+
+        def COLON(self):
+            return self.getToken(Python3Parser.COLON, 0)
 
         def sliceop(self):
             return self.getTypedRuleContext(Python3Parser.SliceopContext,0)
@@ -5888,11 +6329,15 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class SliceopContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def COLON(self):
+            return self.getToken(Python3Parser.COLON, 0)
 
         def test(self):
             return self.getTypedRuleContext(Python3Parser.TestContext,0)
@@ -5937,6 +6382,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ExprlistContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5949,6 +6395,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.Star_exprContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_exprlist
@@ -6002,6 +6454,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class TestlistContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6014,6 +6467,12 @@ class Python3Parser ( Parser ):
             else:
                 return self.getTypedRuleContext(Python3Parser.TestContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_testlist
@@ -6067,6 +6526,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class DictorsetmakerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6080,9 +6540,21 @@ class Python3Parser ( Parser ):
                 return self.getTypedRuleContext(Python3Parser.TestContext,i)
 
 
+        def COLON(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COLON)
+            else:
+                return self.getToken(Python3Parser.COLON, i)
+
         def comp_for(self):
             return self.getTypedRuleContext(Python3Parser.Comp_forContext,0)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_dictorsetmaker
@@ -6202,6 +6674,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ClassdefContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6214,9 +6687,18 @@ class Python3Parser ( Parser ):
         def NAME(self):
             return self.getToken(Python3Parser.NAME, 0)
 
+        def COLON(self):
+            return self.getToken(Python3Parser.COLON, 0)
+
         def suite(self):
             return self.getTypedRuleContext(Python3Parser.SuiteContext,0)
 
+
+        def OPEN_PAREN(self):
+            return self.getToken(Python3Parser.OPEN_PAREN, 0)
+
+        def CLOSE_PAREN(self):
+            return self.getToken(Python3Parser.CLOSE_PAREN, 0)
 
         def arglist(self):
             return self.getTypedRuleContext(Python3Parser.ArglistContext,0)
@@ -6277,6 +6759,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ArglistContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6290,12 +6773,24 @@ class Python3Parser ( Parser ):
                 return self.getTypedRuleContext(Python3Parser.ArgumentContext,i)
 
 
+        def STAR(self):
+            return self.getToken(Python3Parser.STAR, 0)
+
         def test(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(Python3Parser.TestContext)
             else:
                 return self.getTypedRuleContext(Python3Parser.TestContext,i)
 
+
+        def POWER(self):
+            return self.getToken(Python3Parser.POWER, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(Python3Parser.COMMA)
+            else:
+                return self.getToken(Python3Parser.COMMA, i)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_arglist
@@ -6395,6 +6890,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ArgumentContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6411,6 +6907,9 @@ class Python3Parser ( Parser ):
         def comp_for(self):
             return self.getTypedRuleContext(Python3Parser.Comp_forContext,0)
 
+
+        def ASSIGN(self):
+            return self.getToken(Python3Parser.ASSIGN, 0)
 
         def getRuleIndex(self):
             return Python3Parser.RULE_argument
@@ -6468,6 +6967,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Comp_iterContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6524,6 +7024,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Comp_forContext(ParserRuleContext):
 
@@ -6594,6 +7095,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Comp_ifContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6652,6 +7154,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Yield_exprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6703,6 +7206,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Yield_argContext(ParserRuleContext):
 
@@ -6766,6 +7270,7 @@ class Python3Parser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Str_Context(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6813,6 +7318,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class NumberContext(ParserRuleContext):
 
@@ -6877,6 +7383,7 @@ class Python3Parser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class IntegerContext(ParserRuleContext):
 

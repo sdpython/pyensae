@@ -1,4 +1,4 @@
-# Generated from CSharpParser.g4 by ANTLR 4.7.1
+# Generated from \CSharpParser.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .CSharpParser import CSharpParser
@@ -1937,3 +1937,6 @@ class CSharpParserListener(ParseTreeListener):
     # Exit a parse tree produced by CSharpParser#identifier.
     def exitIdentifier(self, ctx: CSharpParser.IdentifierContext):
         pass
+
+
+del CSharpParser

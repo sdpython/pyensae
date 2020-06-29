@@ -1,4 +1,4 @@
-# Generated from \Python3.g4 by ANTLR 4.7
+# Generated from \Python3.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .Python3Parser import Python3Parser
@@ -681,3 +681,6 @@ class Python3Listener(ParseTreeListener):
     # Exit a parse tree produced by Python3Parser#integer.
     def exitInteger(self, ctx: Python3Parser.IntegerContext):
         pass
+
+
+del Python3Parser

@@ -111,7 +111,7 @@ class DatabaseCore(DatabaseCore2):
 
         # the rest
         if LOG is None:
-            def blind(*l, **p):
+            def blind(*li, **p):
                 pass
             LOG = blind
         self.LOG = LOG
@@ -147,12 +147,12 @@ class DatabaseCore(DatabaseCore2):
                 if hasattr(DatabaseCore, "SCRIPT_LOOKUP"):
                     script = DatabaseCore.SCRIPT_LOOKUP
                     lines = script.split("\n")
-                    lines = [l if "__CWD__ =" not in l else
-                             l.replace(
+                    lines = [li if "__CWD__ =" not in li else
+                             li.replace(
                                  "(__file__)",
                                  "(r'%s')" %
                                  os.path.realpath(__file__))
-                             for l in lines]
+                             for li in lines]
                     script = "\n".join(lines)
                     script = script.replace(
                         "python quick_look_up.py",
@@ -416,9 +416,8 @@ class DatabaseCore(DatabaseCore2):
         """
         indexes = self.get_index_list()
         if full:
-            return [l for l in indexes if l[1] == table]
-        else:
-            return [l[0] for l in indexes if l[1] == table]
+            return [la for la in indexes if la[1] == table]
+        return [la[0] for la in indexes if la[1] == table]
 
     def get_column_type(self, table, column):
         """

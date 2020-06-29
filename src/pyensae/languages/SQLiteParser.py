@@ -1,9 +1,13 @@
-# Generated from \SQLite.g4 by ANTLR 4.7.1
+# Generated from \SQLite.g4 by ANTLR 4.8
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-from typing.io import TextIO
 import sys
+if sys.version_info[1] > 5:
+	from typing import TextIO
+else:
+	from typing.io import TextIO
+
 
 def serializedATN():
     with StringIO() as buf:
@@ -1249,9 +1253,10 @@ class SQLiteParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.1")
+        self.checkVersion("4.8")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
+
 
 
 
@@ -1331,6 +1336,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ErrorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1374,6 +1380,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Sql_stmt_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1386,6 +1393,12 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(SQLiteParser.Sql_stmtContext,i)
 
+
+        def SCOL(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.SCOL)
+            else:
+                return self.getToken(SQLiteParser.SCOL, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_sql_stmt_list
@@ -1461,6 +1474,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Sql_stmtContext(ParserRuleContext):
 
@@ -1798,6 +1812,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Alter_table_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1834,6 +1849,9 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def K_COLUMN(self):
             return self.getToken(SQLiteParser.K_COLUMN, 0)
@@ -1910,6 +1928,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Analyze_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -1926,6 +1945,9 @@ class SQLiteParser ( Parser ):
         def table_or_index_name(self):
             return self.getTypedRuleContext(SQLiteParser.Table_or_index_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_analyze_stmt
@@ -1976,6 +1998,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Attach_stmtContext(ParserRuleContext):
 
@@ -2043,6 +2066,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Begin_stmtContext(ParserRuleContext):
 
@@ -2129,6 +2153,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Commit_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2200,6 +2225,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Compound_select_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2266,6 +2292,12 @@ class SQLiteParser ( Parser ):
 
         def K_RECURSIVE(self):
             return self.getToken(SQLiteParser.K_RECURSIVE, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_OFFSET(self):
             return self.getToken(SQLiteParser.K_OFFSET, 0)
@@ -2424,6 +2456,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Create_index_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2447,12 +2480,18 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Table_nameContext,0)
 
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
         def indexed_column(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Indexed_columnContext)
             else:
                 return self.getTypedRuleContext(SQLiteParser.Indexed_columnContext,i)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
 
         def K_UNIQUE(self):
             return self.getToken(SQLiteParser.K_UNIQUE, 0)
@@ -2469,6 +2508,15 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_WHERE(self):
             return self.getToken(SQLiteParser.K_WHERE, 0)
@@ -2574,6 +2622,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Create_table_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2590,12 +2639,18 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Table_nameContext,0)
 
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
         def column_def(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Column_defContext)
             else:
                 return self.getTypedRuleContext(SQLiteParser.Column_defContext,i)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
 
         def K_AS(self):
             return self.getToken(SQLiteParser.K_AS, 0)
@@ -2617,11 +2672,20 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
 
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
+
         def K_TEMP(self):
             return self.getToken(SQLiteParser.K_TEMP, 0)
 
         def K_TEMPORARY(self):
             return self.getToken(SQLiteParser.K_TEMPORARY, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def table_constraint(self, i:int=None):
             if i is None:
@@ -2761,6 +2825,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Create_trigger_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2815,6 +2880,12 @@ class SQLiteParser ( Parser ):
                 return self.getTypedRuleContext(SQLiteParser.Database_nameContext,i)
 
 
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.DOT)
+            else:
+                return self.getToken(SQLiteParser.DOT, i)
+
         def K_BEFORE(self):
             return self.getToken(SQLiteParser.K_BEFORE, 0)
 
@@ -2845,6 +2916,12 @@ class SQLiteParser ( Parser ):
         def expr(self):
             return self.getTypedRuleContext(SQLiteParser.ExprContext,0)
 
+
+        def SCOL(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.SCOL)
+            else:
+                return self.getToken(SQLiteParser.SCOL, i)
 
         def K_TEMP(self):
             return self.getToken(SQLiteParser.K_TEMP, 0)
@@ -2886,6 +2963,12 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(SQLiteParser.Select_stmtContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_create_trigger_stmt
@@ -3094,6 +3177,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Create_view_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3129,6 +3213,9 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def K_TEMP(self):
             return self.getToken(SQLiteParser.K_TEMP, 0)
@@ -3210,6 +3297,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Create_virtual_table_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3249,12 +3337,27 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
 
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
+
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
         def module_argument(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Module_argumentContext)
             else:
                 return self.getTypedRuleContext(SQLiteParser.Module_argumentContext,i)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_create_virtual_table_stmt
@@ -3343,6 +3446,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Delete_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3423,6 +3527,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Delete_stmt_limitedContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3471,6 +3576,12 @@ class SQLiteParser ( Parser ):
 
         def K_OFFSET(self):
             return self.getToken(SQLiteParser.K_OFFSET, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_delete_stmt_limited
@@ -3574,6 +3685,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Detach_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3630,6 +3742,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Drop_index_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3655,6 +3768,9 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_drop_index_stmt
@@ -3710,6 +3826,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Drop_table_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3735,6 +3852,9 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_drop_table_stmt
@@ -3790,6 +3910,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Drop_trigger_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3815,6 +3936,9 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_drop_trigger_stmt
@@ -3870,6 +3994,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Drop_view_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3895,6 +4020,9 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_drop_view_stmt
@@ -3949,6 +4077,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Factored_select_stmtContext(ParserRuleContext):
 
@@ -4005,6 +4134,12 @@ class SQLiteParser ( Parser ):
 
         def K_RECURSIVE(self):
             return self.getToken(SQLiteParser.K_RECURSIVE, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_OFFSET(self):
             return self.getToken(SQLiteParser.K_OFFSET, 0)
@@ -4131,6 +4266,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Insert_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4168,12 +4304,24 @@ class SQLiteParser ( Parser ):
         def K_VALUES(self):
             return self.getToken(SQLiteParser.K_VALUES, 0)
 
+        def OPEN_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.OPEN_PAR)
+            else:
+                return self.getToken(SQLiteParser.OPEN_PAR, i)
+
         def expr(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.ExprContext)
             else:
                 return self.getTypedRuleContext(SQLiteParser.ExprContext,i)
 
+
+        def CLOSE_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.CLOSE_PAR)
+            else:
+                return self.getToken(SQLiteParser.CLOSE_PAR, i)
 
         def select_stmt(self):
             return self.getTypedRuleContext(SQLiteParser.Select_stmtContext,0)
@@ -4190,12 +4338,21 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
 
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
+
         def column_name(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Column_nameContext)
             else:
                 return self.getTypedRuleContext(SQLiteParser.Column_nameContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_insert_stmt
@@ -4398,6 +4555,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Pragma_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4415,9 +4573,21 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
 
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
+
+        def ASSIGN(self):
+            return self.getToken(SQLiteParser.ASSIGN, 0)
+
         def pragma_value(self):
             return self.getTypedRuleContext(SQLiteParser.Pragma_valueContext,0)
 
+
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_pragma_stmt
@@ -4482,6 +4652,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Reindex_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4506,6 +4677,9 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_reindex_stmt
@@ -4571,6 +4745,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Release_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4626,6 +4801,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Rollback_stmtContext(ParserRuleContext):
 
@@ -4718,6 +4894,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Savepoint_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4762,6 +4939,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Simple_select_stmtContext(ParserRuleContext):
 
@@ -4808,6 +4986,12 @@ class SQLiteParser ( Parser ):
 
         def K_RECURSIVE(self):
             return self.getToken(SQLiteParser.K_RECURSIVE, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_OFFSET(self):
             return self.getToken(SQLiteParser.K_OFFSET, 0)
@@ -4922,6 +5106,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Select_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4977,6 +5162,12 @@ class SQLiteParser ( Parser ):
 
         def K_RECURSIVE(self):
             return self.getToken(SQLiteParser.K_RECURSIVE, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_OFFSET(self):
             return self.getToken(SQLiteParser.K_OFFSET, 0)
@@ -5103,6 +5294,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Select_or_valuesContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5118,6 +5310,12 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(SQLiteParser.Result_columnContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_FROM(self):
             return self.getToken(SQLiteParser.K_FROM, 0)
@@ -5160,6 +5358,18 @@ class SQLiteParser ( Parser ):
 
         def K_VALUES(self):
             return self.getToken(SQLiteParser.K_VALUES, 0)
+
+        def OPEN_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.OPEN_PAR)
+            else:
+                return self.getToken(SQLiteParser.OPEN_PAR, i)
+
+        def CLOSE_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.CLOSE_PAR)
+            else:
+                return self.getToken(SQLiteParser.CLOSE_PAR, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_select_or_values
@@ -5356,6 +5566,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Update_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5378,6 +5589,12 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(SQLiteParser.Column_nameContext,i)
 
+
+        def ASSIGN(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.ASSIGN)
+            else:
+                return self.getToken(SQLiteParser.ASSIGN, i)
 
         def expr(self, i:int=None):
             if i is None:
@@ -5407,6 +5624,12 @@ class SQLiteParser ( Parser ):
 
         def K_IGNORE(self):
             return self.getToken(SQLiteParser.K_IGNORE, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_WHERE(self):
             return self.getToken(SQLiteParser.K_WHERE, 0)
@@ -5520,6 +5743,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Update_stmt_limitedContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5542,6 +5766,12 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(SQLiteParser.Column_nameContext,i)
 
+
+        def ASSIGN(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.ASSIGN)
+            else:
+                return self.getToken(SQLiteParser.ASSIGN, i)
 
         def expr(self, i:int=None):
             if i is None:
@@ -5571,6 +5801,12 @@ class SQLiteParser ( Parser ):
 
         def K_IGNORE(self):
             return self.getToken(SQLiteParser.K_IGNORE, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_WHERE(self):
             return self.getToken(SQLiteParser.K_WHERE, 0)
@@ -5752,6 +5988,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Vacuum_stmtContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5790,6 +6027,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Column_defContext(ParserRuleContext):
 
@@ -5861,6 +6099,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Type_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5874,12 +6113,21 @@ class SQLiteParser ( Parser ):
                 return self.getTypedRuleContext(SQLiteParser.NameContext,i)
 
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
         def signed_number(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Signed_numberContext)
             else:
                 return self.getTypedRuleContext(SQLiteParser.Signed_numberContext,i)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
+
+        def COMMA(self):
+            return self.getToken(SQLiteParser.COMMA, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_type_name
@@ -5947,6 +6195,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Column_constraintContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5972,9 +6221,15 @@ class SQLiteParser ( Parser ):
         def K_CHECK(self):
             return self.getToken(SQLiteParser.K_CHECK, 0)
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
         def expr(self):
             return self.getTypedRuleContext(SQLiteParser.ExprContext,0)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
 
         def K_DEFAULT(self):
             return self.getToken(SQLiteParser.K_DEFAULT, 0)
@@ -6158,6 +6413,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Conflict_clauseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6231,6 +6487,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ExprContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6252,6 +6509,12 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Table_nameContext,0)
 
 
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.DOT)
+            else:
+                return self.getToken(SQLiteParser.DOT, i)
+
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
@@ -6271,8 +6534,23 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Function_nameContext,0)
 
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
+
+        def STAR(self):
+            return self.getToken(SQLiteParser.STAR, 0)
+
         def K_DISTINCT(self):
             return self.getToken(SQLiteParser.K_DISTINCT, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_CAST(self):
             return self.getToken(SQLiteParser.K_CAST, 0)
@@ -6318,6 +6596,57 @@ class SQLiteParser ( Parser ):
         def raise_function(self):
             return self.getTypedRuleContext(SQLiteParser.Raise_functionContext,0)
 
+
+        def PIPE2(self):
+            return self.getToken(SQLiteParser.PIPE2, 0)
+
+        def DIV(self):
+            return self.getToken(SQLiteParser.DIV, 0)
+
+        def MOD(self):
+            return self.getToken(SQLiteParser.MOD, 0)
+
+        def PLUS(self):
+            return self.getToken(SQLiteParser.PLUS, 0)
+
+        def MINUS(self):
+            return self.getToken(SQLiteParser.MINUS, 0)
+
+        def LT2(self):
+            return self.getToken(SQLiteParser.LT2, 0)
+
+        def GT2(self):
+            return self.getToken(SQLiteParser.GT2, 0)
+
+        def AMP(self):
+            return self.getToken(SQLiteParser.AMP, 0)
+
+        def PIPE(self):
+            return self.getToken(SQLiteParser.PIPE, 0)
+
+        def LT(self):
+            return self.getToken(SQLiteParser.LT, 0)
+
+        def LT_EQ(self):
+            return self.getToken(SQLiteParser.LT_EQ, 0)
+
+        def GT(self):
+            return self.getToken(SQLiteParser.GT, 0)
+
+        def GT_EQ(self):
+            return self.getToken(SQLiteParser.GT_EQ, 0)
+
+        def ASSIGN(self):
+            return self.getToken(SQLiteParser.ASSIGN, 0)
+
+        def EQ(self):
+            return self.getToken(SQLiteParser.EQ, 0)
+
+        def NOT_EQ1(self):
+            return self.getToken(SQLiteParser.NOT_EQ1, 0)
+
+        def NOT_EQ2(self):
+            return self.getToken(SQLiteParser.NOT_EQ2, 0)
 
         def K_IS(self):
             return self.getToken(SQLiteParser.K_IS, 0)
@@ -6976,6 +7305,7 @@ class SQLiteParser ( Parser ):
             self.unrollRecursionContexts(_parentctx)
         return localctx
 
+
     class Foreign_key_clauseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6989,12 +7319,18 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Foreign_tableContext,0)
 
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
         def column_name(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Column_nameContext)
             else:
                 return self.getTypedRuleContext(SQLiteParser.Column_nameContext,i)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
 
         def K_DEFERRABLE(self):
             return self.getToken(SQLiteParser.K_DEFERRABLE, 0)
@@ -7017,6 +7353,12 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(SQLiteParser.NameContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_DELETE(self, i:int=None):
             if i is None:
@@ -7239,6 +7581,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Raise_functionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7248,8 +7591,17 @@ class SQLiteParser ( Parser ):
         def K_RAISE(self):
             return self.getToken(SQLiteParser.K_RAISE, 0)
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
+
         def K_IGNORE(self):
             return self.getToken(SQLiteParser.K_IGNORE, 0)
+
+        def COMMA(self):
+            return self.getToken(SQLiteParser.COMMA, 0)
 
         def error_message(self):
             return self.getTypedRuleContext(SQLiteParser.Error_messageContext,0)
@@ -7321,6 +7673,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Indexed_columnContext(ParserRuleContext):
 
@@ -7399,11 +7752,15 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Table_constraintContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
 
         def indexed_column(self, i:int=None):
             if i is None:
@@ -7411,6 +7768,9 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(SQLiteParser.Indexed_columnContext,i)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
 
         def conflict_clause(self):
             return self.getTypedRuleContext(SQLiteParser.Conflict_clauseContext,0)
@@ -7452,6 +7812,12 @@ class SQLiteParser ( Parser ):
 
         def K_UNIQUE(self):
             return self.getToken(SQLiteParser.K_UNIQUE, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_table_constraint
@@ -7572,6 +7938,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class With_clauseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7594,6 +7961,12 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getToken(SQLiteParser.K_AS, i)
 
+        def OPEN_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.OPEN_PAR)
+            else:
+                return self.getToken(SQLiteParser.OPEN_PAR, i)
+
         def select_stmt(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Select_stmtContext)
@@ -7601,8 +7974,20 @@ class SQLiteParser ( Parser ):
                 return self.getTypedRuleContext(SQLiteParser.Select_stmtContext,i)
 
 
+        def CLOSE_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.CLOSE_PAR)
+            else:
+                return self.getToken(SQLiteParser.CLOSE_PAR, i)
+
         def K_RECURSIVE(self):
             return self.getToken(SQLiteParser.K_RECURSIVE, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_with_clause
@@ -7673,6 +8058,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Qualified_table_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7686,6 +8072,9 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def K_INDEXED(self):
             return self.getToken(SQLiteParser.K_INDEXED, 0)
@@ -7760,6 +8149,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Ordering_termContext(ParserRuleContext):
 
@@ -7838,6 +8228,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Pragma_valueContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7904,6 +8295,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Common_table_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7917,9 +8309,21 @@ class SQLiteParser ( Parser ):
         def K_AS(self):
             return self.getToken(SQLiteParser.K_AS, 0)
 
+        def OPEN_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.OPEN_PAR)
+            else:
+                return self.getToken(SQLiteParser.OPEN_PAR, i)
+
         def select_stmt(self):
             return self.getTypedRuleContext(SQLiteParser.Select_stmtContext,0)
 
+
+        def CLOSE_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.CLOSE_PAR)
+            else:
+                return self.getToken(SQLiteParser.CLOSE_PAR, i)
 
         def column_name(self, i:int=None):
             if i is None:
@@ -7927,6 +8331,12 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(SQLiteParser.Column_nameContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_common_table_expression
@@ -7991,15 +8401,22 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Result_columnContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def STAR(self):
+            return self.getToken(SQLiteParser.STAR, 0)
+
         def table_name(self):
             return self.getTypedRuleContext(SQLiteParser.Table_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def expr(self):
             return self.getTypedRuleContext(SQLiteParser.ExprContext,0)
@@ -8082,6 +8499,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Table_or_subqueryContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8095,6 +8513,9 @@ class SQLiteParser ( Parser ):
         def database_name(self):
             return self.getTypedRuleContext(SQLiteParser.Database_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(SQLiteParser.DOT, 0)
 
         def table_alias(self):
             return self.getTypedRuleContext(SQLiteParser.Table_aliasContext,0)
@@ -8116,6 +8537,12 @@ class SQLiteParser ( Parser ):
         def K_AS(self):
             return self.getToken(SQLiteParser.K_AS, 0)
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
+
         def table_or_subquery(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Table_or_subqueryContext)
@@ -8126,6 +8553,12 @@ class SQLiteParser ( Parser ):
         def join_clause(self):
             return self.getTypedRuleContext(SQLiteParser.Join_clauseContext,0)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def select_stmt(self):
             return self.getTypedRuleContext(SQLiteParser.Select_stmtContext,0)
@@ -8292,6 +8725,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Join_clauseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8364,11 +8798,15 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Join_operatorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def COMMA(self):
+            return self.getToken(SQLiteParser.COMMA, 0)
 
         def K_JOIN(self):
             return self.getToken(SQLiteParser.K_JOIN, 0)
@@ -8467,6 +8905,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Join_constraintContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8483,12 +8922,24 @@ class SQLiteParser ( Parser ):
         def K_USING(self):
             return self.getToken(SQLiteParser.K_USING, 0)
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
         def column_name(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Column_nameContext)
             else:
                 return self.getTypedRuleContext(SQLiteParser.Column_nameContext,i)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_join_constraint
@@ -8554,6 +9005,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Select_coreContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8569,6 +9021,12 @@ class SQLiteParser ( Parser ):
             else:
                 return self.getTypedRuleContext(SQLiteParser.Result_columnContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def K_FROM(self):
             return self.getToken(SQLiteParser.K_FROM, 0)
@@ -8611,6 +9069,18 @@ class SQLiteParser ( Parser ):
 
         def K_VALUES(self):
             return self.getToken(SQLiteParser.K_VALUES, 0)
+
+        def OPEN_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.OPEN_PAR)
+            else:
+                return self.getToken(SQLiteParser.OPEN_PAR, i)
+
+        def CLOSE_PAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.CLOSE_PAR)
+            else:
+                return self.getToken(SQLiteParser.CLOSE_PAR, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_select_core
@@ -8807,6 +9277,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Compound_operatorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8882,6 +9353,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Cte_table_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8892,12 +9364,24 @@ class SQLiteParser ( Parser ):
             return self.getTypedRuleContext(SQLiteParser.Table_nameContext,0)
 
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
         def column_name(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(SQLiteParser.Column_nameContext)
             else:
                 return self.getTypedRuleContext(SQLiteParser.Column_nameContext,i)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(SQLiteParser.COMMA)
+            else:
+                return self.getToken(SQLiteParser.COMMA, i)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_cte_table_name
@@ -8954,6 +9438,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Signed_numberContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8962,6 +9447,12 @@ class SQLiteParser ( Parser ):
 
         def NUMERIC_LITERAL(self):
             return self.getToken(SQLiteParser.NUMERIC_LITERAL, 0)
+
+        def PLUS(self):
+            return self.getToken(SQLiteParser.PLUS, 0)
+
+        def MINUS(self):
+            return self.getToken(SQLiteParser.MINUS, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_signed_number
@@ -9006,6 +9497,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Literal_valueContext(ParserRuleContext):
 
@@ -9070,11 +9562,21 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Unary_operatorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def MINUS(self):
+            return self.getToken(SQLiteParser.MINUS, 0)
+
+        def PLUS(self):
+            return self.getToken(SQLiteParser.PLUS, 0)
+
+        def TILDE(self):
+            return self.getToken(SQLiteParser.TILDE, 0)
 
         def K_NOT(self):
             return self.getToken(SQLiteParser.K_NOT, 0)
@@ -9115,6 +9617,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Error_messageContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9153,6 +9656,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Module_argumentContext(ParserRuleContext):
 
@@ -9211,6 +9715,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Column_aliasContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9258,6 +9763,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class KeywordContext(ParserRuleContext):
 
@@ -9673,6 +10179,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class NameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9712,6 +10219,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Function_nameContext(ParserRuleContext):
 
@@ -9753,6 +10261,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Database_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9792,6 +10301,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Table_nameContext(ParserRuleContext):
 
@@ -9833,6 +10343,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Table_or_index_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9872,6 +10383,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class New_table_nameContext(ParserRuleContext):
 
@@ -9913,6 +10425,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Column_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9952,6 +10465,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Collation_nameContext(ParserRuleContext):
 
@@ -9993,6 +10507,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Foreign_tableContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10032,6 +10547,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Index_nameContext(ParserRuleContext):
 
@@ -10073,6 +10589,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Trigger_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10112,6 +10629,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class View_nameContext(ParserRuleContext):
 
@@ -10153,6 +10671,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Module_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10192,6 +10711,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Pragma_nameContext(ParserRuleContext):
 
@@ -10233,6 +10753,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Savepoint_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10272,6 +10793,7 @@ class SQLiteParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Table_aliasContext(ParserRuleContext):
 
@@ -10313,6 +10835,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Transaction_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10353,6 +10876,7 @@ class SQLiteParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Any_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10369,9 +10893,15 @@ class SQLiteParser ( Parser ):
         def STRING_LITERAL(self):
             return self.getToken(SQLiteParser.STRING_LITERAL, 0)
 
+        def OPEN_PAR(self):
+            return self.getToken(SQLiteParser.OPEN_PAR, 0)
+
         def any_name(self):
             return self.getTypedRuleContext(SQLiteParser.Any_nameContext,0)
 
+
+        def CLOSE_PAR(self):
+            return self.getToken(SQLiteParser.CLOSE_PAR, 0)
 
         def getRuleIndex(self):
             return SQLiteParser.RULE_any_name

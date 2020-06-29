@@ -27,10 +27,10 @@ class TestFileColumns (unittest.TestCase):
         f.open()
         rows = list(f)
         f.close()
-        for l in rows[:5]:
-            fLOG(l)
-            assert isinstance(l, dict)
-            assert isinstance(l["Adj_Close"], float)
+        for li in rows[:5]:
+            fLOG(li)
+            assert isinstance(li, dict)
+            assert isinstance(li["Adj_Close"], float)
 
 
 if __name__ == "__main__":

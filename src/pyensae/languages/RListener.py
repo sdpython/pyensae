@@ -1,4 +1,4 @@
-# Generated from \R.g4 by ANTLR 4.7.1
+# Generated from \R.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .RParser import RParser
@@ -393,3 +393,6 @@ class RListener(ParseTreeListener):
     # Exit a parse tree produced by RParser#comparison.
     def exitComparison(self, ctx: RParser.ComparisonContext):
         pass
+
+
+del RParser

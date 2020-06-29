@@ -282,9 +282,9 @@ def download_data(name, moduleName=None, url=None, glo=None,
                     lines = f.readlines()
                 fil = []
                 fir = True
-                for l in lines:
-                    r1 = reg1.search(l)
-                    r2 = reg2.search(l)
+                for li in lines:
+                    r1 = reg1.search(li)
+                    r2 = reg2.search(li)
                     if r2:
                         ls = ""
                         if fir:

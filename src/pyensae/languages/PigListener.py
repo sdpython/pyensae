@@ -1,4 +1,4 @@
-# Generated from \Pig.g4 by ANTLR 4.7.1
+# Generated from \Pig.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .PigParser import PigParser
@@ -409,3 +409,6 @@ class PigListener(ParseTreeListener):
     # Exit a parse tree produced by PigParser#tuple_.
     def exitTuple_(self, ctx: PigParser.Tuple_Context):
         pass
+
+
+del PigParser

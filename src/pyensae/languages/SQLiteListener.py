@@ -1,4 +1,4 @@
-# Generated from \SQLite.g4 by ANTLR 4.7.1
+# Generated from \SQLite.g4 by ANTLR 4.8
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .SQLiteParser import SQLiteParser
@@ -665,3 +665,6 @@ class SQLiteListener(ParseTreeListener):
     # Exit a parse tree produced by SQLiteParser#any_name.
     def exitAny_name(self, ctx: SQLiteParser.Any_nameContext):
         pass
+
+
+del SQLiteParser

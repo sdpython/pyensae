@@ -40,12 +40,12 @@ def _is_syntax_is_missing(language):
                 locations.keys())))
 
 
-def build_grammar(g4, version="4.7.1", fLOG=noLOG):
+def build_grammar(g4, version="4.8", fLOG=noLOG):
     """
     Compiles the grammar for a specific file.
 
     @param      g4          grammar format antlr4
-    @param      version     version of *antlr4* to use, 4.7
+    @param      version     version of *antlr4* to use, 4.8
     @param      fLOG        logging function
     @return                 list of files
 

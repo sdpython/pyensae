@@ -1,9 +1,13 @@
-# Generated from CSharpParser.g4 by ANTLR 4.7.1
+# Generated from \CSharpParser.g4 by ANTLR 4.8
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
-from typing.io import TextIO
 import sys
+if sys.version_info[1] > 5:
+	from typing import TextIO
+else:
+	from typing.io import TextIO
+
 
 def serializedATN():
     with StringIO() as buf:
@@ -1905,9 +1909,10 @@ class CSharpParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.7.1")
+        self.checkVersion("4.8")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
+
 
 
 
@@ -1953,8 +1958,8 @@ class CSharpParser ( Parser ):
             if hasattr( listener, "exitCompilation_unit" ):
                 listener.exitCompilation_unit(self)
 
-    def parse(self):
-        return self.compilation_unit()
+
+
 
     def compilation_unit(self):
 
@@ -2016,6 +2021,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Namespace_or_type_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2032,6 +2038,12 @@ class CSharpParser ( Parser ):
         def qualified_alias_member(self):
             return self.getTypedRuleContext(CSharpParser.Qualified_alias_memberContext,0)
 
+
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.DOT)
+            else:
+                return self.getToken(CSharpParser.DOT, i)
 
         def type_argument_list(self, i:int=None):
             if i is None:
@@ -2111,6 +2123,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class CstypeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2121,12 +2134,24 @@ class CSharpParser ( Parser ):
             return self.getTypedRuleContext(CSharpParser.Base_typeContext,0)
 
 
+        def INTERR(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.INTERR)
+            else:
+                return self.getToken(CSharpParser.INTERR, i)
+
         def rank_specifier(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(CSharpParser.Rank_specifierContext)
             else:
                 return self.getTypedRuleContext(CSharpParser.Rank_specifierContext,i)
 
+
+        def STAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.STAR)
+            else:
+                return self.getToken(CSharpParser.STAR, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_cstype
@@ -2185,6 +2210,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Base_typeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2201,6 +2227,9 @@ class CSharpParser ( Parser ):
 
         def VOID(self):
             return self.getToken(CSharpParser.VOID, 0)
+
+        def STAR(self):
+            return self.getToken(CSharpParser.STAR, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_base_type
@@ -2251,6 +2280,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Simple_typeContext(ParserRuleContext):
 
@@ -2307,6 +2337,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Numeric_typeContext(ParserRuleContext):
 
@@ -2372,6 +2403,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Integral_typeContext(ParserRuleContext):
 
@@ -2442,6 +2474,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Floating_point_typeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2489,6 +2522,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Class_typeContext(ParserRuleContext):
 
@@ -2564,11 +2598,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Type_argument_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def LT(self):
+            return self.getToken(CSharpParser.LT, 0)
 
         def cstype(self, i:int=None):
             if i is None:
@@ -2576,6 +2614,15 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.CstypeContext,i)
 
+
+        def GT(self):
+            return self.getToken(CSharpParser.GT, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_type_argument_list
@@ -2624,6 +2671,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Argument_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2636,6 +2684,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.ArgumentContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_argument_list
@@ -2680,6 +2734,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ArgumentContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2694,6 +2749,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def VAR(self):
             return self.getToken(CSharpParser.VAR, 0)
@@ -2775,6 +2833,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class ExpressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2831,6 +2890,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Non_assignment_expressionContext(ParserRuleContext):
 
@@ -2899,6 +2959,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class AssignmentContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -2951,11 +3012,42 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Assignment_operatorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
+
+        def OP_ADD_ASSIGNMENT(self):
+            return self.getToken(CSharpParser.OP_ADD_ASSIGNMENT, 0)
+
+        def OP_SUB_ASSIGNMENT(self):
+            return self.getToken(CSharpParser.OP_SUB_ASSIGNMENT, 0)
+
+        def OP_MULT_ASSIGNMENT(self):
+            return self.getToken(CSharpParser.OP_MULT_ASSIGNMENT, 0)
+
+        def OP_DIV_ASSIGNMENT(self):
+            return self.getToken(CSharpParser.OP_DIV_ASSIGNMENT, 0)
+
+        def OP_MOD_ASSIGNMENT(self):
+            return self.getToken(CSharpParser.OP_MOD_ASSIGNMENT, 0)
+
+        def OP_AND_ASSIGNMENT(self):
+            return self.getToken(CSharpParser.OP_AND_ASSIGNMENT, 0)
+
+        def OP_OR_ASSIGNMENT(self):
+            return self.getToken(CSharpParser.OP_OR_ASSIGNMENT, 0)
+
+        def OP_XOR_ASSIGNMENT(self):
+            return self.getToken(CSharpParser.OP_XOR_ASSIGNMENT, 0)
+
+        def OP_LEFT_SHIFT_ASSIGNMENT(self):
+            return self.getToken(CSharpParser.OP_LEFT_SHIFT_ASSIGNMENT, 0)
 
         def right_shift_assignment(self):
             return self.getTypedRuleContext(CSharpParser.Right_shift_assignmentContext,0)
@@ -3049,6 +3141,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Conditional_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3059,12 +3152,18 @@ class CSharpParser ( Parser ):
             return self.getTypedRuleContext(CSharpParser.Null_coalescing_expressionContext,0)
 
 
+        def INTERR(self):
+            return self.getToken(CSharpParser.INTERR, 0)
+
         def expression(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(CSharpParser.ExpressionContext)
             else:
                 return self.getTypedRuleContext(CSharpParser.ExpressionContext,i)
 
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_conditional_expression
@@ -3111,6 +3210,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Null_coalescing_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3120,6 +3220,9 @@ class CSharpParser ( Parser ):
         def conditional_or_expression(self):
             return self.getTypedRuleContext(CSharpParser.Conditional_or_expressionContext,0)
 
+
+        def OP_COALESCING(self):
+            return self.getToken(CSharpParser.OP_COALESCING, 0)
 
         def null_coalescing_expression(self):
             return self.getTypedRuleContext(CSharpParser.Null_coalescing_expressionContext,0)
@@ -3165,6 +3268,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Conditional_or_expressionContext(ParserRuleContext):
 
@@ -3228,6 +3332,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Conditional_and_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3290,6 +3395,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Inclusive_or_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3302,6 +3408,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Exclusive_or_expressionContext,i)
 
+
+        def BITWISE_OR(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.BITWISE_OR)
+            else:
+                return self.getToken(CSharpParser.BITWISE_OR, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_inclusive_or_expression
@@ -3346,6 +3458,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Exclusive_or_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3358,6 +3471,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.And_expressionContext,i)
 
+
+        def CARET(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.CARET)
+            else:
+                return self.getToken(CSharpParser.CARET, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_exclusive_or_expression
@@ -3402,6 +3521,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class And_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3414,6 +3534,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Equality_expressionContext,i)
 
+
+        def AMP(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.AMP)
+            else:
+                return self.getToken(CSharpParser.AMP, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_and_expression
@@ -3457,6 +3583,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Equality_expressionContext(ParserRuleContext):
 
@@ -3531,6 +3658,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Relational_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3569,6 +3697,30 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.CstypeContext,i)
 
+
+        def LT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.LT)
+            else:
+                return self.getToken(CSharpParser.LT, i)
+
+        def GT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.GT)
+            else:
+                return self.getToken(CSharpParser.GT, i)
+
+        def OP_LE(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.OP_LE)
+            else:
+                return self.getToken(CSharpParser.OP_LE, i)
+
+        def OP_GE(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.OP_GE)
+            else:
+                return self.getToken(CSharpParser.OP_GE, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_relational_expression
@@ -3638,6 +3790,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Shift_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3650,6 +3803,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Additive_expressionContext,i)
 
+
+        def OP_LEFT_SHIFT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.OP_LEFT_SHIFT)
+            else:
+                return self.getToken(CSharpParser.OP_LEFT_SHIFT, i)
 
         def right_shift(self, i:int=None):
             if i is None:
@@ -3713,6 +3872,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Additive_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3725,6 +3885,18 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Multiplicative_expressionContext,i)
 
+
+        def PLUS(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.PLUS)
+            else:
+                return self.getToken(CSharpParser.PLUS, i)
+
+        def MINUS(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.MINUS)
+            else:
+                return self.getToken(CSharpParser.MINUS, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_additive_expression
@@ -3775,6 +3947,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Multiplicative_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3787,6 +3960,24 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Unary_expressionContext,i)
 
+
+        def STAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.STAR)
+            else:
+                return self.getToken(CSharpParser.STAR, i)
+
+        def DIV(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.DIV)
+            else:
+                return self.getToken(CSharpParser.DIV, i)
+
+        def PERCENT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.PERCENT)
+            else:
+                return self.getToken(CSharpParser.PERCENT, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_multiplicative_expression
@@ -3837,6 +4028,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Unary_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -3847,12 +4039,27 @@ class CSharpParser ( Parser ):
             return self.getTypedRuleContext(CSharpParser.Primary_expressionContext,0)
 
 
+        def PLUS(self):
+            return self.getToken(CSharpParser.PLUS, 0)
+
         def unary_expression(self):
             return self.getTypedRuleContext(CSharpParser.Unary_expressionContext,0)
 
 
+        def MINUS(self):
+            return self.getToken(CSharpParser.MINUS, 0)
+
         def BANG(self):
             return self.getToken(CSharpParser.BANG, 0)
+
+        def TILDE(self):
+            return self.getToken(CSharpParser.TILDE, 0)
+
+        def OP_INC(self):
+            return self.getToken(CSharpParser.OP_INC, 0)
+
+        def OP_DEC(self):
+            return self.getToken(CSharpParser.OP_DEC, 0)
 
         def OPEN_PARENS(self):
             return self.getToken(CSharpParser.OPEN_PARENS, 0)
@@ -3866,6 +4073,12 @@ class CSharpParser ( Parser ):
 
         def AWAIT(self):
             return self.getToken(CSharpParser.AWAIT, 0)
+
+        def AMP(self):
+            return self.getToken(CSharpParser.AMP, 0)
+
+        def STAR(self):
+            return self.getToken(CSharpParser.STAR, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_unary_expression
@@ -3988,6 +4201,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Primary_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4019,6 +4233,24 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Method_invocationContext,i)
 
+
+        def OP_INC(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.OP_INC)
+            else:
+                return self.getToken(CSharpParser.OP_INC, i)
+
+        def OP_DEC(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.OP_DEC)
+            else:
+                return self.getToken(CSharpParser.OP_DEC, i)
+
+        def OP_PTR(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.OP_PTR)
+            else:
+                return self.getToken(CSharpParser.OP_PTR, i)
 
         def identifier(self, i:int=None):
             if i is None:
@@ -4116,6 +4348,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Primary_expression_startContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4183,12 +4416,18 @@ class CSharpParser ( Parser ):
 
         def BASE(self):
             return self.getToken(CSharpParser.BASE, 0)
+        def DOT(self):
+            return self.getToken(CSharpParser.DOT, 0)
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
         def expression_list(self):
             return self.getTypedRuleContext(CSharpParser.Expression_listContext,0)
 
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
         def type_argument_list(self):
             return self.getTypedRuleContext(CSharpParser.Type_argument_listContext,0)
 
@@ -4297,9 +4536,13 @@ class CSharpParser ( Parser ):
         def object_or_collection_initializer(self):
             return self.getTypedRuleContext(CSharpParser.Object_or_collection_initializerContext,0)
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
         def expression_list(self):
             return self.getTypedRuleContext(CSharpParser.Expression_listContext,0)
 
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterObjectCreationExpression" ):
@@ -4501,6 +4744,11 @@ class CSharpParser ( Parser ):
 
         def CLOSE_PARENS(self):
             return self.getToken(CSharpParser.CLOSE_PARENS, 0)
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.DOT)
+            else:
+                return self.getToken(CSharpParser.DOT, i)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterNameofExpression" ):
@@ -4855,15 +5103,22 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Member_accessContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def DOT(self):
+            return self.getToken(CSharpParser.DOT, 0)
+
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def INTERR(self):
+            return self.getToken(CSharpParser.INTERR, 0)
 
         def type_argument_list(self):
             return self.getTypedRuleContext(CSharpParser.Type_argument_listContext,0)
@@ -4918,11 +5173,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Bracket_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
 
         def indexer_argument(self, i:int=None):
             if i is None:
@@ -4930,6 +5189,18 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Indexer_argumentContext,i)
 
+
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
+
+        def INTERR(self):
+            return self.getToken(CSharpParser.INTERR, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_bracket_expression
@@ -4986,6 +5257,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Indexer_argumentContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -4999,6 +5271,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_indexer_argument
@@ -5039,6 +5314,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Predefined_typeContext(ParserRuleContext):
 
@@ -5127,6 +5403,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Expression_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5139,6 +5416,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.ExpressionContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_expression_list
@@ -5182,6 +5465,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Object_or_collection_initializerContext(ParserRuleContext):
 
@@ -5240,6 +5524,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Object_initializerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5255,6 +5540,9 @@ class CSharpParser ( Parser ):
         def member_initializer_list(self):
             return self.getTypedRuleContext(CSharpParser.Member_initializer_listContext,0)
 
+
+        def COMMA(self):
+            return self.getToken(CSharpParser.COMMA, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_object_initializer
@@ -5305,6 +5593,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Member_initializer_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5317,6 +5606,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Member_initializerContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_member_initializer_list
@@ -5361,11 +5656,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Member_initializerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def initializer_value(self):
             return self.getTypedRuleContext(CSharpParser.Initializer_valueContext,0)
@@ -5375,9 +5674,15 @@ class CSharpParser ( Parser ):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
+
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_member_initializer
@@ -5428,6 +5733,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Initializer_valueContext(ParserRuleContext):
 
@@ -5486,6 +5792,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Collection_initializerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5504,6 +5811,12 @@ class CSharpParser ( Parser ):
 
         def CLOSE_BRACE(self):
             return self.getToken(CSharpParser.CLOSE_BRACE, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_collection_initializer
@@ -5560,6 +5873,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Element_initializerContext(ParserRuleContext):
 
@@ -5628,6 +5942,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Anonymous_object_initializerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5643,6 +5958,9 @@ class CSharpParser ( Parser ):
         def member_declarator_list(self):
             return self.getTypedRuleContext(CSharpParser.Member_declarator_listContext,0)
 
+
+        def COMMA(self):
+            return self.getToken(CSharpParser.COMMA, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_anonymous_object_initializer
@@ -5693,6 +6011,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Member_declarator_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5705,6 +6024,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Member_declaratorContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_member_declarator_list
@@ -5749,6 +6074,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Member_declaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5762,6 +6088,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
@@ -5814,6 +6143,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Unbound_type_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5826,6 +6156,15 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.IdentifierContext,i)
 
+
+        def DOUBLE_COLON(self):
+            return self.getToken(CSharpParser.DOUBLE_COLON, 0)
+
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.DOT)
+            else:
+                return self.getToken(CSharpParser.DOT, i)
 
         def generic_dimension_specifier(self, i:int=None):
             if i is None:
@@ -5915,12 +6254,24 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Generic_dimension_specifierContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def LT(self):
+            return self.getToken(CSharpParser.LT, 0)
+
+        def GT(self):
+            return self.getToken(CSharpParser.GT, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_generic_dimension_specifier
@@ -5965,6 +6316,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class IsTypeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -5981,6 +6333,15 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Rank_specifierContext,i)
 
+
+        def STAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.STAR)
+            else:
+                return self.getToken(CSharpParser.STAR, i)
+
+        def INTERR(self):
+            return self.getToken(CSharpParser.INTERR, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_isType
@@ -6042,6 +6403,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Lambda_expressionContext(ParserRuleContext):
 
@@ -6105,6 +6467,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Anonymous_function_signatureContext(ParserRuleContext):
 
@@ -6195,6 +6558,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Explicit_anonymous_function_parameter_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6207,6 +6571,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Explicit_anonymous_function_parameterContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_explicit_anonymous_function_parameter_list
@@ -6250,6 +6620,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Explicit_anonymous_function_parameterContext(ParserRuleContext):
 
@@ -6319,6 +6690,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Implicit_anonymous_function_parameter_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6331,6 +6703,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.IdentifierContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_implicit_anonymous_function_parameter_list
@@ -6374,6 +6752,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Anonymous_function_bodyContext(ParserRuleContext):
 
@@ -6432,6 +6811,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Query_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6477,6 +6857,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class From_clauseContext(ParserRuleContext):
 
@@ -6545,6 +6926,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Query_bodyContext(ParserRuleContext):
 
@@ -6615,6 +6997,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Query_body_clauseContext(ParserRuleContext):
 
@@ -6700,6 +7083,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Let_clauseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6712,6 +7096,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
@@ -6752,6 +7139,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Where_clauseContext(ParserRuleContext):
 
@@ -6797,6 +7185,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Combined_join_clauseContext(ParserRuleContext):
 
@@ -6900,6 +7289,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Orderby_clauseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -6915,6 +7305,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.OrderingContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_orderby_clause
@@ -6960,6 +7356,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class OrderingContext(ParserRuleContext):
 
@@ -7022,6 +7419,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Select_or_group_clauseContext(ParserRuleContext):
 
@@ -7096,6 +7494,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Query_continuationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7147,6 +7546,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class StatementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7169,6 +7569,8 @@ class CSharpParser ( Parser ):
             super().__init__(parser)
             self.copyFrom(ctx)
 
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
         def local_variable_declaration(self):
             return self.getTypedRuleContext(CSharpParser.Local_variable_declarationContext,0)
 
@@ -7276,6 +7678,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Labeled_StatementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7285,6 +7688,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def statement(self):
             return self.getTypedRuleContext(CSharpParser.StatementContext,0)
@@ -7323,6 +7729,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Embedded_statementContext(ParserRuleContext):
 
@@ -7381,6 +7788,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Simple_embedded_statementContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -7403,6 +7811,8 @@ class CSharpParser ( Parser ):
             super().__init__(parser)
             self.copyFrom(ctx)
 
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterEmptyStatement" ):
@@ -7469,6 +7879,8 @@ class CSharpParser ( Parser ):
 
         def THROW(self):
             return self.getToken(CSharpParser.THROW, 0)
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
@@ -7513,6 +7925,11 @@ class CSharpParser ( Parser ):
             return self.getToken(CSharpParser.FOR, 0)
         def OPEN_PARENS(self):
             return self.getToken(CSharpParser.OPEN_PARENS, 0)
+        def SEMICOLON(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.SEMICOLON)
+            else:
+                return self.getToken(CSharpParser.SEMICOLON, i)
         def CLOSE_PARENS(self):
             return self.getToken(CSharpParser.CLOSE_PARENS, 0)
         def embedded_statement(self):
@@ -7545,6 +7962,8 @@ class CSharpParser ( Parser ):
 
         def BREAK(self):
             return self.getToken(CSharpParser.BREAK, 0)
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterBreakStatement" ):
@@ -7596,6 +8015,8 @@ class CSharpParser ( Parser ):
 
         def RETURN(self):
             return self.getToken(CSharpParser.RETURN, 0)
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
@@ -7617,6 +8038,8 @@ class CSharpParser ( Parser ):
 
         def GOTO(self):
             return self.getToken(CSharpParser.GOTO, 0)
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
@@ -7751,6 +8174,8 @@ class CSharpParser ( Parser ):
 
         def CLOSE_PARENS(self):
             return self.getToken(CSharpParser.CLOSE_PARENS, 0)
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterDoStatement" ):
@@ -7827,6 +8252,8 @@ class CSharpParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterExpressionStatement" ):
@@ -7845,6 +8272,8 @@ class CSharpParser ( Parser ):
 
         def CONTINUE(self):
             return self.getToken(CSharpParser.CONTINUE, 0)
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterContinueStatement" ):
@@ -7919,6 +8348,8 @@ class CSharpParser ( Parser ):
 
         def YIELD(self):
             return self.getToken(CSharpParser.YIELD, 0)
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
         def RETURN(self):
             return self.getToken(CSharpParser.RETURN, 0)
         def expression(self):
@@ -8330,6 +8761,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class BlockContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8387,6 +8819,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Local_variable_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8403,6 +8836,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Local_variable_declaratorContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_local_variable_declaration
@@ -8448,6 +8887,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Local_variable_typeContext(ParserRuleContext):
 
@@ -8505,6 +8945,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Local_variable_declaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8514,6 +8955,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def local_variable_initializer(self):
             return self.getTypedRuleContext(CSharpParser.Local_variable_initializerContext,0)
@@ -8559,6 +9003,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Local_variable_initializerContext(ParserRuleContext):
 
@@ -8626,6 +9071,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Local_constant_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8676,6 +9122,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class If_bodyContext(ParserRuleContext):
 
@@ -8733,6 +9180,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Switch_sectionContext(ParserRuleContext):
 
@@ -8795,6 +9243,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Switch_labelContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8807,6 +9256,9 @@ class CSharpParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def DEFAULT(self):
             return self.getToken(CSharpParser.DEFAULT, 0)
@@ -8859,6 +9311,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Statement_listContext(ParserRuleContext):
 
@@ -8915,6 +9368,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class For_initializerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -8931,6 +9385,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.ExpressionContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_for_initializer
@@ -8988,6 +9448,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class For_iteratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9000,6 +9461,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.ExpressionContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_for_iterator
@@ -9043,6 +9510,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Catch_clausesContext(ParserRuleContext):
 
@@ -9123,6 +9591,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Specific_catch_clauseContext(ParserRuleContext):
 
@@ -9210,6 +9679,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class General_catch_clauseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9268,6 +9738,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Exception_filterContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9323,6 +9794,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Finally_clauseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9367,6 +9839,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Resource_acquisitionContext(ParserRuleContext):
 
@@ -9425,6 +9898,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Namespace_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9442,6 +9916,9 @@ class CSharpParser ( Parser ):
         def qualified_identifier(self):
             return self.getTypedRuleContext(CSharpParser.Qualified_identifierContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_namespace_declaration
@@ -9486,6 +9963,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Qualified_identifierContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9498,6 +9976,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.IdentifierContext,i)
 
+
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.DOT)
+            else:
+                return self.getToken(CSharpParser.DOT, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_qualified_identifier
@@ -9541,6 +10025,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Namespace_bodyContext(ParserRuleContext):
 
@@ -9623,6 +10108,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Extern_alias_directivesContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9678,6 +10164,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Extern_alias_directiveContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9693,6 +10180,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_extern_alias_directive
@@ -9729,6 +10219,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Using_directivesContext(ParserRuleContext):
 
@@ -9784,6 +10275,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Using_directiveContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9811,9 +10303,13 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
         def namespace_or_type_name(self):
             return self.getTypedRuleContext(CSharpParser.Namespace_or_type_nameContext,0)
 
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterUsingAliasDirective" ):
@@ -9835,6 +10331,8 @@ class CSharpParser ( Parser ):
         def namespace_or_type_name(self):
             return self.getTypedRuleContext(CSharpParser.Namespace_or_type_nameContext,0)
 
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterUsingNamespaceDirective" ):
@@ -9858,6 +10356,8 @@ class CSharpParser ( Parser ):
         def namespace_or_type_name(self):
             return self.getTypedRuleContext(CSharpParser.Namespace_or_type_nameContext,0)
 
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterUsingStaticDirective" ):
@@ -9925,6 +10425,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Namespace_member_declarationsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -9978,6 +10479,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Namespace_member_declarationContext(ParserRuleContext):
 
@@ -10044,6 +10546,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Type_declarationContext(ParserRuleContext):
 
@@ -10150,6 +10653,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Qualified_alias_memberContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10162,6 +10666,9 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.IdentifierContext,i)
 
+
+        def DOUBLE_COLON(self):
+            return self.getToken(CSharpParser.DOUBLE_COLON, 0)
 
         def type_argument_list(self):
             return self.getTypedRuleContext(CSharpParser.Type_argument_listContext,0)
@@ -10209,11 +10716,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Type_parameter_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def LT(self):
+            return self.getToken(CSharpParser.LT, 0)
 
         def type_parameter(self, i:int=None):
             if i is None:
@@ -10221,6 +10732,15 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Type_parameterContext,i)
 
+
+        def GT(self):
+            return self.getToken(CSharpParser.GT, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_type_parameter_list
@@ -10268,6 +10788,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Type_parameterContext(ParserRuleContext):
 
@@ -10322,15 +10843,25 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Class_baseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
+
         def class_type(self):
             return self.getTypedRuleContext(CSharpParser.Class_typeContext,0)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def namespace_or_type_name(self, i:int=None):
             if i is None:
@@ -10384,6 +10915,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Interface_type_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10396,6 +10928,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Namespace_or_type_nameContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_interface_type_list
@@ -10439,6 +10977,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Type_parameter_constraints_clausesContext(ParserRuleContext):
 
@@ -10494,6 +11033,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Type_parameter_constraints_clauseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10506,6 +11046,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def type_parameter_constraints(self):
             return self.getTypedRuleContext(CSharpParser.Type_parameter_constraintsContext,0)
@@ -10547,6 +11090,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Type_parameter_constraintsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10560,6 +11104,12 @@ class CSharpParser ( Parser ):
         def primary_constraint(self):
             return self.getTypedRuleContext(CSharpParser.Primary_constraintContext,0)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def secondary_constraints(self):
             return self.getTypedRuleContext(CSharpParser.Secondary_constraintsContext,0)
@@ -10629,6 +11179,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Primary_constraintContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10693,6 +11244,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Secondary_constraintsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10705,6 +11257,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Namespace_or_type_nameContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_secondary_constraints
@@ -10748,6 +11306,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Constructor_constraintContext(ParserRuleContext):
 
@@ -10797,6 +11356,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Class_bodyContext(ParserRuleContext):
 
@@ -10855,6 +11415,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Class_member_declarationsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -10908,6 +11469,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Class_member_declarationContext(ParserRuleContext):
 
@@ -11007,6 +11569,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class All_member_modifiersContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11061,6 +11624,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class All_member_modifierContext(ParserRuleContext):
 
@@ -11152,6 +11716,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Common_member_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11185,6 +11750,9 @@ class CSharpParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def constructor_declaration(self):
             return self.getTypedRuleContext(CSharpParser.Constructor_declarationContext,0)
@@ -11334,6 +11902,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Typed_member_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11347,6 +11916,9 @@ class CSharpParser ( Parser ):
         def namespace_or_type_name(self):
             return self.getTypedRuleContext(CSharpParser.Namespace_or_type_nameContext,0)
 
+
+        def DOT(self):
+            return self.getToken(CSharpParser.DOT, 0)
 
         def indexer_declaration(self):
             return self.getTypedRuleContext(CSharpParser.Indexer_declarationContext,0)
@@ -11436,6 +12008,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Constant_declaratorsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11448,6 +12021,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Constant_declaratorContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_constant_declarators
@@ -11492,6 +12071,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Constant_declaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11501,6 +12081,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
@@ -11540,6 +12123,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Variable_declaratorsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11552,6 +12136,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Variable_declaratorContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_variable_declarators
@@ -11596,6 +12186,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Variable_declaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11605,6 +12196,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def variable_initializer(self):
             return self.getTypedRuleContext(CSharpParser.Variable_initializerContext,0)
@@ -11650,6 +12244,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Variable_initializerContext(ParserRuleContext):
 
@@ -11708,6 +12303,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Return_typeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11764,6 +12360,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Member_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11804,6 +12401,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Method_bodyContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11813,6 +12411,9 @@ class CSharpParser ( Parser ):
         def block(self):
             return self.getTypedRuleContext(CSharpParser.BlockContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_method_body
@@ -11857,6 +12458,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Formal_parameter_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11870,6 +12472,9 @@ class CSharpParser ( Parser ):
         def fixed_parameters(self):
             return self.getTypedRuleContext(CSharpParser.Fixed_parametersContext,0)
 
+
+        def COMMA(self):
+            return self.getToken(CSharpParser.COMMA, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_formal_parameter_list
@@ -11925,6 +12530,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Fixed_parametersContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -11937,6 +12543,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Fixed_parameterContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_fixed_parameters
@@ -11980,6 +12592,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Fixed_parameterContext(ParserRuleContext):
 
@@ -12062,6 +12675,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Parameter_modifierContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -12112,6 +12726,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Parameter_arrayContext(ParserRuleContext):
 
@@ -12176,6 +12791,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Accessor_declarationsContext(ParserRuleContext):
 
@@ -12290,6 +12906,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Get_accessor_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -12360,6 +12977,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Set_accessor_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -12429,6 +13047,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Accessor_modifierContext(ParserRuleContext):
 
@@ -12510,6 +13129,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Accessor_bodyContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -12519,6 +13139,9 @@ class CSharpParser ( Parser ):
         def block(self):
             return self.getTypedRuleContext(CSharpParser.BlockContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_accessor_body
@@ -12562,6 +13185,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Event_accessor_declarationsContext(ParserRuleContext):
 
@@ -12650,6 +13274,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Add_accessor_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -12707,6 +13332,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Remove_accessor_declarationContext(ParserRuleContext):
 
@@ -12766,20 +13392,57 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Overloadable_operatorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def PLUS(self):
+            return self.getToken(CSharpParser.PLUS, 0)
+
+        def MINUS(self):
+            return self.getToken(CSharpParser.MINUS, 0)
+
         def BANG(self):
             return self.getToken(CSharpParser.BANG, 0)
+
+        def TILDE(self):
+            return self.getToken(CSharpParser.TILDE, 0)
+
+        def OP_INC(self):
+            return self.getToken(CSharpParser.OP_INC, 0)
+
+        def OP_DEC(self):
+            return self.getToken(CSharpParser.OP_DEC, 0)
 
         def TRUE(self):
             return self.getToken(CSharpParser.TRUE, 0)
 
         def FALSE(self):
             return self.getToken(CSharpParser.FALSE, 0)
+
+        def STAR(self):
+            return self.getToken(CSharpParser.STAR, 0)
+
+        def DIV(self):
+            return self.getToken(CSharpParser.DIV, 0)
+
+        def PERCENT(self):
+            return self.getToken(CSharpParser.PERCENT, 0)
+
+        def AMP(self):
+            return self.getToken(CSharpParser.AMP, 0)
+
+        def BITWISE_OR(self):
+            return self.getToken(CSharpParser.BITWISE_OR, 0)
+
+        def CARET(self):
+            return self.getToken(CSharpParser.CARET, 0)
+
+        def OP_LEFT_SHIFT(self):
+            return self.getToken(CSharpParser.OP_LEFT_SHIFT, 0)
 
         def right_shift(self):
             return self.getTypedRuleContext(CSharpParser.Right_shiftContext,0)
@@ -12790,6 +13453,18 @@ class CSharpParser ( Parser ):
 
         def OP_NE(self):
             return self.getToken(CSharpParser.OP_NE, 0)
+
+        def GT(self):
+            return self.getToken(CSharpParser.GT, 0)
+
+        def LT(self):
+            return self.getToken(CSharpParser.LT, 0)
+
+        def OP_GE(self):
+            return self.getToken(CSharpParser.OP_GE, 0)
+
+        def OP_LE(self):
+            return self.getToken(CSharpParser.OP_LE, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_overloadable_operator
@@ -12954,6 +13629,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Conversion_operator_declaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -13029,11 +13705,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Constructor_initializerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def OPEN_PARENS(self):
             return self.getToken(CSharpParser.OPEN_PARENS, 0)
@@ -13101,6 +13781,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class BodyContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -13110,6 +13791,9 @@ class CSharpParser ( Parser ):
         def block(self):
             return self.getTypedRuleContext(CSharpParser.BlockContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_body
@@ -13154,11 +13838,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Struct_interfacesContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def interface_type_list(self):
             return self.getTypedRuleContext(CSharpParser.Interface_type_listContext,0)
@@ -13195,6 +13883,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Struct_bodyContext(ParserRuleContext):
 
@@ -13258,6 +13947,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Struct_member_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -13274,6 +13964,9 @@ class CSharpParser ( Parser ):
         def cstype(self):
             return self.getTypedRuleContext(CSharpParser.CstypeContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def attributes(self):
             return self.getTypedRuleContext(CSharpParser.AttributesContext,0)
@@ -13365,6 +14058,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Array_typeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -13381,6 +14075,18 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Rank_specifierContext,i)
 
+
+        def STAR(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.STAR)
+            else:
+                return self.getToken(CSharpParser.STAR, i)
+
+        def INTERR(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.INTERR)
+            else:
+                return self.getToken(CSharpParser.INTERR, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_array_type
@@ -13440,12 +14146,24 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Rank_specifierContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
+
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_rank_specifier
@@ -13490,6 +14208,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Array_initializerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -13508,6 +14227,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Variable_initializerContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_array_initializer
@@ -13571,11 +14296,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Variant_type_parameter_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def LT(self):
+            return self.getToken(CSharpParser.LT, 0)
 
         def variant_type_parameter(self, i:int=None):
             if i is None:
@@ -13583,6 +14312,15 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Variant_type_parameterContext,i)
 
+
+        def GT(self):
+            return self.getToken(CSharpParser.GT, 0)
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_variant_type_parameter_list
@@ -13630,6 +14368,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Variant_type_parameterContext(ParserRuleContext):
 
@@ -13696,6 +14435,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Variance_annotationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -13744,11 +14484,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Interface_baseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def interface_type_list(self):
             return self.getTypedRuleContext(CSharpParser.Interface_type_listContext,0)
@@ -13785,6 +14529,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Interface_bodyContext(ParserRuleContext):
 
@@ -13848,6 +14593,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Interface_member_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -13870,6 +14616,9 @@ class CSharpParser ( Parser ):
 
         def CLOSE_PARENS(self):
             return self.getToken(CSharpParser.CLOSE_PARENS, 0)
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def EVENT(self):
             return self.getToken(CSharpParser.EVENT, 0)
@@ -13894,9 +14643,15 @@ class CSharpParser ( Parser ):
         def THIS(self):
             return self.getToken(CSharpParser.THIS, 0)
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
+
         def formal_parameter_list(self):
             return self.getTypedRuleContext(CSharpParser.Formal_parameter_listContext,0)
 
+
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
 
         def UNSAFE(self):
             return self.getToken(CSharpParser.UNSAFE, 0)
@@ -14094,6 +14849,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Interface_accessorsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -14102,6 +14858,12 @@ class CSharpParser ( Parser ):
 
         def GET(self):
             return self.getToken(CSharpParser.GET, 0)
+
+        def SEMICOLON(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.SEMICOLON)
+            else:
+                return self.getToken(CSharpParser.SEMICOLON, i)
 
         def SET(self):
             return self.getToken(CSharpParser.SET, 0)
@@ -14204,11 +14966,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Enum_baseContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def cstype(self):
             return self.getTypedRuleContext(CSharpParser.CstypeContext,0)
@@ -14246,6 +15012,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Enum_bodyContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -14264,6 +15031,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Enum_member_declarationContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_enum_body
@@ -14327,6 +15100,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Enum_member_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -14340,6 +15114,9 @@ class CSharpParser ( Parser ):
         def attributes(self):
             return self.getTypedRuleContext(CSharpParser.AttributesContext,0)
 
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
@@ -14394,19 +15171,32 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Global_attribute_sectionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
+
         def global_attribute_target(self):
             return self.getTypedRuleContext(CSharpParser.Global_attribute_targetContext,0)
 
 
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
+
         def attribute_list(self):
             return self.getTypedRuleContext(CSharpParser.Attribute_listContext,0)
 
+
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
+
+        def COMMA(self):
+            return self.getToken(CSharpParser.COMMA, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_global_attribute_section
@@ -14454,6 +15244,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Global_attribute_targetContext(ParserRuleContext):
 
@@ -14512,6 +15303,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class AttributesContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -14566,19 +15358,32 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Attribute_sectionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
+
         def attribute_list(self):
             return self.getTypedRuleContext(CSharpParser.Attribute_listContext,0)
 
 
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
+
         def attribute_target(self):
             return self.getTypedRuleContext(CSharpParser.Attribute_targetContext,0)
 
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
+
+        def COMMA(self):
+            return self.getToken(CSharpParser.COMMA, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_attribute_section
@@ -14632,6 +15437,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Attribute_targetContext(ParserRuleContext):
 
@@ -14690,6 +15496,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Attribute_listContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -14702,6 +15509,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.AttributeContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_attribute_list
@@ -14746,6 +15559,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class AttributeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -14768,6 +15582,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Attribute_argumentContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_attribute
@@ -14830,6 +15650,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Attribute_argumentContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -14843,6 +15664,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_attribute_argument
@@ -14884,11 +15708,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Pointer_typeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def STAR(self):
+            return self.getToken(CSharpParser.STAR, 0)
 
         def simple_type(self):
             return self.getTypedRuleContext(CSharpParser.Simple_typeContext,0)
@@ -14904,6 +15732,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Rank_specifierContext,i)
 
+
+        def INTERR(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.INTERR)
+            else:
+                return self.getToken(CSharpParser.INTERR, i)
 
         def VOID(self):
             return self.getToken(CSharpParser.VOID, 0)
@@ -14990,6 +15824,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Fixed_pointer_declaratorsContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15002,6 +15837,12 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.Fixed_pointer_declaratorContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_fixed_pointer_declarators
@@ -15046,6 +15887,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Fixed_pointer_declaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15055,6 +15897,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def fixed_pointer_initializer(self):
             return self.getTypedRuleContext(CSharpParser.Fixed_pointer_initializerContext,0)
@@ -15094,6 +15939,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Fixed_pointer_initializerContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15103,6 +15949,9 @@ class CSharpParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def AMP(self):
+            return self.getToken(CSharpParser.AMP, 0)
 
         def local_variable_initializer_unsafe(self):
             return self.getTypedRuleContext(CSharpParser.Local_variable_initializer_unsafeContext,0)
@@ -15159,6 +16008,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Fixed_size_buffer_declaratorContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15169,9 +16019,15 @@ class CSharpParser ( Parser ):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
+
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_fixed_size_buffer_declarator
@@ -15209,6 +16065,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Local_variable_initializer_unsafeContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15222,9 +16079,15 @@ class CSharpParser ( Parser ):
             return self.getTypedRuleContext(CSharpParser.CstypeContext,0)
 
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
+
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_local_variable_initializer_unsafe
@@ -15264,6 +16127,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Right_arrowContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15272,6 +16136,11 @@ class CSharpParser ( Parser ):
             self.first = None # Token
             self.second = None # Token
 
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
+
+        def GT(self):
+            return self.getToken(CSharpParser.GT, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_right_arrow
@@ -15309,6 +16178,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Right_shiftContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15317,6 +16187,11 @@ class CSharpParser ( Parser ):
             self.first = None # Token
             self.second = None # Token
 
+        def GT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.GT)
+            else:
+                return self.getToken(CSharpParser.GT, i)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_right_shift
@@ -15354,6 +16229,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Right_shift_assignmentContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15362,6 +16238,11 @@ class CSharpParser ( Parser ):
             self.first = None # Token
             self.second = None # Token
 
+        def GT(self):
+            return self.getToken(CSharpParser.GT, 0)
+
+        def OP_GE(self):
+            return self.getToken(CSharpParser.OP_GE, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_right_shift_assignment
@@ -15398,6 +16279,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class LiteralContext(ParserRuleContext):
 
@@ -15496,6 +16378,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Boolean_literalContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15543,6 +16426,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class String_literalContext(ParserRuleContext):
 
@@ -15617,6 +16501,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Interpolated_regular_stringContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15679,6 +16564,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Interpolated_verbatium_stringContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15740,6 +16626,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Interpolated_regular_string_partContext(ParserRuleContext):
 
@@ -15813,6 +16700,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Interpolated_verbatium_string_partContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15885,6 +16773,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Interpolated_string_expressionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -15897,6 +16786,15 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.ExpressionContext,i)
 
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.COMMA)
+            else:
+                return self.getToken(CSharpParser.COMMA, i)
+
+        def COLON(self):
+            return self.getToken(CSharpParser.COLON, 0)
 
         def FORMAT_STRING(self, i:int=None):
             if i is None:
@@ -15966,6 +16864,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class KeywordContext(ParserRuleContext):
 
@@ -16240,6 +17139,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Class_definitionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16268,6 +17168,9 @@ class CSharpParser ( Parser ):
         def type_parameter_constraints_clauses(self):
             return self.getTypedRuleContext(CSharpParser.Type_parameter_constraints_clausesContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_class_definition
@@ -16336,6 +17239,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Struct_definitionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16364,6 +17268,9 @@ class CSharpParser ( Parser ):
         def type_parameter_constraints_clauses(self):
             return self.getTypedRuleContext(CSharpParser.Type_parameter_constraints_clausesContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_struct_definition
@@ -16432,6 +17339,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Interface_definitionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16460,6 +17368,9 @@ class CSharpParser ( Parser ):
         def type_parameter_constraints_clauses(self):
             return self.getTypedRuleContext(CSharpParser.Type_parameter_constraints_clausesContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_interface_definition
@@ -16528,6 +17439,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Enum_definitionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16548,6 +17460,9 @@ class CSharpParser ( Parser ):
         def enum_base(self):
             return self.getTypedRuleContext(CSharpParser.Enum_baseContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_enum_definition
@@ -16600,6 +17515,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Delegate_definitionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16622,6 +17538,9 @@ class CSharpParser ( Parser ):
 
         def CLOSE_PARENS(self):
             return self.getToken(CSharpParser.CLOSE_PARENS, 0)
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def variant_type_parameter_list(self):
             return self.getTypedRuleContext(CSharpParser.Variant_type_parameter_listContext,0)
@@ -16700,6 +17619,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Event_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16716,6 +17636,9 @@ class CSharpParser ( Parser ):
         def variable_declarators(self):
             return self.getTypedRuleContext(CSharpParser.Variable_declaratorsContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def member_name(self):
             return self.getTypedRuleContext(CSharpParser.Member_nameContext,0)
@@ -16785,6 +17708,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Field_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16794,6 +17718,9 @@ class CSharpParser ( Parser ):
         def variable_declarators(self):
             return self.getTypedRuleContext(CSharpParser.Variable_declaratorsContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_field_declaration
@@ -16827,6 +17754,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Property_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16854,6 +17782,12 @@ class CSharpParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def variable_initializer(self):
             return self.getTypedRuleContext(CSharpParser.Variable_initializerContext,0)
@@ -16924,6 +17858,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Constant_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16940,6 +17875,9 @@ class CSharpParser ( Parser ):
         def constant_declarators(self):
             return self.getTypedRuleContext(CSharpParser.Constant_declaratorsContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_constant_declaration
@@ -16977,6 +17915,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Indexer_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -16986,9 +17925,15 @@ class CSharpParser ( Parser ):
         def THIS(self):
             return self.getToken(CSharpParser.THIS, 0)
 
+        def OPEN_BRACKET(self):
+            return self.getToken(CSharpParser.OPEN_BRACKET, 0)
+
         def formal_parameter_list(self):
             return self.getTypedRuleContext(CSharpParser.Formal_parameter_listContext,0)
 
+
+        def CLOSE_BRACKET(self):
+            return self.getToken(CSharpParser.CLOSE_BRACKET, 0)
 
         def OPEN_BRACE(self):
             return self.getToken(CSharpParser.OPEN_BRACE, 0)
@@ -17007,6 +17952,9 @@ class CSharpParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_indexer_declaration
@@ -17066,11 +18014,15 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Destructor_definitionContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def TILDE(self):
+            return self.getToken(CSharpParser.TILDE, 0)
 
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
@@ -17123,6 +18075,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Constructor_declarationContext(ParserRuleContext):
 
@@ -17205,6 +18158,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Method_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -17232,6 +18186,9 @@ class CSharpParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
 
         def type_parameter_list(self):
             return self.getTypedRuleContext(CSharpParser.Type_parameter_listContext,0)
@@ -17322,6 +18279,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Method_member_nameContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -17334,6 +18292,15 @@ class CSharpParser ( Parser ):
             else:
                 return self.getTypedRuleContext(CSharpParser.IdentifierContext,i)
 
+
+        def DOUBLE_COLON(self):
+            return self.getToken(CSharpParser.DOUBLE_COLON, 0)
+
+        def DOT(self, i:int=None):
+            if i is None:
+                return self.getTokens(CSharpParser.DOT)
+            else:
+                return self.getToken(CSharpParser.DOT, i)
 
         def type_argument_list(self, i:int=None):
             if i is None:
@@ -17410,6 +18377,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Operator_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -17447,6 +18415,12 @@ class CSharpParser ( Parser ):
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
 
+
+        def SEMICOLON(self):
+            return self.getToken(CSharpParser.SEMICOLON, 0)
+
+        def COMMA(self):
+            return self.getToken(CSharpParser.COMMA, 0)
 
         def getRuleIndex(self):
             return CSharpParser.RULE_operator_declaration
@@ -17515,6 +18489,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Arg_declarationContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -17528,6 +18503,9 @@ class CSharpParser ( Parser ):
         def identifier(self):
             return self.getTypedRuleContext(CSharpParser.IdentifierContext,0)
 
+
+        def ASSIGNMENT(self):
+            return self.getToken(CSharpParser.ASSIGNMENT, 0)
 
         def expression(self):
             return self.getTypedRuleContext(CSharpParser.ExpressionContext,0)
@@ -17575,6 +18553,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Method_invocationContext(ParserRuleContext):
 
@@ -17632,6 +18611,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class Object_creation_expressionContext(ParserRuleContext):
 
@@ -17702,6 +18682,7 @@ class CSharpParser ( Parser ):
             self.exitRule()
         return localctx
 
+
     class Documented_itemContext(ParserRuleContext):
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
@@ -17749,6 +18730,7 @@ class CSharpParser ( Parser ):
         finally:
             self.exitRule()
         return localctx
+
 
     class IdentifierContext(ParserRuleContext):
 

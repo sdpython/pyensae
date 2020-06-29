@@ -16,8 +16,8 @@ class TestTailCli(unittest.TestCase):
 
         rows = []
 
-        def flog(*l):
-            rows.append(l)
+        def flog(*la):
+            rows.append(la)
 
         file_tail_cli(args=['-h'], fLOG=flog)
 
