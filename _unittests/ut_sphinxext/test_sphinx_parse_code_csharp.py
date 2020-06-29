@@ -48,7 +48,7 @@ class TestSphinxParseCodeCSharp(ExtTestCase):
         }
         """
         p = CSharpParser()
-        els = p.compilation_unit(code)
+        els = p.parse(code)
         self.assertNotEmpty(els)
         self.assertEqual(els[0].__class__.__name__, "CSharpDomain")
         self.assertEqual(str(els[0]), "namespace world_nostatic")
