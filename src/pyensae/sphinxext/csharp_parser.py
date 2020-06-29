@@ -318,7 +318,7 @@ class CSharpParser:
         """
         self._source = source
         parser = parse_code(code, self._parser, self._lexer)
-        tree = parser.parse()
+        tree = parser.compilation_unit()
         walker = ParseTreeWalker()
         listen = CSharpParserListenerSignatures(parser, source)
         walker.walk(listen, tree)

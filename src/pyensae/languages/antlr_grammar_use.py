@@ -92,7 +92,7 @@ def parse_code(code, class_parser, class_lexer):
 
             clparser, cllexer = get_parser_lexer("Pig")
             parser = parse_code(code, clparser, cllexer)
-            tree = parser.parse()
+            tree = parser.compilation_unit()
             st = get_tree_string(tree, parser, None)
             print(st)
     """

@@ -52,7 +52,7 @@ class TestParseCode (unittest.TestCase):
             return
 
         parser = parse_code(code, LanguageParser, LanguageLexer)
-        tree = parser.parse()
+        tree = parser.compilation_unit()
         st = get_tree_string(tree, parser)
         fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0

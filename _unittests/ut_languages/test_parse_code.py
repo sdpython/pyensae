@@ -56,7 +56,7 @@ class TestParseCode(unittest.TestCase):
 
         clparser, cllexer = get_parser_lexer("R")
         parser = parse_code(code, clparser, cllexer)
-        tree = parser.parse()
+        tree = parser.compilation_unit()
         st = get_tree_string(tree, parser)
         assert len(st) > 0
         st = get_tree_string(tree, parser, None)
@@ -79,7 +79,7 @@ class TestParseCode(unittest.TestCase):
 
         clparser, cllexer = get_parser_lexer("SQLite")
         parser = parse_code(code, clparser, cllexer)
-        tree = parser.parse()
+        tree = parser.compilation_unit()
         st = get_tree_string(tree, parser, None)
         fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
@@ -101,7 +101,7 @@ class TestParseCode(unittest.TestCase):
         clparser, cllexer = get_parser_lexer("SQLite")
         parser = parse_code(code, clparser, cllexer)
         try:
-            parser.parse()
+            parser.compilation_unit()
         except SyntaxError as e:
             fLOG(e)
             return
@@ -125,7 +125,7 @@ class TestParseCode(unittest.TestCase):
             warnings.warn("Grammar for Pig not ready yet.")
             return
         parser = parse_code(code, clparser, cllexer)
-        tree = parser.parse()
+        tree = parser.compilation_unit()
         st = get_tree_string(tree, parser, None)
         fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
