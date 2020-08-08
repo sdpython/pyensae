@@ -8,6 +8,7 @@ dbfread
 descartes
 folium
 geopandas
+jedi
 jupyter_sphinx
 jyquickhelper
 openpyxl
