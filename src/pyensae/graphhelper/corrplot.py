@@ -330,15 +330,16 @@ class Corrplot(Linkage):
         if colorbar:
             N = self.params['colorbar.N'] + 1
             assert N >= 2
-            cb = plt.gcf().colorbar(self.collection,
-                                    orientation=self.params[
-                                        'colorbar.orientation'],
-                                    shrink=self.params['colorbar.shrink'],
-                                    boundaries=np.linspace(0, 1, N), ticks=[0, .25, 0.5, 0.75, 1])
+            cb = plt.gcf().colorbar(
+                self.collection, orientation=self.params['colorbar.orientation'],
+                shrink=self.params['colorbar.shrink'], boundaries=np.linspace(
+                    0, 1, N),
+                ticks=[0, .25, 0.5, 0.75, 1])
             cb.ax.set_yticklabels([-1, -.5, 0, .5, 1])
             # make sure it goes from -1 to 1 even though actual values may not
             # reach that range
-            cb.set_clim(0, 1)
+            # cb.set_clim(0, 1)
+            # not working in matplotlib 3.3.0
 
         return ax
 
