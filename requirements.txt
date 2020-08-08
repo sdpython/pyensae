@@ -18,6 +18,7 @@ pycodestyle
 pylint
 pylzma
 pyquickhelper>=1.9.3100
+quandl
 scikit-learn
 scipy
 seaborn

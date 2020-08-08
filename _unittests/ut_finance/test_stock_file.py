@@ -5,7 +5,10 @@ import os
 import unittest
 import datetime
 import warnings
-from quandl.errors.quandl_error import LimitExceededError
+try:
+    from quandl.errors.quandl_error import LimitExceededError
+except ImportError:
+    LimitExceededError = Exception
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 from pyensae.finance.astock import StockPrices, StockPricesHTTPException
