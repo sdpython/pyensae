@@ -9,17 +9,11 @@ See also `biokit license <https://github.com/biokit/biokit/blob/master/LICENSE>`
 :author: Thomas Cokelaer
 :references: http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
 """
-try:
-    from scipy.cluster.hierarchy import dendrogram, fcluster
-except ImportError as e:
-    # The import of scipy was moved it. It creates a warning otherwise.
-    # lib\importlib\_bootstrap.py:205: ImportWarning: can't resolve package
-    # from __spec__ or __package__, falling back on __name__ and __path__
-    import warnings
-    warnings.warn("corrplot.py requires scipy.")
-import numpy as np
-import pandas as pd
+import numpy
+from scipy.cluster.hierarchy import dendrogram, fcluster
+import pandas
 from .linkage import Linkage
+from ._colormap import cmap_builder
 
 
 class Corrplot(Linkage):
@@ -73,10 +67,9 @@ class Corrplot(Linkage):
         super(Corrplot, self).__init__()
 
         # we delay import in case this is not needed
-        from colormap import cmap_builder
         self.cmap_builder = cmap_builder
 
-        self.df = pd.DataFrame(data, copy=True)
+        self.df = pandas.DataFrame(data, copy=True)
 
         compute_correlation = False
 
@@ -260,13 +253,13 @@ class Corrplot(Linkage):
 
         # set xticks/xlabels on top
         ax.xaxis.tick_top()
-        xtickslocs = np.arange(len(labels))
+        xtickslocs = numpy.arange(len(labels))
         ax.set_xticks(xtickslocs)
         ax.set_xticklabels(labels, rotation=rotation, color=label_color,
                            fontsize=fontsize, ha='left')
 
         ax.invert_yaxis()
-        ytickslocs = np.arange(len(labels))
+        ytickslocs = numpy.arange(len(labels))
         ax.set_yticks(ytickslocs)
         ax.set_yticklabels(labels, fontsize=fontsize, color=label_color)
         plt.tight_layout()
@@ -281,47 +274,47 @@ class Corrplot(Linkage):
                 # 2 - set xlabels along the diagonal
                 # set colorbar either on left or bottom
                 if mode == 'lower':
-                    plt.axvline(i + .5, ymin=1 - ratio1, ymax=0., color=grid)
-                    plt.axhline(i + .5, xmin=0, xmax=ratio2, color=grid)
+                    ax.axvline(i + .5, ymin=1 - ratio1, ymax=0., color=grid)
+                    ax.axhline(i + .5, xmin=0, xmax=ratio2, color=grid)
                 if mode == 'upper':
-                    plt.axvline(i + .5, ymin=1 - ratio2, ymax=1, color=grid)
-                    plt.axhline(i + .5, xmin=ratio1, xmax=1, color=grid)
+                    ax.axvline(i + .5, ymin=1 - ratio2, ymax=1, color=grid)
+                    ax.axhline(i + .5, xmin=ratio1, xmax=1, color=grid)
                 if mode in ['method', 'both']:
-                    plt.axvline(i + .5, color=grid)
-                    plt.axhline(i + .5, color=grid)
+                    ax.axvline(i + .5, color=grid)
+                    ax.axhline(i + .5, color=grid)
 
             # can probably be simplified
             if mode == 'lower':
-                plt.axvline(-.5, ymin=0, ymax=1, color='grey')
-                plt.axvline(width - .5, ymin=0, ymax=1. /
-                            width, color='grey', lw=2)
-                plt.axhline(width - .5, xmin=0, xmax=1, color='grey', lw=2)
-                plt.axhline(-.5, xmin=0, xmax=1. / width, color='grey', lw=2)
-                plt.xticks([])
+                ax.axvline(-.5, ymin=0, ymax=1, color='grey')
+                ax.axvline(width - .5, ymin=0, ymax=1. /
+                           width, color='grey', lw=2)
+                ax.axhline(width - .5, xmin=0, xmax=1, color='grey', lw=2)
+                ax.axhline(-.5, xmin=0, xmax=1. / width, color='grey', lw=2)
+                ax.xticks([])
                 for i in range(0, width):
-                    plt.text(i, i - .6, labels[i], fontsize=fontsize,
-                             color=label_color,
-                             rotation=rotation, verticalalignment='bottom')
-                    plt.text(-.6, i, labels[i], fontsize=fontsize,
-                             color=label_color,
-                             rotation=0, horizontalalignment='right')
-                plt.axis('off')
+                    ax.text(i, i - .6, labels[i], fontsize=fontsize,
+                            color=label_color,
+                            rotation=rotation, verticalalignment='bottom')
+                    ax.text(-.6, i, labels[i], fontsize=fontsize,
+                            color=label_color,
+                            rotation=0, horizontalalignment='right')
+                ax.set_axis_off()
             # can probably be simplified
             elif mode == 'upper':
-                plt.axvline(width - .5, ymin=0, ymax=1, color='grey', lw=2)
-                plt.axvline(-.5, ymin=1 - 1. / width,
-                            ymax=1, color='grey', lw=2)
-                plt.axhline(-.5, xmin=0, xmax=1, color='grey', lw=2)
-                plt.axhline(width - .5, xmin=1 - 1. / width,
-                            xmax=1, color='grey', lw=2)
-                plt.yticks([])
+                ax.axvline(width - .5, ymin=0, ymax=1, color='grey', lw=2)
+                ax.axvline(-.5, ymin=1 - 1. / width,
+                           ymax=1, color='grey', lw=2)
+                ax.axhline(-.5, xmin=0, xmax=1, color='grey', lw=2)
+                ax.axhline(width - .5, xmin=1 - 1. / width,
+                           xmax=1, color='grey', lw=2)
+                ax.yticks([])
                 for i in range(0, width):
-                    plt.text(-.6 + i, i, labels[i], fontsize=fontsize,
-                             color=label_color, horizontalalignment='right',
-                             rotation=0)
-                    plt.text(i, -.5, labels[i], fontsize=fontsize,
-                             color=label_color, rotation=rotation, verticalalignment='bottom')
-                plt.axis('off')
+                    ax.text(-.6 + i, i, labels[i], fontsize=fontsize,
+                            color=label_color, horizontalalignment='right',
+                            rotation=0)
+                    ax.text(i, -.5, labels[i], fontsize=fontsize,
+                            color=label_color, rotation=rotation, verticalalignment='bottom')
+                ax.set_axis_off()
 
         # set all ticks length to zero
         ax = plt.gca()
@@ -329,11 +322,12 @@ class Corrplot(Linkage):
 
         if colorbar:
             N = self.params['colorbar.N'] + 1
-            assert N >= 2
+            if N < 2:
+                raise RuntimeError("No colorbar to draw.")
             cb = plt.gcf().colorbar(
                 self.collection, orientation=self.params['colorbar.orientation'],
-                shrink=self.params['colorbar.shrink'], boundaries=np.linspace(
-                    0, 1, N),
+                shrink=self.params['colorbar.shrink'],
+                boundaries=numpy.linspace(0, 1, N),
                 ticks=[0, .25, 0.5, 0.75, 1])
             cb.ax.set_yticklabels([-1, -.5, 0, .5, 1])
             # make sure it goes from -1 to 1 even though actual values may not
@@ -362,7 +356,7 @@ class Corrplot(Linkage):
                     continue
                 datum = (df.iloc[x, y] + 1.) / 2.
                 d = df.iloc[x, y]
-                d_abs = np.abs(d)
+                d_abs = numpy.abs(d)
                 #c = self.pvalues[x, y]
                 rotate = -45 if d > 0 else +45
                 #cmap = self.poscm if d >= 0 else self.negcm
@@ -437,7 +431,7 @@ class Corrplot(Linkage):
 
         if len(patches):
             col1 = PatchCollection(
-                patches, array=np.array(colors), cmap=self.cm)
+                patches, array=numpy.array(colors), cmap=self.cm)
             ax.add_collection(col1)
 
             self.collection = col1

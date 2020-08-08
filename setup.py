@@ -179,21 +179,22 @@ if not r:
         setup_requires=["pyquickhelper"],
         install_requires=[
             "pyquickhelper>=1.8",
-            "numpy>=1.18", "pandas>=1.0", "matplotlib"
+            "numpy>=1.18", "pandas>=1.0", "matplotlib>=3.0"
         ],
         extras_require={
             'graphhelper': ['blockdiag', 'cartopy'],
             'datasource': ['dbread', 'geopandas', 'shapely', 'pyshp', 'pylzma'],
             'finance': ['pandas-datareader', 'yahoo_historical'],
+            'graphhelper': ['matplotlib>=3.0'],
             'languages': ['antlr4-python3-runtime>=4.8'],
             'notebookhelper': ['folium', 'qgrid'],
             'all': [
-                "pyquickhelper>=1.8", "numpy>=1.18", "pandas>=1.0", "matplotlib",
+                "pyquickhelper>=1.8", "numpy>=1.18", "pandas>=1.0", "matplotlib>=3.0",
                 'blockdiag', 'cartopy',
                 'dbread', 'geopandas', 'shapely', 'pyshp', 'pylzma',
                 'pandas-datareader', 'yahoo_historical',
                 'antlr4-python3-runtime>=4.8',
-                'folium', 'qgrid',
+                'folium', 'qgrid', 'easydev',
             ],
         },
         entry_points={

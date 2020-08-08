@@ -39,7 +39,7 @@ class TestGraph(ExtTestCase):
         c = Corrplot(df)
         clog("plot")
         for up in ['lower', 'upper', 'method', 'both']:
-            ax = c.plot(fig=fig, ax=ax)
+            ax = c.plot(fig=fig, ax=ax, colorbar=up == 'lower')
 
         clog("save")
         fLOG("save")

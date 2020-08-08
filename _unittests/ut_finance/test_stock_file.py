@@ -59,7 +59,7 @@ class TestStockFile (unittest.TestCase):
         try:
             stock = StockPrices("EURONEXT/BNP", url="quandl", folder=cache,
                                 end=datetime.datetime(2017, 1, 15))
-        except LimitExceededError:
+        except LimitExceededError:  # pylint: disable=W0703
             warnings.warn(
                 "[test_save_stock_quandl] reached quandl free quota. Stop test.")
             return
