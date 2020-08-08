@@ -12,6 +12,7 @@ install:
   - $PYINT -m pip install --upgrade pip
   - $PYINT -m pip install --upgrade --no-cache-dir --no-deps --index http://localhost:8067/simple/ jyquickhelper pyquickhelper pymyinstall scikit-learn --extra-index-url=https://pypi.python.org/simple/
   - $PYINT -m pip install -r requirements.txt
+  - $PYINT -m pip install "shapely!=1.7.0"
   - $PYINT --version
   - $PYINT -m pip freeze
 

@@ -5,9 +5,16 @@
 History
 =======
 
-current - 2020-04-24 - 0.00Mb
+current - 2020-08-08 - 0.00Mb
 =============================
 
+* `36`: Removes dependency on colormap (2020-08-08)
+* `35`: Add helpers to draw maps of France (2020-05-09)
+
+1.3.839 - 2020-04-24 - 0.45Mb
+=============================
+
+* `32`: Cannot run due to import error (2020-04-24)
 * `34`: Extend the list of dependencies (2020-04-24)
 * `33`: Failure when updating to pandas 1.0 (2020-02-02)
 
@@ -20,18 +27,10 @@ current - 2020-04-24 - 0.00Mb
 * `28`: Python 2 vs Python 3 (2019-02-02)
 * `26`: update default antlr4 version to 4.7.1 (2018-10-25)
 * `25`: update CSharp grammar (2018-10-25)
-
-1.2.788 - 2018-07-31 - 0.48Mb
-=============================
-
 * `21`: remove underscores in subfolders (2018-07-31)
 * `24`: fix download_data when url is a list or urls (2018-06-16)
 * `23`: fix add_missing_indices failing due to more strict comparisons in pandas 0.23 (2018-05-21)
 * `19`: velib collection, group files instead of having multiple files (moved to maydataapi) (2018-05-21)
-
-1.2.776 - 2018-05-20 - 0.48Mb
-=============================
-
 * `22`: move pandas_groupby_nan to pandas_streaming (2018-05-17)
 * `20`: move access to API to manydataapi (2018-05-05)
 * `18`: fix urls to download data (google, yahoo) (2018-03-16)
