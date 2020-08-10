@@ -9,7 +9,7 @@ try:
 except ImportError:
     # We ignore that error since it is not
     # part of the mandatory requirements.
-    pass
+    qgrid = None
 from jyquickhelper import add_notebook_menu
 from pyquickhelper.ipythonhelper import MagicCommandParser, MagicClassWithHelpers
 
@@ -187,6 +187,9 @@ class MagicNotebook(MagicClassWithHelpers):
         """
         parser = self.get_parser(MagicNotebook.jsdf_parser, "jsdf")
         args = self.get_args(line, parser)
+
+        if qgrid is None:
+            return "qgrid is not installed."
 
         if not hasattr(self, "first_jsdf_call") or self.first_jsdf_call:
             if args is not None:
