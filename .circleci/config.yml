@@ -99,18 +99,18 @@ jobs:
             mkdir -p test-reports/dist
             cp dist/*.whl test-reports/dist
 
-      - run:
-          name: documentation
-          command: |
-            . venv/bin/activate
-            export PYTHONPATH=src
-            python setup.py build_sphinx
+      #- run:
+      #    name: documentation
+      #    command: |
+      #      . venv/bin/activate
+      #      export PYTHONPATH=src
+      #      python setup.py build_sphinx
             
-      - run:
-          name: copy documentation
-          command: |
-            mkdir -p test-reports/doc
-            zip -r -9  test-reports/doc/documentation_html.zip _doc/sphinxdoc/build/html
+      #- run:
+      #    name: copy documentation
+      #    command: |
+      #      mkdir -p test-reports/doc
+       #     zip -r -9  test-reports/doc/documentation_html.zip _doc/sphinxdoc/build/html
             
       - store_artifacts:
           path: test-reports
