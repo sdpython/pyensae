@@ -11,6 +11,7 @@ geopandas
 jedi
 jupyter_sphinx
 jyquickhelper
+networkx
 openpyxl
 pandas
 pandas-datareader
