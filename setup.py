@@ -48,7 +48,10 @@ def is_local():
     file = os.path.abspath(__file__).replace("\\", "/").lower()
     if "/temp/" in file and "pip-" in file:
         return False
-    from pyquickhelper.pycode.setup_helper import available_commands_list
+    try:
+        from pyquickhelper.pycode.setup_helper import available_commands_list
+    except ImportError:
+        return False
     if "update_grammars" in sys.argv:
         return True
     return available_commands_list(sys.argv)
