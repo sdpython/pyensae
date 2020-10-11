@@ -76,7 +76,7 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            pip install git+https://github.com/matplotlib/mpl_finance
+            pip install mplfinance
 
       - save_cache:
           paths:
