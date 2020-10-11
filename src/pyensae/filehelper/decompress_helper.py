@@ -24,7 +24,7 @@ def decompress_zip(filename, whereTo=".", fLOG=noLOG):
     """
     try:
         file = zipfile.ZipFile(filename, "r")
-    except zipfile.BadZipFile as e:
+    except zipfile.BadZipFile as e:  # pragma: no cover
         raise RuntimeError("Unable to unzip '{}'.".format(
             filename)) from e
     files = []
@@ -35,9 +35,10 @@ def decompress_zip(filename, whereTo=".", fLOG=noLOG):
             if not os.path.exists(tos):
                 finalfolder = os.path.split(tos)[0]
                 if not os.path.exists(finalfolder):
-                    fLOG("[decompress_zip] creating folder '{0}'".format(
-                        finalfolder))
-                    os.makedirs(finalfolder)
+                    fLOG(  # pragma: no cover
+                        "[decompress_zip] creating folder '{0}'".format(
+                            finalfolder))
+                    os.makedirs(finalfolder)  # pragma: no cover
                 if not info.filename.endswith("/"):
                     u = open(tos, "wb")
                     u.write(data)
@@ -76,7 +77,7 @@ def extractall_silent(self, path=".", members=None, *, numeric_owner=False, sile
             tarinfo = copy.copy(tarinfo)
             tarinfo.mode = 0o700
         # Do not set_attrs directories, as we will do that further down
-        if silent:
+        if silent:  # pragma: no cover
             try:
                 self.extract(tarinfo, path, set_attrs=not tarinfo.isdir(),
                              numeric_owner=numeric_owner)
@@ -98,7 +99,7 @@ def extractall_silent(self, path=".", members=None, *, numeric_owner=False, sile
             self.chown(tarinfo, dirpath, numeric_owner=numeric_owner)
             self.utime(tarinfo, dirpath)
             self.chmod(tarinfo, dirpath)
-        except ExtractError as e:
+        except ExtractError as e:  # pragma: no cover
             if self.errorlevel > 1:
                 raise
             self._dbg(1, "tarfile: %s" % e)
@@ -131,7 +132,8 @@ def decompress_gz(filename, whereTo=".", fLOG=noLOG):
     @return                     return the list of decompressed files (only one)
     """
     if not filename.endswith(".gz"):
-        raise NameError("the file should end with .gz: " + filename)
+        raise NameError(  # pragma: no cover
+            "the file should end with .gz: %r" % filename)
     dest = os.path.join(whereTo, filename[:-3])
     with gzip.open(filename, 'rb') as f:
         with open(dest, "wb") as g:
@@ -149,7 +151,7 @@ def decompress_bz2(filename, whereTo=".", fLOG=noLOG):
     @return                     return the list of decompressed files (only one)
     """
     if not filename.endswith(".bz2"):
-        raise NameError(
+        raise NameError(  # pragma: no cover
             "the file should end with .bz2 not '{0}'".format(filename))
     dest = os.path.join(whereTo, os.path.split(filename)[-1][:-4])
     with bz2.open(filename, 'rb') as f:

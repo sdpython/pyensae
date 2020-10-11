@@ -62,7 +62,7 @@ class Colormap:
         try:
             from matplotlib.pyplot import colormaps as _cmaps
             return _cmaps()
-        except ImportError:
+        except ImportError:  # pragma: no cover
             return []
     colormaps = property(_get_colormap_mpl)
 

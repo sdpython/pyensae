@@ -251,8 +251,9 @@ def download_data(name, moduleName=None, url=None, glo=None,
         try:
             return decompress_zip(outfile, whereTo, fLOG)
         except RuntimeError as e:
-            raise RetrieveDataException("Unable to unzip '{}' to '{}' (url='{}').".format(
-                outfile, whereTo, url))
+            raise RetrieveDataException(  # pragma: no cover
+                "Unable to unzip '{}' to '{}' (url='{}').".format(
+                    outfile, whereTo, url)) from e
 
     elif name.endswith(".tar.gz"):
         return decompress_targz(outfile, whereTo, silent=silent, fLOG=fLOG)

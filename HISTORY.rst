@@ -5,17 +5,18 @@
 History
 =======
 
-current - 2020-08-08 - 0.00Mb
+current - 2020-10-11 - 0.00Mb
 =============================
 
+* `37`: Replace mpl_finance by mplfinance (2020-10-11)
 * `36`: Removes dependency on colormap (2020-08-08)
 * `35`: Add helpers to draw maps of France (2020-05-09)
 
 1.3.839 - 2020-04-24 - 0.45Mb
 =============================
 
-* `32`: Cannot run due to import error (2020-04-24)
 * `34`: Extend the list of dependencies (2020-04-24)
+* `32`: Cannot run due to import error (2020-04-24)
 * `33`: Failure when updating to pandas 1.0 (2020-02-02)
 
 1.3.825 - 2019-09-20 - 0.45Mb

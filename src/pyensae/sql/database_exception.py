@@ -30,12 +30,12 @@ class ExceptionSQL(DBException):
         self.ex = ex
         self.sql = sql
         if False and log:
-            print(description + "\n" + sql)
+            print(description + "\n" + sql)  # pragma: no cover
 
     def __str__(self):
         mes = Exception.__str__(self)
         mes += "\n" + str(self.ex)
         mes += "\n" + "\n".join(repr(self.sql).split("\\n"))
         if len(mes) > 10000:
-            mes = mes[:10000] + "\n..."
+            mes = mes[:10000] + "\n..."  # pragma: no cover
         return mes

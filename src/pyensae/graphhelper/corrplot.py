@@ -64,7 +64,7 @@ class Corrplot(Linkage):
             c = Corrplot([[1,1], [2,4], [3,3], [4,4]])
 
         """
-        super(Corrplot, self).__init__()
+        super(Corrplot, self).__init__()  # pylint: disable=R1725
 
         # we delay import in case this is not needed
         self.cmap_builder = cmap_builder

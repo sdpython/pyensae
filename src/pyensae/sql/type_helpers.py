@@ -29,7 +29,7 @@ def guess_type_value(x, none=None):
             x = float(x)
             return float
         except ValueError:
-            if none:
+            if none:  # pragma: no cover
                 if x is None:
                     return None
                 try:
@@ -68,4 +68,5 @@ def get_default_value_type(ty, none=True):
     elif ty == float:
         return 0.0
     else:
-        raise TypeError("type expected in " + str(guess_type_value_type()))
+        raise TypeError(  # pragma: no cover
+            "type expected in " + str(guess_type_value_type()))

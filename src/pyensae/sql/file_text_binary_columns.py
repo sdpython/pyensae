@@ -170,13 +170,9 @@ class TextFileColumns(TextFile):
             try:
                 self._regex = re.compile(regex)
             except Exception as e:
-                raise Exception(
-                    "algorithm problem: (type %s, %s)\nunable to understand a regular expression (file %s)\nexp: %s" %
-                    (str(
-                        type(e)),
-                        str(e),
-                        self.filename,
-                        regex))
+                raise RuntimeError(  # pylint: disable=W0707
+                    "algorithm problem: (type %r, %r)\nunable to understand a regular expression (file %r)\nexp: %r" %
+                    (str(type(e)), str(e), self.filename, regex))
             self._name = {}
             self._nb = 0
             self._conv = {}
@@ -303,8 +299,8 @@ class TextFileColumns(TextFile):
                                 if nbert * 10 > nb and nbert > 4:
                                     message = "pattern: %s\n line: %s" % (
                                         regex_simple.pattern, line)
-                                    raise Exception(
-                                        "(b) there are probably too many errors %d\n%s" %
+                                    raise RuntimeError(  # pylint: disable=W0707
+                                        "(b) there are probably too many errors %r\n%r" %
                                         (nberr, message))
                                 giveup = True
                                 break
@@ -368,8 +364,8 @@ class TextFileColumns(TextFile):
             file = open(output, "w", encoding=self._encoding)
             file.close()
         except Exception as e:
-            raise Exception(
-                "unable to create file %s, reason: %s" %
+            raise RuntimeError(  # pylint: disable=W0707
+                "Unable to create file %r, reason: %r" %
                 (output, str(e)))
 
         self.LOG("sorting file ", self.filename)

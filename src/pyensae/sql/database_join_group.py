@@ -58,11 +58,12 @@ class DatabaseJoinGroup:
             self._count_as = 0
             self._avoid_prefix = avoid_prefix
             if self.parent_key is None and self.key is not None:
-                raise Exception("parent_key is missing")
+                raise KeyError(  # pragma: no cover
+                    "parent_key is missing")
 
             if where is not None:
                 if not isinstance(where, dict):
-                    raise Exception(
+                    raise TypeError(  # pragma: no cover
                         "parameter where: only dict or None expected (not %s)" % str(
                             type(where)))
                 for k, v in where.items():
@@ -74,7 +75,7 @@ class DatabaseJoinGroup:
                         if k[-2] == self.table:
                             self.where[k[-1]] = v
                     else:
-                        raise Exception(
+                        raise ValueError(  # pragma: no cover
                             "not able to deal with than clause %s:%s" %
                             (str(k), str(v)))
 
@@ -104,7 +105,7 @@ class DatabaseJoinGroup:
             @param      n       new successor
             """
             if n.predecessor is not None:
-                raise Exception(
+                raise ValueError(  # pragma: no cover
                     "This node was already added in another part of the tree. You must duplicate it.")
             self.successor.append(n)
             n.predecessor = self
@@ -246,7 +247,7 @@ class DatabaseJoinGroup:
             for name, tbl, field in fas:
                 if a == tbl and b == field:
                     return name
-            raise Exception(
+            raise ValueError(  # pragma: no cover
                 "unable to find field %s.%s in (%s)" %
                 (a, b, str(fas)))
 
@@ -387,17 +388,19 @@ class DatabaseJoinGroup:
         if order is None:
             order = []
         if create_index:
-            raise Exception(
+            raise RuntimeError(  # pragma: no cover
                 "create_index = True: this option is not available")
         if not duplicate_column:
-            raise Exception(
+            raise RuntimeError(  # pragma: no cover
                 "duplicate_column = False: this option is not available")
         if len(order) > 0:
-            raise Exception("order != []: this option is not available")
+            raise RuntimeError(  # pragma: no cover
+                "order != []: this option is not available")
         if unique:
-            raise Exception("unique = True: this option is not available")
+            raise RuntimeError(  # pragma: no cover
+                "unique = True: this option is not available")
         if fields is not None:
-            raise Exception(
+            raise RuntimeError(  # pragma: no cover
                 "fields != None: this option is not possible yet %s." %
                 (str(fields)))
 
@@ -407,15 +410,15 @@ class DatabaseJoinGroup:
 
         if distinct:
             if not select.startswith("SELECT"):
-                raise Exception("algorithm problem")
+                raise ValueError("algorithm problem")  # pragma: no cover
             select = "SELECT DISTINCT" + select[len("SELECT"):]
 
         if execute:
             if created_table is None:
-                raise Exception(
+                raise RuntimeError(  # pragma: no cover
                     "unable to execute the SQL query: not specified name for the table to create")
             if created_table in self.get_table_list():
-                raise Exception("table %s already exists" % created_table)
+                raise ValueError("table %r already exists" % created_table)
 
             select = "CREATE TABLE %s AS \n" % created_table + select
             self.execute(select, nolog=nolog)
@@ -450,7 +453,7 @@ class DatabaseJoinGroup:
                     if v[1] not in ['==', '<=', '>=', '>', '<', '!=']:
                         v = (v[1], v[0])
                     if v[1] not in ['==', '<=', '>=', '>', '<', '!=']:
-                        raise Exception(
+                        raise ValueError(  # pragma: no cover
                             "unable to understand where %s,%s " %
                             (k, str(v)))
                     if v[1] == '==' and self.isMSSQL():
@@ -466,7 +469,7 @@ class DatabaseJoinGroup:
                     a.append(s)
                 sql += " AND ".join(a)
             else:
-                raise Exception(
+                raise ValueError(  # pragma: no cover
                     "unable to interpret this where condition %s" %
                     (str(where)))
         return sql
@@ -501,8 +504,8 @@ class DatabaseJoinGroup:
         cols = self.get_table_columns_list(table)
         for column in columns:
             if column not in [x[0] for x in cols]:
-                raise Exception(
-                    "%s is not a column of table %s\n- columns:\n%s" %
+                raise ValueError(
+                    "%r is not a column of table %r\n- columns:\n%r" %
                     (column, table, "\n".join(
                         [
                             str(x) for x in cols])))
@@ -541,8 +544,8 @@ class DatabaseJoinGroup:
                     values_rev[v].append(k)
             for k, v in values_rev.items():
                 if len(v) > 1:
-                    raise Exception(
-                        "a category is shared by several values %s and %s" %
+                    raise ValueError(  # pragma: no cover
+                        "a category is shared by several values %r and %r" %
                         (k, ", ".join(v)))
             for k in values_rev:
                 values_rev[k] = values_rev[k][0]
@@ -607,7 +610,7 @@ class DatabaseJoinGroup:
                 for i, x, x_, n in couple:
                     if v < x_:
                         return n
-                raise Exception(
+                raise RuntimeError(  # pragma: no cover
                     "unable to process, " +
                     str(v) +
                     " is a value higher than 1e10")
@@ -627,17 +630,18 @@ class DatabaseJoinGroup:
                 (new_column, new_column, str_sum, sql_add, sql)
 
         else:
-            raise Exception(
+            raise TypeError(  # pragma: no cover
                 "values has not a type (%s) not in [None, dict, list]" %
                 (str(
                     type(values))))
 
         if execute:
             if created_table is None:
-                raise Exception(
+                raise RuntimeError(  # pragma: no cover
                     "unable to execute the SQL query: not specified name for the table to create")
             if created_table in self.get_table_list():
-                raise Exception("table %s already exists" % created_table)
+                raise RuntimeError(  # pragma: no cover
+                    "table %r already exists" % created_table)
 
             select = "CREATE TABLE %s AS \n" % created_table + select
             self.execute(select, nolog=nolog)
@@ -675,13 +679,15 @@ class DatabaseJoinGroup:
         cols1 = self.get_table_columns_list(table1)
         cols1 = [f[0] for f in cols1]
         if len(cols1) == 0:
-            raise Exception("table %s has no field" % table1)
+            raise ValueError(  # pragma: no cover
+                "table %r has no field" % table1)
 
         joinsm = table2 == '________________'
         if joinsm:
             cols2 = [f[1] for f in params["fields"]]
             if len(cols2) == 0:
-                raise Exception("imported table has no field")
+                raise RuntimeError(  # pragma: no cover
+                    "imported table has no field")
             table2 = params["sql"].split("\n")
             table2 = ["     " + s for s in table2]
             table2 = "\n".join(table2)
@@ -695,22 +701,22 @@ class DatabaseJoinGroup:
         if isinstance(field1, tuple):
             for k in field1:
                 if k not in cols1:
-                    raise Exception(
-                        "unable to find field %s in table %s" %
+                    raise ValueError(  # pragma: no cover
+                        "unable to find field %r in table %r" %
                         (k, table1))
             for k in field2:
                 if k not in cols2:
-                    raise Exception(
-                        "unable to find field %s in table %s" %
+                    raise ValueError(  # pragma: no cover
+                        "unable to find field %r in table %r" %
                         (k, table2))
         else:
             if field1 not in cols1:
-                raise Exception(
-                    "unable to find field %s in table %s" %
+                raise ValueError(  # pragma: no cover
+                    "unable to find field %r in table %r" %
                     (field1, table1))
             if field2 not in cols2:
-                raise Exception(
-                    "unable to find field %s in table %s" %
+                raise ValueError(  # pragma: no cover
+                    "unable to find field %r in table %r" %
                     (field2, table2))
             field1 = (field1,)
             field2 = (field2,)
@@ -730,8 +736,8 @@ class DatabaseJoinGroup:
                 ind = True
 
             if not ind:
-                self.LOG(
-                    "creating an index on table %s, field %s" %
+                self.LOG(  # pragma: no cover
+                    "creating an index on table %r, field %r" %
                     (table2, ", ".join(field2)))
                 self.create_index("index_" + table2.replace(".", "_") + "_" + "_".join(field2),
                                   table2, field2, unique=unique)
@@ -853,10 +859,11 @@ class DatabaseJoinGroup:
 
         if execute:
             if created_table is None:
-                raise Exception(
+                raise RuntimeError(  # pragma: no cover
                     "unable to execute the SQL query: not specified name for the table to create")
             if created_table in self.get_table_list():
-                raise Exception("table %s already exists" % created_table)
+                raise ValueError(  # pragma: no cover
+                    "table %r already exists" % created_table)
 
             select = "CREATE TABLE %s AS \n" % created_table + select
             self.execute(select, nolog=nolog)

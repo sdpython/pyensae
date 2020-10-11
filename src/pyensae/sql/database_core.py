@@ -94,15 +94,15 @@ class DatabaseCore(DatabaseCore2):
                 for s in rest:
                     ok = s.split(",")
                     if len(ok) != 2:
-                        raise DBException("unable to find an alias in %s" % s)
+                        raise DBException(  # pragma: no cover
+                            "unable to find an alias in %r" % s)
                     nick = ok[0].strip()
                     file = ",".join(ok[1:])
                     attach[nick] = file.strip()
             elif sql_file.startswith(":"):
                 if sql_file != ":memory:":
-                    raise FileNotFoundError(
-                        "unable to interpret file: " +
-                        sql_file)
+                    raise FileNotFoundError(  # pragma: no cover
+                        "unable to interpret file: %r" % sql_file)
 
         # some initialization
         self._password = password
@@ -111,25 +111,28 @@ class DatabaseCore(DatabaseCore2):
 
         # the rest
         if LOG is None:
-            def blind(*li, **p):
+            def blind(*li, **p):  # pragma: no cover
                 pass
-            LOG = blind
+            LOG = blind  # pragma: no cover
         self.LOG = LOG
 
         if isinstance(LOG, dict):
-            raise TypeError("fLOG should be a function, not a dictionary")
+            raise TypeError(  # pragma: no cover
+                "fLOG should be a function, not a dictionary")
         if isinstance(self.LOG, dict):
-            raise TypeError("LOG should be a function, not a dictionary")
+            raise TypeError(  # pragma: no cover
+                "LOG should be a function, not a dictionary")
 
         if engine == "SQLite":
             self._sql_file = sql_file
             self._engine = engine
 
         elif engine == "ODBCMSSQL":
-            raise DBException("unable to connect to a SQL server")
+            raise DBException(  # pragma: no cover
+                "Unable to connect to a SQL server.")
 
         else:
-            raise DBException(
+            raise DBException(  # pragma: no cover
                 "unfounded engine %s in %s" %
                 (engine, ", ".join(
                     DatabaseCore._engines)))
@@ -293,18 +296,18 @@ class DatabaseCore(DatabaseCore2):
         """
         if self.isMemory():
             if "_connection" not in self.__dict__:
-                raise DBException(
+                raise DBException(  # pragma: no cover
                     "It is a database in memory, the database should already be connected.")
         else:
             if "_connection" in self.__dict__:
-                raise Exception("a previous connection was not closed")
+                raise RuntimeError("A previous connection was not closed.")
 
             if self._engine == "SQLite":
                 self._connection = SQLite.connect(self._sql_file)
             # elif self._engine == "MySQL" :  self._connection =
             # MySQLdb.connect (self._host, self._user, self._password,
             # self._sql_file)
-            elif self._engine == "ODBCMSSQL":
+            elif self._engine == "ODBCMSSQL":  # pragma: no cover
 
                 if odbc_string is None:
                     temp = ["DRIVER={SQL Server Native Client 10.0}",  # {SQL Server}",
@@ -329,9 +332,8 @@ class DatabaseCore(DatabaseCore2):
                     self._connection = module_odbc.connect(st)
 
             else:
-                raise DBException(
-                    "This engine does not exists (%s)" %
-                    self._engine)
+                raise DBException(  # pragma: no cover
+                    "This engine does not exists (%r)" % self._engine)
 
             for func in DatabaseCore._special_function_init_():
                 self.add_function(func[0], func[2], func[1])
@@ -459,7 +461,8 @@ class DatabaseCore(DatabaseCore2):
         for a, b, c in select:
             fi = exp.findall(c)
             if len(fi) != 1:
-                raise DBException("unable to extract index fields from %s" % c)
+                raise DBException(  # pragma: no cover
+                    "Unable to extract index fields from %r" % c)
             fi = tuple([s.strip() for s in fi[0].split(",")])
             res.append((a, b, c, fi))
         select.close()
@@ -492,7 +495,7 @@ class DatabaseCore(DatabaseCore2):
         @return                 a list of tuple (alias, file)
         """
         if self.isMSSQL():
-            return []
+            return []  # pragma: no cover
         else:
             cur = self._connection.cursor()
             cur.execute("PRAGMA database_list;")
@@ -512,7 +515,7 @@ class DatabaseCore(DatabaseCore2):
         @return                         the table list
         """
         self._check_connection()
-        if self.isMSSQL():
+        if self.isMSSQL():  # pragma: no cover
             request = """   SELECT TABLE_NAME FROM (
                                 SELECT TABLE_NAME, OBJECTPROPERTY(object_id(TABLE_NAME), N'IsUserTable') AS type
                                 FROM INFORMATION_SCHEMA.TABLES) AS temp_tbl
@@ -579,7 +582,7 @@ class DatabaseCore(DatabaseCore2):
             prefix = ""
         cur = self._connection.cursor()
 
-        if self.isMSSQL():
+        if self.isMSSQL():  # pragma: no cover
             prf = "" if len(prefix) == 0 else prefix + "."
             sql = """SELECT * FROM (SELECT OBJECT_NAME(c.OBJECT_ID) TableName,c.name AS ColumnName,t.name AS TypeName
                             FROM sys.columns AS c
@@ -765,7 +768,7 @@ class DatabaseCore(DatabaseCore2):
             iterator
             """
             if "matrix" not in self.__dict__:
-                raise StopIteration
+                raise StopIteration  # pragma: no cover
             if self.pos < len(self.matrix):
                 n = self.pos
                 self.pos += 1
@@ -853,7 +856,7 @@ class DatabaseCore(DatabaseCore2):
                 cur.execute(request)
                 dat2 = time.perf_counter()
                 if dat2 - dat > 10:
-                    self.LOG("SQL end")
+                    self.LOG("SQL end")  # pragma: no cover
             except Exception as e:
                 raise ExceptionSQL(
                     "unable to execute a SQL request (1)(file %s)" %
@@ -886,7 +889,7 @@ class DatabaseCore(DatabaseCore2):
             res = list(cur)
         cur.close()
         if not nolog and (len(res) == 0 or len(res) > 1e4):
-            self.LOG("execute_view ", len(res), "results")
+            self.LOG("execute_view ", len(res), "results")  # pragma: no cover
         return res
 
     def execute_script(self, script, nolog=True, close=True):
@@ -899,7 +902,7 @@ class DatabaseCore(DatabaseCore2):
         @return                         cursor
         """
         self._check_connection()
-        if not nolog:
+        if not nolog:  # pragma: no cover
             lines = script.split("\n")
             if len(lines) > 20:
                 self.LOG("SQL start + ",
@@ -912,7 +915,7 @@ class DatabaseCore(DatabaseCore2):
         if close:
             cur.close()
             if not nolog:
-                self.LOG("SQL end")
+                self.LOG("SQL end")  # pragma: no cover
         else:
             return res
 
@@ -930,7 +933,7 @@ class DatabaseCore(DatabaseCore2):
         if isinstance(db, str):
             self.LOG("ATTACH DATABASE '%s' TO '%s' ALIAS %s" % (db, db, alias))
             self.execute("ATTACH DATABASE '%s' AS %s;" % (db, alias))
-        else:
+        else:  # pragma: no cover
             self.LOG(
                 "ATTACH DATABASE '%s' TO '%s' ALIAS %s" %
                 (db._sql_file, self._sql_file, alias))
@@ -947,7 +950,8 @@ class DatabaseCore(DatabaseCore2):
         @param      function        function to add
         """
         if "_" in name:
-            raise Exception("SQLite does not allow function name with _")
+            raise RuntimeError(  # pragma: no cover
+                "SQLite does not allow function name with _")
         self._check_connection()
         if self._engine == "SQLite":
             self._connection.create_function(name, nbparam, function)
@@ -1004,14 +1008,13 @@ class DatabaseCore(DatabaseCore2):
 
         """
         if self._engine == "SQLite" and table == "sqlite_sequence":
-            raise DBException("unable to create a table named sql_sequence")
+            raise DBException(  # pragma: no cover
+                "unable to create a table named sql_sequence")
 
         tables = self.get_table_list()
         if table in tables:
-            raise DBException(
-                "table " +
-                table +
-                " is already present, it cannot be added")
+            raise DBException(  # pragma: no cover
+                "table %r is already present, it cannot be added" % table)
 
         if temporary:
             sql = "CREATE TEMPORARY TABLE " + table + "("
@@ -1019,7 +1022,7 @@ class DatabaseCore(DatabaseCore2):
             sql = "CREATE TABLE " + table + "("
         col = []
         for c, val in columns.items():
-            if self.isMSSQL():
+            if self.isMSSQL():  # pragma: no cover
                 if isinstance(val[1], tuple):
                     v, li = val[1]
                 else:
@@ -1042,7 +1045,7 @@ class DatabaseCore(DatabaseCore2):
                 elif v is datetime.datetime:
                     col.append(val[0] + " DATETIME")
                 else:
-                    raise DBException(
+                    raise DBException(  # pragma: no cover
                         "unable to add column " +
                         str(c) +
                         " ... " +
@@ -1070,7 +1073,7 @@ class DatabaseCore(DatabaseCore2):
                 elif v is datetime.datetime:
                     col.append(val[0] + " DATETIME")
                 else:
-                    raise DBException(
+                    raise DBException(  # pragma: no cover
                         "unable to add column " +
                         str(c) +
                         " ... " +
@@ -1081,7 +1084,7 @@ class DatabaseCore(DatabaseCore2):
             fval = val[2:]
             for v in fval:
                 if v not in DatabaseCore._field_option:
-                    raise DBException(
+                    raise DBException(  # pragma: no cover
                         "an option is unexpected %s should be in %s" %
                         (v, str(
                             DatabaseCore._field_option)))
@@ -1163,7 +1166,8 @@ class DatabaseCore(DatabaseCore2):
             sql = "INSERT INTO %s VALUES (%s)" % (table, values)
             return sql
         else:
-            raise TypeError("unexpected type: " + str(type(insert_values)))
+            raise TypeError(  # pragma: no cover
+                "unexpected type: " + str(type(insert_values)))
 
     def insert(self, table, insert_values, cursor=None, nolog=True):
         """
@@ -1194,7 +1198,7 @@ class DatabaseCore(DatabaseCore2):
 
                 sql = sql.replace("'", "")
                 try:
-                    if not nolog:
+                    if not nolog:  # pragma: no cover
                         if len(sql) > 1000:
                             self.LOG("SQLs", sql[:1000])
                         else:
@@ -1202,15 +1206,15 @@ class DatabaseCore(DatabaseCore2):
                     self._connection.executemany(sql, insert_values)
                     return ""
                 except Exception as e:
-                    raise ExceptionSQL(
-                        "unable to execute a SQL request (3) (cursor %s) (file %s)" %
+                    raise ExceptionSQL(  # pylint: disable=W0707
+                        "Unable to execute a SQL request (3) (cursor %r) (file %r)" %
                         (str(cursor), self.get_file()), e, sql)
 
         elif isinstance(insert_values, dict):
             sql = self._insert_sql(table, insert_values)
 
             try:
-                if not nolog:
+                if not nolog:  # pragma: no cover
                     if len(sql) > 1000:
                         self.LOG("SQLs", sql[:1000])
                     else:
@@ -1230,12 +1234,12 @@ class DatabaseCore(DatabaseCore2):
 
                 return sql
             except Exception as e:
-                raise ExceptionSQL(
-                    "unable to execute a SQL request (2) (cursor %s) (file %s)" %
+                raise ExceptionSQL(  # pylint: disable=W0707
+                    "unable to execute a SQL request (2) (cursor %r) (file %r)" %
                     (str(cursor), self.get_file()), e, sql)
 
         else:
-            raise DBException(
+            raise DBException(  # pragma: no cover
                 "insert: expected type (list of dict or dict) instead of %s" %
                 (str(
                     type(insert_values))))
@@ -1275,7 +1279,7 @@ class DatabaseCore(DatabaseCore2):
         try:
             self._connection.execute(sql)
             return sql
-        except Exception as e:
-            raise ExceptionSQL(
-                "unable to execute a SQL request (4) (file %s)" %
+        except Exception as e:  # pragma: no cover
+            raise ExceptionSQL(  # pylint: disable=W0707
+                "Unable to execute a SQL request (4) (file %r)" %
                 self.get_file(), e, sql)

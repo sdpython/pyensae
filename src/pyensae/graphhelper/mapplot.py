@@ -21,7 +21,7 @@ def plot_map_france(ax=None, scale='50m'):
         plt.show()
     """
 
-    if ax is None:
+    if ax is None:  # pragma: no cover
         import matplotlib.pyplot as plt  # pylint: disable=C0415
         import cartopy.crs as ccrs  # pylint: disable=C0415
         fig = plt.figure(figsize=(8, 8))

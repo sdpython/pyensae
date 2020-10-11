@@ -9,10 +9,7 @@ import sys
 from .datasource.http_retrieve import download_data
 
 
-if sys.version_info[0] < 3:
-    raise ImportError("pyensae only works with Python 3")
-
-__version__ = "1.3.870"
+__version__ = "1.3.879"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pyensae"
 __url__ = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html"
@@ -31,7 +28,7 @@ def _setup_hook(add_print=False, unit_test=False):
     """
     # we can check many things, needed module
     # any others things before unit tests are started
-    if add_print:
+    if add_print:  # pragma: no cover
         print("Success: _setup_hook")
 
 
@@ -66,7 +63,7 @@ def check(log=False):
     return True
 
 
-def load_ipython_extension(ip):
+def load_ipython_extension(ip):  # pragma: no cover
     """
     to allow the call ``%load_ext pyensae``
 

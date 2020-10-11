@@ -62,7 +62,7 @@ class MagicGraph(MagicClassWithHelpers):
             mpl_switch_style(style)
 
 
-def register_graph_magics(ip=None):
+def register_graph_magics(ip=None):  # pragma: no cover
     """
     register magics function, can be called from a notebook
 

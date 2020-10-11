@@ -645,7 +645,7 @@ class StockPrices:
 
         curve = []
         if field == "ohlc":
-            from mplfinance.original_flavor import candlestick_ohlc
+            from mplfinance.original_flavor import candlestick_ohlc  # pylint: disable=E0401
             ohlc = list(list(data.iloc[i, :4])
                         for i in range(0, data.shape[0]))
             ohlc = [[mdates.date2num(t)] + v for t, v in zip(dates, ohlc)]

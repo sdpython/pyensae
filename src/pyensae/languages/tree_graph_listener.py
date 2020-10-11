@@ -115,7 +115,7 @@ class TreeGraphListener(ParseTreeListener):
             kc = self._get_key_context(ctx.parentCtx)
             self.edges[kc, key] = 1
 
-        if self.verbose:
+        if self.verbose:  # pragma: no cover
             self.fLOG("+", type(ctx), ctx)
             self.fLOG("+", ctx.__dict__.keys())
             self.fLOG("  +", type(ctx.start), ctx.start)
@@ -130,7 +130,7 @@ class TreeGraphListener(ParseTreeListener):
         """
         event
         """
-        if self.verbose:
+        if self.verbose:  # pragma: no cover
             self.fLOG("-", type(ctx), ctx)
 
     def to_networkx(self):

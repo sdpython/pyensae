@@ -60,23 +60,29 @@ def r2python(code: str, pep8=False, fLOG=None) -> str:
     * ``%<%`` cannot be followed by an empty line
     """
     if fLOG:
-        fLOG("[r2python] parse ", len(code), "bytes")
+        fLOG(  # pragma: no cover
+            "[r2python] parse ", len(code), "bytes")
     parser = parse_code(code, RParser, RLexer)
     if fLOG:
-        fLOG("[r2python] parse continue")
+        fLOG(  # pragma: no cover
+            "[r2python] parse continue")
     parsed = parser.parse()
     if fLOG:
-        fLOG("[r2python] listen")
+        fLOG(  # pragma: no cover
+            "[r2python] listen")
     listen = TreeStringListener(parsed, fLOG=fLOG)
     walker = ParseTreeWalker()
     if fLOG:
-        fLOG("[r2python] walk")
+        fLOG(  # pragma: no cover
+            "[r2python] walk")
     walker.walk(listen, parsed)
     if fLOG:
-        fLOG("[r2python] get code")
+        fLOG(  # pragma: no cover
+            "[r2python] get code")
     code = listen.get_python()
     if pep8:
         if fLOG:
-            fLOG("[r2python] pep8")
+            fLOG(  # pragma: no cover
+                "[r2python] pep8")
         code = remove_extra_spaces_and_pep8(code, aggressive=True)
     return code

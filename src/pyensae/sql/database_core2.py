@@ -250,7 +250,7 @@ class DatabaseCore2:
                             str(k) + "\t" + str(v) + "\n"
                     mes = "KeyError:" + str(e) + "\n" + str(done) + "\n" + str_columns + "\nnb line " + str(
                         nbline) + " columns: " + str(len(line)) + "\n" + str(line)
-                    raise Exception(
+                    raise RuntimeError(  # pylint: disable=W0707
                         "problem\n" +
                         mes +
                         "\n\ncount_types:\n  " +
@@ -493,13 +493,13 @@ class DatabaseCore2:
                     self.LOG(
                         "OperationalError: unable to execute a query", e, sql)
                 else:
-                    raise ExceptionSQL(
+                    raise ExceptionSQL(  # pylint: disable=W0707
                         "OperationalError: unable to execute a query", e, sql)
             except SQLite.IntegrityError as e:
                 if skip_exception:
                     self.LOG("IntegrityError: unable to execute a query", e, sql)
                 else:
-                    raise ExceptionSQL(
+                    raise ExceptionSQL(  # pylint: disable=W0707
                         "IntegrityError: unable to execute a query", e, sql)
         return sql
 

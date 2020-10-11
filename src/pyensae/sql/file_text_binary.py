@@ -737,11 +737,11 @@ class TextFile:
                     reg = re.compile("?P<(.*?)>")
                     all = reg.findall(final)
                     s = ",".join(all)
-                    raise Exception(
-                        "this expression does not compile (%s), pattern %s, columns %s" %
+                    raise RuntimeError(  # pylint: disable=W0707
+                        "this expression does not compile (%r), pattern %r, columns %r" %
                         (str(e), final, s))
-                raise Exception(
-                    "this expression does not compile (%s), pattern %s" %
+                raise RuntimeError(  # pylint: disable=W0707
+                    "This expression does not compile (%r), pattern %r" %
                     (str(e), final))
 
         exp = {int: "[-]?[0-9]*?",

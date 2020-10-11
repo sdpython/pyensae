@@ -134,7 +134,8 @@ def get_tree_graph(tree, parser, format=TreeGraphListener):
     @return                 string
     """
     if format is None:
-        raise TypeError("format cannot be None")
+        raise TypeError(  # pragma: no cover
+            "format cannot be None")
     walker = ParseTreeWalker()
     listen = format(parser)
     walker.walk(listen, tree)

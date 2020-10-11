@@ -35,7 +35,8 @@ def file_head(filename: str, nbline=10, encoding="utf8", errors="strict"):
         if not os.path.exists(filename):
             raise FileNotFoundError(filename)
         if not os.path.isfile(filename):
-            raise FileNotFoundError("'{0}' is not a file".format(filename))
+            raise FileNotFoundError(  # pragma: no cover
+                "'{0}' is not a file".format(filename))
         with open(filename, "r", encoding=encoding, errors=errors) as f:
             return file_head(f, nbline=nbline, encoding=encoding)
     else:
@@ -67,9 +68,10 @@ def file_tail(filename: str, nbline=10, encoding="utf8", threshold=2 ** 14, erro
     The first returned line may be incomplete.
     """
     if not os.path.exists(filename):
-        raise FileNotFoundError(filename)
+        raise FileNotFoundError(filename)  # pragma: no cover
     if not os.path.isfile(filename):
-        raise FileNotFoundError("'{0}' is not a file".format(filename))
+        raise FileNotFoundError(  # pragma: no cover
+            "'{0}' is not a file".format(filename))
 
     size = os.stat(filename).st_size
     if size < threshold:
@@ -104,9 +106,10 @@ def enumerate_grep(filename, regex, encoding="utf8", errors=None):
     """
     if isinstance(filename, str):
         if not os.path.exists(filename):
-            raise FileNotFoundError(filename)
+            raise FileNotFoundError(filename)  # pragma: no cover
         if not os.path.isfile(filename):
-            raise FileNotFoundError("'{0}' is not a file".format(filename))
+            raise FileNotFoundError(  # pragma: no cover
+                "'{0}' is not a file".format(filename))
         with open(filename, "r", encoding=encoding, errors=errors) as f:
             for _ in enumerate_grep(f, regex, encoding):
                 yield _
