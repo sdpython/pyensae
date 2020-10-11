@@ -9,7 +9,7 @@ import sys
 from .datasource.http_retrieve import download_data
 
 
-__version__ = "1.3.879"
+__version__ = "1.3.881"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pyensae"
 __url__ = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html"

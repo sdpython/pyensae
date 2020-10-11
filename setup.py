@@ -157,9 +157,24 @@ if ask_help():
     process_standard_options_for_setup_help(sys.argv)
 
 if not r:
+
+    def import_pyensae():
+        try:
+            import pyensae
+        except ImportError:
+            p = os.path.normpath(
+                os.path.abspath(
+                    os.path.join(
+                        os.path.dirname(__file__),
+                        "src")))
+            sys.path.append(p)
+            import pyensae
+
     if len(sys.argv) in (1, 2) and sys.argv[-1] in ("--help-commands",):
         from pyquickhelper.pycode import process_standard_options_for_setup_help
         process_standard_options_for_setup_help(sys.argv)
+
+    import_pyensae()
     from pyquickhelper.pycode import clean_readme
     from pyensae import __version__ as sversion
     long_description = clean_readme(long_description)
