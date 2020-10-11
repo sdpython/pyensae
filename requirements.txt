@@ -11,6 +11,7 @@ geopandas
 jedi
 jupyter_sphinx
 jyquickhelper
+mplfinance
 nbconvert>=6.0.2
 networkx
 openpyxl
