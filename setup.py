@@ -175,7 +175,10 @@ if not r:
         process_standard_options_for_setup_help(sys.argv)
 
     import_pyensae()
-    from pyquickhelper.pycode import clean_readme
+    try:
+        from pyquickhelper.pycode import clean_readme
+    except ImportError:
+        clean_readme = lambda s: s
     from pyensae import __version__ as sversion
     long_description = clean_readme(long_description)
 

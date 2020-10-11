@@ -1,11 +1,12 @@
 
+
 .. _l-HISTORY:
 
 =======
 History
 =======
 
-current - 2020-10-11 - 0.00Mb
+current - 2020-10-12 - 0.00Mb
 =============================
 
 * `37`: Replace mpl_finance by mplfinance (2020-10-11)
