@@ -5,10 +5,6 @@
 Recurrent needs for teachings
 turned into functions.
 """
-import sys
-from .datasource.http_retrieve import download_data
-
-
 __version__ = "1.3.881"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pyensae"
