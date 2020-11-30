@@ -2,7 +2,6 @@ dist: xenial
 sudo: true
 language: python
 python:
-    - "3.7"
     - "3.8"
 before_install:
     - sudo apt-get install libgeos-dev libproj-dev proj-data graphviz libgfortran3 libblas-dev liblapack-dev
@@ -10,7 +9,7 @@ install:
     - pip install -r requirements.txt
     # see https://github.com/SciTools/cartopy/issues/1490
     - pip uninstall -y shapely
-    - pip install --no-binary shapely shapely
+    - pip install --no-binary shapely
     - pip install qgrid --upgrade --pre
     - pip install -U git+https://github.com/ozgur/python-linkedin --no-deps
     - pip install mplfinance
