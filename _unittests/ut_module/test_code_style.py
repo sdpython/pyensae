@@ -5,7 +5,6 @@ import sys
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import ExtTestCase, is_travis_or_appveyor
-from pyensae._pylint_common import _private_test_style_src, _private_test_style_test
 
 
 class TestCodeStyle(ExtTestCase):
@@ -16,6 +15,7 @@ class TestCodeStyle(ExtTestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
+        from pyensae._pylint_common import _private_test_style_src
         run_lint = is_travis_or_appveyor(env=['NAME_JENKINS']) is None
         _private_test_style_src(fLOG, run_lint, verbose='-v' in sys.argv)
 
@@ -25,6 +25,7 @@ class TestCodeStyle(ExtTestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
+        from pyensae._pylint_common import _private_test_style_test
         run_lint = is_travis_or_appveyor(env=['NAME_JENKINS']) is None
         _private_test_style_test(fLOG, run_lint, verbose='-v' in sys.argv)
 
