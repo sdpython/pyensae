@@ -5,7 +5,7 @@ python:
     - "3.9"
 
 before_install:
-    - sudo apt-get install libgeos-dev libproj-dev proj-data graphviz libgfortran3 libblas-dev liblapack-dev
+    - sudo apt-get install libgeos-dev libproj-dev proj-data graphviz libblas-dev liblapack-dev
 
 install:
     - pip install -r requirements.txt
