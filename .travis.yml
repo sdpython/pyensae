@@ -3,22 +3,14 @@ sudo: true
 language: python
 python:
     - "3.9"
-addons:
--  apt:
--    packages:
-      - ffmpeg
-      - build-dep
-      - graphviz
-      - libgfortran3
-      - libblas-dev
-      - liblapack-dev
-      - gfortran
-      - libgeos-dev
+
+before_install:
+    - sudo apt-get install libgeos-dev libproj-dev proj-data graphviz libgfortran3 libblas-dev liblapack-dev
 
 install:
     - pip install -r requirements.txt
-    - pip install mplfinance
-    - export PYTHONPATH=src
+    - pip uninstall -y shapely
+    - pip install --no-binary shapely shapely
 
 script:
-    - python setup.py unittests
+    - python ./setup.py unittests
