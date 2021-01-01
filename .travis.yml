@@ -6,14 +6,14 @@ python:
 addons:
 -  apt:
 -    packages:
-    - ffmpeg
-    - build-dep
-    - graphviz
-    - libgfortran3
-    - libblas-dev
-    - liblapack-dev
-    - gfortran
-    - libgeos-dev
+      - ffmpeg
+      - build-dep
+      - graphviz
+      - libgfortran3
+      - libblas-dev
+      - liblapack-dev
+      - gfortran
+      - libgeos-dev
 
 install:
     - pip install -r requirements.txt
