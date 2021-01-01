@@ -12,11 +12,13 @@ addons:
     - libgfortran3
     - libblas-dev
     - liblapack-dev
-    - gfortran      
+    - gfortran
     - libgeos-dev
-install: 
+
+install:
     - pip install -r requirements.txt
     - pip install mplfinance
     - export PYTHONPATH=src
+
 script:
     - python setup.py unittests
