@@ -22,7 +22,7 @@ class TestTailCli(unittest.TestCase):
         file_tail_cli(args=['-h'], fLOG=flog)
 
         r = rows[0][0]
-        if not r.startswith("usage: file_tail [-h] [-f FILENAME] [-n NBLINE] [-e ENCODING] [-t THRESHOLD]"):
+        if not r.startswith("usage: file_tail"):
             raise Exception(r)
 
 

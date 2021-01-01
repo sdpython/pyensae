@@ -22,7 +22,7 @@ class TestHeadCli(unittest.TestCase):
         file_head_cli(args=['-h'], fLOG=flog)
 
         r = rows[0][0]
-        if not r.startswith("usage: file_head [-h] [-f FILENAME] [-n NBLINE] [-e ENCODING] [-er ERRORS]"):
+        if not r.startswith("usage: file_head"):
             raise Exception(r)
 
 
