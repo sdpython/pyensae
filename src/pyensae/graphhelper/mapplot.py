@@ -19,6 +19,10 @@ def plot_map_france(ax=None, scale='50m'):
 
         plot_map_france()
         plt.show()
+
+    You may want to add `ax.set_extent([-5., 10., 38., 52.])`
+    after `ax = plot_map_france()`.
+    See also example :ref:`l-map-france`.
     """
 
     if ax is None:  # pragma: no cover
@@ -58,13 +62,16 @@ def plot_map_france_polygon(geometry, colors, ax=None, scale='50m'):
 
         fig = plt.figure(figsize=(7,7))
         ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
-        ax.set_extent([-5, 10, 38, 52])
         N = float(df.shape[0])
         plot_map_france_polygon(
             ax=ax, geometry=df['geometry'],
             colors=[(i/N, i/N, i/N) for i in range(df.shape[0])])
 
         plt.show()
+
+    You may want to add `ax.set_extent([-5., 10., 38., 52.])`
+    after `ax = plot_map_france_polygon()`.
+    See also example :ref:`l-map-france`.
     """
     from geopandas.plotting import plot_polygon_collection  # pylint: disable=C0415
     ax = plot_map_france(scale=scale, ax=ax)

@@ -5,7 +5,7 @@
 Recurrent needs for teachings
 turned into functions.
 """
-__version__ = "1.3.890"
+__version__ = "1.3.906"
 __author__ = "Xavier Dupré"
 __github__ = "https://github.com/sdpython/pyensae"
 __url__ = "http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html"
