@@ -18,6 +18,7 @@ script:
   - { CMD: "$PYINT -u setup.py unittests -g \".*cartopy.*\"", NAME: "UT" }
   - { CMD: "$PYINT -u setup.py unittests -e \".*LONG.*\" -g \".*cartopy.*\"", NAME: "UT_LONG", TIMEOUT: 900}
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*\" -g \".*cartopy.*\"", NAME: "UT_SKIP", TIMEOUT: 1500}
+  - { CMD: "$PYINT -u setup.py unittests -e \".*cartopy.*\"", NAME: "UT_MAP", TIMEOUT: 1500}
 
 after_script:
   - $PYINT -u setup.py bdist_wheel
