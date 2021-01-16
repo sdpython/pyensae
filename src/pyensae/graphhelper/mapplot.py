@@ -27,7 +27,7 @@ def plot_map_france(ax=None, scale='50m'):
         fig = plt.figure(figsize=(8, 8))
         ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
         # The following line may make the program crash on debian + python3.9.1.
-        ax.set_extent([-5, 10, 38, 52])
+        # ax.set_extent([-5, 10, 38, 52])
 
     import cartopy.feature as cfeature  # pylint: disable=C0415
     ax.add_feature(cfeature.OCEAN.with_scale(scale))
