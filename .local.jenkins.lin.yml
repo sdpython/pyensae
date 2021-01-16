@@ -15,13 +15,13 @@ install:
   - $PYINT -m pip freeze
 
 script:
-  - { CMD: "$PYINT -u setup.py unittests", NAME: "UT" }
-  - { CMD: "$PYINT -u setup.py unittests_LONG", NAME: "UT_LONG", TIMEOUT: 900}
-  - { CMD: "$PYINT -u setup.py unittests_SKIP", NAME: "UT_SKIP", TIMEOUT: 1500}
+  - { CMD: "$PYINT -u setup.py unittests -g \".*cartopy.*\"", NAME: "UT" }
+  - { CMD: "$PYINT -u setup.py unittests -e \".*LONG.*\" -g \".*cartopy.*\"", NAME: "UT_LONG", TIMEOUT: 900}
+  - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*\" -g \".*cartopy.*\"", NAME: "UT_SKIP", TIMEOUT: 1500}
 
 after_script:
   - $PYINT -u setup.py bdist_wheel
-  - if [ ${VERSION} == "3.9" and ${DIST} != "conda" and ${NAME} == "UT" ] then cp dist/*.whl {{root_path}}/../local_pypi/local_pypi_server fi
+  - if [ ${VERSION} == "3.9" and ${NAME} == "UT" ] then cp dist/*.whl {{root_path}}/../local_pypi/local_pypi_server fi
 
 documentation:
   - if [ ${NAME} == "UT" ] then $PYINT -u setup.py build_sphinx fi
