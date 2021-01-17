@@ -21,9 +21,22 @@ from pyensae.datasource import load_french_departements
 from pyensae.graphhelper import plot_map_france, plot_map_france_polygon
 
 ax = plot_map_france()
+# This instruction may introduce a segment fault.
+# See https://github.com/SciTools/cartopy/issues/837.
 ax.set_extent([-5., 10., 38., 52.])
 ax.set_title('France')
 
+#######################################
+# .. faqref::
+#   :title: set_extent make python crashes.
+#   Issue `Segmentation Fault from ax.set_extent()
+#   <https://github.com/SciTools/cartopy/issues/837>`_
+#   explains how to fix it.
+#
+#   ::
+#
+#       pip uninstall shapely
+#       pip install --no-binary :all: shapely
 
 #########################################
 # plot_map_france_polygon
