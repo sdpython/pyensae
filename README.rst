@@ -66,7 +66,7 @@ pyensae: hide complexity for teachings
 
 This project contains helpers used at the `ENSAE <http://www.ensae.fr/>`_
 for teachings available at
-`ENSAE - Programmation - Xavier Dupré <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx3/index.html>`_.
+`ENSAE - Programmation - Xavier Dupré <http://www.xavierdupre.fr/app/ensae_teaching_cs/helpsphinx/index.html>`_.
 It was the first module created for that usage.
 It does not have a clear purpose except hiding
 some annoying logic and shorten notebooks.
