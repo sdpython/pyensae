@@ -842,28 +842,28 @@ class TreeStringListener(ParseTreeListener):
         """
         return self.get_python() + "\n----\n" + "\n".join(self.buffer)
 
-    def enterRanges(self, ctx: RParser.RangesContext):
+    def enterRanges(self, ctx):
         """
         event
         """
         self.fLOG("    add 'range('")
         self.stack.append(("Ranges", "range("))
 
-    def exitRanges(self, ctx: RParser.RangesContext):
+    def exitRanges(self, ctx):
         """
         event
         """
         self.fLOG("    add ') # range'")
         self.stack.append(("Ranges", ")"))
 
-    def enterIntersections(self, ctx: RParser.RangesContext):
+    def enterIntersections(self, ctx):
         """
         event
         """
         self.fLOG("    add 'set('")
         self.stack.append(("Intersections", "set("))
 
-    def exitIntersections(self, ctx: RParser.RangesContext):
+    def exitIntersections(self, ctx):
         """
         event
         """

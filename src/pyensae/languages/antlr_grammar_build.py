@@ -18,9 +18,9 @@ def _is_syntax_is_missing(language):
     @return                     grammar file
     """
     locations = {
-        "R": "https://github.com/antlr/grammars-v4/tree/master/r/R.g4",
-        "SQLite": "https://github.com/antlr/grammars-v4/blob/master/sqlite/SQLite.g4",
-        "Pig": "http://wiki.apache.org/pig/PigLexer",
+        "R": "https://github.com/antlr/grammars-v4/tree/master/r/",
+        "SQLite": "https://github.com/antlr/grammars-v4/blob/master/sqlite/",
+        "Pig": "http://wiki.apache.org/pig/",
         "CSharp": "https://github.com/antlr/grammars-v4/tree/master/csharp",
     }
 
@@ -30,14 +30,11 @@ def _is_syntax_is_missing(language):
         return filename
     if language in locations:
         raise FileNotFoundError(
-            "The grammar {0} is not available, you should get it from {1}".format(
-                language,
-                locations[language]))
+            "The grammar '{0}' is not available, you should get "
+            "it from {1}".format(language, locations[language]))
     raise KeyError(
-        "unexpected language: {0}, not in {1}".format(
-            language,
-            ",".join(
-                locations.keys())))
+        "Unexpected language: '{0}', not in '{1}'".format(
+            language, ",".join(locations.keys())))
 
 
 def build_grammar(g4, version="4.9", fLOG=noLOG):

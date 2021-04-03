@@ -4,9 +4,6 @@
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
 """
-
-
-import sys
 import os
 import unittest
 from pyquickhelper.loghelper import fLOG
@@ -35,44 +32,40 @@ class TestPRConverter(unittest.TestCase):
 
         i = 0
         for exp, script in zip(pyfiles, rfiles):
-            fLOG(os.path.split(script)[-1])
-            with open(script, "r", encoding="utf-8") as f:
-                code = f.read()
+            with self.subTest(script=script):
+                fLOG(os.path.split(script)[-1])
+                with open(script, "r", encoding="utf-8") as f:
+                    code = f.read()
 
-            try:
-                pycode = r2python(code, pep8=True)
-            except Exception as e:
-                fLOG(code)
-                pycode = r2python(code, pep8=True, fLOG=fLOG)
-                raise e
+                try:
+                    pycode = r2python(code, pep8=True)
+                except Exception as e:
+                    fLOG(code)
+                    pycode = r2python(code, pep8=True, fLOG=fLOG)
+                    raise e
 
-            new_file = os.path.join(
-                temp, "pr" + str(i) + os.path.splitext(script)[-1] + ".py")
-            with open(new_file, "w", encoding="utf-8") as f:
-                f.write(pycode)
+                new_file = os.path.join(
+                    temp, "pr" + str(i) + os.path.splitext(script)[-1] + ".py")
+                with open(new_file, "w", encoding="utf-8") as f:
+                    f.write(pycode)
 
-            try:
-                comp = compile(pycode, new_file, "exec")
-            except Exception as e:
-                fLOG(pycode)
-                pycode = r2python(code, pep8=True, fLOG=fLOG)
-                raise e
+                try:
+                    comp = compile(pycode, new_file, "exec")
+                except Exception as e:
+                    fLOG(pycode)
+                    pycode = r2python(code, pep8=True, fLOG=fLOG)
+                    raise e
 
-            self.assertTrue(comp is not None)
+                self.assertTrue(comp is not None)
 
-            with open(exp, "r", encoding="utf-8") as f:
-                expcode = f.read()
+                with open(exp, "r", encoding="utf-8") as f:
+                    expcode = f.read()
 
-            self.maxDiff = None
-            if expcode.strip(" \n") != pycode.strip(" \n"):
-                fLOG(pycode)
-                pycode = r2python(code, pep8=True, fLOG=fLOG)
-
-            if sys.version_info[:2] >= (3, 6):
+                self.maxDiff = None
+                if expcode.strip(" \n") != pycode.strip(" \n"):
+                    fLOG(pycode)
+                    pycode = r2python(code, pep8=True, fLOG=fLOG)
                 self.assertEqual(expcode.strip(" \n"), pycode.strip(" \n"))
-            else:
-                self.assertEqual(expcode.strip(" \n").replace("@", "*"),
-                                 pycode.strip(" \n").replace("@", "*"))
 
 
 if __name__ == "__main__":

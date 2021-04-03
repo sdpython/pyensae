@@ -29,5 +29,7 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 if %errorlevel% neq 0 exit /b %errorlevel%
 %pythonexe% -u %current%..\setup.py update_grammars SimpleWorkflow.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars SQLite.g4
+%pythonexe% -u %current%..\setup.py update_grammars SQLiteLexer.g4
+if %errorlevel% neq 0 exit /b %errorlevel%
+%pythonexe% -u %current%..\setup.py update_grammars SQLiteParser.g4
 if %errorlevel% neq 0 exit /b %errorlevel%

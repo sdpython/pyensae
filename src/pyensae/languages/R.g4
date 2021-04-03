@@ -44,88 +44,289 @@ $ java TestR sample.R
 */
 grammar R;
 
-prog:   (   expr (';'|NL)*
-        |   NL
-        )*
-        EOF
+parse
+    : ( expr (';'| NL ) | NL )* EOF
     ;
 
-/*
-expr_or_assign
-    :   expr ('<-'|'='|'<<-') expr_or_assign
-    |   expr
+expr
+    : ranges
+    | intersections
+    | expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
+    | expr '[' sublist ']'
+    | expr dotop expr
+    | ('-'|'+') expr
+    | expr affectation
+    | expr rangeopexpr
+    | <assoc=right> expr NL* USER_OP NL* expr // anything wrappedin %: '%' .* '%'
+    | <assoc=right> expr NL* operator NL* expr
+    | <assoc=right> expr NL* comparison NL* expr
+    | '!' expr
+    | expr NL* ('&'|'&&') NL* expr
+    | expr NL* ('|'|'||') NL* expr
+    | formula_simple
+    | functiondefbody
+    | functiondeflambda
+    | functioncall
+    | NL* '{' NL* exprlist NL* '}' NL*  // compound statement
+    | returnexpr
+    | ifelseexpr
+    | ifexpr
+    | forexpr
+    | whileexpr
+    | repeatexpr
+    | '?' expr // get help on expr, usually string or ID
+    | implicit_column_name
+    | nextexpr
+    | 'break'
+    | ('(' NL* expr NL* ')')
+    | constant
+    | identifier
     ;
-*/
 
-expr:   expr '[[' sublist ']' ']'  // '[[' follows R's yacc grammar
-    |   expr '[' sublist ']'
-    |   expr ('::'|':::') expr
-    |   expr ('$'|'@') expr
-    |   <assoc=right> expr '^' expr
-    |   ('-'|'+') expr
-    |   expr ':' expr
-    |   expr USER_OP expr // anything wrappedin %: '%' .* '%'
-    |   expr ('*'|'/') expr
-    |   expr ('+'|'-') expr
-    |   expr ('>'|'>='|'<'|'<='|'=='|'!=') expr
-    |   '!' expr
-    |   expr ('&'|'&&') expr
-    |   expr ('|'|'||') expr
-    |   '~' expr
-    |   expr '~' expr
-    |   expr ('<-'|'<<-'|'='|'->'|'->>'|':=') expr
-    |   'function' '(' formlist? ')' expr // define function
-    |   expr '(' sublist ')'              // call function
-    |   '{' exprlist '}' // compound statement
-    |   'if' '(' expr ')' expr
-    |   'if' '(' expr ')' expr 'else' expr
-    |   'for' '(' ID 'in' expr ')' expr
-    |   'while' '(' expr ')' expr
-    |   'repeat' expr
-    |   '?' expr // get help on expr, usually string or ID
-    |   'next'
-    |   'break'
-    |   '(' expr ')'
-    |   ID
-    |   STRING
-    |   HEX
-    |   INT
-    |   FLOAT
-    |   COMPLEX
-    |   'NULL'
-    |   'NA'
-    |   'Inf'
-    |   'NaN'
-    |   'TRUE'
-    |   'FALSE'
+functiondefbody
+    :  functiondefargs NL* '{' NL* exprlist NL* '}'  // define function
+    ;
+
+functiondeflambda
+    :  functiondefargslambda expr  // define function
+    ;
+
+functiondefargslambda
+    : functiondef '(' NL* formlist? NL* ')'
+    ;
+
+functiondefargs
+    : functiondef '(' NL* formlist? NL* ')'
+    ;
+
+implicit_column_name
+    : '.' '(' identifier ')'
+    ;
+
+affectation
+    : affectop NL? expr
+    ;
+
+rangeopexpr
+    : rangeop expr
     ;
 
 exprlist
-    :   expr ((';'|NL) expr?)*
-    |
+    : expr rightexpr*
+    ;
+    
+rightexpr
+    : (';'|NL) expr?
     ;
 
-formlist : form (',' form)* ;
+formlist
+    : form ( NL? ',' NL* form)*
+    ;
 
-form:   ID
-    |   ID '=' expr
+form
+    :   argumentname
+    |   argumentname '=' expr
     |   '...'
-    |   '.'
     ;
 
-sublist : sub (',' sub)* ;
-
-sub :   expr
-    |   ID '='
-    |   ID '=' expr
-    |   STRING '='
-    |   STRING '=' expr
-    |   'NULL' '='
-    |   'NULL' '=' expr
-    |   '...'
-    |   '.'
-    |
+argumentname
+    : ID
     ;
+
+sublist
+    : sub ( NL* ',' NL* (inlinefunction | sub ) NL* )* ;
+
+sublistadd
+    : identifier ( NL? '+' NL? identifier NL? )* ;
+
+sub
+    : subnobracket
+    | expr
+    ;
+
+subnobracket
+    : identifier '=' ( inlinefunction | expr )
+    | STRING '='
+    | STRING '=' expr
+    | 'NULL' '='
+    | 'NULL' '=' expr
+    | '...'
+    | ':'
+    ;
+
+ranges
+    : range_simple
+    | range_complexe
+    ;
+
+range_simple
+    : (identifier | INT ) ':' (identifier | INT )
+    ;
+    
+range_complexe
+    : '(' expr ')' ':' expr
+    ;
+
+intersections
+    : intersection_simple
+    | intersection_complexe
+    ;
+
+intersection_simple
+    : (identifier | constant) '%in%' expr
+    ;
+
+intersection_complexe
+    : '(' expr ')' '%in%' expr
+    ;
+
+
+//////
+// NEW
+//////
+
+constant
+    : STRING
+    | HEX
+    | INT
+    | FLOAT
+    | COMPLEX
+    | 'NULL'
+    | 'NA'
+    | 'Inf'
+    | 'NaN'
+    | boolean
+    ;
+
+boolean
+    : 'TRUE'
+    | 'FALSE'
+    ;
+
+nextexpr
+    : 'next'
+    ;
+
+repeatexpr
+    : 'repeat' expr
+    ;
+
+whileexpr
+    : 'while' '(' expr ')' expr
+    ;
+
+forexpr
+    : 'for' '(' identifier 'in' expr ')' expr
+    ;
+
+ifexpr
+    : 'if' '(' expr ')' NL*  expr
+      (elseif  '(' expr ')' NL*  expr NL*  )*
+    ;
+    
+ifelseexpr
+    : 'if' '(' expr ')' NL*  expr NL* 
+      (elseif  '(' expr ')' NL*  expr NL*  )*
+      'else' NL* expr
+    ;
+    
+elseif
+    : 'else' 'if'
+    ;
+
+returnexpr
+    : 'return' '(' expr ')'
+    ;
+
+functioncall
+    : identifier ( ('(' ')') | 
+                   ('(' inlinefunction ')') |   // don't change the order
+                   ('(' NL* sublist NL* ')')
+                 )
+    ;
+    
+inlinefunction
+    : NL* '{' NL* exprlist NL*'}' NL*
+    ;
+
+formula_simple
+    : formula_simple_B
+    | formula_simple_A
+    | formula_simple_C
+    ;
+
+formula_simple_A
+    : identifier? formop ( sublistadd | '.' )
+    ;
+
+formula_simple_B
+    : 'within' '(' identifier ',' (
+           ('{' NL* expr (';' expr)* NL* '}' ) |
+           ( identifier affectop expr )
+           ) ')'
+    ;
+
+formula_simple_C
+    : '(' expr ')' formop ( sublistadd | '.' )
+    ;
+
+PARENTHESIS : '(' | ')' ;
+
+affectop
+    : '<-'
+    | '<<-'
+    | '='
+    | '->'
+    | '->>'
+    | ':='
+    ;
+
+functiondef
+    : 'function'
+    ;
+    
+identifier
+    : ID
+    ;
+
+formop
+    : '~'
+    ;
+
+rangeop
+    : ':'
+    | '::'
+    | ':::'
+    ;
+
+dotop
+    : '$'
+    | '@'
+    ;
+
+operator
+    : '-'
+    | '+'
+    | '*'
+    | '/'
+    | '%'
+    | '^'
+    | '%%'
+    | '%in%'
+    ;
+
+comparison
+    : '>'
+    | '>='
+    | '<'
+    | '<='
+    | '=='
+    | '!='
+    ;
+    
+//////
+// END
+//////
 
 HEX :   '0' ('x'|'X') HEXDIGIT+ [Ll]? ;
 
@@ -180,7 +381,7 @@ HEX_ESCAPE
     ;
 
 ID  :   '.' (LETTER|'_'|'.') (LETTER|DIGIT|'_'|'.')*
-    |   LETTER (LETTER|DIGIT|'_'|'.')*
+    |   '_'? LETTER (LETTER|DIGIT|'_'|'.')*
     ;
     
 fragment LETTER  : [a-zA-Z] ;
