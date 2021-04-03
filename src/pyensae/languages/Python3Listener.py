@@ -1,4 +1,4 @@
-# Generated from \Python3.g4 by ANTLR 4.8
+# Generated from \Python3.g4 by ANTLR 4.9
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .Python3Parser import Python3Parser
@@ -56,6 +56,14 @@ class Python3Listener(ParseTreeListener):
 
     # Exit a parse tree produced by Python3Parser#decorated.
     def exitDecorated(self, ctx: Python3Parser.DecoratedContext):
+        pass
+
+    # Enter a parse tree produced by Python3Parser#async_funcdef.
+    def enterAsync_funcdef(self, ctx: Python3Parser.Async_funcdefContext):
+        pass
+
+    # Exit a parse tree produced by Python3Parser#async_funcdef.
+    def exitAsync_funcdef(self, ctx: Python3Parser.Async_funcdefContext):
         pass
 
     # Enter a parse tree produced by Python3Parser#funcdef.
@@ -136,6 +144,14 @@ class Python3Listener(ParseTreeListener):
 
     # Exit a parse tree produced by Python3Parser#expr_stmt.
     def exitExpr_stmt(self, ctx: Python3Parser.Expr_stmtContext):
+        pass
+
+    # Enter a parse tree produced by Python3Parser#annassign.
+    def enterAnnassign(self, ctx: Python3Parser.AnnassignContext):
+        pass
+
+    # Exit a parse tree produced by Python3Parser#annassign.
+    def exitAnnassign(self, ctx: Python3Parser.AnnassignContext):
         pass
 
     # Enter a parse tree produced by Python3Parser#testlist_star_expr.
@@ -312,6 +328,14 @@ class Python3Listener(ParseTreeListener):
 
     # Exit a parse tree produced by Python3Parser#compound_stmt.
     def exitCompound_stmt(self, ctx: Python3Parser.Compound_stmtContext):
+        pass
+
+    # Enter a parse tree produced by Python3Parser#async_stmt.
+    def enterAsync_stmt(self, ctx: Python3Parser.Async_stmtContext):
+        pass
+
+    # Exit a parse tree produced by Python3Parser#async_stmt.
+    def exitAsync_stmt(self, ctx: Python3Parser.Async_stmtContext):
         pass
 
     # Enter a parse tree produced by Python3Parser#if_stmt.
@@ -522,6 +546,14 @@ class Python3Listener(ParseTreeListener):
     def exitPower(self, ctx: Python3Parser.PowerContext):
         pass
 
+    # Enter a parse tree produced by Python3Parser#atom_expr.
+    def enterAtom_expr(self, ctx: Python3Parser.Atom_exprContext):
+        pass
+
+    # Exit a parse tree produced by Python3Parser#atom_expr.
+    def exitAtom_expr(self, ctx: Python3Parser.Atom_exprContext):
+        pass
+
     # Enter a parse tree produced by Python3Parser#atom.
     def enterAtom(self, ctx: Python3Parser.AtomContext):
         pass
@@ -642,6 +674,14 @@ class Python3Listener(ParseTreeListener):
     def exitComp_if(self, ctx: Python3Parser.Comp_ifContext):
         pass
 
+    # Enter a parse tree produced by Python3Parser#encoding_decl.
+    def enterEncoding_decl(self, ctx: Python3Parser.Encoding_declContext):
+        pass
+
+    # Exit a parse tree produced by Python3Parser#encoding_decl.
+    def exitEncoding_decl(self, ctx: Python3Parser.Encoding_declContext):
+        pass
+
     # Enter a parse tree produced by Python3Parser#yield_expr.
     def enterYield_expr(self, ctx: Python3Parser.Yield_exprContext):
         pass
@@ -656,30 +696,6 @@ class Python3Listener(ParseTreeListener):
 
     # Exit a parse tree produced by Python3Parser#yield_arg.
     def exitYield_arg(self, ctx: Python3Parser.Yield_argContext):
-        pass
-
-    # Enter a parse tree produced by Python3Parser#str_.
-    def enterStr_(self, ctx: Python3Parser.Str_Context):
-        pass
-
-    # Exit a parse tree produced by Python3Parser#str_.
-    def exitStr_(self, ctx: Python3Parser.Str_Context):
-        pass
-
-    # Enter a parse tree produced by Python3Parser#number.
-    def enterNumber(self, ctx: Python3Parser.NumberContext):
-        pass
-
-    # Exit a parse tree produced by Python3Parser#number.
-    def exitNumber(self, ctx: Python3Parser.NumberContext):
-        pass
-
-    # Enter a parse tree produced by Python3Parser#integer.
-    def enterInteger(self, ctx: Python3Parser.IntegerContext):
-        pass
-
-    # Exit a parse tree produced by Python3Parser#integer.
-    def exitInteger(self, ctx: Python3Parser.IntegerContext):
         pass
 
 

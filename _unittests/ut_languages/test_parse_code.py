@@ -4,9 +4,6 @@
 You should indicate a time in seconds. The program ``run_unittests.py``
 will sort all test files by increasing time and run them.
 """
-
-
-import sys
 import os
 import unittest
 import warnings
@@ -91,7 +88,11 @@ class TestParseCode(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         code = """
-        SELECT a,tbl.b,nb$ FROM tbl
+        SELECT
+                a,
+                tbl.b,
+                nb$
+            FROM tbl
         INNER JOIN (
             SELECT b, COUNT(*) AS nb FROM tbl
             ) AS tblG
@@ -100,13 +101,7 @@ class TestParseCode(unittest.TestCase):
 
         clparser, cllexer = get_parser_lexer("SQLite")
         parser = parse_code(code, clparser, cllexer)
-        try:
-            parser.parse()
-        except SyntaxError as e:
-            fLOG(e)
-            return
-
-        raise Exception("should not be here")
+        parser.parse()
 
     def test_pig(self):
         fLOG(
