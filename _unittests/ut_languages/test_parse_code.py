@@ -88,7 +88,7 @@ class TestParseCode(unittest.TestCase):
             OutputPrint=__name__ == "__main__")
 
         code = """
-        SELECT 
+        SELECT
                 a,
                 tbl.b,
                 nb$

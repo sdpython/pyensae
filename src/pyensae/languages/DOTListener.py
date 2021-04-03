@@ -114,12 +114,20 @@ class DOTListener(ParseTreeListener):
     def exitSubgraph(self, ctx: DOTParser.SubgraphContext):
         pass
 
-    # Enter a parse tree produced by DOTParser#id.
-    def enterId(self, ctx: DOTParser.IdContext):
+    # Enter a parse tree produced by DOTParser#compass_pt.
+    def enterCompass_pt(self, ctx: DOTParser.Compass_ptContext):
         pass
 
-    # Exit a parse tree produced by DOTParser#id.
-    def exitId(self, ctx: DOTParser.IdContext):
+    # Exit a parse tree produced by DOTParser#compass_pt.
+    def exitCompass_pt(self, ctx: DOTParser.Compass_ptContext):
+        pass
+
+    # Enter a parse tree produced by DOTParser#gid.
+    def enterGid(self, ctx: DOTParser.GidContext):
+        pass
+
+    # Exit a parse tree produced by DOTParser#gid.
+    def exitGid(self, ctx: DOTParser.GidContext):
         pass
 
 
