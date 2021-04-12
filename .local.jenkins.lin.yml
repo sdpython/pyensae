@@ -15,7 +15,7 @@ install:
   - $PYINT -m pip freeze
 
 script:
-  - { CMD: "$PYINT -u setup.py unittests -g \".*cartopy.*\"", NAME: "UT" }
+  - { CMD: "$PYINT -u setup.py unittests -g \".*cartopy.*\" --covtoken=f929c9b3-bf00-4928-906a-b1dc54d5a5d9", NAME: "UT" }
   - { CMD: "$PYINT -u setup.py unittests -e \".*LONG.*\" -g \".*cartopy.*\"", NAME: "UT_LONG", TIMEOUT: 900}
   - { CMD: "$PYINT -u setup.py unittests -e \".*SKIP.*\" -g \".*cartopy.*\"", NAME: "UT_SKIP", TIMEOUT: 1500}
   - { CMD: "$PYINT -u setup.py unittests -e \".*cartopy.*\"", NAME: "UT_MAP", TIMEOUT: 1500}

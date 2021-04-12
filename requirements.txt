@@ -5,6 +5,7 @@ cartopy
 colormap
 coverage
 dbfread
+decorator>=5.0.5
 descartes
 folium
 geopandas
@@ -22,7 +23,8 @@ parso
 pycodestyle
 pylint
 pylzma
-pyquickhelper>=1.9.3100
+pyquickhelper>=1.10
+pyquicksetup
 quandl
 scikit-learn
 scipy
