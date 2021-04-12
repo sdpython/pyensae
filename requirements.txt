@@ -5,6 +5,7 @@ cartopy
 colormap
 coverage
 dbfread
+decorator>=5.0.5
 descartes
 folium
 geopandas
