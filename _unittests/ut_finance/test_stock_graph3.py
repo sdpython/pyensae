@@ -33,8 +33,13 @@ class TestStockGraph3(ExtTestCase):
         except KeyError as e:
             warnings.warn(str(e))
             return
-        stock2 = StockPrices(
-            TestStockGraph3.tick[1], folder=cache, url=TestStockGraph3.source)
+        try:
+            stock2 = StockPrices(
+                TestStockGraph3.tick[1], folder=cache,
+                url=TestStockGraph3.source)
+        except KeyError as e:
+            warnings.warn(str(e))
+            return
 
         fig, ax = plt.subplots(figsize=(16, 8))
         ax = stock.plot(ax=ax)
