@@ -3,6 +3,7 @@
 """
 import os
 import unittest
+import warnings
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import fix_tkinter_issues_virtualenv, ExtTestCase
 from pyensae.finance.astock import StockPrices
@@ -25,8 +26,13 @@ class TestStockGraph3(ExtTestCase):
 
         cache = os.path.abspath(os.path.split(__file__)[0])
         cache = os.path.join(cache, "temp_cache3")
-        stock = StockPrices(
-            TestStockGraph3.tick[0], folder=cache, url=TestStockGraph3.source)
+        try:
+            stock = StockPrices(
+                TestStockGraph3.tick[0], folder=cache,
+                url=TestStockGraph3.source)
+        except KeyError as e:
+            warnings.warn(str(e))
+            return
         stock2 = StockPrices(
             TestStockGraph3.tick[1], folder=cache, url=TestStockGraph3.source)
 
