@@ -78,7 +78,7 @@ setup(
     download_url="https://github.com/sdpython/pyensae/",
     description=DESCRIPTION,
     long_description=read_readme(__file__),
-    cmdclass=default_cmdclass(),
+    cmdclass=command,
     keywords=KEYWORDS,
     classifiers=CLASSIFIERS,
     packages=packages,
