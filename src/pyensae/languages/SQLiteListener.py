@@ -19,11 +19,11 @@ class SQLiteListener(ParseTreeListener):
         pass
 
     # Enter a parse tree produced by SQLiteParser#error.
-    def enterError(self, ctx: SQLiteParser.ErrorContext):
+    def enterError(self, ctx):
         pass
 
     # Exit a parse tree produced by SQLiteParser#error.
-    def exitError(self, ctx: SQLiteParser.ErrorContext):
+    def exitError(self, ctx):
         pass
 
     # Enter a parse tree produced by SQLiteParser#sql_stmt_list.
