@@ -29,7 +29,7 @@ class ExceptionSQL(DBException):
         DBException.__init__(self, description + "\n" + sql)
         self.ex = ex
         self.sql = sql
-        if False and log:
+        if log:
             print(description + "\n" + sql)  # pragma: no cover
 
     def __str__(self):

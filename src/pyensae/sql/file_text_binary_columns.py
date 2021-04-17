@@ -375,7 +375,7 @@ class TextFileColumns(TextFile):
         self.open()
         for line in self:
             try:
-                k = tuple([line[k] for k in key])
+                k = tuple(line[k] for k in key)
             except KeyError as e:
                 raise Exception("unable to find one column in\n{0}".format(
                     self.get_columns())) from e
@@ -449,7 +449,7 @@ class TextFileColumns(TextFile):
                 d = None
             if d is not None:
                 try:
-                    k = tuple([d[k] for k in key])
+                    k = tuple(d[k] for k in key)
                 except KeyError as e:
                     raise Exception("unable to find one column in\n{0}".format(
                         li[0].get_columns())) from e
@@ -488,7 +488,7 @@ class TextFileColumns(TextFile):
                 d = None
 
             if d is not None:
-                k = tuple([d[k_] for k_ in key])
+                k = tuple(d[k_] for k_ in key)
                 kline.append([k, d] + line[2:])
 
         # end

@@ -155,35 +155,35 @@ class SQLiteListener(ParseTreeListener):
         pass
 
     # Enter a parse tree produced by SQLiteParser#drop_index_stmt.
-    def enterDrop_index_stmt(self, ctx: SQLiteParser.Drop_index_stmtContext):
+    def enterDrop_index_stmt(self, ctx):
         pass
 
     # Exit a parse tree produced by SQLiteParser#drop_index_stmt.
-    def exitDrop_index_stmt(self, ctx: SQLiteParser.Drop_index_stmtContext):
+    def exitDrop_index_stmt(self, ctx):
         pass
 
     # Enter a parse tree produced by SQLiteParser#drop_table_stmt.
-    def enterDrop_table_stmt(self, ctx: SQLiteParser.Drop_table_stmtContext):
+    def enterDrop_table_stmt(self, ctx):
         pass
 
     # Exit a parse tree produced by SQLiteParser#drop_table_stmt.
-    def exitDrop_table_stmt(self, ctx: SQLiteParser.Drop_table_stmtContext):
+    def exitDrop_table_stmt(self, ctx):
         pass
 
     # Enter a parse tree produced by SQLiteParser#drop_trigger_stmt.
-    def enterDrop_trigger_stmt(self, ctx: SQLiteParser.Drop_trigger_stmtContext):
+    def enterDrop_trigger_stmt(self, ctx):
         pass
 
     # Exit a parse tree produced by SQLiteParser#drop_trigger_stmt.
-    def exitDrop_trigger_stmt(self, ctx: SQLiteParser.Drop_trigger_stmtContext):
+    def exitDrop_trigger_stmt(self, ctx):
         pass
 
     # Enter a parse tree produced by SQLiteParser#drop_view_stmt.
-    def enterDrop_view_stmt(self, ctx: SQLiteParser.Drop_view_stmtContext):
+    def enterDrop_view_stmt(self, ctx):
         pass
 
     # Exit a parse tree produced by SQLiteParser#drop_view_stmt.
-    def exitDrop_view_stmt(self, ctx: SQLiteParser.Drop_view_stmtContext):
+    def exitDrop_view_stmt(self, ctx):
         pass
 
     # Enter a parse tree produced by SQLiteParser#factored_select_stmt.
@@ -259,11 +259,11 @@ class SQLiteListener(ParseTreeListener):
         pass
 
     # Enter a parse tree produced by SQLiteParser#select_or_values.
-    def enterSelect_or_values(self, ctx: SQLiteParser.Select_or_valuesContext):
+    def enterSelect_or_values(self, ctx):
         pass
 
     # Exit a parse tree produced by SQLiteParser#select_or_values.
-    def exitSelect_or_values(self, ctx: SQLiteParser.Select_or_valuesContext):
+    def exitSelect_or_values(self, ctx):
         pass
 
     # Enter a parse tree produced by SQLiteParser#update_stmt.
@@ -539,11 +539,11 @@ class SQLiteListener(ParseTreeListener):
         pass
 
     # Enter a parse tree produced by SQLiteParser#database_name.
-    def enterDatabase_name(self, ctx: SQLiteParser.Database_nameContext):
+    def enterDatabase_name(self, ctx):
         pass
 
     # Exit a parse tree produced by SQLiteParser#database_name.
-    def exitDatabase_name(self, ctx: SQLiteParser.Database_nameContext):
+    def exitDatabase_name(self, ctx):
         pass
 
     # Enter a parse tree produced by SQLiteParser#table_name.

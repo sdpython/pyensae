@@ -463,7 +463,7 @@ class DatabaseCore(DatabaseCore2):
             if len(fi) != 1:
                 raise DBException(  # pragma: no cover
                     "Unable to extract index fields from %r" % c)
-            fi = tuple([s.strip() for s in fi[0].split(",")])
+            fi = tuple(s.strip() for s in fi[0].split(","))
             res.append((a, b, c, fi))
         select.close()
         #self.LOG ("number of indices ", len (res))
