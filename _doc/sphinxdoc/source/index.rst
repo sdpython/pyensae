@@ -1,8 +1,8 @@
 pyensae documentation
 =====================
 
-.. image:: https://travis-ci.org/sdpython/pyensae.svg?branch=master
-    :target: https://travis-ci.org/sdpython/pyensae
+.. image:: https://travis-ci.com/sdpython/pyensae.svg?branch=master
+    :target: https://travis-ci.com/sdpython/pyensae
     :alt: Build status
 
 .. image:: https://ci.appveyor.com/api/projects/status/jioxwx1igwbqwa28?svg=true
@@ -50,7 +50,7 @@ pyensae documentation
 `github <https://github.com/sdpython/pyensae/>`_,
 `documentation <http://www.xavierdupre.fr/app/pyensae/helpsphinx/index.html>`_,
 `wheel <http://www.xavierdupre.fr/site2013/index_code.html#pyensae>`_,
-`travis <https://travis-ci.org/sdpython/pyensae>`_,
+`travis <https://travis-ci.com/sdpython/pyensae>`_,
 :ref:`l-README`,
 :ref:`blog <ap-main-0>`,
 :ref:`l-issues-todolist`

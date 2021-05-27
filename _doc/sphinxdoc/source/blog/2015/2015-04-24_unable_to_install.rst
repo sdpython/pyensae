@@ -6,7 +6,7 @@
     :categories: installation
 
     The module is tested on Windows and on Linux
-    through `travis <https://travis-ci.org/sdpython/pyensae>`_.
+    through `travis <https://travis-ci.com/sdpython/pyensae>`_.
     It is not tested on OS X (Apple), the installation was failing
     on a student's machine today (however he installed almost
     all the version including 3.5a).
