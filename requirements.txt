@@ -16,7 +16,7 @@ mplfinance
 nbconvert>=6.0.2
 networkx
 openpyxl
-pandas
+pandas>=1.0
 pandas-datareader
 pandocfilters
 parso
@@ -26,7 +26,7 @@ pylzma
 pyquickhelper>=1.10
 pyquicksetup
 quandl
-scikit-learn
+scikit-learn>=0.24
 scipy
 seaborn
 shapely
