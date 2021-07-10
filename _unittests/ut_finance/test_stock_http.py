@@ -4,7 +4,6 @@
 import os
 import unittest
 import datetime
-from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
 from pyensae.finance.astock import StockPrices, StockPricesException
 
@@ -15,10 +14,6 @@ class TestStockHttp(unittest.TestCase):
     source = 'yahoo_new'
 
     def test_download_stock(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_cache_download_http")
         stock = StockPrices(TestStockHttp.ticks[0], folder=cache,
                             end=datetime.datetime(2014, 1, 15),
@@ -30,10 +25,6 @@ class TestStockHttp(unittest.TestCase):
         self.assertTrue(len(df) > 0)
 
     def test_available_dates(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_cache_dates")
         stocks = [StockPrices(t, folder=cache, url=TestStockHttp.source)
                   for t in TestStockHttp.ticks]
@@ -44,10 +35,6 @@ class TestStockHttp(unittest.TestCase):
         self.assertTrue(missing is None or len(missing) > 0)
 
     def test_covariance(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_cache_cov")
         stocks = [StockPrices(t, folder=cache, url=TestStockHttp.source)
                   for t in TestStockHttp.ticks]
@@ -70,15 +57,9 @@ class TestStockHttp(unittest.TestCase):
         self.assertEqual(len(ret), 3)
 
     def test_no_wifi(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
         data = os.path.abspath(os.path.split(__file__)[0])
         data = os.path.join(data, "data")
         file = os.path.join(data, "BNP.PA.2000-01-03.2014-02-24.txt")
-        fLOG(os.path.exists(file))
-        fLOG(file)
         try:
             StockPrices(file)
         except StockPricesException as e:
@@ -88,10 +69,6 @@ class TestStockHttp(unittest.TestCase):
                 raise Exception("unexpected error (3)") from e
 
     def test_index(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
         cache = get_temp_folder(__file__, "temp_cache_index")
         stock = StockPrices(TestStockHttp.ticks[0], folder=cache,
                             end=datetime.datetime(2014, 1, 15),

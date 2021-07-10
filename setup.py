@@ -93,7 +93,7 @@ setup(
     extras_require={
         'graphhelper': ['blockdiag', 'cartopy'],
         'datasource': ['dbread', 'geopandas', 'shapely', 'pyshp', 'pylzma'],
-        'finance': ['pandas-datareader', 'yahoo_historical'],
+        'finance': ['pandas-datareader', 'yahoo_historical>=0.4'],
         'graphhelper': ['matplotlib>=3.0'],
         'languages': ['antlr4-python3-runtime>=4.8'],
         'notebookhelper': ['folium', 'qgrid'],
@@ -101,7 +101,7 @@ setup(
             "pyquickhelper>=1.8", "numpy>=1.18", "pandas>=1.0", "matplotlib>=3.0",
             'blockdiag', 'cartopy',
             'dbread', 'geopandas', 'shapely', 'pyshp', 'pylzma',
-            'pandas-datareader', 'yahoo_historical',
+            'pandas-datareader', 'yahoo_historical>=0.4',
             'antlr4-python3-runtime>=4.8',
             'folium', 'qgrid', 'easydev',
         ],

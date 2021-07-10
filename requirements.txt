@@ -34,4 +34,4 @@ sphinx
 sphinxcontrib.imagesvg
 sphinx_gallery
 wheel
-yahoo-historical
+yahoo-historical>=0.4
