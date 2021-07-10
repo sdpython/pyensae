@@ -6,8 +6,10 @@ import os
 import urllib.request
 import urllib.error
 import datetime
+from io import StringIO
 import pandas
 import numpy
+import requests
 from pyquickhelper.filehelper import is_file_string
 
 
@@ -202,9 +204,27 @@ class StockPrices:
                     use_url = False
                 elif url == 'yahoo_new':
                     from yahoo_historical import Fetcher
+
+                    def _get(self, events):
+                        if self.interval not in ["1d", "1wk", "1mo"]:
+                            raise ValueError(
+                                "Incorrect interval: valid intervals are 1d, 1wk, 1mo")
+
+                        url = self.api_url % (
+                            self.ticker, self.start, self.end, self.interval, events)
+
+                        headers = {'User-Agent': ''}
+                        data = requests.get(
+                            url, cookies={"User-agent": "Mozilla/5.0"},
+                            headers=headers)
+                        content = StringIO(data.content.decode("utf-8"))
+                        return pandas.read_csv(content, sep=",")
+
+                    # See issue https://github.com/AndrewRPorter/yahoo-historical/issues/19.
+                    Fetcher._get = _get
                     data = Fetcher(tick, [begin.year, begin.month, begin.day],
                                    [end.year, end.month, end.day])
-                    df = data.getHistorical()
+                    df = data.get_historical()
                     df.to_csv(name, sep=sep, index=False)
                     use_url = False
                 elif url in ("yahoo", "google", "fred", "famafrench"):
@@ -515,7 +535,7 @@ class StockPrices:
         listStockPrices = [v.returns() for v in listStockPrices]
         mat = StockPrices.available_dates(listStockPrices, False, field)
 
-        npmat = numpy.matrix(mat)
+        npmat = numpy.array(mat)
         cov = numpy.cov(
             npmat.transpose()) if cov else numpy.corrcoef(
             npmat.transpose())
