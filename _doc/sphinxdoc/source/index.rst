@@ -23,10 +23,6 @@ pyensae documentation
     :alt: MIT License
     :target: http://opensource.org/licenses/MIT
 
-.. image:: https://requires.io/github/sdpython/pyensae/requirements.svg?branch=master
-     :target: https://requires.io/github/sdpython/pyensae/requirements/?branch=master
-     :alt: Requirements Status
-
 .. image:: https://codecov.io/github/sdpython/pyensae/coverage.svg?branch=master
     :target: https://codecov.io/github/sdpython/pyensae?branch=master
 
