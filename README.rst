@@ -8,7 +8,7 @@ pyensae: hide complexity for teachings
 ======================================
 
 .. image:: https://travis-ci.com/sdpython/pyensae.svg?branch=master
-    :target: https://travis-ci.com/sdpython/pyensae
+    :target: https://app.travis-ci.com/github/sdpython/pyensae
     :alt: Build status
 
 .. image:: https://ci.appveyor.com/api/projects/status/jioxwx1igwbqwa28?svg=true
