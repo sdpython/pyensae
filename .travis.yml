@@ -2,7 +2,7 @@ dist: focal
 sudo: true
 language: python
 python:
-    - "3.9"
+    - "3.10"
 
 before_install:
     - sudo apt-get install libgeos-dev libproj-dev proj-data graphviz libblas-dev liblapack-dev
