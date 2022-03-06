@@ -16,7 +16,7 @@ readme = 'README.rst'
 history = "HISTORY.rst"
 requirements = None
 
-KEYWORDS = project_var_name + ', ENSAE, sqllite, database, teachings'
+KEYWORDS = [project_var_name, 'ENSAE', 'sqllite', 'database', 'teachings']
 DESCRIPTION = """Helpers for teaching purposes (includes sqllite helpers)."""
 CLASSIFIERS = [
     'Programming Language :: Python :: %d' % sys.version_info[0],
