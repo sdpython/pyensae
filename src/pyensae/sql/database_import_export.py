@@ -6,8 +6,10 @@
 
 import os
 import collections
-
-
+try:
+    from collections.abc import Iterable
+except ImportError:
+    from collections import Iterable
 from .file_text_binary import TextFile
 from .file_text_binary_columns import TextFileColumns
 from .database_exception import DBException
@@ -205,7 +207,7 @@ class DatabaseImportExport:
         nbinsert = 0
         unique_key = {}
         if isinstance(file, list) or (
-                isinstance(file, collections.Iterable) and not isinstance(file, str)):
+                isinstance(file, Iterable) and not isinstance(file, str)):
             primarykey = None
             for c, v in columns.items():
                 if "PRIMARYKEY" in v:
