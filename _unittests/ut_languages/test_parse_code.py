@@ -8,14 +8,16 @@ import os
 import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
-from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
-from pyensae.languages.antlr_grammar_build import build_grammar
-import pyensae.languages.antlr_grammar_use as source_parser
 
 
 class TestParseCode(unittest.TestCase):
 
     def test_build_parser(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -40,6 +42,11 @@ class TestParseCode(unittest.TestCase):
             fLOG(final)
 
     def test_r(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -61,6 +68,11 @@ class TestParseCode(unittest.TestCase):
         assert len(st) > 0
 
     def test_sql(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -82,6 +94,11 @@ class TestParseCode(unittest.TestCase):
         assert len(st) > 0
 
     def test_error(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -104,6 +121,11 @@ class TestParseCode(unittest.TestCase):
         parser.parse()
 
     def test_pig(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -126,6 +148,11 @@ class TestParseCode(unittest.TestCase):
         assert len(st) > 0
 
     def test_csharp(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -152,6 +179,11 @@ class TestParseCode(unittest.TestCase):
         assert len(st) > 0
 
     def test_python3(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -180,6 +212,11 @@ class TestParseCode(unittest.TestCase):
         assert len(st) > 0
 
     def test_DOT(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,

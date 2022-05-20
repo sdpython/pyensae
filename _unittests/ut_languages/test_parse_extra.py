@@ -8,14 +8,16 @@ import os
 import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
-from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
-from pyensae.languages.antlr_grammar_build import build_grammar
-import pyensae.languages.antlr_grammar_use as source_parser
 
 
 class TestParseCode (unittest.TestCase):
 
     def test_build_parser_extra(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -37,6 +39,11 @@ class TestParseCode (unittest.TestCase):
             build_grammar(lang, fLOG=fLOG)
 
     def test_extra(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
