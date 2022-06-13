@@ -5,7 +5,7 @@
 History
 =======
 
-current - 2022-05-20 - 0.00Mb
+current - 2022-06-13 - 0.00Mb
 =============================
 
 * #40: Fixes issue with yahoo_historical>=0.4 (2021-07-10)
