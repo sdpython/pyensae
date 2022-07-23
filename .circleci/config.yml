@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Install dependencies for proj
           command: |
-            sudo apt-get install -y libgeos-dev proj-data graphviz sqlite3 libtiff
+            sudo apt-get install -y libgeos-dev proj-data graphviz sqlite3 libtiff5 libtiff5-dev libtiff-dev libsqlite3-dev libcurl4-gnutls-dev
 
       - run:
           name: build proj
