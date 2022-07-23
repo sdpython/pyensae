@@ -3,14 +3,16 @@
 """
 import os
 import unittest
-from pyquickhelper.pycode import get_temp_folder, ExtTestCase
-from pyquickhelper.pycode import fix_tkinter_issues_virtualenv
+from pyquickhelper.pycode import (
+    get_temp_folder, ExtTestCase, fix_tkinter_issues_virtualenv,
+    skipif_circleci)
 from pyensae.datasource import load_french_departements
 from pyensae.graphhelper import plot_map_france, plot_map_france_polygon
 
 
 class TestMap(ExtTestCase):
 
+    @skipif_circleci('cartopy crashes on circleci')
     def test_plot_map_france(self):
         temp = get_temp_folder(__file__, "temp_plot_map_france")
         fix_tkinter_issues_virtualenv()
@@ -26,6 +28,7 @@ class TestMap(ExtTestCase):
         plt.close('all')
         self.assertExists(img)
 
+    @skipif_circleci('cartopy crashes on circleci')
     def test_plot_map_france_polygon(self):
         temp = get_temp_folder(__file__, "temp_plot_map_france_polygon")
         df = load_french_departements(cache=temp)

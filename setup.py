@@ -57,7 +57,7 @@ class SetupCommandBuildScript(Command):
             if not os.path.exists(g2):
                 raise FileNotFoundError("{0}\n{1}".format(grammar, g2))
             grammar = g2
-        build_grammar(grammar, fLOG=logging_function)
+        build_grammar(grammar, fLOG=print)
         r = True
 
 
