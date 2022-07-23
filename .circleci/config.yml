@@ -18,8 +18,8 @@ jobs:
           name: Install pandoc
           command: |
                     sudo apt-get update 
-                    wget https://github.com/jgm/pandoc/releases/download/2.14.1/pandoc-2.14.1-1-amd64.deb
-                    sudo dpkg -i pandoc-2.14.1-1-amd64.deb
+                    wget https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-1-amd64.deb
+                    sudo dpkg -i pandoc-2.18-1-amd64.deb
 
       - run:
           name: Install java
@@ -49,14 +49,21 @@ jobs:
                     sudo apt-get install -y graphviz
           
       - run:
-          name: Install libproj
+          name: Install dependencies for proj
           command: |
-            sudo apt-get install -y libgeos-dev libproj-dev proj-data graphviz
+            sudo apt-get install -y libgeos-dev proj-data graphviz
 
       - run:
-          name: Install standard libraries
+          name: build proj
           command: |
-            pip install scipy matplotlib numpy cython pandas
+            wget https://download.osgeo.org/proj/proj-9.0.0.tar.gz
+            tar -xf proj-9.0.0.tar.gz
+            cd proj-9.0.0
+            mkdir build && cd build
+            cmake ..
+            cmake --build .
+            cmake --build . --target install
+            cd ..
 
       - run:
           name: install dependencies
