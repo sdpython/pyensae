@@ -51,11 +51,12 @@ jobs:
       - run:
           name: Install dependencies for proj
           command: |
-            sudo apt-get install -y libgeos-dev proj-data graphviz
+            sudo apt-get install -y libgeos-dev proj-data graphviz sqlite3
 
       - run:
           name: build proj
           command: |
+            # see https://stackoverflow.com/questions/72442087/cant-install-proj-8-0-0-for-cartopy-linux
             wget https://download.osgeo.org/proj/proj-9.0.0.tar.gz
             tar -xf proj-9.0.0.tar.gz
             cd proj-9.0.0
