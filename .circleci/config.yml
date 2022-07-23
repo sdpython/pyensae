@@ -59,14 +59,6 @@ jobs:
             pip install scipy matplotlib numpy cython pandas
 
       - run:
-          name: Install pyproj, shapely, cartopy
-          command: |
-            pip install pyproj
-            pip uninstall -y shapely
-            pip install --no-binary shapely shapely
-            pip install cartopy
-
-      - run:
           name: install dependencies
           command: |
             pip install -r requirements.txt
