@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.10.1
+      - image: cimg/python:3.10.5
     
     working_directory: ~/repo
     
@@ -56,25 +56,19 @@ jobs:
       - run:
           name: Install standard libraries
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip3 install scipy matplotlib numpy cython pandas
+            pip install scipy matplotlib numpy cython pandas
 
       - run:
           name: Install pyproj, shapely, cartopy
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip3 install pyproj
-            pip3 uninstall -y shapely
-            pip3 install --no-binary shapely shapely
-            pip3 install cartopy
+            pip install pyproj
+            pip uninstall -y shapely
+            pip install --no-binary shapely shapely
+            pip install cartopy
 
       - run:
           name: install dependencies
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
             pip install -r requirements.txt
             pip install mplfinance
 
@@ -86,14 +80,12 @@ jobs:
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
             export PYTHONPATH=src
             python setup.py unittests
 
       - run:
           name: wheel
           command: |
-            . venv/bin/activate
             export PYTHONPATH=src
             python setup.py bdist_wheel
             mkdir -p test-reports/dist
