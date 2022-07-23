@@ -23,7 +23,7 @@ class TestParseCode(unittest.TestCase):
             self._testMethodName,
             OutputPrint=__name__ == "__main__")
 
-        langs = ["DOT", "CSharp4", "SQLite", "R"]  # , "Python3", "Pig"]
+        langs = ["DOT", "CSharp4", "SQLite", "R"]  # , "Python3"]
 
         try:
             for lang in langs:
@@ -119,33 +119,6 @@ class TestParseCode(unittest.TestCase):
         clparser, cllexer = get_parser_lexer("SQLite")
         parser = parse_code(code, clparser, cllexer)
         parser.parse()
-
-    def test_pig(self):
-        from pyensae.languages.antlr_grammar_use import (
-            get_parser_lexer, get_tree_string, parse_code)
-        from pyensae.languages.antlr_grammar_build import build_grammar
-        import pyensae.languages.antlr_grammar_use as source_parser
-
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
-        code = """
-        A = LOAD 'filename.txt' USING PigStorage('\t');
-        STORE A INTO 'samefile.txt' ;
-        """
-
-        try:
-            clparser, cllexer = get_parser_lexer("Pig")
-        except ImportError:
-            warnings.warn("Grammar for Pig not ready yet.")
-            return
-        parser = parse_code(code, clparser, cllexer)
-        tree = parser.compilation_unit()
-        st = get_tree_string(tree, parser, None)
-        fLOG(st.replace("\\n", "\n"))
-        assert len(st) > 0
 
     def test_csharp(self):
         from pyensae.languages.antlr_grammar_use import (

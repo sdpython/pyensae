@@ -4,27 +4,19 @@
 
 lexer grammar CSharpLexer;
 
-@lexer::header
-{# import java.util.Stack;}
-
 channels { COMMENTS_CHANNEL, DIRECTIVE }
 
-@lexer::members
-{    self.interpolatedStringLevel = 0;
-    self.interpolatedVerbatiums = []
-    self.curlyLevels = []
-    self.verbatium = False
-}
+options { superClass = CSharpLexerBase; }
 
 BYTE_ORDER_MARK: '\u00EF\u00BB\u00BF';
 
-SINGLE_LINE_DOC_COMMENT: '///' InputCharacter*;
-DELIMITED_DOC_COMMENT:   '/**' .*? '*/'           -> channel(COMMENTS_CHANNEL);
-SINGLE_LINE_COMMENT:     '//'  InputCharacter*;
+SINGLE_LINE_DOC_COMMENT: '///' InputCharacter*    -> channel(COMMENTS_CHANNEL);
+EMPTY_DELIMITED_DOC_COMMENT: '/***/'              -> channel(COMMENTS_CHANNEL);
+DELIMITED_DOC_COMMENT:       '/**' ~'/' .*? '*/'  -> channel(COMMENTS_CHANNEL);
+SINGLE_LINE_COMMENT:     '//'  InputCharacter*    -> channel(COMMENTS_CHANNEL);
 DELIMITED_COMMENT:       '/*'  .*? '*/'           -> channel(COMMENTS_CHANNEL);
-
 WHITESPACES:   (Whitespace | NewLine)+            -> channel(HIDDEN);
-SHARP:         '#'                                -> mode(DIRECTIVE_MODE);
+SHARP:         '#'                                -> mode(DIRECTIVE_MODE), skip;
 
 ABSTRACT:      'abstract';
 ADD:           'add';
@@ -84,7 +76,7 @@ LONG:          'long';
 NAMEOF:        'nameof';
 NAMESPACE:     'namespace';
 NEW:           'new';
-NULL:          'null';
+NULL_:         'null';
 OBJECT:        'object';
 ON:            'on';
 OPERATOR:      'operator';
@@ -119,6 +111,7 @@ TYPEOF:        'typeof';
 UINT:          'uint';
 ULONG:         'ulong';
 UNCHECKED:     'unchecked';
+UNMANAGED:     'unmanaged';
 UNSAFE:        'unsafe';
 USHORT:        'ushort';
 USING:         'using';
@@ -138,53 +131,27 @@ IDENTIFIER:          '@'? IdentifierOrKeyword;
 
 //B.1.8 Literals
 // 0.Equals() would be parsed as an invalid real (1. branch) causing a lexer error
-LITERAL_ACCESS:      [0-9]+ IntegerTypeSuffix? '.' '@'? IdentifierOrKeyword;
-INTEGER_LITERAL:     [0-9]+ IntegerTypeSuffix?;
-HEX_INTEGER_LITERAL: '0' [xX] HexDigit+ IntegerTypeSuffix?;
-REAL_LITERAL:        [0-9]* '.' [0-9]+ ExponentPart? [FfDdMm]? | [0-9]+ ([FfDdMm] | ExponentPart [FfDdMm]?);
+LITERAL_ACCESS:      [0-9] ('_'* [0-9])* IntegerTypeSuffix? '.' '@'? IdentifierOrKeyword;
+INTEGER_LITERAL:     [0-9] ('_'* [0-9])* IntegerTypeSuffix?;
+HEX_INTEGER_LITERAL: '0' [xX] ('_'* HexDigit)+ IntegerTypeSuffix?;
+BIN_INTEGER_LITERAL: '0' [bB] ('_'* [01])+ IntegerTypeSuffix?;
+REAL_LITERAL:        ([0-9] ('_'* [0-9])*)? '.' [0-9] ('_'* [0-9])* ExponentPart? [FfDdMm]? | [0-9] ('_'* [0-9])* ([FfDdMm] | ExponentPart [FfDdMm]?);
 
 CHARACTER_LITERAL:                   '\'' (~['\\\r\n\u0085\u2028\u2029] | CommonCharacter) '\'';
 REGULAR_STRING:                      '"'  (~["\\\r\n\u0085\u2028\u2029] | CommonCharacter)* '"';
 VERBATIUM_STRING:                    '@"' (~'"' | '""')* '"';
-INTERPOLATED_REGULAR_STRING_START:   '$"'
-    { self.interpolatedStringLevel += 1; self.interpolatedVerbatiums.append(False); self.verbatium = False; } -> pushMode(INTERPOLATION_STRING);
-INTERPOLATED_VERBATIUM_STRING_START: '$@"'
-    { self.interpolatedStringLevel += 1; self.interpolatedVerbatiums.push(True); self.verbatium = True; }  -> pushMode(INTERPOLATION_STRING);
-
+INTERPOLATED_REGULAR_STRING_START:   '$"' { this.OnInterpolatedRegularStringStart(); } -> pushMode(INTERPOLATION_STRING);
+INTERPOLATED_VERBATIUM_STRING_START: '$@"'  { this.OnInterpolatedVerbatiumStringStart(); }  -> pushMode(INTERPOLATION_STRING);
 //B.1.9 Operators And Punctuators
-OPEN_BRACE:               '{'
-{
-if self.interpolatedStringLevel > 0:
-    self.curlyLevels.push(self.curlyLevels.pop() + 1);
-};
-CLOSE_BRACE:              '}'
-{
-if self.interpolatedStringLevel > 0:
-    self.curlyLevels.push(curlyLevels.pop() - 1);
-    if (self.curlyLevels.peek() == 0):
-        self.curlyLevels.pop();
-        self.skip();
-        self.popMode();
-};
+OPEN_BRACE:               '{' { this.OnOpenBrace(); };
+CLOSE_BRACE:              '}' { this.OnCloseBrace(); };
 OPEN_BRACKET:             '[';
 CLOSE_BRACKET:            ']';
 OPEN_PARENS:              '(';
 CLOSE_PARENS:             ')';
 DOT:                      '.';
 COMMA:                    ',';
-COLON:                    ':'
-{
-if (self.interpolatedStringLevel > 0):
-    ind = 1;
-    switchToFormatString = true;
-    while (_input.LA(ind) != '}'):
-        if (self._input.LA(ind) == ':' or self._input.LA(ind) == ')'):
-            switchToFormatString = false;
-            break;
-        ind += 1
-    if (switchToFormatString):
-        self.mode(INTERPOLATION_FORMAT);
-};
+COLON:                    ':' { this.OnColon(); };
 SEMICOLON:                ';';
 PLUS:                     '+';
 MINUS:                    '-';
@@ -221,27 +188,22 @@ OP_OR_ASSIGNMENT:         '|=';
 OP_XOR_ASSIGNMENT:        '^=';
 OP_LEFT_SHIFT:            '<<';
 OP_LEFT_SHIFT_ASSIGNMENT: '<<=';
-
+OP_COALESCING_ASSIGNMENT: '??=';
+OP_RANGE:                 '..';
 // https://msdn.microsoft.com/en-us/library/dn961160.aspx
 mode INTERPOLATION_STRING;
-
 DOUBLE_CURLY_INSIDE:           '{{';
-OPEN_BRACE_INSIDE:             '{' { self.curlyLevels.append(1); } -> skip, pushMode(DEFAULT_MODE);
-REGULAR_CHAR_INSIDE:           { not verbatium }? SimpleEscapeSequence;
-VERBATIUM_DOUBLE_QUOTE_INSIDE: {  verbatium }? '""';
-DOUBLE_QUOTE_INSIDE:           '"' { self.interpolatedStringLevel -= 1; self.interpolatedVerbatiums.pop();
- self.verbatium = self.interpolatedVerbatiums.peek() if (len(self.interpolatedVerbatiums) > 0) else False; } -> popMode;
-REGULAR_STRING_INSIDE:         { not verbatium }? ~('{' | '\\' | '"')+;
-VERBATIUM_INSIDE_STRING:       {  verbatium }? ~('{' | '"')+;
-
+OPEN_BRACE_INSIDE:             '{' { this.OpenBraceInside(); } -> skip, pushMode(DEFAULT_MODE);
+REGULAR_CHAR_INSIDE:           { this.IsRegularCharInside() }? SimpleEscapeSequence;
+VERBATIUM_DOUBLE_QUOTE_INSIDE: { this.IsVerbatiumDoubleQuoteInside() }? '""';
+DOUBLE_QUOTE_INSIDE:           '"' { this.OnDoubleQuoteInside(); } -> popMode;
+REGULAR_STRING_INSIDE:         { this.IsRegularCharInside() }? ~('{' | '\\' | '"')+;
+VERBATIUM_INSIDE_STRING:       { this.IsVerbatiumDoubleQuoteInside() }? ~('{' | '"')+;
 mode INTERPOLATION_FORMAT;
-
 DOUBLE_CURLY_CLOSE_INSIDE:      '}}' -> type(FORMAT_STRING);
-CLOSE_BRACE_INSIDE:             '}' { curlyLevels.pop(); }   -> skip, popMode;
+CLOSE_BRACE_INSIDE:             '}' { this.OnCloseBraceInside(); }   -> skip, popMode;
 FORMAT_STRING:                  ~'}'+;
-
 mode DIRECTIVE_MODE;
-
 DIRECTIVE_WHITESPACES:         Whitespace+                      -> channel(HIDDEN);
 DIGITS:                        [0-9]+                           -> channel(DIRECTIVE);
 DIRECTIVE_TRUE:                'true'                           -> channel(DIRECTIVE), type(TRUE);
@@ -258,6 +220,7 @@ WARNING:                       'warning' Whitespace+            -> channel(DIREC
 REGION:                        'region' Whitespace*             -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
 ENDREGION:                     'endregion' Whitespace*          -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
 PRAGMA:                        'pragma' Whitespace+             -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
+NULLABLE:                      'nullable' Whitespace+           -> channel(DIRECTIVE), mode(DIRECTIVE_TEXT);
 DIRECTIVE_DEFAULT:             'default'                        -> channel(DIRECTIVE), type(DEFAULT);
 DIRECTIVE_HIDDEN:              'hidden'                         -> channel(DIRECTIVE);
 DIRECTIVE_OPEN_PARENS:         '('                              -> channel(DIRECTIVE), type(OPEN_PARENS);
@@ -269,18 +232,13 @@ DIRECTIVE_OP_AND:              '&&'                             -> channel(DIREC
 DIRECTIVE_OP_OR:               '||'                             -> channel(DIRECTIVE), type(OP_OR);
 DIRECTIVE_STRING:              '"' ~('"' | [\r\n\u0085\u2028\u2029])* '"' -> channel(DIRECTIVE), type(STRING);
 CONDITIONAL_SYMBOL:            IdentifierOrKeyword              -> channel(DIRECTIVE);
-DIRECTIVE_SINGLE_LINE_COMMENT: '//' ~[\r\n\u0085\u2028\u2029]*  -> type(SINGLE_LINE_COMMENT);
+DIRECTIVE_SINGLE_LINE_COMMENT: '//' ~[\r\n\u0085\u2028\u2029]*  -> channel(COMMENTS_CHANNEL), type(SINGLE_LINE_COMMENT);
 DIRECTIVE_NEW_LINE:            NewLine                          -> channel(DIRECTIVE), mode(DEFAULT_MODE);
-
 mode DIRECTIVE_TEXT;
-
 TEXT:                          ~[\r\n\u0085\u2028\u2029]+       -> channel(DIRECTIVE);
 TEXT_NEW_LINE:                 NewLine    -> channel(DIRECTIVE), type(DIRECTIVE_NEW_LINE), mode(DEFAULT_MODE);
-
 // Fragments
-
 fragment InputCharacter:       ~[\r\n\u0085\u2028\u2029];
-
 fragment NewLineCharacter
 	: '\u000D' //'<Carriage Return CHARACTER (U+000D)>'
 	| '\u000A' //'<Line Feed CHARACTER (U+000A)>'
@@ -288,16 +246,13 @@ fragment NewLineCharacter
 	| '\u2028' //'<Line Separator CHARACTER (U+2028)>'
 	| '\u2029' //'<Paragraph Separator CHARACTER (U+2029)>'
 	;
-
 fragment IntegerTypeSuffix:         [lL]? [uU] | [uU]? [lL];
-fragment ExponentPart:              [eE] ('+' | '-')? [0-9]+;
-
+fragment ExponentPart:              [eE] ('+' | '-')? [0-9] ('_'* [0-9])*;
 fragment CommonCharacter
 	: SimpleEscapeSequence
 	| HexEscapeSequence
 	| UnicodeEscapeSequence
 	;
-
 fragment SimpleEscapeSequence
 	: '\\\''
 	| '\\"'
@@ -311,14 +266,12 @@ fragment SimpleEscapeSequence
 	| '\\t'
 	| '\\v'
 	;
-
 fragment HexEscapeSequence
 	: '\\x' HexDigit
 	| '\\x' HexDigit HexDigit
 	| '\\x' HexDigit HexDigit HexDigit
 	| '\\x' HexDigit HexDigit HexDigit HexDigit
 	;
-
 fragment NewLine
 	: '\r\n' | '\r' | '\n'
 	| '\u0085' // <Next Line CHARACTER (U+0085)>'

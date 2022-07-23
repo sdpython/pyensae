@@ -17,13 +17,9 @@ set current=%~dp0
 
 %pythonexe% -u %current%..\setup.py update_grammars --g Python3.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars --g Pig.g4
-if %errorlevel% neq 0 exit /b %errorlevel%
 %pythonexe% -u %current%..\setup.py update_grammars --g CSharpLexer.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
 %pythonexe% -u %current%..\setup.py update_grammars --g CSharpParser.g4
-if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars --g R.g4 RFilter.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
 %pythonexe% -u %current%..\setup.py update_grammars --g DOT.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
@@ -32,4 +28,6 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 %pythonexe% -u %current%..\setup.py update_grammars --g SQLiteLexer.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
 %pythonexe% -u %current%..\setup.py update_grammars --g SQLiteParser.g4
+if %errorlevel% neq 0 exit /b %errorlevel%
+%pythonexe% -u %current%..\setup.py update_grammars --g R.g4 RFilter.g4
 if %errorlevel% neq 0 exit /b %errorlevel%

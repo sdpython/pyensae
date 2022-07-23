@@ -20,7 +20,6 @@ def _is_syntax_is_missing(language):
     locations = {
         "R": "https://github.com/antlr/grammars-v4/tree/master/r/",
         "SQLite": "https://github.com/antlr/grammars-v4/blob/master/sqlite/",
-        "Pig": "http://wiki.apache.org/pig/",
         "CSharp": "https://github.com/antlr/grammars-v4/tree/master/csharp",
     }
 
@@ -37,7 +36,7 @@ def _is_syntax_is_missing(language):
             language, ",".join(locations.keys())))
 
 
-def build_grammar(g4, version="4.9", fLOG=noLOG):
+def build_grammar(g4, version="4.10.1", fLOG=noLOG):
     """
     Compiles the grammar for a specific file.
 

@@ -36,11 +36,6 @@ def get_parser_lexer(language):
             from .DOTLexer import DOTLexer
             from .DOTParser import DOTParser
             return DOTParser, DOTLexer
-        elif language == "Pig":
-            raise ImportError("Pig is not available yet")
-            # from .PigLexer import PigLexer
-            # from .PigParser import PigParser
-            # return PigParser, PigLexer
         elif language == "Python3":
             from .Python3Lexer import Python3Lexer
             from .Python3Parser import Python3Parser
@@ -79,22 +74,6 @@ def parse_code(code, class_parser, class_lexer):
     @param      class_parser        parser
     @param      class_lexer         lexer
     @return                         parsed code
-
-    .. exref::
-        :title: Check the syntax of a script PIG
-
-        ::
-
-            code = '''
-            A = LOAD 'filename.txt' USING PigStorage('\t');
-            STORE A INTO 'samefile.txt' ;
-            '''
-
-            clparser, cllexer = get_parser_lexer("Pig")
-            parser = parse_code(code, clparser, cllexer)
-            tree = parser.compilation_unit()
-            st = get_tree_string(tree, parser, None)
-            print(st)
     """
     if isinstance(code, str):
         # we assume it is a string
