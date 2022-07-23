@@ -72,6 +72,11 @@ jobs:
             pip install -r requirements.txt
             pip install mplfinance
 
+      - run:
+          name: install ldconfig
+          command: |
+            sudo ldconfig
+
       - save_cache:
           paths:
             - ./venv
