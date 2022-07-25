@@ -1,4 +1,4 @@
-# Generated from \SQLiteParser.g4 by ANTLR 4.9
+# Generated from \SQLiteParser.g4 by ANTLR 4.10.1
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .SQLiteParser import SQLiteParser
@@ -298,6 +298,14 @@ class SQLiteParserListener(ParseTreeListener):
     def exitInsert_stmt(self, ctx: SQLiteParser.Insert_stmtContext):
         pass
 
+    # Enter a parse tree produced by SQLiteParser#returning_clause.
+    def enterReturning_clause(self, ctx: SQLiteParser.Returning_clauseContext):
+        pass
+
+    # Exit a parse tree produced by SQLiteParser#returning_clause.
+    def exitReturning_clause(self, ctx: SQLiteParser.Returning_clauseContext):
+        pass
+
     # Enter a parse tree produced by SQLiteParser#upsert_clause.
     def enterUpsert_clause(self, ctx: SQLiteParser.Upsert_clauseContext):
         pass
@@ -594,20 +602,20 @@ class SQLiteParserListener(ParseTreeListener):
     def exitWindow_function(self, ctx: SQLiteParser.Window_functionContext):
         pass
 
-    # Enter a parse tree produced by SQLiteParser#of_OF_fset.
-    def enterOf_OF_fset(self, ctx: SQLiteParser.Of_OF_fsetContext):
+    # Enter a parse tree produced by SQLiteParser#offset.
+    def enterOffset(self, ctx: SQLiteParser.OffsetContext):
         pass
 
-    # Exit a parse tree produced by SQLiteParser#of_OF_fset.
-    def exitOf_OF_fset(self, ctx: SQLiteParser.Of_OF_fsetContext):
+    # Exit a parse tree produced by SQLiteParser#offset.
+    def exitOffset(self, ctx: SQLiteParser.OffsetContext):
         pass
 
-    # Enter a parse tree produced by SQLiteParser#default_DEFAULT__value.
-    def enterDefault_DEFAULT__value(self, ctx: SQLiteParser.Default_DEFAULT__valueContext):
+    # Enter a parse tree produced by SQLiteParser#default_value.
+    def enterDefault_value(self, ctx: SQLiteParser.Default_valueContext):
         pass
 
-    # Exit a parse tree produced by SQLiteParser#default_DEFAULT__value.
-    def exitDefault_DEFAULT__value(self, ctx: SQLiteParser.Default_DEFAULT__valueContext):
+    # Exit a parse tree produced by SQLiteParser#default_value.
+    def exitDefault_value(self, ctx: SQLiteParser.Default_valueContext):
         pass
 
     # Enter a parse tree produced by SQLiteParser#partition_by.
@@ -650,12 +658,12 @@ class SQLiteParserListener(ParseTreeListener):
     def exitInitial_select(self, ctx: SQLiteParser.Initial_selectContext):
         pass
 
-    # Enter a parse tree produced by SQLiteParser#recursive__select.
-    def enterRecursive__select(self, ctx: SQLiteParser.Recursive__selectContext):
+    # Enter a parse tree produced by SQLiteParser#recursive_select.
+    def enterRecursive_select(self, ctx: SQLiteParser.Recursive_selectContext):
         pass
 
-    # Exit a parse tree produced by SQLiteParser#recursive__select.
-    def exitRecursive__select(self, ctx: SQLiteParser.Recursive__selectContext):
+    # Exit a parse tree produced by SQLiteParser#recursive_select.
+    def exitRecursive_select(self, ctx: SQLiteParser.Recursive_selectContext):
         pass
 
     # Enter a parse tree produced by SQLiteParser#unary_operator.

@@ -56,7 +56,7 @@ class TestParseCodeCSharp(ExtTestCase):
         tree = parser.compilation_unit()
         st = get_tree_string(tree, parser)
         self.assertNotEmpty(st)
-        self.assertIn("/// <summary>", st)
+        self.assertIn("namespace", st)
 
 
 if __name__ == "__main__":
