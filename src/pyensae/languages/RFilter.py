@@ -199,7 +199,7 @@ class RFilter (Parser):
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
-    protected int curlies = 0
+    curlies = 0
 
     class StreamContext(ParserRuleContext):
         __slots__ = 'parser'
@@ -315,7 +315,7 @@ class RFilter (Parser):
                 if _alt == 1:
                     self.state = 20
                     localctx._NL = self.match(RFilter.NL)
-                    ((WritableToken)localctx._NL).setChannel(Token.HIDDEN_CHANNEL)
+                    localctx._NL.setChannel(Token.HIDDEN_CHANNEL)
 
                 else:
                     raise NoViableAltException(self)
@@ -410,7 +410,7 @@ class RFilter (Parser):
                     self.state = 32
                     self.eat()
 
-                curlies + +
+                curlies += 1
                 self.state = 41
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
@@ -437,7 +437,7 @@ class RFilter (Parser):
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
 
-                curlies - -
+                curlies -= 1
                 self.state = 45
                 self.match(RFilter.T__12)
                 pass
@@ -715,28 +715,28 @@ class RFilter (Parser):
                 self.state = 138
                 self.match(RFilter.T__35)
 
-                // ``inside a compound expression, a newline before else is discarded,
-                // whereas at the outermost level, the newline terminates the if
-                 // construction and a subsequent else causes a syntax error.''
-                  /*
-                   Works here
-                        if (1 == 0) {print(1)} else {print(2)}
-
-                    and correctly gets error here:
-
-                        if (1 == 0) {print(1)}
-                        else {print(2)}
-
-                    this works too:
-
-                        if (1 == 0) {
-                            if (2 == 0) print(1)
-                            else print(2)
-                        }
-                    */
-                    WritableToken tok = (WritableToken)_input.LT(-2)
-                    if (curlies > 0&&tok.getType() == NL) tok.setChannel(Token.HIDDEN_CHANNEL)
-
+                # ``inside a compound expression, a newline before else is discarded,
+                # whereas at the outermost level, the newline terminates the if
+                # construction and a subsequent else causes a syntax error.''
+                # /*
+                # Works here
+                #     if (1 == 0) {print(1)} else {print(2)}
+                #
+                # and correctly gets error here:
+                #
+                #     if (1 == 0) {print(1)}
+                #     else {print(2)}
+                #
+                # this works too:
+                #
+                #     if (1 == 0) {
+                #         if (2 == 0) print(1)
+                #         else print(2)
+                #     }
+                # */
+                tok = _input.LT(-2)
+                if curlies > 0 and tok.getType() == NL:
+                    tok.setChannel(Token.HIDDEN_CHANNEL)
                 pass
             else:
                 raise NoViableAltException(self)
