@@ -8,10 +8,10 @@ else:
     from typing.io import TextIO
 
 
-#if __name__ is not None and "." in __name__:
-#    from .CSharpLexerBase import CSharpLexerBase
-#else:
-#    from CSharpLexerBase import CSharpLexerBase
+if __name__ is not None and "." in __name__:
+    from .CSharpLexerBase import CSharpLexerBase
+else:
+    from CSharpLexerBase import CSharpLexerBase
 
 
 def serializedATN():
@@ -904,7 +904,7 @@ def serializedATN():
     ]
 
 
-class CSharpLexer(Lexer):
+class CSharpLexer(CSharpLexerBase):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 

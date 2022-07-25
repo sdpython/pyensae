@@ -30,11 +30,15 @@ class TestParseCode(ExtTestCase):
 
         folder = os.path.dirname(source_parser.__file__)
 
+        rows = []
+
+        def local_print(*s):
+            rows.append(' '.join(map(str, s)))
+
         for lang in langs:
-            fLOG("generate for LANG", lang)
             gr = os.path.join(folder, lang + ".g4")
             assert os.path.exists(gr)
-            final = build_grammar(lang, fLOG=fLOG)
+            final = build_grammar(lang, fLOG=local_print)
             fLOG(final)
 
     def test_r(self):
@@ -55,7 +59,6 @@ class TestParseCode(ExtTestCase):
         st = get_tree_string(tree, parser)
         assert len(st) > 0
         st = get_tree_string(tree, parser, None)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
     def test_sql(self):
@@ -76,7 +79,6 @@ class TestParseCode(ExtTestCase):
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
         st = get_tree_string(tree, parser, None)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
     def test_error(self):
@@ -124,7 +126,6 @@ class TestParseCode(ExtTestCase):
         parser = parse_code(code, clparser, cllexer)
         tree = parser.compilation_unit()
         st = get_tree_string(tree, parser)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
     def test_python3(self):
@@ -152,7 +153,6 @@ class TestParseCode(ExtTestCase):
             warnings.warn("Grammar for Python3 not ready yet: {0}".format(e))
             return
         st = get_tree_string(tree, parser)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
     def test_DOT(self):

@@ -8,9 +8,6 @@ if sys.version_info[1] > 5:
 else:
     from typing.io import TextIO
 
-import java.util.Stack
-import java.util.HashSet
-
 
 def serializedATN():
     return [
@@ -87,7 +84,7 @@ class CSharpPreprocessorParser (Parser):
                     "'char'", "'checked'", "'class'", "'const'", "'continue'",
                     "'decimal'", "'default'", "'delegate'", "'descending'",
                     "'do'", "'double'", "'dynamic'", "'else'", "'enum'",
-                    "'equals'", "'event'", "'explicit'", "'extern'", "'false'",
+                    "'equals'", "'event'", "'explicit'", "'extern'", "'False'",
                     "'finally'", "'fixed'", "'float'", "'for'", "'foreach'",
                     "'from'", "'get'", "'goto'", "'group'", "'if'", "'implicit'",
                     "'in'", "'int'", "'interface'", "'internal'", "'into'",
@@ -127,7 +124,7 @@ class CSharpPreprocessorParser (Parser):
                      "CLASS", "CONST", "CONTINUE", "DECIMAL", "DEFAULT",
                      "DELEGATE", "DESCENDING", "DO", "DOUBLE", "DYNAMIC",
                      "ELSE", "ENUM", "EQUALS", "EVENT", "EXPLICIT", "EXTERN",
-                     "FALSE", "FINALLY", "FIXED", "FLOAT", "FOR", "FOREACH",
+                     "False", "FINALLY", "FIXED", "FLOAT", "FOR", "FOREACH",
                      "FROM", "GET", "GOTO", "GROUP", "IF", "IMPLICIT",
                      "IN", "INT", "INTERFACE", "INTERNAL", "INTO", "IS",
                      "JOIN", "LET", "LOCK", "LONG", "NAMEOF", "NAMESPACE",
@@ -377,16 +374,14 @@ class CSharpPreprocessorParser (Parser):
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
-    Stack < Boolean > conditions = new Stack < Boolean > () {{conditions.push(true)
-                                                              }}
-    public HashSet < String > ConditionalSymbols = new HashSet < String > () {{ConditionalSymbols.add("DEBUG")
-                                                                               }}
+    conditions = [True]
+    ConditionalSymbols = {"DEBUG"}
 
-    private boolean allConditions() {
-        for(boolean condition: conditions) {
-            if (!condition)
-            return false; }
-        return true;}
+    def allConditions(self):
+        for condition in CSharpPreprocessorParser.conditions:
+            if not condition:
+                return False
+        return True
 
     class Preprocessor_directiveContext(ParserRuleContext):
         __slots__ = 'parser'
@@ -626,7 +621,9 @@ class CSharpPreprocessorParser (Parser):
                 localctx.expr = self.preprocessor_expression(0)
                 self.state = 18
                 self.directive_new_line_or_sharp()
-                localctx.value = localctx.expr.value.equals("true") & & allConditions() conditions.push(localctx.expr.value.equals("true"))
+                # conditions.push(localctx.expr.value.equals("true"))
+                localctx.value = localctx.expr.value.equals(
+                    "true") and self.allConditions()
                 pass
             elif token in [CSharpPreprocessorParser.ELIF]:
                 localctx = CSharpPreprocessorParser.PreprocessorConditionalContext(
@@ -638,11 +635,11 @@ class CSharpPreprocessorParser (Parser):
                 localctx.expr = self.preprocessor_expression(0)
                 self.state = 23
                 self.directive_new_line_or_sharp()
-                if (!conditions.peek()) {conditions.pop()
-                                         localctx.value = localctx.expr.value.equals("true") & & allConditions()
-                                         conditions.push(
-                                             localctx.expr.value.equals("true"))
-                                         } else localctx.value = false
+                if not conditions.peek():
+                    conditions.pop()
+                    localctx.value = localctx.expr.value.equals(
+                        "true") and allConditions()
+                    # conditions.push(localctx.expr.value.equals("true")) else localctx.value = False
                 pass
             elif token in [CSharpPreprocessorParser.ELSE]:
                 localctx = CSharpPreprocessorParser.PreprocessorConditionalContext(
@@ -652,10 +649,12 @@ class CSharpPreprocessorParser (Parser):
                 self.match(CSharpPreprocessorParser.ELSE)
                 self.state = 27
                 self.directive_new_line_or_sharp()
-                if (!conditions.peek()) {conditions.pop()
-                                         localctx.value = true & & allConditions() conditions.push(true)
-                                         }
-                else localctx.value = false
+                if not conditions.peek():
+                    conditions.pop()
+                    localctx.value = true and allConditions()
+                    # conditions.push(true)
+                else:
+                    localctx.value = False
                 pass
             elif token in [CSharpPreprocessorParser.ENDIF]:
                 localctx = CSharpPreprocessorParser.PreprocessorConditionalContext(
@@ -912,13 +911,14 @@ class CSharpPreprocessorParser (Parser):
             elif token in [CSharpPreprocessorParser.FALSE]:
                 self.state = 82
                 self.match(CSharpPreprocessorParser.FALSE)
-                localctx.value = "false"
+                localctx.value = "False"
                 pass
             elif token in [CSharpPreprocessorParser.CONDITIONAL_SYMBOL]:
                 self.state = 84
                 localctx._CONDITIONAL_SYMBOL = self.match(
                     CSharpPreprocessorParser.CONDITIONAL_SYMBOL)
-                localctx.value = ConditionalSymbols.contains((None if localctx._CONDITIONAL_SYMBOL is None else localctx._CONDITIONAL_SYMBOL.text)) ? "true": "false"
+                localctx.value = ConditionalSymbols.contains(
+                    None if localctx._CONDITIONAL_SYMBOL is None else localctx._CONDITIONAL_SYMBOL.text)
                 pass
             elif token in [CSharpPreprocessorParser.OPEN_PARENS]:
                 self.state = 86
@@ -934,7 +934,7 @@ class CSharpPreprocessorParser (Parser):
                 self.match(CSharpPreprocessorParser.BANG)
                 self.state = 92
                 localctx.expr = self.preprocessor_expression(5)
-                localctx.value = localctx.expr.value.equals("true") ? "false": "true"
+                localctx.value = localctx.expr.value.equals("true")
                 pass
             else:
                 raise NoViableAltException(self)
@@ -967,7 +967,7 @@ class CSharpPreprocessorParser (Parser):
                         self.match(CSharpPreprocessorParser.OP_EQ)
                         self.state = 99
                         localctx.expr2 = self.preprocessor_expression(5)
-                        localctx.value = (localctx.expr1.value == localctx.expr2.value ? "true": "false")
+                        localctx.value = localctx.expr1.value == localctx.expr2.value
                         pass
 
                     elif la_ == 2:
@@ -985,7 +985,7 @@ class CSharpPreprocessorParser (Parser):
                         self.match(CSharpPreprocessorParser.OP_NE)
                         self.state = 104
                         localctx.expr2 = self.preprocessor_expression(4)
-                        localctx.value = (localctx.expr1.value != localctx.expr2.value ? "true": "false")
+                        localctx.value = localctx.expr1.value != localctx.expr2.value
                         pass
 
                     elif la_ == 3:
@@ -1003,7 +1003,8 @@ class CSharpPreprocessorParser (Parser):
                         self.match(CSharpPreprocessorParser.OP_AND)
                         self.state = 109
                         localctx.expr2 = self.preprocessor_expression(3)
-                        localctx.value = (localctx.expr1.value.equals("true") & & localctx.expr2.value.equals("true") ? "true": "false")
+                        localctx.value = localctx.expr1.value.equals(
+                            "true") and localctx.expr2.value.equals("true")
                         pass
 
                     elif la_ == 4:
@@ -1021,7 +1022,8 @@ class CSharpPreprocessorParser (Parser):
                         self.match(CSharpPreprocessorParser.OP_OR)
                         self.state = 114
                         localctx.expr2 = self.preprocessor_expression(2)
-                        localctx.value = (localctx.expr1.value.equals("true") | | localctx.expr2.value.equals("true") ? "true": "false")
+                        localctx.value = localctx.expr1.value.equals(
+                            "true") or localctx.expr2.value.equals("true")
                         pass
 
                 self.state = 121
