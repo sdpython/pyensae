@@ -29,14 +29,14 @@ def serializedATN():
         13, 11, 1, 0, 0, 0, 13, 12, 1, 0, 0, 0, 14, 17, 1, 0, 0, 0, 15, 13, 1, 0, 0, 0, 15, 16, 1,
         0, 0, 0, 16, 18, 1, 0, 0, 0, 17, 15, 1, 0, 0, 0, 18, 19, 5, 0, 0, 1, 19, 1, 1, 0, 0, 0, 20,
         21, 5, 69, 0, 0, 21, 23, 6, 1, -
-            1, 0, 22, 20, 1, 0, 0, 0, 23, 24, 1, 0, 0, 0, 24, 22, 1, 0,
+        1, 0, 22, 20, 1, 0, 0, 0, 23, 24, 1, 0, 0, 0, 24, 22, 1, 0,
         0, 0, 24, 25, 1, 0, 0, 0, 25, 3, 1, 0, 0, 0, 26, 28, 3, 8, 4, 0, 27, 29, 3, 2, 1, 0, 28, 27,
         1, 0, 0, 0, 28, 29, 1, 0, 0, 0, 29, 141, 1, 0, 0, 0, 30, 141, 3, 6, 3, 0, 31, 33, 5, 12, 0,
         0, 32, 34, 3, 2, 1, 0, 33, 32, 1, 0, 0, 0, 33, 34, 1, 0, 0, 0, 34, 35, 1, 0, 0, 0, 35, 41,
         6, 2, -1, 0, 36, 40, 3, 4, 2, 0, 37, 40, 5, 69, 0, 0, 38, 40, 5, 1, 0, 0, 39, 36, 1, 0, 0,
         0, 39, 37, 1, 0, 0, 0, 39, 38, 1, 0, 0, 0, 40, 43, 1, 0, 0, 0, 41, 39, 1, 0, 0, 0, 41, 42,
         1, 0, 0, 0, 42, 44, 1, 0, 0, 0, 43, 41, 1, 0, 0, 0, 44, 45, 6, 2, -
-            1, 0, 45, 141, 5, 13, 0,
+        1, 0, 45, 141, 5, 13, 0,
         0, 46, 51, 5, 16, 0, 0, 47, 50, 3, 4, 2, 0, 48, 50, 3, 2, 1, 0, 49, 47, 1, 0, 0, 0, 49, 48,
         1, 0, 0, 0, 50, 53, 1, 0, 0, 0, 51, 49, 1, 0, 0, 0, 51, 52, 1, 0, 0, 0, 52, 54, 1, 0, 0, 0,
         53, 51, 1, 0, 0, 0, 54, 141, 5, 17, 0, 0, 55, 60, 5, 4, 0, 0, 56, 59, 3, 4, 2, 0, 57, 59,
@@ -88,29 +88,29 @@ class RFilter (Parser):
                     "'?'", "'break'", "'('", "')'", "'.'", "','", "'='",
                     "'...'", "'NULL'", "':'", "'%in%'", "'NA'", "'Inf'",
                     "'NaN'", "'TRUE'", "'FALSE'", "'next'", "'repeat'",
-                     "'while'", "'for'", "'in'", "'if'", "'else'", "'return'",
-                     "'within'", "'<-'", "'<<-'", "'->'", "'->>'", "':='",
-                     "'function'", "'~'", "'::'", "':::'", "'$'", "'@'",
-                     "'*'", "'/'", "'%'", "'^'", "'%%'", "'>'", "'>='",
-                     "'<'", "'<='", "'=='", "'!='"]
+                    "'while'", "'for'", "'in'", "'if'", "'else'", "'return'",
+                    "'within'", "'<-'", "'<<-'", "'->'", "'->>'", "':='",
+                    "'function'", "'~'", "'::'", "':::'", "'$'", "'@'",
+                    "'*'", "'/'", "'%'", "'^'", "'%%'", "'>'", "'>='",
+                    "'<'", "'<='", "'=='", "'!='"]
 
     symbolicNames = ["<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                      "<INVALID>", "PARENTHESIS", "HEX", "INT", "FLOAT",
-                      "COMPLEX", "STRING", "ID", "USER_OP", "NL", "WS"]
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
+                     "<INVALID>", "PARENTHESIS", "HEX", "INT", "FLOAT",
+                     "COMPLEX", "STRING", "ID", "USER_OP", "NL", "WS"]
 
     RULE_stream = 0
     RULE_eat = 1
@@ -752,7 +752,7 @@ class RFilter (Parser):
     class AtomContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int =-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -810,7 +810,7 @@ class RFilter (Parser):
     class OpContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int =-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 

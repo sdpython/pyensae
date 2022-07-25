@@ -5,9 +5,10 @@
 History
 =======
 
-current - 2022-06-13 - 0.00Mb
+current - 2022-07-25 - 0.00Mb
 =============================
 
+* #41: Moves CI to python 3.10 (2022-07-25)
 * #40: Fixes issue with yahoo_historical>=0.4 (2021-07-10)
 * #38: Updates grammar with antlr 4.9 (2021-04-03)
 
