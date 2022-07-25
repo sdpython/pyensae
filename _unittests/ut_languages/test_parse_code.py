@@ -7,10 +7,10 @@ will sort all test files by increasing time and run them.
 import os
 import unittest
 import warnings
-from pyquickhelper.loghelper import fLOG
+from pyquickhelper.pycode import ExtTestCase
 
 
-class TestParseCode(unittest.TestCase):
+class TestParseCode(ExtTestCase):
 
     def test_build_parser(self):
         from pyensae.languages.antlr_grammar_use import (
@@ -18,19 +18,15 @@ class TestParseCode(unittest.TestCase):
         from pyensae.languages.antlr_grammar_build import build_grammar
         import pyensae.languages.antlr_grammar_use as source_parser
 
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
         langs = ["DOT", "CSharp4", "SQLite", "R"]  # , "Python3"]
 
-        try:
-            for lang in langs:
-                get_parser_lexer(lang)
-            return
-        except ImportError:
-            pass
+        for lang in langs:
+            with self.subTest(lang=lang):
+                try:
+                    get_parser_lexer(lang)
+                    return
+                except ImportError:
+                    pass
 
         folder = os.path.dirname(source_parser.__file__)
 
@@ -46,11 +42,6 @@ class TestParseCode(unittest.TestCase):
             get_parser_lexer, get_tree_string, parse_code)
         from pyensae.languages.antlr_grammar_build import build_grammar
         import pyensae.languages.antlr_grammar_use as source_parser
-
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
 
         code = """
         a = 4 ;
@@ -73,11 +64,6 @@ class TestParseCode(unittest.TestCase):
         from pyensae.languages.antlr_grammar_build import build_grammar
         import pyensae.languages.antlr_grammar_use as source_parser
 
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
         code = """
         SELECT a,tbl.b,nb FROM tbl
         INNER JOIN (
@@ -98,11 +84,6 @@ class TestParseCode(unittest.TestCase):
             get_parser_lexer, get_tree_string, parse_code)
         from pyensae.languages.antlr_grammar_build import build_grammar
         import pyensae.languages.antlr_grammar_use as source_parser
-
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
 
         code = """
         SELECT
@@ -125,11 +106,6 @@ class TestParseCode(unittest.TestCase):
             get_parser_lexer, get_tree_string, parse_code)
         from pyensae.languages.antlr_grammar_build import build_grammar
         import pyensae.languages.antlr_grammar_use as source_parser
-
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
 
         code = """
         namespace hello
@@ -156,11 +132,6 @@ class TestParseCode(unittest.TestCase):
             get_parser_lexer, get_tree_string, parse_code)
         from pyensae.languages.antlr_grammar_build import build_grammar
         import pyensae.languages.antlr_grammar_use as source_parser
-
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
 
         # the grammar does not fully compile
 
@@ -190,11 +161,6 @@ class TestParseCode(unittest.TestCase):
         from pyensae.languages.antlr_grammar_build import build_grammar
         import pyensae.languages.antlr_grammar_use as source_parser
 
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
         # the grammar does not fully compile
 
         code = """
@@ -208,9 +174,9 @@ class TestParseCode(unittest.TestCase):
         parser = parse_code(code, clparser, cllexer)
         tree = parser.graph()
         st = get_tree_string(tree, parser)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
 
 if __name__ == "__main__":
+    TestParseCode().test_csharp()
     unittest.main()

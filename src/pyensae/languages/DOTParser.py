@@ -1,4 +1,4 @@
-# Generated from \DOT.g4 by ANTLR 4.9
+# Generated from \DOT.g4 by ANTLR 4.10.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -10,51 +10,52 @@ else:
 
 
 def serializedATN():
-    with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\32")
-        buf.write("\u0083\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
-        buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
-        buf.write("\t\16\4\17\t\17\3\2\5\2 \n\2\3\2\3\2\5\2$\n\2\3\2\3\2")
-        buf.write("\3\2\3\2\3\2\3\3\3\3\5\3-\n\3\7\3/\n\3\f\3\16\3\62\13")
-        buf.write("\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4<\n\4\3\5\3\5\3")
-        buf.write("\5\3\6\3\6\5\6C\n\6\3\6\6\6F\n\6\r\6\16\6G\3\7\3\7\3\7")
-        buf.write("\5\7M\n\7\3\7\5\7P\n\7\6\7R\n\7\r\7\16\7S\3\b\3\b\5\b")
-        buf.write("X\n\b\3\b\3\b\5\b\\\n\b\3\t\3\t\3\t\5\ta\n\t\6\tc\n\t")
-        buf.write("\r\t\16\td\3\n\3\n\3\13\3\13\5\13k\n\13\3\f\3\f\5\fo\n")
-        buf.write("\f\3\r\3\r\3\r\3\r\5\ru\n\r\3\16\3\16\5\16y\n\16\5\16")
-        buf.write("{\n\16\3\16\3\16\3\16\3\16\3\17\3\17\3\17\2\2\20\2\4\6")
-        buf.write("\b\n\f\16\20\22\24\26\30\32\34\2\6\3\2\16\17\4\2\16\16")
-        buf.write("\20\21\3\2\n\13\3\2\23\26\2\u008a\2\37\3\2\2\2\4\60\3")
-        buf.write("\2\2\2\6;\3\2\2\2\b=\3\2\2\2\nE\3\2\2\2\fQ\3\2\2\2\16")
-        buf.write("W\3\2\2\2\20b\3\2\2\2\22f\3\2\2\2\24h\3\2\2\2\26l\3\2")
-        buf.write("\2\2\30p\3\2\2\2\32z\3\2\2\2\34\u0080\3\2\2\2\36 \7\r")
-        buf.write("\2\2\37\36\3\2\2\2\37 \3\2\2\2 !\3\2\2\2!#\t\2\2\2\"$")
-        buf.write("\5\34\17\2#\"\3\2\2\2#$\3\2\2\2$%\3\2\2\2%&\7\3\2\2&\'")
-        buf.write("\5\4\3\2\'(\7\4\2\2()\7\2\2\3)\3\3\2\2\2*,\5\6\4\2+-\7")
-        buf.write("\5\2\2,+\3\2\2\2,-\3\2\2\2-/\3\2\2\2.*\3\2\2\2/\62\3\2")
-        buf.write("\2\2\60.\3\2\2\2\60\61\3\2\2\2\61\5\3\2\2\2\62\60\3\2")
-        buf.write("\2\2\63<\5\24\13\2\64<\5\16\b\2\65<\5\b\5\2\66\67\5\34")
-        buf.write("\17\2\678\7\6\2\289\5\34\17\29<\3\2\2\2:<\5\32\16\2;\63")
-        buf.write("\3\2\2\2;\64\3\2\2\2;\65\3\2\2\2;\66\3\2\2\2;:\3\2\2\2")
-        buf.write("<\7\3\2\2\2=>\t\3\2\2>?\5\n\6\2?\t\3\2\2\2@B\7\7\2\2A")
-        buf.write("C\5\f\7\2BA\3\2\2\2BC\3\2\2\2CD\3\2\2\2DF\7\b\2\2E@\3")
-        buf.write("\2\2\2FG\3\2\2\2GE\3\2\2\2GH\3\2\2\2H\13\3\2\2\2IL\5\34")
-        buf.write("\17\2JK\7\6\2\2KM\5\34\17\2LJ\3\2\2\2LM\3\2\2\2MO\3\2")
-        buf.write("\2\2NP\7\t\2\2ON\3\2\2\2OP\3\2\2\2PR\3\2\2\2QI\3\2\2\2")
-        buf.write("RS\3\2\2\2SQ\3\2\2\2ST\3\2\2\2T\r\3\2\2\2UX\5\26\f\2V")
-        buf.write("X\5\32\16\2WU\3\2\2\2WV\3\2\2\2XY\3\2\2\2Y[\5\20\t\2Z")
-        buf.write("\\\5\n\6\2[Z\3\2\2\2[\\\3\2\2\2\\\17\3\2\2\2]`\5\22\n")
-        buf.write("\2^a\5\26\f\2_a\5\32\16\2`^\3\2\2\2`_\3\2\2\2ac\3\2\2")
-        buf.write("\2b]\3\2\2\2cd\3\2\2\2db\3\2\2\2de\3\2\2\2e\21\3\2\2\2")
-        buf.write("fg\t\4\2\2g\23\3\2\2\2hj\5\26\f\2ik\5\n\6\2ji\3\2\2\2")
-        buf.write("jk\3\2\2\2k\25\3\2\2\2ln\5\34\17\2mo\5\30\r\2nm\3\2\2")
-        buf.write("\2no\3\2\2\2o\27\3\2\2\2pq\7\f\2\2qt\5\34\17\2rs\7\f\2")
-        buf.write("\2su\5\34\17\2tr\3\2\2\2tu\3\2\2\2u\31\3\2\2\2vx\7\22")
-        buf.write("\2\2wy\5\34\17\2xw\3\2\2\2xy\3\2\2\2y{\3\2\2\2zv\3\2\2")
-        buf.write("\2z{\3\2\2\2{|\3\2\2\2|}\7\3\2\2}~\5\4\3\2~\177\7\4\2")
-        buf.write("\2\177\33\3\2\2\2\u0080\u0081\t\5\2\2\u0081\35\3\2\2\2")
-        buf.write("\25\37#,\60;BGLOSW[`djntxz")
-        return buf.getvalue()
+    return [
+        4, 1, 24, 129, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7, 4, 2, 5, 7, 5, 2, 6, 7,
+        6, 2, 7, 7, 7, 2, 8, 7, 8, 2, 9, 7, 9, 2, 10, 7, 10, 2, 11, 7, 11, 2, 12, 7, 12, 2, 13, 7, 13,
+        1, 0, 3, 0, 30, 8, 0, 1, 0, 1, 0, 3, 0, 34, 8, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 3,
+        1, 43, 8, 1, 5, 1, 45, 8, 1, 10, 1, 12, 1, 48, 9, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+        1, 2, 3, 2, 58, 8, 2, 1, 3, 1, 3, 1, 3, 1, 4, 1, 4, 3, 4, 65, 8, 4, 1, 4, 4, 4, 68, 8, 4, 11,
+        4, 12, 4, 69, 1, 5, 1, 5, 1, 5, 3, 5, 75, 8, 5, 1, 5, 3, 5, 78, 8, 5, 4, 5, 80, 8, 5, 11, 5,
+        12, 5, 81, 1, 6, 1, 6, 3, 6, 86, 8, 6, 1, 6, 1, 6, 3, 6, 90, 8, 6, 1, 7, 1, 7, 1, 7, 3, 7, 95,
+        8, 7, 4, 7, 97, 8, 7, 11, 7, 12, 7, 98, 1, 8, 1, 8, 1, 9, 1, 9, 3, 9, 105, 8, 9, 1, 10, 1, 10,
+        3, 10, 109, 8, 10, 1, 11, 1, 11, 1, 11, 1, 11, 3, 11, 115, 8, 11, 1, 12, 1, 12, 3, 12, 119,
+        8, 12, 3, 12, 121, 8, 12, 1, 12, 1, 12, 1, 12, 1, 12, 1, 13, 1, 13, 1, 13, 0, 0, 14, 0, 2,
+        4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 0, 4, 1, 0, 12, 13, 2, 0, 12, 12, 14, 15, 1,
+        0, 8, 9, 1, 0, 17, 20, 136, 0, 29, 1, 0, 0, 0, 2, 46, 1, 0, 0, 0, 4, 57, 1, 0, 0, 0, 6, 59,
+        1, 0, 0, 0, 8, 67, 1, 0, 0, 0, 10, 79, 1, 0, 0, 0, 12, 85, 1, 0, 0, 0, 14, 96, 1, 0, 0, 0, 16,
+        100, 1, 0, 0, 0, 18, 102, 1, 0, 0, 0, 20, 106, 1, 0, 0, 0, 22, 110, 1, 0, 0, 0, 24, 120,
+        1, 0, 0, 0, 26, 126, 1, 0, 0, 0, 28, 30, 5, 11, 0, 0, 29, 28, 1, 0, 0, 0, 29, 30, 1, 0, 0,
+        0, 30, 31, 1, 0, 0, 0, 31, 33, 7, 0, 0, 0, 32, 34, 3, 26, 13, 0, 33, 32, 1, 0, 0, 0, 33, 34,
+        1, 0, 0, 0, 34, 35, 1, 0, 0, 0, 35, 36, 5, 1, 0, 0, 36, 37, 3, 2, 1, 0, 37, 38, 5, 2, 0, 0,
+        38, 39, 5, 0, 0, 1, 39, 1, 1, 0, 0, 0, 40, 42, 3, 4, 2, 0, 41, 43, 5, 3, 0, 0, 42, 41, 1, 0,
+        0, 0, 42, 43, 1, 0, 0, 0, 43, 45, 1, 0, 0, 0, 44, 40, 1, 0, 0, 0, 45, 48, 1, 0, 0, 0, 46, 44,
+        1, 0, 0, 0, 46, 47, 1, 0, 0, 0, 47, 3, 1, 0, 0, 0, 48, 46, 1, 0, 0, 0, 49, 58, 3, 18, 9, 0,
+        50, 58, 3, 12, 6, 0, 51, 58, 3, 6, 3, 0, 52, 53, 3, 26, 13, 0, 53, 54, 5, 4, 0, 0, 54, 55,
+        3, 26, 13, 0, 55, 58, 1, 0, 0, 0, 56, 58, 3, 24, 12, 0, 57, 49, 1, 0, 0, 0, 57, 50, 1, 0,
+        0, 0, 57, 51, 1, 0, 0, 0, 57, 52, 1, 0, 0, 0, 57, 56, 1, 0, 0, 0, 58, 5, 1, 0, 0, 0, 59, 60,
+        7, 1, 0, 0, 60, 61, 3, 8, 4, 0, 61, 7, 1, 0, 0, 0, 62, 64, 5, 5, 0, 0, 63, 65, 3, 10, 5, 0,
+        64, 63, 1, 0, 0, 0, 64, 65, 1, 0, 0, 0, 65, 66, 1, 0, 0, 0, 66, 68, 5, 6, 0, 0, 67, 62, 1,
+        0, 0, 0, 68, 69, 1, 0, 0, 0, 69, 67, 1, 0, 0, 0, 69, 70, 1, 0, 0, 0, 70, 9, 1, 0, 0, 0, 71,
+        74, 3, 26, 13, 0, 72, 73, 5, 4, 0, 0, 73, 75, 3, 26, 13, 0, 74, 72, 1, 0, 0, 0, 74, 75, 1,
+        0, 0, 0, 75, 77, 1, 0, 0, 0, 76, 78, 5, 7, 0, 0, 77, 76, 1, 0, 0, 0, 77, 78, 1, 0, 0, 0, 78,
+        80, 1, 0, 0, 0, 79, 71, 1, 0, 0, 0, 80, 81, 1, 0, 0, 0, 81, 79, 1, 0, 0, 0, 81, 82, 1, 0, 0,
+        0, 82, 11, 1, 0, 0, 0, 83, 86, 3, 20, 10, 0, 84, 86, 3, 24, 12, 0, 85, 83, 1, 0, 0, 0, 85,
+        84, 1, 0, 0, 0, 86, 87, 1, 0, 0, 0, 87, 89, 3, 14, 7, 0, 88, 90, 3, 8, 4, 0, 89, 88, 1, 0,
+        0, 0, 89, 90, 1, 0, 0, 0, 90, 13, 1, 0, 0, 0, 91, 94, 3, 16, 8, 0, 92, 95, 3, 20, 10, 0, 93,
+        95, 3, 24, 12, 0, 94, 92, 1, 0, 0, 0, 94, 93, 1, 0, 0, 0, 95, 97, 1, 0, 0, 0, 96, 91, 1, 0,
+        0, 0, 97, 98, 1, 0, 0, 0, 98, 96, 1, 0, 0, 0, 98, 99, 1, 0, 0, 0, 99, 15, 1, 0, 0, 0, 100,
+        101, 7, 2, 0, 0, 101, 17, 1, 0, 0, 0, 102, 104, 3, 20, 10, 0, 103, 105, 3, 8, 4, 0, 104,
+        103, 1, 0, 0, 0, 104, 105, 1, 0, 0, 0, 105, 19, 1, 0, 0, 0, 106, 108, 3, 26, 13, 0, 107,
+        109, 3, 22, 11, 0, 108, 107, 1, 0, 0, 0, 108, 109, 1, 0, 0, 0, 109, 21, 1, 0, 0, 0, 110,
+        111, 5, 10, 0, 0, 111, 114, 3, 26, 13, 0, 112, 113, 5, 10, 0, 0, 113, 115, 3, 26, 13,
+        0, 114, 112, 1, 0, 0, 0, 114, 115, 1, 0, 0, 0, 115, 23, 1, 0, 0, 0, 116, 118, 5, 16, 0,
+        0, 117, 119, 3, 26, 13, 0, 118, 117, 1, 0, 0, 0, 118, 119, 1, 0, 0, 0, 119, 121, 1, 0,
+        0, 0, 120, 116, 1, 0, 0, 0, 120, 121, 1, 0, 0, 0, 121, 122, 1, 0, 0, 0, 122, 123, 5, 1,
+        0, 0, 123, 124, 3, 2, 1, 0, 124, 125, 5, 2, 0, 0, 125, 25, 1, 0, 0, 0, 126, 127, 7, 3, 0,
+        0, 127, 27, 1, 0, 0, 0, 19, 29, 33, 42, 46, 57, 64, 69, 74, 77, 81, 85, 89, 94, 98, 104,
+        108, 114, 118, 120
+    ]
 
 
 class DOTParser (Parser):
@@ -124,12 +125,13 @@ class DOTParser (Parser):
 
     def __init__(self, input: TokenStream, output: TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.9")
+        self.checkVersion("4.10.1")
         self._interp = ParserATNSimulator(
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
     class GraphContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -209,6 +211,7 @@ class DOTParser (Parser):
         return localctx
 
     class Stmt_listContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -264,6 +267,7 @@ class DOTParser (Parser):
         return localctx
 
     class StmtContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -349,6 +353,7 @@ class DOTParser (Parser):
         return localctx
 
     class Attr_stmtContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -402,6 +407,7 @@ class DOTParser (Parser):
         return localctx
 
     class Attr_listContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -461,6 +467,7 @@ class DOTParser (Parser):
         return localctx
 
     class A_listContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -527,6 +534,7 @@ class DOTParser (Parser):
         return localctx
 
     class Edge_stmtContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -594,6 +602,7 @@ class DOTParser (Parser):
         return localctx
 
     class EdgeRHSContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -670,6 +679,7 @@ class DOTParser (Parser):
         return localctx
 
     class EdgeopContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -709,6 +719,7 @@ class DOTParser (Parser):
         return localctx
 
     class Node_stmtContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -756,6 +767,7 @@ class DOTParser (Parser):
         return localctx
 
     class Node_idContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -803,6 +815,7 @@ class DOTParser (Parser):
         return localctx
 
     class PortContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -854,6 +867,7 @@ class DOTParser (Parser):
         return localctx
 
     class SubgraphContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -914,6 +928,7 @@ class DOTParser (Parser):
         return localctx
 
     class Id_Context(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
