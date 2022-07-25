@@ -8,10 +8,10 @@ if sys.version_info[1] > 5:
 else:
 	from typing.io import TextIO
 
-if __name__ is not None and "." in __name__:
-    from .CSharpParserBase import CSharpParserBase
-else:
-    from CSharpParserBase import CSharpParserBase
+#if __name__ is not None and "." in __name__:
+#    from .CSharpParserBase import CSharpParserBase
+#else:
+#    from CSharpParserBase import CSharpParserBase
 
 def serializedATN():
     return [
@@ -1136,7 +1136,7 @@ def serializedATN():
         2573,2580,2587,2590,2596,2603,2608,2611,2619,2625,2629,2635,2639
     ]
 
-class CSharpParser ( CSharpParserBase ):
+class CSharpParser ( Parser ):
 
     grammarFileName = "CSharpParser.g4"
 
