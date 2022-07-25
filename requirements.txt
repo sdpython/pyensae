@@ -24,7 +24,7 @@ parso
 pycodestyle
 pylint
 pylzma
-pyquickhelper>=1.10.3616
+pyquickhelper>=1.11.3747
 pyquicksetup
 quandl
 scikit-learn>=0.24
