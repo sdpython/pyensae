@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/python:3.9.6
+      - image: cimg/python:3.10.5
     
     working_directory: ~/repo
     
@@ -18,8 +18,8 @@ jobs:
           name: Install pandoc
           command: |
                     sudo apt-get update 
-                    wget https://github.com/jgm/pandoc/releases/download/2.14.1/pandoc-2.14.1-1-amd64.deb
-                    sudo dpkg -i pandoc-2.14.1-1-amd64.deb
+                    wget https://github.com/jgm/pandoc/releases/download/2.18/pandoc-2.18-1-amd64.deb
+                    sudo dpkg -i pandoc-2.18-1-amd64.deb
 
       - run:
           name: Install java
@@ -49,34 +49,33 @@ jobs:
                     sudo apt-get install -y graphviz
           
       - run:
-          name: Install libproj
+          name: Install dependencies for proj
           command: |
-            sudo apt-get install -y libgeos-dev libproj-dev proj-data graphviz
+            sudo apt-get install -y libgeos-dev proj-data graphviz sqlite3 libtiff5 libtiff5-dev libtiff-dev libsqlite3-dev libcurl4-gnutls-dev
 
       - run:
-          name: Install standard libraries
+          name: build proj
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip3 install scipy matplotlib numpy cython pandas
-
-      - run:
-          name: Install pyproj, shapely, cartopy
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip3 install pyproj
-            pip3 uninstall -y shapely
-            pip3 install --no-binary shapely shapely
-            pip3 install cartopy
+            # see https://stackoverflow.com/questions/72442087/cant-install-proj-8-0-0-for-cartopy-linux
+            wget https://download.osgeo.org/proj/proj-9.0.0.tar.gz
+            tar -xf proj-9.0.0.tar.gz
+            cd proj-9.0.0
+            mkdir build && cd build
+            cmake ..
+            cmake --build .
+            sudo cmake --build . --target install
+            cd ..
 
       - run:
           name: install dependencies
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
             pip install -r requirements.txt
             pip install mplfinance
+
+      - run:
+          name: install ldconfig
+          command: |
+            sudo ldconfig
 
       - save_cache:
           paths:
@@ -86,14 +85,12 @@ jobs:
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
             export PYTHONPATH=src
             python setup.py unittests
 
       - run:
           name: wheel
           command: |
-            . venv/bin/activate
             export PYTHONPATH=src
             python setup.py bdist_wheel
             mkdir -p test-reports/dist

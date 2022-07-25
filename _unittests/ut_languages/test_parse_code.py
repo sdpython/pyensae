@@ -7,43 +7,45 @@ will sort all test files by increasing time and run them.
 import os
 import unittest
 import warnings
-from pyquickhelper.loghelper import fLOG
-from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
-from pyensae.languages.antlr_grammar_build import build_grammar
-import pyensae.languages.antlr_grammar_use as source_parser
+from pyquickhelper.pycode import ExtTestCase
 
 
-class TestParseCode(unittest.TestCase):
+class TestParseCode(ExtTestCase):
 
     def test_build_parser(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
 
-        langs = ["DOT", "CSharp4", "SQLite", "R"]  # , "Python3", "Pig"]
+        langs = ["DOT", "CSharp4", "SQLite", "R"]  # , "Python3"]
 
-        try:
-            for lang in langs:
-                get_parser_lexer(lang)
-            return
-        except ImportError:
-            pass
+        for lang in langs:
+            with self.subTest(lang=lang):
+                try:
+                    get_parser_lexer(lang)
+                    return
+                except ImportError:
+                    pass
 
         folder = os.path.dirname(source_parser.__file__)
 
+        rows = []
+
+        def local_print(*s):
+            rows.append(' '.join(map(str, s)))
+
         for lang in langs:
-            fLOG("generate for LANG", lang)
             gr = os.path.join(folder, lang + ".g4")
             assert os.path.exists(gr)
-            final = build_grammar(lang, fLOG=fLOG)
+            final = build_grammar(lang, fLOG=local_print)
             fLOG(final)
 
     def test_r(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
 
         code = """
         a = 4 ;
@@ -57,14 +59,13 @@ class TestParseCode(unittest.TestCase):
         st = get_tree_string(tree, parser)
         assert len(st) > 0
         st = get_tree_string(tree, parser, None)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
     def test_sql(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
 
         code = """
         SELECT a,tbl.b,nb FROM tbl
@@ -78,14 +79,13 @@ class TestParseCode(unittest.TestCase):
         parser = parse_code(code, clparser, cllexer)
         tree = parser.parse()
         st = get_tree_string(tree, parser, None)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
     def test_error(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
 
         code = """
         SELECT
@@ -103,33 +103,11 @@ class TestParseCode(unittest.TestCase):
         parser = parse_code(code, clparser, cllexer)
         parser.parse()
 
-    def test_pig(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
-
-        code = """
-        A = LOAD 'filename.txt' USING PigStorage('\t');
-        STORE A INTO 'samefile.txt' ;
-        """
-
-        try:
-            clparser, cllexer = get_parser_lexer("Pig")
-        except ImportError:
-            warnings.warn("Grammar for Pig not ready yet.")
-            return
-        parser = parse_code(code, clparser, cllexer)
-        tree = parser.compilation_unit()
-        st = get_tree_string(tree, parser, None)
-        fLOG(st.replace("\\n", "\n"))
-        assert len(st) > 0
-
     def test_csharp(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
 
         code = """
         namespace hello
@@ -148,14 +126,13 @@ class TestParseCode(unittest.TestCase):
         parser = parse_code(code, clparser, cllexer)
         tree = parser.compilation_unit()
         st = get_tree_string(tree, parser)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
     def test_python3(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
 
         # the grammar does not fully compile
 
@@ -176,14 +153,13 @@ class TestParseCode(unittest.TestCase):
             warnings.warn("Grammar for Python3 not ready yet: {0}".format(e))
             return
         st = get_tree_string(tree, parser)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
     def test_DOT(self):
-        fLOG(
-            __file__,
-            self._testMethodName,
-            OutputPrint=__name__ == "__main__")
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
 
         # the grammar does not fully compile
 
@@ -198,9 +174,9 @@ class TestParseCode(unittest.TestCase):
         parser = parse_code(code, clparser, cllexer)
         tree = parser.graph()
         st = get_tree_string(tree, parser)
-        fLOG(st.replace("\\n", "\n"))
         assert len(st) > 0
 
 
 if __name__ == "__main__":
+    TestParseCode().test_csharp()
     unittest.main()

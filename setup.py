@@ -16,7 +16,7 @@ readme = 'README.rst'
 history = "HISTORY.rst"
 requirements = None
 
-KEYWORDS = project_var_name + ', ENSAE, sqllite, database, teachings'
+KEYWORDS = [project_var_name, 'ENSAE', 'sqllite', 'database', 'teachings']
 DESCRIPTION = """Helpers for teaching purposes (includes sqllite helpers)."""
 CLASSIFIERS = [
     'Programming Language :: Python :: %d' % sys.version_info[0],
@@ -57,7 +57,7 @@ class SetupCommandBuildScript(Command):
             if not os.path.exists(g2):
                 raise FileNotFoundError("{0}\n{1}".format(grammar, g2))
             grammar = g2
-        build_grammar(grammar, fLOG=logging_function)
+        build_grammar(grammar, fLOG=print)
         r = True
 
 

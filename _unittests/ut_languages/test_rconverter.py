@@ -8,12 +8,13 @@ import os
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from pyensae.languages.rconverter import r2python
 
 
 class TestPRConverter(unittest.TestCase):
 
     def test_rconverter(self):
+        from pyensae.languages.rconverter import r2python
+
         fLOG(
             __file__,
             self._testMethodName,

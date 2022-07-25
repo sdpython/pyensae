@@ -11,15 +11,17 @@ import os
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
-from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code, get_tree_graph
-from pyensae.languages.antlr_grammar_build import build_grammar
 from pyensae.graphhelper import run_dot
-import pyensae.languages.antlr_grammar_use as source_parser
 
 
 class TestParseCodeSimpleWorkflow (unittest.TestCase):
 
     def test_build_parser_simple_workflow(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code, get_tree_graph)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -44,6 +46,11 @@ class TestParseCodeSimpleWorkflow (unittest.TestCase):
             fLOG(final)
 
     def test_simple_workflow(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code, get_tree_graph)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,
@@ -82,6 +89,11 @@ class TestParseCodeSimpleWorkflow (unittest.TestCase):
             assert os.path.exists(img)
 
     def test_simple_for_workflow(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code, get_tree_graph)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         fLOG(
             __file__,
             self._testMethodName,

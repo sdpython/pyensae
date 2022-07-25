@@ -1,4 +1,4 @@
-# Generated from \DOT.g4 by ANTLR 4.9
+# Generated from \DOT.g4 by ANTLR 4.10.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -10,55 +10,52 @@ else:
 
 
 def serializedATN():
-    with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35")
-        buf.write("\u008a\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
-        buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
-        buf.write("\t\16\4\17\t\17\4\20\t\20\3\2\5\2\"\n\2\3\2\3\2\5\2&\n")
-        buf.write("\2\3\2\3\2\3\2\3\2\3\3\3\3\5\3.\n\3\7\3\60\n\3\f\3\16")
-        buf.write("\3\63\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4=\n\4\3")
-        buf.write("\5\3\5\3\5\3\6\3\6\5\6D\n\6\3\6\6\6G\n\6\r\6\16\6H\3\7")
-        buf.write("\3\7\3\7\5\7N\n\7\3\7\5\7Q\n\7\6\7S\n\7\r\7\16\7T\3\b")
-        buf.write("\3\b\5\bY\n\b\3\b\3\b\5\b]\n\b\3\t\3\t\3\t\5\tb\n\t\6")
-        buf.write("\td\n\t\r\t\16\te\3\n\3\n\3\13\3\13\5\13l\n\13\3\f\3\f")
-        buf.write("\5\fp\n\f\3\r\3\r\3\r\3\r\5\rv\n\r\3\r\3\r\5\rz\n\r\3")
-        buf.write("\16\3\16\5\16~\n\16\5\16\u0080\n\16\3\16\3\16\3\16\3\16")
-        buf.write("\3\17\3\17\3\20\3\20\3\20\2\2\21\2\4\6\b\n\f\16\20\22")
-        buf.write("\24\26\30\32\34\36\2\7\3\2\17\20\4\2\17\17\21\22\3\2\n")
-        buf.write("\13\4\2\r\r\31\31\4\2\24\26\31\31\2\u0091\2!\3\2\2\2\4")
-        buf.write("\61\3\2\2\2\6<\3\2\2\2\b>\3\2\2\2\nF\3\2\2\2\fR\3\2\2")
-        buf.write("\2\16X\3\2\2\2\20c\3\2\2\2\22g\3\2\2\2\24i\3\2\2\2\26")
-        buf.write("m\3\2\2\2\30y\3\2\2\2\32\177\3\2\2\2\34\u0085\3\2\2\2")
-        buf.write("\36\u0087\3\2\2\2 \"\7\16\2\2! \3\2\2\2!\"\3\2\2\2\"#")
-        buf.write("\3\2\2\2#%\t\2\2\2$&\5\36\20\2%$\3\2\2\2%&\3\2\2\2&\'")
-        buf.write("\3\2\2\2\'(\7\3\2\2()\5\4\3\2)*\7\4\2\2*\3\3\2\2\2+-\5")
-        buf.write("\6\4\2,.\7\5\2\2-,\3\2\2\2-.\3\2\2\2.\60\3\2\2\2/+\3\2")
-        buf.write("\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\5\3\2")
-        buf.write("\2\2\63\61\3\2\2\2\64=\5\24\13\2\65=\5\16\b\2\66=\5\b")
-        buf.write("\5\2\678\5\36\20\289\7\6\2\29:\5\36\20\2:=\3\2\2\2;=\5")
-        buf.write("\32\16\2<\64\3\2\2\2<\65\3\2\2\2<\66\3\2\2\2<\67\3\2\2")
-        buf.write("\2<;\3\2\2\2=\7\3\2\2\2>?\t\3\2\2?@\5\n\6\2@\t\3\2\2\2")
-        buf.write("AC\7\7\2\2BD\5\f\7\2CB\3\2\2\2CD\3\2\2\2DE\3\2\2\2EG\7")
-        buf.write("\b\2\2FA\3\2\2\2GH\3\2\2\2HF\3\2\2\2HI\3\2\2\2I\13\3\2")
-        buf.write("\2\2JM\5\36\20\2KL\7\6\2\2LN\5\36\20\2MK\3\2\2\2MN\3\2")
-        buf.write("\2\2NP\3\2\2\2OQ\7\t\2\2PO\3\2\2\2PQ\3\2\2\2QS\3\2\2\2")
-        buf.write("RJ\3\2\2\2ST\3\2\2\2TR\3\2\2\2TU\3\2\2\2U\r\3\2\2\2VY")
-        buf.write("\5\26\f\2WY\5\32\16\2XV\3\2\2\2XW\3\2\2\2YZ\3\2\2\2Z\\")
-        buf.write("\5\20\t\2[]\5\n\6\2\\[\3\2\2\2\\]\3\2\2\2]\17\3\2\2\2")
-        buf.write("^a\5\22\n\2_b\5\26\f\2`b\5\32\16\2a_\3\2\2\2a`\3\2\2\2")
-        buf.write("bd\3\2\2\2c^\3\2\2\2de\3\2\2\2ec\3\2\2\2ef\3\2\2\2f\21")
-        buf.write("\3\2\2\2gh\t\4\2\2h\23\3\2\2\2ik\5\26\f\2jl\5\n\6\2kj")
-        buf.write("\3\2\2\2kl\3\2\2\2l\25\3\2\2\2mo\5\36\20\2np\5\30\r\2")
-        buf.write("on\3\2\2\2op\3\2\2\2p\27\3\2\2\2qr\7\f\2\2ru\5\36\20\2")
-        buf.write("st\7\f\2\2tv\5\34\17\2us\3\2\2\2uv\3\2\2\2vz\3\2\2\2w")
-        buf.write("x\7\f\2\2xz\5\34\17\2yq\3\2\2\2yw\3\2\2\2z\31\3\2\2\2")
-        buf.write("{}\7\23\2\2|~\5\36\20\2}|\3\2\2\2}~\3\2\2\2~\u0080\3\2")
-        buf.write("\2\2\177{\3\2\2\2\177\u0080\3\2\2\2\u0080\u0081\3\2\2")
-        buf.write("\2\u0081\u0082\7\3\2\2\u0082\u0083\5\4\3\2\u0083\u0084")
-        buf.write("\7\4\2\2\u0084\33\3\2\2\2\u0085\u0086\t\5\2\2\u0086\35")
-        buf.write("\3\2\2\2\u0087\u0088\t\6\2\2\u0088\37\3\2\2\2\26!%-\61")
-        buf.write("<CHMPTX\\aekouy}\177")
-        return buf.getvalue()
+    return [
+        4, 1, 24, 129, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7, 4, 2, 5, 7, 5, 2, 6, 7,
+        6, 2, 7, 7, 7, 2, 8, 7, 8, 2, 9, 7, 9, 2, 10, 7, 10, 2, 11, 7, 11, 2, 12, 7, 12, 2, 13, 7, 13,
+        1, 0, 3, 0, 30, 8, 0, 1, 0, 1, 0, 3, 0, 34, 8, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 3,
+        1, 43, 8, 1, 5, 1, 45, 8, 1, 10, 1, 12, 1, 48, 9, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,
+        1, 2, 3, 2, 58, 8, 2, 1, 3, 1, 3, 1, 3, 1, 4, 1, 4, 3, 4, 65, 8, 4, 1, 4, 4, 4, 68, 8, 4, 11,
+        4, 12, 4, 69, 1, 5, 1, 5, 1, 5, 3, 5, 75, 8, 5, 1, 5, 3, 5, 78, 8, 5, 4, 5, 80, 8, 5, 11, 5,
+        12, 5, 81, 1, 6, 1, 6, 3, 6, 86, 8, 6, 1, 6, 1, 6, 3, 6, 90, 8, 6, 1, 7, 1, 7, 1, 7, 3, 7, 95,
+        8, 7, 4, 7, 97, 8, 7, 11, 7, 12, 7, 98, 1, 8, 1, 8, 1, 9, 1, 9, 3, 9, 105, 8, 9, 1, 10, 1, 10,
+        3, 10, 109, 8, 10, 1, 11, 1, 11, 1, 11, 1, 11, 3, 11, 115, 8, 11, 1, 12, 1, 12, 3, 12, 119,
+        8, 12, 3, 12, 121, 8, 12, 1, 12, 1, 12, 1, 12, 1, 12, 1, 13, 1, 13, 1, 13, 0, 0, 14, 0, 2,
+        4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 0, 4, 1, 0, 12, 13, 2, 0, 12, 12, 14, 15, 1,
+        0, 8, 9, 1, 0, 17, 20, 136, 0, 29, 1, 0, 0, 0, 2, 46, 1, 0, 0, 0, 4, 57, 1, 0, 0, 0, 6, 59,
+        1, 0, 0, 0, 8, 67, 1, 0, 0, 0, 10, 79, 1, 0, 0, 0, 12, 85, 1, 0, 0, 0, 14, 96, 1, 0, 0, 0, 16,
+        100, 1, 0, 0, 0, 18, 102, 1, 0, 0, 0, 20, 106, 1, 0, 0, 0, 22, 110, 1, 0, 0, 0, 24, 120,
+        1, 0, 0, 0, 26, 126, 1, 0, 0, 0, 28, 30, 5, 11, 0, 0, 29, 28, 1, 0, 0, 0, 29, 30, 1, 0, 0,
+        0, 30, 31, 1, 0, 0, 0, 31, 33, 7, 0, 0, 0, 32, 34, 3, 26, 13, 0, 33, 32, 1, 0, 0, 0, 33, 34,
+        1, 0, 0, 0, 34, 35, 1, 0, 0, 0, 35, 36, 5, 1, 0, 0, 36, 37, 3, 2, 1, 0, 37, 38, 5, 2, 0, 0,
+        38, 39, 5, 0, 0, 1, 39, 1, 1, 0, 0, 0, 40, 42, 3, 4, 2, 0, 41, 43, 5, 3, 0, 0, 42, 41, 1, 0,
+        0, 0, 42, 43, 1, 0, 0, 0, 43, 45, 1, 0, 0, 0, 44, 40, 1, 0, 0, 0, 45, 48, 1, 0, 0, 0, 46, 44,
+        1, 0, 0, 0, 46, 47, 1, 0, 0, 0, 47, 3, 1, 0, 0, 0, 48, 46, 1, 0, 0, 0, 49, 58, 3, 18, 9, 0,
+        50, 58, 3, 12, 6, 0, 51, 58, 3, 6, 3, 0, 52, 53, 3, 26, 13, 0, 53, 54, 5, 4, 0, 0, 54, 55,
+        3, 26, 13, 0, 55, 58, 1, 0, 0, 0, 56, 58, 3, 24, 12, 0, 57, 49, 1, 0, 0, 0, 57, 50, 1, 0,
+        0, 0, 57, 51, 1, 0, 0, 0, 57, 52, 1, 0, 0, 0, 57, 56, 1, 0, 0, 0, 58, 5, 1, 0, 0, 0, 59, 60,
+        7, 1, 0, 0, 60, 61, 3, 8, 4, 0, 61, 7, 1, 0, 0, 0, 62, 64, 5, 5, 0, 0, 63, 65, 3, 10, 5, 0,
+        64, 63, 1, 0, 0, 0, 64, 65, 1, 0, 0, 0, 65, 66, 1, 0, 0, 0, 66, 68, 5, 6, 0, 0, 67, 62, 1,
+        0, 0, 0, 68, 69, 1, 0, 0, 0, 69, 67, 1, 0, 0, 0, 69, 70, 1, 0, 0, 0, 70, 9, 1, 0, 0, 0, 71,
+        74, 3, 26, 13, 0, 72, 73, 5, 4, 0, 0, 73, 75, 3, 26, 13, 0, 74, 72, 1, 0, 0, 0, 74, 75, 1,
+        0, 0, 0, 75, 77, 1, 0, 0, 0, 76, 78, 5, 7, 0, 0, 77, 76, 1, 0, 0, 0, 77, 78, 1, 0, 0, 0, 78,
+        80, 1, 0, 0, 0, 79, 71, 1, 0, 0, 0, 80, 81, 1, 0, 0, 0, 81, 79, 1, 0, 0, 0, 81, 82, 1, 0, 0,
+        0, 82, 11, 1, 0, 0, 0, 83, 86, 3, 20, 10, 0, 84, 86, 3, 24, 12, 0, 85, 83, 1, 0, 0, 0, 85,
+        84, 1, 0, 0, 0, 86, 87, 1, 0, 0, 0, 87, 89, 3, 14, 7, 0, 88, 90, 3, 8, 4, 0, 89, 88, 1, 0,
+        0, 0, 89, 90, 1, 0, 0, 0, 90, 13, 1, 0, 0, 0, 91, 94, 3, 16, 8, 0, 92, 95, 3, 20, 10, 0, 93,
+        95, 3, 24, 12, 0, 94, 92, 1, 0, 0, 0, 94, 93, 1, 0, 0, 0, 95, 97, 1, 0, 0, 0, 96, 91, 1, 0,
+        0, 0, 97, 98, 1, 0, 0, 0, 98, 96, 1, 0, 0, 0, 98, 99, 1, 0, 0, 0, 99, 15, 1, 0, 0, 0, 100,
+        101, 7, 2, 0, 0, 101, 17, 1, 0, 0, 0, 102, 104, 3, 20, 10, 0, 103, 105, 3, 8, 4, 0, 104,
+        103, 1, 0, 0, 0, 104, 105, 1, 0, 0, 0, 105, 19, 1, 0, 0, 0, 106, 108, 3, 26, 13, 0, 107,
+        109, 3, 22, 11, 0, 108, 107, 1, 0, 0, 0, 108, 109, 1, 0, 0, 0, 109, 21, 1, 0, 0, 0, 110,
+        111, 5, 10, 0, 0, 111, 114, 3, 26, 13, 0, 112, 113, 5, 10, 0, 0, 113, 115, 3, 26, 13,
+        0, 114, 112, 1, 0, 0, 0, 114, 115, 1, 0, 0, 0, 115, 23, 1, 0, 0, 0, 116, 118, 5, 16, 0,
+        0, 117, 119, 3, 26, 13, 0, 118, 117, 1, 0, 0, 0, 118, 119, 1, 0, 0, 0, 119, 121, 1, 0,
+        0, 0, 120, 116, 1, 0, 0, 0, 120, 121, 1, 0, 0, 0, 121, 122, 1, 0, 0, 0, 122, 123, 5, 1,
+        0, 0, 123, 124, 3, 2, 1, 0, 124, 125, 5, 2, 0, 0, 125, 25, 1, 0, 0, 0, 126, 127, 7, 3, 0,
+        0, 127, 27, 1, 0, 0, 0, 19, 29, 33, 42, 46, 57, 64, 69, 74, 77, 81, 85, 89, 94, 98, 104,
+        108, 114, 118, 120
+    ]
 
 
 class DOTParser (Parser):
@@ -72,14 +69,14 @@ class DOTParser (Parser):
     sharedContextCache = PredictionContextCache()
 
     literalNames = ["<INVALID>", "'{'", "'}'", "';'", "'='", "'['", "']'",
-                    "','", "'->'", "'--'", "':'", "'_'"]
+                    "','", "'->'", "'--'", "':'"]
 
     symbolicNames = ["<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>",
-                     "STRICT", "GRAPH", "DIGRAPH", "NODE", "EDGE", "SUBGRAPH",
-                     "NUMBER", "STRING", "HTML_STRING", "TAG", "EntityRef",
-                     "ID", "COMMENT", "LINE_COMMENT", "PREPROC", "WS"]
+                     "<INVALID>", "<INVALID>", "<INVALID>", "STRICT", "GRAPH",
+                     "DIGRAPH", "NODE", "EDGE", "SUBGRAPH", "NUMBER", "STRING",
+                     "ID", "HTML_STRING", "COMMENT", "LINE_COMMENT", "PREPROC",
+                     "WS"]
 
     RULE_graph = 0
     RULE_stmt_list = 1
@@ -94,12 +91,11 @@ class DOTParser (Parser):
     RULE_node_id = 10
     RULE_port = 11
     RULE_subgraph = 12
-    RULE_compass_pt = 13
-    RULE_gid = 14
+    RULE_id_ = 13
 
     ruleNames = ["graph", "stmt_list", "stmt", "attr_stmt", "attr_list",
                  "a_list", "edge_stmt", "edgeRHS", "edgeop", "node_stmt",
-                 "node_id", "port", "subgraph", "compass_pt", "gid"]
+                 "node_id", "port", "subgraph", "id_"]
 
     EOF = Token.EOF
     T__0 = 1
@@ -112,32 +108,30 @@ class DOTParser (Parser):
     T__7 = 8
     T__8 = 9
     T__9 = 10
-    T__10 = 11
-    STRICT = 12
-    GRAPH = 13
-    DIGRAPH = 14
-    NODE = 15
-    EDGE = 16
-    SUBGRAPH = 17
-    NUMBER = 18
-    STRING = 19
+    STRICT = 11
+    GRAPH = 12
+    DIGRAPH = 13
+    NODE = 14
+    EDGE = 15
+    SUBGRAPH = 16
+    NUMBER = 17
+    STRING = 18
+    ID = 19
     HTML_STRING = 20
-    TAG = 21
-    EntityRef = 22
-    ID = 23
-    COMMENT = 24
-    LINE_COMMENT = 25
-    PREPROC = 26
-    WS = 27
+    COMMENT = 21
+    LINE_COMMENT = 22
+    PREPROC = 23
+    WS = 24
 
     def __init__(self, input: TokenStream, output: TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.9")
+        self.checkVersion("4.10.1")
         self._interp = ParserATNSimulator(
             self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
     class GraphContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -145,6 +139,9 @@ class DOTParser (Parser):
 
         def stmt_list(self):
             return self.getTypedRuleContext(DOTParser.Stmt_listContext, 0)
+
+        def EOF(self):
+            return self.getToken(DOTParser.EOF, 0)
 
         def GRAPH(self):
             return self.getToken(DOTParser.GRAPH, 0)
@@ -155,8 +152,8 @@ class DOTParser (Parser):
         def STRICT(self):
             return self.getToken(DOTParser.STRICT, 0)
 
-        def gid(self):
-            return self.getTypedRuleContext(DOTParser.GidContext, 0)
+        def id_(self):
+            return self.getTypedRuleContext(DOTParser.Id_Context, 0)
 
         def getRuleIndex(self):
             return DOTParser.RULE_graph
@@ -176,33 +173,35 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 31
+            self.state = 29
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == DOTParser.STRICT:
-                self.state = 30
+                self.state = 28
                 self.match(DOTParser.STRICT)
 
-            self.state = 33
+            self.state = 31
             _la = self._input.LA(1)
             if not(_la == DOTParser.GRAPH or _la == DOTParser.DIGRAPH):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.state = 35
+            self.state = 33
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.HTML_STRING) | (1 << DOTParser.ID))) != 0):
-                self.state = 34
-                self.gid()
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.ID) | (1 << DOTParser.HTML_STRING))) != 0):
+                self.state = 32
+                self.id_()
 
-            self.state = 37
+            self.state = 35
             self.match(DOTParser.T__0)
-            self.state = 38
+            self.state = 36
             self.stmt_list()
-            self.state = 39
+            self.state = 37
             self.match(DOTParser.T__1)
+            self.state = 38
+            self.match(DOTParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -212,6 +211,7 @@ class DOTParser (Parser):
         return localctx
 
     class Stmt_listContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -241,20 +241,20 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 47
+            self.state = 46
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.T__0) | (1 << DOTParser.GRAPH) | (1 << DOTParser.NODE) | (1 << DOTParser.EDGE) | (1 << DOTParser.SUBGRAPH) | (1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.HTML_STRING) | (1 << DOTParser.ID))) != 0):
-                self.state = 41
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.T__0) | (1 << DOTParser.GRAPH) | (1 << DOTParser.NODE) | (1 << DOTParser.EDGE) | (1 << DOTParser.SUBGRAPH) | (1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.ID) | (1 << DOTParser.HTML_STRING))) != 0):
+                self.state = 40
                 self.stmt()
-                self.state = 43
+                self.state = 42
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == DOTParser.T__2:
-                    self.state = 42
+                    self.state = 41
                     self.match(DOTParser.T__2)
 
-                self.state = 49
+                self.state = 48
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -267,6 +267,7 @@ class DOTParser (Parser):
         return localctx
 
     class StmtContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -281,11 +282,11 @@ class DOTParser (Parser):
         def attr_stmt(self):
             return self.getTypedRuleContext(DOTParser.Attr_stmtContext, 0)
 
-        def gid(self, i: int = None):
+        def id_(self, i: int = None):
             if i is None:
-                return self.getTypedRuleContexts(DOTParser.GidContext)
+                return self.getTypedRuleContexts(DOTParser.Id_Context)
             else:
-                return self.getTypedRuleContext(DOTParser.GidContext, i)
+                return self.getTypedRuleContext(DOTParser.Id_Context, i)
 
         def subgraph(self):
             return self.getTypedRuleContext(DOTParser.SubgraphContext, 0)
@@ -306,40 +307,40 @@ class DOTParser (Parser):
         localctx = DOTParser.StmtContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_stmt)
         try:
-            self.state = 58
+            self.state = 57
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input, 4, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 50
+                self.state = 49
                 self.node_stmt()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 51
+                self.state = 50
                 self.edge_stmt()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 52
+                self.state = 51
                 self.attr_stmt()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
+                self.state = 52
+                self.id_()
                 self.state = 53
-                self.gid()
-                self.state = 54
                 self.match(DOTParser.T__3)
-                self.state = 55
-                self.gid()
+                self.state = 54
+                self.id_()
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 57
+                self.state = 56
                 self.subgraph()
                 pass
 
@@ -352,6 +353,7 @@ class DOTParser (Parser):
         return localctx
 
     class Attr_stmtContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -387,14 +389,14 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 60
+            self.state = 59
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.GRAPH) | (1 << DOTParser.NODE) | (1 << DOTParser.EDGE))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-            self.state = 61
+            self.state = 60
             self.attr_list()
         except RecognitionException as re:
             localctx.exception = re
@@ -405,6 +407,7 @@ class DOTParser (Parser):
         return localctx
 
     class Attr_listContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -434,22 +437,22 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 68
+            self.state = 67
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 63
+                self.state = 62
                 self.match(DOTParser.T__4)
-                self.state = 65
+                self.state = 64
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.HTML_STRING) | (1 << DOTParser.ID))) != 0):
-                    self.state = 64
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.ID) | (1 << DOTParser.HTML_STRING))) != 0):
+                    self.state = 63
                     self.a_list()
 
-                self.state = 67
+                self.state = 66
                 self.match(DOTParser.T__5)
-                self.state = 70
+                self.state = 69
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la == DOTParser.T__4):
@@ -464,16 +467,17 @@ class DOTParser (Parser):
         return localctx
 
     class A_listContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def gid(self, i: int = None):
+        def id_(self, i: int = None):
             if i is None:
-                return self.getTypedRuleContexts(DOTParser.GidContext)
+                return self.getTypedRuleContexts(DOTParser.Id_Context)
             else:
-                return self.getTypedRuleContext(DOTParser.GidContext, i)
+                return self.getTypedRuleContext(DOTParser.Id_Context, i)
 
         def getRuleIndex(self):
             return DOTParser.RULE_a_list
@@ -493,32 +497,32 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 80
+            self.state = 79
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 72
-                self.gid()
-                self.state = 75
+                self.state = 71
+                self.id_()
+                self.state = 74
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == DOTParser.T__3:
-                    self.state = 73
+                    self.state = 72
                     self.match(DOTParser.T__3)
-                    self.state = 74
-                    self.gid()
+                    self.state = 73
+                    self.id_()
 
-                self.state = 78
+                self.state = 77
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la == DOTParser.T__6:
-                    self.state = 77
+                    self.state = 76
                     self.match(DOTParser.T__6)
 
-                self.state = 82
+                self.state = 81
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.HTML_STRING) | (1 << DOTParser.ID))) != 0)):
+                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.ID) | (1 << DOTParser.HTML_STRING))) != 0)):
                     break
 
         except RecognitionException as re:
@@ -530,6 +534,7 @@ class DOTParser (Parser):
         return localctx
 
     class Edge_stmtContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -565,27 +570,27 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 86
+            self.state = 85
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [DOTParser.NUMBER, DOTParser.STRING, DOTParser.HTML_STRING, DOTParser.ID]:
-                self.state = 84
+            if token in [DOTParser.NUMBER, DOTParser.STRING, DOTParser.ID, DOTParser.HTML_STRING]:
+                self.state = 83
                 self.node_id()
                 pass
             elif token in [DOTParser.T__0, DOTParser.SUBGRAPH]:
-                self.state = 85
+                self.state = 84
                 self.subgraph()
                 pass
             else:
                 raise NoViableAltException(self)
 
-            self.state = 88
+            self.state = 87
             self.edgeRHS()
-            self.state = 90
+            self.state = 89
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == DOTParser.T__4:
-                self.state = 89
+                self.state = 88
                 self.attr_list()
 
         except RecognitionException as re:
@@ -597,6 +602,7 @@ class DOTParser (Parser):
         return localctx
 
     class EdgeRHSContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -638,27 +644,27 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 97
+            self.state = 96
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 92
+                self.state = 91
                 self.edgeop()
-                self.state = 95
+                self.state = 94
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
-                if token in [DOTParser.NUMBER, DOTParser.STRING, DOTParser.HTML_STRING, DOTParser.ID]:
-                    self.state = 93
+                if token in [DOTParser.NUMBER, DOTParser.STRING, DOTParser.ID, DOTParser.HTML_STRING]:
+                    self.state = 92
                     self.node_id()
                     pass
                 elif token in [DOTParser.T__0, DOTParser.SUBGRAPH]:
-                    self.state = 94
+                    self.state = 93
                     self.subgraph()
                     pass
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 99
+                self.state = 98
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la == DOTParser.T__7 or _la == DOTParser.T__8):
@@ -673,6 +679,7 @@ class DOTParser (Parser):
         return localctx
 
     class EdgeopContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -696,7 +703,7 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 101
+            self.state = 100
             _la = self._input.LA(1)
             if not(_la == DOTParser.T__7 or _la == DOTParser.T__8):
                 self._errHandler.recoverInline(self)
@@ -712,6 +719,7 @@ class DOTParser (Parser):
         return localctx
 
     class Node_stmtContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -741,13 +749,13 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 103
+            self.state = 102
             self.node_id()
-            self.state = 105
+            self.state = 104
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == DOTParser.T__4:
-                self.state = 104
+                self.state = 103
                 self.attr_list()
 
         except RecognitionException as re:
@@ -759,13 +767,14 @@ class DOTParser (Parser):
         return localctx
 
     class Node_idContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def gid(self):
-            return self.getTypedRuleContext(DOTParser.GidContext, 0)
+        def id_(self):
+            return self.getTypedRuleContext(DOTParser.Id_Context, 0)
 
         def port(self):
             return self.getTypedRuleContext(DOTParser.PortContext, 0)
@@ -788,13 +797,13 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 107
-            self.gid()
-            self.state = 109
+            self.state = 106
+            self.id_()
+            self.state = 108
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == DOTParser.T__9:
-                self.state = 108
+                self.state = 107
                 self.port()
 
         except RecognitionException as re:
@@ -806,16 +815,17 @@ class DOTParser (Parser):
         return localctx
 
     class PortContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def gid(self):
-            return self.getTypedRuleContext(DOTParser.GidContext, 0)
-
-        def compass_pt(self):
-            return self.getTypedRuleContext(DOTParser.Compass_ptContext, 0)
+        def id_(self, i: int = None):
+            if i is None:
+                return self.getTypedRuleContexts(DOTParser.Id_Context)
+            else:
+                return self.getTypedRuleContext(DOTParser.Id_Context, i)
 
         def getRuleIndex(self):
             return DOTParser.RULE_port
@@ -834,33 +844,19 @@ class DOTParser (Parser):
         self.enterRule(localctx, 22, self.RULE_port)
         self._la = 0  # Token type
         try:
-            self.state = 119
+            self.enterOuterAlt(localctx, 1)
+            self.state = 110
+            self.match(DOTParser.T__9)
+            self.state = 111
+            self.id_()
+            self.state = 114
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input, 17, self._ctx)
-            if la_ == 1:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 111
-                self.match(DOTParser.T__9)
+            _la = self._input.LA(1)
+            if _la == DOTParser.T__9:
                 self.state = 112
-                self.gid()
-                self.state = 115
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la == DOTParser.T__9:
-                    self.state = 113
-                    self.match(DOTParser.T__9)
-                    self.state = 114
-                    self.compass_pt()
-
-                pass
-
-            elif la_ == 2:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 117
                 self.match(DOTParser.T__9)
-                self.state = 118
-                self.compass_pt()
-                pass
+                self.state = 113
+                self.id_()
 
         except RecognitionException as re:
             localctx.exception = re
@@ -871,6 +867,7 @@ class DOTParser (Parser):
         return localctx
 
     class SubgraphContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -882,8 +879,8 @@ class DOTParser (Parser):
         def SUBGRAPH(self):
             return self.getToken(DOTParser.SUBGRAPH, 0)
 
-        def gid(self):
-            return self.getTypedRuleContext(DOTParser.GidContext, 0)
+        def id_(self):
+            return self.getTypedRuleContext(DOTParser.Id_Context, 0)
 
         def getRuleIndex(self):
             return DOTParser.RULE_subgraph
@@ -903,24 +900,24 @@ class DOTParser (Parser):
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 125
+            self.state = 120
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la == DOTParser.SUBGRAPH:
-                self.state = 121
+                self.state = 116
                 self.match(DOTParser.SUBGRAPH)
-                self.state = 123
+                self.state = 118
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.HTML_STRING) | (1 << DOTParser.ID))) != 0):
-                    self.state = 122
-                    self.gid()
+                if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.ID) | (1 << DOTParser.HTML_STRING))) != 0):
+                    self.state = 117
+                    self.id_()
 
-            self.state = 127
+            self.state = 122
             self.match(DOTParser.T__0)
-            self.state = 128
+            self.state = 123
             self.stmt_list()
-            self.state = 129
+            self.state = 124
             self.match(DOTParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -930,49 +927,8 @@ class DOTParser (Parser):
             self.exitRule()
         return localctx
 
-    class Compass_ptContext(ParserRuleContext):
-
-        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def ID(self):
-            return self.getToken(DOTParser.ID, 0)
-
-        def getRuleIndex(self):
-            return DOTParser.RULE_compass_pt
-
-        def enterRule(self, listener: ParseTreeListener):
-            if hasattr(listener, "enterCompass_pt"):
-                listener.enterCompass_pt(self)
-
-        def exitRule(self, listener: ParseTreeListener):
-            if hasattr(listener, "exitCompass_pt"):
-                listener.exitCompass_pt(self)
-
-    def compass_pt(self):
-
-        localctx = DOTParser.Compass_ptContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_compass_pt)
-        self._la = 0  # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 131
-            _la = self._input.LA(1)
-            if not(_la == DOTParser.T__10 or _la == DOTParser.ID):
-                self._errHandler.recoverInline(self)
-            else:
-                self._errHandler.reportMatch(self)
-                self.consume()
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-    class GidContext(ParserRuleContext):
+    class Id_Context(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
@@ -991,26 +947,26 @@ class DOTParser (Parser):
             return self.getToken(DOTParser.NUMBER, 0)
 
         def getRuleIndex(self):
-            return DOTParser.RULE_gid
+            return DOTParser.RULE_id_
 
         def enterRule(self, listener: ParseTreeListener):
-            if hasattr(listener, "enterGid"):
-                listener.enterGid(self)
+            if hasattr(listener, "enterId_"):
+                listener.enterId_(self)
 
         def exitRule(self, listener: ParseTreeListener):
-            if hasattr(listener, "exitGid"):
-                listener.exitGid(self)
+            if hasattr(listener, "exitId_"):
+                listener.exitId_(self)
 
-    def gid(self):
+    def id_(self):
 
-        localctx = DOTParser.GidContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_gid)
+        localctx = DOTParser.Id_Context(self, self._ctx, self.state)
+        self.enterRule(localctx, 26, self.RULE_id_)
         self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 133
+            self.state = 126
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.HTML_STRING) | (1 << DOTParser.ID))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.ID) | (1 << DOTParser.HTML_STRING))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)

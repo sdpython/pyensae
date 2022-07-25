@@ -31,6 +31,7 @@ def _private_test_style_src(fLOG, run_lint, verbose=False, pattern=".*[.]py$"):
                      "R0401: Cyclic import (src.pyensae.sql.sql_interface",
                      "R0401: Cyclic import (pyensae.sql.sql_interface",
                      "database_core2.py:230: R1714",
+                     "RFilter.py",
                      ])
 
 

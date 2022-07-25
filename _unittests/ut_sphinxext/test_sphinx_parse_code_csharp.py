@@ -6,12 +6,13 @@ will sort all test files by increasing time and run them.
 """
 import unittest
 from pyquickhelper.pycode import ExtTestCase
-from pyensae.sphinxext import CSharpParser
 
 
 class TestSphinxParseCodeCSharp(ExtTestCase):
 
     def test_csharp_parse(self):
+        from pyensae.sphinxext import CSharpParser
+
         code = """
         namespace hello_dom
         {

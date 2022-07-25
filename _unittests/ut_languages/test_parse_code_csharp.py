@@ -11,14 +11,16 @@ import os
 import unittest
 import warnings
 from pyquickhelper.pycode import ExtTestCase
-from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_string, parse_code
-from pyensae.languages.antlr_grammar_build import build_grammar
-import pyensae.languages.antlr_grammar_use as source_parser
 
 
 class TestParseCodeCSharp(ExtTestCase):
 
     def test_csharp_parse(self):
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_string, parse_code)
+        from pyensae.languages.antlr_grammar_build import build_grammar
+        import pyensae.languages.antlr_grammar_use as source_parser
+
         code = """
         namespace hello
         {
@@ -54,7 +56,7 @@ class TestParseCodeCSharp(ExtTestCase):
         tree = parser.compilation_unit()
         st = get_tree_string(tree, parser)
         self.assertNotEmpty(st)
-        self.assertIn("/// <summary>", st)
+        self.assertIn("namespace", st)
 
 
 if __name__ == "__main__":

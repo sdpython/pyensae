@@ -11,7 +11,6 @@ import os
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder, fix_tkinter_issues_virtualenv
-from pyensae.languages.antlr_grammar_use import get_parser_lexer, get_tree_graph, parse_code
 from pyensae.graphhelper import run_dot
 
 
@@ -35,6 +34,8 @@ class TestParseCodeGraph (unittest.TestCase):
             }
         }
         """
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_graph, parse_code)
 
         clparser, cllexer = get_parser_lexer("C#")
         parser = parse_code(code, clparser, cllexer)
@@ -72,6 +73,9 @@ class TestParseCodeGraph (unittest.TestCase):
             }
         }
         """
+
+        from pyensae.languages.antlr_grammar_use import (
+            get_parser_lexer, get_tree_graph, parse_code)
 
         clparser, cllexer = get_parser_lexer("C#")
         parser = parse_code(code, clparser, cllexer)

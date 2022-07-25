@@ -15,21 +15,23 @@ set pythonexe=python
 set current=%~dp0
 @echo ~SET current=%current%
 
-%pythonexe% -u %current%..\setup.py update_grammars Python3.g4
+%pythonexe% -u %current%..\setup.py update_grammars --g Python3.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars Pig.g4
+%pythonexe% -u %current%..\setup.py update_grammars --g CSharpLexer.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars CSharpLexer.g4
+%pythonexe% -u %current%..\setup.py update_grammars --g CSharpPreprocessorParser.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars CSharpParser.g4
+%pythonexe% -u %current%..\setup.py update_grammars --g CSharpParser.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars R.g4 RFilter.g4
+%pythonexe% -u %current%..\setup.py update_grammars --g DOT.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars DOT.g4
+%pythonexe% -u %current%..\setup.py update_grammars --g SimpleWorkflow.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars SimpleWorkflow.g4
+%pythonexe% -u %current%..\setup.py update_grammars --g SQLiteLexer.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars SQLiteLexer.g4
+%pythonexe% -u %current%..\setup.py update_grammars --g SQLiteParser.g4
 if %errorlevel% neq 0 exit /b %errorlevel%
-%pythonexe% -u %current%..\setup.py update_grammars SQLiteParser.g4
+%pythonexe% -u %current%..\setup.py update_grammars --g R.g4
+if %errorlevel% neq 0 exit /b %errorlevel%
+%pythonexe% -u %current%..\setup.py update_grammars --g RFilter.g4
 if %errorlevel% neq 0 exit /b %errorlevel%

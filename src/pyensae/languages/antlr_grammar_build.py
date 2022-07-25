@@ -20,7 +20,6 @@ def _is_syntax_is_missing(language):
     locations = {
         "R": "https://github.com/antlr/grammars-v4/tree/master/r/",
         "SQLite": "https://github.com/antlr/grammars-v4/blob/master/sqlite/",
-        "Pig": "http://wiki.apache.org/pig/",
         "CSharp": "https://github.com/antlr/grammars-v4/tree/master/csharp",
     }
 
@@ -37,7 +36,7 @@ def _is_syntax_is_missing(language):
             language, ",".join(locations.keys())))
 
 
-def build_grammar(g4, version="4.9", fLOG=noLOG):
+def build_grammar(g4, version="4.10.1", fLOG=noLOG):
     """
     Compiles the grammar for a specific file.
 
@@ -94,8 +93,7 @@ def build_grammar(g4, version="4.9", fLOG=noLOG):
     version = version.split("-")[0]
 
     cmd = "org.antlr.v4.Tool "
-    if "Lexer" not in g4:
-        cmd += "-Dlanguage=Python3 "
+    cmd += "-Dlanguage=Python3 "
     cmd += g4
     from pyquickhelper.loghelper import run_cmd
     out, err = run_cmd("java " + cmd, wait=True, fLOG=fLOG)
