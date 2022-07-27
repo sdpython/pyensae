@@ -1,11 +1,6 @@
 """
 @brief      test log(time=2s)
-
-You should indicate a time in seconds. The program ``run_unittests.py``
-will sort all test files by increasing time and run them.
 """
-
-
 import sys
 import os
 import unittest
@@ -16,6 +11,8 @@ from pyensae.graphhelper import run_dot
 
 class TestParseCodeGraph (unittest.TestCase):
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_charp_graph_networkx(self):
         fLOG(
             __file__,
@@ -55,6 +52,8 @@ class TestParseCodeGraph (unittest.TestCase):
 
         plt.close('all')
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_graph_graphviz(self):
         fLOG(
             __file__,

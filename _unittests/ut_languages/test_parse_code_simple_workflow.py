@@ -1,11 +1,6 @@
 """
 @brief      test log(time=4s)
-
-You should indicate a time in seconds. The program ``run_unittests.py``
-will sort all test files by increasing time and run them.
 """
-
-
 import sys
 import os
 import unittest
@@ -16,6 +11,8 @@ from pyensae.graphhelper import run_dot
 
 class TestParseCodeSimpleWorkflow (unittest.TestCase):
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_build_parser_simple_workflow(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code, get_tree_graph)
@@ -45,6 +42,8 @@ class TestParseCodeSimpleWorkflow (unittest.TestCase):
             final = build_grammar(lang, fLOG=fLOG)
             fLOG(final)
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_simple_workflow(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code, get_tree_graph)
@@ -88,6 +87,8 @@ class TestParseCodeSimpleWorkflow (unittest.TestCase):
             run_dot(name, img)
             assert os.path.exists(img)
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_simple_for_workflow(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code, get_tree_graph)

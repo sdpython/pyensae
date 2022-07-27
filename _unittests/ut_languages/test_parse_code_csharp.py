@@ -1,11 +1,6 @@
 """
 @brief      test log(time=3s)
-
-You should indicate a time in seconds. The program ``run_unittests.py``
-will sort all test files by increasing time and run them.
 """
-
-
 import sys
 import os
 import unittest
@@ -15,6 +10,8 @@ from pyquickhelper.pycode import ExtTestCase
 
 class TestParseCodeCSharp(ExtTestCase):
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_csharp_parse(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)

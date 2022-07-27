@@ -1,10 +1,8 @@
 """
 @brief      test log(time=3s)
-
-You should indicate a time in seconds. The program ``run_unittests.py``
-will sort all test files by increasing time and run them.
 """
 import os
+import sys
 import unittest
 import warnings
 from pyquickhelper.pycode import ExtTestCase
@@ -12,6 +10,8 @@ from pyquickhelper.pycode import ExtTestCase
 
 class TestParseCode(ExtTestCase):
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_build_parser(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)
@@ -41,6 +41,8 @@ class TestParseCode(ExtTestCase):
             final = build_grammar(lang, fLOG=local_print)
             fLOG(final)
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_r(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)
@@ -61,6 +63,8 @@ class TestParseCode(ExtTestCase):
         st = get_tree_string(tree, parser, None)
         assert len(st) > 0
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_sql(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)
@@ -81,6 +85,8 @@ class TestParseCode(ExtTestCase):
         st = get_tree_string(tree, parser, None)
         assert len(st) > 0
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_error(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)
@@ -103,6 +109,8 @@ class TestParseCode(ExtTestCase):
         parser = parse_code(code, clparser, cllexer)
         parser.parse()
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_csharp(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)
@@ -128,6 +136,8 @@ class TestParseCode(ExtTestCase):
         st = get_tree_string(tree, parser)
         assert len(st) > 0
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_python3(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)
@@ -155,6 +165,8 @@ class TestParseCode(ExtTestCase):
         st = get_tree_string(tree, parser)
         assert len(st) > 0
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_DOT(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)

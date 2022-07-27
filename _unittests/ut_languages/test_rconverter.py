@@ -1,10 +1,8 @@
 """
 @brief      test log(time=7s)
-
-You should indicate a time in seconds. The program ``run_unittests.py``
-will sort all test files by increasing time and run them.
 """
 import os
+import sys
 import unittest
 from pyquickhelper.loghelper import fLOG
 from pyquickhelper.pycode import get_temp_folder
@@ -12,6 +10,8 @@ from pyquickhelper.pycode import get_temp_folder
 
 class TestPRConverter(unittest.TestCase):
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_rconverter(self):
         from pyensae.languages.rconverter import r2python
 

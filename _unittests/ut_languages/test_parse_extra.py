@@ -1,10 +1,8 @@
 """
 @brief      test log(time=2s)
-
-You should indicate a time in seconds. The program ``run_unittests.py``
-will sort all test files by increasing time and run them.
 """
 import os
+import sys
 import unittest
 import warnings
 from pyquickhelper.loghelper import fLOG
@@ -12,6 +10,8 @@ from pyquickhelper.loghelper import fLOG
 
 class TestParseCode (unittest.TestCase):
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_build_parser_extra(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)
@@ -38,6 +38,8 @@ class TestParseCode (unittest.TestCase):
                 continue
             build_grammar(lang, fLOG=fLOG)
 
+    @unittest.skipIf(sys.version_info[:2] < (3, 10),
+                     reason="grammars compiled on python 3.10")
     def test_extra(self):
         from pyensae.languages.antlr_grammar_use import (
             get_parser_lexer, get_tree_string, parse_code)
