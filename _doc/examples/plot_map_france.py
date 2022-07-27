@@ -55,4 +55,4 @@ plot_map_france_polygon(
     ax=ax, geometry=df['geometry'],
     colors=[(i / N, 1. - i / N, 1. - i / N) for i in range(df.shape[0])])
 ax.set_title('France departments')
-plt.show()
+# plt.show()
