@@ -14,10 +14,10 @@ def r2python(code: str, pep8=False, fLOG=None) -> str:
     """
     Converts a R script into Python.
 
-    @param      code        R string
-    @param      pep8        modify the output to be compliant with pep8
-    @param      fLOG        logging function
-    @return                 Python string
+    :param code: R string
+    :param pep8: modify the output to be compliant with pep8
+    :param fLOG: logging function
+    :return: Python string
 
     .. _code-r2python:
 
@@ -58,6 +58,9 @@ def r2python(code: str, pep8=False, fLOG=None) -> str:
     * ``m[,1]`` must be replaced by ``M[:,1]``
     * formula ``~.`` is not translated
     * ``%<%`` cannot be followed by an empty line
+
+    The grammar were updated in 2022 for python 3.10 and
+    :epkg:`antrl4-python3-runtime` == 4.10.
     """
     if fLOG:
         fLOG(  # pragma: no cover

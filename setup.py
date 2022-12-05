@@ -95,7 +95,7 @@ setup(
         'datasource': ['dbread', 'geopandas', 'shapely', 'pyshp', 'pylzma'],
         'finance': ['pandas-datareader', 'yahoo_historical>=0.4'],
         'graphhelper': ['matplotlib>=3.0'],
-        'languages': ['antlr4-python3-runtime>=4.8'],
+        'languages': ['antlr4-python3-runtime>=4.10'],
         'notebookhelper': ['folium', 'qgrid'],
         'all': [
             "pyquickhelper>=1.8", "numpy>=1.18", "pandas>=1.0", "matplotlib>=3.0",

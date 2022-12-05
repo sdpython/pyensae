@@ -5,13 +5,14 @@ import os
 import sys
 import unittest
 from pyquickhelper.loghelper import fLOG
-from pyquickhelper.pycode import get_temp_folder
+from pyquickhelper.pycode import get_temp_folder, ignore_warnings
 
 
 class TestPRConverter(unittest.TestCase):
 
     @unittest.skipIf(sys.version_info[:2] < (3, 10),
                      reason="grammars compiled on python 3.10")
+    @ignore_warnings(PendingDeprecationWarning)
     def test_rconverter(self):
         from pyensae.languages.rconverter import r2python
 
