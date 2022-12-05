@@ -33,9 +33,8 @@ class TestStockGraph(ExtTestCase):
             fLOG("A", sys.executable)
             fig, ax = plt.subplots()
             ax = StockPrices.draw(
-                stocks, figsize=(
-                    16, 8), field=[
-                    "Open", "Close"],
+                stocks, figsize=(16, 8),
+                field=["Open", "Close"],
                 ax=ax)
             img = os.path.abspath(
                 os.path.join(

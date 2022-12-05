@@ -60,7 +60,7 @@ def r2python(code: str, pep8=False, fLOG=None) -> str:
     * ``%<%`` cannot be followed by an empty line
 
     The grammar were updated in 2022 for python 3.10 and
-    :epkg:`antrl4-python3-runtime` == 4.10.
+    :epkg:`antlr4-python3-runtime` == 4.10.
     """
     if fLOG:
         fLOG(  # pragma: no cover
