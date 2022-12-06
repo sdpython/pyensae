@@ -5,15 +5,17 @@
 History
 =======
 
-current - 2022-06-13 - 0.00Mb
+current - 2022-12-06 - 0.00Mb
 =============================
 
+* #45: Refreshes documentation for r2python (2022-12-06)
+
+1.3.946 - 2022-07-25 - 0.43Mb
+=============================
+
+* #41: Moves CI to python 3.10 (2022-07-25)
 * #40: Fixes issue with yahoo_historical>=0.4 (2021-07-10)
 * #38: Updates grammar with antlr 4.9 (2021-04-03)
-
-1.3.884 - 2020-10-11 - 0.42Mb
-=============================
-
 * #37: Replace mpl_finance by mplfinance (2020-10-11)
 * #36: Removes dependency on colormap (2020-08-08)
 * #35: Add helpers to draw maps of France (2020-05-09)
