@@ -182,7 +182,7 @@ class DOTParser (Parser):
 
             self.state = 31
             _la = self._input.LA(1)
-            if not(_la == DOTParser.GRAPH or _la == DOTParser.DIGRAPH):
+            if not (_la == DOTParser.GRAPH or _la == DOTParser.DIGRAPH):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -391,7 +391,7 @@ class DOTParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 59
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.GRAPH) | (1 << DOTParser.NODE) | (1 << DOTParser.EDGE))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.GRAPH) | (1 << DOTParser.NODE) | (1 << DOTParser.EDGE))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -705,7 +705,7 @@ class DOTParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 100
             _la = self._input.LA(1)
-            if not(_la == DOTParser.T__7 or _la == DOTParser.T__8):
+            if not (_la == DOTParser.T__7 or _la == DOTParser.T__8):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -966,7 +966,7 @@ class DOTParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 126
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.ID) | (1 << DOTParser.HTML_STRING))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DOTParser.NUMBER) | (1 << DOTParser.STRING) | (1 << DOTParser.ID) | (1 << DOTParser.HTML_STRING))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)

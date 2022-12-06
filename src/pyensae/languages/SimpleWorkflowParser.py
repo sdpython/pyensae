@@ -934,7 +934,7 @@ class SimpleWorkflowParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 160
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SimpleWorkflowParser.T__12) | (1 << SimpleWorkflowParser.T__13) | (1 << SimpleWorkflowParser.T__14) | (1 << SimpleWorkflowParser.T__15) | (1 << SimpleWorkflowParser.T__16) | (1 << SimpleWorkflowParser.T__17) | (1 << SimpleWorkflowParser.T__18) | (1 << SimpleWorkflowParser.T__19) | (1 << SimpleWorkflowParser.T__20) | (1 << SimpleWorkflowParser.T__21) | (1 << SimpleWorkflowParser.T__22) | (1 << SimpleWorkflowParser.T__23) | (1 << SimpleWorkflowParser.T__24))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SimpleWorkflowParser.T__12) | (1 << SimpleWorkflowParser.T__13) | (1 << SimpleWorkflowParser.T__14) | (1 << SimpleWorkflowParser.T__15) | (1 << SimpleWorkflowParser.T__16) | (1 << SimpleWorkflowParser.T__17) | (1 << SimpleWorkflowParser.T__18) | (1 << SimpleWorkflowParser.T__19) | (1 << SimpleWorkflowParser.T__20) | (1 << SimpleWorkflowParser.T__21) | (1 << SimpleWorkflowParser.T__22) | (1 << SimpleWorkflowParser.T__23) | (1 << SimpleWorkflowParser.T__24))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -975,7 +975,7 @@ class SimpleWorkflowParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 162
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SimpleWorkflowParser.T__12) | (1 << SimpleWorkflowParser.T__13) | (1 << SimpleWorkflowParser.T__25))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << SimpleWorkflowParser.T__12) | (1 << SimpleWorkflowParser.T__13) | (1 << SimpleWorkflowParser.T__25))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1132,7 +1132,7 @@ class SimpleWorkflowParser (Parser):
                 self.data_or_module_output()
                 self.state = 174
                 _la = self._input.LA(1)
-                if not(_la == SimpleWorkflowParser.T__27 or _la == SimpleWorkflowParser.T__28):
+                if not (_la == SimpleWorkflowParser.T__27 or _la == SimpleWorkflowParser.T__28):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
@@ -1660,7 +1660,7 @@ class SimpleWorkflowParser (Parser):
             self.match(SimpleWorkflowParser.T__29)
             self.state = 231
             _la = self._input.LA(1)
-            if not(_la == SimpleWorkflowParser.Identifier or _la == SimpleWorkflowParser.STRING):
+            if not (_la == SimpleWorkflowParser.Identifier or _la == SimpleWorkflowParser.STRING):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1711,7 +1711,7 @@ class SimpleWorkflowParser (Parser):
             self.match(SimpleWorkflowParser.T__29)
             self.state = 235
             _la = self._input.LA(1)
-            if not(_la == SimpleWorkflowParser.Identifier or _la == SimpleWorkflowParser.STRING):
+            if not (_la == SimpleWorkflowParser.Identifier or _la == SimpleWorkflowParser.STRING):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)

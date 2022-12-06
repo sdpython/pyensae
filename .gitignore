@@ -292,3 +292,5 @@ src/pyensae/languages/CSharpParser.tokens
 *.interp
 _doc/examples/shapefiles
 _doc/examples/*.7z
+*.err
+*.out

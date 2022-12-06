@@ -526,7 +526,7 @@ class RParser (Parser):
                     self.expr(0)
                     self.state = 97
                     _la = self._input.LA(1)
-                    if not(_la == RParser.T__0 or _la == RParser.NL):
+                    if not (_la == RParser.T__0 or _la == RParser.NL):
                         self._errHandler.recoverInline(self)
                     else:
                         self._errHandler.reportMatch(self)
@@ -680,7 +680,7 @@ class RParser (Parser):
             elif la_ == 3:
                 self.state = 110
                 _la = self._input.LA(1)
-                if not(_la == RParser.T__4 or _la == RParser.T__5):
+                if not (_la == RParser.T__4 or _la == RParser.T__5):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
@@ -1030,7 +1030,7 @@ class RParser (Parser):
 
                         self.state = 234
                         _la = self._input.LA(1)
-                        if not(_la == RParser.T__7 or _la == RParser.T__8):
+                        if not (_la == RParser.T__7 or _la == RParser.T__8):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
@@ -1074,7 +1074,7 @@ class RParser (Parser):
 
                         self.state = 249
                         _la = self._input.LA(1)
-                        if not(_la == RParser.T__9 or _la == RParser.T__10):
+                        if not (_la == RParser.T__9 or _la == RParser.T__10):
                             self._errHandler.recoverInline(self)
                         else:
                             self._errHandler.reportMatch(self)
@@ -1685,7 +1685,7 @@ class RParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 362
             _la = self._input.LA(1)
-            if not(_la == RParser.T__0 or _la == RParser.NL):
+            if not (_la == RParser.T__0 or _la == RParser.NL):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2713,7 +2713,7 @@ class RParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 511
             _la = self._input.LA(1)
-            if not(_la == RParser.T__27 or _la == RParser.T__28):
+            if not (_la == RParser.T__27 or _la == RParser.T__28):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -3762,7 +3762,7 @@ class RParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 729
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__19) | (1 << RParser.T__38) | (1 << RParser.T__39) | (1 << RParser.T__40) | (1 << RParser.T__41) | (1 << RParser.T__42))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__19) | (1 << RParser.T__38) | (1 << RParser.T__39) | (1 << RParser.T__40) | (1 << RParser.T__41) | (1 << RParser.T__42))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -3907,7 +3907,7 @@ class RParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 737
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__22) | (1 << RParser.T__45) | (1 << RParser.T__46))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__22) | (1 << RParser.T__45) | (1 << RParser.T__46))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -3947,7 +3947,7 @@ class RParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 739
             _la = self._input.LA(1)
-            if not(_la == RParser.T__47 or _la == RParser.T__48):
+            if not (_la == RParser.T__47 or _la == RParser.T__48):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -3987,7 +3987,7 @@ class RParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 741
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__4) | (1 << RParser.T__5) | (1 << RParser.T__23) | (1 << RParser.T__49) | (1 << RParser.T__50) | (1 << RParser.T__51) | (1 << RParser.T__52) | (1 << RParser.T__53))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__4) | (1 << RParser.T__5) | (1 << RParser.T__23) | (1 << RParser.T__49) | (1 << RParser.T__50) | (1 << RParser.T__51) | (1 << RParser.T__52) | (1 << RParser.T__53))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -4027,7 +4027,7 @@ class RParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 743
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__54) | (1 << RParser.T__55) | (1 << RParser.T__56) | (1 << RParser.T__57) | (1 << RParser.T__58) | (1 << RParser.T__59))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RParser.T__54) | (1 << RParser.T__55) | (1 << RParser.T__56) | (1 << RParser.T__57) | (1 << RParser.T__58) | (1 << RParser.T__59))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)

@@ -205,25 +205,14 @@ class StockPrices:
                 elif url == 'yahoo_new':
                     from yahoo_historical import Fetcher
 
-                    def _get(self, events):
-                        if self.interval not in ["1d", "1wk", "1mo"]:
-                            raise ValueError(
-                                "Incorrect interval: valid intervals are 1d, 1wk, 1mo")
-
-                        url = self.api_url % (
-                            self.ticker, self.start, self.end, self.interval, events)
-
-                        headers = {'User-Agent': ''}
-                        data = requests.get(
-                            url, cookies={"User-agent": "Mozilla/5.0"},
-                            headers=headers)
-                        content = StringIO(data.content.decode("utf-8"))
-                        return pandas.read_csv(content, sep=",")
-
-                    # See issue https://github.com/AndrewRPorter/yahoo-historical/issues/19.
-                    Fetcher._get = _get
-                    data = Fetcher(tick, [begin.year, begin.month, begin.day],
-                                   [end.year, end.month, end.day])
+                    dt = datetime.datetime(begin.year, begin.month, begin.day)
+                    ts = dt.timestamp()
+                    try:
+                        data = Fetcher(tick, ts)
+                    except TypeError as e:
+                        raise TypeError(
+                            f"Unable to fetch data with year={begin.year!r}, "
+                            f"month={begin.month!r}, day={begin.day!r}.") from e
                     df = data.get_historical()
                     df.to_csv(name, sep=sep, index=False)
                     use_url = False

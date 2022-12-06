@@ -817,7 +817,7 @@ class CSharpPreprocessorParser (Parser):
             self.enterOuterAlt(localctx, 1)
             self.state = 77
             _la = self._input.LA(1)
-            if not(_la == CSharpPreprocessorParser.EOF or _la == CSharpPreprocessorParser.DIRECTIVE_NEW_LINE):
+            if not (_la == CSharpPreprocessorParser.EOF or _la == CSharpPreprocessorParser.DIRECTIVE_NEW_LINE):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
