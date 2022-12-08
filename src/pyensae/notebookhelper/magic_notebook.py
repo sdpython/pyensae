@@ -6,7 +6,7 @@
 from IPython.core.magic import magics_class, line_magic
 try:
     import qgrid
-except ImportError:
+except (ImportError, TypeError):
     # We ignore that error since it is not
     # part of the mandatory requirements.
     qgrid = None
