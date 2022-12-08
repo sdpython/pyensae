@@ -4,8 +4,8 @@ if __name__ is not None and "." in __name__:
     from .CSharpPreprocessorParser import CSharpPreprocessorParser
 else:
     from CSharpPreprocessorParser import CSharpPreprocessorParser
-import java.util.Stack
-import java.util.HashSet
+# import java.util.Stack
+# import java.util.HashSet
 
 # This class defines a complete listener for a parse tree produced by CSharpPreprocessorParser.
 
