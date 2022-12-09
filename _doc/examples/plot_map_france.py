@@ -13,7 +13,7 @@ plot_map_france
 
 Just a map of France.
 """
-
+import sys
 from matplotlib import pyplot as plt
 from matplotlib import pyplot as plt
 import cartopy.crs as ccrs
@@ -51,8 +51,11 @@ df = load_french_departements()
 fig = plt.figure(figsize=(7, 7))
 ax = fig.add_subplot(1, 1, 1, projection=ccrs.PlateCarree())
 N = float(df.shape[0])
-plot_map_france_polygon(
-    ax=ax, geometry=df['geometry'],
-    colors=[(i / N, 1. - i / N, 1. - i / N) for i in range(df.shape[0])])
+if sys.version_info[:2] >= (3, 10):
+    plot_map_france_polygon(
+        ax=ax, geometry=df['geometry'],
+        colors=[(i / N, 1. - i / N, 1. - i / N) for i in range(df.shape[0])])
+else:
+    print("some issues with the installation on older version of python.")
 ax.set_title('France departments')
 # plt.show()
