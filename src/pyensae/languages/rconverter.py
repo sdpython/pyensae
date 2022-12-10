@@ -41,7 +41,7 @@ def r2python(code: str, pep8=False, fLOG=None) -> str:
                 return(c(B$Female[B$Year==y],deces))}
                 '''
 
-            from pyensae.languages import r2python
+            from pyensae.languages.rconverter import r2python
             print(r2python(rscript, pep8=True))
 
     Some patterns are not well migrated such expression ``a:b`` into ``range(a,b)``.
