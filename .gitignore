@@ -235,7 +235,7 @@ _doc/sphinxdoc/source/examples/*
 _doc/sphinxdoc/source/gallery/*
 _doc/sphinxdoc/source/gallerynb/*
 */sphinxdoc/source/coverage/*
-*/sphinxdoc/source/phdoc_static/reveal.js
+*/sphinxdoc/source/_static/reveal.js
 _doc/notebooks/cache/*
 _doc/notebooks/donnees.txt
 
@@ -269,8 +269,8 @@ _doc/notebooks/None0000000.png
 _unittests/ut_datasource/test_linkedin.py.err
 _unittests/ut_finance/test_stock_file.py.err
 _unittests/run_unittests.py.out
-_doc/sphinxdoc/source/phdoc_static/require.js
-_doc/sphinxdoc/source/phdoc_static/style_notebook_snippet.css
+_doc/sphinxdoc/source/_static/require.js
+_doc/sphinxdoc/source/_static/style_notebook_snippet.css
 .vscode/settings.json
 src/pyensae/.vscode/settings.json
 _doc/sphinxdoc/plot_directive/source/pyensae/graph_helper/corrplot-1.pdf
