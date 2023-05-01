@@ -414,9 +414,9 @@ class StockPrices:
 
         df = pandas.DataFrame(dates)
         if isinstance(field, str):
-            piv = df.pivot("Date", "tick", field)
+            piv = df.pivot(index="Date", columns="tick", values=field)
         elif isinstance(field, (tuple, list)):
-            pivs = [df.pivot("Date", "tick", f) for f in field]
+            pivs = [df.pivot(index="Date", columns="tick", values=f) for f in field]
             for fi, piv in zip(field, pivs):
                 col = [c + "," + fi for c in piv.columns]
                 piv.columns = col
